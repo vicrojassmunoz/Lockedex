@@ -1,0 +1,41 @@
+{
+  "ability": {},
+  "item": {},
+  "move": {
+    "charm": { "type": "normal" },
+    "sweet-kiss": { "type": "normal" },
+    "moonlight": { "type": "normal" },
+    "curse": { "type": "???" },
+    "bite": { "type": "normal" },
+    "gust": { "type": "normal" },
+    "sand-attack": { "type": "normal" },
+    "karate-chop": { "type": "normal" }
+  },
+  "pokemon": {
+    "azumarill": { "name": "azumarill", "types": ["water"] },
+    "azurill": { "name": "azurill", "types": ["water"] },
+    "clefable": { "name": "clefable", "types": ["normal"] },
+    "clefairy": { "name": "clefairy", "types": ["normal"] },
+    "cleffa": { "name": "cleffa", "types": ["normal"] },
+    "cottonee": { "name": "cottonee", "types": ["grass"] },
+    "gardevoir": { "name": "gardevoir", "types": ["psychic"] },
+    "granbull": { "name": "granbull", "types": ["normal"] },
+    "igglybuff": { "name": "igglybuff", "types": ["normal"] },
+    "jigglypuff": { "name": "jigglypuff", "types": ["normal"] },
+    "kirlia": { "name": "kirlia", "types": ["psychic"] },
+    "marill": { "name": "marill", "types": ["water"] },
+    "mawile": { "name": "mawile", "types": ["steel"] },
+    "mime-jr": { "name": "mime-jr", "types": ["psychic"] },
+    "mr-mime": { "name": "mr-mime", "types": ["psychic"] },
+    "ralts": { "name": "ralts", "types": ["psychic"] },
+    "snubbull": { "name": "snubbull", "types": ["normal"] },
+    "togekiss": { "name": "togekiss", "types": ["normal", "flying"] },
+    "togepi": { "name": "togepi", "types": ["normal"] },
+    "togetic": { "name": "togetic", "types": ["normal", "flying"] },
+    "whimsicott": { "name": "whimsicott", "types": ["grass"] },
+    "wigglytuff": { "name": "wigglytuff", "types": ["normal"] },
+    "magnemite": { "name": "magnemite", "types": ["electric"] },
+    "magneton": { "name": "magneton", "types": ["electric"] }
+  },
+  "fakemon": {}
+}

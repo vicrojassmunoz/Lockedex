@@ -7,7 +7,7 @@ name: Publicar versión
 on:
   push:
     branches: [main]
-    paths: ['web/**', 'electron/**', 'NOVEDADES.md', '.github/workflows/publicar.yml']
+    paths: ['web/**', 'electron/**', 'datos/**', 'herramientas/datos.mjs', 'NOVEDADES.md', '.github/workflows/publicar.yml']
   workflow_dispatch:
 
 permissions:
@@ -38,6 +38,10 @@ jobs:
           else
             echo "nueva=si" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: Comprobar la base de datos (datos/)
+        shell: bash
+        run: node herramientas/datos.mjs comprobar
 
       - name: Sprites de Pokémon (PokeAPI/sprites, solo los necesarios)
         shell: bash

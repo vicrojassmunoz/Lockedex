@@ -1,13 +1,10 @@
-## Novedades de la 1.4.0
+## Novedades de la 1.4.1
 
-- **Arreglado de verdad: las pestañas que «no cambiaban».** Al pasar de Guías a Inicio, Partidas, Perfil… (o al revés), la página anterior se quedaba en pantalla y la nueva aparecía debajo, fuera de la vista. Ahora el cambio entre Guías y el resto se hace con una carga completa, que en local es instantánea.
-- **Actualizaciones más fiables:** Lockedex ya no guarda en caché los archivos de la app, así que tras actualizar no se pueden mezclar trozos de la versión anterior con la nueva.
-- **Logo e icono nuevos:** un candado-Pokédex con la lente como cerradura. Cambian el icono de la ventana, la barra de tareas, el acceso directo, el instalador (con barra lateral propia) y el Acerca de.
-- **Estética propia:**
-  - Los paneles y todas las ventanas emergentes llevan franja roja con luces.
-  - La cabecera de la partida es una pantalla LCD con tu equipo.
-  - Cada ruta es una ficha y cada jefe una tarjeta con franja roja.
-  - Las fichas de Pokémon tienen contorno de tinta.
-  - Botones e interruptores pasan al rojo Lockedex.
-  - Las guías estrenan cabecera y el pie de página es más sencillo.
-- El tema oscuro sigue la nueva estética.
+- **Base de datos propia de Lockedex:** los datos de juegos, rutas, jefes y ROM hacks pasan a una carpeta propia que se revisa automáticamente antes de cada versión. Así se pueden corregir y ampliar sin depender del proyecto original.
+- **Corregidos nombres mal escritos que dejaban encuentros vacíos o rotos:**
+  - Pelipper en Rubí Omega y Zafiro Alfa.
+  - Smeargle, Budew, Bidoof, Qwilfish, Flaaffy y Nidoran♀/♂ en Diamante Brillante y Perla Reluciente.
+  - Spinarak en Oro, Plata y Cristal.
+  - Meowth de Alola y Magnemite en Ultrasol y Ultraluna.
+  - Aerodactyl en X e Y.
+- **New Generations:** el Kangaskhan del Admin de Silph S.A. ya muestra su tipo y sus estadísticas.

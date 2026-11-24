@@ -1,0 +1,112 @@
+{
+  "ability": {},
+  "item": {
+    "jelly-donut": { "name": "Jelly donut", "sprite": "big-malasada", "effect": "Raises the user's Speed stat by 2 Levels" },
+    "sugar-donut": { "name": "Sugar donut", "sprite": "big-malasada", "effect": "Raises the user's Sp. Attack stat by 2 Levels" },
+    "glazed-donut": { "name": "Glazed donut", "sprite": "big-malasada", "effect": "Raises the user's Attack stat by 2 Levels" }
+  },
+  "move": {
+    "hidden-power-electric": { "power": "60", "type": "electric", "category": "special", "locale": "Hidden Power" },
+    "hidden-power-fighting": { "power": "60", "type": "fighting", "category": "special", "locale": "Hidden Power" },
+    "hidden-power-dark": { "power": "60", "type": "dark", "category": "special", "locale": "Hidden Power" }
+  },
+  "pokemon": {
+    "charizard": { "name": "charizard", "evoline": "charmander", "evos": ["charizard-mega-x", "charizard-mega-y"] },
+    "venusaur": { "name": "venusaur", "evoline": "bulbasaur", "evos": ["venusaur-mega"] },
+    "blastoise": { "name": "blastoise", "evoline": "squirtle", "evos": ["blastoise-mega"] },
+    "lucario": { "name": "lucario", "evoline": "riolu", "evos": ["lucario-mega"] },
+    "salamence": { "name": "salamence", "evoline": "bagon", "evos": ["salamence-mega"] },
+    "absol": { "name": "absol", "evoline": "absol", "evos": ["absol-mega"] },
+    "manectric": { "name": "manectric", "evoline": "electrike", "evos": ["manectric-mega"] }
+  },
+  "fakemon": {
+    "charizard-mega-x": {
+      "label": "Mega Charizard X",
+      "name": "Mega Charizard X",
+      "alias": "charizard-mega-x",
+      "sprite": "charizard-mega-x",
+      "baseStats": { "hp": 78, "atk": 130, "def": 111, "spa": 130, "spd": 85, "spe": 100 },
+      "types": ["fire", "dragon"],
+      "imgUrl": "/base/10034",
+      "evoline": "charmander",
+      "total": 634
+    },
+    "charizard-mega-y": {
+      "label": "Mega Charizard Y",
+      "name": "Mega Charizard Y",
+      "alias": "charizard-mega-y",
+      "sprite": "charizard-mega-y",
+      "baseStats": { "hp": 78, "atk": 104, "def": 78, "spa": 159, "spd": 115, "spe": 100 },
+      "types": ["fire", "flying"],
+      "imgUrl": "/base/10035",
+      "evoline": "charmander",
+      "total": 634
+    },
+    "venusaur-mega": {
+      "label": "Mega Venusaur",
+      "name": "Mega Venusaur",
+      "alias": "venusaur-mega",
+      "sprite": "venusaur-mega",
+      "baseStats": { "hp": 80, "atk": 100, "def": 123, "spa": 122, "spd": 120, "spe": 80 },
+      "types": ["grass", "poison"],
+      "imgUrl": "/base/10033",
+      "evoline": "bulbasaur",
+      "total": 625
+    },
+    "blastoise-mega": {
+      "label": "Mega Blastoise",
+      "name": "Mega Blastoise",
+      "alias": "blastoise-mega",
+      "sprite": "blastoise-mega",
+      "baseStats": { "hp": 79, "atk": 103, "def": 120, "spa": 135, "spd": 115, "spe": 78 },
+      "types": ["water"],
+      "imgUrl": "/base/10036",
+      "evoline": "squirtle",
+      "total": 630
+    },
+    "lucario-mega": {
+      "label": "Mega Lucario",
+      "name": "Mega Lucario",
+      "alias": "lucario-mega",
+      "sprite": "lucario-mega",
+      "baseStats": { "hp": 70, "atk": 145, "def": 88, "spa": 140, "spd": 70, "spe": 112 },
+      "types": ["fighting", "steel"],
+      "imgUrl": "/base/10059",
+      "evoline": "riolu",
+      "total": 625
+    },
+    "manectric-mega": {
+      "label": "Mega Manectric",
+      "name": "Mega Manectric",
+      "alias": "manectric-mega",
+      "sprite": "manectric-mega",
+      "baseStats": { "hp": 70, "atk": 75, "def": 80, "spa": 135, "spd": 80, "spe": 135 },
+      "types": ["electric"],
+      "imgUrl": "/base/10055",
+      "evoline": "electrike",
+      "total": 575
+    },
+    "absol-mega": {
+      "label": "Mega Absol",
+      "name": "Mega Absol",
+      "alias": "absol-mega",
+      "sprite": "absol-mega",
+      "baseStats": { "hp": 65, "atk": 150, "def": 60, "spa": 115, "spd": 60, "spe": 115 },
+      "types": ["dark"],
+      "imgUrl": "/base/10057",
+      "evoline": "absol",
+      "total": 565
+    },
+    "salamence-mega": {
+      "label": "Mega Salamence",
+      "name": "Mega Salamence",
+      "alias": "salamence-mega",
+      "sprite": "salamence-mega",
+      "baseStats": { "hp": 95, "atk": 145, "def": 130, "spa": 120, "spd": 90, "spe": 120 },
+      "types": ["dragon", "flying"],
+      "imgUrl": "/base/10089",
+      "evoline": "bagon",
+      "total": 700
+    }
+  }
+}

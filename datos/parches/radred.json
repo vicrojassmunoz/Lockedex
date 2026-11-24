@@ -1,0 +1,1124 @@
+{
+  "ability": {
+    "defeatist": { "name": "Defeatist", "effect": "While this Pokemon has ⅓ or less of its maximum HP, its Attack and Special Attack are halved." },
+    "iron-fist": { "name": "Iron fist", "effect": "This Pokemon's punch-based attacks have their power multiplied by 1.3×." },
+    "flare-boost": { "name": "Flare boost", "effect": "When burned, special attacks have 1.5× power. This Pokemon is also immune to burn damage." },
+    "illusion": { "name": "Illusion", "effect": "Appears as last Pokemon in party until damaged. Moves have their power multiplied by 1.3× whilst disguised." },
+    "liquid-voice": { "name": "Liquid voice", "effect": "This Pokemon's sound-based moves become Water-type moves and have their power multiplied by 1.2×." },
+    "fatal-precision": { "name": "Fatal precision", "effect": "Super Effective Moves from this Pokemon can’t miss and receive a 20% damage boost." },
+    "blazing-soul": { "name": "Blazing soul", "effect": "If this Pokemon is at full HP, its Fire-type moves have their priority increased by 1." },
+    "blademaster": { "name": "Blademaster", "effect": "This Pokemon's blade-based attacks have their power multiplied by 1.2× and get a +1 critical hit ratio." },
+    "bad-company": { "name": "Bad company", "effect": "Prevents self-lowering stat drops and recoil." },
+    "as-one": {
+      "name": "As one",
+      "effect": "This Pokemon's Attack is raised by 1 stage if it attacks and knocks out another Pokemon. While this Pokemon is active, it prevents opposing Pokemon from using their Berries. This Ability activates before hazards and other Abilities take effect."
+    },
+    "primal-armor": { "name": "Primal armor", "effect": "This Pokemon receives 1/2 damage from supereffective attacks." },
+    "striker": { "name": "Striker", "effect": "This Pokemon's kick-based attacks have their power multiplied by 1.3." },
+    "stalwart": { "name": "Stalwart", "effect": "This Pokemon's moves cannot be redirected to a different target by any effect." },
+    "blubber-defense": { "name": "Blubber defense", "effect": "If this Pokemon is at full HP, damage taken from attacks is halved." },
+    "bone-zone": { "name": "Bone zone", "effect": "Bone moves ignore immunities and deal double damage on not very effective." },
+    "phoenix-down": {
+      "name": "Phoenix down",
+      "effect": "Once per battle, this Pokemon restores 1/2 of its maximum HP, has its non-volatile status condition cured, and has its stat stages reset to 0 instead of fainting."
+    },
+    "sage-power": { "name": "Sage power", "effect": "This Pokemon's Sp. Atk is 1.5x, but it can only select the first move it executes." }
+  },
+  "item": {
+    "toxtricitite": { "name": "Toxtricitite", "sprite": "mawilite", "effect": "Allows Toxtricity to Mega Evolve into Mega Toxtricity." },
+    "duraludite": { "name": "Duraludite", "sprite": "aggronite", "effect": "Allows Duraludon to Mega Evolve into Mega Duraludon." },
+    "heavy-duty-boots": { "name": "Heavy duty boots", "sprite": "heavy-duty-boots", "effect": "When switching in, the holder is unaffected by hazards on its side of the field." },
+    "eternamax-orb": { "name": "Eternamax orb", "sprite": "toxic-orb", "effect": "If held by an Eternatus, this item triggers its Primal Reversion in battle." }
+  },
+  "move": {
+    "drill-peck": { "effect": "Has an increased chance for a critical hit." },
+    "triple-kick": { "power": "20" },
+    "charge-beam": { "effect": "Boosts the user's Special Attack by one stage" },
+    "self-destruct": { "power": "100", "effect": "Target's Defense is halved during damage. User faints." },
+    "explosion": { "power": "100", "effect": "Target's Defense is halved during damage. User faints." },
+    "poison-fang": { "power": "75" },
+    "shadow-claw": { "power": "80" },
+    "parabolic-charge": { "power": "75" },
+    "rock-smash": { "power": "60" },
+    "kings-shield": { "effect": "Protects from damaging attacks." },
+    "roar-of-time": { "power": "80", "effect": "Forces the target to switch to a random ally." },
+    "ice-hammer": { "effect": "No effect" },
+    "soul-robbery": {
+      "power": "100",
+      "type": "psychic",
+      "effect": "The target's stat increases are stolen from it and applied to the user before dealing damage.",
+      "category": "special"
+    },
+    "dark-hole": {
+      "power": "100",
+      "type": "dark",
+      "effect": "This move has a 40% chance to inflict sleep on the target, it also bypasses substitute.",
+      "category": "special"
+    },
+    "draco-barrage": {
+      "power": "100",
+      "type": "dragon",
+      "effect": "This move becomes a physical attack if the user's Attack is greater than its Special Attack. If the target lost HP, the user takes recoil damage equal to 33% the HP. This move can hit Fairy-type Pokemon.",
+      "category": "special"
+    },
+    "chloroblast": { "power": "150", "type": "grass", "category": "special" },
+    "infernal-parade": { "power": "60", "type": "ghost", "category": "special" },
+    "hidden-power-grass": { "power": "60", "type": "grass", "category": "special", "locale": "Hidden Power" },
+    "hidden-power-ground": { "power": "60", "type": "ground", "category": "special", "locale": "Hidden Power" },
+    "hidden-power-rock": { "power": "60", "type": "rock", "category": "special", "locale": "Hidden Power" },
+    "hidden-power-bug": { "power": "60", "type": "bug", "category": "special", "locale": "Hidden Power" },
+    "hidden-power-electric": { "power": "60", "type": "electric", "category": "special", "locale": "Hidden Power" },
+    "hidden-power-fire": { "power": "60", "type": "fire", "category": "special", "locale": "Hidden Power" },
+    "hidden-power-fighting": { "power": "60", "type": "fighting", "category": "special", "locale": "Hidden Power" },
+    "hidden-power-dark": { "power": "60", "type": "dark", "category": "special", "locale": "Hidden Power" },
+    "hidden-power-ice": { "power": "60", "type": "ice", "category": "special", "locale": "Hidden Power" }
+  },
+  "pokemon": {
+    "butterfree": {
+      "name": "butterfree",
+      "stats": { "spa": 95 }
+    },
+    "raticate": {
+      "name": "raticate",
+      "stats": { "hp": 60, "atk": 91 }
+    },
+    "raticate-alola": {
+      "name": "raticate-alola",
+      "stats": { "atk": 86 }
+    },
+    "fearow": {
+      "name": "fearow",
+      "stats": { "atk": 100, "spe": 115 }
+    },
+    "arbok": {
+      "name": "arbok",
+      "stats": { "hp": 75, "def": 75 },
+      "types": ["poison", "dark"]
+    },
+    "raichu": {
+      "name": "raichu",
+      "stats": { "hp": 70, "atk": 100, "spa": 100 }
+    },
+    "sandslash": {
+      "name": "sandslash",
+      "stats": { "atk": 110, "def": 120, "spa": 25, "spd": 65 }
+    },
+    "sandslash-alola": {
+      "name": "sandslash-alola",
+      "stats": { "atk": 110 }
+    },
+    "parasect": {
+      "name": "parasect",
+      "stats": { "hp": 80, "atk": 110, "def": 100 }
+    },
+    "venomoth": {
+      "name": "venomoth",
+      "stats": { "def": 65, "spa": 95 },
+      "types": ["bug", "psychic"]
+    },
+    "dugtrio-alola": {
+      "name": "dugtrio-alola",
+      "stats": { "atk": 110 }
+    },
+    "persian": {
+      "name": "persian",
+      "stats": { "atk": 80, "spa": 60 }
+    },
+    "persian-alola": {
+      "name": "persian-alola",
+      "stats": { "spa": 55 }
+    },
+    "golduck": {
+      "name": "golduck",
+      "stats": { "spa": 100, "spe": 100 },
+      "types": ["water", "psychic"]
+    },
+    "victreebel": {
+      "name": "victreebel",
+      "stats": { "def": 70, "spd": 75 }
+    },
+    "tentacruel": {
+      "name": "tentacruel",
+      "stats": { "atk": 60, "def": 80, "spa": 90 }
+    },
+    "ponyta-galar": { "name": "ponyta-galar", "types": ["fire", "fairy"] },
+    "rapidash-galar": {
+      "name": "rapidash-galar",
+      "stats": { "spa": 60, "spe": 125 },
+      "types": ["fire", "fairy"]
+    },
+    "rapidash": {
+      "name": "rapidash",
+      "stats": { "spa": 60, "spe": 125 }
+    },
+    "slowbro-galar": {
+      "name": "slowbro-galar",
+      "stats": { "atk": 75, "def": 105, "spa": 115 }
+    },
+    "dewgong": {
+      "name": "dewgong",
+      "stats": { "atk": 50, "spa": 90 }
+    },
+    "electrode": {
+      "name": "electrode",
+      "stats": { "atk": 55, "spa": 100 }
+    },
+    "marowak": {
+      "name": "marowak",
+      "stats": { "hp": 80, "spa": 30 }
+    },
+    "hitmonchan": {
+      "name": "hitmonchan",
+      "stats": { "atk": 115 }
+    },
+    "farfetchd": {
+      "name": "farfetchd",
+      "stats": { "hp": 75, "def": 70, "spd": 77 },
+      "types": ["fighting", "flying"]
+    },
+    "onix": {
+      "name": "onix",
+      "stats": { "hp": 50, "atk": 60, "def": 150, "spe": 65 }
+    },
+    "mrmime": {
+      "name": "mrmime",
+      "stats": { "hp": 50 }
+    },
+    "tauros": {
+      "name": "tauros",
+      "stats": { "spa": 70 }
+    },
+    "flareon": {
+      "name": "flareon",
+      "stats": { "spa": 65, "spd": 100, "spe": 95 }
+    },
+    "jynx": {
+      "name": "jynx",
+      "stats": { "def": 50, "spe": 100 }
+    },
+    "articuno": {
+      "name": "articuno",
+      "stats": { "atk": 70, "spe": 105 }
+    },
+    "articuno-galar": {
+      "name": "articuno-galar",
+      "stats": { "atk": 70, "def": 95, "spe": 100 }
+    },
+    "furret": {
+      "name": "furret",
+      "stats": { "atk": 86 }
+    },
+    "noctowl": {
+      "name": "noctowl",
+      "stats": { "hp": 110 }
+    },
+    "ledian": {
+      "name": "ledian",
+      "stats": { "atk": 90, "spa": 35, "spd": 100 },
+      "types": ["bug", "fighting"]
+    },
+    "ariados": {
+      "name": "ariados",
+      "stats": { "atk": 95, "spe": 70 }
+    },
+    "crobat": {
+      "name": "crobat",
+      "stats": { "spa": 90 }
+    },
+    "lanturn": {
+      "name": "lanturn",
+      "stats": { "atk": 50, "def": 65, "spa": 90 }
+    },
+    "xatu": {
+      "name": "xatu",
+      "stats": { "spa": 105, "spe": 105 }
+    },
+    "bellossom": {
+      "name": "bellossom",
+      "stats": { "hp": 85, "atk": 70 }
+    },
+    "sudowoodo": {
+      "name": "sudowoodo",
+      "stats": { "hp": 90 }
+    },
+    "jumpluff": {
+      "name": "jumpluff",
+      "stats": { "atk": 85, "spa": 35 }
+    },
+    "sunflora": {
+      "name": "sunflora",
+      "stats": { "hp": 95, "spa": 135, "spe": 55 },
+      "types": ["grass", "fire"]
+    },
+    "quagsire": {
+      "name": "quagsire",
+      "stats": { "hp": 100, "def": 90 }
+    },
+    "dunsparce": {
+      "name": "dunsparce",
+      "stats": { "def": 80, "spd": 75 }
+    },
+    "granbull": {
+      "name": "granbull",
+      "stats": { "hp": 100 },
+      "types": ["fairy", "fighting"]
+    },
+    "qwilfish": {
+      "name": "qwilfish",
+      "stats": { "atk": 105 }
+    },
+    "delibird": {
+      "name": "delibird",
+      "stats": { "atk": 100, "spe": 105 }
+    },
+    "ursaring": {
+      "name": "ursaring",
+      "stats": { "hp": 100, "def": 80, "spa": 55, "spd": 80 }
+    },
+    "corsola": {
+      "name": "corsola",
+      "stats": { "hp": 85, "def": 100, "spd": 100 }
+    },
+    "octillery": {
+      "name": "octillery",
+      "stats": { "spe": 75 }
+    },
+    "mantine": {
+      "name": "mantine",
+      "stats": { "spa": 90 }
+    },
+    "stantler": {
+      "name": "stantler",
+      "stats": { "hp": 80, "atk": 100, "def": 70, "spa": 100, "spd": 73, "spe": 100 }
+    },
+    "miltank": {
+      "name": "miltank",
+      "stats": { "atk": 85 }
+    },
+    "sceptile": {
+      "name": "sceptile",
+      "stats": { "atk": 105, "spa": 85 },
+      "types": ["grass", "dragon"]
+    },
+    "mightyena": {
+      "name": "mightyena",
+      "stats": { "atk": 95 }
+    },
+    "linoone": {
+      "name": "linoone",
+      "stats": { "hp": 85, "atk": 85 }
+    },
+    "beautifly": {
+      "name": "beautifly",
+      "stats": { "spa": 104, "spe": 75 }
+    },
+    "dustox": {
+      "name": "dustox",
+      "stats": { "hp": 80, "atk": 40, "spa": 60 }
+    },
+    "shiftry": {
+      "name": "shiftry",
+      "stats": { "atk": 120, "spa": 110 }
+    },
+    "masquerain": {
+      "name": "masquerain",
+      "stats": { "hp": 80 },
+      "types": ["water", "bug"]
+    },
+    "exploud": {
+      "name": "exploud",
+      "stats": { "atk": 81, "spe": 73 }
+    },
+    "delcatty": {
+      "name": "delcatty",
+      "stats": { "spa": 65 }
+    },
+    "plusle": {
+      "name": "plusle",
+      "stats": { "spe": 110 }
+    },
+    "minun": {
+      "name": "minun",
+      "stats": { "atk": 85, "def": 75, "spa": 50, "spd": 40, "spe": 110 }
+    },
+    "volbeat": {
+      "name": "volbeat",
+      "stats": { "hp": 85, "atk": 47, "spa": 90, "spe": 100 },
+      "types": ["bug", "electric"]
+    },
+    "illumise": {
+      "name": "illumise",
+      "stats": { "hp": 85, "atk": 90, "def": 47, "spd": 100 },
+      "types": ["bug", "fairy"]
+    },
+    "swalot": {
+      "name": "swalot",
+      "stats": { "atk": 88, "def": 88, "spa": 93, "spd": 88 }
+    },
+    "wailord": {
+      "name": "wailord",
+      "stats": { "hp": 150, "atk": 50, "def": 80, "spa": 105, "spd": 80, "spe": 50 }
+    },
+    "camerupt": {
+      "name": "camerupt",
+      "stats": { "hp": 90 }
+    },
+    "grumpig": {
+      "name": "grumpig",
+      "stats": { "hp": 90 }
+    },
+    "flygon": {
+      "name": "flygon",
+      "stats": { "hp": 100, "spa": 100 }
+    },
+    "cacturne": {
+      "name": "cacturne",
+      "stats": { "atk": 120, "spa": 120 }
+    },
+    "altaria": {
+      "name": "altaria",
+      "stats": { "hp": 85 }
+    },
+    "zangoose": {
+      "name": "zangoose",
+      "stats": { "def": 70, "spd": 70, "spe": 100 }
+    },
+    "seviper": {
+      "name": "seviper",
+      "stats": { "hp": 83, "def": 83, "spd": 73, "spe": 100 }
+    },
+    "lunatone": {
+      "name": "lunatone",
+      "stats": { "spa": 105, "spe": 90 }
+    },
+    "solrock": {
+      "name": "solrock",
+      "stats": { "atk": 105, "spe": 90 }
+    },
+    "torkoal": {
+      "name": "torkoal",
+      "stats": { "atk": 75, "spa": 95 }
+    },
+    "claydol": {
+      "name": "claydol",
+      "stats": { "spa": 80 }
+    },
+    "milotic": {
+      "name": "milotic",
+      "stats": { "def": 84, "spe": 86 }
+    },
+    "kecleon": {
+      "name": "kecleon",
+      "stats": { "hp": 85, "atk": 100 }
+    },
+    "tropius": {
+      "name": "tropius",
+      "stats": { "spa": 92, "spe": 81 },
+      "types": ["grass", "dragon"]
+    },
+    "chimecho": {
+      "name": "chimecho",
+      "stats": { "hp": 90, "spe": 80 }
+    },
+    "walrein": {
+      "name": "walrein",
+      "stats": { "hp": 90 }
+    },
+    "gorebyss": {
+      "name": "gorebyss",
+      "stats": { "spa": 104 },
+      "types": ["water", "fairy"]
+    },
+    "relicanth": {
+      "name": "relicanth",
+      "stats": { "atk": 105, "def": 115 }
+    },
+    "luvdisc": {
+      "name": "luvdisc",
+      "stats": { "spa": 100 },
+      "types": ["water", "fairy"]
+    },
+    "infernape": {
+      "name": "infernape",
+      "stats": { "atk": 110, "spa": 110, "spe": 113 }
+    },
+    "bibarel": {
+      "name": "bibarel",
+      "stats": { "def": 80, "spd": 80, "spe": 50 }
+    },
+    "kricketune": {
+      "name": "kricketune",
+      "stats": { "atk": 95, "def": 71, "spd": 71, "spe": 80 }
+    },
+    "wormadam-sandy": {
+      "name": "wormadam-sandy",
+      "stats": { "atk": 59, "spa": 79 }
+    },
+    "wormadam-trash": {
+      "name": "wormadam-trash",
+      "stats": { "atk": 59, "spa": 79 }
+    },
+    "mothim": {
+      "name": "mothim",
+      "stats": { "atk": 84, "spe": 80 }
+    },
+    "vespiquen": {
+      "name": "vespiquen",
+      "stats": { "hp": 85 }
+    },
+    "pachirisu": {
+      "name": "pachirisu",
+      "stats": { "hp": 75, "spa": 95 }
+    },
+    "floatzel": {
+      "name": "floatzel",
+      "stats": { "hp": 90, "atk": 90 }
+    },
+    "cherrim": {
+      "name": "cherrim",
+      "stats": { "atk": 100, "spa": 60 }
+    },
+    "mismagius": {
+      "name": "mismagius",
+      "stats": { "hp": 70, "def": 70 },
+      "types": ["ghost", "fairy"]
+    },
+    "honchkrow": {
+      "name": "honchkrow",
+      "stats": { "spe": 96 }
+    },
+    "purugly": {
+      "name": "purugly",
+      "stats": { "hp": 100, "def": 79, "spd": 79 }
+    },
+    "skuntank": {
+      "name": "skuntank",
+      "stats": { "spa": 91 }
+    },
+    "chatot": {
+      "name": "chatot",
+      "stats": { "spe": 101 }
+    },
+    "drapion": {
+      "name": "drapion",
+      "stats": { "atk": 80 }
+    },
+    "carnivine": {
+      "name": "carnivine",
+      "stats": { "hp": 89, "def": 82, "spa": 55, "spd": 82 }
+    },
+    "lumineon": {
+      "name": "lumineon",
+      "stats": { "hp": 79, "atk": 59, "spa": 96, "spd": 69, "spe": 101 }
+    },
+    "lickilicky": {
+      "name": "lickilicky",
+      "stats": { "atk": 95, "spe": 30 }
+    },
+    "electivire": {
+      "name": "electivire",
+      "stats": { "atk": 113, "spa": 105 }
+    },
+    "magmortar": {
+      "name": "magmortar",
+      "stats": { "atk": 80, "spe": 98 }
+    },
+    "leafeon": {
+      "name": "leafeon",
+      "stats": { "atk": 130, "def": 110 }
+    },
+    "glaceon": {
+      "name": "glaceon",
+      "stats": { "hp": 80, "atk": 45, "def": 100, "spe": 75 }
+    },
+    "probopass": {
+      "name": "probopass",
+      "stats": { "hp": 65, "atk": 45, "spa": 80 }
+    },
+    "froslass": {
+      "name": "froslass",
+      "stats": { "atk": 95, "spa": 95 }
+    },
+    "rotom": {
+      "name": "rotom",
+      "stats": { "def": 70, "spd": 70 }
+    },
+    "samurott": {
+      "name": "samurott",
+      "stats": { "atk": 108, "spa": 95, "spe": 100 },
+      "types": ["water", "steel"]
+    },
+    "watchog": {
+      "name": "watchog",
+      "stats": { "hp": 80, "atk": 100, "def": 74, "spd": 74 }
+    },
+    "stoutland": {
+      "name": "stoutland",
+      "stats": { "hp": 90, "atk": 115 }
+    },
+    "liepard": {
+      "name": "liepard",
+      "stats": { "atk": 95, "spa": 78 }
+    },
+    "unfezant": {
+      "name": "unfezant",
+      "stats": { "spe": 108 }
+    },
+    "swoobat": {
+      "name": "swoobat",
+      "stats": { "hp": 75, "def": 65 }
+    },
+    "throh": {
+      "name": "throh",
+      "stats": { "def": 95, "spd": 95 }
+    },
+    "basculin": {
+      "name": "basculin",
+      "stats": { "atk": 110 }
+    },
+    "darmanitan-galar": {
+      "name": "darmanitan-galar",
+      "stats": { "atk": 130 }
+    },
+    "maractus": {
+      "name": "maractus",
+      "stats": { "atk": 106, "spa": 85 }
+    },
+    "crustle": {
+      "name": "crustle",
+      "stats": { "spe": 55 }
+    },
+    "garbodor": {
+      "name": "garbodor",
+      "stats": { "atk": 115, "spe": 60 }
+    },
+    "swanna": {
+      "name": "swanna",
+      "stats": { "atk": 77, "spa": 97, "spe": 108 }
+    },
+    "vanilluxe": {
+      "name": "vanilluxe",
+      "stats": { "atk": 90, "spe": 84 }
+    },
+    "sawsbuck": {
+      "name": "sawsbuck",
+      "stats": { "atk": 110, "spe": 105 }
+    },
+    "emolga": {
+      "name": "emolga",
+      "stats": { "atk": 55, "spa": 95 }
+    },
+    "jellicent": {
+      "name": "jellicent",
+      "stats": { "def": 80, "spa": 75 }
+    },
+    "eelektross": {
+      "name": "eelektross",
+      "stats": { "atk": 105, "spa": 115 }
+    },
+    "beheeyem": {
+      "name": "beheeyem",
+      "stats": { "hp": 95 }
+    },
+    "beartic": {
+      "name": "beartic",
+      "stats": { "atk": 140 },
+      "types": ["ice", "fighting"]
+    },
+    "cryogonal": {
+      "name": "cryogonal",
+      "stats": { "atk": 110 }
+    },
+    "druddigon": {
+      "name": "druddigon",
+      "stats": { "hp": 90, "spe": 41 }
+    },
+    "golurk": {
+      "name": "golurk",
+      "stats": { "hp": 100, "def": 90, "spd": 90 }
+    },
+    "heatmor": {
+      "name": "heatmor",
+      "stats": { "atk": 90, "spe": 100 }
+    },
+    "bouffalant": {
+      "name": "bouffalant",
+      "stats": { "spe": 65 }
+    },
+    "talonflame": {
+      "name": "talonflame",
+      "stats": { "atk": 91 }
+    },
+    "gogoat": {
+      "name": "gogoat",
+      "stats": { "def": 72, "spa": 67, "spd": 87, "spe": 74 }
+    },
+    "furfrou": {
+      "name": "furfrou",
+      "stats": { "atk": 90 }
+    },
+    "meowstic": {
+      "name": "meowstic",
+      "stats": { "atk": 55 }
+    },
+    "aromatisse": {
+      "name": "aromatisse",
+      "stats": { "atk": 62, "def": 82 }
+    },
+    "slurpuff": {
+      "name": "slurpuff",
+      "stats": { "atk": 90, "spa": 75 }
+    },
+    "clawitzer": {
+      "name": "clawitzer",
+      "stats": { "spe": 72 }
+    },
+    "dedenne": {
+      "name": "dedenne",
+      "stats": { "spa": 91 }
+    },
+    "trevenant": {
+      "name": "trevenant",
+      "stats": { "atk": 120, "def": 82 }
+    },
+    "noivern": {
+      "name": "noivern",
+      "stats": { "spa": 102 }
+    },
+    "decidueye": {
+      "name": "decidueye",
+      "stats": { "spa": 95, "spd": 85, "spe": 100 }
+    },
+    "toucannon": {
+      "name": "toucannon",
+      "stats": { "hp": 90 }
+    },
+    "gumshoos": {
+      "name": "gumshoos",
+      "stats": { "hp": 98 }
+    },
+    "lurantis": {
+      "name": "lurantis",
+      "stats": { "spe": 55 },
+      "types": ["grass", "fighting"]
+    },
+    "shiinotic": {
+      "name": "shiinotic",
+      "stats": { "hp": 75 }
+    },
+    "oranguru": {
+      "name": "oranguru",
+      "stats": { "def": 110, "spd": 80 }
+    },
+    "passimian": {
+      "name": "passimian",
+      "stats": { "spd": 75 }
+    },
+    "komala": {
+      "name": "komala",
+      "stats": { "hp": 75 }
+    },
+    "turtonator": {
+      "name": "turtonator",
+      "stats": { "hp": 70, "atk": 58 }
+    },
+    "togedemaru": {
+      "name": "togedemaru",
+      "stats": { "atk": 108 }
+    },
+    "drampa": {
+      "name": "drampa",
+      "stats": { "hp": 103, "atk": 50 }
+    },
+    "xurkitree": {
+      "name": "xurkitree",
+      "stats": { "atk": 74, "spe": 98 }
+    },
+    "guzzlord": {
+      "name": "guzzlord",
+      "stats": { "hp": 203, "def": 73, "spd": 73, "spe": 23 }
+    },
+    "cinderace": {
+      "name": "cinderace",
+      "stats": { "atk": 111 }
+    },
+    "thievul": {
+      "name": "thievul",
+      "stats": { "spa": 97, "spe": 110 }
+    },
+    "90eldegoss": {
+      "name": "90eldegoss",
+      "stats": { "hp": 75 }
+    },
+    "dubwool": {
+      "name": "dubwool",
+      "stats": { "hp": 82 }
+    },
+    "boltund": {
+      "name": "boltund",
+      "stats": { "atk": 100, "spa": 80 }
+    },
+    "cramorant": {
+      "name": "cramorant",
+      "stats": { "def": 65, "spa": 100, "spe": 105 }
+    },
+    "perrserker": {
+      "name": "perrserker",
+      "stats": { "hp": 90, "spa": 30 }
+    },
+    "cursola": {
+      "name": "cursola",
+      "stats": { "hp": 80, "atk": 75, "spe": 55 }
+    },
+    "sirfetchd": {
+      "name": "sirfetchd",
+      "stats": { "hp": 82 }
+    },
+    "mrrime": {
+      "name": "mrrime",
+      "stats": { "atk": 65, "spd": 90, "spe": 100 }
+    },
+    "falinks": {
+      "name": "falinks",
+      "stats": { "hp": 75, "spa": 60 },
+      "types": ["bug", "fighting"]
+    },
+    "pincurchin": {
+      "name": "pincurchin",
+      "stats": { "hp": 68, "atk": 81 },
+      "types": ["electric", "water"]
+    },
+    "frosmoth": {
+      "name": "frosmoth",
+      "stats": { "def": 65 }
+    },
+    "stonjourner": {
+      "name": "stonjourner",
+      "stats": { "spd": 50, "spe": 80 }
+    },
+    "eiscue": {
+      "name": "eiscue",
+      "stats": { "atk": 100, "spa": 45 }
+    },
+    "morpeko": {
+      "name": "morpeko",
+      "stats": { "atk": 110 }
+    },
+    "copperajah": {
+      "name": "copperajah",
+      "stats": { "def": 79, "spd": 79 }
+    },
+    "arctovish": {
+      "name": "arctovish",
+      "stats": { "spa": 55, "spe": 80 }
+    },
+    "arctozolt": {
+      "name": "arctozolt",
+      "stats": { "spd": 55, "spe": 80 }
+    },
+    "duraludon": {
+      "name": "duraludon",
+      "stats": { "hp": 85 }
+    },
+    "pikachu-belle": { "name": "pikachu-belle", "types": ["electric", "ice"] },
+    "pikachu-phd": { "name": "pikachu-phd", "types": ["electric", "psychic"] },
+    "pikachu-libre": { "name": "pikachu-libre", "types": ["electric", "fighting"] },
+    "pikachu-rockstar": { "name": "pikachu-rockstar", "types": ["electric", "steel"] },
+    "pikachu-pop-star": { "name": "pikachu-pop-star", "types": ["electric", "fairy"] }
+  },
+  "fakemon": {
+    "blitzle-sevii": {
+      "label": "Seviian Blitzle",
+      "name": "Seviian Blitzle",
+      "alias": "blitzle-sevii",
+      "sprite": "blitzle-sevii",
+      "baseStats": { "hp": 45, "atk": 45, "def": 32, "spa": 65, "spd": 32, "spe": 76 },
+      "types": ["ice", "electric"],
+      "imgUrl": "/radred/blitzle-sevii",
+      "evoline": "blitzle",
+      "evos": ["zebstrika-sevii"],
+      "total": 295
+    },
+    "zebstrika-sevii": {
+      "label": "Seviian Zebstrika",
+      "name": "Seviian Zebstrika",
+      "alias": "zebstrika-sevii",
+      "sprite": "zebstrika-sevii",
+      "baseStats": { "hp": 75, "atk": 70, "def": 63, "spa": 110, "spd": 63, "spe": 116 },
+      "types": ["ice", "electric"],
+      "imgUrl": "/radred/zebstrika-sevii",
+      "evoline": "blitzle",
+      "total": 497
+    },
+    "carnivine-sevii": {
+      "label": "Seviian Carnivine",
+      "name": "Seviian Carnivine",
+      "alias": "carnivine-sevii",
+      "sprite": "carnivine-sevii",
+      "baseStats": { "hp": 94, "atk": 100, "def": 92, "spa": 55, "spd": 77, "spe": 36 },
+      "types": ["poison", "steel"],
+      "imgUrl": "/radred/carnivine-sevii",
+      "evoline": "carnivine",
+      "total": 454
+    },
+    "centiskorch-sevii": {
+      "label": "Seviian Centiskorch",
+      "name": "Seviian Centiskorch",
+      "alias": "centiskorch-sevii",
+      "sprite": "centiskorch-sevii",
+      "baseStats": { "hp": 100, "atk": 115, "def": 65, "spa": 65, "spd": 90, "spe": 90 },
+      "types": ["ground", "bug"],
+      "imgUrl": "/radred/centiskorch-sevii",
+      "evoline": "sizzlipede",
+      "total": 525
+    },
+    "sizzlipede-sevii": {
+      "label": "Seviian Sizzlipede",
+      "name": "Seviian Sizzlipede",
+      "alias": "sizzlipede-sevii",
+      "sprite": "sizzlipede-sevii",
+      "baseStats": { "hp": 50, "atk": 65, "def": 45, "spa": 50, "spd": 50, "spe": 45 },
+      "types": ["ground", "bug"],
+      "imgUrl": "/radred/sizzlipede-sevii",
+      "evoline": "sizzlipede",
+      "evos": ["centiskorch-sevii"],
+      "total": 305
+    },
+    "clauncher-sevii": {
+      "label": "Seviian Clauncher",
+      "name": "Seviian Clauncher",
+      "alias": "clauncher-sevii",
+      "sprite": "clauncher-sevii",
+      "baseStats": { "hp": 50, "atk": 38, "def": 62, "spa": 58, "spd": 63, "spe": 59 },
+      "types": ["bug", "dark"],
+      "imgUrl": "/radred/clauncher-sevii",
+      "evoline": "clauncher",
+      "evos": ["clawitzer-sevii"],
+      "total": 330
+    },
+    "clawitzer-sevii": {
+      "label": "Seviian Clawitzer",
+      "name": "Seviian Clawitzer",
+      "alias": "clawitzer-sevii",
+      "sprite": "clawitzer-sevii",
+      "baseStats": { "hp": 81, "atk": 63, "def": 83, "spa": 110, "spd": 79, "spe": 97 },
+      "types": ["bug", "dark"],
+      "imgUrl": "/radred/clawitzer-sevii",
+      "evoline": "clauncher",
+      "total": 513
+    },
+    "dhelmise-sevii": {
+      "label": "Seviian Dhelmise",
+      "name": "Seviian Dhelmise",
+      "alias": "dhelmise-sevii",
+      "sprite": "dhelmise-sevii",
+      "baseStats": { "hp": 90, "atk": 81, "def": 105, "spa": 106, "spd": 95, "spe": 40 },
+      "types": ["water", "grass"],
+      "imgUrl": "/radred/dhelmise-sevii",
+      "evoline": "dhelmise",
+      "total": 517
+    },
+    "dodrio-sevii": {
+      "label": "Seviian Dodrio",
+      "name": "Seviian Dodrio",
+      "alias": "dodrio-sevii",
+      "sprite": "dodrio-sevii",
+      "baseStats": { "hp": 65, "atk": 125, "def": 65, "spa": 40, "spd": 65, "spe": 110 },
+      "types": ["fire", "ground"],
+      "imgUrl": "/radred/dodrio-sevii",
+      "evoline": "doduo",
+      "total": 470
+    },
+    "doduo-sevii": {
+      "label": "Seviian Doduo",
+      "name": "Seviian Doduo",
+      "alias": "doduo-sevii",
+      "sprite": "doduo-sevii",
+      "baseStats": { "hp": 40, "atk": 80, "def": 45, "spa": 35, "spd": 35, "spe": 75 },
+      "types": ["fire", "ground"],
+      "imgUrl": "/radred/doduo-sevii",
+      "evoline": "doduo",
+      "evos": ["dodrio-sevii"],
+      "total": 310
+    },
+    "feebas-sevii": {
+      "label": "Seviian Feebas",
+      "name": "Seviian Feebas",
+      "alias": "feebas-sevii",
+      "sprite": "feebas-sevii",
+      "baseStats": { "hp": 20, "atk": 15, "def": 20, "spa": 10, "spd": 55, "spe": 80 },
+      "types": ["water", "ground"],
+      "imgUrl": "/radred/feebas-sevii",
+      "evoline": "feebas",
+      "evos": ["milotic-sevii"],
+      "total": 200
+    },
+    "milotic-sevii": {
+      "label": "Seviian Milotic",
+      "name": "Seviian Milotic",
+      "alias": "milotic-sevii",
+      "sprite": "milotic-sevii",
+      "baseStats": { "hp": 95, "atk": 60, "def": 84, "spa": 105, "spd": 125, "spe": 81 },
+      "types": ["fairy", "ground"],
+      "imgUrl": "/radred/milotic-sevii",
+      "evoline": "feebas",
+      "total": 550
+    },
+    "mantine-sevii": {
+      "label": "Seviian Mantine",
+      "name": "Seviian Mantine",
+      "alias": "mantine-sevii",
+      "sprite": "mantine-sevii",
+      "baseStats": { "hp": 80, "atk": 30, "def": 70, "spa": 100, "spd": 120, "spe": 95 },
+      "types": ["electric", "poison"],
+      "imgUrl": "/radred/mantine-sevii",
+      "evoline": "mantyke",
+      "total": 495
+    },
+    "mantyke-sevii": {
+      "label": "Seviian Mantyke",
+      "name": "Seviian Mantyke",
+      "alias": "mantyke-sevii",
+      "sprite": "mantyke-sevii",
+      "baseStats": { "hp": 45, "atk": 20, "def": 55, "spa": 70, "spd": 85, "spe": 70 },
+      "types": ["electric", "poison"],
+      "imgUrl": "/radred/mantyke-sevii",
+      "evoline": "mantyke",
+      "evos": ["mantine-sevii"],
+      "total": 345
+    },
+    "teddiursa-sevii": {
+      "label": "Seviian Teddiursa",
+      "name": "Seviian Teddiursa",
+      "alias": "teddiursa-sevii",
+      "sprite": "teddiursa-sevii",
+      "baseStats": { "hp": 55, "atk": 80, "def": 50, "spa": 45, "spd": 50, "spe": 50 },
+      "types": ["ghost"],
+      "imgUrl": "/radred/teddiursa-sevii",
+      "evoline": "teddiursa",
+      "evos": ["ursaring-sevii"],
+      "total": 330
+    },
+    "ursaring-sevii": {
+      "label": "Seviian Ursaring",
+      "name": "Seviian Ursaring",
+      "alias": "ursaring-sevii",
+      "sprite": "ursaring-sevii",
+      "baseStats": { "hp": 100, "atk": 110, "def": 90, "spa": 55, "spd": 90, "spe": 55 },
+      "types": ["ghost", "fighting"],
+      "imgUrl": "/radred/ursaring-sevii",
+      "evoline": "teddiursa",
+      "total": 500
+    },
+    "wishiwashi-sevii": {
+      "label": "Seviian Wishiwashi",
+      "name": "Seviian Wishiwashi",
+      "alias": "wishiwashi-sevii",
+      "sprite": "wishiwashi-sevii",
+      "baseStats": { "hp": 60, "atk": 20, "def": 20, "spa": 25, "spd": 15, "spe": 35 },
+      "types": ["ghost"],
+      "imgUrl": "/radred/wishiwashi-sevii",
+      "evoline": "wishwashi",
+      "total": 175
+    },
+    "wishiwashi-sevii-school": {
+      "label": "Seviian Wishiwashi",
+      "name": "Seviian Wishiwashi",
+      "alias": "wishiwashi-sevii-school",
+      "sprite": "wishiwashi-sevii-school",
+      "baseStats": { "hp": 60, "atk": 140, "def": 130, "spa": 140, "spd": 135, "spe": 25 },
+      "types": ["ghost", "dragon"],
+      "imgUrl": "/radred/wishiwashi-sevii-school",
+      "evoline": "wishiwashi",
+      "total": 630
+    },
+    "pikachu-flying": {
+      "label": "Flying Pikachu",
+      "name": "Flying Pikachu",
+      "alias": "pikachu-flying",
+      "sprite": "pikachu",
+      "baseStats": { "hp": 35, "atk": 55, "def": 40, "spa": 50, "spd": 50, "spe": 90 },
+      "types": ["electric", "flying"],
+      "imgUrl": "/radred/pikachu-flying",
+      "evoline": "pikachu",
+      "total": 320
+    },
+    "pikachu-surfing": {
+      "label": "Surfing Pikachu",
+      "name": "Surfing Pikachu",
+      "alias": "pikachu-surfing",
+      "sprite": "pikachu",
+      "baseStats": { "hp": 35, "atk": 55, "def": 40, "spa": 50, "spd": 50, "spe": 90 },
+      "types": ["electric", "water"],
+      "imgUrl": "/radred/pikachu-surfing",
+      "evoline": "pikachu",
+      "total": 320
+    },
+    "arceus-ground": {
+      "label": "Arceus",
+      "name": "Arceus",
+      "alias": "arceus-ground",
+      "sprite": "arceus-ground",
+      "baseStats": { "hp": 120, "atk": 120, "def": 120, "spa": 120, "spd": 120, "spe": 120 },
+      "types": ["ground"],
+      "imgUrl": "/radred/arceus-ground",
+      "evoline": "arceus",
+      "total": 720
+    },
+    "arceus-steel": {
+      "label": "Arceus",
+      "name": "Arceus",
+      "alias": "arceus-steel",
+      "sprite": "arceus-steel",
+      "baseStats": { "hp": 120, "atk": 120, "def": 120, "spa": 120, "spd": 120, "spe": 120 },
+      "types": ["steel"],
+      "imgUrl": "/radred/arceus-steel",
+      "evoline": "arceus",
+      "total": 720
+    },
+    "arceus-fairy": {
+      "label": "Arceus",
+      "name": "Arceus",
+      "alias": "arceus-fairy",
+      "sprite": "arceus-fairy",
+      "baseStats": { "hp": 120, "atk": 120, "def": 120, "spa": 120, "spd": 120, "spe": 120 },
+      "types": ["fairy"],
+      "imgUrl": "/radred/arceus-fairy",
+      "evoline": "arceus",
+      "total": 720
+    },
+    "silvally-ghost": {
+      "label": "Silvally",
+      "name": "Silvally",
+      "alias": "silvally-ghost",
+      "sprite": "silvally-ghost",
+      "baseStats": { "hp": 100, "atk": 100, "def": 100, "spa": 100, "spd": 100, "spe": 100 },
+      "types": ["ghost"],
+      "imgUrl": "/radred/silvally-ghost",
+      "evoline": "type-null",
+      "total": 600
+    },
+    "silvally-fairy": {
+      "label": "Silvally",
+      "name": "Silvally",
+      "alias": "silvally-fairy",
+      "sprite": "silvally-fairy",
+      "baseStats": { "hp": 100, "atk": 100, "def": 100, "spa": 100, "spd": 100, "spe": 100 },
+      "types": ["fairy"],
+      "imgUrl": "/radred/silvally-fairy",
+      "evoline": "type-null",
+      "total": 600
+    },
+    "toxtricity-mega": {
+      "label": "Mega Toxtricity",
+      "name": "Mega Toxtricity",
+      "alias": "toxtricity-mega",
+      "sprite": "toxtricity-mega",
+      "baseStats": { "hp": 75, "atk": 120, "def": 80, "spa": 155, "spd": 80, "spe": 111 },
+      "types": ["electric", "poison"],
+      "imgUrl": "/radred/toxtricity-mega",
+      "evoline": "toxel",
+      "total": 621
+    }
+  }
+}

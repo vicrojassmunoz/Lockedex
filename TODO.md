@@ -58,21 +58,19 @@ Cómo hacerlo: ir componente a componente, con capturas antes y después. Se pue
 
 Además están los datos propios de Lockedex en `web/static/lx/`, sacados de PokeAPI.
 
-**Plan propuesto:**
+**Hecho en la 1.4.1 (primera fase):**
 
-- [ ] Crear `datos/` en la raíz como **fuente de verdad**, con un archivo legible por juego (YAML o JSON) que contenga las rutas, los encuentros por método y los jefes.
-- [ ] Escribir un **esquema** (JSON Schema o zod) y validarlo en el workflow (un paso nuevo antes de compilar).
-- [ ] Hacer un **script de compilación** (`herramientas/`) que genere los formatos que ya consume la app (`routes.json`, `league/*.json`…). Así no se rompe nada mientras se migra; después se puede cambiar la app al formato nuevo poco a poco.
-- [ ] Hacer la **importación inicial** desde los JSON actuales (y/o los `.txt` de nuzlocke.data) al formato nuevo.
-- [ ] **Ampliaciones:**
-  - [ ] Probabilidad de cada encuentro por método (hierba, surf, pesca, día/noche). Para los juegos oficiales sale de PokeAPI (`encounters`, `encounter_slots`, `location_areas`).
-  - [ ] Dónde conseguir cada MT y objeto clave antes de cada jefe, para que el asistente diga "consigue Tumba Rocas en…".
-  - [ ] Nombres en español de líderes, rivales y equipos malvados. Las rutas ya se traducen con PokeAPI.
-  - [ ] Niveles máximos por dificultad y variantes del rival según el inicial, revisados.
-  - [ ] Combates dobles, IA y notas por jefe ("lleva Baya Zidra", "usa Protección").
-  - [ ] Versiones concretas de los ROM hacks (Radical Red 4.x, Unbound 2.x…), con sus movimientos por nivel propios, porque ahora se usan los del juego base.
-- [ ] **Corrección de datos dentro de la app** (más adelante): un "modo editor" para corregir un encuentro o un jefe y exportar el cambio a `datos/`.
-- [ ] **Licencias:** comprobar la licencia de nuzlocke.data antes de redistribuir datos derivados. PokeAPI permite reutilizar sus datos. No copiar textos de Bulbapedia ni de Wikidex (CC BY-NC-SA).
+- [x] `datos/` es la **fuente de verdad** (ver `datos/LEEME.md`): `juegos.json`, `rutas/<clave>.json`, `jefes/<liga>.json`, `parches/<id>.json`, `entrenadores.json` e `indice.json`. Formato legible: una línea por ruta, jefe o Pokémon.
+- [x] `herramientas/datos.mjs` (sin dependencias): `compilar` (datos → `web/src/lib/data/*.json`), `comprobar` (estructura + app al día) y `extraer` (la migración inicial, ya hecha). La primera compilación da exactamente los mismos datos que el original.
+- [x] **Validación en GitHub Actions** antes de compilar: los errores de estructura o los datos sin compilar bloquean la publicación. Los Pokémon o movimientos desconocidos salen como avisos (se tienen en cuenta los Pokémon y movimientos de los parches de cada ROM hack).
+- [x] Corregidas las primeras erratas que encontró: `pelliper`, `smeagle`, `budex`, `bidoofy`, `qwillfish`, `flaafy`, `nidoran-female/male`, `spinark`, `mewoth-alola`, `magnemtic`, `aerodacyl` y `kanghaskan`/`aerian-ace` (este también en los equipos detallados de New Generations).
+
+**Siguiente fase:**
+
+- [ ] **Generar los equipos detallados** (`web/static/api/league/<pid>.<inicial>.json`, 165 archivos, 29 MB) desde `datos/jefes/` + datos de PokeAPI (CSV ya usados en `herramientas/generar_datos.py`) + `datos/parches/`. Ahora son los del original, generados contra la API de PokeAPI (ver `routes/api/battle/[gen]/[id].json/+server.js`). Hay que respetar los cambios por generación (tipos antiguos, potencias) y los parches.
+- [ ] Revisar los avisos que quedan (`TODOS=1 node herramientas/datos.mjs comprobar`): formas `-hoenn` de Blazing Emerald y `-sevii` de Radical Red que faltan en el parche, `darmanitan-standard`, y los datos de Rejuvenation (no lo usa ningún juego de la lista).
+- [ ] Ampliar: juegos nuevos, encuentros por método (hierba, surf, caña…) y niveles de los encuentros.
+- [ ] Más adelante, que la app lea directamente el formato nuevo y quitar la compilación intermedia.
 
 ---
 

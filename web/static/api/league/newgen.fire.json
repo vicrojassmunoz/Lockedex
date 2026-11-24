@@ -5634,7 +5634,7 @@
         }
       },
       {
-        "name": "kanghaskan",
+        "name": "kangaskhan",
         "level": "65",
         "moves": [
           {
@@ -5670,7 +5670,18 @@
           "name": "Silk Scarf",
           "effect": ""
         },
-        "stats": {}
+        "stats": {
+          "hp": 105,
+          "atk": 95,
+          "def": 80,
+          "spa": 40,
+          "spd": 80,
+          "spe": 90
+        },
+        "sprite": "115",
+        "types": [
+          "normal"
+        ]
       },
       {
         "name": "onix",

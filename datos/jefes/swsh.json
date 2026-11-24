@@ -1,0 +1,1018 @@
+{
+  "1": {
+    "name": "Milo",
+    "speciality": "grass",
+    "img": { "src": "/leaders/swsh-milo", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      { "name": "gossifleur", "level": "19", "moves": ["magical-leaf", "round", "rapid-spin"], "ability": "regenerator", "abilities": ["regenerator"] },
+      { "name": "eldegoss", "level": "20", "moves": ["magical-leaf", "round", "leafage"], "ability": "regenerator", "abilities": ["regenerator"] }
+    ]
+  },
+  "2": {
+    "name": "Nessa",
+    "speciality": "water",
+    "img": { "src": "/leaders/swsh-nessa", "author": "Drawnamu", "link": "https://www.deviantart.com/drawnamu" },
+    "pokemon": [
+      {
+        "name": "goldeen",
+        "level": "22",
+        "moves": ["water-pulse", "whirlpool", "horn-attack", "agility"],
+        "ability": "swift-swim",
+        "abilities": ["swift-swim"]
+      },
+      { "name": "arrokuda", "level": "23", "moves": ["aqua-jet", "bite", "whirlpool", "fury-attack"], "ability": "swift-swim", "abilities": ["swift-swim"] },
+      { "name": "drednaw", "level": "24", "moves": ["razor-shell", "water-gun", "bite", "headbutt"], "ability": "swift-swim", "abilities": ["swift-swim"] }
+    ]
+  },
+  "3": {
+    "name": "Kabu",
+    "speciality": "fire",
+    "img": { "src": "/leaders/swsh-kabu", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      {
+        "name": "ninetales",
+        "level": "25",
+        "moves": ["will-o-wisp", "fire-spin", "quick-attack", "ember"],
+        "ability": "flash-fire",
+        "abilities": ["flash-fire"]
+      },
+      { "name": "arcanine", "level": "25", "moves": ["will-o-wisp", "flame-wheel", "bite", "agility"], "ability": "intimidate", "abilities": ["intimidate"] },
+      {
+        "name": "centiskorch",
+        "level": "27",
+        "moves": ["flame-wheel", "coil", "bug-bite", "smokescreen"],
+        "ability": "flash-fire",
+        "abilities": ["flash-fire"]
+      }
+    ]
+  },
+  "5": {
+    "name": "Opal",
+    "speciality": "fairy",
+    "img": { "src": "/leaders/swsh-opal", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      {
+        "name": "weezing-galar",
+        "level": "36",
+        "moves": ["sludge", "fairy-wind", "tackle"],
+        "ability": "levitate",
+        "abilities": ["levitate"],
+        "sprite": "weezing-galar"
+      },
+      {
+        "name": "mawile",
+        "level": "36",
+        "moves": ["draining-kiss", "crunch", "iron-defense", "astonish"],
+        "ability": "intimidate",
+        "abilities": ["intimidate"]
+      },
+      { "name": "togekiss", "level": "37", "moves": ["air-slash", "draining-kiss", "ancient-power"], "ability": "hustle", "abilities": ["hustle"] },
+      { "name": "alcremie", "level": "38", "moves": ["draining-kiss", "acid-armor", "sweet-kiss"], "ability": "sweet-veil", "abilities": ["sweet-veil"] }
+    ]
+  },
+  "7": {
+    "name": "Piers",
+    "speciality": "dark",
+    "img": { "src": "/leaders/swsh-piers", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      { "name": "scrafty", "level": "44", "moves": ["fake-out", "sand-attack", "brick-break", "payback"], "ability": "intimidate", "abilities": ["intimidate"] },
+      { "name": "malamar", "level": "45", "moves": ["night-slash", "foul-play", "psycho-cut", "payback"], "ability": "contrary", "abilities": ["contrary"] },
+      { "name": "skuntank", "level": "45", "moves": ["sucker-punch", "screech", "toxic", "snarl"], "ability": "aftermath", "abilities": ["aftermath"] },
+      { "name": "obstagoon", "level": "46", "moves": ["obstruct", "throat-chop", "counter", "shadow-claw"], "ability": "reckless", "abilities": ["reckless"] }
+    ]
+  },
+  "8": {
+    "name": "Raihan",
+    "speciality": "dragon",
+    "img": { "src": "/leaders/swsh-raihan", "author": "Drawnamu", "link": "https://www.deviantart.com/drawnamu" },
+    "pokemon": [
+      {
+        "name": "gigalith",
+        "level": "46",
+        "moves": ["stealth-rock", "sand-tomb", "rock-blast", "body-press"],
+        "ability": "sand-stream",
+        "abilities": ["sand-stream"]
+      },
+      {
+        "name": "flygon",
+        "level": "47",
+        "moves": ["thunder-punch", "breaking-swipe", "crunch", "steel-wing"],
+        "ability": "levitate",
+        "abilities": ["levitate"]
+      },
+      { "name": "sandaconda", "level": "46", "moves": ["protect", "glare", "fire-fang", "earth-power"], "ability": "sand-spit", "abilities": ["sand-spit"] },
+      {
+        "name": "duraludon",
+        "level": "48",
+        "moves": ["breaking-swipe", "body-press", "stone-edge", "iron-head"],
+        "ability": "heavy-metal",
+        "abilities": ["heavy-metal"]
+      }
+    ]
+  },
+  "rose": {
+    "name": "Rose",
+    "speciality": "",
+    "img": { "src": "/leaders/swsh-rose", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      {
+        "name": "escavalier",
+        "level": "55",
+        "moves": ["drill-run", "iron-head", "megahorn", "swords-dance"],
+        "ability": "shell-armor",
+        "abilities": ["shell-armor"]
+      },
+      { "name": "ferrothorn", "level": "55", "moves": ["gyro-ball", "power-whip", "body-press", "curse"], "ability": "iron-barbs", "abilities": ["iron-barbs"] },
+      {
+        "name": "perrserker",
+        "level": "55",
+        "moves": ["iron-head", "screech", "shadow-claw", "throat-chop"],
+        "ability": "tough-claws",
+        "abilities": ["tough-claws"]
+      },
+      { "name": "klinklang", "level": "56", "moves": ["gear-grind", "shift-gear", "wild-charge", "assurance"], "ability": "minus", "abilities": ["minus"] },
+      {
+        "name": "copperajah",
+        "level": "57",
+        "moves": ["heavy-slam", "iron-head", "high-horsepower", "zen-headbutt"],
+        "ability": "sheer-force",
+        "abilities": ["sheer-force"]
+      }
+    ]
+  },
+  "oleana": {
+    "name": "Oleana",
+    "speciality": "",
+    "img": { "src": "/leaders/swsh-oleana", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      { "name": "froslass", "level": "50", "moves": ["hex", "icy-wind", "will-o-wisp", "double-team"], "ability": "snow-cloak", "abilities": ["snow-cloak"] },
+      {
+        "name": "tsareena",
+        "level": "50",
+        "moves": ["trop-kick", "stomp", "attract", "acrobatics"],
+        "ability": "queenly-majesty",
+        "abilities": ["queenly-majesty"]
+      },
+      {
+        "name": "salazzle",
+        "level": "50",
+        "moves": ["venoshock", "incinerate", "poison-gas", "dragon-pulse"],
+        "ability": "corrosion",
+        "abilities": ["corrosion"]
+      },
+      { "name": "milotic", "level": "51", "moves": ["surf", "safeguard", "aqua-ring", "recover"], "ability": "competitive", "abilities": ["competitive"] },
+      {
+        "name": "garbodor",
+        "level": "52",
+        "moves": ["gunk-shot", "stomping-tantrum", "rock-blast", "toxic-spikes"],
+        "ability": "weak-armor",
+        "abilities": ["weak-armor"]
+      }
+    ]
+  },
+  "b1": {
+    "name": "Bede",
+    "speciality": "",
+    "img": { "src": "/leaders/swsh-bede", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      { "name": "solosis", "level": "13", "moves": ["endeavor", "confusion"], "ability": "magic-guard", "abilities": ["magic-guard"] },
+      { "name": "gothita", "level": "15", "moves": ["psybeam", "tickle", "pound"], "ability": "competitive", "abilities": ["competitive"] },
+      { "name": "hatenna", "level": "16", "moves": ["confusion", "round", "disarming-voice"], "ability": "anticipation", "abilities": ["anticipation"] }
+    ]
+  },
+  "b2": {
+    "name": "Bede",
+    "speciality": "",
+    "img": { "src": "/leaders/swsh-bede", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      { "name": "solosis", "level": "21", "moves": ["psyshock", "psybeam", "endeavor"], "ability": "magic-guard", "abilities": ["magic-guard"] },
+      { "name": "gothita", "level": "22", "moves": ["psyshock", "rock-tomb", "psybeam"], "ability": "competitive", "abilities": ["competitive"] },
+      {
+        "name": "ponyta-galar",
+        "level": "22",
+        "moves": ["confusion", "fairy-wind"],
+        "ability": "pastel-veil",
+        "abilities": ["pastel-veil"],
+        "sprite": "ponyta-galar"
+      },
+      { "name": "hatenna", "level": "23", "moves": ["psybeam", "disarming-voice"], "ability": "anticipation", "abilities": ["anticipation"] }
+    ]
+  },
+  "b3": {
+    "name": "Bede",
+    "speciality": "",
+    "img": { "src": "/leaders/swsh-bede", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      { "name": "duosion", "level": "32", "moves": ["light-screen", "reflect", "psyshock", "psybeam"], "ability": "magic-guard", "abilities": ["magic-guard"] },
+      { "name": "gothorita", "level": "32", "moves": ["fake-tears", "psybeam", "rock-tomb"], "ability": "competitive", "abilities": ["competitive"] },
+      {
+        "name": "ponyta-galar",
+        "level": "33",
+        "moves": ["fairy-wind", "psybeam", "agility"],
+        "ability": "pastel-veil",
+        "abilities": ["pastel-veil"],
+        "sprite": "ponyta-galar"
+      },
+      { "name": "hattrem", "level": "35", "moves": ["dazzling-gleam", "psybeam"], "ability": "anticipation", "abilities": ["anticipation"] }
+    ]
+  },
+  "m1": {
+    "name": "Marnie",
+    "speciality": "",
+    "img": { "src": "/leaders/swsh-marnie", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      { "name": "croagunk", "level": "24", "moves": ["poison-sting", "venoshock", "revenge", "sucker-punch"], "ability": "dry-skin", "abilities": ["dry-skin"] },
+      { "name": "scraggy", "level": "24", "moves": ["beat-up", "headbutt", "low-kick"], "ability": "shed-skin", "abilities": ["shed-skin"] },
+      {
+        "name": "morpeko-full-belly",
+        "level": "26",
+        "moves": ["bite", "thunder-shock", "quick-attack"],
+        "ability": "hunger-switch",
+        "abilities": ["hunger-switch"],
+        "sprite": "morpeko"
+      }
+    ]
+  },
+  "m2": {
+    "name": "Marnie",
+    "speciality": "",
+    "img": { "src": "/leaders/swsh-marnie", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      { "name": "liepard", "level": "42", "moves": ["fake-out", "torment", "nasty-plot", "sucker-punch"], "ability": "prankster", "abilities": ["prankster"] },
+      { "name": "toxicroak", "level": "43", "moves": ["venoshock", "sucker-punch", "swagger", "poison-jab"], "ability": "dry-skin", "abilities": ["dry-skin"] },
+      { "name": "scrafty", "level": "43", "moves": ["brick-break", "scary-face", "crunch", "swagger"], "ability": "shed-skin", "abilities": ["shed-skin"] },
+      {
+        "name": "morpeko-full-belly",
+        "level": "44",
+        "moves": ["quick-attack", "torment", "spark", "bite"],
+        "ability": "hunger-switch",
+        "abilities": ["hunger-switch"],
+        "sprite": "morpeko"
+      }
+    ]
+  },
+  "r1": {
+    "name": "Hop",
+    "speciality": "",
+    "img": { "src": "/leaders/swsh-hop", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      { "name": "wooloo", "level": "3", "moves": ["tackle"], "ability": "run-away", "abilities": ["run-away"] },
+      { "name": "sobble", "level": "5", "moves": ["pound", "growl"], "ability": "torrent", "abilities": ["torrent"], "starter": "grass" },
+      { "name": "grookey", "level": "5", "moves": ["scratch", "growl"], "ability": "overgrow", "abilities": ["overgrow"], "starter": "fire" },
+      { "name": "scorbunny", "level": "5", "moves": ["tackle", "growl"], "ability": "blaze", "abilities": ["blaze"], "starter": "water" }
+    ]
+  },
+  "r2": {
+    "name": "Hop",
+    "speciality": "",
+    "img": { "src": "/leaders/swsh-hop", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      { "name": "wooloo", "level": "6", "moves": ["tackle", "growl"], "ability": "run-away", "abilities": ["run-away"] },
+      { "name": "rookidee", "level": "5", "moves": ["leer", "peck"], "ability": "unnerve", "abilities": ["unnerve"] },
+      { "name": "sobble", "level": "8", "moves": ["pound", "growl", "water-gun"], "ability": "torrent", "abilities": ["torrent"], "starter": "grass" },
+      { "name": "grookey", "level": "8", "moves": ["scratch", "growl", "branch-poke"], "ability": "overgrow", "abilities": ["overgrow"], "starter": "fire" },
+      { "name": "scorbunny", "level": "8", "moves": ["tackle", "growl", "ember"], "ability": "blaze", "abilities": ["blaze"], "starter": "water" }
+    ]
+  },
+  "r3": {
+    "name": "Hop",
+    "speciality": "",
+    "img": { "src": "/leaders/swsh-hop", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      { "name": "wooloo", "level": "11", "moves": ["tackle", "growl"], "ability": "run-away", "abilities": ["run-away"] },
+      { "name": "rookidee", "level": "12", "moves": ["leer", "peck"], "ability": "unnerve", "abilities": ["unnerve"] },
+      { "name": "sobble", "level": "14", "moves": ["pound", "growl", "water-gun", "bind"], "ability": "torrent", "abilities": ["torrent"], "starter": "grass" },
+      {
+        "name": "grookey",
+        "level": "14",
+        "moves": ["scratch", "growl", "branch-poke", "taunt"],
+        "ability": "overgrow",
+        "abilities": ["overgrow"],
+        "starter": "fire"
+      },
+      {
+        "name": "scorbunny",
+        "level": "14",
+        "moves": ["tackle", "growl", "ember", "quick-attack"],
+        "ability": "blaze",
+        "abilities": ["blaze"],
+        "starter": "water"
+      }
+    ]
+  },
+  "r4": {
+    "name": "Hop",
+    "speciality": "",
+    "img": { "src": "/leaders/swsh-hop", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      { "name": "wooloo", "level": "18", "moves": ["tackle", "growl"], "ability": "run-away", "abilities": ["run-away"] },
+      { "name": "corvisquire", "level": "19", "moves": ["leer", "peck", "fury-attack", "pluck"], "ability": "unnerve", "abilities": ["unnerve"] },
+      {
+        "name": "drizzile",
+        "level": "21",
+        "moves": ["round", "growl", "water-pulse", "bind"],
+        "ability": "torrent",
+        "abilities": ["torrent"],
+        "starter": "grass"
+      },
+      {
+        "name": "thwackey",
+        "level": "21",
+        "moves": ["round", "razor-leaf", "double-hit", "screech"],
+        "ability": "overgrow",
+        "abilities": ["overgrow"],
+        "starter": "fire"
+      },
+      {
+        "name": "raboot",
+        "level": "21",
+        "moves": ["round", "growl", "double-kick", "flame-charge"],
+        "ability": "blaze",
+        "abilities": ["blaze"],
+        "starter": "water"
+      }
+    ]
+  },
+  "r5": {
+    "name": "Hop",
+    "speciality": "",
+    "img": { "src": "/leaders/swsh-hop", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      { "name": "cramorant", "level": "28", "moves": ["dive", "pluck", "fury-attack"], "ability": "gulp-missile", "abilities": ["gulp-missile"] },
+      { "name": "toxel", "level": "29", "moves": ["tearful-look", "nuzzle", "flail", "acid"], "ability": "static", "abilities": ["static"] },
+      { "name": "silicobra", "level": "30", "moves": ["glare", "dig", "brutal-swing"], "ability": "shed-skin", "abilities": ["shed-skin"] },
+      {
+        "name": "drizzile",
+        "level": "33",
+        "moves": ["water-pulse", "sucker-punch", "round", "tearful-look"],
+        "ability": "torrent",
+        "abilities": ["torrent"],
+        "starter": "grass"
+      },
+      {
+        "name": "thwackey",
+        "level": "33",
+        "moves": ["knock-off", "razor-leaf", "screech", "round"],
+        "ability": "overgrow",
+        "abilities": ["overgrow"],
+        "starter": "fire"
+      },
+      {
+        "name": "raboot",
+        "level": "33",
+        "moves": ["flame-charge", "agility", "round", "double-kick"],
+        "ability": "blaze",
+        "abilities": ["blaze"],
+        "starter": "water"
+      }
+    ]
+  },
+  "r6": {
+    "name": "Hop",
+    "speciality": "",
+    "img": { "src": "/leaders/swsh-hop", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      { "name": "trevenant", "level": "34", "moves": ["horn-leech", "shadow-claw", "confuse-ray"], "ability": "natural-cure", "abilities": ["natural-cure"] },
+      { "name": "heatmor", "level": "34", "moves": ["fire-lash", "bug-bite", "slash", "lick"], "ability": "flash-fire", "abilities": ["flash-fire"] },
+      { "name": "snorlax", "level": "35", "moves": ["body-slam", "stockpile", "heavy-slam"], "ability": "thick-fat", "abilities": ["thick-fat"] },
+      { "name": "boltund", "level": "35", "moves": ["spark", "crunch", "roar", "nuzzle"], "ability": "strong-jaw", "abilities": ["strong-jaw"] },
+      {
+        "name": "inteleon",
+        "level": "37",
+        "moves": ["snipe-shot", "sucker-punch", "tearful-look", "whirlpool"],
+        "ability": "torrent",
+        "abilities": ["torrent"],
+        "starter": "grass"
+      },
+      {
+        "name": "rillaboom",
+        "level": "37",
+        "moves": ["drum-beating", "knock-off", "slam", "brutal-swing"],
+        "ability": "overgrow",
+        "abilities": ["overgrow"],
+        "starter": "fire"
+      },
+      {
+        "name": "cinderace",
+        "level": "37",
+        "moves": ["pyro-ball", "headbutt", "acrobatics", "agility"],
+        "ability": "blaze",
+        "abilities": ["blaze"],
+        "starter": "water"
+      }
+    ]
+  },
+  "r7": {
+    "name": "Hop",
+    "speciality": "",
+    "img": { "src": "/leaders/swsh-hop", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      { "name": "dubwool", "level": "40", "moves": ["growl", "defense-curl", "double-kick", "take-down"], "ability": "steadfast", "abilities": ["steadfast"] },
+      { "name": "corviknight", "level": "40", "moves": ["fury-attack", "pluck", "scary-face", "drill-peck"], "ability": "unnerve", "abilities": ["unnerve"] },
+      { "name": "pincurchin", "level": "39", "moves": ["spark", "bubble-beam", "curse"], "ability": "lightning-rod", "abilities": ["lightning-rod"] },
+      { "name": "snorlax", "level": "39", "moves": ["crunch", "heavy-slam", "body-slam"], "ability": "thick-fat", "abilities": ["thick-fat"] },
+      {
+        "name": "inteleon",
+        "level": "41",
+        "moves": ["tearful-look", "sucker-punch", "snipe-shot", "liquidation"],
+        "ability": "torrent",
+        "abilities": ["torrent"],
+        "starter": "grass"
+      },
+      {
+        "name": "rillaboom",
+        "level": "41",
+        "moves": ["double-hit", "knock-off", "drum-beating", "brick-break"],
+        "ability": "overgrow",
+        "abilities": ["overgrow"],
+        "starter": "fire"
+      },
+      {
+        "name": "cinderace",
+        "level": "41",
+        "moves": ["double-kick", "pyro-ball", "counter", "mega-kick"],
+        "ability": "blaze",
+        "abilities": ["blaze"],
+        "starter": "water"
+      }
+    ]
+  },
+  "mustard1": {
+    "name": "Mustard",
+    "speciality": "",
+    "img": { "src": "/leaders/swsh-mustard1", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      { "name": "mienfoo", "level": "61", "moves": ["fake-out", "u-turn", "force-palm"], "ability": "inner-focus", "abilities": ["inner-focus"] },
+      { "name": "shinx", "level": "61", "moves": ["spark", "bite"], "ability": "intimidate", "abilities": ["intimidate"] }
+    ]
+  },
+  "mustard2": {
+    "name": "Master Mustard",
+    "speciality": "",
+    "img": { "src": "/leaders/swsh-mustard2", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      {
+        "name": "mienshao",
+        "level": "78",
+        "moves": ["fake-out", "close-combat", "blaze-kick", "u-turn"],
+        "ability": "inner-focus",
+        "abilities": ["inner-focus"]
+      },
+      {
+        "name": "luxray",
+        "level": "78",
+        "moves": ["wild-charge", "crunch", "psychic-fangs", "play-rough"],
+        "ability": "intimidate",
+        "abilities": ["intimidate"]
+      },
+      {
+        "name": "corviknight",
+        "level": "79",
+        "moves": ["iron-head", "brave-bird", "light-screen", "body-press"],
+        "ability": "unnerve",
+        "abilities": ["unnerve"]
+      },
+      {
+        "name": "lycanroc-midday",
+        "level": "80",
+        "moves": ["stone-edge", "accelerock", "play-rough", "stealth-rock"],
+        "ability": "keen-eye",
+        "abilities": ["keen-eye"],
+        "sprite": "lycanroc-midday"
+      },
+      {
+        "name": "kommo-o",
+        "level": "80",
+        "moves": ["clanging-scales", "flash-cannon", "aura-sphere", "clangorous-soul"],
+        "ability": "soundproof",
+        "abilities": ["soundproof"]
+      },
+      {
+        "name": "urshifu-single-strike",
+        "level": "80",
+        "moves": ["wicked-blow", "close-combat", "iron-head", "poison-jab"],
+        "ability": "unseen-fist",
+        "abilities": ["unseen-fist"],
+        "sprite": "urshifu"
+      },
+      {
+        "name": "urshifu-rapid-strike",
+        "level": "80",
+        "moves": ["surging-strikes", "close-combat", "iron-head", "poison-jab"],
+        "ability": "unseen-fist",
+        "abilities": ["unseen-fist"],
+        "sprite": "urshifu"
+      }
+    ]
+  },
+  "kl1": {
+    "name": "Klara",
+    "speciality": "poison",
+    "img": { "src": "/leaders/swsh-klara", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      { "name": "venipede", "level": "58", "moves": ["poison-tail"], "ability": "poison-point", "abilities": ["poison-point"] },
+      { "name": "slowpoke-galar", "level": "60", "moves": ["confusion", "acid"], "ability": "gluttony", "abilities": ["gluttony"], "sprite": "slowpoke-galar" }
+    ]
+  },
+  "kl2": {
+    "name": "Klara",
+    "speciality": "poison",
+    "img": { "src": "/leaders/swsh-klara", "author": "Drawnamu", "link": "https://www.deviantart.com/drawnamu" },
+    "pokemon": [
+      { "name": "slowpoke-galar", "level": "62", "moves": ["confusion", "acid"], "ability": "gluttony", "abilities": ["gluttony"], "sprite": "slowpoke-galar" },
+      { "name": "koffing", "level": "62", "moves": ["clear-smog", "assurance"], "ability": "levitate", "abilities": ["levitate"] },
+      { "name": "whirlipede", "level": "63", "moves": ["poison-tail", "bug-bite"], "ability": "poison-point", "abilities": ["poison-point"] }
+    ]
+  },
+  "kl3": {
+    "name": "Klara",
+    "speciality": "poison",
+    "img": { "src": "/leaders/swsh-klara", "author": "Drawnamu", "link": "https://www.deviantart.com/drawnamu" },
+    "pokemon": [
+      { "name": "skorupi", "level": "65", "moves": ["bite", "poison-fang"], "ability": "battle-armor", "abilities": ["battle-armor"] },
+      {
+        "name": "weezing-galar",
+        "level": "66",
+        "moves": ["clear-smog", "assurance"],
+        "ability": "levitate",
+        "abilities": ["levitate"],
+        "sprite": "weezing-galar"
+      },
+      { "name": "whirlipede", "level": "66", "moves": ["poison-tail", "bug-bite"], "ability": "poison-point", "abilities": ["poison-point"] },
+      {
+        "name": "slowbro-galar",
+        "level": "67",
+        "moves": ["water-pulse", "confusion", "shell-side-arm"],
+        "ability": "quick-draw",
+        "abilities": ["quick-draw"],
+        "sprite": "slowbro-galar"
+      }
+    ]
+  },
+  "av1": {
+    "name": "Avery",
+    "speciality": "psychic",
+    "img": { "src": "/leaders/swsh-avery", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      { "name": "abra", "level": "58", "moves": ["confusion"], "ability": "synchronize", "abilities": ["synchronize"] },
+      { "name": "slowpoke-galar", "level": "60", "moves": ["confusion", "acid"], "ability": "gluttony", "abilities": ["gluttony"], "sprite": "slowpoke-galar" }
+    ]
+  },
+  "av2": {
+    "name": "Avery",
+    "speciality": "psychic",
+    "img": { "src": "/leaders/swsh-avery", "author": "Drawnamu", "link": "https://www.deviantart.com/drawnamu" },
+    "pokemon": [
+      { "name": "slowpoke-galar", "level": "62", "moves": ["confusion", "acid"], "ability": "gluttony", "abilities": ["gluttony"], "sprite": "slowpoke-galar" },
+      { "name": "woobat", "level": "62", "moves": ["confusion", "air-cutter"], "ability": "unaware", "abilities": ["unaware"] },
+      { "name": "kadabra", "level": "53", "moves": ["psybeam", "swift"], "ability": "synchronize", "abilities": ["synchronize"] }
+    ]
+  },
+  "av3": {
+    "name": "Avery",
+    "speciality": "psychic",
+    "img": { "src": "/leaders/swsh-avery", "author": "Drawnamu", "link": "https://www.deviantart.com/drawnamu" },
+    "pokemon": [
+      { "name": "ponyta-galar", "level": "65", "moves": ["psybeam", "fairy-wind"], "ability": "run-away", "abilities": ["run-away"], "sprite": "ponyta-galar" },
+      { "name": "swoobat", "level": "66", "moves": ["confusion", "air-cutter"], "ability": "unaware", "abilities": ["unaware"] },
+      { "name": "kadabra", "level": "66", "moves": ["psybeam", "swift"], "ability": "synchronize", "abilities": ["synchronize"] },
+      {
+        "name": "slowbro-galar",
+        "level": "67",
+        "moves": ["water-pulse", "shell-side-arm", "confusion"],
+        "ability": "quick-draw",
+        "abilities": ["quick-draw"],
+        "sprite": "slowbrow-galar"
+      }
+    ]
+  },
+  "p": {
+    "name": "Peony",
+    "speciality": "steel",
+    "img": { "src": "/leaders/swsh-peony", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      {
+        "name": "copperajah",
+        "level": "70",
+        "moves": ["high-horsepower", "heavy-slam", "play-rough", "superpower"],
+        "ability": "sheer-force",
+        "abilities": ["sheer-force"]
+      },
+      {
+        "name": "aggron",
+        "level": "70",
+        "moves": ["body-press", "stone-edge", "crunch", "iron-head"],
+        "ability": "sturdy",
+        "abilities": ["sturdy"],
+        "held": "sitrus-berry"
+      }
+    ]
+  },
+  "p2": {
+    "name": "Peony",
+    "speciality": "steel",
+    "img": { "src": "/leaders/swsh-peony", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      {
+        "name": "perrserker",
+        "level": "74",
+        "moves": ["u-turn", "iron-head", "seed-bomb", "throat-chop"],
+        "ability": "tough-claws",
+        "abilities": ["tough-claws"]
+      },
+      {
+        "name": "bronzong",
+        "level": "73",
+        "moves": ["extrasensory", "calm-mind", "flash-cannon", "shadow-ball"],
+        "ability": "heatproof",
+        "abilities": ["heatproof"]
+      },
+      {
+        "name": "scizor",
+        "level": "73",
+        "moves": ["x-scissor", "bullet-punch", "wing-attack", "double-hit"],
+        "ability": "technician",
+        "abilities": ["technician"]
+      },
+      { "name": "aggron", "level": "74", "moves": ["body-press", "stone-edge", "crunch", "iron-head"], "ability": "sturdy", "abilities": ["sturdy"] },
+      {
+        "name": "copperajah",
+        "level": "74",
+        "moves": ["high-horsepower", "heavy-slam", "play-rough", "superpower"],
+        "ability": "sheer-force",
+        "abilities": ["sheer-force"]
+      }
+    ]
+  },
+  "4a": {
+    "name": "Bea",
+    "speciality": "fighting",
+    "img": { "src": "/leaders/swsh-bea", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      {
+        "name": "hitmontop",
+        "level": "34",
+        "moves": ["triple-kick", "quick-attack", "counter", "revenge"],
+        "ability": "technician",
+        "abilities": ["technician"]
+      },
+      {
+        "name": "pangoro",
+        "level": "34",
+        "moves": ["bullet-punch", "circle-throw", "night-slash", "work-up"],
+        "ability": "mold-breaker",
+        "abilities": ["mold-breaker"]
+      },
+      { "name": "sirfetchd", "level": "35", "moves": ["detect", "swords-dance", "brutal-swing", "revenge"], "ability": "steadfast", "abilities": ["steadfast"] },
+      { "name": "machamp", "level": "36", "moves": ["scary-face", "revenge", "knock-off", "strength"], "ability": "guts", "abilities": ["guts"] }
+    ]
+  },
+  "4b": {
+    "name": "Allister",
+    "speciality": "ghost",
+    "img": { "src": "/leaders/swsh-allister", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      { "name": "yamask", "level": "34", "moves": ["brutal-swing", "hex", "disable"], "ability": "wandering-spirit", "abilities": ["wandering-spirit"] },
+      {
+        "name": "mimikyu-disguised",
+        "level": "34",
+        "moves": ["shadow-sneak", "baby-doll-eyes", "hone-claws", "slash"],
+        "ability": "disguise",
+        "abilities": ["disguise"],
+        "sprite": "mimikyu"
+      },
+      { "name": "cursola", "level": "35", "moves": ["ancient-power", "curse", "hex"], "ability": "weak-armor", "abilities": ["weak-armor"] },
+      { "name": "gengar", "level": "36", "moves": ["venoshock", "hex", "hypnosis", "payback"], "ability": "cursed-body", "abilities": ["cursed-body"] }
+    ]
+  },
+  "6a": {
+    "name": "Gordie",
+    "speciality": "rock",
+    "img": { "src": "/leaders/swsh-gordie", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      { "name": "barbaracle", "level": "40", "moves": ["shell-smash", "rock-tomb", "razor-shell"], "ability": "tough-claws", "abilities": ["tough-claws"] },
+      {
+        "name": "shuckle",
+        "level": "40",
+        "moves": ["power-split", "stone-edge", "struggle-bug", "rock-tomb"],
+        "ability": "contrary",
+        "abilities": ["contrary"]
+      },
+      {
+        "name": "stonjourner",
+        "level": "41",
+        "moves": ["stealth-rock", "rock-tomb", "body-slam", "wonder-room"],
+        "ability": "power-spot",
+        "abilities": ["power-spot"]
+      },
+      {
+        "name": "coalossal",
+        "level": "42",
+        "moves": ["tar-shot", "stealth-rock", "heat-crash", "rock-tomb"],
+        "ability": "steam-engine",
+        "abilities": ["steam-engine"]
+      }
+    ]
+  },
+  "6b": {
+    "name": "Melony",
+    "speciality": "ice",
+    "img": { "src": "/leaders/swsh-melony", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      { "name": "frosmoth", "level": "40", "moves": ["icy-wind", "feather-dance", "bug-buzz", "hail"], "ability": "shield-dust", "abilities": ["shield-dust"] },
+      {
+        "name": "darmanitan-galar-standard",
+        "level": "40",
+        "moves": ["icicle-crash", "headbutt", "taunt", "fire-fang"],
+        "ability": "zen-mode",
+        "abilities": ["zen-mode"],
+        "sprite": "darmanitan-galar"
+      },
+      {
+        "name": "eiscue-ice",
+        "level": "41",
+        "moves": ["amnesia", "freeze-dry", "hail", "icy-wind"],
+        "ability": "ice-face",
+        "abilities": ["ice-face"],
+        "sprite": "eiscue"
+      },
+      { "name": "lapras", "level": "42", "moves": ["icy-wind", "ice-beam", "surf", "sing"], "ability": "shell-armor", "abilities": ["shell-armor"] }
+    ]
+  },
+  "e1": {
+    "name": "Marnie",
+    "speciality": "dark",
+    "img": { "src": "/leaders/swsh-marnie", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      { "name": "liepard", "level": "47", "moves": ["fake-out", "torment", "nasty-plot", "snarl"], "ability": "prankster", "abilities": ["prankster"] },
+      { "name": "toxicroak", "level": "47", "moves": ["venoshock", "sucker-punch", "swagger", "toxic"], "ability": "dry-skin", "abilities": ["dry-skin"] },
+      { "name": "scrafty", "level": "47", "moves": ["swagger", "scary-face", "brick-break", "crunch"], "ability": "shed-skin", "abilities": ["shed-skin"] },
+      {
+        "name": "morpeko-full-belly",
+        "level": "48",
+        "moves": ["bullet-seed", "torment", "spark", "bite"],
+        "ability": "hunger-switch",
+        "abilities": ["hunger-switch"],
+        "sprite": "morpeko"
+      },
+      {
+        "name": "grimmsnarl",
+        "level": "49",
+        "moves": ["spirit-break", "darkest-lariat", "bulk-up", "torment"],
+        "ability": "prankster",
+        "abilities": ["prankster"]
+      }
+    ]
+  },
+  "e2": {
+    "name": "Hop",
+    "speciality": "",
+    "img": { "src": "/leaders/swsh-hop", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      {
+        "name": "dubwool",
+        "level": "48",
+        "moves": ["cotton-guard", "reversal", "body-slam", "zen-headbutt"],
+        "ability": "steadfast",
+        "abilities": ["steadfast"]
+      },
+      { "name": "corviknight", "level": "48", "moves": ["steel-wing", "drill-peck", "scary-face", "swagger"], "ability": "unnerve", "abilities": ["unnerve"] },
+      { "name": "pincurchin", "level": "47", "moves": ["thunderbolt", "poison-jab", "curse"], "ability": "lightning-rod", "abilities": ["lightning-rod"] },
+      { "name": "snorlax", "level": "47", "moves": ["heavy-slam", "high-horsepower", "hammer-arm"], "ability": "thick-fat", "abilities": ["thick-fat"] },
+      {
+        "name": "inteleon",
+        "level": "49",
+        "moves": ["snipe-shot", "mud-shot", "icy-wind", "dark-pulse"],
+        "ability": "torrent",
+        "abilities": ["torrent"],
+        "starter": "grass"
+      },
+      {
+        "name": "rillaboom",
+        "level": "49",
+        "moves": ["drum-beating", "high-horsepower", "snarl", "uproar"],
+        "ability": "overgrow",
+        "abilities": ["overgrow"],
+        "starter": "fire"
+      },
+      {
+        "name": "cinderace",
+        "level": "49",
+        "moves": ["pyro-ball", "counter", "gunk-shot", "bounce"],
+        "ability": "blaze",
+        "abilities": ["blaze"],
+        "starter": "water"
+      }
+    ]
+  },
+  "e3": {
+    "name": "Bede",
+    "speciality": "psychic",
+    "img": { "src": "/leaders/swsh-bede", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      { "name": "mawile", "level": "51", "moves": ["play-rough", "iron-head", "crunch"], "ability": "intimidate", "abilities": ["intimidate"] },
+      {
+        "name": "gardevoir",
+        "level": "51",
+        "moves": ["dazzling-gleam", "psychic", "calm-mind", "wish"],
+        "ability": "synchronize",
+        "abilities": ["synchronize"]
+      },
+      {
+        "name": "rapidash-galar",
+        "level": "52",
+        "moves": ["psycho-cut", "take-down", "dazzling-gleam", "quick-attack"],
+        "ability": "pastel-veil",
+        "abilities": ["pastel-veil"],
+        "sprite": "rapidash-galar"
+      },
+      {
+        "name": "hatterene",
+        "level": "53",
+        "moves": ["psychic", "dazzling-gleam", "calm-mind", "mystical-fire"],
+        "ability": "anticipation",
+        "abilities": ["anticipation"]
+      }
+    ]
+  },
+  "e4": {
+    "name": "Nessa",
+    "speciality": "water",
+    "img": { "src": "/leaders/swsh-nessa", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      {
+        "name": "golisopod",
+        "level": "51",
+        "moves": ["first-impression", "liquidation", "swords-dance", "shadow-claw"],
+        "ability": "emergency-exit",
+        "abilities": ["emergency-exit"]
+      },
+      { "name": "pelipper", "level": "51", "moves": ["roost", "air-slash", "water-pulse", "tailwind"], "ability": "drizzle", "abilities": ["drizzle"] },
+      {
+        "name": "barraskewda",
+        "level": "52",
+        "moves": ["liquidation", "throat-chop", "ice-fang", "drill-run"],
+        "ability": "swift-swim",
+        "abilities": ["swift-swim"]
+      },
+      {
+        "name": "seaking",
+        "level": "52",
+        "moves": ["smart-strike", "megahorn", "aqua-ring", "waterfall"],
+        "ability": "swift-swim",
+        "abilities": ["swift-swim"]
+      },
+      { "name": "drednaw", "level": "53", "moves": ["liquidation", "jaw-lock", "rock-tomb", "crunch"], "ability": "shell-armor", "abilities": ["shell-armor"] }
+    ]
+  },
+  "e5a": {
+    "name": "Bea",
+    "speciality": "fighting",
+    "img": { "src": "/leaders/swsh-bea", "author": "Drawnamu", "link": "https://www.deviantart.com/drawnamu" },
+    "pokemon": [
+      { "name": "hawlucha", "level": "52", "moves": ["flying-press", "high-jump-kick", "bounce"], "ability": "limber", "abilities": ["limber"] },
+      { "name": "grapploct", "level": "52", "moves": ["octolock", "submission", "bind", "mega-punch"], "ability": "limber", "abilities": ["limber"] },
+      { "name": "sirfetchd", "level": "53", "moves": ["leaf-blade", "slam", "brick-break", "brutal-swing"], "ability": "steadfast", "abilities": ["steadfast"] },
+      {
+        "name": "falinks",
+        "level": "53",
+        "moves": ["no-retreat", "bulk-up", "close-combat", "rock-tomb"],
+        "ability": "battle-armor",
+        "abilities": ["battle-armor"]
+      },
+      { "name": "machamp", "level": "54", "moves": ["cross-chop", "revenge", "fire-punch", "strength"], "ability": "guts", "abilities": ["guts"] }
+    ]
+  },
+  "e5b": {
+    "name": "Allister",
+    "speciality": "ghost",
+    "img": { "src": "/leaders/swsh-allister", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      {
+        "name": "dusknoir",
+        "level": "52",
+        "moves": ["shadow-punch", "thunder-punch", "rock-tomb", "disable"],
+        "ability": "pressure",
+        "abilities": ["pressure"]
+      },
+      { "name": "chandelure", "level": "52", "moves": ["shadow-ball", "mystical-fire", "will-o-wisp"], "ability": "flash-fire", "abilities": ["flash-fire"] },
+      { "name": "cursola", "level": "53", "moves": ["hex", "strength-sap", "ancient-power", "amnesia"], "ability": "weak-armor", "abilities": ["weak-armor"] },
+      {
+        "name": "polteageist",
+        "level": "53",
+        "moves": ["shadow-ball", "protect", "nasty-plot", "giga-drain"],
+        "ability": "weak-armor",
+        "abilities": ["weak-armor"]
+      },
+      {
+        "name": "gengar",
+        "level": "54",
+        "moves": ["shadow-ball", "sludge-bomb", "dark-pulse", "hypnosis"],
+        "ability": "cursed-body",
+        "abilities": ["cursed-body"]
+      }
+    ]
+  },
+  "e6": {
+    "name": "Raihan",
+    "speciality": "dragon",
+    "img": { "src": "/leaders/swsh-raihan", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      { "name": "torkoal", "level": "53", "moves": ["lava-plume", "body-press", "solar-beam", "yawn"], "ability": "drought", "abilities": ["drought"] },
+      { "name": "goodra", "level": "54", "moves": ["rain-dance", "surf", "thunder", "muddy-water"], "ability": "sap-sipper", "abilities": ["sap-sipper"] },
+      {
+        "name": "turtonator",
+        "level": "54",
+        "moves": ["sunny-day", "dragon-pulse", "shell-trap", "fire-blast"],
+        "ability": "shell-armor",
+        "abilities": ["shell-armor"]
+      },
+      { "name": "flygon", "level": "54", "moves": ["sandstorm", "dragon-claw", "earthquake", "crunch"], "ability": "levitate", "abilities": ["levitate"] },
+      {
+        "name": "duraludon",
+        "level": "55",
+        "moves": ["dragon-claw", "body-press", "stone-edge", "iron-head"],
+        "ability": "light-metal",
+        "abilities": ["light-metal"]
+      }
+    ]
+  },
+  "ca": {
+    "name": "Champion Leon",
+    "speciality": "",
+    "img": { "src": "/leaders/swsh-leon", "author": "Brumirage", "link": "https://www.instagram.com/brumirage" },
+    "pokemon": [
+      {
+        "name": "aegislash-shield",
+        "level": "62",
+        "moves": ["kings-shield", "shadow-ball", "sacred-sword", "flash-cannon"],
+        "ability": "stance-change",
+        "abilities": ["stance-change"],
+        "sprite": "aegislash"
+      },
+      {
+        "name": "dragapult",
+        "level": "62",
+        "moves": ["shadow-ball", "flamethrower", "thunderbolt", "dragon-breath"],
+        "ability": "clear-body",
+        "abilities": ["clear-body"]
+      },
+      {
+        "name": "haxorus",
+        "level": "63",
+        "moves": ["poison-jab", "iron-tail", "outrage", "earthquake"],
+        "ability": "mold-breaker",
+        "abilities": ["mold-breaker"]
+      },
+      {
+        "name": "seismitoad",
+        "level": "64",
+        "moves": ["toxic", "drain-punch", "liquidation", "earthquake"],
+        "ability": "water-absorb",
+        "abilities": ["water-absorb"],
+        "starter": "grass"
+      },
+      {
+        "name": "mr-rime",
+        "level": "64",
+        "moves": ["teeter-dance", "psychic", "freeze-dry", "thunderbolt"],
+        "ability": "tangled-feet",
+        "abilities": ["tangled-feet"],
+        "starter": "fire"
+      },
+      {
+        "name": "rhyperior",
+        "level": "64",
+        "moves": ["earthquake", "stone-edge", "megahorn", "heat-crash"],
+        "ability": "solid-rock",
+        "abilities": ["solid-rock"],
+        "starter": "water"
+      },
+      {
+        "name": "cinderace",
+        "level": "64",
+        "moves": ["pyro-ball", "feint", "acrobatics", "quick-attack"],
+        "ability": "blaze",
+        "abilities": ["blaze"],
+        "starter": "grass"
+      },
+      {
+        "name": "inteleon",
+        "level": "64",
+        "moves": ["snipe-shot", "dark-pulse", "mud-shot", "tearful-look"],
+        "ability": "torrent",
+        "abilities": ["torrent"],
+        "starter": "fire"
+      },
+      {
+        "name": "rillaboom",
+        "level": "64",
+        "moves": ["drum-beating", "knock-off", "high-horsepower", "endeavor"],
+        "ability": "overgrow",
+        "abilities": ["overgrow"],
+        "starter": "water"
+      },
+      { "name": "charizard", "level": "65", "moves": ["fire-blast", "air-slash", "solar-beam", "ancient-power"], "ability": "blaze", "abilities": ["blaze"] }
+    ]
+  }
+}

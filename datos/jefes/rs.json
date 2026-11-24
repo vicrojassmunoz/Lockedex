@@ -1,0 +1,656 @@
+{
+  "1": {
+    "name": "Roxanne",
+    "speciality": "rock",
+    "img": "/leaders/rs-roxanne",
+    "pokemon": [
+      { "name": "geodude", "level": "14", "moves": ["tackle", "defense-curl", "rock-throw", "rock-tomb"], "ability": "rock-head", "abilities": ["rock-head"] },
+      { "name": "nosepass", "level": "15", "moves": ["tackle", "harden", "rock-throw", "rock-tomb"], "ability": "sturdy", "abilities": ["sturdy"] }
+    ]
+  },
+  "2": {
+    "name": "Brawly",
+    "speciality": "fighting",
+    "img": "/leaders/rs-brawly",
+    "pokemon": [
+      { "name": "machop", "level": "17", "moves": ["bulk-up", "leer", "karate-chop", "seismic-toss"], "ability": "guts", "abilities": ["guts"] },
+      { "name": "makuhita", "level": "18", "moves": ["bulk-up", "knock-off", "arm-thrust", "sand-attack"], "ability": "guts", "abilities": ["guts"] }
+    ]
+  },
+  "3": {
+    "name": "Wattson",
+    "speciality": "electric",
+    "img": "/leaders/rs-wattson",
+    "pokemon": [
+      {
+        "name": "magnemite",
+        "level": "22",
+        "moves": ["thunder-shock", "supersonic", "sonic-boom", "thunder-wave"],
+        "ability": "magnet-pull",
+        "abilities": ["magnet-pull"]
+      },
+      { "name": "voltorb", "level": "20", "moves": ["rollout", "spark", "sonic-boom", "self-destruct"], "ability": "soundproof", "abilities": ["soundproof"] },
+      {
+        "name": "magneton",
+        "level": "23",
+        "moves": ["shock-wave", "supersonic", "sonic-boom", "thunder-wave"],
+        "ability": "magnet-pull",
+        "abilities": ["magnet-pull"]
+      }
+    ]
+  },
+  "4": {
+    "name": "Flannery",
+    "speciality": "fire",
+    "img": "/leaders/rs-flannery",
+    "pokemon": [
+      { "name": "slugma", "level": "26", "moves": ["overheat", "smog", "light-screen", "sunny-day"], "ability": "magma-armor", "abilities": ["magma-armor"] },
+      {
+        "name": "slugma",
+        "level": "26",
+        "moves": ["flamethrower", "rock-slide", "light-screen", "sunny-day"],
+        "ability": "magma-armor",
+        "abilities": ["magma-armor"]
+      },
+      { "name": "torkoal", "level": "28", "moves": ["overheat", "body-slam", "flail", "attract"], "ability": "white-smoke", "abilities": ["white-smoke"] }
+    ]
+  },
+  "5": {
+    "name": "Norman",
+    "speciality": "normal",
+    "img": "/leaders/rs-norman",
+    "pokemon": [
+      { "name": "slaking", "level": "28", "moves": ["encore", "facade", "yawn", "feint-attack"], "ability": "truant", "abilities": ["truant"] },
+      { "name": "vigoroth", "level": "30", "moves": ["slash", "feint-attack", "facade", "encore"], "ability": "vital-spirit", "abilities": ["vital-spirit"] },
+      { "name": "slaking", "level": "31", "moves": ["focus-punch", "slack-off", "facade", "feint-attack"], "ability": "truant", "abilities": ["truant"] }
+    ]
+  },
+  "6": {
+    "name": "Winona",
+    "speciality": "flying",
+    "img": "/leaders/rs-winona",
+    "pokemon": [
+      { "name": "swellow", "level": "31", "moves": ["quick-attack", "aerial-ace", "double-team", "endeavor"], "ability": "guts", "abilities": ["guts"] },
+      { "name": "pelipper", "level": "30", "moves": ["water-gun", "supersonic", "facade", "encore"], "ability": "keen-eye", "abilities": ["keen-eye"] },
+      {
+        "name": "skarmory",
+        "level": "32",
+        "moves": ["sand-attack", "fury-attack", "steel-wing", "aerial-ace"],
+        "ability": "keen-eye",
+        "abilities": ["keen-eye"]
+      },
+      {
+        "name": "altaria",
+        "level": "33",
+        "moves": ["earthquake", "dragon-breath", "dragon-dance", "aerial-ace"],
+        "ability": "natural-cure",
+        "abilities": ["natural-cure"]
+      }
+    ]
+  },
+  "7": {
+    "name": "Tate & Liza",
+    "speciality": "psychic",
+    "img": "/leaders/rs-tate-liza",
+    "pokemon": [
+      { "name": "lunatone", "level": "42", "moves": ["light-screen", "psychic", "hypnosis", "calm-mind"], "ability": "levitate", "abilities": ["levitate"] },
+      { "name": "solrock", "level": "42", "moves": ["sunny-day", "solar-beam", "psychic", "flamethrower"], "ability": "levitate", "abilities": ["levitate"] }
+    ],
+    "doubleBattle": true
+  },
+  "8": {
+    "name": "Wallace",
+    "speciality": "water",
+    "img": "/leaders/rs-wallace",
+    "pokemon": [
+      { "name": "luvdisc", "level": "40", "moves": ["water-pulse", "attract", "sweet-kiss", "flail"], "ability": "swift-swim", "abilities": ["swift-swim"] },
+      { "name": "whiscash", "level": "42", "moves": ["rain-dance", "water-pulse", "earthquake", "amnesia"], "ability": "oblivious", "abilities": ["oblivious"] },
+      { "name": "sealeo", "level": "40", "moves": ["encore", "body-slam", "aurora-beam", "water-pulse"], "ability": "thick-fat", "abilities": ["thick-fat"] },
+      {
+        "name": "seaking",
+        "level": "42",
+        "moves": ["water-pulse", "rain-dance", "fury-attack", "horn-drill"],
+        "ability": "swift-swim",
+        "abilities": ["swift-swim"]
+      },
+      { "name": "milotic", "level": "43", "moves": ["water-pulse", "twister", "recover", "ice-beam"], "ability": "marvel-scale", "abilities": ["marvel-scale"] }
+    ]
+  },
+  "ruby1": {
+    "name": "Tabitha",
+    "speciality": "",
+    "img": "/leaders/rs-tabitha",
+    "pokemon": [
+      { "name": "numel", "level": "20", "moves": ["tackle", "growl", "ember", "magnitude"], "ability": "oblivious", "abilities": ["oblivious"] },
+      { "name": "poochyena", "level": "20", "moves": ["tackle", "howl", "odor-sleuth", "bite"], "ability": "run-away", "abilities": ["run-away"] },
+      { "name": "numel", "level": "20", "moves": ["tackle", "growl", "ember", "magnitude"], "ability": "oblivious", "abilities": ["oblivious"] }
+    ]
+  },
+  "ruby2": {
+    "name": "Courtney",
+    "speciality": "",
+    "img": "/leaders/rs-courtney",
+    "pokemon": [
+      { "name": "numel", "level": "28", "moves": ["tackle", "focus-energy", "ember", "magnitude"], "ability": "oblivious", "abilities": ["oblivious"] },
+      { "name": "mightyena", "level": "28", "moves": ["bite", "odor-sleuth", "roar", "swagger"], "ability": "intimidate", "abilities": ["intimidate"] }
+    ]
+  },
+  "ruby3": {
+    "name": "Tabitha",
+    "speciality": "",
+    "img": "/leaders/rs-tabitha",
+    "pokemon": [
+      { "name": "numel", "level": "32", "moves": ["take-down", "focus-energy", "amnesia", "magnitude"], "ability": "oblivious", "abilities": ["oblivious"] },
+      { "name": "mightyena", "level": "32", "moves": ["bite", "scary-face", "roar", "swagger"], "ability": "intimidate", "abilities": ["intimidate"] },
+      {
+        "name": "camerupt",
+        "level": "32",
+        "moves": ["take-down", "focus-energy", "amnesia", "magnitude"],
+        "ability": "magma-armor",
+        "abilities": ["magma-armor"]
+      }
+    ]
+  },
+  "ruby4": {
+    "name": "Courtney",
+    "speciality": "",
+    "img": "/leaders/rs-courtney",
+    "pokemon": [
+      { "name": "mightyena", "level": "38", "moves": ["take-down", "scary-face", "roar", "swagger"], "ability": "intimidate", "abilities": ["intimidate"] },
+      {
+        "name": "camerupt",
+        "level": "38",
+        "moves": ["take-down", "rock-slide", "amnesia", "earthquake"],
+        "ability": "magma-armor",
+        "abilities": ["magma-armor"]
+      }
+    ]
+  },
+  "saph1": {
+    "name": "Matt",
+    "speciality": "",
+    "img": "/leaders/rs-matt",
+    "pokemon": [
+      { "name": "carvanha", "level": "20", "moves": ["bite", "focus-energy", "rage", "scary-face"], "ability": "rough-skin", "abilities": ["rough-skin"] },
+      { "name": "poochyena", "level": "20", "moves": ["tackle", "howl", "odor-sleuth", "bite"], "ability": "run-away", "abilities": ["run-away"] },
+      { "name": "carvanha", "level": "20", "moves": ["bite", "focus-energy", "rage", "scary-face"], "ability": "rough-skin", "abilities": ["rough-skin"] }
+    ]
+  },
+  "saph2": {
+    "name": "Shelly",
+    "speciality": "",
+    "img": "/leaders/rs-shelly",
+    "pokemon": [
+      { "name": "carvanha", "level": "28", "moves": ["crunch", "screech", "focus-energy", "scary-face"], "ability": "rough-skin", "abilities": ["rough-skin"] },
+      { "name": "mightyena", "level": "28", "moves": ["bite", "odor-sleuth", "roar", "swagger"], "ability": "intimidate", "abilities": ["intimidate"] }
+    ]
+  },
+  "saph3": {
+    "name": "Matt",
+    "speciality": "",
+    "img": "/leaders/rs-matt",
+    "pokemon": [
+      { "name": "carvanha", "level": "32", "moves": ["bite", "focus-energy", "scary-face", "rage"], "ability": "rough-skin", "abilities": ["rough-skin"] },
+      { "name": "mightyena", "level": "32", "moves": ["bite", "odor-sleuth", "scary-face", "swagger"], "ability": "intimidate", "abilities": ["intimidate"] },
+      { "name": "sharpedo", "level": "32", "moves": ["bite", "focus-energy", "scary-face", "rage"], "ability": "rough-skin", "abilities": ["rough-skin"] }
+    ]
+  },
+  "saph4": {
+    "name": "Shelly",
+    "speciality": "",
+    "img": "/leaders/rs-shelly",
+    "pokemon": [
+      { "name": "mightyena", "level": "38", "moves": ["take-down", "scary-face", "roar", "swagger"], "ability": "intimidate", "abilities": ["intimidate"] },
+      { "name": "sharpedo", "level": "38", "moves": ["crunch", "taunt", "screech", "slash"], "ability": "rough-skin", "abilities": ["rough-skin"] }
+    ]
+  },
+  "max1": {
+    "name": "Maxie",
+    "speciality": "",
+    "img": "/leaders/rs-maxie",
+    "pokemon": [
+      { "name": "mightyena", "level": "24", "moves": ["sand-attack", "bite", "odor-sleuth", "roar"], "ability": "intimidate", "abilities": ["intimidate"] },
+      { "name": "golbat", "level": "24", "moves": ["supersonic", "astonish", "bite", "wing-attack"], "ability": "inner-focus", "abilities": ["inner-focus"] },
+      { "name": "camerupt", "level": "25", "moves": ["tackle", "focus-energy", "ember", "magnitude"], "ability": "magma-armor", "abilities": ["magma-armor"] }
+    ]
+  },
+  "max2": {
+    "name": "Maxie",
+    "speciality": "",
+    "img": "/leaders/rs-maxie",
+    "pokemon": [
+      { "name": "mightyena", "level": "41", "moves": ["roar", "swagger", "scary-face", "take-down"], "ability": "intimidate", "abilities": ["intimidate"] },
+      { "name": "crobat", "level": "41", "moves": ["bite", "confuse-ray", "air-cutter", "wing-attack"], "ability": "inner-focus", "abilities": ["inner-focus"] },
+      {
+        "name": "camerupt",
+        "level": "43",
+        "moves": ["take-down", "amnesia", "rock-slide", "earthquake"],
+        "ability": "magma-armor",
+        "abilities": ["magma-armor"]
+      }
+    ]
+  },
+  "arc1": {
+    "name": "Archie",
+    "speciality": "",
+    "img": "/leaders/rs-archie",
+    "pokemon": [
+      { "name": "mightyena", "level": "24", "moves": ["sand-attack", "bite", "odor-sleuth", "roar"], "ability": "intimidate", "abilities": ["intimidate"] },
+      { "name": "golbat", "level": "24", "moves": ["supersonic", "astonish", "bite", "wing-attack"], "ability": "inner-focus", "abilities": ["inner-focus"] },
+      { "name": "sharpedo", "level": "25", "moves": ["crunch", "focus-energy", "rage", "scary-face"], "ability": "rough-skin", "abilities": ["rough-skin"] }
+    ]
+  },
+  "arc2": {
+    "name": "Archie",
+    "speciality": "",
+    "img": "/leaders/rs-archie",
+    "pokemon": [
+      { "name": "mightyena", "level": "41", "moves": ["roar", "swagger", "scary-face", "take-down"], "ability": "intimidate", "abilities": ["intimidate"] },
+      { "name": "crobat", "level": "41", "moves": ["bite", "confuse-ray", "air-cutter", "wing-attack"], "ability": "inner-focus", "abilities": ["inner-focus"] },
+      { "name": "sharpedo", "level": "43", "moves": ["screech", "slash", "swagger", "taunt"], "ability": "rough-skin", "abilities": ["rough-skin"] }
+    ]
+  },
+  "r1": {
+    "name": "Rival",
+    "speciality": "",
+    "img": "/leaders/rs-may",
+    "pokemon": [
+      { "name": "torchic", "level": "5", "moves": ["scratch", "growl"], "ability": "blaze", "abilities": ["blaze"], "starter": "grass" },
+      { "name": "mudkip", "level": "5", "moves": ["tackle", "growl"], "ability": "torrent", "abilities": ["torrent"], "starter": "fire" },
+      { "name": "treecko", "level": "5", "moves": ["pound", "leer"], "ability": "overgrow", "abilities": ["overgrow"], "starter": "water" }
+    ]
+  },
+  "r2": {
+    "name": "Rival",
+    "speciality": "",
+    "img": "/leaders/rs-may",
+    "pokemon": [
+      {
+        "name": "wailmer",
+        "level": "18",
+        "moves": ["splash", "growl", "water-gun", "rollout"],
+        "ability": "water-veil",
+        "abilities": ["water-veil"],
+        "starter": "grass"
+      },
+      {
+        "name": "wailmer",
+        "level": "18",
+        "moves": ["splash", "growl", "water-gun", "rollout"],
+        "ability": "water-veil",
+        "abilities": ["water-veil"],
+        "starter": "water"
+      },
+      {
+        "name": "shroomish",
+        "level": "18",
+        "moves": ["stun-spore", "leech-seed", "mega-drain", "tackle"],
+        "ability": "effect-spore",
+        "abilities": ["effect-spore"],
+        "starter": "grass"
+      },
+      {
+        "name": "shroomish",
+        "level": "18",
+        "moves": ["stun-spore", "leech-seed", "mega-drain", "tackle"],
+        "ability": "effect-spore",
+        "abilities": ["effect-spore"],
+        "starter": "fire"
+      },
+      { "name": "numel", "level": "18", "moves": ["ember", "growl", "tackle"], "ability": "oblivious", "abilities": ["oblivious"], "starter": "fire" },
+      { "name": "numel", "level": "18", "moves": ["ember", "growl", "tackle"], "ability": "oblivious", "abilities": ["oblivious"], "starter": "water" },
+      {
+        "name": "combusken",
+        "level": "20",
+        "moves": ["focus-energy", "peck", "double-kick", "ember"],
+        "ability": "blaze",
+        "abilities": ["blaze"],
+        "starter": "grass"
+      },
+      {
+        "name": "marshtomp",
+        "level": "20",
+        "moves": ["mud-shot", "water-gun", "foresight", "bide"],
+        "ability": "torrent",
+        "abilities": ["torrent"],
+        "starter": "fire"
+      },
+      {
+        "name": "grovyle",
+        "level": "20",
+        "moves": ["quick-attack", "fury-cutter", "absorb", "pursuit"],
+        "ability": "overgrow",
+        "abilities": ["overgrow"],
+        "starter": "water"
+      }
+    ]
+  },
+  "r3": {
+    "name": "Rival",
+    "speciality": "",
+    "img": "/leaders/rs-may",
+    "pokemon": [
+      {
+        "name": "wailmer",
+        "level": "29",
+        "moves": ["water-pulse", "whirlpool", "rollout", "astonish"],
+        "ability": "water-veil",
+        "abilities": ["water-veil"],
+        "starter": "grass"
+      },
+      {
+        "name": "wailmer",
+        "level": "29",
+        "moves": ["water-pulse", "whirlpool", "rollout", "astonish"],
+        "ability": "water-veil",
+        "abilities": ["water-veil"],
+        "starter": "water"
+      },
+      {
+        "name": "shroomish",
+        "level": "29",
+        "moves": ["poison-powder", "leech-seed", "mega-drain", "headbutt"],
+        "ability": "effect-spore",
+        "abilities": ["effect-spore"],
+        "starter": "grass"
+      },
+      {
+        "name": "shroomish",
+        "level": "29",
+        "moves": ["poison-powder", "leech-seed", "mega-drain", "headbutt"],
+        "ability": "effect-spore",
+        "abilities": ["effect-spore"],
+        "starter": "fire"
+      },
+      {
+        "name": "numel",
+        "level": "29",
+        "moves": ["ember", "magnitude", "focus-energy", "take-down"],
+        "ability": "oblivious",
+        "abilities": ["oblivious"],
+        "starter": "fire"
+      },
+      {
+        "name": "numel",
+        "level": "29",
+        "moves": ["ember", "magnitude", "focus-energy", "take-down"],
+        "ability": "oblivious",
+        "abilities": ["oblivious"],
+        "starter": "water"
+      },
+      {
+        "name": "combusken",
+        "level": "31",
+        "moves": ["bulk-up", "double-kick", "sand-attack", "peck"],
+        "ability": "blaze",
+        "abilities": ["blaze"],
+        "starter": "grass"
+      },
+      {
+        "name": "marshtomp",
+        "level": "31",
+        "moves": ["mud-shot", "mud-sport", "foresight", "take-down"],
+        "ability": "torrent",
+        "abilities": ["torrent"],
+        "starter": "fire"
+      },
+      {
+        "name": "grovyle",
+        "level": "31",
+        "moves": ["pursuit", "leaf-blade", "fury-cutter", "screech"],
+        "ability": "overgrow",
+        "abilities": ["overgrow"],
+        "starter": "water"
+      }
+    ]
+  },
+  "r4": {
+    "name": "Rival",
+    "speciality": "",
+    "img": "/leaders/rs-may",
+    "pokemon": [
+      { "name": "swellow", "level": "31", "moves": ["double-team", "endeavor", "quick-guard", "wing-attack"], "ability": "guts", "abilities": ["guts"] },
+      {
+        "name": "wailmer",
+        "level": "32",
+        "moves": ["mist", "astonish", "water-pulse", "whirlpool"],
+        "ability": "water-veil",
+        "abilities": ["water-veil"],
+        "starter": "grass"
+      },
+      {
+        "name": "wailmer",
+        "level": "32",
+        "moves": ["mist", "astonish", "water-pulse", "whirlpool"],
+        "ability": "water-veil",
+        "abilities": ["water-veil"],
+        "starter": "water"
+      },
+      {
+        "name": "shroomish",
+        "level": "32",
+        "moves": ["headbutt", "poison-powder", "leech-seed", "mega-drain"],
+        "ability": "effect-spore",
+        "abilities": ["effect-spore"],
+        "starter": "grass"
+      },
+      {
+        "name": "shroomish",
+        "level": "32",
+        "moves": ["headbutt", "poison-powder", "leech-seed", "mega-drain"],
+        "ability": "effect-spore",
+        "abilities": ["effect-spore"],
+        "starter": "fire"
+      },
+      {
+        "name": "numel",
+        "level": "32",
+        "moves": ["amnesia", "magnitude", "focus-energy", "take-down"],
+        "ability": "magma-armor",
+        "abilities": ["magma-armor"],
+        "starter": "fire"
+      },
+      {
+        "name": "numel",
+        "level": "32",
+        "moves": ["amnesia", "magnitude", "focus-energy", "take-down"],
+        "ability": "magma-armor",
+        "abilities": ["magma-armor"],
+        "starter": "water"
+      },
+      {
+        "name": "combusken",
+        "level": "34",
+        "moves": ["double-kick", "bulk-up", "sand-attack", "peck"],
+        "ability": "blaze",
+        "abilities": ["blaze"],
+        "starter": "grass"
+      },
+      {
+        "name": "marshtomp",
+        "level": "34",
+        "moves": ["mud-shot", "mud-sport", "foresight", "take-down"],
+        "ability": "torrent",
+        "abilities": ["torrent"],
+        "starter": "fire"
+      },
+      {
+        "name": "grovyle",
+        "level": "34",
+        "moves": ["leaf-blade", "fury-cutter", "screech", "pursuit"],
+        "ability": "overgrow",
+        "abilities": ["overgrow"],
+        "starter": "water"
+      }
+    ]
+  },
+  "w1": {
+    "name": "Wally",
+    "speciality": "",
+    "img": "/leaders/rs-wally",
+    "pokemon": [
+      { "name": "ralts", "level": "17", "moves": ["growl", "double-team", "teleport", "confusion"], "ability": "synchronize", "abilities": ["synchronize"] }
+    ]
+  },
+  "w2": {
+    "name": "Wally",
+    "speciality": "",
+    "img": "/leaders/rs-wally",
+    "pokemon": [
+      {
+        "name": "altaria",
+        "level": "44",
+        "moves": ["aerial-ace", "safeguard", "dragon-dance", "dragon-breath"],
+        "ability": "natural-cure",
+        "abilities": ["natural-cure"]
+      },
+      { "name": "delcatty", "level": "43", "moves": ["charm", "sing", "assist", "feint-attack"], "ability": "cute-charm", "abilities": ["cute-charm"] },
+      {
+        "name": "roselia",
+        "level": "44",
+        "moves": ["magical-leaf", "leech-seed", "giga-drain", "toxic"],
+        "ability": "poison-point",
+        "abilities": ["poison-point"]
+      },
+      {
+        "name": "magneton",
+        "level": "41",
+        "moves": ["screech", "tri-attack", "supersonic", "thunderbolt"],
+        "ability": "magnet-pull",
+        "abilities": ["magnet-pull"]
+      },
+      {
+        "name": "gardevoir",
+        "level": "45",
+        "moves": ["psychic", "future-sight", "calm-mind", "double-team"],
+        "ability": "synchronize",
+        "abilities": ["synchronize"]
+      }
+    ]
+  },
+  "e1": {
+    "name": "Sidney",
+    "speciality": "dark",
+    "img": "/leaders/rs-sidney",
+    "pokemon": [
+      { "name": "mightyena", "level": "46", "moves": ["crunch", "take-down", "sand-attack", "roar"], "ability": "intimidate", "abilities": ["intimidate"] },
+      {
+        "name": "cacturne",
+        "level": "46",
+        "moves": ["feint-attack", "needle-arm", "cotton-spore", "leech-seed"],
+        "ability": "sand-veil",
+        "abilities": ["sand-veil"]
+      },
+      {
+        "name": "shiftry",
+        "level": "48",
+        "moves": ["fake-out", "extrasensory", "double-team", "swagger"],
+        "ability": "chlorophyll",
+        "abilities": ["chlorophyll"]
+      },
+      { "name": "sharpedo", "level": "48", "moves": ["surf", "crunch", "slash", "swagger"], "ability": "rough-skin", "abilities": ["rough-skin"] },
+      { "name": "absol", "level": "49", "moves": ["swords-dance", "slash", "aerial-ace", "snatch"], "ability": "pressure", "abilities": ["pressure"] }
+    ]
+  },
+  "e2": {
+    "name": "Phoebe",
+    "speciality": "ghost",
+    "img": "/leaders/rs-phoebe",
+    "pokemon": [
+      { "name": "dusclops", "level": "48", "moves": ["curse", "confuse-ray", "future-sight", "shadow-punch"], "ability": "pressure", "abilities": ["pressure"] },
+      { "name": "banette", "level": "49", "moves": ["spite", "will-o-wisp", "shadow-ball", "feint-attack"], "ability": "insomnia", "abilities": ["insomnia"] },
+      { "name": "banette", "level": "49", "moves": ["toxic", "skill-swap", "shadow-ball", "psychic"], "ability": "insomnia", "abilities": ["insomnia"] },
+      { "name": "sableye", "level": "50", "moves": ["feint-attack", "shadow-ball", "psychic", "attract"], "ability": "keen-eye", "abilities": ["keen-eye"] },
+      {
+        "name": "dusclops",
+        "level": "51",
+        "moves": ["confuse-ray", "shadow-ball", "ice-beam", "earthquake"],
+        "ability": "pressure",
+        "abilities": ["pressure"],
+        "held": "sitrus-berry"
+      }
+    ]
+  },
+  "e3": {
+    "name": "Glacia",
+    "speciality": "ice",
+    "img": "/leaders/rs-glacia",
+    "pokemon": [
+      { "name": "glalie", "level": "50", "moves": ["hail", "light-screen", "ice-beam", "crunch"], "ability": "inner-focus", "abilities": ["inner-focus"] },
+      { "name": "sealeo", "level": "50", "moves": ["surf", "ice-ball", "hail", "body-slam"], "ability": "thick-fat", "abilities": ["thick-fat"] },
+      { "name": "sealeo", "level": "52", "moves": ["hail", "blizzard", "dive", "attract"], "ability": "thick-fat", "abilities": ["thick-fat"] },
+      { "name": "glalie", "level": "52", "moves": ["hail", "ice-beam", "shadow-ball", "crunch"], "ability": "inner-focus", "abilities": ["inner-focus"] },
+      {
+        "name": "walrein",
+        "level": "53",
+        "moves": ["blizzard", "surf", "body-slam", "sheer-cold"],
+        "ability": "thick-fat",
+        "abilities": ["thick-fat"],
+        "held": "sitrus-berry"
+      }
+    ]
+  },
+  "e4": {
+    "name": "Drake",
+    "speciality": "ice",
+    "img": "/leaders/rs-drake",
+    "pokemon": [
+      { "name": "shelgon", "level": "52", "moves": ["dragon-claw", "rock-tomb", "protect", "crunch"], "ability": "rock-head", "abilities": ["rock-head"] },
+      {
+        "name": "altaria",
+        "level": "54",
+        "moves": ["take-down", "dragon-breath", "dragon-dance", "refresh"],
+        "ability": "natural-cure",
+        "abilities": ["natural-cure"]
+      },
+      { "name": "flygon", "level": "53", "moves": ["flamethrower", "dragon-breath", "crunch", "sand-attack"], "ability": "levitate", "abilities": ["levitate"] },
+      { "name": "flygon", "level": "53", "moves": ["fly", "dragon-breath", "dig", "sandstorm"], "ability": "levitate", "abilities": ["levitate"] },
+      {
+        "name": "salamence",
+        "level": "53",
+        "moves": ["flamethrower", "dragon-claw", "crunch", "fly"],
+        "ability": "intimidate",
+        "abilities": ["intimidate"],
+        "held": "sitrus-berry"
+      }
+    ]
+  },
+  "c": {
+    "name": "Steven",
+    "speciality": "",
+    "img": "/leaders/rs-steven",
+    "pokemon": [
+      { "name": "skarmory", "level": "52", "moves": ["steel-wing", "toxic", "aerial-ace", "spikes"], "ability": "keen-eye", "abilities": ["keen-eye"] },
+      {
+        "name": "claydol",
+        "level": "55",
+        "moves": ["earthquake", "ancient-power", "light-screen", "reflect"],
+        "ability": "levitate",
+        "abilities": ["levitate"]
+      },
+      { "name": "aggron", "level": "56", "moves": ["earthquake", "dragon-claw", "thunder", "solar-beam"], "ability": "sturdy", "abilities": ["sturdy"] },
+      {
+        "name": "cradily",
+        "level": "56",
+        "moves": ["ancient-power", "confuse-ray", "sludge-bomb", "giga-drain"],
+        "ability": "suction-cups",
+        "abilities": ["suction-cups"]
+      },
+      {
+        "name": "armaldo",
+        "level": "56",
+        "moves": ["ancient-power", "slash", "aerial-ace", "water-pulse"],
+        "ability": "battle-armor",
+        "abilities": ["battle-armor"]
+      },
+      {
+        "name": "metagross",
+        "level": "58",
+        "moves": ["meteor-mash", "earthquake", "psychic", "hyper-beam"],
+        "ability": "clear-body",
+        "abilities": ["clear-body"],
+        "held": "sitrus-berry"
+      }
+    ]
+  }
+}
