@@ -69,7 +69,42 @@ Además están los datos propios de Lockedex en `web/static/lx/`, sacados de Pok
 
 ---
 
-## 3. Otras mejoras y limitaciones conocidas
+## 3. Modo Analista (team builder sin partida)
+
+Una pantalla `/analista`, enlazada desde la barra, para preparar cualquier combate sin tener una run: eliges juego, jefe y un equipo hecho a mano, y ves el análisis.
+
+**Lo que ya se puede reutilizar:**
+
+- `calcularRiesgo({ jefe, equipo, gen, cap })` en `lockedex/riesgo.js` no depende de la run. Con nivel y movimientos usa la calculadora de Smogon (`@smogon/calc`); sin ellos, hace una estimación por tipos.
+- `cargarRutas(lid)` y `cargarLiga(juego, inicial)` en `lockedex/partida.js`: lista de jefes del juego y sus equipos. Hay que elegir el inicial, porque cambia los equipos del rival.
+- `coincideJuego` y `nombreJuego` en `lockedex/juegos.js`: el buscador de juegos.
+- `aprendizaje(grupo)` e `infoJuego(clave)` en `lockedex/datos.js`: movimientos por nivel y MT por juego, generación y grupo de versiones.
+- `/api/pokemon/<gen>.json`: Pokédex con tipos, estadísticas base y sprites. Ojo: `fetchData()` usa el juego de la run activa, así que hace falta una variante que reciba la generación.
+- `Riesgo.svelte`, la tarjeta de información al pasar el ratón (`data-lx-mov`) y el estilo del asistente.
+
+**Pasos:**
+
+- [ ] **Paso 1 · Juego e inicial:** buscador como el de Nueva partida.
+- [ ] **Paso 2 · Jefe:** lista de los jefes del juego en orden, agrupados (gimnasios, rival, Alto Mando, equipo malvado), con su nivel máximo. Este modo muestra el equipo del jefe aunque esté activado el modo sin spoilers; hay que avisarlo.
+- [ ] **Paso 3 · Tu equipo (hasta 6):** por cada Pokémon:
+  - [ ] Especie, con buscador en español o inglés.
+  - [ ] Nivel, por defecto el nivel máximo del jefe.
+  - [ ] Naturaleza, habilidad y objeto.
+  - [ ] IVs y EVs, con preajustes: "salvaje medio" (IVs 15, EVs 0), "perfecto" (31) y a mano.
+  - [ ] 4 movimientos, sugiriendo los que aprende por nivel hasta ese nivel y por MT en ese juego.
+- [ ] **Atajos para rellenar el equipo:** "Copiar de mi run", "Copiar de mi .sav importado" y "Aleatorio con X características" (por ejemplo: monotipo, solo Pokémon capturables antes de ese jefe, sin legendarios, etc.).
+- [ ] **Resultado:**
+  - [ ] Medidor de riesgo grande y consejos.
+  - [ ] Tabla de enfrentamientos: cada Pokémon tuyo contra cada Pokémon del jefe, con el % de daño que haces y recibes (mín–máx), quién es más rápido y avisos de KO de un golpe.
+  - [ ] Mejor Pokémon para abrir el combate y "respuesta" recomendada para cada Pokémon del jefe.
+- [ ] **Qué pasaría si…:** deslizador de nivel y cambio rápido de movimientos o naturaleza, recalculando al momento.
+- [ ] **Comparar dos equipos** lado a lado contra el mismo jefe.
+- [ ] **Equipos guardados** en `localStorage` (`lockedex.analista.equipos`), que el archivo de partidas ya sincroniza. Opción de exportar e importar en formato Showdown (texto), que es el estándar de la comunidad.
+- [ ] Si el cálculo de muchos enfrentamientos tarda, llevarlo a un Web Worker.
+
+---
+
+## 4. Otras mejoras y limitaciones conocidas
 
 - [ ] **Lector de .sav:** probado solo con partidas sintéticas. Hay que probarlo con partidas reales de Rubí, Zafiro, Esmeralda, RojoFuego y VerdeHoja (y con hacks CFRU como Radical Red y Unbound, que amplían especies y pueden no ser compatibles).
 - [ ] Añadir .sav de otras generaciones (1–2 en GB/GBC y 4–5 en NDS, siguiendo los formatos de PKHeX).
