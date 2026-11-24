@@ -1,0 +1,86 @@
+# Compila Lockedex en Windows, lo prueba y publica la versión.
+# Se lanza al subir una etiqueta vX.Y.Z (o a mano desde la pestaña Actions).
+name: Publicar versión
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Sprites de Pokémon (PokeAPI/sprites, solo los necesarios)
+        shell: bash
+        run: |
+          git clone --filter=blob:none --no-checkout --depth 1 https://github.com/PokeAPI/sprites.git sprites-src
+          cd sprites-src
+          git sparse-checkout init --no-cone
+          printf '/sprites/pokemon/*.png\n/sprites/pokemon/shiny/*.png\n' > .git/info/sparse-checkout
+          git checkout
+
+      - name: Compilar la app web
+        shell: bash
+        working-directory: web
+        run: |
+          npm ci --no-audit --no-fund
+          mkdir -p node_modules/pokemon-sprites/sprites/pokemon/shiny
+          cp ../sprites-src/sprites/pokemon/*.png node_modules/pokemon-sprites/sprites/pokemon/
+          cp ../sprites-src/sprites/pokemon/shiny/*.png node_modules/pokemon-sprites/sprites/pokemon/shiny/
+          echo '{"name":"pokemon-sprites","version":"1.0.0"}' > node_modules/pokemon-sprites/package.json
+          npm run build
+
+      - name: Preparar Electron
+        shell: bash
+        run: |
+          rm -rf electron/app
+          cp -r web/build electron/app
+          find electron/app -name '*.map' -delete
+          cd electron
+          npm ci --no-audit --no-fund
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
+            npm version "${GITHUB_REF_NAME#v}" --no-git-tag-version --allow-same-version
+          fi
+
+      - name: Compilar el instalador
+        working-directory: electron
+        run: npx electron-builder --win nsis --x64 --publish never
+
+      - name: Probar que arranca en Windows
+        shell: pwsh
+        working-directory: electron
+        run: |
+          $p = Start-Process -FilePath ".\dist\win-unpacked\Lockedex.exe" -ArgumentList "--prueba-arranque" -Wait -PassThru
+          if ($p.ExitCode -ne 0) { Write-Error "Lockedex no arrancó bien (código $($p.ExitCode))"; exit 1 }
+          Write-Host "Lockedex arranca bien en Windows"
+
+      - name: Guardar el instalador como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: Lockedex-Windows
+          path: |
+            electron/dist/*.exe
+            electron/dist/*.blockmap
+            electron/dist/latest.yml
+
+      - name: Publicar la versión
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Lockedex ${{ github.ref_name }}
+          body_path: NOVEDADES.md
+          files: |
+            electron/dist/*.exe
+            electron/dist/*.blockmap
+            electron/dist/latest.yml

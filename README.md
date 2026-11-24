@@ -1,0 +1,42 @@
+# Lockedex
+
+**Tu Pokédex para Nuzlockes.** Lockedex es una app de escritorio para Windows con la que llevas el control de tus runs de Pokémon en modo Nuzlocke: encuentros ruta a ruta, equipo, caja, cementerio y todos los jefes de cada juego, con su nivel máximo.
+
+Está basada en [nuzlocke-redux](https://nuzlocke-redux.vercel.app) (de domtronn y Bassel-T) y añade:
+
+- **Tus partidas en tu ordenador.** Se guardan en `Documentos\Lockedex\partidas.json`, con una copia de seguridad diaria automática. Borrar las cookies del navegador ya no te hace perder nada.
+- **Estilo Pokédex** y **todo en español**, con los nombres oficiales de movimientos, habilidades, objetos y lugares.
+- **Información al pasar el ratón** por cualquier movimiento, habilidad u objeto: tipo, categoría, potencia, precisión, PP y descripción.
+- **Nivel de riesgo de cada jefe** y un **asistente de combate** con consejos y los movimientos que aprende tu equipo hasta el nivel máximo.
+- **Importación de partidas .sav** de Rubí, Zafiro, Esmeralda, RojoFuego y VerdeHoja: equipo y cajas con niveles, movimientos, naturalezas e IVs. Si quieres, se reimporta sola cada vez que guardas en el emulador, y el riesgo se calcula con la calculadora de daño de Smogon.
+- **Modo sin spoilers**, para ocultar los equipos o los jefes hasta que decidas verlos.
+- **Barra de EXP** con el progreso de la run, **perfil de entrenador** con foto, estadísticas y logros, y **modo compacto** (Ctrl+Alt+L): una ventanita siempre encima, junto al emulador.
+- **Se actualiza sola** desde las versiones publicadas en este repositorio.
+- Sin Google Analytics ni envío de estadísticas.
+
+## Instalar
+
+Descarga `Lockedex-Instalador-X.Y.Z.exe` de la última versión en [Releases](../../releases/latest) y ábrelo. No hace falta ser administrador.
+
+Windows puede mostrar el aviso «Windows protegió su PC» porque el instalador no está firmado: pulsa **Más información → Ejecutar de todas formas**.
+
+## Cómo se publica una versión
+
+1. Anota los cambios en `NOVEDADES.md`.
+2. Crea y sube una etiqueta con el número de versión, por ejemplo `git tag v1.2.0 && git push origin v1.2.0`.
+3. GitHub Actions compila Lockedex en Windows, comprueba que arranca y publica la versión. Las apps instaladas la descargan solas y avisan con el botón **¡Actualizar!**.
+
+## Estructura
+
+- `web/`: la app (SvelteKit), basada en nuzlocke-redux. Lo propio de Lockedex está en `web/src/lib/lockedex/` y los datos generados en `web/static/lx/`.
+- `electron/`: el programa de escritorio (ventana, guardado en archivo, modo compacto, lectura de .sav y actualizaciones).
+- `herramientas/`: scripts que generan los datos de `web/static/lx/` a partir de PokeAPI y de los proyectos pret.
+
+## Créditos y licencia
+
+- Código original: [Bassel-T/nuzlocke.app](https://github.com/Bassel-T/nuzlocke.app) y [domtronn/nuzlocke.app](https://github.com/domtronn/nuzlocke.app), licencia BSD-3 (ver `LICENSE`).
+- Datos de movimientos, habilidades, objetos y nombres en español: [PokeAPI](https://pokeapi.co).
+- Tablas de 3.ª generación: [pret/pokeemerald](https://github.com/pret/pokeemerald) y [pret/pokefirered](https://github.com/pret/pokefirered).
+- Sprites de Pokémon: [PokeAPI/sprites](https://github.com/PokeAPI/sprites). Fuente VT323 (licencia SIL OFL 1.1).
+
+Pokémon y los nombres de Pokémon son marcas de Nintendo, Creatures Inc. y GAME FREAK inc. Lockedex es un proyecto de fans sin ánimo de lucro y no está afiliado a ellos.

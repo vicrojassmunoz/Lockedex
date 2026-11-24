@@ -1,0 +1,9 @@
+node_modules/
+web/build/
+web/.svelte-kit/
+web/stats.html
+electron/app/
+electron/dist/
+sprites-src/
+*.log
+.DS_Store

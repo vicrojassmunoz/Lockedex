@@ -1,0 +1,115 @@
+/* ==========================================================================
+   Lockedex · estilo Pokédex retro
+   ========================================================================== */
+:root {
+  --lx-rojo: #dc0a2d;
+  --lx-rojo-claro: #ff3355;
+  --lx-rojo-oscuro: #8b0a1e;
+  --lx-negro: #1b1b1f;
+  --lx-pantalla: #f3f4ee;
+  --lx-pantalla-borde: #d9d9d2;
+  --lx-cian: #29b6f6;
+  --lx-amarillo: #ffcb05;
+  --lx-verde: #3ddc84;
+  --lx-barra: 0px;
+  --lx-marco: 0px;
+}
+
+html.dark {
+  --lx-pantalla: #1f2937;
+  --lx-pantalla-borde: #111827;
+}
+
+/* --- Ventana de escritorio: chasis rojo + pantalla ------------------------ */
+html.lx-escritorio {
+  --lx-barra: 52px;
+  --lx-marco: 10px;
+  background: var(--lx-rojo) !important;
+  background-image: repeating-linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.03) 0 2px,
+      transparent 2px 7px
+    ) !important;
+}
+
+html.lx-escritorio body {
+  margin: var(--lx-barra) var(--lx-marco) var(--lx-marco);
+  min-height: calc(100vh - var(--lx-barra) - var(--lx-marco));
+  background-color: var(--lx-pantalla) !important;
+  border-radius: 14px;
+}
+
+/* Marco fijo que se mantiene al hacer scroll */
+.lx-marco {
+  position: fixed;
+  inset: var(--lx-barra) 0 0 0;
+  pointer-events: none;
+  z-index: 9400;
+  border: var(--lx-marco) solid var(--lx-rojo);
+  border-top-width: 0;
+  overflow: hidden;
+}
+.lx-marco::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 14px 14px 14px 14px;
+  box-shadow: 0 0 0 14px var(--lx-rojo), inset 0 3px 0 rgba(0, 0, 0, 0.18),
+    inset 0 0 0 2px rgba(0, 0, 0, 0.12);
+}
+html.dark .lx-marco::before {
+  box-shadow: 0 0 0 14px var(--lx-rojo), inset 0 3px 0 rgba(0, 0, 0, 0.45),
+    inset 0 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Barras de scroll a juego */
+html.lx-escritorio ::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+html.lx-escritorio ::-webkit-scrollbar-track {
+  background: var(--lx-rojo);
+}
+html.lx-escritorio ::-webkit-scrollbar-thumb {
+  background: var(--lx-rojo-oscuro);
+  border: 3px solid var(--lx-rojo);
+  border-radius: 8px;
+}
+html.lx-escritorio body ::-webkit-scrollbar-track {
+  background: transparent;
+}
+html.lx-escritorio body ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.25);
+  border-color: transparent;
+}
+
+/* La cabecera de la partida queda dentro de la pantalla */
+html.lx-escritorio nav {
+  border-radius: 14px 14px 0 0;
+}
+
+/* --- Detalles retro sobre la app original --------------------------------- */
+html.lx-escritorio .font-mono,
+.lx-pixel {
+  font-family: 'VT323', monospace;
+}
+
+/* Botones de acento en rojo Pokédex */
+html.lx-escritorio .bg-indigo-700 {
+  background-color: var(--lx-rojo) !important;
+}
+html.lx-escritorio .hover\:ring-indigo-400:hover {
+  --tw-ring-color: var(--lx-rojo-claro) !important;
+}
+
+/* Elementos con información al pasar el ratón */
+[data-lx-mov],
+[data-lx-hab],
+[data-lx-obj] {
+  cursor: help;
+}
+[data-lx-mov]:hover > .font-medium,
+[data-lx-hab]:hover {
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+}

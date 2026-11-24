@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      html { background: #ffffff; }
+      html.dark { background: #1f2937; }
+    </style>
+    <script>
+      if (/Lockedex\//.test(navigator.userAgent) && location.pathname !== '/compacto') document.documentElement.classList.add('lx-escritorio')
+      try { document.documentElement.lang = localStorage.getItem('lockedex.idioma') === 'en' ? 'en' : 'es' } catch (e) {}
+    </script>
+    <script data-cfasync="false">
+      // Lockedex: las partidas viven en un archivo en tu
+      // ordenador (Documentos\Lockedex\partidas.json), no en el navegador.
+      ;(function () {
+        var URL_ESTADO = '/__escritorio/estado'
+        var ls = window.localStorage
+        var proto = Storage.prototype
+        var setItem = proto.setItem
+        var removeItem = proto.removeItem
+        var clear = proto.clear
+
+        function instantanea() {
+          var o = {}
+          for (var i = 0; i < ls.length; i++) {
+            var k = ls.key(i)
+            o[k] = ls.getItem(k)
+          }
+          return o
+        }
+
+        // Cada cambio deja una marca de revisión. Si el navegador tiene datos
+        // más nuevos que el archivo (p. ej. al cambiar de página justo después
+        // de guardar), se conservan y se escriben en el archivo.
+        var CLAVE_REV = '__escritorio.rev'
+        function marcar() {
+          setItem.call(ls, CLAVE_REV, String(Date.now()))
+        }
+
+        var ultimo = null
+        var pendiente = false
+        try {
+          var xhr = new XMLHttpRequest()
+          xhr.open('GET', URL_ESTADO, false)
+          xhr.send(null)
+          var revLocal = +ls.getItem(CLAVE_REV) || 0
+          if (xhr.status === 200) {
+            var datos = JSON.parse(xhr.responseText)
+            if (datos && datos.claves && typeof datos.claves === 'object') {
+              var revArchivo = +datos.claves[CLAVE_REV] || 0
+              if (revLocal > 0 && revLocal >= revArchivo) {
+                pendiente = true
+              } else {
+                clear.call(ls)
+                Object.keys(datos.claves).forEach(function (k) {
+                  setItem.call(ls, k, String(datos.claves[k]))
+                })
+                ultimo = JSON.stringify(instantanea())
+              }
+            } else pendiente = true
+          } else pendiente = true
+        } catch (e) {
+          console.error('[escritorio] No se pudieron cargar las partidas', e)
+        }
+
+        var temporizador = null
+        function guardar() {
+          clearTimeout(temporizador)
+          temporizador = null
+          var claves = JSON.stringify(instantanea())
+          if (claves === ultimo) return Promise.resolve(true)
+          var cuerpo =
+            '{"version":1,"guardado":"' + new Date().toISOString() +
+            '","claves":' + claves + '}'
+          return fetch(URL_ESTADO, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: cuerpo
+          })
+            .then(function (r) {
+              if (r.ok) {
+                ultimo = claves
+                window.dispatchEvent(new Event('lx:guardado'))
+              }
+              return r.ok
+            })
+            .catch(function (e) {
+              console.error('[escritorio] No se pudo guardar', e)
+              return false
+            })
+        }
+        var avisoCambio = null
+        function programar() {
+          clearTimeout(temporizador)
+          temporizador = setTimeout(guardar, 250)
+          clearTimeout(avisoCambio)
+          avisoCambio = setTimeout(function () {
+            window.dispatchEvent(new Event('lx:cambio'))
+          }, 60)
+        }
+
+        proto.setItem = function (k, v) {
+          var cambia = this === ls && k !== CLAVE_REV && ls.getItem(k) !== String(v)
+          setItem.call(this, k, v)
+          if (cambia) {
+            marcar()
+            programar()
+          }
+        }
+        proto.removeItem = function (k) {
+          var cambia = this === ls && k !== CLAVE_REV && ls.getItem(k) !== null
+          removeItem.call(this, k)
+          if (cambia) {
+            marcar()
+            programar()
+          }
+        }
+        proto.clear = function () {
+          clear.call(this)
+          if (this === ls) {
+            marcar()
+            programar()
+          }
+        }
+
+        window.__escritorioGuardar = guardar
+        setInterval(guardar, 15000)
+        if (pendiente) {
+          if (!ls.getItem(CLAVE_REV)) marcar()
+          programar()
+        }
+      })()
+    </script>
+    <link rel="icon" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/icons/apple-icon-180.png" />
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <link
+      rel="apple-touch-startup-image"
+      href="/icons/apple-splash-2048-2732.jpg"
+      media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="/icons/apple-splash-2732-2048.jpg"
+      media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="/icons/apple-splash-1668-2388.jpg"
+      media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="/icons/apple-splash-2388-1668.jpg"
+      media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="/icons/apple-splash-1536-2048.jpg"
+      media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="/icons/apple-splash-2048-1536.jpg"
+      media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="/icons/apple-splash-1668-2224.jpg"
+      media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="/icons/apple-splash-2224-1668.jpg"
+      media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="/icons/apple-splash-1620-2160.jpg"
+      media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="/icons/apple-splash-2160-1620.jpg"
+      media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="/icons/apple-splash-1284-2778.jpg"
+      media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="/icons/apple-splash-2778-1284.jpg"
+      media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="/icons/apple-splash-1170-2532.jpg"
+      media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="/icons/apple-splash-2532-1170.jpg"
+      media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="/icons/apple-splash-1125-2436.jpg"
+      media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="/icons/apple-splash-2436-1125.jpg"
+      media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="/icons/apple-splash-1242-2688.jpg"
+      media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="/icons/apple-splash-2688-1242.jpg"
+      media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="/icons/apple-splash-828-1792.jpg"
+      media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="/icons/apple-splash-1792-828.jpg"
+      media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="/icons/apple-splash-1242-2208.jpg"
+      media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="/icons/apple-splash-2208-1242.jpg"
+      media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="/icons/apple-splash-750-1334.jpg"
+      media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="/icons/apple-splash-1334-750.jpg"
+      media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="/icons/apple-splash-640-1136.jpg"
+      media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="/icons/apple-splash-1136-640.jpg"
+      media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+    />
+
+    <link rel="manifest" crossorigin="use-credentials" href="/manifest.json" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ff143b" />
+
+
+    <meta property="og:image" content="/twitter.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@vercel" />
+    <meta name="twitter:image" content="/twitter.png" />
+
+    <script data-cfasync="false">
+      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+      const lsid = 'nuzlocke.theme'
+      const mdark =
+        !(lsid in localStorage) &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+
+      if (mdark) localStorage.setItem(lsid, 'dark')
+      if (localStorage[lsid] === 'dark') {
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
+    </script>
+
+    %sveltekit.head%
+  </head>
+
+  <div style="display: contents">%sveltekit.body%</div>
+
+
+</html>
