@@ -101,7 +101,7 @@
   })
   $: if (vista && !loading && pokemon.length) evaluarRiesgo()
   const abrirAsistente = () =>
-    open(Asistente, { jefe: boss, cap: levelCap, ocultarEquipo: !showBoss })
+    open(Asistente, { jefe: boss, cap: levelCap, ocultarEquipo: !showBoss, valor: id, juego: game, inicial: starter })
 
   $: showTeam = reader || spoilers < 1 || revealed || defeated
   $: showBoss = reader || spoilers < 2 || revealed || defeated

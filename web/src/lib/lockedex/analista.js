@@ -126,8 +126,8 @@ export const paraCalculo = async (equipo, datosCalc, delta = 0) => {
         naturaleza: m.naturaleza,
         habilidadNombre: m.habilidad || sp?.habilidades?.[0],
         objeto: m.objeto,
-        ivs: ivsDe(m.iv),
-        evs: evsDe(m.ev, sp)
+        ivs: m.iv === 'exacto' && m.ivExacto ? m.ivExacto : ivsDe(m.iv),
+        evs: m.ev === 'exacto' && m.evExacto ? m.evExacto : evsDe(m.ev, sp)
       }
     })
 }
@@ -176,12 +176,13 @@ export const aShowdown = (equipo, datosCalc) =>
       const lineas = [`${m.mote && m.mote !== nombre ? `${m.mote} (${nombre})` : nombre}${m.objeto ? ` @ ${m.objeto}` : ''}`]
       if (m.habilidad) lineas.push(`Ability: ${m.habilidad}`)
       lineas.push(`Level: ${m.nivel}`)
-      const evs = evsDe(m.ev, sp)
+      const evs = m.ev === 'exacto' && m.evExacto ? m.evExacto : evsDe(m.ev, sp)
       const evTxt = Object.entries(evs).filter(([, v]) => v).map(([k, v]) => `${v} ${STAT_SD[k]}`).join(' / ')
       if (evTxt) lineas.push(`EVs: ${evTxt}`)
       lineas.push(`${m.naturaleza.charAt(0).toUpperCase() + m.naturaleza.slice(1)} Nature`)
-      const iv = PRESETS_IV[m.iv]?.v ?? 15
-      if (iv !== 31) lineas.push(`IVs: ${Object.values(STAT_SD).map((s) => `${iv} ${s}`).join(' / ')}`)
+      const ivs = m.iv === 'exacto' && m.ivExacto ? m.ivExacto : ivsDe(m.iv)
+      const ivTxt = Object.entries(ivs).filter(([, v]) => v !== 31).map(([k, v]) => `${v} ${STAT_SD[k]}`).join(' / ')
+      if (ivTxt) lineas.push(`IVs: ${ivTxt}`)
       for (const mv of m.movimientos.filter(Boolean)) lineas.push(`- ${mv}`)
       return lineas.join('\n')
     })

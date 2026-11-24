@@ -26,6 +26,7 @@
     { href: '/', es: 'Inicio', en: 'Home' },
     { href: '/game', es: 'Partida', en: 'Run', partida: true },
     { href: '/saves', es: 'Partidas', en: 'Saves' },
+    { href: '/analista', es: 'Analista', en: 'Analyst' },
     { href: '/perfil', es: 'Perfil', en: 'Profile' },
     { href: '/guides', es: 'Guías', en: 'Guides' }
   ]
@@ -678,12 +679,12 @@
       display: none;
     }
   }
-  @media (max-width: 1000px) {
+  @media (max-width: 1080px) {
     .lx-marca {
       display: none;
     }
   }
-  @media (max-width: 820px) {
+  @media (max-width: 900px) {
     .lx-enlaces {
       display: none;
     }

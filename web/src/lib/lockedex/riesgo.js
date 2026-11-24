@@ -157,38 +157,34 @@ const riesgoConCalculadora = async (jefe, equipo, gen, cap) => {
           mejor = m
         }
       }
-      return {
-        y,
-        recibe,
-        recibeMin,
-        peligro,
-        hace,
-        haceMax,
-        mejor,
-        rapido: p.stats.spe > pb.stats.spe,
-        empate: p.stats.spe === pb.stats.spe
-      }
+      const rapido = p.stats.spe > pb.stats.spe
+      // Duelo 1 contra 1: golpes que necesitas (con tu daño mínimo) frente a
+      // golpes que aguantas (con su daño máximo). Si eres más lento, pega antes.
+      const tu = hace > 0 ? Math.ceil(1 / hace) : 99
+      const el = recibe > 0 ? Math.ceil(1 / recibe) : 99
+      const ganas = rapido ? tu <= el : tu < el
+      const margen = (rapido ? el : el - 1) - tu
+      return { y, recibe, recibeMin, peligro, hace, haceMax, mejor, rapido, empate: p.stats.spe === pb.stats.spe, tu, el, ganas, margen }
     })
     matriz.push({ jefe: b, velocidad: pb.stats.spe, filas })
 
-    const seguros = filas.filter(
-      (f) => (f.hace >= 1 && (f.rapido || f.recibe < 1)) || (f.hace >= 0.5 && f.recibe < 0.5)
-    )
-    const buenos = filas.filter((f) => f.hace >= 0.5 && f.recibe < 1)
-    const aguantan = filas.filter((f) => f.hace >= 0.34 && f.recibe < 1)
+    const comodos = filas.filter((f) => f.ganas && f.margen >= 1)
+    const ganadores = filas.filter((f) => f.ganas)
+    const ajustados = filas.filter((f) => !f.ganas && f.tu <= f.el + 1 && f.tu < 99)
     const ohko = filas.filter((f) => f.recibe >= 1)
 
-    let p = seguros.length ? 0 : buenos.length ? 1 : aguantan.length ? 2 : 3
-    if (ohko.length >= Math.ceil(filas.length / 2)) p += 1
+    let p = comodos.length ? 0 : ganadores.length ? 1 : ajustados.length ? 2 : 3
+    if (ohko.length >= Math.ceil(filas.length / 2)) p += 0.5
 
-    const mejor = [...filas].sort((a, b) => b.hace - b.recibe * 0.5 - (a.hace - a.recibe * 0.5))[0]
+    const mejor = [...filas].sort((a, b) => (b.ganas - a.ganas) || (b.margen - a.margen) || (b.hace - a.hace))[0]
     if (mejor && mejor.hace > 0) {
       const nm = movs[norm(mejor.mejor)]
+      const golpes = (n) => (n >= 99 ? '∞' : n)
       consejos.push({
-        tipo: mejor.hace >= 0.5 && mejor.recibe < 1 ? 'bien' : 'aviso',
+        tipo: mejor.ganas ? 'bien' : 'aviso',
         texto: es()
-          ? `Contra ${nb}: ${mejor.y.nombre} con ${nm?.es || mejor.mejor} le quita al menos un ${pct(Math.min(mejor.hace, 1))} % y recibe hasta un ${pct(Math.min(mejor.recibe, 1))} %${mejor.rapido ? ' (es más rápido)' : ''}.`
-          : `Vs ${nb}: ${mejor.y.nombre} with ${mejor.mejor} deals at least ${pct(Math.min(mejor.hace, 1))}% and takes up to ${pct(Math.min(mejor.recibe, 1))}%${mejor.rapido ? ' (outspeeds)' : ''}.`
+          ? `Contra ${nb}: ${mejor.y.nombre} con ${nm?.es || mejor.mejor} lo debilita en ${golpes(mejor.tu)} ${mejor.tu === 1 ? 'golpe' : 'golpes'} y aguanta ${golpes(mejor.el)}${mejor.rapido ? ' (y es más rápido)' : ''}${mejor.ganas ? '.' : ': no le gana el 1 contra 1.'}`
+          : `Vs ${nb}: ${mejor.y.nombre} with ${mejor.mejor} KOs in ${golpes(mejor.tu)} and survives ${golpes(mejor.el)}${mejor.rapido ? ' (outspeeds)' : ''}${mejor.ganas ? '.' : ': loses the 1v1.'}`
       })
     }
     if (ohko.length)
@@ -250,6 +246,9 @@ const calcularRiesgoSinCache = async ({ jefe, equipo = [], gen = 3, cap = null }
       })
     }
   }
+
+  const vistos = new Set()
+  r.consejos = r.consejos.filter((c) => !vistos.has(c.texto) && vistos.add(c.texto))
 
   return {
     nivel: Math.max(0, Math.min(4, Math.round(nivel))),

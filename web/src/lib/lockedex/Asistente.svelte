@@ -12,6 +12,14 @@
   export let jefe
   export let cap = null
   export let ocultarEquipo = false
+  export let valor = ''
+  export let juego = ''
+  export let inicial = 'fire'
+  import { goto } from '$app/navigation'
+  const abrirAnalista = () => {
+    close()
+    goto(`/analista?juego=${juego}&jefe=${valor}&inicial=${inicial || 'fire'}&equipo=run`)
+  }
 
   const { close } = getContext('simple-modal')
   const es = idioma() === 'es'
@@ -60,6 +68,11 @@
       {#if cap}<span class="lx-cap">{es ? 'Nivel máximo' : 'Level cap'} {cap}</span>{/if}
     </div>
     {#if riesgo}<Riesgo nivel={riesgo.nivel} grande />{/if}
+    {#if juego && valor !== ''}
+      <button class="lx-analista-boton" on:click={abrirAnalista} title={es ? 'Prueba otros equipos, niveles y movimientos' : 'Try other teams, levels and moves'}>
+        {es ? 'Probar en el Analista →' : 'Try in Analyst →'}
+      </button>
+    {/if}
     <button class="lx-cerrar" on:click={close} aria-label={es ? 'Cerrar' : 'Close'}>✕</button>
   </header>
 
@@ -193,6 +206,15 @@
     color: #ffcb05;
     padding: 1px 8px;
     border-radius: 6px;
+  }
+  .lx-analista-boton {
+    align-self: center;
+    font-family: 'VT323', monospace;
+    font-size: 19px;
+    background: #1b1b1f;
+    color: #ffcb05;
+    border-radius: 8px;
+    padding: 4px 10px;
   }
   .lx-cerrar {
     align-self: flex-start;
