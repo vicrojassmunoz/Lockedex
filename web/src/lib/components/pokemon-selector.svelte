@@ -281,7 +281,7 @@
   <div
     class:lg:grid-cols-8={nicknames}
     class:lg:grid-cols-6={!nicknames}
-    class="relative flex grid w-full grid-cols-2 gap-y-3 gap-x-2 md:grid-cols-4 md:gap-y-2 lg:grid-cols-8 lg:gap-y-0"
+    class="lx-fila relative flex grid w-full grid-cols-2 gap-y-3 gap-x-2 md:grid-cols-4 md:gap-y-2 lg:grid-cols-8 lg:gap-y-0"
   >
     <span class="location group relative z-50">
       {#if $$slots.location}

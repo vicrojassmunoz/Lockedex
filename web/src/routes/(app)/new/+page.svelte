@@ -127,7 +127,7 @@
 </script>
 
 <svelte:head>
-  <title>Lockedex | Create new game</title>
+  <title>Lockedex | Nueva partida</title>
 </svelte:head>
 
 <ScreenContainer

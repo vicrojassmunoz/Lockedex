@@ -13,11 +13,84 @@
   --lx-verde: #3ddc84;
   --lx-barra: 0px;
   --lx-marco: 0px;
+
+  /* Tokens de diseño: usar estos en lugar de colores sueltos */
+  --lx-tinta: #1b1b1f; /* contornos */
+  --lx-panel: #ffffff; /* tarjetas y paneles */
+  --lx-panel-2: #f6f5f0; /* rellenos suaves dentro de paneles */
+  --lx-bisel: #e2e1da; /* bordes interiores */
+  --lx-texto: #23232a;
+  --lx-texto-suave: #6b6b73;
+  --lx-acento: var(--lx-rojo);
+  --lx-acento-suave: #ffe4e8;
+  --lx-lcd: #12303f; /* pantallas oscuras */
+  --lx-lcd-claro: #1d4a5e;
+  --lx-lcd-texto: #8ee8ff;
+  --lx-radio: 14px;
+  --lx-radio-sm: 8px;
+  --lx-sombra: 4px 4px 0 rgba(0, 0, 0, 0.16);
+  --lx-sombra-sm: 2px 2px 0 rgba(0, 0, 0, 0.14);
 }
 
 html.dark {
   --lx-pantalla: #1f2937;
   --lx-pantalla-borde: #111827;
+  --lx-tinta: #050507;
+  --lx-panel: #111827;
+  --lx-panel-2: #1a2231;
+  --lx-bisel: #374151;
+  --lx-texto: #e7e7e2;
+  --lx-texto-suave: #9ca3af;
+  --lx-acento-suave: #3d0f18;
+  --lx-lcd: #0b1f29;
+  --lx-lcd-claro: #12303f;
+  --lx-sombra: 4px 4px 0 rgba(0, 0, 0, 0.45);
+  --lx-sombra-sm: 2px 2px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* Panel Lockedex: tarjeta con franja roja y luces, como una Pokédex pequeña */
+.lx-panel {
+  position: relative;
+  color: var(--lx-texto);
+  background: linear-gradient(var(--lx-tinta) 0 3px, var(--lx-panel) 3px);
+  border-top: 16px solid var(--lx-rojo);
+  border-radius: var(--lx-radio);
+  box-shadow: 0 0 0 3px var(--lx-tinta), 7px 7px 0 3px rgba(0, 0, 0, 0.16);
+}
+html.dark .lx-panel {
+  box-shadow: 0 0 0 3px var(--lx-tinta), 7px 7px 0 3px rgba(0, 0, 0, 0.5);
+}
+.lx-panel::after {
+  content: '';
+  position: absolute;
+  top: -13px;
+  left: 14px;
+  width: 50px;
+  height: 11px;
+  pointer-events: none;
+  background: radial-gradient(circle at 5.5px 5.5px, #ff7b7b 0 3px, var(--lx-tinta) 3.5px 5px, transparent 5.5px),
+    radial-gradient(circle at 23.5px 5.5px, #ffd23f 0 3px, var(--lx-tinta) 3.5px 5px, transparent 5.5px),
+    radial-gradient(circle at 41.5px 5.5px, #4fdc6a 0 3px, var(--lx-tinta) 3.5px 5px, transparent 5.5px);
+}
+.lx-panel::before {
+  content: '';
+  position: absolute;
+  top: -11px;
+  right: 16px;
+  width: 34px;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.22);
+  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+}
+
+/* Pantalla oscura (LCD) con líneas de barrido */
+.lx-lcd {
+  color: var(--lx-lcd-texto);
+  background-color: var(--lx-lcd);
+  background-image: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0 2px, transparent 2px 4px),
+    radial-gradient(ellipse at 50% 0%, rgba(95, 208, 255, 0.22), transparent 70%);
 }
 
 /* --- Ventana de escritorio: chasis rojo + pantalla ------------------------ */
@@ -121,14 +194,6 @@ html.lx-escritorio body nav:not(.lx-enlaces) {
   width: auto !important;
   max-width: none !important;
 }
-@media (min-width: 640px) {
-  html.lx-escritorio body nav:not(.lx-enlaces) {
-    background-color: var(--lx-pantalla) !important;
-  }
-  html.lx-escritorio body nav:not(.lx-enlaces)::before {
-    background: linear-gradient(var(--lx-pantalla) 50%, transparent) !important;
-  }
-}
 
 /* Ventanas medianas: las pestañas Partida/Caja/Cementerio solo con icono */
 @media (max-width: 960px) {
@@ -153,4 +218,53 @@ html.lx-escritorio body nav:not(.lx-enlaces) {
 /* "Ancho de pantalla" dentro de la pantalla de la Pokédex (con marco) */
 html.lx-escritorio .w-screen {
   width: 100% !important;
+}
+
+/* --- Filas de encuentros como fichas ----------------------------------------- */
+.lx-fila {
+  align-items: center;
+  padding: 6px 8px;
+  border-radius: 12px;
+  background: var(--lx-panel);
+  border: 2px solid var(--lx-bisel);
+  transition: border-color 0.12s, box-shadow 0.12s;
+}
+.lx-fila:hover,
+.lx-fila:focus-within {
+  border-color: var(--lx-tinta);
+  box-shadow: var(--lx-sombra-sm);
+}
+html.dark .lx-fila:hover,
+html.dark .lx-fila:focus-within {
+  border-color: #6b7280;
+}
+.lx-fila > .location {
+  font-family: 'VT323', monospace;
+  font-size: 21px !important;
+  line-height: 1 !important;
+  letter-spacing: 0.3px;
+  color: var(--lx-texto);
+}
+.lx-fila input,
+.lx-fila button.rounded-lg,
+.lx-fila .rounded-lg {
+  border-radius: var(--lx-radio-sm);
+}
+
+/* --- Jefes en la lista de la partida ------------------------------------------ */
+.lx-jefe {
+  padding: 14px 14px 8px 22px;
+  border-radius: var(--lx-radio);
+  background: var(--lx-panel);
+  border: 3px solid var(--lx-tinta);
+  box-shadow: inset 7px 0 0 var(--lx-rojo), var(--lx-sombra);
+}
+html.dark .lx-jefe {
+  border-color: #000;
+}
+.lx-jefe h4 {
+  font-family: 'VT323', monospace;
+  font-size: 26px !important;
+  line-height: 1;
+  letter-spacing: 0.5px;
 }

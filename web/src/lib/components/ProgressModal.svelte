@@ -137,7 +137,7 @@
   <Loader />
 {:else if !analysisResult.box.length}
   <div
-    class="rounded-xl bg-white px-6 py-8 text-center text-lg shadow-lg dark:bg-gray-900 dark:text-gray-50"
+    class="lx-panel px-6 py-8 text-center text-lg"
   >
     <p class="mb-2">
       How do you expect to beat <b>{boss.name}</b> with no Pokémon?

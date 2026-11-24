@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="cuerpo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff4a62"/>
+      <stop offset="0.45" stop-color="#e3112f"/>
+      <stop offset="1" stop-color="#a8061f"/>
+    </linearGradient>
+    <linearGradient id="arco" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8d93a5"/>
+      <stop offset="0.5" stop-color="#d3d8e4"/>
+      <stop offset="1" stop-color="#6c7286"/>
+    </linearGradient>
+    <radialGradient id="lente" cx="0.36" cy="0.32" r="0.75">
+      <stop offset="0" stop-color="#e6f9ff"/>
+      <stop offset="0.16" stop-color="#7fdcff"/>
+      <stop offset="0.5" stop-color="#1aa3e8"/>
+      <stop offset="1" stop-color="#0a5d98"/>
+    </radialGradient>
+  </defs>
+  <!-- arco del candado -->
+  <path d="M150 262 V190 a106 106 0 0 1 212 0 V262" fill="none" stroke="#111" stroke-width="84" stroke-linecap="round"/>
+  <path d="M150 262 V190 a106 106 0 0 1 212 0 V262" fill="none" stroke="url(#arco)" stroke-width="56" stroke-linecap="round"/>
+  <path d="M138 214 V190 a118 118 0 0 1 62 -103" fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round" opacity="0.8"/>
+  <!-- sombra del cuerpo -->
+  <rect x="70" y="236" width="372" height="248" rx="54" fill="#000" opacity="0.28" transform="translate(10 12)"/>
+  <!-- cuerpo -->
+  <rect x="70" y="236" width="372" height="248" rx="54" fill="url(#cuerpo)" stroke="#111" stroke-width="16"/>
+  <!-- bisagra -->
+  <path d="M78 300 H434" stroke="#7a0416" stroke-width="10"/>
+  <path d="M84 290 H428" stroke="#ff7a8c" stroke-width="4" opacity="0.6"/>
+  <!-- luces -->
+  <circle cx="112" cy="267" r="12" fill="#ff5a5a" stroke="#111" stroke-width="6"/>
+  <circle cx="148" cy="267" r="12" fill="#ffd23f" stroke="#111" stroke-width="6"/>
+  <circle cx="184" cy="267" r="12" fill="#4fdc6a" stroke="#111" stroke-width="6"/>
+  <!-- lente con cerradura -->
+  <circle cx="256" cy="384" r="84" fill="#fff" stroke="#111" stroke-width="14"/>
+  <circle cx="256" cy="384" r="62" fill="url(#lente)" stroke="#0b4f7c" stroke-width="6"/>
+  <path d="M256 352 a17 17 0 0 1 10 31 l7 33 h-34 l7 -33 a17 17 0 0 1 10 -31z" fill="#073a5e" opacity="0.9"/>
+  <ellipse cx="230" cy="358" rx="16" ry="10" fill="#fff" opacity="0.85" transform="rotate(-35 230 358)"/>
+</svg>

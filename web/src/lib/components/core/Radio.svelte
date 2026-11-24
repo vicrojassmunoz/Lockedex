@@ -8,7 +8,7 @@
 {#each options as o, i}
   <label class={className}>
     <input type=radio bind:group={selected} {name} value={i} />
-    <span class=on><Icon inline={true} height=1.4em icon={On} class='fill-current ml-0.5 text-orange-600 dark:text-orange-500' /></span>
+    <span class=on><Icon inline={true} height=1.4em icon={On} class='fill-current ml-0.5 text-red-600 dark:text-red-400' /></span>
     <span class=off><Icon inline={true} height=1.4em icon={Off} class='fill-current ml-0.5' /></span>
     <small>{o}</small>
   </label>
@@ -34,8 +34,8 @@
 
   input:checked ~ .on { display: block; }
   input:checked ~ .off { display: none; }
-  input:checked ~ small { @apply text-orange-600  }
-  :global(.dark) input:checked ~ small { @apply text-orange-500 }
+  input:checked ~ small { @apply text-red-600  }
+  :global(.dark) input:checked ~ small { @apply text-red-400 }
 
   input ~ .off { display: block; }
   input ~ .on { display: none; }

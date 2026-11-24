@@ -33,7 +33,7 @@
 
 </script>
 
-<section class='bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 py-3 px-3 sm:p-6 rounded-2xl shadow-lg' >
+<section class='lx-panel py-3 px-3 sm:p-6' >
   <div class='flex justify-between items-center mb-2'>
     <IconButton containerClassName='ml-1' rounded src={Sort} on:click={nextsort} />
     <h3 class='inline-flex gap-x-1 items-center text-sm'>

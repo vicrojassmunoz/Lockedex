@@ -62,13 +62,13 @@
 
 <style lang="postcss">
   :root {
-    --inp-focus: theme('colors.black');
-    --inp-focus-2: theme('colors.gray.500');
+    --inp-focus: var(--lx-tinta);
+    --inp-focus-2: rgba(220, 10, 45, 0.25);
   }
 
   :global(.dark) {
-    --inp-focus: theme('colors.white');
-    --inp-focus-2: theme('colors.gray.200');
+    --inp-focus: #e5e7eb;
+    --inp-focus-2: rgba(255, 51, 85, 0.35);
   }
 
   .green {
@@ -84,7 +84,8 @@
     /* @apply  sm:text-xs */
     @apply h-10 w-full border-2 pr-3 text-xxs text-gray-800 placeholder-gray-400 shadow-sm ring-2 ring-transparent transition-colors focus:outline-none sm:text-xs;
     background-color: var(--input-bg);
-    border-color: theme('colors.gray.200');
+    border-color: theme('colors.gray.300');
+    border-radius: var(--lx-radio-sm);
   }
 
   :global(.dark) input {

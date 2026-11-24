@@ -63,10 +63,10 @@
 </script>
 
 <svelte:head>
-  <title>Nuzlocke | {game?.name || ''}</title>
+  <title>Lockedex | {game?.name || ''}</title>
 </svelte:head>
 
-<nav class={$page.url.pathname.replace('/', '')}>
+<nav class="lx-cabecera-partida lx-lcd {$page.url.pathname.replace('/', '')}">
   <div class="p-container">
     <div class="inline-flex items-center">
       <a href="/" class="{$$restProps.class || ''} home group">
@@ -177,18 +177,16 @@
 </nav>
 
 <style lang="postcss">
+  /* Cabecera de la partida: franja de pantalla oscura (LCD) con el equipo y las pestañas */
   nav {
     position: fixed;
     z-index: 5000;
-    @apply container mx-auto mb-8 bg-black text-white sm:bg-white sm:text-black md:mb-2;
+    @apply container mx-auto mb-8 md:mb-2;
+    border-bottom: 3px solid var(--lx-tinta);
   }
 
   nav :global(.p-container) {
     @apply px-0;
-  }
-
-  :global(.dark) nav {
-    @apply sm:bg-gray-800;
   }
 
   @media (min-width: theme('screens.sm')) {
@@ -198,58 +196,77 @@
       right: 0;
     }
 
+    /* Difuminado para que el contenido pase por debajo sin corte brusco */
     nav::before {
       content: '';
-      background: linear-gradient(white 50%, transparent);
-      @apply absolute -bottom-6 h-6 w-full;
+      background: linear-gradient(var(--lx-pantalla) 30%, transparent);
+      pointer-events: none;
+      @apply absolute -bottom-6 h-5 w-full;
     }
 
     nav.graveyard::before {
       display: none;
     }
-
-    :global(.dark) nav::before {
-      background: linear-gradient(theme('colors.gray.800') 50%, transparent);
-    }
-  }
-
-  :global(.dark) nav {
-    @apply sm:text-gray-200;
-  }
-
-  :global(.dark) nav.graveyard,
-  nav.graveyard {
-    @apply sm:bg-transparent;
-  }
-
-  :global(.dark) nav.graveyard::after,
-  nav.graveyard::after {
-    @apply sm:hidden;
   }
 
   h1 {
-    @apply -mb-1.5 border-b-2 border-transparent text-base transition sm:mb-0;
+    @apply -mb-1.5 border-b-2 border-transparent transition sm:mb-0;
+    font-family: 'VT323', monospace;
+    font-size: 24px;
+    letter-spacing: 1px;
+    color: #f7f7f2;
   }
 
   a.home {
     @apply ml-4 -mt-4 inline-flex h-12 items-center md:mt-0 md:-ml-2;
   }
+  a.home :global(img) {
+    filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.5));
+  }
+
   a.link {
-    @apply inline-flex items-center gap-x-1 border-black p-2 px-3 text-sm transition md:p-4 md:text-base;
+    @apply inline-flex items-center gap-x-1.5 p-2 px-3 transition md:p-4;
+    font-family: 'VT323', monospace;
+    font-size: 21px;
+    line-height: 1;
+    letter-spacing: 0.5px;
   }
 
   a.link.active {
-    @apply cursor-default border-b-2 bg-gray-50 text-black;
+    cursor: default;
+    color: var(--lx-amarillo);
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: inset 0 -4px 0 var(--lx-amarillo);
   }
   a.link:not(.active) {
-    @apply cursor-pointer hover:text-black  sm:text-gray-500;
+    cursor: pointer;
+    color: rgba(142, 232, 255, 0.72);
+  }
+  a.link:not(.active):hover {
+    color: #fff;
   }
 
-  :global(.dark) a.link:not(.active) {
-    @apply text-gray-400 hover:text-gray-100;
+  /* Huecos del equipo */
+  nav :global(.lx-hueco-equipo) {
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: inset 0 0 0 2px rgba(142, 232, 255, 0.22);
   }
-  :global(.dark) a.link.active {
-    @apply border-b-gray-200 bg-gray-900 text-gray-50 hover:text-gray-100;
+  nav :global(.lx-hueco-equipo:hover) {
+    box-shadow: inset 0 0 0 2px var(--lx-amarillo);
+  }
+  nav :global(.lx-silueta) {
+    filter: invert(1) brightness(1.4);
+    opacity: 0.25 !important;
+  }
+  nav :global(.lx-hueco-equipo:hover .lx-silueta) {
+    opacity: 0.5 !important;
+  }
+
+  /* Botones de la cabecera (tema, partidas) en claro sobre la pantalla */
+  nav :global(button),
+  nav :global(.popover-trigger) {
+    color: inherit;
   }
 
   :global(.game--sw),

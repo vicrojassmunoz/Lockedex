@@ -2,7 +2,7 @@
 // Basado en la app web de nuzlocke-redux (código abierto, BSD-3). Guarda las
 // partidas en un archivo en tu ordenador.
 
-import { app, BrowserWindow, Menu, shell, dialog, ipcMain, globalShortcut } from 'electron'
+import { app, BrowserWindow, Menu, shell, dialog, ipcMain, globalShortcut, session, nativeImage } from 'electron'
 import http from 'node:http'
 import fs from 'node:fs'
 import fsp from 'node:fs/promises'
@@ -198,10 +198,36 @@ const escuchar = (servidor, puerto) =>
     })
   })
 
+// Todo se sirve en local, así que no se guarda nada en caché: tras una actualización
+// la caché del navegador podía mezclar trozos de la versión anterior con la nueva.
+const sinCache = (res) => {
+  const poner = res.setHeader.bind(res)
+  res.setHeader = (clave, valor) =>
+    poner(clave, String(clave).toLowerCase() === 'cache-control' ? 'no-cache' : valor)
+  const escribir = res.writeHead.bind(res)
+  res.writeHead = (codigo, ...resto) => {
+    for (const h of resto) {
+      if (!h || typeof h !== 'object' || Array.isArray(h)) continue
+      for (const k of Object.keys(h)) if (k.toLowerCase() === 'cache-control') h[k] = 'no-cache'
+    }
+    return escribir(codigo, ...resto)
+  }
+}
+
+const limpiarCaches = async () => {
+  try {
+    await session.defaultSession.clearCache()
+    await session.defaultSession.clearStorageData({ storages: ['serviceworkers', 'cachestorage'] })
+  } catch (e) {
+    registrar('No se pudo limpiar la caché', e)
+  }
+}
+
 const arrancarServidor = async () => {
   let manejador = null
   const servidor = http.createServer((req, res) => {
     if (req.url.startsWith('/__escritorio/estado')) return manejarEstado(req, res)
+    sinCache(res)
     if (!manejador) {
       res.writeHead(503)
       return res.end('Cargando…')
@@ -455,7 +481,8 @@ const hacerCopia = async () => {
 
 const acercaDe = () =>
   dialog.showMessageBox(ventana, {
-    type: 'info',
+    type: 'none',
+    icon: nativeImage.createFromPath(path.join(__dirname, 'icono.png')).resize({ width: 64, height: 64 }),
     title: `Acerca de ${NOMBRE}`,
     message: `${NOMBRE} · v${app.getVersion()}`,
     detail: [
@@ -685,6 +712,7 @@ app.whenReady().then(async () => {
   try {
     migrarDatosAnteriores()
     asegurarCarpetas()
+    await limpiarCaches()
     origen = await arrancarServidor()
     construirMenu()
     crearVentana()

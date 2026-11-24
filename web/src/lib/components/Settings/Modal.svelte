@@ -113,7 +113,7 @@
 </script>
 
 <section
-  class="mx-auto max-w-sm rounded-2xl bg-gray-50 p-6 dark:bg-gray-900 md:max-w-4xl md:p-8"
+  class="lx-panel mx-auto max-w-sm p-6 md:max-w-4xl md:p-8"
 >
   <h2
     class="flex justify-between text-lg font-bold text-gray-900 dark:text-gray-50"

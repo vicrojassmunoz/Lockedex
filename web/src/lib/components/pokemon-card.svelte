@@ -42,14 +42,14 @@
   {@const color2 = color(types[1] || types[0], themeId)}
   {@const pattern = Pattern(color2)}
   <div
-    class="card relative flex flex-col rounded-lg border bg-white dark:border-gray-900 dark:bg-gray-900 dark:shadow-lg {$$restProps.class ||
+    class="card relative flex flex-col bg-white dark:bg-gray-900 {$$restProps.class ||
       ''}"
   >
     <div
       style={`--t-col: ${color1}; background-image: url("${pattern}");`}
       class:rounded-b-lg={minimal}
       class:minimal
-      class="card__header relative z-0 flex justify-between rounded-t-lg pl-4 pt-4 pb-3"
+      class="card__header relative z-0 flex justify-between pl-4 pt-4 pb-3"
     >
       <div class="pointer-events-none flex flex-row items-end gap-x-2">
         {#if level}
@@ -143,7 +143,7 @@
     {#if !minimal}
       <div
         style="border-color: {color(types[0], themeId)}"
-        class="relative z-10 flex flex-col-reverse rounded-b-lg border-t-2 bg-white dark:bg-gray-900 sm:items-center md:inline-flex md:flex-row"
+        class="lx-tarjeta-pie relative z-10 flex flex-col-reverse bg-white dark:bg-gray-900 sm:items-center md:inline-flex md:flex-row"
       >
         {#if moves && moves.length}
           <div
@@ -203,8 +203,18 @@
     @apply -translate-y-1;
   }
 
+  /* Ficha Lockedex: contorno de tinta y sombra plana */
   .card {
-    box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+    border: 3px solid var(--lx-tinta);
+    border-radius: var(--lx-radio);
+    box-shadow: var(--lx-sombra);
+  }
+  .card__header {
+    border-radius: 11px 11px 0 0;
+  }
+  .lx-tarjeta-pie {
+    border-top: 3px solid var(--lx-tinta);
+    border-radius: 0 0 11px 11px;
   }
 
   .card__header::before {
@@ -214,7 +224,7 @@
     left: 0;
     bottom: 0;
     right: 0;
-    border-radius: 8px 8px 0 0;
+    border-radius: 11px 11px 0 0;
   }
 
   .card__header.minimal::before {
@@ -224,7 +234,7 @@
     left: 0;
     bottom: 0;
     right: 0;
-    border-radius: 8px;
+    border-radius: 11px;
   }
 
   .card__header {

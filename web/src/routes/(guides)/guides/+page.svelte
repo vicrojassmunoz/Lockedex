@@ -31,7 +31,7 @@
   <meta content={description} name=twitter:description  />
 </svelte:head>
 
-<Hero theme={['#000', '#4a4a4a', '#fff']}>
+<Hero theme={['#ff3355', '#a8061f', '#fff']}>
   <svelte:fragment slot=hero>
     <div>
       <small>Lockedex</small>

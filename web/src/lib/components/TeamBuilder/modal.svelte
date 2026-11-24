@@ -35,7 +35,7 @@
   
 </script>
 
-<section class='bg-white px-4 py-6 md:px-6 md:py-8 rounded-xl text-xl dark:bg-gray-900 dark:text-gray-50 shadow-lg'>
+<section class='lx-panel px-4 py-6 md:px-6 md:py-8 text-xl'>
   {#if availableMons.length > 0}
   <IconButton
     rounded borderless color=orange containerClassName='absolute top-2 right-2'

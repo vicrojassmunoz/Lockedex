@@ -21,7 +21,7 @@
   const encounterCount = route.count
   const routeCount = route.routes.length
 
-  const title = `Nuzlocke Tracker | Pokémon ${game.title} Nuzlocke Guide`
+  const title = `Lockedex | Guía Nuzlocke de Pokémon ${game.title}`
   const description = `This guide shows you all ${encounterCount} Pokémon available across ${routeCount} route encounters in Pokémon ${game.title}, as well as detailed information on all ${gymCount} boss battles!`
 
   const schema = {
@@ -30,7 +30,7 @@
     headline: `A Nuzlocke guide for Pokémon ${game.title}`,
     alternativeHeadline: `A guide and overview to Nuzlocking Pokémon ${game.title}`,
     image: `https://img.nuzlocke.app${game.logo}@2.png`,
-    author: 'Nuzlocke Tracker',
+    author: 'Lockedex',
     genre: 'Pokémon',
     keywords: `pokemon nuzlocke ${game.title} encounters boss battles fights`,
     url: `https://nuzlocke.app/${path}`,

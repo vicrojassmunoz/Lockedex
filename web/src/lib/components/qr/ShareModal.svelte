@@ -46,7 +46,7 @@
 
 </script>
 
-<section>
+<section class="lx-panel">
 	<h1>
 		<Icon inline={true} icon={Share} class="-ml-4 mr-2 fill-current" />
 		Transfer your save
@@ -98,12 +98,9 @@
 	}
 
 	section {
-	@apply mx-auto flex flex-col items-center gap-y-4 overflow-hidden rounded-xl bg-gray-50 py-10 px-6 text-gray-800 md:px-12;
+	@apply mx-auto flex flex-col items-center gap-y-4 py-10 px-6 md:px-12;
 	}
 
-	:global(.dark) section {
-	@apply bg-gray-800 text-white;
-	}
 
 	p {
 	@apply max-w-xs text-center text-sm leading-5;

@@ -94,11 +94,11 @@
       data-drag-action="replace"
       class:opacity-50={over && +over === i}
       ondragover="return false"
-      class="group relative h-10 w-10 cursor-pointer transition"
+      class="lx-hueco-equipo group relative h-10 w-10 cursor-pointer transition"
     >
       <span class="pointer-events-none" in:scale={{ duration: 500 }}>
         <PIcon
-          class="pointer-events-none absolute left-1/2 top-1/2 -mt-0.5 -translate-y-1/2 -translate-x-1/2 opacity-30 dark:opacity-80 dark:contrast-50"
+          class="pointer-events-none absolute left-1/2 top-1/2 -mt-0.5 -translate-y-1/2 -translate-x-1/2 opacity-30 dark:opacity-80 dark:contrast-50 lx-silueta"
           name="unknown-pokemon2"
         />
 
@@ -126,10 +126,10 @@
         data-drag-id={i + mons.length}
         data-drag-action="add"
         ondragover="return false"
-        class="group relative h-10 w-10 cursor-pointer transition"
+        class="lx-hueco-equipo group relative h-10 w-10 cursor-pointer transition"
       >
         <PIcon
-          class="pointer-events-none absolute left-1/2 top-1/2 -mt-[2px] -translate-y-1/2 -translate-x-1/2 opacity-40 brightness-200 contrast-200 transition group-hover:opacity-100 dark:contrast-0"
+          class="pointer-events-none absolute left-1/2 top-1/2 -mt-[2px] -translate-y-1/2 -translate-x-1/2 opacity-40 brightness-200 contrast-200 transition group-hover:opacity-100 dark:contrast-0 lx-silueta"
           name="unknown-pokemon2"
         />
 

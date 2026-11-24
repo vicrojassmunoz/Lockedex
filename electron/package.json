@@ -1,7 +1,7 @@
 {
   "name": "lockedex",
   "productName": "Lockedex",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Lockedex: tracker de Nuzlocke para escritorio, con las partidas guardadas en un archivo local",
   "author": "Lockedex",
   "license": "BSD-3-Clause",
@@ -57,7 +57,9 @@
       "installerLanguages": [
         "es_ES"
       ],
-      "deleteAppDataOnUninstall": false
+      "deleteAppDataOnUninstall": false,
+      "installerSidebar": "build/installerSidebar.bmp",
+      "uninstallerSidebar": "build/uninstallerSidebar.bmp"
     },
     "publish": [
       {

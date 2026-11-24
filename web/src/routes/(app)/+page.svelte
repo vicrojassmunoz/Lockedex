@@ -66,11 +66,18 @@
 
 
 
+<svelte:head>
+  <title>Lockedex</title>
+</svelte:head>
+
 <main>
   <h1 aria-level="1" class="lx-logo" data-lx-original>
-    <span class="lx-logo-pantalla">
-      <span class="lx-logo-texto">LOCKEDEX</span>
-      <span class="lx-logo-sub">{idiomaEs ? 'Tu Pokédex para Nuzlockes' : 'Your Nuzlocke Pokédex'}</span>
+    <span class="lx-logo-pantalla lx-lcd">
+      <img class="lx-logo-icono" src="/lx/icono.svg" alt="" width="92" height="92" />
+      <span class="lx-logo-textos">
+        <span class="lx-logo-texto">LOCKEDEX</span>
+        <span class="lx-logo-sub">{idiomaEs ? 'Tu Pokédex para Nuzlockes' : 'Your Nuzlocke Pokédex'}</span>
+      </span>
     </span>
   </h1>
 
@@ -182,31 +189,47 @@
   .lx-logo-pantalla {
     position: relative;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    padding: 16px 34px 12px;
-    border-radius: 14px;
-    background: #12303f;
-    background-image: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0 2px, transparent 2px 4px),
-      radial-gradient(ellipse at 50% 0%, rgba(95, 208, 255, 0.25), transparent 70%);
-    border: 4px solid #1b1b1f;
-    box-shadow: inset 0 0 0 4px #d9d9d2, inset 0 0 22px rgba(0, 0, 0, 0.6), 5px 5px 0 rgba(0, 0, 0, 0.25);
+    gap: 18px;
+    padding: 14px 30px 14px 20px;
+    border-radius: var(--lx-radio);
+    border: 4px solid var(--lx-tinta);
+    box-shadow: inset 0 0 0 4px #d9d9d2, inset 0 0 22px rgba(0, 0, 0, 0.6), var(--lx-sombra);
+  }
+  .lx-logo-icono {
+    width: 92px;
+    height: 92px;
+    filter: drop-shadow(3px 4px 0 rgba(0, 0, 0, 0.45));
+  }
+  .lx-logo-textos {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
   .lx-logo-texto {
     font-family: 'VT323', monospace;
     font-size: 84px;
     line-height: 0.85;
     letter-spacing: 6px;
-    color: #ffcb05;
-    text-shadow: 3px 0 0 #2a6ab8, -3px 0 0 #2a6ab8, 0 3px 0 #2a6ab8, 0 -3px 0 #2a6ab8, 3px 3px 0 #2a6ab8,
-      6px 6px 0 #0d2a4d;
+    color: #f7f7f2;
+    text-shadow: 3px 3px 0 var(--lx-rojo), 6px 6px 0 #4a0412;
   }
   .lx-logo-sub {
     font-family: 'VT323', monospace;
     font-size: 22px;
-    color: #8ee8ff;
+    color: var(--lx-lcd-texto);
     letter-spacing: 2px;
-    margin-top: 6px;
+    margin-top: 8px;
+  }
+  @media (max-width: 560px) {
+    .lx-logo-icono {
+      width: 64px;
+      height: 64px;
+    }
+    .lx-logo-texto {
+      font-size: 60px;
+      letter-spacing: 3px;
+    }
   }
   main {
     @apply container mx-auto mt-16 flex flex-col justify-center;

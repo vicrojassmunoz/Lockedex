@@ -62,7 +62,7 @@
   }
 </script>
 
-<section>
+<section class="lx-panel">
   <IconButton
     rounded
     borderless
@@ -177,12 +177,9 @@
   }
 
   section {
-    @apply mx-auto flex max-w-md flex-col items-center gap-y-4 overflow-hidden rounded-xl bg-gray-50 py-10 px-6 text-gray-800 md:px-12;
+    @apply mx-auto flex max-w-md flex-col items-center gap-y-4 py-10 px-6 md:px-12;
   }
 
-  :global(.dark) section {
-    @apply bg-gray-800 text-white;
-  }
 
   p.or {
     @apply relative w-3/4 px-10;

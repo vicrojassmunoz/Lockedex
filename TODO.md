@@ -19,23 +19,28 @@ Notas para retomar el trabajo en otra sesión. Lo primero es el mapa del proyect
 
 ## 1. Estética propia (desmarcarse de nuzlocke-redux)
 
-**Ya es Lockedex:** el chasis rojo con la lente y los LEDs, la barra con EXP, el logo de la portada, la tarjeta de información, el medidor de riesgo, el asistente, la importación, el perfil y el modo compacto.
+**Ya es Lockedex:** el chasis rojo con la lente y los LEDs, la barra con EXP, el logo de la portada, la tarjeta de información, el medidor de riesgo, el asistente, la importación, el perfil, el modo compacto y el Analista.
 
-**Sigue con la cara del original** (es lo que más se nota):
+**Hecho en la 1.4.0:**
 
-- [ ] **Logo e icono de la app** (petición del usuario): el icono de la ventana, la barra de tareas, el acceso directo y el instalador sigue siendo el del Nuzlocke Tracker original (`electron/icono.png`, `electron/icono.ico`, `web/static/favicon.png`, `web/static/icons/*`, `web/static/logo.*`). Hay que diseñar un logo propio de Lockedex y regenerar todos los tamaños. Aprovechar para revisar todo lo relacionado con la marca: nombre, logo, colores e imágenes.
+- [x] **Logo e icono propios**: candado-Pokédex (cuerpo rojo con luces, arco plateado y la lente azul como cerradura). Fuente en `marca/icono.svg` (+ `icono-pequeno.svg` para 16–48 px) y `herramientas/generar_marca.py` regenera `electron/icono.png/.ico`, las barras laterales del instalador, el favicon, los iconos del manifiesto, `logo.png/.webp` y `twitter.png`. Quitadas las pantallas de inicio de iPhone del original.
+- [x] **Tokens de diseño** en `lockedex.css` (`--lx-tinta`, `--lx-panel`, `--lx-panel-2`, `--lx-bisel`, `--lx-texto`, `--lx-texto-suave`, `--lx-acento-suave`, `--lx-lcd*`, `--lx-radio*`, `--lx-sombra*`), con su versión oscura.
+- [x] **Panel Lockedex** (`.lx-panel`: franja roja con luces) en lugar del contenedor pixelado: portada, partidas, nueva partida, créditos, privacidad y **todos los modales** (ajustes, compartir, importar, evolución, muerte, progreso, equipo, análisis).
+- [x] **Cabecera de la partida** como pantalla LCD oscura (`.lx-lcd`) con huecos de equipo y pestañas en VT323.
+- [x] **Filas de encuentros** como fichas (`.lx-fila`) y **jefes** como tarjetas con franja roja (`.lx-jefe`).
+- [x] **Botones, interruptores y radios** con el rojo de Lockedex (antes naranja) y botones con sombra que se hunde.
+- [x] **Fichas de Pokémon** (`pokemon-card.svelte`) con contorno de tinta y sombra plana.
+- [x] **Guías**: cabecera tipo chasis (color del juego con rayado y canto oscuro) en lugar de las ondas; textos en español.
+- [x] **Pie de página** simplificado (créditos BSD-3, versión y «Avisar de un fallo» a este repo).
 
-- [ ] **Filas de encuentros** de la partida (`components/pokemon-selector.svelte`, `Game/Route.svelte`): 4 inputs en fila. Idea: fichas tipo Pokédex por ruta, con sprite grande, estado como sello/insignia y naturaleza como chip.
-- [ ] **Cabecera de la partida** (`navs/GameHeading.svelte`): barra blanca con el logo del juego y el equipo. Idea: integrarla en el chasis, como una segunda franja roja oscura bajo la barra Lockedex con el equipo en Poké Balls y las pestañas Partida/Caja/Cementerio.
-- [ ] **Contenedor pixelado** (`containers/PixelatedContainer`) de la portada, nueva partida y cargar partida. Idea: pantallas con bisel (como el logo de la portada) en lugar del marco pixel blanco.
-- [ ] **Tarjetas de Pokémon de los jefes** (`pokemon-card.svelte`, `move-card.svelte`): degradado por tipo heredado. Idea: ficha de Pokédex con la pantalla oscura y las estadísticas en barras tipo PS.
-- [ ] **Caja** (`routes/(app)/box`): tarjetas de estadísticas del original. Idea: rejilla tipo caja del PC (30 huecos) con panel lateral de detalle.
-- [ ] **Cementerio** (`routes/(app)/graveyard`): lápidas y niebla del original. Idea: mantener la idea pero con lápidas pixel propias y un epitafio con la causa de la muerte.
-- [ ] **Guías** (`components/Guide/*`, `routes/(guides)`): cabecera negra con ondas del original. Idea: cabecera Pokédex roja y listados en pantallas.
-- [ ] **Modales** (ajustes de partida, compartir, evolución): pasarlos al estilo del asistente (borde negro grueso, cabecera roja).
-- [ ] **Pie de página**: simplificarlo y dejar los créditos (obligatorios por la licencia BSD-3) en Acerca de y en `/credit`.
-- [ ] Definir **tokens de diseño** en `lockedex.css` (colores, radios, sombras, tipografías) y usarlos en todos los componentes, en lugar de los colores sueltos de Tailwind.
-- [ ] Tema oscuro revisado entero, pantalla por pantalla.
+**Pendiente:**
+
+- [ ] **Filas de encuentros, paso 2**: fichas con sprite grande, estado como sello y naturaleza como chip (ahora solo es el contenedor).
+- [ ] **Caja** (`routes/(app)/box`): rejilla tipo caja del PC (30 huecos) con panel lateral de detalle.
+- [ ] **Cementerio**: lápidas pixel propias y epitafio con la causa de la muerte.
+- [ ] **Tarjetas de los jefes por dentro** (`move-card.svelte`, cabecera de `pokemon-card`): pantalla oscura y estadísticas en barras tipo PS.
+- [ ] **Página de cada guía**: listados en pantallas, mismo estilo que la app.
+- [ ] Repasar el tema oscuro pantalla por pantalla y los colores sueltos de Tailwind que quedan (`grep -rn "orange-\|indigo-" web/src`).
 
 Cómo hacerlo: ir componente a componente, con capturas antes y después. Se puede abrir Electron con `--remote-debugging-port` y hacer capturas con puppeteer-core, como en las pruebas de esta sesión. Sería útil maquetar primero cada pantalla (por ejemplo, como diseño en Claude) y luego pasarla a código.
 

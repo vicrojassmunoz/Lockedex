@@ -18,7 +18,7 @@
 </script>
 
 <section
-  class="mx-auto flex flex-col items-center rounded-lg bg-gray-50 p-8 pb-12 shadow-lg dark:bg-gray-900 dark:text-gray-200"
+  class="lx-panel mx-auto flex flex-col items-center p-8 pb-12"
 >
   <span><strong>{capitalise(base)}</strong> is evolving!</span>
 

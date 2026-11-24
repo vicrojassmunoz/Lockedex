@@ -16,6 +16,24 @@
 
   import { page } from '$app/stores'
   import { afterUpdate } from 'svelte'
+  import { beforeNavigate } from '$app/navigation'
+
+  // Al pasar entre la zona de la app y la de Guías (layouts distintos), Svelte 3 dejaba
+  // en pantalla la página anterior y la nueva quedaba debajo: parecía que la pestaña
+  // no cambiaba. Entre zonas se carga la página entera, que es instantáneo en local.
+  const zona = (destino) => {
+    const id = destino?.route?.id || ''
+    const ruta = destino?.url?.pathname || ''
+    return id.startsWith('/(guides)') || ruta === '/guides' || ruta.startsWith('/guides/') ? 'guias' : 'app'
+  }
+  beforeNavigate((nav) => {
+    if (!nav.from || !nav.to || nav.type === 'leave') return
+    if (nav.to.url.origin !== location.origin) return
+    if (zona(nav.from) !== zona(nav.to)) {
+      nav.cancel()
+      location.href = nav.to.url.href
+    }
+  })
   import { Footer } from '$c/navs'
 
   import createErrorModal from '$utils/error-handler'

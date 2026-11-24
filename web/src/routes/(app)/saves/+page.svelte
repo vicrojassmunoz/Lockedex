@@ -23,7 +23,7 @@
 </script>
 
 <svelte:head>
-  <title>Lockedex | Load game</title>
+  <title>Lockedex | Partidas</title>
 </svelte:head>
 
 <Modal

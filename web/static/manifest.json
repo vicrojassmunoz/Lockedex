@@ -1,13 +1,13 @@
 {
-  "name": "Nuzlocke Tracker | Track Nuzlocke Pokémon Encounters",
-  "description": "Best application for tracking Pokémon encounters and helping prepare you for the boss batles on your Nuzlocke runs. Get insights into team match ups, compare stat blocks and get detail on Gym movesets & abilities - all in one place - so you never lose again.",
-  "short_name": "Nuzlocke Tracker",
-  "theme_color": "#ff143b",
-  "background_color": "#ff143b",
+  "name": "Lockedex",
+  "description": "Tu Pokédex para Nuzlockes: encuentros, jefes, riesgo de cada combate y reglas, todo en tu equipo.",
+  "short_name": "Lockedex",
+  "theme_color": "#dc0a2d",
+  "background_color": "#dc0a2d",
   "display": "standalone",
   "orientation": "portrait-primary",
   "scope": "/",
-  "start_url": "/index.html",
+  "start_url": "/",
   "icons": [
     {
       "src": "icons/manifest-icon-192.maskable.png",

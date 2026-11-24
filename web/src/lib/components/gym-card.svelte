@@ -213,7 +213,7 @@
   </p>
 {/if}
 
-<div class="relative my-6" bind:this={tarjetaEl}>
+<div class="lx-jefe relative my-6" bind:this={tarjetaEl}>
   <Accordion
     jsenabled={!reader}
     iconClassName="transition duration-1000 {loading

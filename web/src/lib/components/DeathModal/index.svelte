@@ -43,7 +43,7 @@
 </script>
 
 <section
-  class="mx-auto items-center rounded-lg bg-white px-6 pt-4 pb-6 text-center shadow-lg dark:bg-gray-900 dark:text-gray-200 md:w-[50ch] md:p-8"
+  class="lx-panel mx-auto items-center px-6 pt-4 pb-6 text-center md:w-[50ch] md:p-8"
 >
   <IconButton
     rounded
