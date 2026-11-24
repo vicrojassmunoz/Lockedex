@@ -200,7 +200,7 @@
   {#if !busqueda}
     <Tabs
       name="gens"
-      className="hidden sm:flex"
+      className="hidden sm:flex lx-pestanas-desplazables"
       tabs={gens}
       bind:selected={gen}
     />
@@ -209,7 +209,7 @@
   <ul
     role="radiogroup"
     aria-labelledby="sc_title"
-    class="grid hidden grid-cols-3 items-center justify-center gap-x-4 gap-y-6 sm:grid sm:grid-cols-4"
+    class="lx-rejilla-juegos grid hidden items-center justify-center gap-x-4 gap-y-6 sm:grid"
   >
     {#each Object.entries(validGames) as [id, game]}
       {#if visible(id, game, busqueda, gen)}
@@ -290,5 +290,13 @@
     text-align: center;
     opacity: 0.6;
     padding: 24px 0;
+  }
+  .lx-rejilla-juegos {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    width: min(860px, calc(100vw - 120px));
+  }
+  :global(.lx-pestanas-desplazables) {
+    overflow-x: auto;
+    max-width: calc(100vw - 120px);
   }
 </style>

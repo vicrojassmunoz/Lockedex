@@ -146,6 +146,10 @@ guardar('naturalezas.json', naturalezas)
 
 # --- Especies ---------------------------------------------------------------------
 esp_es, esp_en = nombres('pokemon_species_names', 'pokemon_species_id')
+legendario = {
+    r['id']: (r.get('is_legendary') == '1' or r.get('is_mythical') == '1')
+    for r in leer('pokemon_species')
+}
 pokemon = {}
 for r in leer('pokemon'):
     pokemon[r['id']] = {'id': r['identifier'], 'especie': r['species_id']}
@@ -153,7 +157,8 @@ especies = {
     p['id']: {
         'n': int(p['especie']),
         'es': esp_es.get(p['especie']),
-        'en': esp_en.get(p['especie'])
+        'en': esp_en.get(p['especie']),
+        **({'l': 1} if legendario.get(p['especie']) else {})
     }
     for p in pokemon.values()
 }

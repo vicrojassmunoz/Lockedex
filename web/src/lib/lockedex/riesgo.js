@@ -91,7 +91,8 @@ const riesgoConCalculadora = async (jefe, equipo, gen, cap) => {
         nature: nombreBonito(y.naturaleza || 'hardy'),
         ivs: y.ivs,
         evs: y.evs,
-        ability: habs[y.habilidad]?.en,
+        ability: habs[y.habilidad]?.en || y.habilidadNombre,
+        item: y.objeto || undefined,
         moves
       })
       return p ? { y, p, moves } : null
@@ -111,12 +112,13 @@ const riesgoConCalculadora = async (jefe, equipo, gen, cap) => {
 
   const consejos = []
   const puntos = []
+  const matriz = []
   for (const b of jefe.pokemon) {
     // Cede el paso entre Pokémon para no congelar la ventana
     await new Promise((r) => setTimeout(r, 0))
     puntos.push(evaluar(b))
   }
-  return { puntos, consejos, modo: 'calculadora' }
+  return { puntos, consejos, matriz, modo: 'calculadora' }
 
   function evaluar(b) {
     const movsJefe = (b.moves || []).map((m) => m?.name).filter(Boolean)
@@ -127,22 +129,47 @@ const riesgoConCalculadora = async (jefe, equipo, gen, cap) => {
       moves: movsJefe
     })
     const nb = nombreBonito(b.name)
-    if (!pb) return 2
+    if (!pb) {
+      matriz.push({ jefe: b, filas: [] })
+      return 2
+    }
 
     const filas = nuestros.map(({ y, p, moves }) => {
       let recibe = 0
-      for (const m of movsJefe) recibe = Math.max(recibe, daño(pb, p, m).max)
+      let recibeMin = 0
+      let peligro = null
+      for (const m of movsJefe) {
+        const d = daño(pb, p, m)
+        if (d.max > recibe) {
+          recibe = d.max
+          recibeMin = d.min
+          peligro = m
+        }
+      }
       let hace = 0
+      let haceMax = 0
       let mejor = null
       for (const m of moves) {
-        const d = daño(p, pb, m).min
-        if (d > hace) {
-          hace = d
+        const d = daño(p, pb, m)
+        if (d.min > hace || (d.min === hace && d.max > haceMax)) {
+          hace = d.min
+          haceMax = d.max
           mejor = m
         }
       }
-      return { y, recibe, hace, mejor, rapido: p.stats.spe > pb.stats.spe }
+      return {
+        y,
+        recibe,
+        recibeMin,
+        peligro,
+        hace,
+        haceMax,
+        mejor,
+        rapido: p.stats.spe > pb.stats.spe,
+        empate: p.stats.spe === pb.stats.spe
+      }
     })
+    matriz.push({ jefe: b, velocidad: pb.stats.spe, filas })
 
     const seguros = filas.filter(
       (f) => (f.hace >= 1 && (f.rapido || f.recibe < 1)) || (f.hace >= 0.5 && f.recibe < 0.5)
@@ -184,7 +211,7 @@ export const calcularRiesgo = (args) => {
   const firma = JSON.stringify([
     jefe.name,
     jefe.pokemon.map((p) => [p.name, p.level, (p.moves || []).map((m) => m?.name)]),
-    equipo.map((y) => [y.alias, y.especie, y.nivel, y.movimientos, y.naturaleza, y.habilidad, y.ivs, y.evs]),
+    equipo.map((y) => [y.alias, y.especie, y.nivel, y.movimientos, y.naturaleza, y.habilidad, y.habilidadNombre, y.objeto, y.ivs, y.evs]),
     gen,
     cap,
     idioma()
@@ -227,6 +254,9 @@ const calcularRiesgoSinCache = async ({ jefe, equipo = [], gen = 3, cap = null }
   return {
     nivel: Math.max(0, Math.min(4, Math.round(nivel))),
     modo: r.modo,
-    consejos: r.consejos.slice(0, 8)
+    consejos: r.consejos.slice(0, 8),
+    todosLosConsejos: r.consejos,
+    matriz: r.matriz || null,
+    puntos: r.puntos
   }
 }

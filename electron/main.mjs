@@ -330,6 +330,7 @@ const crearVentana = () => {
 
   ventana.once('ready-to-show', () => ventana.show())
   protegerNavegacion(ventana)
+  vigilarErrores(ventana, 'ventana')
 
   let cerrando = false
   ventana.on('close', async (e) => {
@@ -384,6 +385,7 @@ const alternarCompacto = () => {
   })
   compacto.setAlwaysOnTop(true, 'floating')
   protegerNavegacion(compacto)
+  vigilarErrores(compacto, 'compacto')
   compacto.on('close', () => {
     if (!compacto.isDestroyed()) guardarConfig({ compacto: compacto.getBounds() })
   })
@@ -474,6 +476,35 @@ const acercaDe = () =>
   })
 
 // ---------------------------------------------------------------------------
+// Registro de errores (Documentos\Lockedex\registro-de-errores.txt)
+// ---------------------------------------------------------------------------
+const archivoRegistro = () => path.join(carpetaDatos(), 'registro-de-errores.txt')
+const registrar = (origenTexto, mensaje) => {
+  try {
+    asegurarCarpetas()
+    const linea = `[${new Date().toISOString()}] v${app.getVersion()} ${origenTexto}: ${String(mensaje).slice(0, 2000)}\r\n`
+    const ruta = archivoRegistro()
+    if (fs.existsSync(ruta) && fs.statSync(ruta).size > 512 * 1024) {
+      const texto = fs.readFileSync(ruta, 'utf8')
+      fs.writeFileSync(ruta, texto.slice(texto.length / 2))
+    }
+    fs.appendFileSync(ruta, linea)
+  } catch {}
+}
+process.on('uncaughtException', (e) => registrar('principal', e?.stack || e))
+process.on('unhandledRejection', (e) => registrar('principal', e?.stack || e))
+
+const vigilarErrores = (v, nombre) => {
+  v.webContents.on('console-message', (e, nivel, mensaje, linea, fuente) => {
+    const lvl = e?.level ?? nivel
+    const msg = e?.message ?? mensaje
+    if (lvl === 'error' || lvl === 3) registrar(nombre, `${msg} (${e?.sourceId ?? fuente ?? ''}:${e?.lineNumber ?? linea ?? ''})`)
+  })
+  v.webContents.on('render-process-gone', (_e, d) => registrar(nombre, `la ventana se cerró de golpe: ${d?.reason}`))
+  v.webContents.on('did-fail-load', (_e, codigo, desc, url) => registrar(nombre, `no cargó ${url}: ${codigo} ${desc}`))
+}
+
+// ---------------------------------------------------------------------------
 // Partida del emulador (.sav)
 // ---------------------------------------------------------------------------
 let savVigilado = null
@@ -525,11 +556,15 @@ ipcMain.handle('lx:vigilar-sav', (_e, ruta) => {
 // ---------------------------------------------------------------------------
 let estadoActualizacion = null
 let actualizador = null
+let busquedaManual = false
 
 const avisarActualizacion = (estado) => {
-  estadoActualizacion = estado
-  for (const v of BrowserWindow.getAllWindows()) v.webContents.send('lx:actualizacion', estado)
+  estadoActualizacion = { ...estado, manual: busquedaManual }
+  for (const v of BrowserWindow.getAllWindows()) v.webContents.send('lx:actualizacion', estadoActualizacion)
+  if (['al-dia', 'error', 'lista'].includes(estado.estado)) busquedaManual = false
 }
+
+const mb = (bytes) => `${(bytes / 1048576).toFixed(0)} MB`
 
 const prepararActualizaciones = async () => {
   if (!app.isPackaged || !fs.existsSync(path.join(process.resourcesPath, 'app-update.yml'))) return
@@ -539,55 +574,51 @@ const prepararActualizaciones = async () => {
     actualizador.autoDownload = true
     actualizador.autoInstallOnAppQuit = true
     actualizador.on('checking-for-update', () => avisarActualizacion({ estado: 'buscando' }))
-    actualizador.on('update-available', (i) => avisarActualizacion({ estado: 'descargando', version: i.version }))
+    actualizador.on('update-available', (i) => avisarActualizacion({ estado: 'descargando', version: i.version, progreso: 0 }))
     actualizador.on('update-not-available', () => avisarActualizacion({ estado: 'al-dia' }))
     actualizador.on('download-progress', (p) =>
-      avisarActualizacion({ estado: 'descargando', progreso: Math.round(p.percent) })
+      avisarActualizacion({
+        estado: 'descargando',
+        version: estadoActualizacion?.version,
+        progreso: Math.round(p.percent),
+        mb: `${mb(p.transferred)} de ${mb(p.total)}`,
+        velocidad: `${(p.bytesPerSecond / 1048576).toFixed(1)} MB/s`
+      })
     )
     actualizador.on('update-downloaded', (i) => avisarActualizacion({ estado: 'lista', version: i.version }))
-    actualizador.on('error', (e) => avisarActualizacion({ estado: 'error', mensaje: String(e?.message || e) }))
+    actualizador.on('error', (e) => {
+      registrar('actualizaciones', e?.stack || e)
+      avisarActualizacion({ estado: 'error', mensaje: String(e?.message || e) })
+    })
     setTimeout(() => actualizador.checkForUpdates().catch(() => {}), 8000)
     setInterval(() => actualizador.checkForUpdates().catch(() => {}), 4 * 60 * 60 * 1000)
   } catch (e) {
-    console.error('[actualizaciones]', e)
+    registrar('actualizaciones', e?.stack || e)
   }
 }
 
 ipcMain.handle('lx:estado-actualizacion', () => estadoActualizacion)
+if (process.env.NUZ_DEBUG) globalThis.__avisar = avisarActualizacion
 
 const buscarActualizacion = async () => {
-  if (!actualizador) {
-    return dialog.showMessageBox(ventana, {
-      type: 'info',
-      title: 'Actualizaciones',
-      message: 'Esta copia de Lockedex no tiene activadas las actualizaciones automáticas.'
-    })
-  }
+  busquedaManual = true
+  if (!actualizador) return avisarActualizacion({ estado: 'no-disponible' })
+  // Si ya está descargando o lista, se vuelve a enseñar ese estado
+  if (['descargando', 'lista'].includes(estadoActualizacion?.estado)) return avisarActualizacion(estadoActualizacion)
   try {
-    const r = await actualizador.checkForUpdates()
-    const nueva = r?.updateInfo?.version
-    if (!nueva || nueva === app.getVersion()) {
-      dialog.showMessageBox(ventana, {
-        type: 'info',
-        title: 'Actualizaciones',
-        message: `Tienes la última versión (v${app.getVersion()}).`
-      })
-    }
+    await actualizador.checkForUpdates()
   } catch (e) {
-    dialog.showMessageBox(ventana, {
-      type: 'warning',
-      title: 'Actualizaciones',
-      message: 'No se pudo comprobar si hay actualizaciones.',
-      detail: String(e?.message || e)
-    })
+    avisarActualizacion({ estado: 'error', mensaje: String(e?.message || e) })
   }
 }
 
 const instalarActualizacion = async () => {
   if (!actualizador) return
+  avisarActualizacion({ estado: 'instalando', version: estadoActualizacion?.version })
   await guardarDesdeVentana()
   if (compacto && !compacto.isDestroyed()) await guardarDesdeVentana(compacto)
-  actualizador.quitAndInstall(true, true)
+  // Instalador visible (con su barra de progreso) y Lockedex se vuelve a abrir al terminar
+  setTimeout(() => actualizador.quitAndInstall(false, true), 600)
 }
 
 // ---------------------------------------------------------------------------
@@ -614,6 +645,9 @@ ipcMain.handle('lx:accion', async (_e, nombre) => {
       return instalarActualizacion()
     case 'web-original':
       return shell.openExternal(WEB_ORIGINAL)
+    case 'registro':
+      if (!fs.existsSync(archivoRegistro())) registrar('info', 'registro creado (todavía no hay errores)')
+      return shell.openPath(archivoRegistro())
     case 'devtools':
       return ventana?.webContents.toggleDevTools()
   }

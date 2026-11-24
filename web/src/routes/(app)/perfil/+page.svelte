@@ -23,14 +23,34 @@
       perfil = { ...perfil, ...(JSON.parse(localStorage.getItem(CLAVE) || '{}') || {}) }
     } catch {}
 
+    try {
+      await calcular()
+    } catch (e) {
+      console.error('[perfil] no se pudieron calcular las estadísticas', e)
+      fallo = true
+    } finally {
+      cargando = false
+    }
+  })
+
+  let fallo = false
+  const calcular = async () => {
     const lista = leerPartidas()
-    runs = await Promise.all(
+    // Cada run por separado: si una falla, se salta y el resto se muestra
+    const resultados = await Promise.all(
       lista.map(async (p) => {
-        const completa = leerPartida(p.id)
-        const rutas = await cargarRutas(completa?.info?.lid)
-        return { ...completa, resumen: resumirPartida(completa, rutas) }
+        try {
+          const completa = leerPartida(p.id)
+          if (!completa) return null
+          const rutas = await cargarRutas(completa?.info?.lid)
+          return { ...completa, resumen: resumirPartida(completa, Array.isArray(rutas) ? rutas : []) }
+        } catch (e) {
+          console.error('[perfil] run ignorada', p.id, e)
+          return null
+        }
       })
     )
+    runs = resultados.filter(Boolean)
     runs.sort((a, b) => b.actualizada - a.actualizada)
 
     const muertes = runs.flatMap((r) => r.resumen.muertos.map((m) => ({ ...m, run: r })))
@@ -73,8 +93,7 @@
         { ok: muertos >= 50, icono: '☠', es: 'Sepulturero', en: 'Gravedigger', d: es ? '50 Pokémon en el cementerio' : '50 Pokémon in the graveyard' }
       ]
     }
-    cargando = false
-  })
+  }
 
   const elegir = (id) => {
     perfil.avatar = id
@@ -127,6 +146,8 @@
 
   {#if cargando}
     <p class="lx-cargando">{es ? 'Calculando estadísticas…' : 'Crunching stats…'}</p>
+  {:else if fallo}
+    <p class="lx-cargando">{es ? 'No se pudieron calcular las estadísticas. El detalle queda en Menú → Abrir registro de errores.' : 'Could not compute stats. Details in Menu → Open error log.'}</p>
   {:else if est}
     <section class="lx-stats">
       <div><b>{est.capturas}</b><span>{es ? 'Pokémon capturados' : 'Pokémon caught'}</span></div>

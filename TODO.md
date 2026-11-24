@@ -23,6 +23,8 @@ Notas para retomar el trabajo en otra sesión. Lo primero es el mapa del proyect
 
 **Sigue con la cara del original** (es lo que más se nota):
 
+- [ ] **Logo e icono de la app** (petición del usuario): el icono de la ventana, la barra de tareas, el acceso directo y el instalador sigue siendo el del Nuzlocke Tracker original (`electron/icono.png`, `electron/icono.ico`, `web/static/favicon.png`, `web/static/icons/*`, `web/static/logo.*`). Hay que diseñar un logo propio de Lockedex y regenerar todos los tamaños. Aprovechar para revisar todo lo relacionado con la marca: nombre, logo, colores e imágenes.
+
 - [ ] **Filas de encuentros** de la partida (`components/pokemon-selector.svelte`, `Game/Route.svelte`): 4 inputs en fila. Idea: fichas tipo Pokédex por ruta, con sprite grande, estado como sello/insignia y naturaleza como chip.
 - [ ] **Cabecera de la partida** (`navs/GameHeading.svelte`): barra blanca con el logo del juego y el equipo. Idea: integrarla en el chasis, como una segunda franja roja oscura bajo la barra Lockedex con el equipo en Poké Balls y las pestañas Partida/Caja/Cementerio.
 - [ ] **Contenedor pixelado** (`containers/PixelatedContainer`) de la portada, nueva partida y cargar partida. Idea: pantallas con bisel (como el logo de la portada) en lugar del marco pixel blanco.
