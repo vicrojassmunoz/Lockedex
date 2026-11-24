@@ -23,8 +23,8 @@ Windows puede mostrar el aviso «Windows protegió su PC» porque el instalador 
 ## Cómo se publica una versión
 
 1. Anota los cambios en `NOVEDADES.md`.
-2. Crea y sube una etiqueta con el número de versión, por ejemplo `git tag v1.2.0 && git push origin v1.2.0`.
-3. GitHub Actions compila Lockedex en Windows, comprueba que arranca y publica la versión. Las apps instaladas la descargan solas y avisan con el botón **¡Actualizar!**.
+2. Sube el número de versión en `electron/package.json` (por ejemplo, de 1.2.0 a 1.3.0) y súbelo a `main`.
+3. GitHub Actions compila Lockedex en Windows, comprueba que arranca, crea la etiqueta `vX.Y.Z` y publica la versión. Las apps instaladas la descargan solas y avisan con el botón **¡Actualizar!**.
 
 ## Estructura
 
