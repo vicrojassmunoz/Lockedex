@@ -104,7 +104,54 @@ Una pantalla `/analista`, enlazada desde la barra, para preparar cualquier comba
 
 ---
 
-## 4. Otras mejoras y limitaciones conocidas
+## 4. Modo Randomlocke (juegos aleatorizados)
+
+En un juego pasado por un randomizer, los Pokémon de cada ruta y los equipos de los jefes no coinciden con los datos. Este modo deja de mostrarlos, pero sigue llevando la cuenta de **dónde capturaste qué** y del **nivel del próximo jefe**, que en los randomizers normalmente se mantiene.
+
+- [ ] Elegir el modo al crear la partida: "Randomlocke", junto al botón *Aleatorio* de Nueva partida. Ojo: ese botón hace otra cosa (preasigna encuentros al azar para juegos de mundo abierto); hay que aclararlo en la interfaz.
+- [ ] Opciones del modo:
+  - [ ] Qué está aleatorizado: solo salvajes, salvajes y entrenadores, o también habilidades, movimientos y tipos.
+  - [ ] Si los niveles de los jefes se mantienen o están cambiados (por ejemplo, +X %).
+- [ ] **En la partida:**
+  - [ ] El buscador de encuentro ofrece **cualquier Pokémon** (`getAllPkmn`), no los de la tabla de la ruta. Esto equivale a forzar el ajuste "Encounter suggestions" desactivado.
+  - [ ] Sin estadísticas, tipos sugeridos ni análisis basados en datos del juego cuando no aplican.
+  - [ ] Jefes: solo nombre, lugar y **nivel máximo**. Si los entrenadores están aleatorizados, ocultar el equipo, el riesgo y el asistente; se puede reutilizar la lógica del modo sin spoilers (`gym-card.svelte`, ajuste `spoilers`).
+  - [ ] Opción de apuntar a mano el equipo real del jefe cuando lo veas en el juego, para que el riesgo y el asistente funcionen con esos datos.
+- [ ] En el modo compacto y en la barra de EXP: el próximo jefe con su nivel máximo, sin equipo.
+- [ ] La importación del .sav sigue funcionando igual: el lector no depende de las tablas del juego.
+
+---
+
+## 5. Reglas del Nuzlocke (ampliar y hacerlas "inteligentes")
+
+**Situación actual:** las reglas son ajustes por partida en `web/src/lib/components/Settings/_data.js`. Se guardan como una cadena de dígitos por índice: la 8 es la de Spoilers, y el índice 999 (Croma) se añade al final como `NaN`, ojo con eso. Ya existen: cláusula de motes, de repetidos (no / resaltar / ocultar), fallidos cuentan como repetidos, niveles máximos, límite de tamaño de equipo y muerte permanente. Los estados están en `web/src/lib/data/states.js`: Recibido = 2, Variocolor = 6, Muerto = 5.
+
+**Reglas nuevas a añadir:**
+
+- [ ] **Cláusula de regalos:** los Pokémon de regalo (estado *Recibido*) no gastan el encuentro de la zona. Permitir un encuentro normal además del regalo en el mismo lugar; se puede apoyar en las ubicaciones extra (`addlocation` / `__custom` en `store.js`).
+- [ ] **Cláusula variocolor:** un shiny siempre se puede capturar, aunque ya hayas tenido encuentro en esa zona. Añade un hueco extra automáticamente.
+- [ ] **Cláusula de estáticos:** los encuentros estáticos o legendarios cuentan, o no, como encuentro de la zona.
+- [ ] **Cláusula de especie:** como la de repetidos, pero por línea evolutiva (ya existe `evoline` en los datos).
+- [ ] **Modo Set** (sin cambio gratis tras debilitar) y **objetos en combate**: prohibidos, o limitados a X por combate.
+- [ ] **Hardcore:** nivel máximo obligatorio (aviso si tu equipo lo supera antes del combate), sin objetos en combate y modo Set.
+- [ ] **Game over** si cae todo el equipo, con opción de "nuevo intento", que ya existe en Cargar partida.
+- [ ] Variantes populares activables:
+  - [ ] Wedlocke: parejas, y solo combate un miembro de la pareja.
+  - [ ] Monotipo.
+  - [ ] Sin legendarios.
+  - [ ] Soul Link a dos jugadores, emparejando encuentros por zona.
+  - [ ] Wonderlocke.
+- [ ] **Plantillas de reglas:** "Nuzlocke clásico", "Hardcore", "Randomlocke", "A mi manera", y elegir la plantilla al crear la partida.
+- [ ] **Reglas inteligentes:** avisos cuando registras algo que rompe una regla. Por ejemplo:
+  - segundo encuentro en una zona sin regalo ni shiny;
+  - un Pokémon por encima del nivel máximo antes del jefe;
+  - un repetido según la cláusula de especie.
+
+  Se pueden mostrar en la fila del encuentro y en la barra superior (un LED en ámbar o rojo). Integrarlo con el riesgo: el asistente puede avisar si el equipo supera el nivel máximo en modo Hardcore.
+
+---
+
+## 6. Otras mejoras y limitaciones conocidas
 
 - [ ] **Lector de .sav:** probado solo con partidas sintéticas. Hay que probarlo con partidas reales de Rubí, Zafiro, Esmeralda, RojoFuego y VerdeHoja (y con hacks CFRU como Radical Red y Unbound, que amplían especies y pueden no ser compatibles).
 - [ ] Añadir .sav de otras generaciones (1–2 en GB/GBC y 4–5 en NDS, siguiendo los formatos de PKHeX).
