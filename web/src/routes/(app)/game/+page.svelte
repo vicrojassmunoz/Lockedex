@@ -1,4 +1,5 @@
 <script>
+  import AvisosReglas from '$lib/lockedex/AvisosReglas.svelte'
   import { onMount, afterUpdate } from 'svelte'
   import { browser } from '$app/environment'
   import { fade, slide } from 'svelte/transition'
@@ -150,6 +151,7 @@
           class="flex snap-y snap-start snap-always flex-col items-start justify-between gap-y-4 pt-14 md:mb-6 md:flex-row md:pt-14 lg:gap-y-0"
         >
           <div class="flex w-full flex-col gap-y-2">
+            <AvisosReglas />
             {#if filter === 'nuzlocke'}
               <button
                 transition:slide={{ duration: 250 }}

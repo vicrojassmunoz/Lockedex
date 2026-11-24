@@ -65,6 +65,42 @@
   import { alCambiarDatos } from '$lib/lockedex/partida.js'
   import { onMount as alMontar } from 'svelte'
 
+  // Lockedex: Randomlocke (equipos de jefes aleatorizados, apuntados a mano)
+  import { leerReglas } from '$lib/lockedex/reglas.js'
+  import { leerEquiposJefes, comoJefe } from '$lib/lockedex/jefes.js'
+  import { cargarCalc, urlSprite, cargarPokedex } from '$lib/lockedex/analista.js'
+  import { infoJuego } from '$lib/lockedex/datos.js'
+  import EquipoJefe from '$lib/lockedex/EquipoJefe.svelte'
+
+  let reglasRun = {}
+  let equipoReal = null
+  let pokedexRun = {}
+  const leerRandom = () => {
+    if (!browser) return
+    reglasRun = leerReglas($activeGame)
+    equipoReal = leerEquiposJefes($activeGame)[id] || null
+  }
+  $: aleatorio = !!(reglasRun.randomlocke && reglasRun.entrenadoresAleatorios)
+  $: if (browser && aleatorio && !Object.keys(pokedexRun).length) cargarPokedex(game).then((p) => (pokedexRun = p))
+  const jefeParaRiesgo = async () => {
+    if (!aleatorio) return boss
+    if (!equipoReal?.length) return null
+    const datos = await cargarCalc(infoJuego(game)?.gen || 9)
+    return comoJefe(name, equipoReal, datos)
+  }
+  const apuntarEquipo = () =>
+    open(EquipoJefe, {
+      partidaId: $activeGame,
+      juego: game,
+      jefeId: id,
+      nombre: name,
+      cap: levelCap,
+      alGuardar: () => {
+        leerRandom()
+        evaluarRiesgo()
+      }
+    })
+
   let riesgo = null
   let tarjetaEl
   let vista = false
@@ -75,13 +111,16 @@
       await new Promise((r) => (window.requestIdleCallback || setTimeout)(r, { timeout: 800 }))
       const actual = await equipoActual()
       if (!actual) return
-      riesgo = await calcularRiesgo({ jefe: boss, equipo: actual.eq.miembros, gen: actual.partida.info.gen, cap: levelCap })
+      leerRandom()
+      const jefeRiesgo = await jefeParaRiesgo()
+      riesgo = jefeRiesgo ? await calcularRiesgo({ jefe: jefeRiesgo, equipo: actual.eq.miembros, gen: actual.partida.info.gen, cap: levelCap }) : null
     } catch (e) {
       console.error('[riesgo]', e)
     }
   }
   alMontar(() => {
     if (!browser || reader) return
+    leerRandom()
     const io = new IntersectionObserver((e) => {
       if (e.some((x) => x.isIntersecting) && !vista) {
         vista = true
@@ -100,10 +139,13 @@
     }
   })
   $: if (vista && !loading && pokemon.length) evaluarRiesgo()
-  const abrirAsistente = () =>
-    open(Asistente, { jefe: boss, cap: levelCap, ocultarEquipo: !showBoss, valor: id, juego: game, inicial: starter })
+  const abrirAsistente = async () => {
+    const jefeRiesgo = await jefeParaRiesgo()
+    if (!jefeRiesgo) return apuntarEquipo()
+    open(Asistente, { jefe: jefeRiesgo, cap: levelCap, ocultarEquipo: !showBoss, valor: id, juego: game, inicial: starter })
+  }
 
-  $: showTeam = reader || spoilers < 1 || revealed || defeated
+  $: showTeam = !aleatorio && (reader || spoilers < 1 || revealed || defeated)
   $: showBoss = reader || spoilers < 2 || revealed || defeated
   const reveal = () => (revealed = true)
 
@@ -338,7 +380,26 @@
       slot="item"
       class="mt-8 grid gap-y-10 md:grid-cols-2 md:gap-x-2 lg:grid-cols-2 lg:gap-x-6"
     >
-      {#if !showTeam}
+      {#if aleatorio}
+        <div class="lx-random col-span-full" data-lx-original>
+          {#if equipoReal?.length}
+            <div class="lx-random-equipo">
+              {#each equipoReal as p}
+                <span class="lx-random-p">
+                  <img src={urlSprite(pokedexRun, p.especie) || '/assets/img/pokemon/base-201-question.png'} alt="" />
+                  <b>{p.especie}</b>
+                  <small>Nv. {p.nivel}</small>
+                  {#each p.movimientos || [] as mv}<em data-lx-mov={mv}>{mv}</em>{/each}
+                </span>
+              {/each}
+            </div>
+            <button class="lx-random-boton" on:click|stopPropagation={apuntarEquipo}>Editar equipo apuntado</button>
+          {:else}
+            <p>Randomlocke: el equipo de este jefe es aleatorio. Apúntalo cuando lo veas para calcular el riesgo.</p>
+            <button class="lx-random-boton" on:click|stopPropagation={apuntarEquipo}>Apuntar equipo real</button>
+          {/if}
+        </div>
+      {:else if !showTeam}
         <div
           class="col-span-full flex flex-col items-center gap-y-3 rounded-xl border-2 border-dashed border-gray-300 py-8 text-center dark:border-gray-700"
         >
@@ -394,3 +455,56 @@
     </div>
   </Accordion>
 </div>
+
+<style>
+  .lx-random {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 14px;
+    border: 2px dashed #a1a1aa;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 14px;
+  }
+  .lx-random-equipo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+  .lx-random-p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 96px;
+  }
+  .lx-random-p img {
+    width: 56px;
+    height: 56px;
+    image-rendering: pixelated;
+  }
+  .lx-random-p b {
+    font-family: 'VT323', monospace;
+    font-size: 19px;
+    line-height: 1;
+  }
+  .lx-random-p small {
+    font-size: 12px;
+    opacity: 0.7;
+  }
+  .lx-random-p em {
+    font-style: normal;
+    font-size: 11px;
+  }
+  .lx-random-boton {
+    background: #dc0a2d;
+    color: #fff;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: 2px solid #1b1b1f;
+  }
+</style>

@@ -62,7 +62,7 @@
 
   const onnewlocation = (e) => {
     const index = e.detail.id + 1
-    const loc = { type: 'custom', name: '', id: shortuuid(), index }
+    const loc = { type: 'custom', name: e.detail.name || '', id: shortuuid(), index }
     custom = custom.concat(loc)
     store.update(addlocation(loc))
   }

@@ -1,5 +1,28 @@
 <script>
-  import { savedGames, createGame } from '$lib/store'
+  import { savedGames, createGame, activeGame, parse, updateGame } from '$lib/store'
+  import { get } from 'svelte/store'
+  import Reglas from '$lib/lockedex/Reglas.svelte'
+  import { PLANTILLAS, guardarReglas, aplicarAjustes } from '$lib/lockedex/reglas.js'
+
+  let reglasNuevas = { ...PLANTILLAS.clasico.reglas, plantilla: 'clasico' }
+  let personalizar = false
+  let ajustesExtra = {}
+
+  // Guarda las reglas elegidas en la run recién creada y aplica sus ajustes
+  const aplicarReglas = () => {
+    const id = get(activeGame)
+    if (!id) return
+    guardarReglas(id, reglasNuevas)
+    const plantilla = reglasNuevas.plantilla || 'libre'
+    parse((saves) => {
+      const g = saves[id]
+      if (!g) return
+      let ajustes = aplicarAjustes(g.settings, plantilla)
+      const lista = ajustes.split('')
+      for (const [i, v] of Object.entries(ajustesExtra)) lista[+i] = v
+      savedGames.update(updateGame({ ...g, settings: lista.join('') }))
+    })(get(savedGames))
+  }
   import { ScreenContainer } from '$lib/components/containers'
 
   import {
@@ -44,6 +67,7 @@
       createid += difficultyOptions?.[difficulty]?.id || ''
 
     savedGames.update(createGame(gameName, createid))
+    aplicarReglas()
     window.location = '/game'
   }
 
@@ -59,6 +83,7 @@
           createid += difficultyOptions?.[difficulty]?.id || ''
 
         savedGames.update(createGame(gameName, createid, res))
+        aplicarReglas()
         window.location = '/game'
       })
   }
@@ -182,6 +207,32 @@
     </div>
   </div>
 
+  <div class="lx-reglas-nueva" data-lx-original>
+    <span>{es ? 'Reglas:' : 'Rules:'}</span>
+    {#each Object.entries(PLANTILLAS) as [k, p]}
+      <button
+        class:lx-sel={reglasNuevas.plantilla === k}
+        on:click={() => {
+          reglasNuevas = { ...p.reglas, plantilla: k }
+          ajustesExtra = {}
+        }}>{es ? p.es : p.en}</button
+      >
+    {/each}
+    <button class="lx-personalizar" on:click={() => (personalizar = !personalizar)}>{personalizar ? '▴' : '▾'} {es ? 'Personalizar' : 'Customise'}</button>
+  </div>
+  {#if personalizar}
+    {#key reglasNuevas.plantilla}
+      <div class="lx-reglas-editor">
+        <Reglas
+          borrador
+          reglas={{ ...reglasNuevas }}
+          on:cambio={(e) => (reglasNuevas = { ...e.detail })}
+          on:ajuste={(e) => (ajustesExtra = { ...ajustesExtra, [e.detail.indice]: e.detail.valor })}
+        />
+      </div>
+    {/key}
+  {/if}
+
   <div class="lx-buscar-juego hidden sm:flex" data-lx-original>
     <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2.4" fill="none" /><path d="m20 20-4-4" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" /></svg>
     <!-- svelte-ignore a11y-autofocus -->
@@ -298,5 +349,38 @@
   :global(.lx-pestanas-desplazables) {
     overflow-x: auto;
     max-width: calc(100vw - 120px);
+  }
+  .lx-reglas-nueva {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    font-size: 13px;
+  }
+  .lx-reglas-nueva span {
+    font-weight: 600;
+    margin-right: 2px;
+  }
+  .lx-reglas-nueva button {
+    padding: 3px 9px;
+    border-radius: 8px;
+    border: 2px solid #1b1b1f;
+  }
+  .lx-reglas-nueva button.lx-sel {
+    background: #dc0a2d;
+    color: #fff;
+  }
+  .lx-reglas-nueva .lx-personalizar {
+    border-color: transparent;
+    opacity: 0.75;
+    margin-left: auto;
+  }
+  .lx-reglas-editor {
+    max-width: calc(100vw - 120px);
+    max-height: 45vh;
+    overflow: auto;
+    padding: 8px 10px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.03);
   }
 </style>

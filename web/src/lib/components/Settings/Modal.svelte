@@ -16,6 +16,12 @@
 
   import { getSetting, settingsData, settingsDefault } from './_data'
   import { Themes } from '$lib/data/colors.ts'
+  import Reglas from '$lib/lockedex/Reglas.svelte'
+
+  // Las plantillas de reglas también cambian algunos ajustes (sugerencias, niveles máx…)
+  const aplicarAjuste = (e) => {
+    settings = settings.map((s) => (s.index === e.detail.indice ? { ...s, state: +e.detail.valor } : s))
+  }
 
   let game,
     settingHash = settingsDefault,
@@ -206,6 +212,13 @@
   </ul>
 
   <div class="mt-2 h-px w-full bg-gray-500 dark:bg-gray-500" />
+
+  {#if $activeGame}
+    <div class="my-4">
+      <Reglas id={$activeGame} on:ajuste={aplicarAjuste} />
+    </div>
+    <div class="mt-2 h-px w-full bg-gray-500 dark:bg-gray-500" />
+  {/if}
 
   <div class="mt-4 flex-col md:flex-row flex w-full justify-end gap-2 md:gap-4">
     <Button on:click={reset} rounded>Reset Run</Button>

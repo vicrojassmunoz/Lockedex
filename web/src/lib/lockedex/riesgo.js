@@ -218,7 +218,9 @@ export const calcularRiesgo = (args) => {
 
 const calcularRiesgoSinCache = async ({ jefe, equipo = [], gen = 3, cap = null }) => {
   const tt = await tiposEs()
-  const conDatos = equipo.every((y) => y.nivel && y.movimientos?.length)
+  const conDatos =
+    equipo.every((y) => y.nivel && y.movimientos?.length) &&
+    jefe.pokemon.every((p) => (p.moves || []).filter(Boolean).length)
 
   let r
   try {

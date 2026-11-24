@@ -8,6 +8,8 @@
   import { aprendizaje, movimientos, clavePokemon, norm } from './datos.js'
   import { idioma } from './idioma.js'
   import { COLOR_TIPO } from './colores.js'
+  import { leerReglas, recordatorios } from './reglas.js'
+  let reglasActivas = []
 
   export let jefe
   export let cap = null
@@ -35,6 +37,7 @@
   onMount(async () => {
     const partida = partidaActiva()
     info = partida?.info
+    reglasActivas = recordatorios(leerReglas(partida?.id))
     if (!partida) return (cargando = false)
     const rutas = await cargarRutas(info.lid)
     const resumen = resumirPartida(partida, rutas)
@@ -66,6 +69,7 @@
       <small>{es ? 'ASISTENTE DE COMBATE' : 'BATTLE ASSISTANT'}</small>
       <h2>{ocultarEquipo ? '???' : jefe?.name}</h2>
       {#if cap}<span class="lx-cap">{es ? 'Nivel máximo' : 'Level cap'} {cap}</span>{/if}
+      {#each reglasActivas as r}<span class="lx-regla-chip">{r}</span>{/each}
     </div>
     {#if riesgo}<Riesgo nivel={riesgo.nivel} grande />{/if}
     {#if juego && valor !== ''}
@@ -215,6 +219,14 @@
     color: #ffcb05;
     border-radius: 8px;
     padding: 4px 10px;
+  }
+  .lx-regla-chip {
+    font-family: 'VT323', monospace;
+    font-size: 18px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1px 8px;
+    border-radius: 6px;
+    margin-left: 4px;
   }
   .lx-cerrar {
     align-self: flex-start;

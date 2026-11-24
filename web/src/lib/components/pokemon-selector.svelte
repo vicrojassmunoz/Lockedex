@@ -1,5 +1,8 @@
 <script>
   import { traducirNombre } from '$lib/lockedex/idioma.js'
+  import { leerReglas } from '$lib/lockedex/reglas.js'
+  const reglasRun = typeof window !== 'undefined' ? leerReglas(localStorage.getItem('nuzlocke')) : {}
+  const nombreExtra = (sufijo) => `${traducirNombre(locationName || location)} · ${sufijo}`
   export let id,
     store,
     location,
@@ -172,6 +175,7 @@
   }
 
   const onnew = () => dispatch('new', { id })
+  const onextra = (sufijo) => () => dispatch('new', { id, name: nombreExtra(sufijo) })
   const ondelete = () => {
     if (
       selected &&
@@ -585,6 +589,30 @@
               Add Location
             </button>
           </li>
+          {#if reglasRun.regalos && status?.id === 2}
+            <li data-lx-original>
+              <button on:click={onextra('extra')} title="Cláusula de regalos: el regalo no gasta el encuentro de la zona">
+                <Icon inline={true} icon={Add} class="mr-2 fill-current" />
+                Encuentro extra (regalo)
+              </button>
+            </li>
+          {/if}
+          {#if reglasRun.variocolor}
+            <li data-lx-original>
+              <button on:click={onextra('variocolor')} title="Cláusula variocolor: un shiny siempre se puede capturar">
+                <Icon inline={true} icon={Add} class="mr-2 fill-current" />
+                Variocolor extra
+              </button>
+            </li>
+          {/if}
+          {#if reglasRun.estaticos}
+            <li data-lx-original>
+              <button on:click={onextra('estático')} title="Los estáticos y legendarios no gastan el encuentro de la zona">
+                <Icon inline={true} icon={Add} class="mr-2 fill-current" />
+                Estático extra
+              </button>
+            </li>
+          {/if}
 
           <SettingsWrapper id="permadeath" on="1" condition={status?.id === 5}>
             <li slot="else">
@@ -624,7 +652,7 @@
                   type="item"
                   name="dawn-stone"
                 />
-                <span class="ml-0.5">Evolve {nickname || selected.name}</span>
+                <span class="ml-0.5">{traducirNombre('Evolve')} {nickname || selected.name}</span>
               </button>
             </li>
           {/if}
@@ -659,7 +687,7 @@
                     icon={inteam ? Minus : Plus}
                   />
                 </span>
-                {inteam ? `Remove from Team` : `Add to Team`}
+                {inteam ? traducirNombre('Remove from Team') : traducirNombre('Add to Team')}
               </button>
             </li>
           {/if}

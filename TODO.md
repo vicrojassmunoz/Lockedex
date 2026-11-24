@@ -71,7 +71,9 @@ Además están los datos propios de Lockedex en `web/static/lx/`, sacados de Pok
 
 ---
 
-## 3. Modo Analista (team builder sin partida)
+## 3. Modo Analista (team builder sin partida) — ✅ hecho en la 1.3.0
+
+Pendiente de ampliar: Web Worker si hiciera falta y más filtros del equipo aleatorio.
 
 Una pantalla `/analista`, enlazada desde la barra, para preparar cualquier combate sin tener una run: eliges juego, jefe y un equipo hecho a mano, y ves el análisis.
 
@@ -106,7 +108,9 @@ Una pantalla `/analista`, enlazada desde la barra, para preparar cualquier comba
 
 ---
 
-## 4. Modo Randomlocke (juegos aleatorizados)
+## 4. Modo Randomlocke (juegos aleatorizados) — ✅ base hecha en la 1.3.0
+
+Hecho: regla Randomlocke (sin sugerencias de encuentros), entrenadores aleatorizados con equipo del jefe apuntado a mano y riesgo calculado con él. Pendiente: opción de niveles de jefes cambiados (+X %) y aclarar en la interfaz el botón *Aleatorio* de Nueva partida.
 
 En un juego pasado por un randomizer, los Pokémon de cada ruta y los equipos de los jefes no coinciden con los datos. Este modo deja de mostrarlos, pero sigue llevando la cuenta de **dónde capturaste qué** y del **nivel del próximo jefe**, que en los randomizers normalmente se mantiene.
 
@@ -124,7 +128,9 @@ En un juego pasado por un randomizer, los Pokémon de cada ruta y los equipos de
 
 ---
 
-## 5. Reglas del Nuzlocke (ampliar y hacerlas "inteligentes")
+## 5. Reglas del Nuzlocke (ampliar y hacerlas "inteligentes") — ✅ base hecha en la 1.3.0
+
+Hecho: reglas por run en `lockedex.reglas.<id>` (`web/src/lib/lockedex/reglas.js`), plantillas al crear partida y en Ajustes, cláusulas de regalos/variocolor/estáticos (encuentro extra desde el menú ⋮), Hardcore (aviso de nivel máximo con el .sav, sin objetos, modo Set), game over, sin legendarios, monotipo, banner de avisos y LED rojo. Pendiente: Wedlocke, Soul Link, Wonderlocke y cláusula de especie.
 
 **Situación actual:** las reglas son ajustes por partida en `web/src/lib/components/Settings/_data.js`. Se guardan como una cadena de dígitos por índice: la 8 es la de Spoilers, y el índice 999 (Croma) se añade al final como `NaN`, ojo con eso. Ya existen: cláusula de motes, de repetidos (no / resaltar / ocultar), fallidos cuentan como repetidos, niveles máximos, límite de tamaño de equipo y muerte permanente. Los estados están en `web/src/lib/data/states.js`: Recibido = 2, Variocolor = 6, Muerto = 5.
 

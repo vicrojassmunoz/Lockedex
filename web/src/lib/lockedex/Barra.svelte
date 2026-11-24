@@ -20,6 +20,7 @@
   let version = lx?.version || ''
   let aviso = null
   let avisoVisible = false
+  let avisosReglas = 0
   let temporizadorAviso
 
   const enlaces = [
@@ -85,6 +86,8 @@
       setTimeout(() => (parpadeo = false), 700)
     }
     window.addEventListener('lx:guardado', guardado)
+    const alAvisar = (e) => (avisosReglas = e.detail || 0)
+    window.addEventListener('lx:avisos', alAvisar)
     const cerrar = (e) => {
       if (!e.target.closest?.('.lx-menu, .lx-boton-menu')) menuAbierto = false
       if (!e.target.closest?.('.lx-nav-mini')) navAbierta = false
@@ -117,7 +120,7 @@
       <span />
     </div>
     <div class="lx-luces">
-      <i class="lx-luz lx-r" />
+      <i class="lx-luz lx-r" class:lx-encendida-r={avisosReglas > 0} title={avisosReglas ? (es ? 'Hay avisos de reglas en tu partida' : 'Your run has rule warnings') : ''} />
       <i class="lx-luz lx-a" class:lx-encendida-a={aviso?.estado === 'descargando' || aviso?.estado === 'buscando'} />
       <i class="lx-luz lx-v" class:lx-encendida={parpadeo} />
     </div>
@@ -525,6 +528,15 @@
 
   .lx-enlaces a.lx-inactivo {
     opacity: 0.45;
+  }
+  .lx-r.lx-encendida-r {
+    animation: parpadeo-r 1.2s ease-in-out infinite;
+  }
+  @keyframes parpadeo-r {
+    50% {
+      filter: brightness(1.5);
+      box-shadow: 0 0 10px 3px rgba(255, 43, 43, 0.95);
+    }
   }
   .lx-a.lx-encendida-a {
     animation: parpadeo-a 0.9s ease-in-out infinite;
