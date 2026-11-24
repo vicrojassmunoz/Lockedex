@@ -84,8 +84,7 @@
             class="group tracking-widest hover:drop-shadow-text {color}"
             {href}
             aria-label={aria}
-            data-sveltekit-preload-data
-            rel="external"
+            data-sveltekit-prefetch
           >
             {#if title === 'Continue'}
               {title}

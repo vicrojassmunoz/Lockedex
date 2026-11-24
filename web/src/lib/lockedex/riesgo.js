@@ -110,7 +110,15 @@ const riesgoConCalculadora = async (jefe, equipo, gen, cap) => {
   }
 
   const consejos = []
-  const puntos = jefe.pokemon.map((b) => {
+  const puntos = []
+  for (const b of jefe.pokemon) {
+    // Cede el paso entre Pokémon para no congelar la ventana
+    await new Promise((r) => setTimeout(r, 0))
+    puntos.push(evaluar(b))
+  }
+  return { puntos, consejos, modo: 'calculadora' }
+
+  function evaluar(b) {
     const movsJefe = (b.moves || []).map((m) => m?.name).filter(Boolean)
     const pb = crear(b.name, {
       level: nivelJefe(b, cap),
@@ -164,14 +172,28 @@ const riesgoConCalculadora = async (jefe, equipo, gen, cap) => {
           : `${nb} can OHKO ${ohko.map((f) => f.y.nombre).join(', ')}.`
       })
     return p
-  })
-  return { puntos, consejos, modo: 'calculadora' }
+  }
 }
 
 // --- Punto de entrada -------------------------------------------------------------------------
 // equipo: [{ nombre, alias, especie, types, nivel?, movimientos?, naturaleza?, ivs?, evs?, habilidad? }]
-export const calcularRiesgo = async ({ jefe, equipo = [], gen = 3, cap = null }) => {
-  if (!jefe?.pokemon?.length || !equipo.length) return null
+const cacheRiesgo = new Map()
+export const calcularRiesgo = (args) => {
+  const { jefe, equipo = [], gen, cap } = args
+  if (!jefe?.pokemon?.length || !equipo.length) return Promise.resolve(null)
+  const firma = JSON.stringify([
+    jefe.name,
+    jefe.pokemon.map((p) => [p.name, p.level, (p.moves || []).map((m) => m?.name)]),
+    equipo.map((y) => [y.alias, y.especie, y.nivel, y.movimientos, y.naturaleza, y.habilidad, y.ivs, y.evs]),
+    gen,
+    cap,
+    idioma()
+  ])
+  if (!cacheRiesgo.has(firma)) cacheRiesgo.set(firma, calcularRiesgoSinCache(args))
+  return cacheRiesgo.get(firma)
+}
+
+const calcularRiesgoSinCache = async ({ jefe, equipo = [], gen = 3, cap = null }) => {
   const tt = await tiposEs()
   const conDatos = equipo.every((y) => y.nivel && y.movimientos?.length)
 

@@ -1,6 +1,7 @@
 // Tu equipo con todos los datos disponibles (run + partida .sav importada)
 import { fetchData } from '$utils/fetchers'
 import { norm } from './datos.js'
+import { partidaActiva, cargarRutas, resumirPartida } from './partida.js'
 
 export const claveSav = (idPartida) => `lockedex.sav.${idPartida}`
 export const claveRutaSav = (idPartida) => `lockedex.savruta.${idPartida}`
@@ -79,4 +80,22 @@ export const equipoCompleto = async (partida, resumen) => {
     return ficha(busca(e.pokemon), e, s)
   })
   return { fuente, miembros, sav }
+}
+
+// Partida activa + resumen + equipo, calculado una sola vez por cada cambio
+// guardado (todas las tarjetas de jefe comparten el mismo resultado)
+let memo = { clave: null, promesa: null }
+export const equipoActual = () => {
+  const clave = `${localStorage.getItem('nuzlocke')}|${localStorage.getItem('__escritorio.rev')}`
+  if (memo.clave === clave && memo.promesa) return memo.promesa
+  memo.clave = clave
+  memo.promesa = (async () => {
+    const partida = partidaActiva()
+    if (!partida?.info) return null
+    const rutas = await cargarRutas(partida.info.lid)
+    const resumen = resumirPartida(partida, rutas)
+    const eq = await equipoCompleto(partida, resumen)
+    return { partida, rutas, resumen, eq }
+  })()
+  return memo.promesa
 }

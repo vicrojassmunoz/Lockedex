@@ -16,6 +16,18 @@
   import { File, Dice } from '$icons'
 
   import Games from '$lib/data/games.json'
+  import { coincideJuego, nombreJuego } from '$lib/lockedex/juegos.js'
+  import { idioma } from '$lib/lockedex/idioma.js'
+
+  const es = idioma() === 'es'
+  let busqueda = ''
+  const visible = (id, game, busqueda, gen) =>
+    game.logo && (busqueda ? coincideJuego(id, game, busqueda) : gen === 'All' || game.gen === gen)
+  $: visibles = Object.entries(validGames || {}).filter(([id, g]) => visible(id, g, busqueda, gen))
+  const alPulsar = (e) => {
+    if (e.key === 'Enter' && visibles.length) selected = visibles[0][0]
+    if (e.key === 'Escape') busqueda = ''
+  }
   import { IMG } from '$lib/utils/rewrites'
 
   import { filterObj } from '$lib/utils/arr'
@@ -76,7 +88,7 @@
   $: {
     if ((selectedGame && !gameName) || customName === gameName) {
       customName = gameName = selectedGame
-        ? `${selectedGame?.title} Nuzlocke`
+        ? `${nombreJuego(selected, selectedGame)} Nuzlocke`
         : ''
     }
   }
@@ -170,12 +182,29 @@
     </div>
   </div>
 
-  <Tabs
-    name="gens"
-    className="hidden sm:flex"
-    tabs={gens}
-    bind:selected={gen}
-  />
+  <div class="lx-buscar-juego hidden sm:flex" data-lx-original>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2.4" fill="none" /><path d="m20 20-4-4" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" /></svg>
+    <!-- svelte-ignore a11y-autofocus -->
+    <input
+      type="search"
+      bind:value={busqueda}
+      on:keydown={alPulsar}
+      autofocus
+      placeholder={es ? 'Buscar juego… (Esmeralda, Platino, Radical Red…)' : 'Search game… (Emerald, Platinum, Radical Red…)'}
+    />
+    {#if busqueda}
+      <span>{visibles.length} {es ? (visibles.length === 1 ? 'juego' : 'juegos') : visibles.length === 1 ? 'game' : 'games'}{visibles.length ? (es ? ' · Intro para elegir el primero' : ' · Enter picks the first') : ''}</span>
+    {/if}
+  </div>
+
+  {#if !busqueda}
+    <Tabs
+      name="gens"
+      className="hidden sm:flex"
+      tabs={gens}
+      bind:selected={gen}
+    />
+  {/if}
 
   <ul
     role="radiogroup"
@@ -183,7 +212,7 @@
     class="grid hidden grid-cols-3 items-center justify-center gap-x-4 gap-y-6 sm:grid sm:grid-cols-4"
   >
     {#each Object.entries(validGames) as [id, game]}
-      {#if game.logo && (gen === 'All' || game.gen === gen)}
+      {#if visible(id, game, busqueda, gen)}
         <button
           role="radio"
           aria-checked={selected === id}
@@ -208,12 +237,58 @@
               ? 'drop-shadow-highlight grayscale-0'
               : ''} cursor-pointer"
           />
-          <strong class="mx-auto max-w-[16ch] line-clamp-2">{game.title}</strong
+          <strong class="mx-auto max-w-[16ch] line-clamp-2" data-lx-original>{nombreJuego(id, game)}</strong
           >
         </button>
       {/if}
     {/each}
   </ul>
+  {#if busqueda && !visibles.length}
+    <p class="lx-sin-juegos hidden sm:block" data-lx-original>
+      {es ? `No hay ningún juego que coincida con «${busqueda}».` : `No game matches “${busqueda}”.`}
+    </p>
+  {/if}
 </ScreenContainer>
 
 <div class="h-28 w-8" />
+
+<style>
+
+  .lx-buscar-juego {
+    align-items: center;
+    gap: 8px;
+    margin: 4px 0 10px;
+    padding: 6px 12px;
+    border: 3px solid #1b1b1f;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.15);
+  }
+  :global(.dark) .lx-buscar-juego {
+    background: #111827;
+  }
+  .lx-buscar-juego svg {
+    width: 18px;
+    height: 18px;
+    flex: none;
+    opacity: 0.6;
+  }
+  .lx-buscar-juego input {
+    flex: 1;
+    border: 0;
+    outline: none;
+    background: transparent;
+    font-size: 15px;
+  }
+  .lx-buscar-juego span {
+    font-family: 'VT323', monospace;
+    font-size: 16px;
+    opacity: 0.7;
+    white-space: nowrap;
+  }
+  .lx-sin-juegos {
+    text-align: center;
+    opacity: 0.6;
+    padding: 24px 0;
+  }
+</style>

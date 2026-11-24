@@ -21,7 +21,7 @@
     '#000'}"
 >
   <div class="g-container nav">
-    <a title="Home" href="/" rel="external">
+    <a title="Home" href="/">
       <Icon inline={true} height="1.4rem" icon={Home} class="fill-current" />
     </a>
     <div>

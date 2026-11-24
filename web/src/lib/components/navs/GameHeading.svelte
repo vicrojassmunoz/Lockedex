@@ -69,7 +69,7 @@
 <nav class={$page.url.pathname.replace('/', '')}>
   <div class="p-container">
     <div class="inline-flex items-center">
-      <a href="/" rel="external" class="{$$restProps.class || ''} home group">
+      <a href="/" class="{$$restProps.class || ''} home group">
         {#if game?.game}
           <Logo
             logo="{game?.game}"

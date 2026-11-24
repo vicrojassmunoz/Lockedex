@@ -10,6 +10,12 @@
       if (/Lockedex\//.test(navigator.userAgent) && location.pathname !== '/compacto') document.documentElement.classList.add('lx-escritorio')
       try { document.documentElement.lang = localStorage.getItem('lockedex.idioma') === 'en' ? 'en' : 'es' } catch (e) {}
     </script>
+    <script src="/lx/traductor.js"></script>
+    <style>
+      html:not(.lx-escritorio) .lx-barra,
+      html:not(.lx-escritorio) .lx-bisagra,
+      html:not(.lx-escritorio) .lx-marco { display: none !important; }
+    </style>
     <script data-cfasync="false">
       // Lockedex: las partidas viven en un archivo en tu
       // ordenador (Documentos\Lockedex\partidas.json), no en el navegador.

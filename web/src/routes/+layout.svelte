@@ -46,8 +46,8 @@
   {/if}
 </svelte:head>
 
+<Barra />
 {#if escritorio}
-  <Barra />
   <Sincronizacion />
 {/if}
 <InfoFlotante />

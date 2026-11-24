@@ -61,8 +61,8 @@
   import Riesgo from '$lib/lockedex/Riesgo.svelte'
   import Asistente from '$lib/lockedex/Asistente.svelte'
   import { calcularRiesgo } from '$lib/lockedex/riesgo.js'
-  import { equipoCompleto } from '$lib/lockedex/equipo.js'
-  import { partidaActiva, cargarRutas, resumirPartida, alCambiarDatos } from '$lib/lockedex/partida.js'
+  import { equipoActual } from '$lib/lockedex/equipo.js'
+  import { alCambiarDatos } from '$lib/lockedex/partida.js'
   import { onMount as alMontar } from 'svelte'
 
   let riesgo = null
@@ -72,12 +72,10 @@
   const evaluarRiesgo = async () => {
     if (!browser || reader || !pokemon?.length) return
     try {
-      const partida = partidaActiva()
-      if (!partida?.info) return
-      const rutas = await cargarRutas(partida.info.lid)
-      const resumen = resumirPartida(partida, rutas)
-      const eq = await equipoCompleto(partida, resumen)
-      riesgo = await calcularRiesgo({ jefe: boss, equipo: eq.miembros, gen: partida.info.gen, cap: levelCap })
+      await new Promise((r) => (window.requestIdleCallback || setTimeout)(r, { timeout: 800 }))
+      const actual = await equipoActual()
+      if (!actual) return
+      riesgo = await calcularRiesgo({ jefe: boss, equipo: actual.eq.miembros, gen: actual.partida.info.gen, cap: levelCap })
     } catch (e) {
       console.error('[riesgo]', e)
     }

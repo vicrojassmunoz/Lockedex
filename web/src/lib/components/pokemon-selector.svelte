@@ -1,4 +1,5 @@
 <script>
+  import { traducirNombre } from '$lib/lockedex/idioma.js'
   export let id,
     store,
     location,
@@ -419,7 +420,7 @@
       <svelte:fragment slot="else">
         <AutoCompleteV2
           itemF={(_) => Object.values(NuzlockeStates)}
-          labelF={(_) => _.state}
+          labelF={(_) => traducirNombre(_.state)}
           inset={status ? '2rem' : null}
           bind:search={statusSearch}
           bind:selected={status}
@@ -461,6 +462,7 @@
 
     <AutoCompleteV2
       itemF={(_) => Natures}
+      labelF={(n) => traducirNombre(n?.label || n)}
       max={Natures.length}
       bind:search={natureSearch}
       bind:selected={nature}

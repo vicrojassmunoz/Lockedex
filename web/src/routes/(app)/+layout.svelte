@@ -14,7 +14,8 @@
   import Modal from 'svelte-simple-modal'
   import deferStyles from '$lib/utils/defer-styles'
 
-  let path = $page.url.pathname
+  // Reactivo: así la cabecera correcta aparece también al navegar sin recargar
+  $: path = $page.url.pathname
 
   const [, gameKey] = browser ? readdata() : []
   setContext('region', RegionMap[gameKey] ?? 'unknown')
