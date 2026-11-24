@@ -1,7 +1,7 @@
 {
   "name": "lockedex",
   "productName": "Lockedex",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Lockedex: tracker de Nuzlocke para escritorio, con las partidas guardadas en un archivo local",
   "author": "Lockedex",
   "license": "BSD-3-Clause",
@@ -53,12 +53,10 @@
       "createStartMenuShortcut": true,
       "shortcutName": "Lockedex",
       "artifactName": "Lockedex-Instalador-${version}.exe",
-      "license": "LICENSE.txt",
       "language": "3082",
       "installerLanguages": [
         "es_ES"
       ],
-      "include": "build/installer.nsh",
       "deleteAppDataOnUninstall": false
     },
     "publish": [
