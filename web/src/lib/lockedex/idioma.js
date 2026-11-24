@@ -8,7 +8,15 @@ const CLAVE = 'lockedex.idioma'
 const ATRIBUTOS = ['placeholder', 'title', 'aria-label', 'alt']
 const SALTAR = new Set(['SCRIPT', 'STYLE', 'TEXTAREA', 'INPUT', 'CODE', 'PRE', 'KBD'])
 
+const MESES = {
+  January: 'enero', February: 'febrero', March: 'marzo', April: 'abril', May: 'mayo', June: 'junio',
+  July: 'julio', August: 'agosto', September: 'septiembre', October: 'octubre', November: 'noviembre', December: 'diciembre'
+}
+const fecha = (d, m) => `${d} de ${MESES[m] || m}`
+
 const PATRONES = [
+  [/^(\d+)(?:st|nd|rd|th) of (\w+)$/, (_, d, m) => fecha(d, m)],
+  [/^(\d+)(?:st|nd|rd|th) of (\w+) - (\d+)(?:st|nd|rd|th) of (\w+)$/, (_, d1, m1, d2, m2) => `${fecha(d1, m1)} - ${fecha(d2, m2)}`],
   [/^Route (\d+)$/, 'Ruta $1'],
   [/^Route (\d+) \((.+)\)$/, 'Ruta $1 ($2)'],
   [/^Lvl (\d+)$/, 'Nv. $1'],

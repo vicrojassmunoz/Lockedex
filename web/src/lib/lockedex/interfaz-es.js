@@ -114,6 +114,10 @@ export default {
   'Dmg types': 'Tipos de daño',
   vs: 'vs',
 
+  'Met on': 'Capturado en',
+  'Met in': 'Capturado en',
+  'Met in a fateful encounter': 'Encuentro fatídico',
+  Type: 'Tipo',
   // Equipo y caja
   Team: 'Equipo',
   'Your team': 'Tu equipo',
