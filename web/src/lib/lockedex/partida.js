@@ -14,7 +14,7 @@ const leerJSON = (clave) => {
 }
 
 export const leerPartidas = () =>
-  (localStorage.getItem('nuzlocke.saves') || '')
+  (typeof window === 'undefined' ? '' : localStorage.getItem('nuzlocke.saves') || '')
     .split(',')
     .filter((i) => i.length)
     .map((i) => i.split('|'))
@@ -38,6 +38,7 @@ export const leerPartida = (id) => {
 }
 
 export const partidaActiva = () => {
+  if (typeof window === 'undefined') return null
   const id = localStorage.getItem('nuzlocke')
   return id ? leerPartida(id) : null
 }

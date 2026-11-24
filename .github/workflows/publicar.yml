@@ -1,12 +1,13 @@
 # Compila Lockedex en Windows, lo prueba y publica la versión.
-# Se lanza al cambiar la versión en electron/package.json (o a mano desde Actions).
-# Si esa versión ya está publicada, solo compila y prueba.
+# Se lanza con cada cambio en el código (o a mano desde Actions). Solo publica
+# cuando la versión de electron/package.json todavía no está publicada; si ya
+# lo está, compila y prueba en Windows sin publicar nada.
 name: Publicar versión
 
 on:
   push:
     branches: [main]
-    paths: ['electron/package.json', '.github/workflows/publicar.yml']
+    paths: ['web/**', 'electron/**', 'NOVEDADES.md', '.github/workflows/publicar.yml']
   workflow_dispatch:
 
 permissions:

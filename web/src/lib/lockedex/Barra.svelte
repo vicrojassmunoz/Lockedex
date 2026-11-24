@@ -2,6 +2,7 @@
   // Cabecera de Lockedex: la tapa de la Pokédex (lente, luces, menú y barra de EXP)
   import { onMount } from 'svelte'
   import { page } from '$app/stores'
+  import { browser } from '$app/environment'
   import { idioma, cambiarIdioma } from './idioma.js'
   import { partidaActiva, cargarRutas, resumirPartida, alCambiarDatos } from './partida.js'
 
@@ -56,7 +57,7 @@
   }
 
   $: ruta = $page.url.pathname
-  $: if (ruta) actualizar()
+  $: if (browser && ruta) actualizar()
   $: porcentaje = Math.round((resumen?.progreso || 0) * 100)
 </script>
 
