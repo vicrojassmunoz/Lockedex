@@ -16,7 +16,6 @@
     img
 
   $: boss = { pokemon, name, speciality, id, img, type }
-  $: nombre = name
 
   // Extra leader data
   let doubleBattle = false,
@@ -412,16 +411,7 @@
         </div>
       {:else}
       <div class="col-span-full">
-        <MenuEquipo
-          {pokemon}
-          juego={game}
-          {nombre}
-          grupo={type}
-          lugar={location}
-          especialidad={speciality}
-          imagenBatalla={img?.src}
-          on:comparar={(e) => openCompare(e.detail)()}
-        />
+        <MenuEquipo {pokemon} on:comparar={(e) => openCompare(e.detail)()} />
       </div>
       {/if}
     </div>

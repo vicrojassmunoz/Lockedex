@@ -1,29 +1,18 @@
 <script>
-  // Equipo de un jefe como el menú de equipo de los juegos: el entrenador con su sprite de mapa,
-  // el primer Pokémon en grande y el resto en barras. Al pulsar uno se despliega su ficha.
-  import { onMount, createEventDispatcher } from 'svelte'
+  // Equipo de un jefe como el menú de equipo de los juegos: el primer Pokémon en grande y el resto
+  // en barras. Al pulsar uno se despliega su ficha.
+  import { createEventDispatcher } from 'svelte'
   import { PIcon, Icon } from '$c/core'
   import { Physical, Special, Status } from '$icons'
   import { createImgUrl, UNOWN } from '$utils/rewrites'
   import { COLOR_TIPO } from './colores.js'
-  import { spriteMapa } from './mapa.js'
   import { t, traducirNombre } from './idioma.js'
 
   export let pokemon = []
-  export let juego = ''
-  export let nombre = ''
-  export let grupo = ''
-  export let lugar = ''
-  export let especialidad = ''
-  export let imagenBatalla = null // por si no hay sprite de mapa
 
   const despachar = createEventDispatcher()
 
-  let ow = null
   let abierto = null
-  onMount(async () => {
-    ow = await spriteMapa({ juego, nombre, grupo })
-  })
 
   const mayus = (s) => String(s || '').replace(/(^|[-\s])([a-z])/g, (m, a, b) => a + b.toUpperCase())
   const nombreEspecie = (p) => traducirNombre(mayus(String(p.name || '').replace(/-/g, ' ')))
@@ -46,13 +35,6 @@
     ['spd', 'Def. Esp.', 'Sp. Def'],
     ['spe', 'Vel.', 'Speed']
   ]
-  const TEXTO_GRUPO = {
-    'gym-leader': ['Líder de gimnasio', 'Gym leader'],
-    'elite-four': ['Alto Mando', 'Elite Four'],
-    rival: ['Rival', 'Rival'],
-    'evil-team': ['Equipo villano', 'Villain team'],
-    'mini-boss': ['Entrenador', 'Trainer']
-  }
 
   const elegir = (i) => (abierto = abierto === i ? null : i)
   $: primero = pokemon[0]
@@ -63,21 +45,6 @@
 
 <div class="lx-me">
   <div class="lx-me-izq">
-    <div class="lx-me-entrenador">
-      <span class="lx-me-suelo">
-        {#if ow}
-          <img class="lx-me-ow" src={ow} alt="" />
-        {:else if imagenBatalla}
-          <img class="lx-me-batalla" src={imagenBatalla} alt="" />
-        {/if}
-      </span>
-      <div class="lx-me-quien">
-        <b>{nombre}</b>
-        <small>{t(...(TEXTO_GRUPO[grupo] || ['Jefe', 'Boss']))}{#if especialidad} · <span class="lx-me-tipo-txt">{traducirNombre(mayus(especialidad))}</span>{/if}</small>
-        {#if lugar}<small class="lx-me-lugar">{traducirNombre(lugar)}</small>{/if}
-      </div>
-    </div>
-
     {#if primero}
       <button class="lx-me-slot lx-me-grande" class:lx-me-sel={abierto === 0} on:click={() => elegir(0)} title={t('Ver su ficha', 'See details')}>
         <span class="lx-me-ball" aria-hidden="true" />
@@ -206,79 +173,6 @@
     display: flex;
     flex-direction: column;
     gap: 7px;
-  }
-
-  /* Entrenador */
-  .lx-me-entrenador {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 8px 12px 8px 8px;
-    border-radius: 10px;
-    background: #f8f8f0;
-    border: 3px solid #404050;
-    box-shadow: inset 0 0 0 2px #c8c8d0;
-    color: #303040;
-  }
-  .lx-me-suelo {
-    position: relative;
-    flex: none;
-    width: 64px;
-    height: 72px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    border-radius: 8px;
-    background: linear-gradient(#b8e0a0 0 60%, #88c070 60%);
-    box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.15);
-    overflow: hidden;
-  }
-  .lx-me-suelo::after {
-    content: '';
-    position: absolute;
-    bottom: 6px;
-    left: 50%;
-    width: 30px;
-    height: 7px;
-    transform: translateX(-50%);
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.22);
-  }
-  .lx-me-ow {
-    position: relative;
-    z-index: 1;
-    width: 48px;
-    height: auto;
-    margin-bottom: 6px;
-    image-rendering: pixelated;
-  }
-  .lx-me-batalla {
-    position: relative;
-    z-index: 1;
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    image-rendering: pixelated;
-  }
-  .lx-me-quien {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-  }
-  .lx-me-quien b {
-    font-family: 'VT323', monospace;
-    font-size: 30px;
-    line-height: 1;
-    font-weight: normal;
-    color: #303040;
-    text-shadow: 2px 2px 0 #d0d0d8;
-  }
-  .lx-me-quien small {
-    font-size: 12px;
-    color: #606070;
-  }
-  .lx-me-lugar {
-    font-style: italic;
   }
 
   /* Huecos del equipo */

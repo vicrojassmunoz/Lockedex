@@ -42,7 +42,8 @@ Notas para retomar el trabajo en otra sesión. Lo primero es el mapa del proyect
 
 **Hecho en la 1.7.0 (pedido el 25/11):**
 
-- [x] **Equipo de los jefes como el menú de equipo de los juegos** (`lib/lockedex/MenuEquipo.svelte`): el entrenador con su **sprite de mapa**, el primer Pokémon en grande y el resto en barras con PS (con IVs perfectos, el peor caso); al pulsar uno se despliega su ficha con habilidad, objeto, movimientos (como el menú de combate) y estadísticas, y «Comparar con mi equipo».
+- [x] **Equipo de los jefes como el menú de equipo de los juegos** (`lib/lockedex/MenuEquipo.svelte`): el primer Pokémon en grande y el resto en barras con PS (con IVs perfectos, el peor caso); al pulsar uno se despliega su ficha con habilidad, objeto, movimientos (como el menú de combate) y estadísticas, y «Comparar con mi equipo».
+- [x] En la 1.7.1 se quitó el entrenador pequeño del menú (sobraba: ya sale en la cabecera). Los **sprites de mapa** siguen en la app para otros usos (¿modo compacto?).
 - [x] **Sprites de mapa** de 1.ª a 3.ª generación sacados de los desensamblados de pret con su paleta real (`herramientas/generar_sprites_mapa.py` → `web/static/lx/mapa/`; FRLG, RSE, GSC y RBY). `lib/lockedex/mapa.js` elige el sprite por nombre del jefe y región (con alias: Lt. Surge, Tabitha, Silver…); si no hay, usa el de combate. **Pendiente:** 4.ª y 5.ª generación (no hay gráficos extraídos en pret) y comprobar las paletas de FRLG (Misty sale rubia).
 - [x] Algunos iconos son **sprites de objetos** de los juegos (`icons/sprites.js`): Poké Ball (capturado), Amuleto Iris (variocolor), Cuerda Huida (huyó) y Mapa del pueblo.
 - [x] Nombres de gimnasio traducidos con un patrón («Cerulean City Gym» → «Gimnasio de Ciudad Celeste»).
