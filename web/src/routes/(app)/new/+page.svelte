@@ -316,7 +316,7 @@
     box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.15);
   }
   :global(.dark) .lx-buscar-juego {
-    background: #111827;
+    background: #1e1c33;
   }
   .lx-buscar-juego svg {
     width: 18px;

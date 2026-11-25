@@ -692,7 +692,7 @@
     box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.15);
   }
   :global(.dark) .lx-a-panel {
-    background: #111827;
+    background: #1e1c33;
     border-color: #0b1118;
   }
   .lx-a-pasos {
@@ -744,7 +744,7 @@
   :global(.dark) .lx-analista input,
   :global(.dark) .lx-analista select,
   :global(.dark) .lx-analista textarea {
-    background: #1f2937;
+    background: #2c2948;
     border-color: #374151;
   }
   input:focus,
@@ -955,7 +955,7 @@
   :global(.dark) .lx-a-herramientas button,
   :global(.dark) .lx-a-subpanel button,
   :global(.dark) .lx-a-guardado button {
-    background: #1f2937;
+    background: #2c2948;
     border-color: #4b5563;
   }
   .lx-a-herramientas button:hover {
@@ -1037,7 +1037,7 @@
     gap: 8px;
   }
   :global(.dark) .lx-a-equipo article {
-    background: #1f2937;
+    background: #2c2948;
     border-color: #0b1118;
   }
   .lx-a-vacio-slot {

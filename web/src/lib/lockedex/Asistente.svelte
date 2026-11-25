@@ -299,7 +299,7 @@
     background: #fff;
   }
   :global(.dark) article {
-    background: #1f2937;
+    background: #2c2948;
     border-color: #0b1118;
   }
   .lx-m-cab {

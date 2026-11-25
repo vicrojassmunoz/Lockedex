@@ -1,8 +1,3 @@
-## Novedades de la 1.9.1
+## Novedades de la 1.9.2
 
-- **La Piedra Fuego ya no se corta:** con la ventana mediana, las piedras del inicial bajan debajo de «Inicial» para caber.
-- **Equipo con tu avatar:** Eusine ya sale (con su sprite de Cristal), y los avatares sin sprite en el mapa (Sinnoh, Teselia…) salen con su propio sprite en vez de Rojo.
-- **Iconos más grandes:** Capturado, Fallido, Regalo y el resto de iconos con sprites ya no salen diminutos. **Descartado** tiene icono propio: una papelera.
-- **Más iconos de los juegos:** Guardar (el Diario), Ajustes (la Pieza Máquina), Partida (la Pokédex), ordenar por Tipo (una Tabla) y por Total (el Brazal Firme), el análisis de Caja y Equipo (el Periscopio) y el daño máximo del VS (Protección Especial).
-- **Movimientos de estado** con una espiral (como Hipnosis) en vez del círculo gris.
-- **Ventana de VS:** en español («Marcar victoria», «Quitar del equipo», daño máximo y debilidades) y con las barras de estadísticas a píxeles.
+- **Tema oscuro nuevo, «de noche en los juegos»:** fuera el azul marino de web moderna. Ahora es el violeta-índigo con el que se tiñen las rutas de noche en Oro, Plata y HeartGold/SoulSilver, con texto crema como el de los menús de la consola, el fondo con las rayitas diagonales de los menús de GBA y los paneles con su línea de luz arriba. Las pantallas LCD se quedan en verde azulado.

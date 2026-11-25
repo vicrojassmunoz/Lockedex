@@ -144,7 +144,7 @@
     font-size: 13px;
   }
   :global(.dark) .lx-ej input {
-    background: #1f2937;
+    background: #2c2948;
     border-color: #374151;
   }
   .lx-ej-esp {

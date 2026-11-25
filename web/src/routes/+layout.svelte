@@ -112,7 +112,7 @@
     --input-bg: theme('colors.white');
   }
   :global(.dark) {
-    --input-bg: theme('colors.gray.800');
+    --input-bg: var(--lx-panel-2, #24213e);
   }
 
   /* Letra de los menús estilo GBA: Fusion Pixel 12px (OFL), recortada a latín */

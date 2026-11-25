@@ -68,7 +68,7 @@
     font-size: 13px;
   }
   :global(.dark) .lx-avisos {
-    background: #111827;
+    background: #1e1c33;
   }
   .lx-con-error {
     border-color: #dc0a2d;
