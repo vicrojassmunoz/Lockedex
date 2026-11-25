@@ -651,6 +651,14 @@ const instalarActualizacion = async () => {
 // ---------------------------------------------------------------------------
 // Acciones pedidas desde la ventana
 // ---------------------------------------------------------------------------
+// El modo compacto no escribe la partida directamente: la ventana principal tiene los datos
+// en memoria y los sobrescribiría. Le reenviamos la acción para que la aplique ella.
+ipcMain.handle('lx:accion-partida', async (_e, datos) => {
+  if (!ventana || ventana.isDestroyed()) return { ok: false, motivo: 'sin-ventana' }
+  ventana.webContents.send('lx:accion-partida', datos)
+  return { ok: true }
+})
+
 ipcMain.handle('lx:accion', async (_e, nombre) => {
   switch (nombre) {
     case 'copia':

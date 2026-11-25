@@ -36,8 +36,8 @@ Notas para retomar el trabajo en otra sesión. Lo primero es el mapa del proyect
 **Pendiente:**
 
 - [ ] **Filas de encuentros, paso 2**: fichas con sprite grande, estado como sello y naturaleza como chip (ahora solo es el contenedor).
-- [ ] **Caja** (`routes/(app)/box`): rejilla tipo caja del PC (30 huecos) con panel lateral de detalle.
-- [ ] **Cementerio**: lápidas pixel propias y epitafio con la causa de la muerte.
+- [x] **Caja** (1.5.0): rejilla tipo caja del PC (30 huecos por caja, flechas para moverse, se puede arrastrar al equipo) con panel de detalle (`lib/lockedex/CajaPC.svelte`). Las fichas de siempre siguen en la pestaña «Fichas».
+- [x] **Cementerio** (1.5.0): lápidas pixel art propias dibujadas en SVG (`graveyard/Lapida.svelte`, 4 formas con musgo y grietas al azar) y la causa de la muerte al pasar por encima.
 - [ ] **Tarjetas de los jefes por dentro** (`move-card.svelte`, cabecera de `pokemon-card`): pantalla oscura y estadísticas en barras tipo PS.
 - [ ] **Página de cada guía**: listados en pantallas, mismo estilo que la app.
 - [ ] Repasar el tema oscuro pantalla por pantalla y los colores sueltos de Tailwind que quedan (`grep -rn "orange-\|indigo-" web/src`).
@@ -65,9 +65,13 @@ Además están los datos propios de Lockedex en `web/static/lx/`, sacados de Pok
 - [x] **Validación en GitHub Actions** antes de compilar: los errores de estructura o los datos sin compilar bloquean la publicación. Los Pokémon o movimientos desconocidos salen como avisos (se tienen en cuenta los Pokémon y movimientos de los parches de cada ROM hack).
 - [x] Corregidas las primeras erratas que encontró: `pelliper`, `smeagle`, `budex`, `bidoofy`, `qwillfish`, `flaafy`, `nidoran-female/male`, `spinark`, `mewoth-alola`, `magnemtic`, `aerodacyl` y `kanghaskan`/`aerian-ace` (este también en los equipos detallados de New Generations).
 
+**Hecho en la 1.5.0 (segunda fase):**
+
+- [x] **Equipos de los jefes propios**: `datos/jefes/<juego>.json` (55 juegos y dificultades, 2 MB en lugar de 29 MB) con nombres cortos; `herramientas/jefes.mjs` genera los 165 archivos detallados que usa la app (`web/static/api/league/<juego>.<inicial>.json`) y `league.json`. La migración reproduce los originales byte a byte y GitHub Actions comprueba que siguen al día.
+- [x] Validación de jefes: Pokémon, movimientos, habilidades y objetos desconocidos, inicial válido y movimientos personalizados completos.
+
 **Siguiente fase:**
 
-- [ ] **Generar los equipos detallados** (`web/static/api/league/<pid>.<inicial>.json`, 165 archivos, 29 MB) desde `datos/jefes/` + datos de PokeAPI (CSV ya usados en `herramientas/generar_datos.py`) + `datos/parches/`. Ahora son los del original, generados contra la API de PokeAPI (ver `routes/api/battle/[gen]/[id].json/+server.js`). Hay que respetar los cambios por generación (tipos antiguos, potencias) y los parches.
 - [ ] Revisar los avisos que quedan (`TODOS=1 node herramientas/datos.mjs comprobar`): formas `-hoenn` de Blazing Emerald y `-sevii` de Radical Red que faltan en el parche, `darmanitan-standard`, y los datos de Rejuvenation (no lo usa ningún juego de la lista).
 - [ ] Ampliar: juegos nuevos, encuentros por método (hierba, surf, caña…) y niveles de los encuentros.
 - [ ] Más adelante, que la app lea directamente el formato nuevo y quitar la compilación intermedia.
@@ -166,9 +170,10 @@ Hecho: reglas por run en `lockedex.reglas.<id>` (`web/src/lib/lockedex/reglas.js
 
 - [ ] **Lector de .sav:** probado solo con partidas sintéticas. Hay que probarlo con partidas reales de Rubí, Zafiro, Esmeralda, RojoFuego y VerdeHoja (y con hacks CFRU como Radical Red y Unbound, que amplían especies y pueden no ser compatibles).
 - [ ] Añadir .sav de otras generaciones (1–2 en GB/GBC y 4–5 en NDS, siguiendo los formatos de PKHeX).
-- [ ] **Modo compacto con acciones rápidas** (marcar captura o muerte), enviándolas a la ventana principal por IPC; ahora solo muestra información.
+- [x] **Modo compacto con acciones rápidas** (1.5.0): apuntar el encuentro de la siguiente zona (capturado o fallido) y marcar como caído a un miembro del equipo. Se envían por IPC a la ventana principal (`lib/lockedex/acciones.js`), que es la que guarda.
 - [ ] **Afinar el riesgo:** IVs y EVs reales de los jefes por juego, cambios de forma o tipo, objetos, clima y prioridad.
 - [ ] Sincronizar la partida del emulador con la run de forma más fina (evoluciones, muertes cuando el Pokémon sale debilitado en el .sav).
 - [ ] Más logros en el perfil y estadísticas por juego.
-- [ ] Traducir los textos largos que quedan en inglés (política de privacidad, créditos, guías por juego).
+- [x] Privacidad y créditos reescritos en español (1.5.0), con lo que de verdad hace la versión de escritorio y los proyectos en los que se apoya.
+- [ ] Traducir lo que queda en inglés de las guías por juego y del modal de muerte (plantillas de epitafio).
 - [ ] Firmar el instalador para que Windows no muestre el aviso de SmartScreen (requiere certificado).

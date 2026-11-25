@@ -13,8 +13,9 @@ Está basada en [nuzlocke-redux](https://nuzlocke-redux.vercel.app) (de domtronn
 - **Importación de partidas .sav** de Rubí, Zafiro, Esmeralda, RojoFuego y VerdeHoja: equipo y cajas con niveles, movimientos, naturalezas e IVs. Si quieres, se reimporta sola cada vez que guardas en el emulador, y el riesgo se calcula con la calculadora de daño de Smogon.
 - **Modo Analista**: prepara cualquier combate sin partida, con equipos a mano, copiados de tu run o tu .sav, aleatorios o de Showdown.
 - **Reglas de Nuzlocke** con plantillas (Clásico, Hardcore, Randomlocke) y cláusulas ampliadas, con avisos si las rompes. Incluye un **modo Randomlocke**.
+- **Caja tipo PC** con panel de detalle y **cementerio** con lápidas pixel propias.
 - **Modo sin spoilers**, para ocultar los equipos o los jefes hasta que decidas verlos.
-- **Barra de EXP** con el progreso de la run, **perfil de entrenador** con foto, estadísticas y logros, y **modo compacto** (Ctrl+Alt+L): una ventanita siempre encima, junto al emulador.
+- **Barra de EXP** con el progreso de la run, **perfil de entrenador** con foto, estadísticas y logros, y **modo compacto** (Ctrl+Alt+L): una ventanita siempre encima, junto al emulador, desde la que puedes apuntar encuentros y bajas sin salir del juego.
 - **Se actualiza sola** desde las versiones publicadas en este repositorio.
 - Sin Google Analytics ni envío de estadísticas.
 
@@ -35,6 +36,7 @@ Windows puede mostrar el aviso «Windows protegió su PC» porque el instalador 
 - `web/`: la app (SvelteKit), basada en nuzlocke-redux. Lo propio de Lockedex está en `web/src/lib/lockedex/` y los datos generados en `web/static/lx/`.
 - `electron/`: el programa de escritorio (ventana, guardado en archivo, modo compacto, lectura de .sav y actualizaciones).
 - `herramientas/`: scripts que generan los datos de `web/static/lx/` a partir de PokeAPI y de los proyectos pret, y `generar_marca.py`, que crea todos los iconos e imágenes de marca.
+- `datos/`: la base de datos propia (juegos, rutas, jefes y parches de ROM hacks). Ver `datos/LEEME.md`.
 - `marca/`: el logo de Lockedex en SVG (`icono.svg` y una versión simplificada para 16–48 px). Si lo cambias, ejecuta `python3 herramientas/generar_marca.py`.
 
 ## Créditos y licencia

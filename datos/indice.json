@@ -1,5 +1,4 @@
 {
   "rutas": ["as", "b2w2", "bd", "bdsp", "bl", "bl2c", "bl2n", "blaze", "blazevolt2_c", "blazevolt2_n", "blazingem", "blue", "chb2w2", "crys", "d", "dp", "em", "emkaizo", "emrunbun", "fr", "frlg", "glazed", "gold", "gsc", "hg", "incem", "lg", "moon", "newgen", "or", "p", "plat", "pt", "radred", "radred_hard", "rb", "red", "rejuv", "renplat", "rrss", "ruby", "sacredgold", "saph", "sc", "sh", "silv", "sp", "ss", "ssaph", "stormsilv", "sun", "sw", "umoon", "unbound", "unbound_exp", "usun", "vi", "volt", "wh", "wh2n", "wh2c", "x", "xy", "y", "yel"],
-  "jefes": ["b2w2", "bdsp", "blazevolt", "blazevolt2_n", "blazingem", "bw", "dp", "em", "emkaizo", "emrunbun", "frlg", "glazed", "gsc", "hgss", "incem", "newgen", "oras", "plat", "radred", "rb", "rejuv", "renplat", "rrss", "rs", "sm", "sssg", "sv", "swsh", "unbound", "usum", "xy", "yel"],
   "parches": ["blazevolt", "blazevolt2", "blazingem", "emkaizo", "emrunbun", "glazed", "incem", "insurgence", "newgen", "pregen2", "pregen5", "pregen6", "radred", "renplat", "rrss", "sssg", "unbound"]
 }

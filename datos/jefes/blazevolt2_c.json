@@ -1,0 +1,1203 @@
+{
+  "r0_c": {
+    "name": "Hugh",
+    "speciality": "",
+    "img": "/leaders/blwh-hugh",
+    "pokemon": [
+      { "name": "oshawott", "level": "6", "moves": ["tackle", "tail-whip"], "ability": "shell-armor", "starter": "fire" },
+      { "name": "tepig", "level": "6", "moves": ["tackle", "tail-whip"], "ability": "sheer-force", "starter": "grass" },
+      { "name": "snivy", "level": "6", "moves": ["tackle", "leer"], "ability": "contrary", "starter": "water" }
+    ]
+  },
+  "r1_c": {
+    "name": "Hugh",
+    "speciality": "",
+    "img": "/leaders/blwh-hugh",
+    "pokemon": [
+      { "name": "taillow", "level": "9", "moves": ["peck", "growl", "focus-energy", "quick-attack"], "ability": "early-bird" },
+      {
+        "name": "oshawott",
+        "level": "11",
+        "moves": ["tackle", "tail-whip", "water-gun", "aqua-jet"],
+        "ability": "shell-armor",
+        "held": "oran-berry",
+        "starter": "fire"
+      },
+      { "name": "tepig", "level": "11", "moves": ["tackle", "tail-whip", "ember", "smog"], "ability": "sheer-force", "held": "oran-berry", "starter": "grass" },
+      { "name": "snivy", "level": "11", "moves": ["wrap", "leer", "vine-whip", "twister"], "ability": "contrary", "held": "oran-berry", "starter": "water" },
+      { "name": "pansear", "level": "10", "moves": ["tickle", "scratch", "lick", "incinerate"], "ability": "blaze", "starter": "fire" },
+      { "name": "pansage", "level": "10", "moves": ["tickle", "scratch", "lick", "vine-whip"], "ability": "overgrow", "starter": "grass" },
+      { "name": "panpour", "level": "10", "moves": ["tickle", "scratch", "lick", "water-gun"], "ability": "torrent", "starter": "water" }
+    ]
+  },
+  "r2": {
+    "name": "Hugh",
+    "speciality": "",
+    "img": "/leaders/blwh-hugh",
+    "pokemon": [
+      { "name": "swellow", "level": "46", "moves": ["boomburst", "quick-attack", "hurricane", "u-turn"], "ability": "scrappy", "held": "metronome" },
+      { "name": "eelektrik", "level": "46", "moves": ["wild-charge", "aqua-tail", "giga-drain", "drain-punch"], "ability": "levitate", "held": "leftovers" },
+      { "name": "flygon", "level": "47", "moves": ["scorching-sands", "dragon-claw", "lunge", "dragon-dance"], "ability": "levitate", "held": "life-orb" },
+      {
+        "name": "lilligant",
+        "level": "46",
+        "moves": ["petal-dance", "extrasensory", "sleep-powder", "quiver-dance"],
+        "ability": "own-tempo",
+        "held": "focus-sash",
+        "starter": "fire"
+      },
+      {
+        "name": "starmie",
+        "level": "46",
+        "moves": ["scald", "psyshock", "signal-beam", "tri-attack"],
+        "ability": "regenerator",
+        "held": "red-card",
+        "starter": "grass"
+      },
+      {
+        "name": "camerupt",
+        "level": "46",
+        "moves": ["flamethrower", "rock-climb", "earthquake", "rock-polish"],
+        "ability": "simple",
+        "held": "passho-berry",
+        "starter": "water"
+      },
+      {
+        "name": "samurott",
+        "level": "47",
+        "moves": ["air-slash", "waterfall", "megahorn", "close-combat"],
+        "ability": "shell-armor",
+        "held": "leftovers",
+        "starter": "fire"
+      },
+      {
+        "name": "emboar",
+        "level": "47",
+        "moves": ["body-slam", "flame-charge", "earthquake", "cross-chop"],
+        "ability": "mold-breaker",
+        "held": "leftovers",
+        "starter": "grass"
+      },
+      {
+        "name": "serperior",
+        "level": "47",
+        "moves": ["glare", "leaf-blade", "dragon-pulse", "aqua-tail"],
+        "ability": "contrary",
+        "held": "leftovers",
+        "starter": "water"
+      }
+    ]
+  },
+  "r3_c": {
+    "name": "Hugh",
+    "speciality": "",
+    "img": "/leaders/blwh-hugh",
+    "pokemon": [
+      { "name": "swellow", "level": "58", "moves": ["boomburst", "quick-attack", "hurricane", "heat-wave"], "ability": "scrappy", "held": "normal-gem" },
+      { "name": "eelektross", "level": "58", "moves": ["wild-charge", "aqua-tail", "coil", "drain-punch"], "ability": "levitate", "held": "leftovers" },
+      { "name": "flygon", "level": "58", "moves": ["earthquake", "dragon-claw", "lunge", "dragon-dance"], "ability": "levitate", "held": "life-orb" },
+      {
+        "name": "lilligant",
+        "level": "58",
+        "moves": ["petal-dance", "sleep-powder", "quiver-dance", "extrasensory"],
+        "ability": "own-tempo",
+        "held": "focus-sash",
+        "starter": "fire"
+      },
+      {
+        "name": "starmie",
+        "level": "58",
+        "moves": ["scald", "psyshock", "signal-beam", "tri-attack"],
+        "ability": "regenerator",
+        "held": "red-card",
+        "starter": "grass"
+      },
+      {
+        "name": "camerupt",
+        "level": "58",
+        "moves": ["flamethrower", "rock-climb", "earthquake", "rock-polish"],
+        "ability": "simple",
+        "held": "passho-berry",
+        "starter": "water"
+      },
+      {
+        "name": "samurott",
+        "level": "58",
+        "moves": ["air-slash", "waterfall", "megahorn", "close-combat"],
+        "ability": "shell-armor",
+        "held": "leftovers",
+        "starter": "fire"
+      },
+      {
+        "name": "emboar",
+        "level": "58",
+        "moves": ["wild-charge", "flame-charge", "earthquake", "cross-chop"],
+        "ability": "mold-breaker",
+        "held": "leftovers",
+        "starter": "grass"
+      },
+      {
+        "name": "serperior",
+        "level": "58",
+        "moves": ["glare", "leaf-blade", "dragon-pulse", "aqua-tail"],
+        "ability": "contrary",
+        "held": "leftovers",
+        "starter": "water"
+      },
+      {
+        "name": "camerupt",
+        "level": "58",
+        "moves": ["flamethrower", "rock-climb", "earthquake", "rock-polish"],
+        "ability": "simple",
+        "held": "passho-berry",
+        "starter": "fire"
+      },
+      {
+        "name": "lilligant",
+        "level": "58",
+        "moves": ["petal-dance", "sleep-powder", "quiver-dance", "extrasensory"],
+        "ability": "own-tempo",
+        "held": "focus-sash",
+        "starter": "grass"
+      },
+      {
+        "name": "starmie",
+        "level": "58",
+        "moves": ["scald", "psyshock", "signal-beam", "tri-attack"],
+        "ability": "regenerator",
+        "held": "red-card",
+        "starter": "water"
+      }
+    ]
+  },
+  "r4_c": {
+    "name": "Hugh",
+    "speciality": "",
+    "img": "/leaders/blwh-hugh",
+    "pokemon": [
+      { "name": "swellow", "level": "75", "moves": ["boomburst", "u-turn", "hurricane", "heat-wave"], "ability": "scrappy", "held": "normal-gem" },
+      { "name": "eelektross", "level": "75", "moves": ["wild-charge", "aqua-tail", "drain-punch", "coil"], "ability": "levitate", "held": "leftovers" },
+      { "name": "flygon", "level": "75", "moves": ["dragon-pulse", "bug-buzz", "quiver-dance", "flamethrower"], "ability": "levitate", "held": "focus-sash" },
+      {
+        "name": "lilligant",
+        "level": "75",
+        "moves": ["petal-dance", "fiery-dance", "sleep-powder", "quiver-dance"],
+        "ability": "own-tempo",
+        "held": "focus-sash",
+        "starter": "fire"
+      },
+      {
+        "name": "starmie",
+        "level": "75",
+        "moves": ["scald", "psyshock", "signal-beam", "tri-attack"],
+        "ability": "regenerator",
+        "held": "red-card",
+        "starter": "grass"
+      },
+      {
+        "name": "camerupt",
+        "level": "75",
+        "moves": ["flamethrower", "rock-climb", "earthquake", "rock-polish"],
+        "ability": "simple",
+        "held": "passho-berry",
+        "starter": "water"
+      },
+      {
+        "name": "samurott",
+        "level": "77",
+        "moves": ["close-combat", "hydro-pump", "megahorn", "shell-smash"],
+        "ability": "shell-armor",
+        "held": "leftovers",
+        "starter": "fire"
+      },
+      {
+        "name": "emboar",
+        "level": "77",
+        "moves": ["v-create", "sucker-punch", "wild-charge", "earthquake"],
+        "ability": "mold-breaker",
+        "held": "leftovers",
+        "starter": "grass"
+      },
+      {
+        "name": "serperior",
+        "level": "77",
+        "moves": ["glare", "leaf-storm", "dragon-pulse", "substitute"],
+        "ability": "contrary",
+        "held": "leftovers",
+        "starter": "water"
+      },
+      {
+        "name": "camerupt",
+        "level": "75",
+        "moves": ["flamethrower", "rock-climb", "earthquake", "rock-polish"],
+        "ability": "simple",
+        "held": "passho-berry",
+        "starter": "fire"
+      },
+      {
+        "name": "lilligant",
+        "level": "75",
+        "moves": ["petal-dance", "fiery-dance", "sleep-powder", "quiver-dance"],
+        "ability": "own-tempo",
+        "held": "focus-sash",
+        "starter": "grass"
+      },
+      {
+        "name": "starmie",
+        "level": "75",
+        "moves": ["scald", "psyshock", "signal-beam", "tri-attack"],
+        "ability": "regenerator",
+        "held": "red-card",
+        "starter": "water"
+      }
+    ]
+  },
+  "bianca_c": {
+    "name": "Bianca",
+    "speciality": "",
+    "img": "/leaders/blwh-bianca",
+    "pokemon": [
+      { "name": "mienshao", "level": "56", "moves": ["close-combat", "fake-out", "rock-slide", "u-turn"], "ability": "regenerator", "held": "focus-sash" },
+      { "name": "musharna", "level": "56", "moves": ["psyshock", "dazzling-gleam", "reflect", "light-screen"], "ability": "synchronize", "held": "light-clay" },
+      {
+        "name": "haxorus",
+        "level": "56",
+        "moves": ["dragon-claw", "cross-poison", "dragon-dance", "close-combat"],
+        "ability": "mold-breaker",
+        "held": "dragon-gem"
+      },
+      { "name": "serperior", "level": "56", "moves": ["leaf-storm", "glare", "dragon-pulse", "leech-seed"], "ability": "contrary", "held": "sitrus-berry" },
+      { "name": "samurott", "level": "56", "moves": ["swords-dance", "aqua-jet", "megahorn", "wave-crash"], "ability": "shell-armor", "held": "life-orb" },
+      {
+        "name": "emboar",
+        "level": "56",
+        "moves": ["flare-blitz", "wild-charge", "head-smash", "high-horsepower"],
+        "ability": "mold-breaker",
+        "held": "fire-gem"
+      }
+    ],
+    "doubleBattle": true
+  },
+  "emin": {
+    "name": "Emmet & Ingo",
+    "speciality": "",
+    "img": "/leaders/blazevolt-ingo-emmet",
+    "pokemon": [
+      { "name": "eelektross", "level": "34", "moves": ["thunderbolt", "brick-break", "protect", "thunder-wave"], "ability": "levitate", "held": "magnet" },
+      { "name": "chandelure", "level": "34", "moves": ["heat-wave", "hex", "protect", "will-o-wisp"], "ability": "flash-fire", "held": "charcoal" },
+      { "name": "umbreon", "level": "34", "moves": ["helping-hand", "foul-play", "fake-tears", "assurance"], "ability": "synchronize", "held": "leftovers" },
+      { "name": "espeon", "level": "34", "moves": ["psychic", "dazzling-gleam", "power-gem", "aura-sphere"], "ability": "magic-bounce", "held": "psychic-gem" }
+    ]
+  },
+  "natros": {
+    "name": "Nate & Rosa",
+    "speciality": "",
+    "img": "/leaders/blazevolt-nate-rosa",
+    "pokemon": [
+      {
+        "name": "servine",
+        "level": "31",
+        "moves": ["body-slam", "leech-seed", "giga-drain", "mirror-coat"],
+        "ability": "contrary",
+        "held": "sitrus-berry",
+        "starter": "fire"
+      },
+      {
+        "name": "dewott",
+        "level": "31",
+        "moves": ["razor-shell", "aqua-jet", "dual-chop", "storm-throw"],
+        "ability": "shell-armor",
+        "held": "sitrus-berry",
+        "starter": "grass"
+      },
+      {
+        "name": "pignite",
+        "level": "31",
+        "moves": ["arm-thrust", "high-horsepower", "take-down", "heat-crash"],
+        "ability": "sheer-force",
+        "held": "sitrus-berry",
+        "starter": "water"
+      },
+      {
+        "name": "simipour",
+        "level": "30",
+        "moves": ["tickle", "aqua-tail", "acrobatics", "crunch"],
+        "ability": "gluttony",
+        "held": "sitrus-berry",
+        "starter": "fire"
+      },
+      {
+        "name": "simisear",
+        "level": "30",
+        "moves": ["tickle", "fire-lash", "acrobatics", "crunch"],
+        "ability": "gluttony",
+        "held": "sitrus-berry",
+        "starter": "grass"
+      },
+      {
+        "name": "simisage",
+        "level": "30",
+        "moves": ["tickle", "seed-bomb", "acrobatics", "crunch"],
+        "ability": "gluttony",
+        "held": "sitrus-berry",
+        "starter": "water"
+      }
+    ]
+  },
+  "o1_c": {
+    "name": "Roxanne",
+    "speciality": "rock",
+    "img": "/leaders/blazevolt-roxanne",
+    "pokemon": [
+      { "name": "anorith", "level": "11", "moves": ["rock-tomb", "metal-claw", "bug-bite", "knock-off"], "ability": "battle-armor", "held": "metronome" },
+      { "name": "lileep", "level": "11", "moves": ["rock-tomb", "grass-knot", "brine", "ingrain"], "ability": "suction-cups", "held": "absorb-bulb" },
+      { "name": "nosepass", "level": "13", "moves": ["rock-tomb", "rock-smash", "shock-wave", "rest"], "ability": "magnet-pull", "held": "chesto-berry" },
+      { "name": "archen", "level": "11", "moves": ["rock-tomb", "wing-attack", "bite", "dragon-breath"], "ability": "defeatist", "held": "cell-battery" }
+    ]
+  },
+  "o2_c": {
+    "name": "Brawly",
+    "speciality": "fighting",
+    "img": "/leaders/blazevolt-brawly",
+    "pokemon": [
+      { "name": "monferno", "level": "19", "moves": ["stealth-rock", "fire-lash", "rock-tomb", "double-kick"], "ability": "blaze", "held": "focus-sash" },
+      {
+        "name": "meditite",
+        "level": "19",
+        "moves": ["thunder-punch", "rock-smash", "psycho-cut", "bullet-punch"],
+        "ability": "pure-power",
+        "held": "coba-berry"
+      },
+      { "name": "machop", "level": "19", "moves": ["bulk-up", "dynamic-punch", "rock-slide", "bullet-punch"], "ability": "no-guard", "held": "cheri-berry" },
+      { "name": "sawk", "level": "19", "moves": ["reversal", "rock-tomb", "dual-chop", "payback"], "ability": "sturdy", "held": "salac-berry" },
+      { "name": "makuhita", "level": "20", "moves": ["bulk-up", "revenge", "fire-punch", "ice-punch"], "ability": "sheer-force", "held": "berry-juice" }
+    ]
+  },
+  "o3_c": {
+    "name": "Wattson",
+    "speciality": "electric",
+    "img": "/leaders/blazevolt-wattson",
+    "pokemon": [
+      {
+        "name": "jolteon",
+        "level": "27",
+        "moves": ["volt-switch", "grass-knot", "double-kick", "shadow-ball"],
+        "ability": "volt-absorb",
+        "held": "shuca-berry"
+      },
+      {
+        "name": "rotom",
+        "level": "27",
+        "moves": ["volt-switch", "blizzard", "hex", "trick"],
+        "ability": "levitate",
+        "held": "lagging-tail",
+        "icon": "rotom-frost",
+        "sprite": "10010",
+        "types": ["electric", "ice"],
+        "stats": { "hp": 50, "atk": 65, "def": 107, "spa": 105, "spd": 107, "spe": 86 }
+      },
+      { "name": "magneton", "level": "27", "moves": ["volt-switch", "flash-cannon", "bug-buzz", "tri-attack"], "ability": "sturdy", "held": "eviolite" },
+      { "name": "electabuzz", "level": "27", "moves": ["volt-switch", "psychic", "brick-break", "dual-chop"], "ability": "static", "held": "life-orb" },
+      {
+        "name": "manectric",
+        "level": "28",
+        "moves": ["volt-switch", "ice-fang", "flame-burst", "quick-attack"],
+        "ability": "intimidate",
+        "held": "air-balloon"
+      },
+      {
+        "name": "volbeat",
+        "level": "27",
+        "moves": ["volt-switch", "bug-buzz", "mystical-fire", "water-pulse"],
+        "ability": "tinted-lens",
+        "held": "charti-berry"
+      }
+    ]
+  },
+  "o4_c": {
+    "name": "Flannery",
+    "speciality": "fire",
+    "img": { "src": "/leaders/rs-flannery-oras", "author": "PKMNTrainerSpriterC", "link": "https://www.deviantart.com/PKMNTrainerSpriterC" },
+    "pokemon": [
+      { "name": "torkoal", "level": "37", "moves": ["overheat", "earth-power", "stealth-rock", "yawn"], "ability": "drought", "held": "white-herb" },
+      { "name": "magmar", "level": "36", "moves": ["overheat", "thunder-punch", "cross-chop", "will-o-wisp"], "ability": "flame-body", "held": "white-herb" },
+      { "name": "houndoom", "level": "36", "moves": ["overheat", "crunch", "sludge-bomb", "solar-beam"], "ability": "intimidate", "held": "white-herb" },
+      {
+        "name": "rotom",
+        "level": "36",
+        "moves": ["overheat", "volt-switch", "sunny-day", "thunderbolt"],
+        "ability": "levitate",
+        "held": "white-herb",
+        "icon": "rotom-heat",
+        "sprite": "10008",
+        "types": ["electric", "fire"],
+        "stats": { "hp": 50, "atk": 65, "def": 107, "spa": 105, "spd": 107, "spe": 86 }
+      },
+      { "name": "camerupt", "level": "36", "moves": ["overheat", "earthquake", "growth", "flame-charge"], "ability": "simple", "held": "white-herb" },
+      { "name": "magcargo", "level": "36", "moves": ["overheat", "magma-storm", "power-gem", "solar-beam"], "ability": "solid-rock", "held": "white-herb" }
+    ]
+  },
+  "o5_c": {
+    "name": "Norman",
+    "speciality": "normal",
+    "img": { "src": "/leaders/rs-norman-oras", "author": "PKMNTrainerSpriterC", "link": "https://www.deviantart.com/PKMNTrainerSpriterC" },
+    "pokemon": [
+      { "name": "exploud", "level": "43", "moves": ["boomburst", "surf", "extrasensory", "flamethrower"], "ability": "scrappy", "held": "chople-berry" },
+      { "name": "tauros", "level": "43", "moves": ["rock-climb", "close-combat", "strength", "zen-headbutt"], "ability": "sheer-force", "held": "life-orb" },
+      {
+        "name": "banette",
+        "level": "43",
+        "moves": ["crush-claw", "gunk-shot", "shadow-claw", "shadow-sneak"],
+        "ability": "cursed-body",
+        "held": "colbur-berry"
+      },
+      { "name": "zangoose", "level": "43", "moves": ["facade", "close-combat", "night-slash", "protect"], "ability": "toxic-boost", "held": "toxic-orb" },
+      { "name": "slaking", "level": "44", "moves": ["giga-impact", "earthquake", "hammer-arm", "ice-punch"], "ability": "truant", "held": "normal-gem" },
+      { "name": "linoone", "level": "43", "moves": ["extreme-speed", "belly-drum", "shadow-claw", "seed-bomb"], "ability": "gluttony", "held": "sitrus-berry" }
+    ]
+  },
+  "o6_c": {
+    "name": "Juan",
+    "speciality": "water",
+    "img": "/leaders/blazevolt-juan",
+    "pokemon": [
+      { "name": "swampert", "level": "53", "moves": ["hammer-arm", "rock-slide", "waterfall", "high-horsepower"], "ability": "torrent", "held": "rindo-berry" },
+      { "name": "slowking", "level": "53", "moves": ["ice-beam", "muddy-water", "psychic", "trick-room"], "ability": "regenerator", "held": "lum-berry" },
+      { "name": "pelipper", "level": "53", "moves": ["hurricane", "hydro-pump", "ice-beam", "u-turn"], "ability": "drizzle", "held": "flying-gem" },
+      { "name": "starmie", "level": "53", "moves": ["hydro-pump", "ice-beam", "thunder", "trick-room"], "ability": "analytic", "held": "wacan-berry" },
+      { "name": "crawdaunt", "level": "54", "moves": ["aqua-jet", "crunch", "crabhammer", "close-combat"], "ability": "adaptability", "held": "life-orb" },
+      { "name": "azumarill", "level": "53", "moves": ["aqua-jet", "ice-punch", "belly-drum", "play-rough"], "ability": "huge-power", "held": "sitrus-berry" }
+    ],
+    "doubleBattle": true,
+    "effect": "rain"
+  },
+  "o7_c": {
+    "name": "Winona",
+    "speciality": "flying",
+    "img": "/leaders/blazevolt-winona",
+    "pokemon": [
+      { "name": "dragonite", "level": "62", "moves": ["hurricane", "earthquake", "thunder", "icy-wind"], "ability": "multiscale", "held": "flying-gem" },
+      { "name": "mantine", "level": "62", "moves": ["hydro-pump", "hurricane", "confuse-ray", "tailwind"], "ability": "swift-swim", "held": "wacan-berry" },
+      {
+        "name": "rotom",
+        "level": "62",
+        "moves": ["thunder", "electroweb", "air-slash", "rain-dance"],
+        "ability": "motor-drive",
+        "held": "electric-gem",
+        "icon": "rotom-fan",
+        "sprite": "10011",
+        "types": ["electric", "flying"],
+        "stats": { "hp": 50, "atk": 65, "def": 107, "spa": 105, "spd": 107, "spe": 86 }
+      },
+      { "name": "pelipper", "level": "62", "moves": ["hydro-pump", "hurricane", "soak", "ice-beam"], "ability": "drizzle", "held": "sitrus-berry" },
+      { "name": "altaria", "level": "63", "moves": ["brave-bird", "earthquake", "play-rough", "dragon-dance"], "ability": "natural-cure", "held": "life-orb" },
+      { "name": "drifblim", "level": "62", "moves": ["protect", "hurricane", "thunder", "shadow-ball"], "ability": "flare-boost", "held": "flame-orb" }
+    ],
+    "effect": "rain",
+    "doubleBattle": true
+  },
+  "o8_c": {
+    "name": "Tate & Liza",
+    "speciality": "psychic",
+    "img": "/leaders/blazevolt-tate-liza",
+    "pokemon": [
+      { "name": "mr-mime", "level": "66", "moves": ["trick-room", "dazzling-gleam", "baton-pass", "aura-sphere"], "ability": "filter", "held": "lum-berry" },
+      {
+        "name": "claydol",
+        "level": "66",
+        "moves": ["scorching-sands", "extrasensory", "shadow-ball", "ice-beam"],
+        "ability": "levitate",
+        "held": "kasib-berry"
+      },
+      { "name": "lunatone", "level": "67", "moves": ["psychic", "ice-beam", "earth-power", "power-gem"], "ability": "levitate", "held": "rock-gem" },
+      { "name": "solrock", "level": "67", "moves": ["rock-slide", "acrobatics", "psyshield-bash", "flare-blitz"], "ability": "levitate", "held": "flying-gem" },
+      { "name": "exeggutor", "level": "66", "moves": ["trick-room", "sleep-powder", "giga-drain", "sludge-bomb"], "ability": "harvest", "held": "sitrus-berry" },
+      {
+        "name": "medicham",
+        "level": "66",
+        "moves": ["high-jump-kick", "zen-headbutt", "ice-punch", "bullet-punch"],
+        "ability": "pure-power",
+        "held": "life-orb"
+      },
+      { "name": "jynx", "level": "66", "moves": ["aura-sphere", "psyshock", "ice-beam", "draining-kiss"], "ability": "trace", "held": "focus-sash" },
+      { "name": "beheeyem", "level": "66", "moves": ["mystical-fire", "trick-room", "thunderbolt", "psychic"], "ability": "analytic", "held": "colbur-berry" }
+    ],
+    "doubleBattle": true
+  },
+  "o9_hail": {
+    "name": "Hail Trainer Caroll",
+    "speciality": "",
+    "img": "/leaders/blazevolt-caroll",
+    "pokemon": [
+      { "name": "abomasnow", "level": "72", "moves": ["blizzard", "ice-shard", "focus-blast", "wood-hammer"], "ability": "snow-warning", "held": "occa-berry" },
+      { "name": "reuniclus", "level": "72", "moves": ["psychic", "energy-ball", "shadow-ball", "focus-blast"], "ability": "magic-guard", "held": "leftovers" },
+      { "name": "weavile", "level": "72", "moves": ["icicle-crash", "aerial-ace", "night-slash", "ice-shard"], "ability": "pressure", "held": "focus-sash" },
+      {
+        "name": "vanilluxe",
+        "level": "72",
+        "moves": ["blizzard", "power-gem", "extrasensory", "dazzling-gleam"],
+        "ability": "snow-warning",
+        "held": "life-orb"
+      },
+      { "name": "cloyster", "level": "72", "moves": ["shell-smash", "icicle-spear", "rock-blast", "hydro-pump"], "ability": "skill-link", "held": "white-herb" },
+      { "name": "jynx", "level": "72", "moves": ["blizzard", "lovely-kiss", "aura-sphere", "psyshock"], "ability": "trace", "held": "ice-gem" }
+    ]
+  },
+  "o9_sun": {
+    "name": "Sun Trainer Elmer",
+    "speciality": "",
+    "img": "/leaders/blazevolt-elmer",
+    "pokemon": [
+      { "name": "torkoal", "level": "72", "moves": ["stealth-rock", "yawn", "solar-beam", "lava-plume"], "ability": "drought", "held": "red-card" },
+      { "name": "darmanitan", "level": "72", "moves": ["flare-blitz", "lunge", "earthquake", "rock-slide"], "ability": "sheer-force", "held": "fire-gem" },
+      { "name": "venusaur", "level": "72", "moves": ["giga-drain", "growth", "weather-ball", "earth-power"], "ability": "chlorophyll", "held": "life-orb" },
+      { "name": "ninetales", "level": "72", "moves": ["moonblast", "solar-beam", "flamethrower", "power-gem"], "ability": "drought", "held": "eject-button" },
+      { "name": "volcarona", "level": "72", "moves": ["quiver-dance", "fiery-dance", "bug-buzz", "giga-drain"], "ability": "flame-body", "held": "focus-sash" },
+      { "name": "victreebel", "level": "72", "moves": ["growth", "solar-beam", "weather-ball", "sludge-bomb"], "ability": "chlorophyll", "held": "occa-berry" }
+    ]
+  },
+  "o9_rain": {
+    "name": "Rain Trainer Porta",
+    "speciality": "",
+    "img": "/leaders/blazevolt-porta",
+    "pokemon": [
+      { "name": "pelipper", "level": "72", "moves": ["scald", "hurricane", "u-turn", "ice-beam"], "ability": "drizzle", "held": "wacan-berry" },
+      {
+        "name": "seismitoad",
+        "level": "72",
+        "moves": ["earthquake", "drain-punch", "sludge-wave", "ice-punch"],
+        "ability": "swift-swim",
+        "held": "rindo-berry"
+      },
+      { "name": "electrode", "level": "72", "moves": ["thunder", "aura-sphere", "energy-ball", "bug-buzz"], "ability": "aftermath", "held": "air-balloon" },
+      { "name": "politoed", "level": "72", "moves": ["hypnosis", "hydro-pump", "psychic", "focus-blast"], "ability": "drizzle", "held": "zoom-lens" },
+      { "name": "scizor", "level": "72", "moves": ["crabhammer", "bullet-punch", "psycho-cut", "u-turn"], "ability": "technician", "held": "leftovers" },
+      { "name": "kingdra", "level": "72", "moves": ["hydro-pump", "hurricane", "dragon-pulse", "ice-beam"], "ability": "swift-swim", "held": "life-orb" }
+    ]
+  },
+  "o9_sand": {
+    "name": "Sand Trainer Sterline",
+    "speciality": "",
+    "img": "/leaders/blazevolt-sterline",
+    "pokemon": [
+      {
+        "name": "hippowdon",
+        "level": "72",
+        "moves": ["earthquake", "stealth-rock", "ice-fang", "stone-edge"],
+        "ability": "sand-stream",
+        "held": "passho-berry"
+      },
+      {
+        "name": "garchomp",
+        "level": "72",
+        "moves": ["dragon-claw", "earthquake", "flamethrower", "brick-break"],
+        "ability": "rough-skin",
+        "held": "yache-berry"
+      },
+      { "name": "excadrill", "level": "72", "moves": ["earthquake", "iron-head", "swords-dance", "x-scissor"], "ability": "sand-rush", "held": "air-balloon" },
+      { "name": "tyranitar", "level": "72", "moves": ["rock-polish", "stone-edge", "crunch", "aerial-ace"], "ability": "sand-stream", "held": "chople-berry" },
+      {
+        "name": "clefable",
+        "level": "72",
+        "moves": ["mystical-fire", "draining-kiss", "grass-knot", "power-gem"],
+        "ability": "magic-guard",
+        "held": "leftovers"
+      },
+      { "name": "nidoking", "level": "72", "moves": ["thunderbolt", "ice-beam", "sludge-wave", "earth-power"], "ability": "sheer-force", "held": "life-orb" }
+    ]
+  },
+  "o9_c": {
+    "name": "Lance",
+    "speciality": "dragon",
+    "img": "/leaders/gs-lance",
+    "pokemon": [
+      { "name": "aerodactyl", "level": "76", "moves": ["stealth-rock", "brave-bird", "head-smash", "rock-smash"], "ability": "rock-head", "held": "focus-sash" },
+      { "name": "charizard", "level": "76", "moves": ["fire-lash", "dragon-dance", "iron-tail", "dragon-claw"], "ability": "defiant", "held": "life-orb" },
+      { "name": "gyarados", "level": "76", "moves": ["dragon-dance", "waterfall", "stone-edge", "avalanche"], "ability": "moxie", "held": "charti-berry" },
+      { "name": "salamence", "level": "76", "moves": ["outrage", "dual-wingbeat", "flamethrower", "hydro-pump"], "ability": "moxie", "held": "wide-lens" },
+      { "name": "haxorus", "level": "76", "moves": ["dragon-dance", "dragon-rush", "close-combat", "iron-tail"], "ability": "mold-breaker", "held": "red-card" },
+      { "name": "dragonite", "level": "76", "moves": ["agility", "dual-wingbeat", "extreme-speed", "outrage"], "ability": "multiscale", "held": "yache-berry" }
+    ]
+  },
+  "1_c": {
+    "name": "Cheren",
+    "speciality": "normal",
+    "img": "/leaders/blwh-cheren-boss",
+    "pokemon": [
+      { "name": "porygon", "level": "13", "moves": ["work-up", "confusion", "thunder-shock", "swift"], "ability": "trace", "held": "enigma-berry" },
+      { "name": "lillipup", "level": "13", "moves": ["work-up", "pursuit", "retaliate", "thunder-fang"], "ability": "vital-spirit", "held": "muscle-band" },
+      { "name": "doduo", "level": "13", "moves": ["work-up", "aerial-ace", "quick-attack", "double-hit"], "ability": "early-bird", "held": "silk-scarf" },
+      { "name": "aipom", "level": "13", "moves": ["work-up", "double-hit", "fake-out", "water-pulse"], "ability": "skill-link", "held": "water-gem" },
+      { "name": "deerling", "level": "13", "moves": ["work-up", "double-kick", "headbutt", "leech-seed"], "ability": "sap-sipper", "held": "occa-berry" },
+      { "name": "munchlax", "level": "14", "moves": ["work-up", "tackle", "pursuit", "rock-tomb"], "ability": "thick-fat", "held": "oran-berry" }
+    ]
+  },
+  "2_c": {
+    "name": "Roxie",
+    "speciality": "poison",
+    "img": "/leaders/blwh-roxie",
+    "pokemon": [
+      { "name": "trubbish", "level": "20", "moves": ["clear-smog", "toxic-spikes", "drain-punch", "explosion"], "ability": "aftermath", "held": "focus-sash" },
+      { "name": "koffing", "level": "20", "moves": ["venoshock", "toxic", "thunderbolt", "flamethrower"], "ability": "levitate", "held": "eviolite" },
+      { "name": "ivysaur", "level": "20", "moves": ["venoshock", "protect", "leech-seed", "giga-drain"], "ability": "solar-power", "held": "black-sludge" },
+      { "name": "qwilfish", "level": "20", "moves": ["venoshock", "aqua-jet", "reversal", "explosion"], "ability": "intimidate", "held": "muscle-band" },
+      { "name": "gastly", "level": "20", "moves": ["venoshock", "hex", "giga-drain", "icy-wind"], "ability": "levitate", "held": "life-orb" },
+      { "name": "whirlipede", "level": "21", "moves": ["venoshock", "steamroller", "endeavor", "protect"], "ability": "speed-boost", "held": "eviolite" }
+    ]
+  },
+  "3_c": {
+    "name": "Brycen",
+    "speciality": "ice",
+    "img": "/leaders/blwh-brycen",
+    "pokemon": [
+      { "name": "snover", "level": "21", "moves": ["bullet-seed", "ice-shard", "water-pulse", "icy-wind"], "ability": "snow-warning", "held": "occa-berry" },
+      { "name": "delibird", "level": "23", "moves": ["peck", "fake-out", "water-pulse", "icy-wind"], "ability": "insomnia", "held": "charti-berry" },
+      { "name": "smoochum", "level": "21", "moves": ["frost-breath", "psybeam", "nasty-plot", "grass-knot"], "ability": "dry-skin", "held": "focus-sash" },
+      {
+        "name": "shellder",
+        "level": "21",
+        "moves": ["icicle-spear", "rock-blast", "water-pulse", "shell-smash"],
+        "ability": "skill-link",
+        "held": "mystic-water"
+      }
+    ]
+  },
+  "4_c": {
+    "name": "Burgh",
+    "speciality": "bug",
+    "img": "/leaders/blwh-burgh",
+    "pokemon": [
+      { "name": "yanmega", "level": "28", "moves": ["bug-buzz", "giga-drain", "air-cutter", "detect"], "ability": "tinted-lens", "held": "bug-gem" },
+      { "name": "masquerain", "level": "28", "moves": ["signal-beam", "bubble-beam", "icy-wind", "twister"], "ability": "intimidate", "held": "absorb-bulb" },
+      { "name": "scyther", "level": "28", "moves": ["bug-bite", "wing-attack", "rock-smash", "quick-attack"], "ability": "technician", "held": "lum-berry" },
+      { "name": "vespiquen", "level": "28", "moves": ["attack-order", "air-slash", "power-gem", "revenge"], "ability": "intimidate", "held": "wacan-berry" },
+      { "name": "durant", "level": "28", "moves": ["rock-slide", "lunge", "low-sweep", "iron-head"], "ability": "heatproof", "held": "muscle-band" },
+      { "name": "leavanny", "level": "29", "moves": ["x-scissor", "leaf-blade", "swords-dance", "aerial-ace"], "ability": "swarm", "held": "focus-sash" }
+    ],
+    "doubleBattle": true
+  },
+  "5_c": {
+    "name": "Lenora & Hawes",
+    "speciality": "normal",
+    "img": "/leaders/blazevolt-lenora-hawes",
+    "pokemon": [
+      { "name": "gigalith", "level": "31", "moves": ["stealth-rock", "sandstorm", "heavy-slam", "rock-slide"], "ability": "sand-stream", "held": "wide-lens" },
+      { "name": "stoutland", "level": "31", "moves": ["strength", "wild-charge", "crunch", "play-rough"], "ability": "sand-rush", "held": "leftovers" },
+      {
+        "name": "machamp",
+        "level": "31",
+        "moves": ["dynamic-punch", "bullet-punch", "ice-punch", "cross-poison"],
+        "ability": "no-guard",
+        "held": "sitrus-berry"
+      },
+      { "name": "unfezant", "level": "31", "moves": ["hyper-voice", "hurricane", "heat-wave", "tailwind"], "ability": "unaware", "held": "normal-gem" }
+    ],
+    "doubleBattle": true
+  },
+  "6_c": {
+    "name": "Elesa",
+    "speciality": "electric",
+    "img": "/leaders/blwh-elesa-2",
+    "pokemon": [
+      { "name": "emolga", "level": "37", "moves": ["air-slash", "discharge", "energy-ball", "tailwind"], "ability": "motor-drive", "held": "focus-sash" },
+      { "name": "lanturn", "level": "37", "moves": ["muddy-water", "icy-wind", "discharge", "tail-glow"], "ability": "volt-absorb", "held": "rindo-berry" },
+      {
+        "name": "electivire",
+        "level": "37",
+        "moves": ["discharge", "close-combat", "rock-slide", "ice-punch"],
+        "ability": "motor-drive",
+        "held": "shuca-berry"
+      },
+      {
+        "name": "raichu",
+        "level": "37",
+        "moves": ["grass-knot", "extreme-speed", "thunderbolt", "icicle-crash"],
+        "ability": "lightning-rod",
+        "held": "air-balloon"
+      },
+      {
+        "name": "stunfisk",
+        "level": "37",
+        "moves": ["muddy-water", "discharge", "earth-power", "sludge-bomb"],
+        "ability": "lightning-rod",
+        "held": "sitrus-berry"
+      },
+      { "name": "zebstrika", "level": "38", "moves": ["wild-charge", "flare-blitz", "high-horsepower", "lunge"], "ability": "motor-drive", "held": "life-orb" }
+    ]
+  },
+  "7_c": {
+    "name": "Clay",
+    "speciality": "ground",
+    "img": "/leaders/blwh-clay",
+    "pokemon": [
+      {
+        "name": "seismitoad",
+        "level": "44",
+        "moves": ["rock-slide", "hydro-pump", "power-whip", "ice-punch"],
+        "ability": "water-absorb",
+        "held": "rindo-berry"
+      },
+      { "name": "mamoswine", "level": "44", "moves": ["ice-shard", "endeavor", "earthquake", "icicle-crash"], "ability": "thick-fat", "held": "passho-berry" },
+      { "name": "torterra", "level": "44", "moves": ["shell-smash", "wood-hammer", "head-smash", "earthquake"], "ability": "rock-head", "held": "white-herb" },
+      {
+        "name": "garchomp",
+        "level": "44",
+        "moves": ["earthquake", "dragon-claw", "brick-break", "extreme-speed"],
+        "ability": "rough-skin",
+        "held": "yache-berry"
+      },
+      { "name": "nidoking", "level": "44", "moves": ["earth-power", "sludge-wave", "ice-beam", "thunderbolt"], "ability": "sheer-force", "held": "life-orb" },
+      { "name": "excadrill", "level": "45", "moves": ["earthquake", "swords-dance", "rock-slide", "x-scissor"], "ability": "sand-rush", "held": "air-balloon" }
+    ],
+    "effect": "sandstorm"
+  },
+  "8_c": {
+    "name": "Skyla",
+    "speciality": "flying",
+    "img": "/leaders/blwh-skyla",
+    "pokemon": [
+      { "name": "jumpluff", "level": "54", "moves": ["hurricane", "sleep-powder", "tailwind", "giga-drain"], "ability": "prankster", "held": "flying-gem" },
+      { "name": "gliscor", "level": "54", "moves": ["earthquake", "rock-slide", "ice-fang", "thunder-fang"], "ability": "poison-heal", "held": "toxic-orb" },
+      { "name": "pidgeot", "level": "54", "moves": ["hyper-voice", "heat-wave", "hurricane", "protect"], "ability": "no-guard", "held": "normal-gem" },
+      { "name": "aerodactyl", "level": "54", "moves": ["head-smash", "brave-bird", "earthquake", "tailwind"], "ability": "rock-head", "held": "focus-sash" },
+      { "name": "togekiss", "level": "54", "moves": ["heat-wave", "dazzling-gleam", "hurricane", "protect"], "ability": "serene-grace", "held": "wacan-berry" },
+      { "name": "swanna", "level": "55", "moves": ["hurricane", "hydro-pump", "icy-wind", "protect"], "ability": "friend-guard", "held": "life-orb" }
+    ]
+  },
+  "9_c": {
+    "name": "Drayden",
+    "speciality": "dragon",
+    "img": "/leaders/blwh-drayden",
+    "pokemon": [
+      { "name": "charizard", "level": "63", "moves": ["shadow-claw", "fire-lash", "dragon-claw", "rock-slide"], "ability": "defiant", "held": "sitrus-berry" },
+      { "name": "latias", "level": "63", "moves": ["aura-sphere", "thunderbolt", "tailwind", "dragon-pulse"], "ability": "levitate", "held": "lum-berry" },
+      {
+        "name": "haxorus",
+        "level": "64",
+        "moves": ["outrage", "swords-dance", "close-combat", "cross-poison"],
+        "ability": "mold-breaker",
+        "held": "haban-berry"
+      },
+      { "name": "flygon", "level": "63", "moves": ["quiver-dance", "dragon-pulse", "high-horsepower", "giga-drain"], "ability": "levitate", "held": "life-orb" },
+      {
+        "name": "salamence",
+        "level": "63",
+        "moves": ["dragon-claw", "flamethrower", "dragon-dance", "dual-wingbeat"],
+        "ability": "intimidate",
+        "held": "yache-berry"
+      },
+      { "name": "sceptile", "level": "63", "moves": ["dragon-claw", "leaf-blade", "acrobatics", "drain-punch"], "ability": "unburden", "held": "focus-sash" }
+    ],
+    "doubleBattle": true
+  },
+  "10_c": {
+    "name": "Marlon",
+    "speciality": "water",
+    "img": "/leaders/blwh-marlon",
+    "pokemon": [
+      {
+        "name": "poliwrath",
+        "level": "67",
+        "moves": ["lovely-kiss", "poison-jab", "high-horsepower", "close-combat"],
+        "ability": "swift-swim",
+        "held": "cell-battery"
+      },
+      { "name": "ludicolo", "level": "67", "moves": ["hydro-pump", "giga-drain", "ice-beam", "focus-blast"], "ability": "swift-swim", "held": "life-orb" },
+      { "name": "kabutops", "level": "67", "moves": ["rock-slide", "waterfall", "leech-life", "aqua-jet"], "ability": "swift-swim", "held": "focus-sash" },
+      { "name": "pelipper", "level": "67", "moves": ["hurricane", "u-turn", "muddy-water", "icy-wind"], "ability": "drizzle", "held": "wacan-berry" },
+      { "name": "starmie", "level": "67", "moves": ["thunder", "hydro-pump", "psychic", "ice-beam"], "ability": "analytic", "held": "rindo-berry" },
+      { "name": "kingdra", "level": "68", "moves": ["muddy-water", "dragon-pulse", "hurricane", "flash-cannon"], "ability": "swift-swim", "held": "water-gem" }
+    ],
+    "effect": "rain",
+    "doubleBattle": true
+  },
+  "col1": {
+    "name": "Colress",
+    "speciality": "",
+    "img": "/leaders/blwh-colress",
+    "pokemon": [
+      {
+        "name": "magnemite",
+        "level": "26",
+        "moves": ["volt-switch", "flash-cannon", "thunder-wave", "signal-beam"],
+        "ability": "sturdy",
+        "held": "air-balloon"
+      },
+      {
+        "name": "rotom",
+        "level": "26",
+        "moves": ["signal-beam", "air-slash", "dark-pulse", "thunderbolt"],
+        "ability": "motor-drive",
+        "held": "wise-glasses",
+        "icon": "rotom-fan",
+        "sprite": "10011",
+        "types": ["electric", "flying"],
+        "stats": { "hp": 50, "atk": 65, "def": 107, "spa": 105, "spd": 107, "spe": 86 }
+      },
+      { "name": "klink", "level": "26", "moves": ["autotomize", "gear-grind", "wild-charge", "flame-wheel"], "ability": "levitate", "held": "life-orb" },
+      { "name": "metang", "level": "26", "moves": ["bullet-punch", "rock-tomb", "zen-headbutt", "bulldoze"], "ability": "clear-body", "held": "occa-berry" },
+      { "name": "porygon2", "level": "28", "moves": ["recover", "tri-attack", "charge-beam", "psyshock"], "ability": "trace", "held": "eviolite" }
+    ]
+  },
+  "col2_c": {
+    "name": "Colress",
+    "speciality": "",
+    "img": "/leaders/blwh-colress",
+    "pokemon": [
+      {
+        "name": "mt",
+        "level": "53",
+        "moves": ["iron-head", "stealth-rock", "whirlwind", "aqua-tail"],
+        "ability": "analytic",
+        "held": "red-card",
+        "imgUrl": "/blazevolt/mt",
+        "types": ["steel"],
+        "stats": { "hp": 100, "atk": 100, "def": 100, "spa": 100, "spd": 100, "spe": 100 },
+        "calc": false
+      },
+      {
+        "name": "ufo",
+        "level": "53",
+        "moves": ["volt-switch", "psychic", "aeroblast", "recover"],
+        "ability": "magic-bounce",
+        "held": "leftovers",
+        "imgUrl": "/blazevolt/ufo",
+        "types": ["flying", "electric"],
+        "stats": { "hp": 100, "atk": 100, "def": 100, "spa": 100, "spd": 100, "spe": 100 },
+        "calc": false
+      },
+      {
+        "name": "f00",
+        "level": "53",
+        "moves": ["u-turn", "extreme-speed", "thunder-wave", "needle-arm"],
+        "ability": "volt-absorb",
+        "held": "chople-berry",
+        "imgUrl": "/blazevolt/f00",
+        "types": ["steel", "normal"],
+        "stats": { "hp": 100, "atk": 100, "def": 100, "spa": 100, "spd": 100, "spe": 100 },
+        "calc": false
+      },
+      {
+        "name": "mt2",
+        "level": "53",
+        "moves": ["shift-gear", "meteor-mash", "earthquake", "wild-charge"],
+        "ability": "flash-fire",
+        "held": "air-balloon",
+        "imgUrl": "/blazevolt/mt2",
+        "types": ["steel", "electric"],
+        "stats": { "hp": 100, "atk": 100, "def": 100, "spa": 100, "spd": 100, "spe": 100 },
+        "calc": false
+      }
+    ]
+  },
+  "col3_c": {
+    "name": "Colress",
+    "speciality": "",
+    "img": "/leaders/blwh-colress",
+    "pokemon": [
+      { "name": "beheeyem", "level": "69", "moves": ["bug-buzz", "mystical-fire", "psychic", "destiny-bond"], "ability": "analytic", "held": "colbur-berry" },
+      {
+        "name": "rotom",
+        "level": "69",
+        "moves": ["volt-switch", "will-o-wisp", "hydro-pump", "thunderbolt"],
+        "ability": "levitate",
+        "held": "focus-sash",
+        "icon": "rotom-wash",
+        "sprite": "10009",
+        "types": ["electric", "water"],
+        "stats": { "hp": 50, "atk": 65, "def": 107, "spa": 105, "spd": 107, "spe": 86 }
+      },
+      { "name": "magnezone", "level": "69", "moves": ["volt-switch", "bug-buzz", "thunderbolt", "flash-cannon"], "ability": "sturdy", "held": "air-balloon" },
+      { "name": "metagross", "level": "69", "moves": ["meteor-mash", "shift-gear", "ice-punch", "zen-headbutt"], "ability": "iron-fist", "held": "occa-berry" },
+      {
+        "name": "porygon-z",
+        "level": "69",
+        "moves": ["nasty-plot", "thunderbolt", "hyper-beam", "ice-beam"],
+        "ability": "adaptability",
+        "held": "custap-berry"
+      },
+      { "name": "klinklang", "level": "70", "moves": ["gear-grind", "shift-gear", "wild-charge", "high-horsepower"], "ability": "levitate", "held": "life-orb" }
+    ]
+  },
+  "ghetsis_c": {
+    "name": "Ghetsis",
+    "speciality": "",
+    "img": "/leaders/blwh-ghetsis-2",
+    "pokemon": [
+      { "name": "cofagrigus", "level": "71", "moves": ["will-o-wisp", "protect", "trick-room", "hex"], "ability": "mummy", "held": "leftovers" },
+      { "name": "eelektross", "level": "71", "moves": ["wild-charge", "drain-punch", "aqua-tail", "coil"], "ability": "levitate", "held": "leftovers" },
+      { "name": "gyarados", "level": "71", "moves": ["dragon-dance", "waterfall", "earthquake", "ice-fang"], "ability": "moxie", "held": "lum-berry" },
+      {
+        "name": "machamp",
+        "level": "71",
+        "moves": ["dynamic-punch", "stone-edge", "thunder-punch", "cross-poison"],
+        "ability": "no-guard",
+        "held": "coba-berry"
+      },
+      { "name": "genesect", "level": "72", "moves": ["bug-buzz", "iron-head", "thunderbolt", "ice-beam"], "ability": "download", "held": "focus-sash" },
+      { "name": "hydreigon", "level": "71", "moves": ["dragon-pulse", "nasty-plot", "dark-pulse", "flash-cannon"], "ability": "levitate", "held": "life-orb" }
+    ]
+  },
+  "rood": {
+    "name": "Rood",
+    "speciality": "",
+    "img": "/leaders/blwh-rood",
+    "pokemon": [
+      {
+        "name": "bouffalant",
+        "level": "41",
+        "moves": ["head-charge", "zen-headbutt", "wild-charge", "close-combat"],
+        "ability": "reckless",
+        "held": "chople-berry"
+      },
+      { "name": "zoroark", "level": "41", "moves": ["extrasensory", "grass-knot", "sucker-punch", "u-turn"], "ability": "illusion", "held": "focus-sash" },
+      { "name": "swoobat", "level": "41", "moves": ["nasty-plot", "stored-power", "air-slash", "giga-drain"], "ability": "simple", "held": "sitrus-berry" },
+      { "name": "stoutland", "level": "41", "moves": ["strength", "fire-fang", "ice-fang", "thunder-fang"], "ability": "intimidate", "held": "life-orb" },
+      {
+        "name": "chandelure",
+        "level": "41",
+        "moves": ["energy-ball", "shadow-ball", "mystical-fire", "dark-pulse"],
+        "ability": "flash-fire",
+        "held": "passho-berry"
+      }
+    ]
+  },
+  "zinz1": {
+    "name": "Zinzolin & Grunt",
+    "speciality": "",
+    "img": "/leaders/blwh-zinzolin-grunt",
+    "pokemon": [
+      { "name": "cryogonal", "level": "54", "moves": ["blizzard", "hail", "dazzling-gleam", "explosion"], "ability": "levitate", "held": "focus-sash" },
+      { "name": "swalot", "level": "54", "moves": ["acid-spray", "toxic", "stockpile", "destiny-bond"], "ability": "liquid-ooze" },
+      { "name": "walrein", "level": "54", "moves": ["brine", "protect", "substitute", "toxic"], "ability": "ice-body", "held": "leftovers" },
+      { "name": "delibird", "level": "54", "moves": ["icy-wind", "frost-breath", "acrobatics", "tailwind"], "ability": "technician" },
+      { "name": "weavile", "level": "56", "moves": ["night-slash", "ice-punch", "fake-out", "low-kick"], "ability": "pressure", "held": "life-orb" }
+    ],
+    "doubleBattle": true
+  },
+  "zinz2": {
+    "name": "Zinzolin & Grunt",
+    "speciality": "",
+    "img": "/leaders/blwh-zinzolin-grunt",
+    "pokemon": [
+      {
+        "name": "abomasnow",
+        "level": "59",
+        "moves": ["wood-hammer", "blizzard", "focus-blast", "thunder-punch"],
+        "ability": "snow-warning",
+        "held": "life-orb"
+      },
+      { "name": "cryogonal", "level": "59", "moves": ["blizzard", "reflect", "light-screen", "explosion"], "ability": "levitate", "held": "light-clay" },
+      { "name": "walrein", "level": "59", "moves": ["surf", "protect", "substitute", "toxic"], "ability": "ice-body", "held": "leftovers" },
+      { "name": "weavile", "level": "60", "moves": ["night-slash", "ice-punch", "fake-out", "ice-shard"], "ability": "pressure", "held": "focus-sash" },
+      { "name": "drifblim", "level": "59", "moves": ["acrobatics", "shadow-ball", "thunderbolt", "destiny-bond"], "ability": "unburden", "held": "flying-gem" }
+    ],
+    "doubleBattle": true
+  },
+  "zinz3_c": {
+    "name": "Zinzolin",
+    "speciality": "",
+    "img": "/leaders/blwh-zinzolin",
+    "pokemon": [
+      { "name": "walrein", "level": "67", "moves": ["blizzard", "brine", "encore", "toxic"], "ability": "ice-body", "held": "leftovers" },
+      { "name": "qwilfish", "level": "66", "moves": ["hail", "aqua-jet", "poison-jab", "spikes"], "ability": "intimidate", "held": "icy-rock" },
+      { "name": "drifblim", "level": "67", "moves": ["acrobatics", "shadow-ball", "thunderbolt", "hypnosis"], "ability": "unburden", "held": "flying-gem" },
+      { "name": "golem", "level": "66", "moves": ["rock-slide", "accelerock", "thunder-punch", "steamroller"], "ability": "sturdy", "held": "rock-gem" },
+      { "name": "weavile", "level": "68", "moves": ["knock-off", "icicle-crash", "ice-shard", "low-kick"], "ability": "pressure", "held": "life-orb" },
+      { "name": "carnivine", "level": "66", "moves": ["power-whip", "rage-powder", "sleep-powder", "knock-off"], "ability": "levitate", "held": "focus-sash" }
+    ]
+  },
+  "zinz4_c": {
+    "name": "Zinzolin",
+    "speciality": "",
+    "img": "/leaders/blwh-zinzolin",
+    "pokemon": [
+      {
+        "name": "vanilluxe",
+        "level": "69",
+        "moves": ["dazzling-gleam", "blizzard", "power-gem", "flash-cannon"],
+        "ability": "snow-warning",
+        "held": "focus-sash"
+      },
+      { "name": "cryogonal", "level": "69", "moves": ["blizzard", "reflect", "light-screen", "hail"], "ability": "levitate", "held": "light-clay" },
+      { "name": "froslass", "level": "69", "moves": ["blizzard", "hex", "will-o-wisp", "destiny-bond"], "ability": "snow-cloak", "held": "ice-gem" },
+      {
+        "name": "mamoswine",
+        "level": "69",
+        "moves": ["icicle-crash", "stone-edge", "high-horsepower", "ice-shard"],
+        "ability": "snow-cloak",
+        "held": "zoom-lens"
+      },
+      { "name": "walrein", "level": "69", "moves": ["blizzard", "bubble-beam", "toxic", "substitute"], "ability": "ice-body", "held": "leftovers" },
+      { "name": "weavile", "level": "70", "moves": ["night-slash", "triple-axel", "fake-out", "low-kick"], "ability": "pressure", "held": "life-orb" }
+    ]
+  },
+  "benga_c": {
+    "name": "Benga",
+    "speciality": "",
+    "img": "/leaders/blazevolt-benga",
+    "pokemon": [
+      { "name": "metagross", "level": "61", "moves": ["stealth-rock", "bullet-punch", "ice-punch", "fire-punch"], "ability": "iron-fist", "held": "focus-sash" },
+      { "name": "garchomp", "level": "61", "moves": ["swords-dance", "earthquake", "dragon-claw", "stone-edge"], "ability": "rough-skin", "held": "wide-lens" },
+      { "name": "emboar", "level": "61", "moves": ["v-create", "earthquake", "sucker-punch", "wild-charge"], "ability": "mold-breaker", "held": "passho-berry" },
+      { "name": "gyarados", "level": "61", "moves": ["dragon-dance", "stone-edge", "waterfall", "power-whip"], "ability": "moxie", "held": "wacan-berry" },
+      { "name": "conkeldurr", "level": "61", "moves": ["drain-punch", "mach-punch", "knock-off", "facade"], "ability": "guts", "held": "flame-orb" },
+      { "name": "volcarona", "level": "62", "moves": ["quiver-dance", "fiery-dance", "bug-buzz", "giga-drain"], "ability": "flame-body", "held": "lum-berry" }
+    ]
+  },
+  "charles": {
+    "name": "Charles",
+    "speciality": "",
+    "img": "/leaders/blwh-charles",
+    "pokemon": [
+      {
+        "name": "accelgor",
+        "level": "37",
+        "moves": ["bug-buzz", "final-gambit", "giga-drain", "sludge-bomb"],
+        "ability": "infiltrator",
+        "held": "charti-berry"
+      },
+      { "name": "sigilyph", "level": "37", "moves": ["air-cutter", "esper-wing", "icy-wind", "heat-wave"], "ability": "tinted-lens", "held": "twisted-spoon" },
+      {
+        "name": "krokorok",
+        "level": "37",
+        "moves": ["foul-play", "high-horsepower", "rock-slide", "thunder-fang"],
+        "ability": "intimidate",
+        "held": "rocky-helmet"
+      },
+      { "name": "druddigon", "level": "37", "moves": ["dragon-rush", "thunder-punch", "rock-climb", "glare"], "ability": "sheer-force", "held": "life-orb" },
+      {
+        "name": "bouffalant",
+        "level": "37",
+        "moves": ["head-charge", "wild-charge", "megahorn", "high-horsepower"],
+        "ability": "reckless",
+        "held": "sitrus-berry"
+      },
+      { "name": "crustle", "level": "37", "moves": ["rock-slide", "accelerock", "shell-smash", "x-scissor"], "ability": "sturdy", "held": "custap-berry" }
+    ]
+  },
+  "e1_c": {
+    "name": "Shauntal",
+    "speciality": "ghost",
+    "img": "/leaders/blwh-shauntal",
+    "pokemon": [
+      { "name": "sableye", "level": "77", "moves": ["trick", "quash", "will-o-wisp", "shadow-claw"], "ability": "prankster", "held": "lagging-tail" },
+      { "name": "gengar", "level": "77", "moves": ["shadow-ball", "sludge-bomb", "aura-sphere", "energy-ball"], "ability": "levitate", "held": "life-orb" },
+      {
+        "name": "mismagius",
+        "level": "77",
+        "moves": ["mystical-fire", "shadow-ball", "dazzling-gleam", "nasty-plot"],
+        "ability": "levitate",
+        "held": "focus-sash"
+      },
+      {
+        "name": "golurk",
+        "level": "77",
+        "moves": ["shadow-punch", "shadow-sneak", "high-horsepower", "ice-punch"],
+        "ability": "iron-fist",
+        "held": "rindo-berry"
+      },
+      { "name": "jellicent", "level": "77", "moves": ["scald", "icy-wind", "shadow-ball", "recover"], "ability": "water-absorb", "held": "leftovers" },
+      {
+        "name": "chandelure",
+        "level": "78",
+        "moves": ["heat-wave", "shadow-ball", "substitute", "energy-ball"],
+        "ability": "shadow-tag",
+        "held": "air-balloon"
+      }
+    ]
+  },
+  "e2_c": {
+    "name": "Grimsley",
+    "speciality": "dark",
+    "img": "/leaders/blwh-grimsley",
+    "pokemon": [
+      {
+        "name": "krookodile",
+        "level": "78",
+        "moves": ["earthquake", "knock-off", "stealth-rock", "close-combat"],
+        "ability": "intimidate",
+        "held": "leftovers"
+      },
+      { "name": "tyranitar", "level": "77", "moves": ["dragon-dance", "crunch", "stone-edge", "ice-punch"], "ability": "battle-armor", "held": "chople-berry" },
+      { "name": "honchkrow", "level": "77", "moves": ["night-slash", "brave-bird", "superpower", "heat-wave"], "ability": "moxie", "held": "custap-berry" },
+      { "name": "sharpedo", "level": "77", "moves": ["crunch", "waterfall", "close-combat", "protect"], "ability": "speed-boost", "held": "focus-sash" },
+      { "name": "zoroark", "level": "77", "moves": ["night-daze", "flamethrower", "nasty-plot", "sludge-bomb"], "ability": "illusion", "held": "life-orb" },
+      { "name": "drapion", "level": "77", "moves": ["storm-throw", "cross-poison", "night-slash", "swords-dance"], "ability": "sniper", "held": "scope-lens" }
+    ]
+  },
+  "e3_c": {
+    "name": "Caitlin",
+    "speciality": "psychic",
+    "img": "/leaders/blwh-caitlin",
+    "pokemon": [
+      { "name": "musharna", "level": "77", "moves": ["trick-room", "psyshock", "dazzling-gleam", "shadow-ball"], "ability": "synchronize", "held": "leftovers" },
+      { "name": "slowbro", "level": "77", "moves": ["psychic", "ice-beam", "fire-blast", "scald"], "ability": "regenerator", "held": "eject-button" },
+      { "name": "gallade", "level": "77", "moves": ["psycho-cut", "close-combat", "ice-punch", "shadow-sneak"], "ability": "justified", "held": "life-orb" },
+      {
+        "name": "darmanitan",
+        "level": "78",
+        "moves": ["heat-wave", "psychic", "grass-knot", "focus-blast"],
+        "ability": "sheer-force",
+        "held": "life-orb",
+        "sprite": "10017",
+        "types": ["fire", "psychic"],
+        "stats": { "hp": 105, "atk": 30, "def": 105, "spa": 140, "spd": 105, "spe": 55 }
+      },
+      { "name": "xatu", "level": "77", "moves": ["aura-sphere", "giga-drain", "heat-wave", "air-slash"], "ability": "magic-bounce", "held": "focus-sash" },
+      {
+        "name": "metagross",
+        "level": "77",
+        "moves": ["meteor-mash", "rock-slide", "trick-room", "bullet-punch"],
+        "ability": "iron-fist",
+        "held": "air-balloon"
+      }
+    ],
+    "doubleBattle": true
+  },
+  "e4_c": {
+    "name": "Marshal",
+    "speciality": "fighting",
+    "img": "/leaders/blwh-marshal",
+    "pokemon": [
+      { "name": "hitmontop", "level": "77", "moves": ["ice-punch", "rock-slide", "fake-out", "close-combat"], "ability": "intimidate", "held": "sitrus-berry" },
+      { "name": "infernape", "level": "77", "moves": ["heat-wave", "thunder-punch", "poison-jab", "close-combat"], "ability": "blaze", "held": "focus-sash" },
+      { "name": "breloom", "level": "77", "moves": ["spore", "mach-punch", "bullet-seed", "rock-tomb"], "ability": "technician", "held": "coba-berry" },
+      {
+        "name": "toxicroak",
+        "level": "77",
+        "moves": ["icy-wind", "poison-jab", "drain-punch", "bullet-punch"],
+        "ability": "poison-touch",
+        "held": "salac-berry"
+      },
+      { "name": "lucario", "level": "77", "moves": ["close-combat", "ice-punch", "bullet-punch", "rock-slide"], "ability": "justified", "held": "air-balloon" },
+      { "name": "conkeldurr", "level": "78", "moves": ["poison-jab", "drain-punch", "rock-slide", "mach-punch"], "ability": "guts", "held": "flame-orb" }
+    ],
+    "doubleBattle": true
+  },
+  "champ_c": {
+    "name": "Iris",
+    "speciality": "",
+    "img": "/leaders/blwh-iris-champion",
+    "pokemon": [
+      { "name": "serperior", "level": "78", "moves": ["leaf-storm", "draco-meteor", "substitute", "glare"], "ability": "contrary", "held": "yache-berry" },
+      {
+        "name": "dragonite",
+        "level": "78",
+        "moves": ["dragon-dance", "dual-wingbeat", "dragon-claw", "fire-punch"],
+        "ability": "multiscale",
+        "held": "leftovers"
+      },
+      { "name": "empoleon", "level": "78", "moves": ["agility", "ice-beam", "flash-cannon", "hydro-pump"], "ability": "torrent", "held": "shuca-berry" },
+      { "name": "alakazam", "level": "78", "moves": ["psyshock", "nasty-plot", "energy-ball", "aura-sphere"], "ability": "magic-guard", "held": "focus-sash" },
+      {
+        "name": "togekiss",
+        "level": "78",
+        "moves": ["moonblast", "air-slash", "thunder-wave", "aura-sphere"],
+        "ability": "serene-grace",
+        "held": "sitrus-berry"
+      },
+      { "name": "latios", "level": "79", "moves": ["dragon-pulse", "aura-sphere", "mystical-fire", "esper-wing"], "ability": "levitate", "held": "life-orb" }
+    ]
+  }
+}

@@ -1,0 +1,803 @@
+{
+  "1": {
+    "name": "Ilima",
+    "speciality": "normal",
+    "img": { "src": "/leaders/sm-ilima", "author": "Drawnamu", "link": "https://www.deviantart.com/drawnamu" },
+    "pokemon": [
+      { "name": "yungoos", "level": "10", "moves": ["tackle", "pursuit", "leer"], "ability": "strong-jaw" },
+      { "name": "smeargle", "level": "11", "moves": ["water-gun", "tackle"], "ability": "technician", "starter": "fire" },
+      { "name": "smeargle", "level": "11", "moves": ["ember", "tackle"], "ability": "technician", "starter": "grass" },
+      { "name": "smeargle", "level": "11", "moves": ["leafage", "tackle"], "ability": "technician", "starter": "water" }
+    ]
+  },
+  "2": {
+    "name": "Island Kahuna Hala",
+    "speciality": "fighting",
+    "img": { "src": "/leaders/sm-hala", "author": "Beliot419", "link": "https://www.deviantart.com/beliot419" },
+    "pokemon": [
+      { "name": "machop", "level": "15", "moves": ["karate-chop", "revenge", "focus-energy"], "ability": "guts" },
+      { "name": "makuhita", "level": "15", "moves": ["fake-out", "sand-attack", "arm-thrust"], "ability": "thick-fat" },
+      { "name": "crabrawler", "level": "16", "moves": ["power-up-punch", "pursuit", "leer"], "ability": "iron-fist", "held": "fightinium-z--held" }
+    ]
+  },
+  "3": {
+    "name": "Lana's Trial",
+    "speciality": "water",
+    "img": { "src": "/leaders/sm-lana", "author": "Kyledove", "link": "https://www.deviantart.com/kyle-dove" },
+    "pokemon": [
+      { "name": "araquanid", "level": "20", "moves": ["leech-life", "bubble", "bite", "aurora-beam"], "ability": "water-bubble", "held": "wacan-berry" },
+      { "name": "masquerain", "level": "18", "moves": ["scary-face", "stun-spore", "tailwind", "bug-bite"], "ability": "intimidate" },
+      { "name": "dewpider", "level": "18", "moves": ["sticky-web", "rain-dance", "bug-bite", "bubble"], "ability": "water-bubble" }
+    ]
+  },
+  "4": {
+    "name": "Kiawe's Trial",
+    "speciality": "fire",
+    "img": { "src": "/leaders/sm-kiawe", "author": "Drawnamu", "link": "https://www.deviantart.com/drawnamu" },
+    "pokemon": [
+      {
+        "name": "marowak",
+        "level": "22",
+        "moves": ["hex", "flame-wheel", "brick-break", "detect"],
+        "ability": "cursed-body",
+        "held": "thick-club",
+        "icon": "marowak-alola",
+        "sprite": "10115",
+        "types": ["fire", "ghost"],
+        "stats": { "hp": 60, "atk": 80, "def": 110, "spa": 50, "spd": 80, "spe": 45 }
+      },
+      { "name": "salazzle", "level": "20", "moves": ["poison-gas", "venoshock", "flame-burst", "torment"], "ability": "corrosion" }
+    ]
+  },
+  "5": {
+    "name": "Mallow's Trial",
+    "speciality": "grass",
+    "img": { "src": "/leaders/sm-mallow", "author": "Kyledove", "link": "https://www.deviantart.com/kyle-dove" },
+    "pokemon": [
+      { "name": "lurantis", "level": "24", "moves": ["low-sweep", "x-scissor", "solar-blade", "synthesis"], "ability": "leaf-guard", "held": "power-herb" },
+      { "name": "comfey", "level": "22", "moves": ["sunny-day", "floral-healing", "flower-shield", "magical-leaf"], "ability": "flower-veil" },
+      { "name": "kecleon", "level": "22", "moves": ["sunny-day", "ancient-power", "dizzy-punch", "screech"], "ability": "color-change" }
+    ]
+  },
+  "6": {
+    "name": "Island Kahuna Olivia",
+    "speciality": "rock",
+    "img": { "src": "/leaders/sm-olivia", "author": "Kyledove", "link": "https://www.deviantart.com/kyle-dove" },
+    "pokemon": [
+      { "name": "anorith", "level": "27", "moves": ["bug-bite", "smack-down", "metal-claw"], "ability": "battle-armor" },
+      { "name": "lileep", "level": "27", "moves": ["giga-drain", "ancient-power", "brine"], "ability": "suction-cups" },
+      {
+        "name": "lycanroc",
+        "level": "28",
+        "moves": ["bite", "rock-tomb"],
+        "ability": "vital-spirit",
+        "held": "rockium-z--held",
+        "icon": "lycanroc-midnight",
+        "sprite": "10126",
+        "types": ["rock"],
+        "stats": { "hp": 85, "atk": 115, "def": 75, "spa": 55, "spd": 75, "spe": 82 }
+      }
+    ]
+  },
+  "7": {
+    "name": "Sophocles' Trial",
+    "speciality": "electric",
+    "img": { "src": "/leaders/sm-sophocles", "author": "Kyledove", "link": "https://www.deviantart.com/kyle-dove" },
+    "pokemon": [
+      { "name": "togedemaru", "level": "33", "moves": ["zing-zap", "spiky-shield", "iron-head", "bounce"], "ability": "lightning-rod", "held": "sitrus-berry" },
+      { "name": "skarmory", "level": "32", "moves": ["stealth-rock", "steel-wing", "tailwind", "torment"], "ability": "sturdy" },
+      { "name": "dedenne", "level": "31", "moves": ["super-fang", "eerie-impulse", "charm", "discharge"], "ability": "pickup" }
+    ]
+  },
+  "8": {
+    "name": "Acerola's Trial",
+    "speciality": "ghost",
+    "img": { "src": "/leaders/sm-acerola", "author": "Drawnamu", "link": "https://www.deviantart.com/drawnamu" },
+    "pokemon": [
+      {
+        "name": "mimikyu",
+        "level": "35",
+        "moves": ["shadow-claw", "play-rough", "leech-life", "slash"],
+        "ability": "disguise",
+        "held": "lum-berry",
+        "icon": "mimikyu-disguised"
+      },
+      { "name": "banette", "level": "32", "moves": ["screech", "will-o-wisp", "feint-attack", "curse"], "ability": "insomnia" },
+      { "name": "jellicent", "level": "33", "moves": ["water-pulse", "snore", "spite", "night-shade"], "ability": "cursed-body" }
+    ]
+  },
+  "9": {
+    "name": "Island Kahuna Nanu",
+    "speciality": "dark",
+    "img": { "src": "/leaders/sm-nanu", "author": "Drawnamu", "link": "https://www.deviantart.com/drawnamu" },
+    "pokemon": [
+      { "name": "sableye", "level": "43", "moves": ["power-gem", "shadow-ball", "fake-out"], "ability": "keen-eye" },
+      { "name": "krokorok", "level": "43", "moves": ["crunch", "assurance", "swagger", "earthquake"], "ability": "intimidate" },
+      {
+        "name": "persian",
+        "level": "44",
+        "moves": ["power-gem", "fake-out", "dark-pulse"],
+        "ability": "fur-coat",
+        "held": "darkinium-z--held",
+        "icon": "persian-alola",
+        "sprite": "10108",
+        "types": ["dark"],
+        "stats": { "hp": 65, "atk": 60, "def": 60, "spa": 75, "spd": 65, "spe": 115 }
+      }
+    ]
+  },
+  "11": {
+    "name": "Kommo-o's Trial",
+    "speciality": "dragon",
+    "img": "/leaders/sm-kommoo",
+    "pokemon": [
+      {
+        "name": "kommo-o",
+        "level": "49",
+        "moves": ["drain-punch", "dragon-claw", "thunder-punch", "poison-jab"],
+        "ability": "soundproof",
+        "held": "roseli-berry"
+      },
+      { "name": "noivern", "level": "48", "moves": ["boomburst", "screech", "dragon-pulse", "air-slash"], "ability": "infiltrator" },
+      { "name": "scizor", "level": "46", "moves": ["light-screen", "pursuit", "bullet-punch", "x-scissor"], "ability": "technician" }
+    ]
+  },
+  "12": {
+    "name": "Mina's Trial",
+    "speciality": "fairy",
+    "img": { "src": "/leaders/sm-mina", "author": "Kyledove", "link": "https://www.deviantart.com/kyle-dove" },
+    "pokemon": [
+      { "name": "blissey", "level": "53", "moves": ["heal-pulse", "light-screen", "helping-hand", "dazzling-gleam"], "ability": "serene-grace" },
+      { "name": "pelipper", "level": "52", "moves": ["stockpile", "scald", "spit-up", "seed-bomb"], "ability": "drizzle" },
+      {
+        "name": "ribombee",
+        "level": "55",
+        "moves": ["bug-buzz", "draining-kiss", "quiver-dance", "dazzling-gleam"],
+        "ability": "shield-dust",
+        "held": "occa-berry"
+      }
+    ]
+  },
+  "13": {
+    "name": "Island Kahuna Hapu",
+    "speciality": "ground",
+    "img": { "src": "/leaders/sm-hapu", "author": "Beliot419", "link": "https://www.deviantart.com/beliot419" },
+    "pokemon": [
+      { "name": "golurk", "level": "53", "moves": ["hammer-arm", "earthquake", "shadow-punch", "stealth-rock"], "ability": "no-guard" },
+      { "name": "gastrodon", "level": "53", "moves": ["muddy-water", "mud-bomb", "recover"], "ability": "sticky-hold" },
+      { "name": "flygon", "level": "53", "moves": ["earth-power", "dragon-breath"], "ability": "levitate" },
+      { "name": "mudsdale", "level": "54", "moves": ["heavy-slam", "earthquake", "double-kick", "payback"], "ability": "stamina", "held": "groundium-z--held" }
+    ]
+  },
+  "rr-max": {
+    "name": "Maxie",
+    "speciality": "",
+    "img": { "src": "/leaders/rs-maxie-oras", "author": "Hyo", "link": "https://www.deviantart.com/hyo-oppa" },
+    "pokemon": [
+      { "name": "mightyena", "level": "64", "moves": ["crunch", "fire-fang", "thunder-fang", "ice-fang"], "ability": "intimidate" },
+      { "name": "crobat", "level": "64", "moves": ["air-slash", "dark-pulse", "toxic", "sludge-bomb"], "ability": "inner-focus" },
+      { "name": "weezing", "level": "64", "moves": ["sludge-bomb", "thunderbolt", "shadow-ball", "pain-split"], "ability": "levitate" },
+      { "name": "camerupt", "level": "64", "moves": ["earthquake", "stone-edge", "flamethrower", "flash-cannon"], "ability": "magma-armor" },
+      { "name": "groudon", "level": "66", "moves": ["earthquake", "flamethrower", "ancient-power", "solar-beam"], "ability": "drought" }
+    ]
+  },
+  "rr-arch": {
+    "name": "Archie",
+    "speciality": "",
+    "img": { "src": "/leaders/rs-archie-oras", "author": "Hyo", "link": "https://www.deviantart.com/hyo-oppa" },
+    "pokemon": [
+      { "name": "mightyena", "level": "64", "moves": ["crunch", "fire-fang", "thunder-fang", "ice-fang"], "ability": "intimidate" },
+      { "name": "crobat", "level": "64", "moves": ["air-slash", "dark-pulse", "toxic", "sludge-bomb"], "ability": "inner-focus" },
+      { "name": "muk", "level": "64", "moves": ["gunk-shot", "fire-punch", "thunder-punch", "ice-punch"], "ability": "poison-touch" },
+      { "name": "sharpedo", "level": "64", "moves": ["night-slash", "liquidation", "ice-fang", "poison-fang"], "ability": "rough-skin" },
+      { "name": "kyogre", "level": "66", "moves": ["hydro-pump", "ice-beam", "ancient-power", "thunder"], "ability": "drizzle" }
+    ]
+  },
+  "rr-cb": {
+    "name": "Cyrus",
+    "speciality": "",
+    "img": "/leaders/dp-cyrus",
+    "pokemon": [
+      { "name": "houndoom", "level": "65", "moves": ["fire-blast", "dark-pulse", "sludge-bomb", "shadow-ball"], "ability": "early-bird" },
+      { "name": "honchkrow", "level": "65", "moves": ["night-slash", "sky-attack", "heat-wave", "icy-wind"], "ability": "insomnia" },
+      { "name": "crobat", "level": "65", "moves": ["cross-poison", "zen-headbutt", "x-scissor", "super-fang"], "ability": "inner-focus" },
+      { "name": "weavile", "level": "65", "moves": ["night-slash", "quick-attack", "ice-punch", "brick-break"], "ability": "pressure" },
+      { "name": "palkia", "level": "67", "moves": ["spacial-rend", "surf", "earth-power", "thunderbolt"], "ability": "pressure" }
+    ]
+  },
+  "rr-ghb": {
+    "name": "Ghetsis",
+    "speciality": "",
+    "img": "/leaders/blwh-ghetsis",
+    "pokemon": [
+      { "name": "cofagrigus", "level": "66", "moves": ["will-o-wisp", "shadow-ball", "power-split", "dark-pulse"], "ability": "mummy" },
+      { "name": "bouffalant", "level": "66", "moves": ["head-charge", "poison-jab", "earthquake", "megahorn"], "ability": "reckless" },
+      { "name": "bisharp", "level": "66", "moves": ["iron-head", "night-slash", "stone-edge", "x-scissor"], "ability": "defiant" },
+      { "name": "hydreigon", "level": "66", "moves": ["dragon-pulse", "hyper-voice", "dark-pulse", "surf"], "ability": "levitate" },
+      { "name": "reshiram", "level": "68", "moves": ["blue-flare", "hyper-voice", "dragon-claw", "zen-headbutt"], "ability": "turboblaze" }
+    ]
+  },
+  "rr-lb": {
+    "name": "Lysandre",
+    "speciality": "",
+    "img": { "src": "/leaders/xy-lysandre", "author": "Sugar and Spice", "link": "https://chipsncookies.tumblr.com/" },
+    "pokemon": [
+      { "name": "mienshao", "level": "65", "moves": ["fake-out", "dual-chop", "high-jump-kick", "u-turn"], "ability": "inner-focus" },
+      { "name": "honchkrow", "level": "65", "moves": ["dark-pulse", "heat-wave", "psychic", "shadow-ball"], "ability": "insomnia" },
+      { "name": "pyroar", "level": "65", "moves": ["flamethrower", "will-o-wisp", "hyper-voice", "snarl"], "ability": "rivalry" },
+      { "name": "gyarados", "level": "65", "moves": ["crunch", "waterfall", "earthquake", "stone-edge"], "ability": "intimidate", "held": "gyaradosite" },
+      { "name": "yveltal", "level": "67", "moves": ["oblivion-wing", "air-slash", "psychic", "shadow-ball"], "ability": "dark-aura" }
+    ]
+  },
+  "rr-gb": {
+    "name": "Giovanni",
+    "speciality": "",
+    "img": { "src": "/leaders/sm-giovanni", "author": "Sugar and Spice", "link": "https://chipsncookies.tumblr.com/" },
+    "pokemon": [
+      { "name": "dugtrio", "level": "68", "moves": ["sandstorm", "earthquake", "sucker-punch", "stealth-rock"], "ability": "sand-veil", "held": "smooth-rock" },
+      { "name": "nidoking", "level": "68", "moves": ["earthquake", "poison-jab", "throat-chop", "aqua-tail"], "ability": "poison-point" },
+      { "name": "nidoqueen", "level": "68", "moves": ["surf", "sludge-wave", "earth-power", "flamethrower"], "ability": "poison-point" },
+      { "name": "rhyperior", "level": "68", "moves": ["megahorn", "earthquake", "stone-edge", "thunder-punch"], "ability": "lightning-rod" },
+      { "name": "mewtwo", "level": "70", "moves": ["psystrike", "aura-sphere", "psychic", "ice-beam"], "ability": "pressure", "held": "mewtwonite-y" }
+    ]
+  },
+  "f1": {
+    "name": "Faba",
+    "speciality": "",
+    "img": { "src": "/leaders/sm-faba", "author": "Beliot419", "link": "https://www.deviantart.com/beliot419" },
+    "pokemon": [
+      { "name": "hypno", "level": "43", "moves": ["psychic", "hypnosis", "disable", "nightmare"], "ability": "insomnia" }
+    ]
+  },
+  "f2": {
+    "name": "Faba & Employee",
+    "speciality": "",
+    "img": { "src": "/leaders/sm-faba", "author": "Beliot419", "link": "https://www.deviantart.com/beliot419" },
+    "pokemon": [
+      { "name": "claydol", "level": "44", "moves": ["earth-power", "extrasensory", "ancient-power", "grass-knot"], "ability": "levitate" },
+      { "name": "bruxish", "level": "44", "moves": ["aqua-jet", "crunch", "psychic-fangs", "waterfall"], "ability": "strong-jaw" },
+      { "name": "hypno", "level": "45", "moves": ["psychic", "hypnosis", "focus-blast", "nightmare"], "ability": "insomnia" },
+      { "name": "ledian", "level": "42", "moves": ["light-screen", "reflect", "air-slash", "bug-buzz"], "ability": "swarm" },
+      { "name": "pupitar", "level": "42", "moves": ["snarl"], "ability": "shed-skin" }
+    ]
+  },
+  "f3": {
+    "name": "Faba & Employee",
+    "speciality": "",
+    "img": { "src": "/leaders/sm-faba", "author": "Beliot419", "link": "https://www.deviantart.com/beliot419" },
+    "pokemon": [
+      { "name": "hypno", "level": "63", "moves": ["psychic", "hypnosis", "focus-blast", "dream-eater"], "ability": "insomnia" },
+      { "name": "claydol", "level": "63", "moves": ["earth-power", "extrasensory", "ancient-power", "grass-knot"], "ability": "levitate" },
+      { "name": "bruxish", "level": "63", "moves": ["aqua-jet", "crunch", "psychic-fangs", "waterfall"], "ability": "strong-jaw" },
+      { "name": "granbull", "level": "61", "moves": ["snarl"], "ability": "intimidate" },
+      { "name": "scrafty", "level": "61", "moves": ["snarl"], "ability": "intimidate" },
+      { "name": "shiinotic", "level": "61", "moves": ["spore", "dazzling-gleam"], "ability": "effect-spore" }
+    ]
+  },
+  "l": {
+    "name": "Lusamine",
+    "speciality": "",
+    "img": { "src": "/leaders/sm-lusamine", "author": "Poffin Case", "link": "https://pokengine.org/trainers/Lusamine" },
+    "pokemon": [
+      { "name": "clefable", "level": "47", "moves": ["moonblast", "charm", "psychic", "hyper-voice"], "ability": "magic-guard" },
+      { "name": "lilligant", "level": "47", "moves": ["stun-spore", "petal-dance", "teeter-dance"], "ability": "own-tempo" },
+      { "name": "lopunny", "level": "47", "moves": ["dizzy-punch", "thunder-punch", "ice-punch", "fire-punch"], "ability": "cute-charm" },
+      { "name": "milotic", "level": "47", "moves": ["hydro-pump", "icy-wind", "flail", "dragon-pulse"], "ability": "marvel-scale" },
+      { "name": "bewear", "level": "47", "moves": ["zen-headbutt", "drain-punch", "take-down", "dual-chop"], "ability": "fluffy" }
+    ]
+  },
+  "p1": {
+    "name": "Plumeria",
+    "speciality": "poison",
+    "img": { "src": "/leaders/sm-plumeria", "author": "Beliot419", "link": "https://www.deviantart.com/beliot419" },
+    "pokemon": [
+      { "name": "golbat", "level": "26", "moves": ["poison-fang", "wing-attack", "confuse-ray"], "ability": "inner-focus" },
+      { "name": "salandit", "level": "27", "moves": ["flame-burst", "dragon-rage", "poison-gas"], "ability": "corrosion" }
+    ]
+  },
+  "p2": {
+    "name": "Plumeria",
+    "speciality": "poison",
+    "img": { "src": "/leaders/sm-plumeria", "author": "Beliot419", "link": "https://www.deviantart.com/beliot419" },
+    "pokemon": [
+      { "name": "golbat", "level": "37", "moves": ["wing-attack", "poison-fang"], "ability": "inner-focus" },
+      { "name": "salazzle", "level": "38", "moves": ["dragon-pulse", "flamethrower", "sludge-bomb"], "ability": "corrosion" }
+    ]
+  },
+  "gz1": {
+    "name": "Guzma",
+    "speciality": "bug",
+    "img": { "src": "/leaders/sm-guzma", "author": "Beliot419", "link": "https://www.deviantart.com/beliot419" },
+    "pokemon": [
+      { "name": "golisopod", "level": "34", "moves": ["sucker-punch", "razor-shell", "first-impression"], "ability": "emergency-exit" },
+      { "name": "masquerain", "level": "34", "moves": ["air-slash", "bug-buzz", "icy-wind"], "ability": "intimidate" }
+    ]
+  },
+  "gz2": {
+    "name": "Guzma",
+    "speciality": "bug",
+    "img": { "src": "/leaders/sm-guzma", "author": "Beliot419", "link": "https://www.deviantart.com/beliot419" },
+    "pokemon": [
+      { "name": "golisopod", "level": "41", "moves": ["sucker-punch", "razor-shell", "first-impression"], "ability": "emergency-exit" },
+      { "name": "masquerain", "level": "41", "moves": ["air-slash", "bug-buzz", "icy-wind"], "ability": "intimidate" },
+      { "name": "pinsir", "level": "41", "moves": ["throat-chop", "storm-throw", "x-scissor"], "ability": "mold-breaker" }
+    ]
+  },
+  "gz3": {
+    "name": "Guzma",
+    "speciality": "bug",
+    "img": { "src": "/leaders/sm-guzma", "author": "Beliot419", "link": "https://www.deviantart.com/beliot419" },
+    "pokemon": [
+      { "name": "golisopod", "level": "45", "moves": ["sucker-punch", "razor-shell", "first-impression"], "ability": "emergency-exit" },
+      { "name": "masquerain", "level": "45", "moves": ["air-slash", "bug-buzz", "icy-wind"], "ability": "intimidate" },
+      { "name": "pinsir", "level": "45", "moves": ["throat-chop", "storm-throw", "x-scissor", "stone-edge"], "ability": "mold-breaker" },
+      { "name": "vikavolt", "level": "45", "moves": ["flash-cannon", "thunderbolt", "bug-buzz", "energy-ball"], "ability": "levitate" }
+    ]
+  },
+  "g1": {
+    "name": "Gladion",
+    "speciality": "",
+    "img": { "src": "/leaders/sm-gladion", "author": "Beliot419", "link": "https://www.deviantart.com/beliot419" },
+    "pokemon": [
+      { "name": "zorua", "level": "17", "moves": ["feint-attack", "scratch"], "ability": "illusion" },
+      { "name": "type-null", "level": "18", "moves": ["tackle", "pursuit"], "ability": "battle-armor" },
+      { "name": "zubat", "level": "17", "moves": ["bite", "wing-attack"], "ability": "inner-focus" }
+    ]
+  },
+  "g2": {
+    "name": "Gladion",
+    "speciality": "",
+    "img": { "src": "/leaders/sm-gladion", "author": "Beliot419", "link": "https://www.deviantart.com/beliot419" },
+    "pokemon": [
+      { "name": "golbat", "level": "42", "moves": ["acrobatics", "poison-fang", "venoshock"], "ability": "inner-focus" },
+      { "name": "zoroark", "level": "42", "moves": ["snarl", "hyper-voice"], "ability": "illusion" },
+      { "name": "type-null", "level": "43", "moves": ["pursuit", "crush-claw", "x-scissor"], "ability": "battle-armor" }
+    ]
+  },
+  "g3": {
+    "name": "Gladion",
+    "speciality": "",
+    "img": { "src": "/leaders/sm-gladion", "author": "Beliot419", "link": "https://www.deviantart.com/beliot419" },
+    "pokemon": [
+      { "name": "crobat", "level": "53", "moves": ["acrobatics", "cross-poison"], "ability": "inner-focus" },
+      { "name": "zoroark", "level": "53", "moves": ["snarl", "hyper-voice"], "ability": "illusion", "held": "darkinium-z--held" },
+      {
+        "name": "silvally",
+        "level": "55",
+        "moves": ["crunch", "crush-claw", "x-scissor", "multi-attack"],
+        "ability": "rks-system",
+        "held": "water-memory",
+        "starter": "fire"
+      },
+      {
+        "name": "silvally",
+        "level": "55",
+        "moves": ["crunch", "crush-claw", "x-scissor", "multi-attack"],
+        "ability": "rks-system",
+        "held": "fire-memory",
+        "starter": "grass"
+      },
+      {
+        "name": "silvally",
+        "level": "55",
+        "moves": ["crunch", "crush-claw", "x-scissor", "multi-attack"],
+        "ability": "rks-system",
+        "held": "grass-memory",
+        "starter": "water"
+      },
+      { "name": "lucario", "level": "53", "moves": ["aura-sphere", "metal-claw", "quick-attack"], "ability": "inner-focus" }
+    ]
+  },
+  "r1": {
+    "name": "Hau",
+    "speciality": "",
+    "img": { "src": "/leaders/sm-hau", "author": "Beliot419", "link": "https://www.deviantart.com/beliot419" },
+    "pokemon": [
+      { "name": "rowlet", "level": "5", "moves": ["tackle", "leafage", "growl"], "ability": "overgrow", "starter": "fire" },
+      { "name": "popplio", "level": "5", "moves": ["pound", "water-gun", "growl"], "ability": "torrent", "starter": "grass" },
+      { "name": "litten", "level": "5", "moves": ["scratch", "ember", "growl"], "ability": "blaze", "starter": "water" }
+    ]
+  },
+  "r2": {
+    "name": "Hau",
+    "speciality": "",
+    "img": { "src": "/leaders/sm-hau", "author": "Beliot419", "link": "https://www.deviantart.com/beliot419" },
+    "pokemon": [
+      { "name": "pichu", "level": "6", "moves": ["thunder-shock", "charm", "tail-whip"], "ability": "static" },
+      { "name": "rowlet", "level": "7", "moves": ["tackle", "leafage", "growl"], "ability": "overgrow", "starter": "fire" },
+      { "name": "popplio", "level": "7", "moves": ["pound", "water-gun", "growl"], "ability": "torrent", "starter": "grass" },
+      { "name": "litten", "level": "7", "moves": ["scratch", "ember", "growl"], "ability": "blaze", "starter": "water" }
+    ]
+  },
+  "r3": {
+    "name": "Hau",
+    "speciality": "",
+    "img": { "src": "/leaders/sm-hau", "author": "Beliot419", "link": "https://www.deviantart.com/beliot419" },
+    "pokemon": [
+      { "name": "rowlet", "level": "13", "moves": ["leafage", "growl", "peck", "astonish"], "ability": "overgrow", "held": "sitrus-berry", "starter": "fire" },
+      {
+        "name": "popplio",
+        "level": "13",
+        "moves": ["water-gun", "growl", "disarming-voice", "baby-doll-eyes"],
+        "ability": "torrent",
+        "held": "sitrus-berry",
+        "starter": "grass"
+      },
+      { "name": "litten", "level": "13", "moves": ["ember", "growl", "lick", "leer"], "ability": "blaze", "held": "sitrus-berry", "starter": "water" },
+      { "name": "noibat", "level": "11", "moves": ["supersonic", "tackle", "absorb", "gust"], "ability": "infiltrator" },
+      { "name": "pikachu", "level": "12", "moves": ["growl", "play-nice", "quick-attack", "thunder-shock"], "ability": "static" }
+    ]
+  },
+  "r4": {
+    "name": "Hau",
+    "speciality": "",
+    "img": { "src": "/leaders/sm-hau", "author": "Beliot419", "link": "https://www.deviantart.com/beliot419" },
+    "pokemon": [
+      { "name": "dartrix", "level": "16", "moves": ["razor-leaf", "peck", "tackle"], "ability": "overgrow", "held": "normalium-z--held", "starter": "fire" },
+      {
+        "name": "brionne",
+        "level": "16",
+        "moves": ["aqua-jet", "disarming-voice", "pound"],
+        "ability": "torrent",
+        "held": "normalium-z--held",
+        "starter": "grass"
+      },
+      { "name": "torracat", "level": "16", "moves": ["fire-fang", "lick", "scratch"], "ability": "blaze", "held": "normalium-z--held", "starter": "water" },
+      { "name": "pikachu", "level": "15", "moves": ["quick-attack", "electro-ball"], "ability": "static" },
+      { "name": "noibat", "level": "14", "moves": ["tackle", "bite"], "ability": "infiltrator" },
+      { "name": "eevee", "level": "14", "moves": ["baby-doll-eyes", "quick-attack"], "ability": "adaptability" }
+    ]
+  },
+  "r5": {
+    "name": "Hau",
+    "speciality": "",
+    "img": { "src": "/leaders/sm-hau", "author": "Beliot419", "link": "https://www.deviantart.com/beliot419" },
+    "pokemon": [
+      { "name": "dartrix", "level": "30", "moves": ["razor-leaf", "peck"], "ability": "overgrow", "held": "grassium-z--held", "starter": "fire" },
+      { "name": "brionne", "level": "30", "moves": ["bubble-beam", "disarming-voice"], "ability": "torrent", "held": "waterium-z--held", "starter": "grass" },
+      { "name": "torracat", "level": "30", "moves": ["fire-fang", "bite"], "ability": "blaze", "held": "firium-z--held", "starter": "water" },
+      { "name": "vaporeon", "level": "28", "moves": ["water-pulse", "quick-attack"], "ability": "water-absorb", "starter": "fire" },
+      { "name": "flareon", "level": "28", "moves": ["fire-fang", "quick-attack"], "ability": "flash-fire", "starter": "grass" },
+      { "name": "leafeon", "level": "28", "moves": ["giga-drain", "quick-attack"], "ability": "leaf-guard", "starter": "water" },
+      { "name": "noibat", "level": "28", "moves": ["wing-attack", "bite"], "ability": "infiltrator" },
+      { "name": "tauros", "level": "28", "moves": ["pursuit", "horn-attack"], "ability": "intimidate" },
+      {
+        "name": "raichu",
+        "level": "29",
+        "moves": ["electro-ball", "quick-attack", "psychic"],
+        "ability": "surge-surfer",
+        "icon": "raichu-alola",
+        "sprite": "10100",
+        "types": ["electric", "psychic"],
+        "stats": { "hp": 60, "atk": 85, "def": 50, "spa": 95, "spd": 85, "spe": 110 }
+      }
+    ]
+  },
+  "ryuki": {
+    "name": "Ryuki",
+    "speciality": "dragon",
+    "img": { "src": "/leaders/sm-ryuki", "author": "Poffin Case", "link": "https://pokengine.org/trainers/Ryuki" },
+    "pokemon": [
+      { "name": "turtonator", "level": "29", "moves": ["flamethrower", "dragon-tail", "iron-defense"], "ability": "shell-armor" },
+      { "name": "gabite", "level": "29", "moves": ["dual-chop", "take-down", "sand-tomb"], "ability": "sand-veil" },
+      { "name": "drampa", "level": "29", "moves": ["glare", "echoed-voice", "dragon-breath"], "ability": "berserk" }
+    ]
+  },
+  "dsb": {
+    "name": "Sina",
+    "speciality": "ice",
+    "img": { "src": "/leaders/sm-sina", "author": "Beliot419", "link": "https://www.deviantart.com/beliot419" },
+    "pokemon": [
+      { "name": "smoochum", "level": "15", "moves": ["powder-snow", "pound"], "ability": "oblivious" },
+      { "name": "glaceon", "level": "15", "moves": ["icy-wind", "quick-attack"], "ability": "snow-cloak" }
+    ]
+  },
+  "ultra1b": {
+    "name": "Soliera",
+    "speciality": "",
+    "pokemon": [
+      { "name": "furfrou", "level": "13", "moves": ["baby-doll-eyes", "sand-attack", "headbutt", "growl"], "ability": "fur-coat" }
+    ]
+  },
+  "ultra2b": {
+    "name": "Soliera",
+    "speciality": "",
+    "pokemon": [
+      { "name": "poipole", "level": "20", "moves": ["venoshock", "acid", "fury-attack", "charm"], "ability": "beast-boost" }
+    ]
+  },
+  "ultra3b": {
+    "name": "Soliera",
+    "speciality": "",
+    "pokemon": [
+      { "name": "poipole", "level": "47", "moves": ["nasty-plot", "toxic", "poison-jab", "fell-stinger"], "ability": "beast-boost" }
+    ]
+  },
+  "ultra4b": {
+    "name": "Soliera",
+    "speciality": "",
+    "pokemon": [
+      { "name": "poipole", "level": "49", "moves": ["nasty-plot", "toxic", "poison-jab", "fell-stinger"], "ability": "beast-boost" }
+    ]
+  },
+  "1b": {
+    "name": "Ilima's Trial",
+    "speciality": "normal",
+    "img": { "src": "/leaders/sm-ilima", "author": "Drawnamu", "link": "https://www.deviantart.com/drawnamu" },
+    "pokemon": [
+      {
+        "name": "raticate",
+        "level": "12",
+        "moves": ["super-fang", "bite", "fury-swipes", "scary-face"],
+        "ability": "gluttony",
+        "held": "pecha-berry",
+        "icon": "raticate-alola",
+        "sprite": "10092",
+        "types": ["dark", "normal"],
+        "stats": { "hp": 75, "atk": 71, "def": 70, "spa": 40, "spd": 80, "spe": 77 }
+      },
+      {
+        "name": "rattata",
+        "level": "10",
+        "moves": ["tackle", "tail-whip", "quick-attack", "pursuit"],
+        "ability": "hustle",
+        "icon": "rattata-alola",
+        "sprite": "10091",
+        "types": ["dark", "normal"],
+        "stats": { "hp": 30, "atk": 56, "def": 35, "spa": 25, "spd": 35, "spe": 72 }
+      }
+    ]
+  },
+  "10b": {
+    "name": "Necrozma",
+    "speciality": "psychic",
+    "img": "/leaders/sm-necrozma",
+    "pokemon": [
+      {
+        "name": "necrozma",
+        "level": "50",
+        "moves": ["moongeist-beam", "moonlight", "psychic", "power-gem"],
+        "ability": "prism-armor",
+        "icon": "necrozma-dawn-wings",
+        "sprite": "10156",
+        "types": ["psychic", "ghost"],
+        "stats": { "hp": 97, "atk": 113, "def": 109, "spa": 157, "spd": 127, "spe": 77 }
+      },
+      {
+        "name": "necrozma",
+        "level": "60",
+        "moves": ["photon-geyser", "smart-strike", "power-gem", "dragon-pulse"],
+        "ability": "neuroforce",
+        "icon": "necrozma-ultra",
+        "sprite": "10157",
+        "types": ["psychic", "dragon"],
+        "stats": { "hp": 97, "atk": 167, "def": 97, "spa": 167, "spd": 97, "spe": 129 }
+      }
+    ]
+  },
+  "12_1": {
+    "name": "Captain Mina",
+    "speciality": "fairy",
+    "img": { "src": "/leaders/sm-mina", "author": "Kyledove", "link": "https://www.deviantart.com/kyle-dove" },
+    "pokemon": [
+      { "name": "mawile", "level": "51", "moves": ["iron-head", "play-rough", "sucker-punch"], "ability": "intimidate" },
+      { "name": "granbull", "level": "51", "moves": ["stone-edge", "play-rough", "earthquake"], "ability": "intimidate" },
+      { "name": "ribombee", "level": "51", "moves": ["pollen-puff", "dazzling-gleam", "psychic"], "ability": "shield-dust", "held": "fairium-z--held" }
+    ]
+  },
+  "12_2": {
+    "name": "Captain Ilima",
+    "speciality": "normal",
+    "img": { "src": "/leaders/sm-ilima", "author": "Drawnamu", "link": "https://www.deviantart.com/drawnamu" },
+    "pokemon": [
+      { "name": "gumshoos", "level": "51", "moves": ["crunch", "hyper-fang", "super-fang"], "ability": "stakeout" },
+      { "name": "smeargle", "level": "51", "moves": ["extreme-speed", "flamethrower", "surf", "energy-ball"], "ability": "technician" },
+      { "name": "komala", "level": "51", "moves": ["sucker-punch", "wood-hammer", "slam"], "ability": "comatose", "held": "normalium-z--held" }
+    ]
+  },
+  "12_3b": {
+    "name": "Captain Lana",
+    "speciality": "water",
+    "img": { "src": "/leaders/sm-lana", "author": "Kyledove", "link": "https://www.deviantart.com/kyle-dove" },
+    "pokemon": [
+      { "name": "lanturn", "level": "51", "moves": ["discharge", "thunder-wave", "hydro-pump"], "ability": "volt-absorb" },
+      { "name": "cloyster", "level": "51", "moves": ["spike-cannon", "icicle-crash", "spikes"], "ability": "skill-link" },
+      { "name": "araquanid", "level": "51", "moves": ["liquidation", "leech-life", "crunch"], "ability": "water-bubble", "held": "waterium-z--held" }
+    ]
+  },
+  "12_4": {
+    "name": "Captain Kiawe",
+    "speciality": "fire",
+    "img": { "src": "/leaders/sm-kiawe", "author": "Drawnamu", "link": "https://www.deviantart.com/drawnamu" },
+    "pokemon": [
+      { "name": "arcanine", "level": "51", "moves": ["crunch", "flare-blitz", "extreme-speed"], "ability": "intimidate" },
+      { "name": "talonflame", "level": "51", "moves": ["quick-attack", "flame-charge", "brave-bird"], "ability": "flame-body" },
+      {
+        "name": "marowak",
+        "level": "51",
+        "moves": ["flame-wheel", "shadow-bone", "bonemerang"],
+        "ability": "cursed-body",
+        "held": "firium-z--held",
+        "icon": "marowak-alola",
+        "sprite": "10115",
+        "types": ["fire", "ghost"],
+        "stats": { "hp": 60, "atk": 80, "def": 110, "spa": 50, "spd": 80, "spe": 45 }
+      }
+    ]
+  },
+  "12_5": {
+    "name": "Captain Sophocles",
+    "speciality": "electric",
+    "img": { "src": "/leaders/sm-sophocles", "author": "Kyledove", "link": "https://www.deviantart.com/kyle-dove" },
+    "pokemon": [
+      { "name": "togedemaru", "level": "51", "moves": ["spiky-shield", "zing-zap", "fell-stinger"], "ability": "iron-barbs" },
+      { "name": "magnezone", "level": "51", "moves": ["flash-cannon", "discharge", "tri-attack"], "ability": "sturdy" },
+      {
+        "name": "golem",
+        "level": "51",
+        "moves": ["stone-edge", "thunder-punch", "steamroller"],
+        "ability": "sturdy",
+        "held": "electrium-z--held",
+        "icon": "golem-alola",
+        "sprite": "10111",
+        "types": ["rock", "electric"],
+        "stats": { "hp": 80, "atk": 120, "def": 130, "spa": 55, "spd": 65, "spe": 45 }
+      }
+    ]
+  },
+  "12_6": {
+    "name": "Island Kahuna Nanu",
+    "speciality": "dark",
+    "img": { "src": "/leaders/sm-nanu", "author": "Drawnamu", "link": "https://www.deviantart.com/drawnamu" },
+    "pokemon": [
+      { "name": "sableye", "level": "52", "moves": ["power-gem", "shadow-ball", "dark-pulse"], "ability": "keen-eye" },
+      { "name": "absol", "level": "52", "moves": ["sucker-punch", "night-slash", "psycho-cut"], "ability": "super-luck" },
+      {
+        "name": "persian",
+        "level": "52",
+        "moves": ["power-gem", "fake-out", "dark-pulse"],
+        "ability": "fur-coat",
+        "held": "darkinium-z--held",
+        "icon": "persian-alola",
+        "sprite": "10108",
+        "types": ["dark"],
+        "stats": { "hp": 65, "atk": 60, "def": 60, "spa": 75, "spd": 65, "spe": 115 }
+      }
+    ]
+  },
+  "e1": {
+    "name": "Molayne",
+    "speciality": "steel",
+    "img": { "src": "/leaders/sm-molayne", "author": "Beliot419", "link": "https://www.deviantart.com/beliot419" },
+    "pokemon": [
+      { "name": "klefki", "level": "56", "moves": ["spikes", "thunder-wave", "flash-cannon", "reflect"], "ability": "prankster" },
+      { "name": "bisharp", "level": "56", "moves": ["night-slash", "iron-head", "x-scissor", "metal-sound"], "ability": "defiant" },
+      { "name": "magnezone", "level": "56", "moves": ["flash-cannon", "thunderbolt", "tri-attack", "screech"], "ability": "sturdy" },
+      { "name": "metagross", "level": "56", "moves": ["hammer-arm", "meteor-mash", "bullet-punch", "zen-headbutt"], "ability": "clear-body" },
+      {
+        "name": "dugtrio",
+        "level": "57",
+        "moves": ["earthquake", "iron-head", "sucker-punch", "fissure"],
+        "ability": "tangling-hair",
+        "held": "steelium-z--held",
+        "icon": "dugtrio-alola",
+        "sprite": "10106",
+        "types": ["ground", "steel"],
+        "stats": { "hp": 35, "atk": 100, "def": 60, "spa": 50, "spd": 70, "spe": 110 }
+      }
+    ]
+  },
+  "e2": {
+    "name": "Olivia",
+    "speciality": "rock",
+    "img": { "src": "/leaders/sm-olivia", "author": "Kyledove", "link": "https://www.deviantart.com/kyle-dove" },
+    "pokemon": [
+      { "name": "armaldo", "level": "56", "moves": ["crush-claw", "x-scissor", "rock-blast"], "ability": "battle-armor" },
+      { "name": "cradily", "level": "56", "moves": ["rock-tomb", "energy-ball", "stealth-rock"], "ability": "suction-cups" },
+      { "name": "gigalith", "level": "56", "moves": ["stone-edge", "bulldoze", "iron-head"], "ability": "sand-stream" },
+      { "name": "probopass", "level": "56", "moves": ["earth-power", "power-gem", "thunder-wave", "sandstorm"], "ability": "sturdy" },
+      {
+        "name": "lycanroc",
+        "level": "57",
+        "moves": ["crunch", "stone-edge", "counter", "rock-climb"],
+        "ability": "keen-eye",
+        "held": "rockium-z--held",
+        "icon": "lycanroc-midnight",
+        "sprite": "10126",
+        "types": ["rock"],
+        "stats": { "hp": 85, "atk": 115, "def": 75, "spa": 55, "spd": 75, "spe": 82 }
+      }
+    ]
+  },
+  "e3": {
+    "name": "Acerola",
+    "speciality": "ghost",
+    "img": { "src": "/leaders/sm-acerola", "author": "Drawnamu", "link": "https://www.deviantart.com/drawnamu" },
+    "pokemon": [
+      { "name": "banette", "level": "56", "moves": ["shadow-claw", "feint-attack", "infestation", "screech"], "ability": "keen-eye" },
+      { "name": "drifblim", "level": "56", "moves": ["ominous-wind", "focus-energy", "amnesia", "baton-pass"], "ability": "aftermath" },
+      { "name": "dhelmise", "level": "56", "moves": ["slam", "shadow-ball", "energy-ball", "whirlpool"], "ability": "steelworker" },
+      { "name": "froslass", "level": "56", "moves": ["blizzard", "shadow-ball", "confuse-ray", "ice-shard"], "ability": "snow-cloak" },
+      {
+        "name": "palossand",
+        "level": "57",
+        "moves": ["shadow-ball", "earth-power", "giga-drain", "iron-defense"],
+        "ability": "water-compaction",
+        "held": "ghostium-z--held"
+      }
+    ]
+  },
+  "e4": {
+    "name": "Kahili",
+    "speciality": "flying",
+    "img": { "src": "/leaders/sm-kahili", "author": "Beliot419", "link": "https://www.deviantart.com/beliot419" },
+    "pokemon": [
+      { "name": "braviary", "level": "56", "moves": ["crush-claw", "brave-bird", "air-slash", "scary-face"], "ability": "sheer-force" },
+      { "name": "hawlucha", "level": "56", "moves": ["flying-press", "throat-chop", "dual-chop", "poison-jab"], "ability": "mold-breaker" },
+      {
+        "name": "oricorio",
+        "level": "56",
+        "moves": ["revelation-dance", "teeter-dance", "air-slash", "feather-dance"],
+        "ability": "dancer",
+        "sprite": "741",
+        "types": ["fire", "flying"],
+        "stats": { "hp": 75, "atk": 70, "def": 70, "spa": 98, "spd": 70, "spe": 93 }
+      },
+      { "name": "mandibuzz", "level": "56", "moves": ["bone-rush", "brave-bird", "punishment", "flatter"], "ability": "big-pecks" },
+      {
+        "name": "toucannon",
+        "level": "57",
+        "moves": ["bullet-seed", "rock-blast", "beak-blast", "screech"],
+        "ability": "skill-link",
+        "held": "flyinium-z--held"
+      }
+    ]
+  },
+  "c": {
+    "name": "Hau",
+    "speciality": "",
+    "img": { "src": "/leaders/sm-hau", "author": "Beliot419", "link": "https://www.deviantart.com/beliot419" },
+    "pokemon": [
+      {
+        "name": "raichu",
+        "level": "59",
+        "moves": ["thunderbolt", "quick-attack", "psychic", "focus-blast"],
+        "ability": "surge-surfer",
+        "icon": "raichu-alola",
+        "sprite": "10100",
+        "types": ["electric", "psychic"],
+        "stats": { "hp": 60, "atk": 85, "def": 50, "spa": 95, "spd": 85, "spe": 110 }
+      },
+      { "name": "vaporeon", "level": "58", "moves": ["hydro-pump", "quick-attack", "charm", "baby-doll-eyes"], "ability": "water-absorb", "starter": "fire" },
+      { "name": "flareon", "level": "58", "moves": ["flare-blitz", "quick-attack", "charm", "baby-doll-eyes"], "ability": "flash-fire", "starter": "grass" },
+      { "name": "leafeon", "level": "58", "moves": ["leaf-blade", "quick-attack", "charm", "baby-doll-eyes"], "ability": "leaf-guard", "starter": "water" },
+      { "name": "tauros", "level": "58", "moves": ["zen-headbutt", "iron-head", "earthquake", "double-edge"], "ability": "intimidate" },
+      { "name": "noivern", "level": "58", "moves": ["dragon-pulse", "air-slash", "dark-pulse", "super-fang"], "ability": "infiltrator" },
+      { "name": "crabominable", "level": "59", "moves": ["power-up-punch", "ice-hammer", "stone-edge", "dizzy-punch"], "ability": "iron-fist" },
+      {
+        "name": "decidueye",
+        "level": "60",
+        "moves": ["spirit-shackle", "leaf-blade", "smack-down"],
+        "ability": "overgrow",
+        "held": "grassium-z--held",
+        "starter": "fire"
+      },
+      {
+        "name": "primarina",
+        "level": "60",
+        "moves": ["sparkling-aria", "moonblast", "hyper-voice"],
+        "ability": "torrent",
+        "held": "waterium-z--held",
+        "starter": "grass"
+      },
+      {
+        "name": "incineroar",
+        "level": "60",
+        "moves": ["darkest-lariat", "flare-blitz", "earthquake"],
+        "ability": "blaze",
+        "held": "firium-z--held",
+        "starter": "water"
+      }
+    ]
+  }
+}

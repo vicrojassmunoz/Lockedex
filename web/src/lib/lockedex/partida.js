@@ -108,6 +108,7 @@ export const resumirPartida = (partida, rutas = []) => {
     total: rutas.length,
     ultimo,
     progreso: rutas.length ? Math.max(0, (ultimo + 1) / rutas.length) : 0,
+    lugares,
     encuentros,
     vivos,
     muertos,

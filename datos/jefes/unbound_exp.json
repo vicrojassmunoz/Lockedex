@@ -1,0 +1,1618 @@
+{
+  "r1_exp": {
+    "name": "Rival",
+    "speciality": "",
+    "img": { "src": "/leaders/unbound-axelrod", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "larvitar",
+        "level": "17",
+        "moves": ["bite", "scary-face", "rock-tomb", "screech"],
+        "ability": "guts",
+        "starter": "fire",
+        "evs": [6, 252, null, null, 252]
+      },
+      {
+        "name": "beldum",
+        "level": "17",
+        "moves": [
+          "tackle",
+          "flash",
+          { "power": "60", "type": "steel", "damage_class": "physical", "name": "Metal Bash", "effect": "" },
+          { "power": "60", "type": "steel", "damage_class": "physical", "name": "Metal Bash", "effect": "" }
+        ],
+        "ability": "clear-body",
+        "starter": "grass",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "gible",
+        "level": "17",
+        "moves": ["sand-attack", "metal-claw", "sandstorm", "fire-fang"],
+        "ability": "rough-skin",
+        "starter": "water",
+        "evs": [6, 252, null, null, null, 252]
+      }
+    ]
+  },
+  "r2_exp": {
+    "name": "Rival",
+    "speciality": "",
+    "img": { "src": "/leaders/unbound-axelrod", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      { "name": "swinub", "level": "18", "moves": ["icy-wind", "flail", "powder-snow", "mud-slap"], "ability": "oblivious" },
+      {
+        "name": "larvitar",
+        "level": "19",
+        "moves": ["bite", "scary-face", "rock-tomb", "screech"],
+        "ability": "guts",
+        "starter": "fire",
+        "evs": [6, 252, null, null, 252]
+      },
+      {
+        "name": "beldum",
+        "level": "19",
+        "moves": [
+          "tackle",
+          "flash",
+          { "power": "60", "type": "steel", "damage_class": "physical", "name": "Metal Bash", "effect": "" },
+          { "power": "60", "type": "steel", "damage_class": "physical", "name": "Metal Bash", "effect": "" }
+        ],
+        "ability": "clear-body",
+        "starter": "grass",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "gible",
+        "level": "19",
+        "moves": ["sand-attack", "metal-claw", "sandstorm", "fire-fang"],
+        "ability": "sand-veil",
+        "starter": "water",
+        "evs": [6, 252, null, null, null, 252]
+      }
+    ]
+  },
+  "r3_exp": {
+    "name": "Rival",
+    "speciality": "",
+    "img": { "src": "/leaders/unbound-axelrod", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "toucannon",
+        "level": "32",
+        "moves": ["pluck", "fury-attack", "rock-blast", "roost"],
+        "ability": "skill-link",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      { "name": "swinub", "level": "32", "moves": ["ice-shard", "mud-bomb", "flail", "mist"], "ability": "thick-fat", "evs": [6, 252, null, null, null, 252] },
+      {
+        "name": "pupitar",
+        "level": "33",
+        "moves": ["rock-tomb", "dark-pulse", "bulldoze", "screech"],
+        "ability": "guts",
+        "starter": "fire",
+        "evs": [6, 252, null, null, 252]
+      },
+      {
+        "name": "metang",
+        "level": "33",
+        "moves": ["bullet-punch", "confusion", "pursuit", "magnet-rise"],
+        "ability": "clear-body",
+        "starter": "grass",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "gabite",
+        "level": "33",
+        "moves": ["dual-chop", "bulldoze", "metal-claw", "fire-fang"],
+        "ability": "rough-skin",
+        "starter": "water",
+        "evs": [6, 252, null, null, null, 252]
+      }
+    ]
+  },
+  "r4_exp": {
+    "name": "Rival",
+    "speciality": "",
+    "img": { "src": "/leaders/unbound-axelrod", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "mamoswine",
+        "level": "46",
+        "moves": ["ice-fang", "bulldoze", "ice-shard", "stealth-rock"],
+        "ability": "thick-fat",
+        "held": "focus-sash",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "toucannon",
+        "level": "45",
+        "moves": ["pluck", "fury-attack", "rock-blast", "roost"],
+        "ability": "skill-link",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "vaporeon",
+        "level": "46",
+        "moves": ["water-pulse", "aurora-beam", "quick-attack", "aqua-ring"],
+        "ability": "water-absorb",
+        "held": "sitrus-berry",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "fraxure",
+        "level": "46",
+        "moves": ["dual-chop", "crunch", "rock-tomb", "dragon-dance"],
+        "ability": "mold-breaker",
+        "starter": "fire",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "fraxure",
+        "level": "46",
+        "moves": ["dual-chop", "crunch", "rock-tomb", "dragon-dance"],
+        "ability": "mold-breaker",
+        "starter": "grass",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "aggron",
+        "level": "46",
+        "moves": ["iron-head", "rock-slide", "bulldoze", "autotomize"],
+        "ability": "sturdy",
+        "starter": "water",
+        "evs": [6, 252, null, null, 252]
+      },
+      {
+        "name": "pupitar",
+        "level": "47",
+        "moves": ["stone-edge", "crunch", "earthquake", "ice-punch"],
+        "ability": "shed-skin",
+        "held": "tyranitarite",
+        "starter": "fire",
+        "evs": [6, 252, null, null, 252]
+      },
+      {
+        "name": "metagross",
+        "level": "47",
+        "moves": ["iron-head", "psychic", "hammer-arm", "magnet-rise"],
+        "ability": "clear-body",
+        "held": "metagrossite",
+        "starter": "grass",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "gabite",
+        "level": "47",
+        "moves": ["dragon-claw", "stomping-tantrum", "crunch", "fire-blast"],
+        "ability": "rough-skin",
+        "held": "garchompite",
+        "starter": "water",
+        "evs": [6, 252, null, null, null, 252]
+      }
+    ]
+  },
+  "r5_exp": {
+    "name": "Rival",
+    "speciality": "",
+    "img": { "src": "/leaders/unbound-axelrod", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "mamoswine",
+        "level": "63",
+        "moves": ["ice-fang", "bulldoze", "ice-shard", "stealth-rock"],
+        "ability": "thick-fat",
+        "held": "focus-sash",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "rotom",
+        "level": "61",
+        "moves": ["discharge", "air-slash", "hex", "thunder-wave"],
+        "ability": "motor-drive",
+        "held": { "sprite": "heavy-duty-boots", "name": "Heavy duty boots", "effect": "" },
+        "icon": "rotom-fan",
+        "starter": "fire",
+        "evs": [6, null, null, 252, null, 252],
+        "sprite": "10011",
+        "types": ["electric", "flying"],
+        "stats": { "hp": 50, "atk": 65, "def": 107, "spa": 105, "spd": 107, "spe": 86 }
+      },
+      {
+        "name": "rotom",
+        "level": "61",
+        "moves": ["leaf-storm", "discharge", "volt-switch", "hex"],
+        "ability": "levitate",
+        "held": "white-herb",
+        "icon": "rotom-mow",
+        "starter": "grass",
+        "evs": [6, null, null, 252, null, 252],
+        "sprite": "10012",
+        "types": ["electric", "grass"],
+        "stats": { "hp": 50, "atk": 65, "def": 107, "spa": 105, "spd": 107, "spe": 86 }
+      },
+      {
+        "name": "rotom",
+        "level": "61",
+        "moves": ["discharge", "air-slash", "hex", "thunder-wave"],
+        "ability": "motor-drive",
+        "held": { "sprite": "heavy-duty-boots", "name": "Heavy duty boots", "effect": "" },
+        "icon": "rotom-fan",
+        "starter": "water",
+        "evs": [6, null, null, 252, null, 252],
+        "sprite": "10011",
+        "types": ["electric", "flying"],
+        "stats": { "hp": 50, "atk": 65, "def": 107, "spa": 105, "spd": 107, "spe": 86 }
+      },
+      {
+        "name": "vaporeon",
+        "level": "62",
+        "moves": ["hydro-pump", "ice-beam", "acid-armor", "aqua-ring"],
+        "ability": "water-absorb",
+        "held": "leftovers",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "haxorus",
+        "level": "63",
+        "moves": ["dragon-claw", "crunch", "earthquake", "dragon-dance"],
+        "ability": "mold-breaker",
+        "held": "safety-goggles",
+        "starter": "fire",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "haxorus",
+        "level": "63",
+        "moves": ["dragon-claw", "crunch", "earthquake", "dragon-dance"],
+        "ability": "mold-breaker",
+        "held": "safety-goggles",
+        "starter": "grass",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "aggron",
+        "level": "63",
+        "moves": ["iron-head", "rock-slide", "earthquake", "metal-burst"],
+        "ability": "sturdy",
+        "held": "shuca-berry",
+        "starter": "water",
+        "evs": [6, 252, null, null, 252]
+      },
+      {
+        "name": "talonflame",
+        "level": "63",
+        "moves": ["flare-blitz", "acrobatics", "steel-wing", "overheat"],
+        "ability": "gale-wings",
+        "held": "flying-gem",
+        "starter": "fire",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "talonflame",
+        "level": "63",
+        "moves": ["flare-blitz", "acrobatics", "steel-wing", "overheat"],
+        "ability": "gale-wings",
+        "held": "flying-gem",
+        "starter": "grass",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "chandelure",
+        "level": "63",
+        "moves": ["flamethrower", "shadow-ball", "energy-ball", "minimize"],
+        "ability": "shadow-tag",
+        "held": "bright-powder",
+        "starter": "water",
+        "evs": [6, null, null, 252, null, 252]
+      },
+      {
+        "name": "tyranitar",
+        "level": "65",
+        "moves": ["stone-edge", "crunch", "ice-punch", "dragon-dance"],
+        "ability": "sand-stream",
+        "held": "tyranitarite",
+        "starter": "fire",
+        "evs": [6, 252, null, null, 252]
+      },
+      {
+        "name": "metagross",
+        "level": "65",
+        "moves": ["meteor-mash", "zen-headbutt", "hammer-arm", "agility"],
+        "ability": "clear-body",
+        "held": "metagrossite",
+        "starter": "grass",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "garchomp",
+        "level": "65",
+        "moves": ["dragon-rush", "earthquake", "crunch", "fire-blast"],
+        "ability": "rough-skin",
+        "held": "garchompite",
+        "starter": "water",
+        "evs": [6, 252, null, null, null, 252]
+      }
+    ]
+  },
+  "1_exp": {
+    "name": "Mirskle",
+    "speciality": "grass",
+    "img": { "src": "/leaders/unbound-mirskle", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "floette",
+        "level": "19",
+        "moves": ["fairy-wind", "grass-knot", "wish", "grassy-terrain"],
+        "ability": "flower-veil",
+        "held": "grass-gem",
+        "evs": [252, null, 4, null, 252]
+      },
+      { "name": "gloom", "level": "21", "moves": ["acid", "mega-drain", "ingrain", "sleep-powder"], "ability": "chlorophyll", "evs": [252, null, 4, null, 252] },
+      {
+        "name": "weedle",
+        "level": "17",
+        "moves": ["bug-bite", "electroweb", "poison-sting", "string-shot"],
+        "ability": "technician",
+        "held": "silver-powder",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "comfey",
+        "level": "18",
+        "moves": ["magical-leaf", "helping-hand", "flower-shield", "floral-healing"],
+        "ability": "flower-veil",
+        "evs": [252, null, 4, null, 252]
+      }
+    ],
+    "doubleBattle": true,
+    "effect": "fog"
+  },
+  "2_exp": {
+    "name": "Vega",
+    "speciality": "dark",
+    "img": { "src": "/leaders/unbound-vega", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "liepard",
+        "level": "26",
+        "moves": ["thief", "play-rough", "fake-out", "pursuit"],
+        "ability": "unburden",
+        "held": "lum-berry",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      { "name": "absol", "level": "27", "moves": ["knock-off", "psycho-cut", "feint", "pursuit"], "ability": "pressure", "evs": [252, null, 252, null, 4] },
+      {
+        "name": "weavile",
+        "level": "27",
+        "moves": ["punishment", "ice-shard", "swagger", "fake-out"],
+        "ability": "pressure",
+        "held": "dark-gem",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "honchkrow",
+        "level": "26",
+        "moves": ["punishment", "air-cutter", "night-shade", "swagger"],
+        "ability": "super-luck",
+        "evs": [null, 128, null, 128, null, 252]
+      }
+    ],
+    "info": "<p><b>Negative Energy</b><br/>A negative energy fills the battlefield and makes every non-Dark, non-Ghost and non-Psychic type Pokémon take 6.25% damage at the end of every turn.</p>"
+  },
+  "3_exp": {
+    "name": "Alice",
+    "speciality": "flying",
+    "img": { "src": "/leaders/unbound-alice", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "minior",
+        "level": "31",
+        "moves": ["ancient-power", "acrobatics", "stealth-rock", "confuse-ray"],
+        "ability": "shields-down",
+        "held": "snowball",
+        "evs": [6, 252, null, null, null, 252],
+        "sprite": "10136",
+        "types": ["rock", "flying"],
+        "stats": { "hp": 60, "atk": 100, "def": 60, "spa": 100, "spd": 60, "spe": 120 }
+      },
+      {
+        "name": "gliscor",
+        "level": "31",
+        "moves": ["bulldoze", "acrobatics", "knock-off", "fire-fang"],
+        "ability": "hyper-cutter",
+        "held": "flying-gem",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "dodrio",
+        "level": "32",
+        "moves": ["aerial-ace", "quick-attack", "steel-wing", "knock-off"],
+        "ability": "early-bird",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "pinsir",
+        "level": "33",
+        "moves": ["x-scissor", "double-hit", "brick-break", "rock-tomb"],
+        "ability": "hyper-cutter",
+        "held": "pinsirite",
+        "evs": [4, null, 252, null, null, 252]
+      },
+      {
+        "name": "crobat",
+        "level": "32",
+        "moves": ["venoshock", "air-cutter", "acrobatics", "bite"],
+        "ability": "infiltrator",
+        "evs": [6, null, null, 252, null, 252]
+      }
+    ],
+    "info": "<p><b>Tailwind</b><br />A permanent tailwind effect for Flying-Types</p>"
+  },
+  "4_exp": {
+    "name": "Mel",
+    "speciality": "normal",
+    "img": { "src": "/leaders/unbound-mel", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "bewear",
+        "level": "36",
+        "moves": ["facade", "hammer-arm", "payback", "ice-punch"],
+        "ability": "fluffy",
+        "held": "normal-gem",
+        "evs": [252, 252, null, null, null, 6]
+      },
+      {
+        "name": "porygon-z",
+        "level": "37",
+        "moves": ["round", "signal-beam", "psybeam", "recover"],
+        "ability": "adaptability",
+        "evs": [6, null, null, 252, null, 252]
+      },
+      {
+        "name": "miltank",
+        "level": "36",
+        "moves": ["body-slam", "ice-punch", "power-up-punch", "milk-drink"],
+        "ability": "scrappy",
+        "held": "sitrus-berry",
+        "evs": [252, 252, null, null, null, 6]
+      },
+      {
+        "name": "lopunny",
+        "level": "37",
+        "moves": ["facade", "brick-break", "power-up-punch", "fake-out"],
+        "ability": "limber",
+        "held": "lopunnite",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "heliolisk",
+        "level": "35",
+        "moves": ["swift", "parabolic-charge", "grass-knot", "thunder-wave"],
+        "ability": "sand-veil",
+        "evs": [6, null, null, 252, null, 252]
+      }
+    ],
+    "info": "<p><b>Inverse Battle</b><br />Type matchups are reversed and no type is immune to any other type.</p>"
+  },
+  "5_exp": {
+    "name": "Galavan",
+    "speciality": "electric",
+    "img": { "src": "/leaders/unbound-galavan", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "bronzong",
+        "level": "44",
+        "moves": ["heavy-slam", "body-press", "trick-room", "protect"],
+        "ability": "heatproof",
+        "held": "mental-herb",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "golem",
+        "level": "45",
+        "moves": ["return", "rock-slide", "fire-punch", "protect"],
+        "ability": "galvanize",
+        "evs": [6, 252, null, null, 252],
+        "sprite": "10111",
+        "types": ["rock", "electric"],
+        "stats": { "hp": 80, "atk": 120, "def": 130, "spa": 55, "spd": 65, "spe": 45 }
+      },
+      {
+        "name": "lanturn",
+        "level": "45",
+        "moves": ["thunderbolt", "scald", "ice-beam", "thunder-wave"],
+        "ability": "water-absorb",
+        "held": "sitrus-berry",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "ampharos",
+        "level": "46",
+        "moves": ["thunderbolt", "dragon-pulse", "hidden-power-grass", "volt-switch"],
+        "ability": "static",
+        "held": "ampharosite",
+        "evs": [252, null, null, 252, null, 6]
+      },
+      {
+        "name": "escavalier",
+        "level": "45",
+        "moves": ["x-scissor", "iron-head", "drill-run", "night-slash"],
+        "ability": "overcoat",
+        "held": "assault-vest",
+        "evs": [252, 252, null, null, null, 6]
+      }
+    ],
+    "doubleBattle": true,
+    "info": "<p><b>Magnet Rise</b><br />Permanent Magnet Rise effect for Steel-Type & Electric-Types making them immune to Ground type attacks.</p>"
+  },
+  "6_exp": {
+    "name": "Big Mo",
+    "speciality": "fighting",
+    "img": { "src": "/leaders/unbound-big-mo", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178-mo" },
+    "pokemon": [
+      {
+        "name": "mudsdale",
+        "level": "52",
+        "moves": ["earthquake", "smack-down", "heavy-slam", "stealth-rock"],
+        "ability": "stamina",
+        "held": { "sprite": "heavy-duty-boots", "name": "Heavy duty boots", "effect": "" },
+        "evs": [252, 252, null, null, null, 6]
+      },
+      {
+        "name": "pangoro",
+        "level": "52",
+        "moves": [
+          { "power": 80, "type": "dark", "damage_class": "physical", "name": "Wicked Blow", "effect": "" },
+          "drain-punch",
+          "rock-slide",
+          "bullet-punch"
+        ],
+        "ability": "iron-fist",
+        "held": "fighting-gem",
+        "evs": [252, 252, null, null, null, 6]
+      },
+      {
+        "name": "snorlax",
+        "level": "53",
+        "moves": ["body-slam", "crunch", "high-horsepower", "heavy-slam"],
+        "ability": "thick-fat",
+        "held": "rawst-berry",
+        "evs": [6, 252, 252]
+      },
+      {
+        "name": "hariyama",
+        "level": "52",
+        "moves": ["storm-throw", "knock-off", "heavy-slam", "fake-out"],
+        "ability": "guts",
+        "held": "flame-orb",
+        "evs": [252, 252, null, null, null, 6]
+      },
+      {
+        "name": "wailord",
+        "level": "53",
+        "moves": ["water-spout", "ice-beam", "surf", "clear-smog"],
+        "ability": "regenerator",
+        "held": { "sprite": "heavy-duty-boots", "name": "Heavy duty boots", "effect": "" },
+        "evs": [252, null, null, 252, null, 6]
+      }
+    ],
+    "info": "<p><b>Inverse Gravity</b><br />Permanent Trick Room effect for weight, heavier Pokémon go first.</p>"
+  },
+  "7_exp": {
+    "name": "Tessy",
+    "speciality": "water",
+    "img": { "src": "/leaders/unbound-tessy", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "toxapex",
+        "level": "56",
+        "moves": ["toxic-spikes", "knock-off", "haze", "recover"],
+        "ability": "regenerator",
+        "held": "leftovers",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "armaldo",
+        "level": "57",
+        "moves": ["aqua-tail", "x-scissor", "stomping-tantrum", "accelerock"],
+        "ability": "swift-swim",
+        "evs": [6, 252, null, null, 252]
+      },
+      {
+        "name": "kingdra",
+        "level": "58",
+        "moves": ["snipe-shot", "dragon-pulse", "ice-beam", "flash-cannon"],
+        "ability": "swift-swim",
+        "held": "scope-lens",
+        "evs": [6, null, null, 252, null, 252]
+      },
+      {
+        "name": "seismitoad",
+        "level": "57",
+        "moves": ["liquidation", "earthquake", "drain-punch", "ice-punch"],
+        "ability": "swift-swim",
+        "held": "life-orb",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "gyarados",
+        "level": "58",
+        "moves": ["waterfall", "dragon-dance", "earthquake", "ice-fang"],
+        "ability": "intimidate",
+        "held": "gyaradosite",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "seaking",
+        "level": "57",
+        "moves": ["waterfall", "smart-strike", "poison-jab", "drill-run"],
+        "ability": "swift-swim",
+        "held": "expert-belt",
+        "evs": [6, 252, null, null, null, 252]
+      }
+    ],
+    "info": "<p><b>Camo-mons</b><br />The Pokémon's types are that of the types of their first two attacks.</p>",
+    "effect": "rain"
+  },
+  "8_exp": {
+    "name": "Benjamin",
+    "speciality": "bug",
+    "img": { "src": "/leaders/unbound-benjamin", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "araquanid",
+        "level": "61",
+        "moves": [
+          "liquidation",
+          { "power": "70", "type": "poison", "damage_class": "physical", "name": "Leech Fang", "effect": "" },
+          "mirror-coat",
+          "sticky-web"
+        ],
+        "ability": "water-bubble",
+        "held": "focus-sash",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "forretress",
+        "level": "61",
+        "moves": ["gyro-ball", "counter", "reflect", "light-screen"],
+        "ability": "sturdy",
+        "held": "light-clay",
+        "evs": [252, null, 4, null, 252]
+      },
+      {
+        "name": "drapion",
+        "level": "61",
+        "moves": ["cross-poison", "night-slash", "pin-missile", "earthquake"],
+        "ability": "super-luck",
+        "held": "eviolite",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "volcarona",
+        "level": "62",
+        "moves": ["bug-buzz", "heat-wave", "wild-charge", "quiver-dance"],
+        "ability": "flame-body",
+        "held": "bug-gem",
+        "evs": [6, null, 252, 252]
+      },
+      {
+        "name": "scizor",
+        "level": "62",
+        "moves": ["bug-bite", "bullet-punch", "dual-wingbeat", "swords-dance"],
+        "ability": "technician",
+        "held": "scizorite",
+        "evs": [252, null, 4, null, 252]
+      },
+      {
+        "name": "flygon",
+        "level": "62",
+        "moves": ["earthquake", "dragon-claw", "rock-slide", "crunch"],
+        "ability": "levitate",
+        "held": "eviolite",
+        "evs": [6, 252, null, null, null, 252]
+      }
+    ],
+    "info": "<p><b>Benjamin Butterfree</b><br />When a Pokémon is knocked out, instead of fainting it devolves to a previous evolution. The Pokémon finally faints when it can’t devolve anymore.</p>"
+  },
+  "e1_exp": {
+    "name": "Moleman",
+    "speciality": "ground",
+    "img": { "src": "/leaders/unbound-moleman", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "excadrill",
+        "level": "74",
+        "moves": ["earthquake", "iron-head", "rock-slide", "protect"],
+        "ability": "sand-rush",
+        "held": "focus-sash",
+        "evs": [252, 252, null, null, null, 6]
+      },
+      {
+        "name": "flygon",
+        "level": "76",
+        "moves": ["clanging-scales", "earth-power", "heat-wave", "boomburst"],
+        "ability": "levitate",
+        "held": "throat-spray",
+        "evs": [6, null, null, 252, null, 252]
+      },
+      {
+        "name": "sandslash",
+        "level": "76",
+        "moves": [
+          "earthquake",
+          "rock-slide",
+          { "power": "70", "type": "poison", "damage_class": "physical", "name": "Leech Fang", "effect": "" },
+          "protect"
+        ],
+        "ability": "sand-rush",
+        "held": "ground-gem",
+        "evs": [252, 252, null, null, null, 6]
+      },
+      {
+        "name": "quagsire",
+        "level": "74",
+        "moves": ["muddy-water", "recover", "yawn", "protect"],
+        "ability": "water-absorb",
+        "held": "sitrus-berry",
+        "evs": [252, null, 4, null, 252]
+      },
+      {
+        "name": "gliscor",
+        "level": "75",
+        "moves": ["earthquake", "rock-slide", "acrobatics", "swords-dance"],
+        "ability": "sand-veil",
+        "evs": [252, null, 4, null, 252]
+      },
+      {
+        "name": "landorus",
+        "level": "76",
+        "moves": ["earthquake", "rock-slide", "u-turn", "protect"],
+        "ability": "intimidate",
+        "evs": [252, null, 4, null, 252],
+        "sprite": "10021",
+        "types": ["ground", "flying"],
+        "stats": { "hp": 89, "atk": 145, "def": 90, "spa": 105, "spd": 80, "spe": 91 }
+      }
+    ],
+    "effect": "sandstorm",
+    "info": "<p><b>Vicious Sandstorm</b><br />Vicious sand causes Pokémon to lose ⅛ of max HP at the end of every turn</p>",
+    "doubleBattle": true
+  },
+  "e2_exp": {
+    "name": "Elias",
+    "speciality": "ghost",
+    "img": { "src": "/leaders/unbound-elias", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "mimikyu",
+        "level": "74",
+        "moves": ["shadow-claw", "play-rough", "shadow-sneak", "swords-dance"],
+        "ability": "disguise",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "aegislash",
+        "level": "75",
+        "moves": ["shadow-ball", "toxic", "substitute", "king-s-shield"],
+        "ability": "stance-change",
+        "held": "leftovers",
+        "evs": [252, null, 252, null, 4],
+        "sprite": "10026",
+        "types": ["steel", "ghost"],
+        "stats": { "hp": 60, "atk": 140, "def": 50, "spa": 140, "spd": 50, "spe": 60 }
+      },
+      {
+        "name": "trevenant",
+        "level": "75",
+        "moves": ["poltergeist", "horn-leech", "leech-seed", "will-o-wisp"],
+        "ability": "harvest",
+        "held": "sitrus-berry",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "cofagrigus",
+        "level": "76",
+        "moves": ["night-shade", "body-press", "iron-defense", "rest"],
+        "ability": "mummy",
+        "held": "colbur-berry",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "banette",
+        "level": "76",
+        "moves": ["poltergeist", "sucker-punch", "will-o-wisp", "destiny-bond"],
+        "ability": "frisk",
+        "held": "banettite",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "blacephalon",
+        "level": "76",
+        "moves": ["flamethrower", "shadow-ball", "psyshock", "calm-mind"],
+        "ability": "beast-boost",
+        "evs": [252, null, null, 4, null, 252]
+      }
+    ],
+    "info": "<p><b>Shadowy Veil</b><br />Every Ghost-type Pokémon take half damage on full HP. Ghost-types are immune to entry hazards at full HP. Other Types cannot use Safeguard or Substitute.</p>"
+  },
+  "e3_exp": {
+    "name": "Arabella",
+    "speciality": "fairy",
+    "img": { "src": "/leaders/unbound-arrabella", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "ribombee",
+        "level": "74",
+        "moves": ["moonblast", "reflect", "light-screen", "sticky-web"],
+        "ability": "shield-dust",
+        "held": "focus-sash",
+        "evs": [6, null, null, 252, null, 252]
+      },
+      {
+        "name": "sylveon",
+        "level": "75",
+        "moves": ["hyper-voice", "mystical-fire", "wish", "psyshock"],
+        "ability": "pixilate",
+        "held": "fairy-gem",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "togekiss",
+        "level": "75",
+        "moves": ["air-slash", "moonblast", "flamethrower", "wish"],
+        "ability": "serene-grace",
+        "evs": [252, null, 4, null, 252]
+      },
+      {
+        "name": "azumarill",
+        "level": "76",
+        "moves": ["aqua-tail", "play-rough", "superpower", "aqua-jet"],
+        "ability": "huge-power",
+        "evs": [252, null, 4, null, 252]
+      },
+      {
+        "name": "mawile",
+        "level": "76",
+        "moves": ["iron-head", "play-rough", "sucker-punch", "swords-dance"],
+        "ability": "intimidate",
+        "held": "mawilite",
+        "evs": [252, 252, null, null, null, 6]
+      },
+      {
+        "name": "tapu-fini",
+        "level": "76",
+        "moves": [
+          "moonblast",
+          "surf",
+          { "type": "fairy", "damage_class": "special", "name": "Nature's Madness", "effect": "" },
+          "taunt"
+        ],
+        "ability": "misty-surge",
+        "held": "sitrus-berry",
+        "evs": [252, null, 4, null, 252]
+      }
+    ],
+    "effect": "misty-terrain",
+    "info": "<p><b>Fairy ring</b><br />All Fairy-Type Pokémon get a +1 boost to their lowest Defense stat on switch in.</p>"
+  },
+  "e4_exp": {
+    "name": "Penny",
+    "speciality": "dragon",
+    "img": { "src": "/leaders/unbound-penny", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "goodra",
+        "level": "74",
+        "moves": ["flamethrower", "muddy-water", "thunderbolt", "sludge-bomb"],
+        "ability": "gooey",
+        "held": "wide-lens",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "tyrantrum",
+        "level": "75",
+        "moves": ["dragon-claw", "head-smash", "high-horsepower", "iron-head"],
+        "ability": "rock-head",
+        "held": "lum-berry",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "kommo-o",
+        "level": "75",
+        "moves": ["clanging-scales", "aura-sphere", "flash-cannon", "protect"],
+        "ability": "overcoat",
+        "held": "dragon-gem",
+        "evs": [6, null, null, 252, 252]
+      },
+      {
+        "name": "hydreigon",
+        "level": "76",
+        "moves": ["dragon-breath", "dark-pulse", "charge-beam", "tailwind"],
+        "ability": "levitate",
+        "evs": [6, null, null, 252, null, 252]
+      },
+      {
+        "name": "sceptile",
+        "level": "76",
+        "moves": ["dragon-pulse", "giga-drain", "rock-slide", "protect"],
+        "ability": "overgrow",
+        "held": "sceptilite",
+        "evs": [6, null, null, 252, null, 252]
+      },
+      {
+        "name": "latias",
+        "level": "76",
+        "moves": [
+          "dragon-breath",
+          { "power": 70, "type": "psychic", "damage_class": "special", "name": "Mist Ball", "effect": "" },
+          "air-slash",
+          "roost"
+        ],
+        "ability": "levitate",
+        "evs": [6, null, 252, 252]
+      }
+    ],
+    "doubleBattle": true,
+    "info": "<p><b>Rainbow Battle</b><br />All Dragon-type Pokémon on the field have their moves' secondary effect chance doubled. This stacks Serene Grace with the exception of flinching moves.</p>"
+  },
+  "c_exp": {
+    "name": "Jax",
+    "speciality": "",
+    "img": { "src": "/leaders/unbound-jax", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "salamence",
+        "level": "76",
+        "moves": ["hyper-voice", "double-edge", "rock-slide", "flamethrower"],
+        "ability": "intimidate",
+        "held": "salamencite",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "hitmontop",
+        "level": "74",
+        "moves": ["close-combat", "fake-out", "helping-hand", "wide-guard"],
+        "ability": "intimidate",
+        "held": "sitrus-berry",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "magnezone",
+        "level": "75",
+        "moves": ["thunderbolt", "flash-cannon", "body-press", "protect"],
+        "ability": "sturdy",
+        "held": "air-balloon",
+        "evs": [6, null, 252, 252]
+      },
+      {
+        "name": "gastrodon",
+        "level": "74",
+        "moves": ["muddy-water", "earth-power", "icy-wind", "protect"],
+        "ability": "storm-drain",
+        "held": "rindo-berry",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "naganadel",
+        "level": "76",
+        "moves": ["sludge-bomb", "dragon-pulse", "heat-wave", "protect"],
+        "ability": "beast-boost",
+        "held": "yache-berry",
+        "evs": [6, null, null, 252, null, 252]
+      },
+      {
+        "name": "pyroar",
+        "level": "75",
+        "moves": ["heat-wave", "hyper-voice", "scorching-sands", "protect"],
+        "ability": "royal-roar",
+        "held": "fire-gem",
+        "evs": [6, null, null, 252, null, 252]
+      }
+    ],
+    "doubleBattle": true
+  },
+  "lr1_exp": {
+    "name": "Ruin Agent Vega & Grunt",
+    "speciality": "",
+    "img": { "src": "/leaders/unbound-vega-grunt", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "liepard",
+        "level": "45",
+        "moves": ["dark-pulse", "grass-knot", "burning-jealousy", "fake-out"],
+        "ability": "unburden",
+        "held": "sitrus-berry",
+        "evs": [6, null, 252, 252]
+      },
+      {
+        "name": "honchkrow",
+        "level": "47",
+        "moves": ["dark-pulse", "air-cutter", "heat-wave", "protect"],
+        "ability": "super-luck",
+        "held": "scope-lens",
+        "evs": [6, null, null, 252, null, 252]
+      },
+      {
+        "name": "absol",
+        "level": "47",
+        "moves": ["night-slash", "psycho-cut", "x-scissor", "iron-tail"],
+        "ability": "pressure",
+        "held": "absolite",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "weavile",
+        "level": "46",
+        "moves": ["knock-off", "ice-punch", "brick-break", "fake-out"],
+        "ability": "pressure",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "spiritomb",
+        "level": "47",
+        "moves": ["hex", "pain-split", "will-o-wisp", "protect"],
+        "ability": "pressure",
+        "held": "leftovers",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "bisharp",
+        "level": "47",
+        "moves": ["iron-head", "sucker-punch", "low-sweep", "protect"],
+        "ability": "defiant",
+        "evs": [6, 252, null, null, null, 252]
+      }
+    ],
+    "tagBattle": true
+  },
+  "lr2_exp": {
+    "name": "Ruin Leader Aklove",
+    "speciality": "",
+    "img": { "src": "/leaders/unbound-aklove", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "klefki",
+        "level": "51",
+        "moves": ["play-rough", "reflect", "light-screen", "thunder-wave"],
+        "ability": "prankster",
+        "held": "light-clay",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "roserade",
+        "level": "51",
+        "moves": ["giga-drain", "hidden-power-fire", "leech-seed", "protect"],
+        "ability": "technician",
+        "held": "big-root",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "primarina",
+        "level": "53",
+        "moves": ["surf", "moonblast", "ice-beam", "aqua-jet"],
+        "ability": "torrent",
+        "held": "kebia-berry",
+        "evs": [6, null, 252, 252]
+      },
+      {
+        "name": "togekiss",
+        "level": "52",
+        "moves": ["air-slash", "moonblast", "aura-sphere", "flamethrower"],
+        "ability": "serene-grace",
+        "held": "babiri-berry",
+        "evs": [6, null, 252, 252]
+      },
+      {
+        "name": "hoopa",
+        "level": "53",
+        "moves": ["zen-headbutt", "hyperspace-fury", "dual-chop", "drain-punch"],
+        "ability": "portal-power",
+        "evs": [6, 252, null, null, null, 252],
+        "sprite": "10086",
+        "types": ["psychic", "dark"],
+        "stats": { "hp": 80, "atk": 160, "def": 60, "spa": 170, "spd": 130, "spe": 80 }
+      },
+      {
+        "name": "gardevoir",
+        "level": "53",
+        "moves": ["psyshock", "dazzling-gleam", "mystical-fire", "shadow-sneak"],
+        "ability": "trace",
+        "held": "gardevoirite",
+        "evs": [6, null, null, 252, null, 252]
+      }
+    ]
+  },
+  "lr3_exp": {
+    "name": "Ruin Admin Ivory",
+    "speciality": "",
+    "img": { "src": "/leaders/unbound-ivory", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "toxicroak",
+        "level": "61",
+        "moves": ["poison-jab", "drain-punch", "ice-punch", "sucker-punch"],
+        "ability": "poison-touch",
+        "held": "focus-sash",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "mismagius",
+        "level": "61",
+        "moves": ["moongeist-beam", "mystical-fire", "dazzling-gleam", "thunderbolt"],
+        "ability": "levitate",
+        "evs": [6, null, null, 252, null, 252]
+      },
+      {
+        "name": "incineroar",
+        "level": "62",
+        "moves": ["flare-blitz", "darkest-lariat", "drain-punch", "thunder-punch"],
+        "ability": "intimidate",
+        "held": "assault-vest",
+        "evs": [6, 252, 252]
+      },
+      {
+        "name": "alakazam",
+        "level": "62",
+        "moves": ["psyshock", "shadow-ball", "energy-ball", "nasty-plot"],
+        "ability": "magic-guard",
+        "held": "alakazite",
+        "evs": [6, null, null, 252, null, 252]
+      },
+      {
+        "name": "mandibuzz",
+        "level": "62",
+        "moves": ["foul-play", "attract", "toxic", "roost"],
+        "ability": "overcoat",
+        "held": "rocky-helmet",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "eelektross",
+        "level": "61",
+        "moves": ["volt-switch", "giga-drain", "flamethrower", "acid-spray"],
+        "ability": "levitate",
+        "evs": [252, null, null, 252, null, 6]
+      }
+    ],
+    "tagBattle": true
+  },
+  "lr4_exp": {
+    "name": "Ruin Leader Aklove",
+    "speciality": "",
+    "img": { "src": "/leaders/unbound-aklove", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "togedemaru",
+        "level": "61",
+        "moves": ["zing-zap", "iron-head", "nuzzle", "fake-out"],
+        "ability": "sturdy",
+        "held": "air-balloon",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "gardevoir",
+        "level": "62",
+        "moves": ["psychic", "moonblast", "mystical-fire", "dazzling-gleam"],
+        "ability": "trace",
+        "held": "gardevoirite",
+        "evs": [6, null, null, 252, null, 252]
+      },
+      {
+        "name": "comfey",
+        "level": "61",
+        "moves": ["draining-kiss", "giga-drain", "floral-healing", "helping-hand"],
+        "ability": "triage",
+        "held": "babiri-berry",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "roserade",
+        "level": "61",
+        "moves": ["leaf-storm", "dazzling-gleam", "shadow-ball", "sleep-powder"],
+        "ability": "natural-cure",
+        "held": "wide-lens",
+        "evs": [6, null, null, 252, null, 252]
+      },
+      {
+        "name": "dragonite",
+        "level": "62",
+        "moves": ["dragon-claw", "dual-wingbeat", "fire-punch", "extreme-speed"],
+        "ability": "multiscale",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "primarina",
+        "level": "61",
+        "moves": ["hyper-voice", "moonblast", "energy-ball", "protect"],
+        "ability": "liquid-voice",
+        "evs": [252, null, null, 252, null, 6]
+      }
+    ]
+  },
+  "lr5_exp": {
+    "name": "Ruin Leader Aklove",
+    "speciality": "",
+    "img": { "src": "/leaders/unbound-aklove", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "meloetta",
+        "level": "72",
+        "moves": ["expanding-force", "shadow-ball", "hidden-power-fighting", "energy-ball"],
+        "ability": "serene-grace",
+        "held": "adrenaline-orb",
+        "evs": [6, null, null, 252, null, 252],
+        "sprite": "648",
+        "types": ["normal", "psychic"],
+        "stats": { "hp": 100, "atk": 77, "def": 77, "spa": 128, "spd": 128, "spe": 90 }
+      },
+      {
+        "name": "tapu-lele",
+        "level": "74",
+        "moves": ["psychic", "dazzling-gleam", "thunderbolt", "psychic-terrain"],
+        "ability": "psychic-surge",
+        "held": "red-card",
+        "evs": [6, null, null, 252, null, 252]
+      },
+      {
+        "name": "manaphy",
+        "level": "74",
+        "moves": ["scald", "ice-beam", "energy-ball", "tail-glow"],
+        "ability": "soul-heart",
+        "held": "sitrus-berry",
+        "evs": [6, null, null, 252, null, 252]
+      },
+      {
+        "name": "tapu-koko",
+        "level": "74",
+        "moves": ["close-combat", "wild-charge", "acrobatics", "grass-knot"],
+        "ability": "electric-surge",
+        "held": "electric-seed",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "melmetal",
+        "level": "74",
+        "moves": ["double-iron-bash", "high-horsepower", "ice-punch", "thunder-punch"],
+        "ability": "iron-fist",
+        "held": "assault-vest",
+        "evs": [6, 252, null, null, 252]
+      },
+      {
+        "name": "diancie",
+        "level": "75",
+        "moves": ["diamond-storm", "moonblast", "earth-power", "mystical-fire"],
+        "ability": "clear-body",
+        "held": "diancite",
+        "evs": [null, 128, null, 128, null, 252]
+      }
+    ]
+  },
+  "sh1_exp": {
+    "name": "Shadow Admin Marlon & Grunt",
+    "speciality": "",
+    "img": { "src": "/leaders/unbound-marlong-grunt", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "duskull",
+        "level": "26",
+        "moves": ["shadow-sneak", "night-shade", "payback", "destiny-bond"],
+        "ability": "levitate",
+        "held": "eviolite",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "cacnea",
+        "level": "27",
+        "moves": ["needle-arm", "feint-attack", "thunder-punch", "fell-stinger"],
+        "ability": "water-absorb",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "swoobat",
+        "level": "28",
+        "moves": ["confusion", "air-cutter", "charge-beam", "roost"],
+        "ability": "unaware",
+        "evs": [6, null, null, 252, null, 252]
+      },
+      {
+        "name": "sableye",
+        "level": "25",
+        "moves": ["night-shade", "fake-out", "will-o-wisp", "torment"],
+        "ability": "prankster",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "shiftry",
+        "level": "27",
+        "moves": ["leaf-tornado", "sucker-punch", "extrasensory", "fake-out"],
+        "ability": "pickpocket",
+        "evs": [6, null, null, 252, null, 252]
+      }
+    ],
+    "tagBattle": true
+  },
+  "sh2_exp": {
+    "name": "Shadow Admin Ivory",
+    "speciality": "",
+    "img": { "src": "/leaders/unbound-ivory", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "misdreavus",
+        "level": "33",
+        "moves": ["hex", "will-o-wisp", "mean-look", "confuse-ray"],
+        "ability": "levitate",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "kadabra",
+        "level": "34",
+        "moves": ["psybeam", "charge-beam", "tri-attack", "night-shade"],
+        "ability": "synchronize",
+        "evs": [252, null, null, 4, null, 252]
+      },
+      {
+        "name": "vullaby",
+        "level": "32",
+        "moves": ["punishment", "pluck", "rock-tomb", "flatter"],
+        "ability": "overcoat",
+        "held": "eviolite",
+        "evs": [6, 252, 252]
+      }
+    ]
+  },
+  "sh3_exp": {
+    "name": "Shadow Boss Zeph",
+    "speciality": "",
+    "img": { "src": "/leaders/unbound-zeph", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "houndoom",
+        "level": "33",
+        "moves": ["fire-fang", "thunder-fang", "sucker-punch", "howl"],
+        "ability": "flash-fire",
+        "held": "houndoominite",
+        "evs": [6, 252, null, null, null, 252]
+      }
+    ]
+  },
+  "sh4_exp": {
+    "name": "Shadow Admin Ivory & Grunt",
+    "speciality": "",
+    "img": { "src": "/leaders/unbound-ivory-grunt", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "incineroar",
+        "level": "38",
+        "moves": ["fire-punch", "darkest-lariat", "thunder-punch", "drain-punch"],
+        "ability": "blaze",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "mismagius",
+        "level": "36",
+        "moves": ["ominous-wind", "mystical-fire", "power-gem", "destiny-bond"],
+        "ability": "magic-bounce",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "alakazam",
+        "level": "37",
+        "moves": ["psyshock", "shadow-ball", "dazzling-gleam", "charge-beam"],
+        "ability": "synchronize",
+        "evs": [6, null, null, 252, null, 252]
+      },
+      {
+        "name": "meowstic",
+        "level": "37",
+        "moves": ["psyshock", "helping-hand", "reflect", "psychic-terrain"],
+        "ability": "prankster",
+        "held": "terrain-extender",
+        "evs": [252, null, 252, null, 4],
+        "sprite": "678",
+        "types": ["psychic"],
+        "stats": { "hp": 74, "atk": 48, "def": 76, "spa": 83, "spd": 81, "spe": 104 }
+      },
+      {
+        "name": "oranguru",
+        "level": "38",
+        "moves": ["zen-headbutt", "instruct", "light-screen", "psychic-terrain"],
+        "ability": "inner-focus",
+        "evs": [252, null, 4, null, 252]
+      }
+    ],
+    "tagBattle": true
+  },
+  "sh5_exp": {
+    "name": "Shadow Admin Marlon",
+    "speciality": "",
+    "img": { "src": "/leaders/unbound-marlon", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "zapdos",
+        "level": "40",
+        "moves": ["discharge", "hurricane", "ancient-power", "light-screen"],
+        "ability": "pressure",
+        "evs": [6, null, 252, 252]
+      },
+      {
+        "name": "dusclops",
+        "level": "40",
+        "moves": ["night-shade", "ice-punch", "confuse-ray", "will-o-wisp"],
+        "ability": "pressure",
+        "held": "eviolite",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "sharpedo",
+        "level": "40",
+        "moves": ["aqua-jet", "crunch", "poison-fang", "ice-fang"],
+        "ability": "speed-boost",
+        "held": "sharpedonite",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "swoobat",
+        "level": "39",
+        "moves": ["esper-wing", "air-slash", "shadow-ball", "calm-mind"],
+        "ability": "simple",
+        "held": "scope-lens",
+        "evs": [6, null, null, 252, null, 252]
+      },
+      {
+        "name": "krookodile",
+        "level": "41",
+        "moves": ["stomping-tantrum", "crunch", "stone-edge", "power-up-punch"],
+        "ability": "intimidate",
+        "evs": [6, 252, 252]
+      }
+    ]
+  },
+  "sh6_exp": {
+    "name": "Shadow Boss Zeph",
+    "speciality": "",
+    "img": { "src": "/leaders/unbound-zeph", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "mightyena",
+        "level": "45",
+        "moves": ["sucker-punch", "ice-fang", "psychic-fangs", "swagger"],
+        "ability": "strong-jaw",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "gengar",
+        "level": "45",
+        "moves": ["shadow-ball", "venoshock", "dazzling-gleam", "toxic"],
+        "ability": "levitate",
+        "held": "gengarite",
+        "evs": [6, null, null, 252, null, 252]
+      },
+      {
+        "name": "umbreon",
+        "level": "46",
+        "moves": ["foul-play", "toxic", "confuse-ray", "moonlight"],
+        "ability": "synchronize",
+        "held": "leftovers",
+        "evs": [252, null, 128, null, 128]
+      },
+      {
+        "name": "exploud",
+        "level": "44",
+        "moves": ["hyper-voice", "flamethrower", "ice-beam", "surf"],
+        "ability": "bellow",
+        "held": "throat-spray",
+        "evs": [252, null, null, 252, null, 6]
+      },
+      {
+        "name": "decidueye",
+        "level": "46",
+        "moves": ["leaf-blade", "spirit-shackle", "low-sweep", "acrobatics"],
+        "ability": "long-reach",
+        "evs": [6, 252, null, null, null, 252]
+      }
+    ]
+  },
+  "sh7_exp": {
+    "name": "Ex-Shadow Admin Marlon",
+    "speciality": "",
+    "img": { "src": "/leaders/unbound-marlon", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "sableye",
+        "level": "61",
+        "moves": ["night-shade", "will-o-wisp", "quash", "protect"],
+        "ability": "prankster",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "tentacruel",
+        "level": "61",
+        "moves": ["scald", "giga-drain", "haze", "protect"],
+        "ability": "clear-body",
+        "held": "black-sludge",
+        "evs": [252, null, 252, null, 4]
+      },
+      {
+        "name": "krookodile",
+        "level": "62",
+        "moves": ["high-horsepower", "crunch", "rock-slide", "protect"],
+        "ability": "intimidate",
+        "held": "passho-berry",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "beedrill",
+        "level": "61",
+        "moves": ["x-scissor", "poison-jab", "brick-break", "protect"],
+        "ability": "swarm",
+        "held": "beedrillite",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "dusknoir",
+        "level": "62",
+        "moves": ["poltergeist", "power-up-punch", "ice-punch", "thunder-punch"],
+        "ability": "iron-fist",
+        "evs": [252, 252, null, null, null, 6]
+      },
+      {
+        "name": "swoobat",
+        "level": "61",
+        "moves": ["air-slash", "energy-ball", "thunder-wave", "helping-hand"],
+        "ability": "unaware",
+        "held": "focus-sash",
+        "evs": [6, null, null, 252, null, 252]
+      }
+    ]
+  },
+  "mb1_exp": {
+    "name": "Successor Maxima",
+    "speciality": "fairy",
+    "img": { "src": "/leaders/unbound-maxima", "author": "Ubound Team", "link": "https://www.pokecommunity.com/showthread.php?t=382178" },
+    "pokemon": [
+      {
+        "name": "wigglytuff",
+        "level": "39",
+        "moves": ["drain-punch", "fire-punch", "ice-punch", "thunder-punch"],
+        "ability": "huge-power",
+        "held": "assault-vest",
+        "evs": [6, 252, 252]
+      },
+      {
+        "name": "serperior",
+        "level": "40",
+        "moves": ["leaf-blade", "aqua-tail", "leech-seed", "protect"],
+        "ability": "overgrow",
+        "held": "big-root",
+        "evs": [6, 252, null, null, null, 252]
+      },
+      {
+        "name": "empoleon",
+        "level": "40",
+        "moves": ["wave-crash", "bulldoze", "aerial-ace", "swords-dance"],
+        "ability": "defiant",
+        "evs": [252, 252, null, null, null, 6]
+      },
+      {
+        "name": "ninetales",
+        "level": "40",
+        "moves": ["ice-beam", "dazzling-gleam", "psyshock", "nasty-plot"],
+        "ability": "snow-cloak",
+        "evs": [252, null, 252, null, 4],
+        "sprite": "10104",
+        "types": ["ice", "fairy"],
+        "stats": { "hp": 73, "atk": 67, "def": 75, "spa": 81, "spd": 100, "spe": 109 }
+      },
+      {
+        "name": "altaria",
+        "level": "41",
+        "moves": ["dragon-pulse", "hyper-voice", "flamethrower", "roost"],
+        "ability": "cotton-cloud",
+        "held": "altarianite",
+        "evs": [252, null, 252, null, 4]
+      }
+    ]
+  }
+}

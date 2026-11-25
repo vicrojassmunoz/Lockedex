@@ -1,5 +1,16 @@
 <script>
   import { PixelatedContainer } from '$lib/components/containers'
+  import { t } from '$lib/lockedex/idioma'
+
+  // Proyectos y datos en los que se apoya Lockedex
+  const proyectos = [
+    { name: 'Nuzlocke Tracker', autor: 'Domtronn', href: 'https://github.com/domtronn/nuzlocke.app', es: 'La app original: rutas, jefes, guías y casi todo el trabajo de datos.', en: 'The original app: routes, bosses, guides and most of the data work.' },
+    { name: 'nuzlocke-redux', autor: 'Bassel', href: 'https://github.com/Bassel-T/nuzlocke.app', es: 'La versión mantenida de la que parte Lockedex.', en: 'The maintained fork Lockedex is based on.' },
+    { name: 'PokeAPI', autor: 'PokeAPI', href: 'https://pokeapi.co', es: 'Nombres en español, movimientos, habilidades, objetos y aprendizaje por nivel. Y los sprites de PokeAPI/sprites.', en: 'Spanish names, moves, abilities, items and learnsets. Plus the PokeAPI/sprites images.' },
+    { name: '@smogon/calc', autor: 'Smogon', href: 'https://github.com/smogon/damage-calc', es: 'La calculadora de daño del medidor de riesgo y el Analista.', en: 'The damage calculator behind the risk meter and the Analyst.' },
+    { name: 'pret', autor: 'pret', href: 'https://github.com/pret', es: 'Los desensamblados de los juegos de GBA, para leer las partidas .sav.', en: 'The GBA disassemblies, used to read .sav files.' },
+    { name: 'VT323', autor: 'Peter Hull', href: 'https://fonts.google.com/specimen/VT323', es: 'La tipografía pixel (licencia OFL).', en: 'The pixel font (OFL licence).' }
+  ]
   import { Picture, Icon } from '$lib/components/core'
   import { Heart } from '$icons'
 
@@ -7,67 +18,67 @@
     {
       name: 'Beliot419',
       href: 'https://www.deviantart.com/beliot419',
-      img: 'https://img.nuzlocke.app/leaders/sm-hala'
+      img: '/assets/img/leaders/sm-hala.png'
     },
     {
       name: 'Brumirage',
       href: 'https://www.instagram.com/brumirage',
-      img: 'https://img.nuzlocke.app/leaders/rs-phoebe-oras'
+      img: '/assets/img/leaders/rs-phoebe-oras.png'
     },
     {
       name: 'Drawnamu',
       href: 'https://www.deviantart.com/drawnamu',
-      img: 'https://img.nuzlocke.app/leaders/sm-acerola'
+      img: '/assets/img/leaders/sm-acerola.png'
     },
     {
       name: 'Gnomowladny',
       href: 'https://www.deviantart.com/gnomowladny',
-      img: 'https://img.nuzlocke.app/leaders/rs-shelly-oras'
+      img: '/assets/img/leaders/rs-shelly-oras.png'
     },
     {
       name: 'Hyo',
       href: 'https://www.deviantart.com/hyo-oppa',
-      img: 'https://img.nuzlocke.app/leaders/rs-maxie-oras'
+      img: '/assets/img/leaders/rs-maxie-oras.png'
     },
     {
       name: 'Kyledove',
       href: 'https://www.deviantart.com/kyle-dove',
-      img: 'https://img.nuzlocke.app/leaders/xy-sycamore'
+      img: '/assets/img/leaders/xy-sycamore.png'
     },
     {
       name: 'Muzyun',
       href: 'https://www.deviantart.com/muzyun',
-      img: 'https://img.nuzlocke.app/leaders/xy-mable'
+      img: '/assets/img/leaders/xy-mable.png'
     },
     {
       name: 'PKMNTrainerSpriterC',
       href: 'https://www.deviantart.com/PKMNTrainerSpriterC',
-      img: 'https://img.nuzlocke.app/leaders/rs-wattson-oras'
+      img: '/assets/img/leaders/rs-wattson-oras.png'
     },
     {
       name: 'Poffin Case',
       href: 'https://pokengine.org/trainers/Courtney',
-      img: 'https://img.nuzlocke.app/leaders/rs-tabitha-oras'
+      img: '/assets/img/leaders/rs-tabitha-oras.png'
     },
     {
       name: 'Sugar and Spice',
       href: 'https://chipsncookies.tumblr.com/',
-      img: 'https://img.nuzlocke.app/leaders/xy-lysandre'
+      img: '/assets/img/leaders/xy-lysandre.png'
     },
     {
       name: 'TintjeMadelintje101',
       href: 'https://www.deviantart.com/tintjemadelintje101',
-      img: 'https://img.nuzlocke.app/leaders/xy-serena'
+      img: '/assets/img/leaders/xy-serena.png'
     },
     {
       name: 'tebited15',
       href: 'https://www.deviantart.com/tebited15',
-      img: 'https://img.nuzlocke.app/leaders/xy-olympia'
+      img: '/assets/img/leaders/xy-olympia.png'
     },
     {
       name: 'Unbound Team',
       href: 'https://www.pokecommunity.com/showthread.php?t=382178',
-      img: 'https://img.nuzlocke.app/leaders/unbound-mirskle'
+      img: '/assets/img/leaders/unbound-mirskle.png'
     },
     {
       name: 'Struedelmuffin, Wednesday and Rool',
@@ -77,7 +88,7 @@
 </script>
 
 <svelte:head>
-  <title>Lockedex | Artist credit</title>
+  <title>Lockedex | {t('Créditos', 'Credits')}</title>
 </svelte:head>
 
 <main
@@ -87,9 +98,28 @@
     <PixelatedContainer
       className="my-16 py-6 px-8 overflow-x-hidden mx-auto text-center max-w-prose"
     >
-      <h1 class="-mb-2 text-xl font-bold sm:text-2xl md:text-4xl">
-        Artist Credits
-      </h1>
+      <h1 class="lx-cred-titulo">{t('Créditos', 'Credits')}</h1>
+
+      <section class="lx-cred-proyectos" data-lx-original>
+        <h2>{t('Lockedex existe gracias a', 'Lockedex exists thanks to')}</h2>
+        <ul>
+          {#each proyectos as pr}
+            <li>
+              <a href={pr.href} target="_blank" rel="noreferrer"><b>{pr.name}</b></a>
+              <small>· {pr.autor}</small>
+              <span>{t(pr.es, pr.en)}</span>
+            </li>
+          {/each}
+        </ul>
+        <p class="lx-cred-nota">
+          {t(
+            'Lockedex es un proyecto de fans sin ánimo de lucro, distribuido bajo la licencia BSD-3 del original. Pokémon y sus nombres son marcas de Nintendo, Creatures Inc. y GAME FREAK inc.',
+            'Lockedex is a non-profit fan project distributed under the original BSD-3 licence. Pokémon and its names are trademarks of Nintendo, Creatures Inc. and GAME FREAK inc.'
+          )}
+        </p>
+      </section>
+
+      <h2 class="lx-cred-sub" data-lx-original>{t('Artistas', 'Artists')}</h2>
 
       <div class="mx-6 my-4 inline-flex sm:mx-24 sm:my-6">
         {#each credit.slice(0, Math.floor(credit.length / 2)) as { name, img }, i (img)}
@@ -141,7 +171,7 @@
       </div>
 
       <h2 class="mb-4 inline-flex items-center text-xl font-bold md:text-2xl">
-        Thank you
+        {t('¡Gracias!', 'Thank you')}
         <Icon
           inline={true}
           height="1.2em"
@@ -167,6 +197,51 @@
 </main>
 
 <style lang="postcss">
+  .lx-cred-titulo {
+    font-family: 'VT323', monospace;
+    font-size: 44px;
+    line-height: 1;
+    letter-spacing: 2px;
+    color: var(--lx-rojo);
+    margin-bottom: 12px;
+  }
+  .lx-cred-proyectos {
+    text-align: left;
+    margin: 0 0 22px;
+  }
+  .lx-cred-proyectos h2,
+  .lx-cred-sub {
+    font-family: 'VT323', monospace;
+    font-size: 26px;
+    margin: 8px 0;
+  }
+  .lx-cred-proyectos ul {
+    display: grid;
+    gap: 8px;
+  }
+  .lx-cred-proyectos li {
+    padding: 8px 10px;
+    border: 2px solid var(--lx-bisel);
+    border-radius: var(--lx-radio-sm);
+    background: var(--lx-panel-2);
+  }
+  .lx-cred-proyectos li a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .lx-cred-proyectos li small {
+    color: var(--lx-texto-suave);
+  }
+  .lx-cred-proyectos li span {
+    display: block;
+    font-size: 14px;
+  }
+  .lx-cred-nota {
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--lx-texto-suave);
+  }
+
   p {
     margin-bottom: 16px;
     @apply px-0 text-sm sm:px-12 md:px-16 md:text-base;

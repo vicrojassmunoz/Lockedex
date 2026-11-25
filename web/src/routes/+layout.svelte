@@ -6,12 +6,15 @@
   import InfoFlotante from '$lib/lockedex/InfoFlotante.svelte'
   import Sincronizacion from '$lib/lockedex/Sincronizacion.svelte'
   import { iniciarTraduccion } from '$lib/lockedex/idioma.js'
+  import { escucharAcciones } from '$lib/lockedex/acciones.js'
 
   let escritorio = false
   onMount(() => {
     if (window.lockedex?.compacto) document.documentElement.classList.remove('lx-escritorio')
     escritorio = document.documentElement.classList.contains('lx-escritorio')
     iniciarTraduccion()
+    // Solo la ventana principal aplica las acciones rápidas del modo compacto
+    if (!window.lockedex?.compacto) return escucharAcciones()
   })
 
   import { page } from '$app/stores'

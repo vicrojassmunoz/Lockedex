@@ -4,8 +4,8 @@
     "speciality": "rock",
     "img": "/leaders/frlg-brock",
     "pokemon": [
-      { "name": "geodude", "level": "10", "moves": ["tackle"], "abilities": [""] },
-      { "name": "onix", "level": "12", "moves": ["tackle", "screech", "bide", "bind"], "abilities": [""] }
+      { "name": "geodude", "level": "10", "moves": ["tackle"] },
+      { "name": "onix", "level": "12", "moves": ["tackle", "screech", "bide", "bind"] }
     ]
   },
   "2": {
@@ -13,8 +13,8 @@
     "speciality": "water",
     "img": "/leaders/frlg-misty",
     "pokemon": [
-      { "name": "staryu", "level": "18", "moves": ["tackle", "water-gun"], "abilities": [""] },
-      { "name": "starmie", "level": "21", "moves": ["tackle", "harden", "water-gun", "bubble-beam"], "abilities": [""] }
+      { "name": "staryu", "level": "18", "moves": ["tackle", "water-gun"] },
+      { "name": "starmie", "level": "21", "moves": ["tackle", "harden", "water-gun", "bubble-beam"] }
     ]
   },
   "3": {
@@ -22,7 +22,7 @@
     "speciality": "electric",
     "img": "/leaders/frlg-surge",
     "pokemon": [
-      { "name": "raichu", "level": "28", "moves": ["thunderbolt", "mega-punch", "mega-kick", "growl"], "abilities": [""] }
+      { "name": "raichu", "level": "28", "moves": ["thunderbolt", "mega-punch", "mega-kick", "growl"] }
     ]
   },
   "4": {
@@ -30,9 +30,9 @@
     "speciality": "grass",
     "img": "/leaders/frlg-erika",
     "pokemon": [
-      { "name": "tangela", "level": "30", "moves": ["bind", "constrict", "mega-drain", "vine-whip"], "abilities": [""] },
-      { "name": "weepinbell", "level": "32", "moves": ["acid", "stun-spore", "sleep-powder", "razor-leaf"], "abilities": [""] },
-      { "name": "gloom", "level": "32", "moves": ["acid", "petal-dance", "stun-spore", "sleep-powder"], "abilities": [""] }
+      { "name": "tangela", "level": "30", "moves": ["bind", "constrict", "mega-drain", "vine-whip"] },
+      { "name": "weepinbell", "level": "32", "moves": ["acid", "stun-spore", "sleep-powder", "razor-leaf"] },
+      { "name": "gloom", "level": "32", "moves": ["acid", "petal-dance", "stun-spore", "sleep-powder"] }
     ]
   },
   "5": {
@@ -40,10 +40,10 @@
     "speciality": "poison",
     "img": "/leaders/frlg-koga",
     "pokemon": [
-      { "name": "venonat", "level": "44", "moves": ["toxic", "psychic", "tackle", "sleep-powder"], "abilities": [""] },
-      { "name": "venonat", "level": "46", "moves": ["toxic", "psychic", "psybeam", "supersonic"], "abilities": [""] },
-      { "name": "venonat", "level": "48", "moves": ["toxic", "psychic", "sleep-powder", "double-edge"], "abilities": [""] },
-      { "name": "venomoth", "level": "50", "moves": ["psychic", "toxic", "leech-life", "double-team"], "abilities": [""] }
+      { "name": "venonat", "level": "44", "moves": ["toxic", "psychic", "tackle", "sleep-powder"] },
+      { "name": "venonat", "level": "46", "moves": ["toxic", "psychic", "psybeam", "supersonic"] },
+      { "name": "venonat", "level": "48", "moves": ["toxic", "psychic", "sleep-powder", "double-edge"] },
+      { "name": "venomoth", "level": "50", "moves": ["psychic", "toxic", "leech-life", "double-team"] }
     ]
   },
   "6": {
@@ -51,9 +51,9 @@
     "speciality": "psychic",
     "img": "/leaders/frlg-sabrina",
     "pokemon": [
-      { "name": "abra", "level": "50", "moves": ["flash"], "abilities": [""] },
-      { "name": "kadabra", "level": "50", "moves": ["psychic", "recover", "kinesis", "psywave"], "abilities": [""] },
-      { "name": "alakazam", "level": "50", "moves": ["psychic", "recover", "reflect", "psywave"], "abilities": [""] }
+      { "name": "abra", "level": "50", "moves": ["flash"] },
+      { "name": "kadabra", "level": "50", "moves": ["psychic", "recover", "kinesis", "psywave"] },
+      { "name": "alakazam", "level": "50", "moves": ["psychic", "recover", "reflect", "psywave"] }
     ]
   },
   "7": {
@@ -61,9 +61,9 @@
     "speciality": "fire",
     "img": "/leaders/frlg-blaine",
     "pokemon": [
-      { "name": "ninetales", "level": "48", "moves": ["quick-attack", "tail-whip", "confuse-ray", "flamethrower"], "abilities": [""] },
-      { "name": "rapidash", "level": "50", "moves": ["take-down", "stomp", "growl", "fire-spin"], "abilities": [""] },
-      { "name": "arcanine", "level": "54", "moves": ["reflect", "take-down", "fire-blast", "flamethrower"], "abilities": [""] }
+      { "name": "ninetales", "level": "48", "moves": ["quick-attack", "tail-whip", "confuse-ray", "flamethrower"] },
+      { "name": "rapidash", "level": "50", "moves": ["take-down", "stomp", "growl", "fire-spin"] },
+      { "name": "arcanine", "level": "54", "moves": ["reflect", "take-down", "fire-blast", "flamethrower"] }
     ]
   },
   "8": {
@@ -71,11 +71,11 @@
     "speciality": "ground",
     "img": "/leaders/frlg-giovanni",
     "pokemon": [
-      { "name": "dugtrio", "level": "50", "moves": ["fissure", "earthquake", "dig", "sand-attack"], "abilities": [""] },
-      { "name": "persian", "level": "53", "moves": ["screech", "slash", "fury-swipes", "double-team"], "abilities": [""] },
-      { "name": "nidoqueen", "level": "53", "moves": ["thunder", "tail-whip", "earthquake", "double-kick"], "abilities": [""] },
-      { "name": "nidoking", "level": "55", "moves": ["thunder", "leer", "earthquake", "double-kick"], "abilities": [""] },
-      { "name": "rhydon", "level": "55", "moves": ["rock-slide", "fury-attack", "earthquake", "horn-drill"], "abilities": [""] }
+      { "name": "dugtrio", "level": "50", "moves": ["fissure", "earthquake", "dig", "sand-attack"] },
+      { "name": "persian", "level": "53", "moves": ["screech", "slash", "fury-swipes", "double-team"] },
+      { "name": "nidoqueen", "level": "53", "moves": ["thunder", "tail-whip", "earthquake", "double-kick"] },
+      { "name": "nidoking", "level": "55", "moves": ["thunder", "leer", "earthquake", "double-kick"] },
+      { "name": "rhydon", "level": "55", "moves": ["rock-slide", "fury-attack", "earthquake", "horn-drill"] }
     ]
   },
   "r1": {
@@ -83,7 +83,7 @@
     "speciality": "",
     "img": "/leaders/frlg-blue-1",
     "pokemon": [
-      { "name": "eevee", "level": "5", "moves": ["tackle", "tail-whip"], "abilities": [""] }
+      { "name": "eevee", "level": "5", "moves": ["tackle", "tail-whip"] }
     ]
   },
   "r2": {
@@ -91,8 +91,8 @@
     "speciality": "",
     "img": "/leaders/frlg-blue-1",
     "pokemon": [
-      { "name": "spearow", "level": "9", "moves": ["peck", "growl", "leer"], "abilities": [""] },
-      { "name": "eevee", "level": "8", "moves": ["tackle", "tail-whip", "sand-attack"], "abilities": [""] }
+      { "name": "spearow", "level": "9", "moves": ["peck", "growl", "leer"] },
+      { "name": "eevee", "level": "8", "moves": ["tackle", "tail-whip", "sand-attack"] }
     ]
   },
   "r3": {
@@ -100,10 +100,10 @@
     "speciality": "",
     "img": "/leaders/frlg-blue-1",
     "pokemon": [
-      { "name": "spearow", "level": "18", "moves": ["peck", "growl", "leer", "fury-attack"], "abilities": [""] },
-      { "name": "sandshrew", "level": "15", "moves": ["scratch", "sand-attack"], "abilities": [""] },
-      { "name": "rattata", "level": "15", "moves": ["tackle", "tail-whip", "quick-attack", "hyper-fang"], "abilities": [""] },
-      { "name": "eevee", "level": "17", "moves": ["tackle", "tail-whip", "sand-attack"], "abilities": [""] }
+      { "name": "spearow", "level": "18", "moves": ["peck", "growl", "leer", "fury-attack"] },
+      { "name": "sandshrew", "level": "15", "moves": ["scratch", "sand-attack"] },
+      { "name": "rattata", "level": "15", "moves": ["tackle", "tail-whip", "quick-attack", "hyper-fang"] },
+      { "name": "eevee", "level": "17", "moves": ["tackle", "tail-whip", "sand-attack"] }
     ]
   },
   "r4": {
@@ -111,10 +111,10 @@
     "speciality": "",
     "img": "/leaders/frlg-blue-2",
     "pokemon": [
-      { "name": "spearow", "level": "19", "moves": ["peck", "growl", "leer", "fury-attack"], "abilities": [""] },
-      { "name": "rattata", "level": "16", "moves": ["tackle", "tail-whip", "quick-attack", "hyper-fang"], "abilities": [""] },
-      { "name": "sandshrew", "level": "18", "moves": ["scratch", "sand-attack", "slash"], "abilities": [""] },
-      { "name": "eevee", "level": "20", "moves": ["tackle", "tail-whip", "sand-attack", "growl"], "abilities": [""] }
+      { "name": "spearow", "level": "19", "moves": ["peck", "growl", "leer", "fury-attack"] },
+      { "name": "rattata", "level": "16", "moves": ["tackle", "tail-whip", "quick-attack", "hyper-fang"] },
+      { "name": "sandshrew", "level": "18", "moves": ["scratch", "sand-attack", "slash"] },
+      { "name": "eevee", "level": "20", "moves": ["tackle", "tail-whip", "sand-attack", "growl"] }
     ]
   },
   "r5": {
@@ -122,15 +122,15 @@
     "speciality": "",
     "img": "/leaders/frlg-blue-2",
     "pokemon": [
-      { "name": "fearow", "level": "25", "moves": ["mirror-move", "growl", "leer", "fury-attack"], "abilities": [""] },
-      { "name": "vulpix", "level": "23", "moves": ["ember", "tail-whip", "quick-attack", "roar"], "abilities": [""], "starter": "water" },
-      { "name": "vulpix", "level": "22", "moves": ["ember", "tail-whip", "quick-attack", "roar"], "abilities": [""], "starter": "grass" },
-      { "name": "magnemite", "level": "23", "moves": ["tackle", "sonic-boom"], "abilities": [""], "starter": "fire" },
-      { "name": "magnemite", "level": "22", "moves": ["tackle", "sonic-boom"], "abilities": [""], "starter": "water" },
-      { "name": "shellder", "level": "23", "moves": ["tackle", "supersonic", "withdraw", "clamp"], "abilities": [""], "starter": "grass" },
-      { "name": "shellder", "level": "22", "moves": ["tackle", "supersonic", "withdraw", "clamp"], "abilities": [""], "starter": "fire" },
-      { "name": "sandshrew", "level": "20", "moves": ["scratch", "sand-attack", "slash"], "abilities": [""] },
-      { "name": "eevee", "level": "25", "moves": ["quick-attack", "tail-whip", "sand-attack", "growl"], "abilities": [""] }
+      { "name": "fearow", "level": "25", "moves": ["mirror-move", "growl", "leer", "fury-attack"] },
+      { "name": "magnemite", "level": "23", "moves": ["tackle", "sonic-boom"], "starter": "fire" },
+      { "name": "vulpix", "level": "22", "moves": ["ember", "tail-whip", "quick-attack", "roar"], "starter": "grass" },
+      { "name": "vulpix", "level": "23", "moves": ["ember", "tail-whip", "quick-attack", "roar"], "starter": "water" },
+      { "name": "shellder", "level": "22", "moves": ["tackle", "supersonic", "withdraw", "clamp"], "starter": "fire" },
+      { "name": "shellder", "level": "23", "moves": ["tackle", "supersonic", "withdraw", "clamp"], "starter": "grass" },
+      { "name": "magnemite", "level": "22", "moves": ["tackle", "sonic-boom"], "starter": "water" },
+      { "name": "sandshrew", "level": "20", "moves": ["scratch", "sand-attack", "slash"] },
+      { "name": "eevee", "level": "25", "moves": ["quick-attack", "tail-whip", "sand-attack", "growl"] }
     ]
   },
   "r6": {
@@ -138,17 +138,37 @@
     "speciality": "",
     "img": "/leaders/frlg-blue-2",
     "pokemon": [
-      { "name": "sandslash", "level": "38", "moves": ["swift", "sand-attack", "slash", "poison-sting"], "abilities": [""] },
-      { "name": "ninetales", "level": "37", "moves": ["ember", "tail-whip", "quick-attack", "roar"], "abilities": [""], "starter": "water" },
-      { "name": "ninetales", "level": "35", "moves": ["ember", "tail-whip", "quick-attack", "roar"], "abilities": [""], "starter": "grass" },
-      { "name": "magneton", "level": "37", "moves": ["tackle", "sonic-boom", "thunder-shock", "supersonic"], "abilities": [""], "starter": "fire" },
-      { "name": "magneton", "level": "35", "moves": ["tackle", "sonic-boom", "thunder-shock", "supersonic"], "abilities": [""], "starter": "water" },
-      { "name": "cloyster", "level": "37", "moves": ["withdraw", "clamp", "supersonic", "aurora-beam"], "abilities": [""], "starter": "grass" },
-      { "name": "cloyster", "level": "35", "moves": ["withdraw", "clamp", "supersonic", "aurora-beam"], "abilities": [""], "starter": "fire" },
-      { "name": "kadabra", "level": "35", "moves": ["confusion", "psybeam", "disable", "recover"], "abilities": [""] },
-      { "name": "jolteon", "level": "40", "moves": ["thunder-shock", "quick-attack", "double-kick", "pin-missile"], "abilities": [""], "starter": "grass" },
-      { "name": "vaporeon", "level": "40", "moves": ["water-gun", "quick-attack", "bite", "aurora-beam"], "abilities": [""], "starter": "water" },
-      { "name": "flareon", "level": "40", "moves": ["ember", "fire-spin", "quick-attack", "bite"], "abilities": [""], "starter": "fire" }
+      { "name": "sandslash", "level": "38", "moves": ["swift", "sand-attack", "slash", "poison-sting"] },
+      { "name": "magneton", "level": "37", "moves": ["tackle", "sonic-boom", "thunder-shock", "supersonic"], "starter": "fire" },
+      { "name": "ninetales", "level": "35", "moves": ["ember", "tail-whip", "quick-attack", "roar"], "starter": "grass" },
+      { "name": "ninetales", "level": "37", "moves": ["ember", "tail-whip", "quick-attack", "roar"], "starter": "water" },
+      { "name": "cloyster", "level": "35", "moves": ["withdraw", "clamp", "supersonic", "aurora-beam"], "starter": "fire" },
+      { "name": "cloyster", "level": "37", "moves": ["withdraw", "clamp", "supersonic", "aurora-beam"], "starter": "grass" },
+      { "name": "magneton", "level": "35", "moves": ["tackle", "sonic-boom", "thunder-shock", "supersonic"], "starter": "water" },
+      { "name": "kadabra", "level": "35", "moves": ["confusion", "psybeam", "disable", "recover"] },
+      {
+        "name": "flareon",
+        "level": "40",
+        "moves": [
+          "ember",
+          "fire-spin",
+          "quick-attack",
+          { "power": 60, "type": "normal", "damage_class": "physical", "name": "Bite", "effect": "" }
+        ],
+        "starter": "fire"
+      },
+      { "name": "jolteon", "level": "40", "moves": ["thunder-shock", "quick-attack", "double-kick", "pin-missile"], "starter": "grass" },
+      {
+        "name": "vaporeon",
+        "level": "40",
+        "moves": [
+          "water-gun",
+          "quick-attack",
+          { "power": 60, "type": "normal", "damage_class": "physical", "name": "Bite", "effect": "" },
+          "aurora-beam"
+        ],
+        "starter": "water"
+      }
     ]
   },
   "r7": {
@@ -156,18 +176,18 @@
     "speciality": "",
     "img": "/leaders/frlg-blue-2",
     "pokemon": [
-      { "name": "sandslash", "level": "47", "moves": ["swift", "fury-swipes", "slash", "poison-sting"], "abilities": [""] },
-      { "name": "exeggcute", "level": "45", "moves": ["leech-seed", "stun-spore", "solar-beam", "poison-powder"], "abilities": [""] },
-      { "name": "ninetales", "level": "47", "moves": ["ember", "tail-whip", "quick-attack", "roar"], "abilities": [""], "starter": "water" },
-      { "name": "ninetales", "level": "45", "moves": ["ember", "tail-whip", "quick-attack", "roar"], "abilities": [""], "starter": "grass" },
-      { "name": "magneton", "level": "47", "moves": ["supersonic", "sonic-boom", "thunder-shock", "thunder-wave"], "abilities": [""], "starter": "fire" },
-      { "name": "magneton", "level": "45", "moves": ["supersonic", "sonic-boom", "thunder-shock", "thunder-wave"], "abilities": [""], "starter": "water" },
-      { "name": "cloyster", "level": "47", "moves": ["withdraw", "clamp", "supersonic", "aurora-beam"], "abilities": [""], "starter": "grass" },
-      { "name": "cloyster", "level": "45", "moves": ["withdraw", "clamp", "supersonic", "aurora-beam"], "abilities": [""], "starter": "fire" },
-      { "name": "kadabra", "level": "50", "moves": ["psychic", "psybeam", "reflect", "recover"], "abilities": [""] },
-      { "name": "jolteon", "level": "40", "moves": ["thunder-shock", "thunder", "agility", "pin-missile"], "abilities": [""], "starter": "grass" },
-      { "name": "vaporeon", "level": "40", "moves": ["hydro-pump", "mist", "haze", "acid-armor"], "abilities": [""], "starter": "water" },
-      { "name": "flareon", "level": "40", "moves": ["flamethrower", "fire-spin", "leer", "smog"], "abilities": [""], "starter": "fire" }
+      { "name": "sandslash", "level": "47", "moves": ["swift", "fury-swipes", "slash", "poison-sting"] },
+      { "name": "exeggcute", "level": "45", "moves": ["leech-seed", "stun-spore", "solar-beam", "poison-powder"] },
+      { "name": "magneton", "level": "47", "moves": ["supersonic", "sonic-boom", "thunder-shock", "thunder-wave"], "starter": "fire" },
+      { "name": "ninetales", "level": "45", "moves": ["ember", "tail-whip", "quick-attack", "roar"], "starter": "grass" },
+      { "name": "ninetales", "level": "47", "moves": ["ember", "tail-whip", "quick-attack", "roar"], "starter": "water" },
+      { "name": "cloyster", "level": "45", "moves": ["withdraw", "clamp", "supersonic", "aurora-beam"], "starter": "fire" },
+      { "name": "cloyster", "level": "47", "moves": ["withdraw", "clamp", "supersonic", "aurora-beam"], "starter": "grass" },
+      { "name": "magneton", "level": "45", "moves": ["supersonic", "sonic-boom", "thunder-shock", "thunder-wave"], "starter": "water" },
+      { "name": "kadabra", "level": "50", "moves": ["psychic", "psybeam", "reflect", "recover"] },
+      { "name": "flareon", "level": "40", "moves": ["flamethrower", "fire-spin", "leer", "smog"], "starter": "fire" },
+      { "name": "jolteon", "level": "40", "moves": ["thunder-shock", "thunder", "agility", "pin-missile"], "starter": "grass" },
+      { "name": "vaporeon", "level": "40", "moves": ["hydro-pump", "mist", "haze", "acid-armor"], "starter": "water" }
     ]
   },
   "jj1": {
@@ -175,9 +195,17 @@
     "speciality": "",
     "img": { "src": "/leaders/frlg-jessiejames", "author": "Kimba", "link": "https://www.deviantart.com/kimba616" },
     "pokemon": [
-      { "name": "ekans", "level": "14", "moves": ["wrap", "leer", "poison-sting"], "abilities": [""] },
-      { "name": "meowth", "level": "14", "moves": ["scratch", "growl", "bite"], "abilities": [""] },
-      { "name": "koffing", "level": "14", "moves": ["tackle", "smog"], "abilities": [""] }
+      { "name": "ekans", "level": "14", "moves": ["wrap", "leer", "poison-sting"] },
+      {
+        "name": "meowth",
+        "level": "14",
+        "moves": [
+          "scratch",
+          "growl",
+          { "power": 60, "type": "normal", "damage_class": "physical", "name": "Bite", "effect": "" }
+        ]
+      },
+      { "name": "koffing", "level": "14", "moves": ["tackle", "smog"] }
     ]
   },
   "jj2": {
@@ -185,9 +213,27 @@
     "speciality": "",
     "img": { "src": "/leaders/frlg-jessiejames", "author": "Kimba", "link": "https://www.deviantart.com/kimba616" },
     "pokemon": [
-      { "name": "ekans", "level": "25", "moves": ["bite", "leer", "glare", "poison-sting"], "abilities": [""] },
-      { "name": "meowth", "level": "25", "moves": ["growl", "bite", "screech", "pay-day"], "abilities": [""] },
-      { "name": "koffing", "level": "25", "moves": ["tackle", "smog"], "abilities": [""] }
+      {
+        "name": "ekans",
+        "level": "25",
+        "moves": [
+          { "power": 60, "type": "normal", "damage_class": "physical", "name": "Bite", "effect": "" },
+          "leer",
+          "glare",
+          "poison-sting"
+        ]
+      },
+      {
+        "name": "meowth",
+        "level": "25",
+        "moves": [
+          "growl",
+          { "power": 60, "type": "normal", "damage_class": "physical", "name": "Bite", "effect": "" },
+          "screech",
+          "pay-day"
+        ]
+      },
+      { "name": "koffing", "level": "25", "moves": ["tackle", "smog"] }
     ]
   },
   "jj3": {
@@ -195,9 +241,27 @@
     "speciality": "",
     "img": { "src": "/leaders/frlg-jessiejames", "author": "Kimba", "link": "https://www.deviantart.com/kimba616" },
     "pokemon": [
-      { "name": "arbok", "level": "27", "moves": ["bite", "leer", "glare", "poison-sting"], "abilities": [""] },
-      { "name": "meowth", "level": "27", "moves": ["growl", "bite", "screech", "pay-day"], "abilities": [""] },
-      { "name": "weezing", "level": "27", "moves": ["tackle", "smog", "sludge"], "abilities": [""] }
+      {
+        "name": "arbok",
+        "level": "27",
+        "moves": [
+          { "power": 60, "type": "normal", "damage_class": "physical", "name": "Bite", "effect": "" },
+          "leer",
+          "glare",
+          "poison-sting"
+        ]
+      },
+      {
+        "name": "meowth",
+        "level": "27",
+        "moves": [
+          "growl",
+          { "power": 60, "type": "normal", "damage_class": "physical", "name": "Bite", "effect": "" },
+          "screech",
+          "pay-day"
+        ]
+      },
+      { "name": "weezing", "level": "27", "moves": ["tackle", "smog", "sludge"] }
     ]
   },
   "jj4": {
@@ -205,9 +269,27 @@
     "speciality": "",
     "img": { "src": "/leaders/frlg-jessiejames", "author": "Kimba", "link": "https://www.deviantart.com/kimba616" },
     "pokemon": [
-      { "name": "arbok", "level": "31", "moves": ["bite", "leer", "glare", "poison-sting"], "abilities": [""] },
-      { "name": "meowth", "level": "31", "moves": ["growl", "bite", "screech", "pay-day"], "abilities": [""] },
-      { "name": "weezing", "level": "31", "moves": ["tackle", "smog", "sludge"], "abilities": [""] }
+      {
+        "name": "arbok",
+        "level": "31",
+        "moves": [
+          { "power": 60, "type": "normal", "damage_class": "physical", "name": "Bite", "effect": "" },
+          "leer",
+          "glare",
+          "poison-sting"
+        ]
+      },
+      {
+        "name": "meowth",
+        "level": "31",
+        "moves": [
+          "growl",
+          { "power": 60, "type": "normal", "damage_class": "physical", "name": "Bite", "effect": "" },
+          "screech",
+          "pay-day"
+        ]
+      },
+      { "name": "weezing", "level": "31", "moves": ["tackle", "smog", "sludge"] }
     ]
   },
   "g1": {
@@ -215,9 +297,18 @@
     "speciality": "ground",
     "img": "/leaders/frlg-giovanni",
     "pokemon": [
-      { "name": "onix", "level": "25", "moves": ["screech", "bind", "rage", "rock-throw"], "abilities": [""] },
-      { "name": "rhyhorn", "level": "24", "moves": ["horn-attack"], "abilities": [""] },
-      { "name": "persian", "level": "29", "moves": ["pay-day", "scratch", "bite", "growl"], "abilities": [""] }
+      { "name": "onix", "level": "25", "moves": ["screech", "bind", "rage", "rock-throw"] },
+      { "name": "rhyhorn", "level": "24", "moves": ["horn-attack"] },
+      {
+        "name": "persian",
+        "level": "29",
+        "moves": [
+          "pay-day",
+          "scratch",
+          { "power": 60, "type": "normal", "damage_class": "physical", "name": "Bite", "effect": "" },
+          "growl"
+        ]
+      }
     ]
   },
   "g2": {
@@ -225,10 +316,19 @@
     "speciality": "ground",
     "img": "/leaders/frlg-giovanni",
     "pokemon": [
-      { "name": "nidorino", "level": "37", "moves": ["double-kick", "poison-sting", "focus-energy", "fury-attack"], "abilities": [""] },
-      { "name": "rhyhorn", "level": "37", "moves": ["horn-attack", "stomp", "tail-whip"], "abilities": [""] },
-      { "name": "persian", "level": "35", "moves": ["scratch", "growl", "bite", "pay-day"], "abilities": [""] },
-      { "name": "nidoqueen", "level": "41", "moves": ["double-kick", "tail-whip", "body-slam", "poison-sting"], "abilities": [""] }
+      { "name": "nidorino", "level": "37", "moves": ["double-kick", "poison-sting", "focus-energy", "fury-attack"] },
+      { "name": "rhyhorn", "level": "37", "moves": ["horn-attack", "stomp", "tail-whip"] },
+      {
+        "name": "persian",
+        "level": "35",
+        "moves": [
+          "scratch",
+          "growl",
+          { "power": 60, "type": "normal", "damage_class": "physical", "name": "Bite", "effect": "" },
+          "pay-day"
+        ]
+      },
+      { "name": "nidoqueen", "level": "41", "moves": ["double-kick", "tail-whip", "body-slam", "poison-sting"] }
     ]
   },
   "e1": {
@@ -236,11 +336,11 @@
     "speciality": "ice",
     "img": "/leaders/frlg-lorelei",
     "pokemon": [
-      { "name": "dewgong", "level": "54", "moves": ["bubble-beam", "aurora-beam", "rest", "take-down"], "abilities": [""] },
-      { "name": "cloyster", "level": "53", "moves": ["supersonic", "clamp", "ice-beam", "spike-cannon"], "abilities": [""] },
-      { "name": "slowbro", "level": "54", "moves": ["surf", "withdraw", "psychic", "amnesia"], "abilities": [""] },
-      { "name": "jynx", "level": "56", "moves": ["ice-punch", "double-slap", "lovely-kiss", "thrash"], "abilities": [""] },
-      { "name": "lapras", "level": "56", "moves": ["body-slam", "confuse-ray", "hydro-pump", "blizzard"], "abilities": [""] }
+      { "name": "dewgong", "level": "54", "moves": ["bubble-beam", "aurora-beam", "rest", "take-down"] },
+      { "name": "cloyster", "level": "53", "moves": ["supersonic", "clamp", "ice-beam", "spike-cannon"] },
+      { "name": "slowbro", "level": "54", "moves": ["surf", "withdraw", "psychic", "amnesia"] },
+      { "name": "jynx", "level": "56", "moves": ["ice-punch", "double-slap", "lovely-kiss", "thrash"] },
+      { "name": "lapras", "level": "56", "moves": ["body-slam", "confuse-ray", "hydro-pump", "blizzard"] }
     ]
   },
   "e2": {
@@ -248,11 +348,11 @@
     "speciality": "fighting",
     "img": "/leaders/frlg-bruno",
     "pokemon": [
-      { "name": "onix", "level": "53", "moves": ["rock-slide", "dig", "screech", "slam"], "abilities": [""] },
-      { "name": "hitmonchan", "level": "55", "moves": ["ice-punch", "thunder-punch", "fire-punch", "double-team"], "abilities": [""] },
-      { "name": "hitmonlee", "level": "55", "moves": ["double-kick", "high-jump-kick", "mega-kick", "double-team"], "abilities": [""] },
-      { "name": "onix", "level": "56", "moves": ["rock-slide", "screech", "earthquake", "slam"], "abilities": [""] },
-      { "name": "machamp", "level": "58", "moves": ["leer", "strength", "karate-chop", "submission"], "abilities": [""] }
+      { "name": "onix", "level": "53", "moves": ["rock-slide", "dig", "screech", "slam"] },
+      { "name": "hitmonchan", "level": "55", "moves": ["ice-punch", "thunder-punch", "fire-punch", "double-team"] },
+      { "name": "hitmonlee", "level": "55", "moves": ["double-kick", "high-jump-kick", "mega-kick", "double-team"] },
+      { "name": "onix", "level": "56", "moves": ["rock-slide", "screech", "earthquake", "slam"] },
+      { "name": "machamp", "level": "58", "moves": ["leer", "strength", "karate-chop", "submission"] }
     ]
   },
   "e3": {
@@ -260,11 +360,11 @@
     "speciality": "ghost",
     "img": "/leaders/frlg-agatha",
     "pokemon": [
-      { "name": "gengar", "level": "56", "moves": ["confuse-ray", "lick", "substitute", "mega-drain"], "abilities": [""] },
-      { "name": "golbat", "level": "56", "moves": ["supersonic", "leech-life", "wing-attack", "toxic"], "abilities": [""] },
-      { "name": "haunter", "level": "55", "moves": ["confuse-ray", "lick", "hypnosis", "dream-eater"], "abilities": [""] },
-      { "name": "arbok", "level": "58", "moves": ["wrap", "glare", "screech", "acid"], "abilities": [""] },
-      { "name": "gengar", "level": "60", "moves": ["confuse-ray", "psychic", "hypnosis", "dream-eater"], "abilities": [""] }
+      { "name": "gengar", "level": "56", "moves": ["confuse-ray", "lick", "substitute", "mega-drain"] },
+      { "name": "golbat", "level": "56", "moves": ["supersonic", "leech-life", "wing-attack", "toxic"] },
+      { "name": "haunter", "level": "55", "moves": ["confuse-ray", "lick", "hypnosis", "dream-eater"] },
+      { "name": "arbok", "level": "58", "moves": ["wrap", "glare", "screech", "acid"] },
+      { "name": "gengar", "level": "60", "moves": ["confuse-ray", "psychic", "hypnosis", "dream-eater"] }
     ]
   },
   "e4": {
@@ -272,11 +372,11 @@
     "speciality": "dragon",
     "img": "/leaders/frlg-lance",
     "pokemon": [
-      { "name": "gyarados", "level": "58", "moves": ["hydro-pump", "dragon-rage", "leer", "hyper-beam"], "abilities": [""] },
-      { "name": "dragonair", "level": "56", "moves": ["thunderbolt", "thunder-wave", "slam", "hyper-beam"], "abilities": [""] },
-      { "name": "dragonair", "level": "56", "moves": ["wrap", "bubble-beam", "ice-beam", "hyper-beam"], "abilities": [""] },
-      { "name": "aerodactyl", "level": "60", "moves": ["wing-attack", "fly", "swift", "hyper-beam"], "abilities": [""] },
-      { "name": "dragonite", "level": "62", "moves": ["blizzard", "fire-blast", "thunder", "hyper-beam"], "abilities": [""] }
+      { "name": "gyarados", "level": "58", "moves": ["hydro-pump", "dragon-rage", "leer", "hyper-beam"] },
+      { "name": "dragonair", "level": "56", "moves": ["thunderbolt", "thunder-wave", "slam", "hyper-beam"] },
+      { "name": "dragonair", "level": "56", "moves": ["wrap", "bubble-beam", "ice-beam", "hyper-beam"] },
+      { "name": "aerodactyl", "level": "60", "moves": ["wing-attack", "fly", "swift", "hyper-beam"] },
+      { "name": "dragonite", "level": "62", "moves": ["blizzard", "fire-blast", "thunder", "hyper-beam"] }
     ]
   },
   "c": {
@@ -284,18 +384,18 @@
     "speciality": "",
     "img": "/leaders/frlg-blue-3",
     "pokemon": [
-      { "name": "sandslash", "level": "61", "moves": ["swift", "fury-swipes", "earthquake", "poison-sting"], "abilities": [""] },
-      { "name": "alakazam", "level": "59", "moves": ["psychic", "psybeam", "kinesis", "recover"], "abilities": [""] },
-      { "name": "exeggutor", "level": "61", "moves": ["leech-seed", "hypnosis", "barrage", "stomp"], "abilities": [""] },
-      { "name": "ninetales", "level": "61", "moves": ["fire-spin", "tail-whip", "quick-attack", "confuse-ray"], "abilities": [""], "starter": "water" },
-      { "name": "ninetales", "level": "63", "moves": ["fire-spin", "tail-whip", "quick-attack", "confuse-ray"], "abilities": [""], "starter": "grass" },
-      { "name": "magneton", "level": "61", "moves": ["swift", "screech", "thunderbolt", "thunder-wave"], "abilities": [""], "starter": "fire" },
-      { "name": "magneton", "level": "63", "moves": ["swift", "screech", "thunderbolt", "thunder-wave"], "abilities": [""], "starter": "water" },
-      { "name": "cloyster", "level": "61", "moves": ["spike-cannon", "clamp", "ice-beam", "aurora-beam"], "abilities": [""], "starter": "grass" },
-      { "name": "cloyster", "level": "63", "moves": ["spike-cannon", "clamp", "ice-beam", "aurora-beam"], "abilities": [""], "starter": "fire" },
-      { "name": "jolteon", "level": "65", "moves": ["thunderbolt", "thunder", "quick-attack", "pin-missile"], "abilities": [""], "starter": "grass" },
-      { "name": "vaporeon", "level": "65", "moves": ["hydro-pump", "quick-attack", "mist", "aurora-beam"], "abilities": [""], "starter": "water" },
-      { "name": "flareon", "level": "65", "moves": ["flamethrower", "fire-spin", "reflect", "quick-attack"], "abilities": [""], "starter": "fire" }
+      { "name": "sandslash", "level": "61", "moves": ["swift", "fury-swipes", "earthquake", "poison-sting"] },
+      { "name": "alakazam", "level": "59", "moves": ["psychic", "psybeam", "kinesis", "recover"] },
+      { "name": "exeggutor", "level": "61", "moves": ["leech-seed", "hypnosis", "barrage", "stomp"] },
+      { "name": "magneton", "level": "61", "moves": ["swift", "screech", "thunderbolt", "thunder-wave"], "starter": "fire" },
+      { "name": "ninetales", "level": "63", "moves": ["fire-spin", "tail-whip", "quick-attack", "confuse-ray"], "starter": "grass" },
+      { "name": "ninetales", "level": "61", "moves": ["fire-spin", "tail-whip", "quick-attack", "confuse-ray"], "starter": "water" },
+      { "name": "cloyster", "level": "63", "moves": ["spike-cannon", "clamp", "ice-beam", "aurora-beam"], "starter": "fire" },
+      { "name": "cloyster", "level": "61", "moves": ["spike-cannon", "clamp", "ice-beam", "aurora-beam"], "starter": "grass" },
+      { "name": "magneton", "level": "63", "moves": ["swift", "screech", "thunderbolt", "thunder-wave"], "starter": "water" },
+      { "name": "flareon", "level": "65", "moves": ["flamethrower", "fire-spin", "reflect", "quick-attack"], "starter": "fire" },
+      { "name": "jolteon", "level": "65", "moves": ["thunderbolt", "thunder", "quick-attack", "pin-missile"], "starter": "grass" },
+      { "name": "vaporeon", "level": "65", "moves": ["hydro-pump", "quick-attack", "mist", "aurora-beam"], "starter": "water" }
     ]
   }
 }

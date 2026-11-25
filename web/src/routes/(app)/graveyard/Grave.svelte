@@ -8,6 +8,8 @@
   import { IMG, createImgUrl } from '$utils/rewrites'
 
   import GraveEpitaph from './GraveEpitaph.svelte'
+  import Lapida from './Lapida.svelte'
+  import { t, traducirNombre } from '$lib/lockedex/idioma'
   import { format } from '$c/DeathModal/prose'
   import { Tooltip, Picture } from '$c/core'
 
@@ -27,6 +29,21 @@
   $: gravehash = death?.epitaph?.length || nickname?.length || pokemon?.length
   $: graveid = id + 1 || (gravehash % 12) + 1
   $: graveid = graveid === 2 ? 1 : graveid
+
+  // Causa de la muerte en una línea, con lo que se apuntó al marcarlo como caído
+  const nombreDe = (o) => (typeof o === 'string' ? o : o?.name || o?.label || o?.alias || o?.value || '')
+  $: rival = nombreDe(death?.opponent)
+  $: entrenador = nombreDe(death?.trainer)
+  $: sitio = nombreDe(death?.location)
+  $: causa = rival
+    ? entrenador
+      ? t(`Cayó ante el ${traducirNombre(regionise(capitalise(rival)))} de ${entrenador}`, `Fell to ${entrenador}'s ${regionise(capitalise(rival))}`)
+      : t(`Cayó ante ${traducirNombre(regionise(capitalise(rival)))}`, `Fell to ${regionise(capitalise(rival))}`)
+    : entrenador
+    ? t(`Cayó contra ${entrenador}`, `Fell against ${entrenador}`)
+    : sitio
+    ? t(`Cayó en ${traducirNombre(sitio)}`, `Fell at ${sitio}`)
+    : ''
 
   let tooltip
   $: tooltip = format(death?.epitaph, {
@@ -48,15 +65,11 @@
   {/if}
 
   <!-- Tombstone Image -->
-  {#key gravehash}
-    <Picture
-      pixelated
-      class="tombstone tombstone--{graveid}"
-      alt="Tombstone for {nickname} the {pokemon}"
-      src="/img/grave-{graveid}"
-      aspect="192x256"
-    />
-  {/key}
+  <Lapida variante={graveid} semilla={gravehash + (nickname || pokemon || '').length * 7} />
+
+  {#if causa}
+    <p class="lx-causa epitaph" role="note">{causa}</p>
+  {/if}
 
   <!-- Edit / add Button controls -->
   <div
@@ -71,10 +84,10 @@
     >
       {#if tooltip}
         <Icon inline icon={Edit} />
-        Click to edit
+        {t('Editar', 'Click to edit')}
       {:else}
         <Icon inline icon={Plus} />
-        Add epitaph
+        {t('Añadir epitafio', 'Add epitaph')}
       {/if}
     </span>
   </div>
@@ -87,9 +100,9 @@
     {#if death?.lvl}
       <p class="lvl top-2 z-20 !text-lg max-md:hidden">
         {#if death?.lvl?.from && death?.lvl?.to}
-          <small>Lv</small>{death?.lvl?.from}-<small>Lv</small>{death?.lvl?.to}
+          <small>{t('Nv', 'Lv')}</small>{death?.lvl?.from}-<small>{t('Nv', 'Lv')}</small>{death?.lvl?.to}
         {:else if death?.lvl?.to}
-          Died <small>Lv</small>{death?.lvl?.to}
+          {t('Murió', 'Died')} <small>{t('Nv', 'Lv')}</small>{death?.lvl?.to}
         {/if}
       </p>
     {/if}
@@ -106,13 +119,14 @@
 
     <p class="z-20 pt-4 text-center">
       {#if nickname}
-        {capitalise(nickname)} the <br /> {regionise(capitalise(pokemon))}
+        {capitalise(nickname)} <br /> <span class="lx-especie">{traducirNombre(regionise(capitalise(pokemon)))}</span>
       {:else}
-        An unknown <br /> {regionise(capitalise(pokemon))}
+        {traducirNombre(regionise(capitalise(pokemon)))}
       {/if}
     </p>
   </div>
 </div>
+
 
 {#if death?.epitaph}
   <GraveEpitaph {death} {pokemon} {nickname} on:edit={onclick}>
@@ -132,6 +146,45 @@
 
   .pkmn {
     @apply z-20 grayscale;
+  }
+
+  .lx-especie {
+    font-size: 0.8em;
+    opacity: 0.85;
+  }
+  /* Causa de la muerte: aparece al pasar por encima de la lápida */
+  .lx-causa {
+    position: absolute;
+    left: 50%;
+    bottom: -44px;
+    z-index: 40;
+    width: max-content;
+    max-width: 12rem;
+    transform: translateX(-50%);
+    padding: 3px 8px;
+    font-family: 'VT323', monospace;
+    font-size: 17px;
+    line-height: 1;
+    text-align: center;
+    color: var(--lx-texto);
+    background: var(--lx-panel);
+    border: 2px solid var(--lx-tinta);
+    border-radius: 6px;
+    box-shadow: var(--lx-sombra-sm);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s;
+  }
+  .grave:hover .lx-causa {
+    opacity: 1;
+  }
+  /* La lápida (y su fila) se ponen delante al pasar por encima, para que se lea la causa */
+  .grave:hover {
+    z-index: 70;
+  }
+  :global(.row:hover) {
+    position: relative;
+    z-index: 60;
   }
 
   :global(.tombstone) {

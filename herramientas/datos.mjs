@@ -7,22 +7,24 @@
 //   node herramientas/datos.mjs compilar    datos/ → web/src/lib/data/*.json
 //   node herramientas/datos.mjs comprobar   valida datos/ y que la app esté al día (lo usa GitHub Actions)
 //   node herramientas/datos.mjs extraer     (una sola vez) app → datos/, para empezar la migración
+//   node herramientas/datos.mjs extraer-jefes  (una sola vez) equipos detallados → datos/jefes/
 //
 // Sin dependencias: solo Node.
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { cargarBase, compactarJuego, expandirJuego, ligaResumida, numeroGen, INICIALES } from './jefes.mjs'
 
 const RAIZ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const DATOS = path.join(RAIZ, 'datos')
 const APP = path.join(RAIZ, 'web', 'src', 'lib', 'data')
 const POKEDEX = path.join(RAIZ, 'web', 'src', 'routes', 'api', 'pokemon.json', '_pokemon.json')
 const MOVIMIENTOS = path.join(RAIZ, 'web', 'static', 'lx', 'movimientos.json')
+const LIGAS = path.join(RAIZ, 'web', 'static', 'api', 'league')
 
 // Colecciones: cada clave del JSON de la app es un archivo en datos/<carpeta>/<clave>.json
 const COLECCIONES = [
   { carpeta: 'rutas', app: 'routes.json', compacto: true },
-  { carpeta: 'jefes', app: 'league.json', compacto: true },
   { carpeta: 'parches', app: 'patches.json', compacto: true }
 ]
 // Archivos sueltos: se copian tal cual (con formato legible en datos/)
@@ -109,27 +111,94 @@ const compilarEnMemoria = () => {
       errores.push(`datos/${s.datos} no es JSON válido: ${e.message}`)
     }
   }
-  return { salida, errores }
+
+  // Jefes: datos/jefes/<clave>.json → equipos detallados (uno por inicial) + league.json
+  const juegos = salida['games.json']?.obj || {}
+  const parches = salida['patches.json']?.obj || {}
+  const dirJefes = path.join(DATOS, 'jefes')
+  const jefes = {}
+  for (const f of (fs.existsSync(dirJefes) ? fs.readdirSync(dirJefes) : []).filter((f) => f.endsWith('.json')).sort()) {
+    try {
+      jefes[f.slice(0, -5)] = leer(path.join(dirJefes, f))
+    } catch (e) {
+      errores.push(`datos/jefes/${f} no es JSON válido: ${e.message}`)
+    }
+  }
+  const base = cargarBase(RAIZ)
+  const ligas = {}
+  const resumen = {}
+  for (const [clave, compacto] of Object.entries(jefes)) {
+    try {
+      const porInicial = expandirJuego(compacto, base, parches[parcheDe(clave, juegos)] || {}, numeroGen(juegoDe(clave, juegos)?.gen))
+      for (const i of INICIALES) ligas[`${clave}.${i}.json`] = JSON.stringify(porInicial[i], null, 2)
+      resumen[clave] = ligaResumida(compacto)
+    } catch (e) {
+      errores.push(`datos/jefes/${clave}.json no se puede compilar: ${e.message}`)
+    }
+  }
+  salida['league.json'] = { obj: resumen, compacto: true }
+  return { salida, errores, jefes, ligas }
 }
 
+// Juego (o juego de una dificultad: radred_hard → radred, bl2c → bl2) y su parche
+const juegoDe = (clave, juegos) => {
+  if (juegos[clave]) return juegos[clave]
+  const candidato = Object.keys(juegos)
+    .filter((k) => clave.startsWith(k))
+    .sort((a, b) => b.length - a.length)[0]
+  return candidato ? juegos[candidato] : undefined
+}
+const parcheDe = (clave, juegos) => juegoDe(clave, juegos)?.patchId
+
 const compilar = () => {
-  const { salida, errores } = compilarEnMemoria()
+  const { salida, errores, ligas } = compilarEnMemoria()
   if (errores.length) return fallar(errores)
   for (const [archivo, { obj, compacto }] of Object.entries(salida)) escribir(path.join(APP, archivo), serializarApp(obj, compacto))
-  console.log(`Compilado: ${Object.keys(salida).join(', ')}`)
+  let cambiados = 0
+  for (const [archivo, texto] of Object.entries(ligas)) {
+    const ruta = path.join(LIGAS, archivo)
+    if (!fs.existsSync(ruta) || fs.readFileSync(ruta, 'utf8') !== texto) {
+      escribir(ruta, texto)
+      cambiados++
+    }
+  }
+  console.log(`Compilado: ${Object.keys(salida).join(', ')} y ${Object.keys(ligas).length} equipos de jefes (${cambiados} cambiados)`)
+}
+
+// ---------------------------------------------------------------------------
+// extraer-jefes: equipos detallados → datos/jefes/<clave>.json (migración)
+const extraerJefes = () => {
+  const juegos = leer(path.join(DATOS, 'juegos.json'))
+  const parches = leer(path.join(APP, 'patches.json'))
+  const base = cargarBase(RAIZ)
+  const dir = path.join(DATOS, 'jefes')
+  if (fs.existsSync(dir)) for (const f of fs.readdirSync(dir)) fs.unlinkSync(path.join(dir, f))
+  const claves = [...new Set(fs.readdirSync(LIGAS).filter((f) => f.endsWith('.json')).map((f) => f.split('.')[0]))].sort()
+  for (const clave of claves) {
+    const porInicial = Object.fromEntries(INICIALES.map((i) => [i, leer(path.join(LIGAS, `${clave}.${i}.json`))]))
+    const compacto = compactarJuego(porInicial, base, parches[parcheDe(clave, juegos)] || {}, numeroGen(juegoDe(clave, juegos)?.gen))
+    escribir(path.join(dir, `${clave}.json`), formatear(compacto) + '\n')
+  }
+  const rutaIndice = path.join(DATOS, 'indice.json')
+  if (fs.existsSync(rutaIndice)) {
+    const indice = leer(rutaIndice)
+    delete indice.jefes
+    escribir(rutaIndice, formatear(indice) + '\n')
+  }
+  console.log(`Extraídos ${claves.length} juegos a datos/jefes/`)
 }
 
 // ---------------------------------------------------------------------------
 // Validación
 const norm = (s) => String(s || '').toLowerCase().normalize('NFD').replace(/[^a-z0-9]/g, '')
 
-const validar = (salida) => {
+const validar = (salida, jefes) => {
   const errores = []
   const avisos = []
   const juegos = salida['games.json'].obj
   const rutas = salida['routes.json'].obj
-  const jefes = salida['league.json'].obj
   const parches = salida['patches.json'].obj
+  const base = cargarBase(RAIZ)
 
   const especies = new Set()
   for (const p of leer(POKEDEX)) for (const k of [p.alias, p.sprite, p.name, p.evoline]) if (k) especies.add(norm(k))
@@ -186,13 +255,13 @@ const validar = (salida) => {
   for (const [e, donde] of desconocidas)
     avisos.push(`Pokémon desconocido en rutas: «${e}» (${[...donde].slice(0, 4).join(', ')}${donde.size > 4 ? '…' : ''})`)
 
-  // Jefes
-  const patchDe = Object.fromEntries(Object.values(juegos).map((j) => [j.lid, j.patchId]))
+  // Jefes (datos/jefes/<clave>.json, formato compacto)
   const movsDesconocidos = new Map()
   const espDesconocidas = new Map()
   for (const [lid, grupo] of Object.entries(jefes)) {
-    const movsParche = new Set(Object.keys(parches[patchDe[lid]]?.move || {}).map(norm))
-    const extra = especiesParche(patchDe[lid])
+    const parche = parches[parcheDe(lid, juegos)] || {}
+    const movsParche = new Set(Object.keys(parche.move || {}).map(norm))
+    const extra = especiesParche(parcheDe(lid, juegos))
     for (const [id, jefe] of Object.entries(grupo || {})) {
       const donde = `jefes/${lid}.json › ${id}`
       if (!jefe?.name) errores.push(`${donde}: falta «name»`)
@@ -205,12 +274,22 @@ const validar = (salida) => {
         if (typeof p?.name !== 'string' || !p.name) return errores.push(`${d}: falta «name»`)
         if (p.level === undefined || p.level === '' || isNaN(+p.level)) errores.push(`${d} (${p.name}): «level» no es un número`)
         if (!Array.isArray(p.moves)) errores.push(`${d} (${p.name}): «moves» debe ser una lista`)
-        if (!conocida(p.name, extra)) espDesconocidas.set(p.name, (espDesconocidas.get(p.name) || new Set()).add(lid))
+        if (p.calc !== false && !conocida(p.name, extra)) espDesconocidas.set(p.name, (espDesconocidas.get(p.name) || new Set()).add(lid))
+        // Los movimientos escritos como objeto son personalizados: solo se comprueban los nombres cortos
         for (const m of p.moves || []) {
-          const n = norm(typeof m === 'string' ? m : m?.name)
+          if (typeof m !== 'string') {
+            if (!m?.name || !m?.type) errores.push(`${d} (${p.name}): movimiento personalizado sin «name» o «type»`)
+            continue
+          }
+          const n = norm(m)
           if (n && !n.startsWith('hiddenpower') && !movimientos.has(n) && !movsParche.has(n))
             movsDesconocidos.set(m, (movsDesconocidos.get(m) || new Set()).add(lid))
         }
+        if (typeof p.ability === 'string' && !base.habs[norm(p.ability)] && !parche.ability?.[p.ability])
+          avisos.push(`${d} (${p.name}): habilidad desconocida «${p.ability}»`)
+        if (typeof p.held === 'string' && !base.objs[norm(p.held)] && !parche.item?.[p.held])
+          avisos.push(`${d} (${p.name}): objeto desconocido «${p.held}»`)
+        if (p.starter && !INICIALES.includes(p.starter)) errores.push(`${d} (${p.name}): «starter» debe ser fire, grass o water`)
       })
     }
   }
@@ -227,9 +306,17 @@ const fallar = (errores) => {
 }
 
 const comprobar = () => {
-  const { salida, errores: deLectura } = compilarEnMemoria()
+  const { salida, errores: deLectura, jefes, ligas } = compilarEnMemoria()
   if (deLectura.length) return fallar(deLectura)
-  const { errores, avisos } = validar(salida)
+  const { errores, avisos } = validar(salida, jefes)
+
+  // Equipos detallados de los jefes generados desde datos/jefes/
+  const desfasados = Object.entries(ligas).filter(([archivo, texto]) => {
+    const ruta = path.join(LIGAS, archivo)
+    return !fs.existsSync(ruta) || fs.readFileSync(ruta, 'utf8').replace(/\r\n/g, '\n') !== texto
+  })
+  if (desfasados.length)
+    errores.push(`${desfasados.length} equipo(s) de jefes no están al día con datos/jefes/ (p. ej. ${desfasados[0][0]}): ejecuta «node herramientas/datos.mjs compilar»`)
 
   // La app tiene que estar compilada desde datos/
   for (const [archivo, { obj, compacto }] of Object.entries(salida)) {
@@ -246,14 +333,15 @@ const comprobar = () => {
   }
   if (errores.length) return fallar(errores)
   const n = (k) => Object.keys(salida[k].obj).length
-  console.log(`✔ datos/ correcto: ${n('games.json')} juegos, ${n('routes.json')} listas de rutas, ${n('league.json')} ligas de jefes, ${n('patches.json')} parches`)
+  console.log(`✔ datos/ correcto: ${n('games.json')} juegos, ${n('routes.json')} listas de rutas, ${n('league.json')} juegos con jefes (${Object.keys(ligas).length} equipos detallados), ${n('patches.json')} parches`)
 }
 
 const orden = process.argv[2]
 if (orden === 'extraer') extraer()
 else if (orden === 'compilar') compilar()
 else if (orden === 'comprobar') comprobar()
+else if (orden === 'extraer-jefes') extraerJefes()
 else {
-  console.log('Uso: node herramientas/datos.mjs <compilar|comprobar|extraer>')
+  console.log('Uso: node herramientas/datos.mjs <compilar|comprobar|extraer|extraer-jefes>')
   process.exit(2)
 }

@@ -12,6 +12,8 @@
 
   import TypeLogo from '$lib/components/type-logo.svelte'
   import { Modal as AnalysisModal } from '$lib/components/Analysis'
+  import CajaPC from '$lib/lockedex/CajaPC.svelte'
+  import { t } from '$lib/lockedex/idioma'
 
   import { capitalise } from '$utils/string'
   import { drag } from '$utils/drag'
@@ -41,6 +43,18 @@
   const { open } = getContext('simple-modal')
 
   let minimal = false
+
+  // Vista de la caja: «pc» (rejilla tipo PC, por defecto) o «fichas» (las tarjetas de siempre)
+  let vista = 'pc'
+  try {
+    vista = localStorage.getItem('lockedex.caja.vista') || 'pc'
+  } catch {}
+  const cambiarVista = (v) => {
+    vista = v
+    try {
+      localStorage.setItem('lockedex.caja.vista', v)
+    } catch {}
+  }
   let Particles
   let gameStore,
     teamData = [],
@@ -249,8 +263,18 @@
 
           <Settings class="absolute right-0" />
 
+          <div class="lx-vistas" role="tablist" data-lx-original>
+            <button role="tab" aria-selected={vista === 'pc'} class:lx-vista-activa={vista === 'pc'} on:click={() => cambiarVista('pc')}>
+              {t('Caja PC', 'PC box')}
+            </button>
+            <button role="tab" aria-selected={vista === 'fichas'} class:lx-vista-activa={vista === 'fichas'} on:click={() => cambiarVista('fichas')}>
+              {t('Fichas', 'Cards')}
+            </button>
+          </div>
+
           <div
             class="mt-0 mr-8 flex gap-x-2 max-md:flex-grow max-md:justify-end md:flex-row-reverse"
+            class:invisible={vista === 'pc'}
           >
             <Toggle id="minimal" bind:state={minimal}>
               <small>Hide stats</small>
@@ -372,6 +396,20 @@
           {/if}
         </div>
 
+        {#if vista === 'pc'}
+          <CajaPC
+            lista={(stat === 'team' ? mons : box).filter(filter)}
+            {Pokemon}
+            equipo={teamData}
+            victorias={winData}
+            evoHecha={evoComplete}
+            {Particles}
+            on:finEvo={() => (evoComplete = false)}
+            on:evolucionar={(e) => handleEvo(Pokemon[e.detail.pokemon], e.detail)}
+            on:matar={(e) => handleKill(e.detail)()}
+            on:equipo={(e) => ((teamData || []).includes(locid(e.detail)) ? handleTeamRemove : handleTeamAdd)(e.detail)}
+          />
+        {:else}
         <div
           class:grid-cols-1={!minimal}
           class:grid-cols-2={minimal}
@@ -575,6 +613,7 @@
             </span>
           {/each}
         </div>
+        {/if}
 
         <Footer class="!relative !mt-6 !-mb-20 md:hidden" />
       </main>
@@ -585,6 +624,30 @@
 <style lang="postcss">
   input {
     display: none;
+  }
+
+  .lx-vistas {
+    display: inline-flex;
+    border: 2px solid var(--lx-tinta);
+    border-radius: var(--lx-radio-sm);
+    overflow: hidden;
+    box-shadow: var(--lx-sombra-sm);
+    margin-left: 8px;
+  }
+  .lx-vistas button {
+    padding: 3px 12px;
+    font-family: 'VT323', monospace;
+    font-size: 19px;
+    line-height: 1.1;
+    background: var(--lx-panel);
+    color: var(--lx-texto-suave);
+  }
+  .lx-vistas button + button {
+    border-left: 2px solid var(--lx-tinta);
+  }
+  .lx-vistas button.lx-vista-activa {
+    background: var(--lx-rojo);
+    color: #fff;
   }
 
   .card-controls {

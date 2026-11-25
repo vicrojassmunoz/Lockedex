@@ -1,0 +1,418 @@
+{
+  "1": {
+    "name": "Brock",
+    "speciality": "rock",
+    "img": "/leaders/frlg-brock",
+    "pokemon": [
+      { "name": "geodude", "level": "12", "moves": ["tackle", "defense-curl"] },
+      { "name": "onix", "level": "14", "moves": ["tackle", "screech", "bide"] }
+    ]
+  },
+  "2": {
+    "name": "Misty",
+    "speciality": "water",
+    "img": "/leaders/frlg-misty",
+    "pokemon": [
+      { "name": "staryu", "level": "18", "moves": ["tackle", "water-gun"] },
+      { "name": "starmie", "level": "21", "moves": ["tackle", "water-gun", "bubble-beam"] }
+    ]
+  },
+  "3": {
+    "name": "Lt. Surge",
+    "speciality": "electric",
+    "img": "/leaders/frlg-surge",
+    "pokemon": [
+      { "name": "voltorb", "level": "21", "moves": ["tackle", "screech", "sonic-boom"] },
+      { "name": "pikachu", "level": "18", "moves": ["thunder-shock", "growl", "thunder-wave", "quick-attack"] },
+      { "name": "raichu", "level": "24", "moves": ["thunder-shock", "growl", "thunderbolt"] }
+    ]
+  },
+  "4": {
+    "name": "Erika",
+    "speciality": "grass",
+    "img": "/leaders/frlg-erika",
+    "pokemon": [
+      { "name": "victreebel", "level": "29", "moves": ["razor-leaf", "wrap", "poison-powder", "sleep-powder"] },
+      { "name": "tangela", "level": "24", "moves": ["constrict", "bind"] },
+      { "name": "vileplume", "level": "29", "moves": ["petal-dance", "poison-powder", "mega-drain", "sleep-powder"] }
+    ]
+  },
+  "5": {
+    "name": "Koga",
+    "speciality": "poison",
+    "img": "/leaders/frlg-koga",
+    "pokemon": [
+      { "name": "koffing", "level": "37", "moves": ["tackle", "smokescreen", "smog", "sludge"] },
+      { "name": "koffing", "level": "37", "moves": ["tackle", "smokescreen", "smog", "sludge"] },
+      { "name": "muk", "level": "39", "moves": ["disable", "minimize", "poison-gas", "sludge"] },
+      { "name": "weezing", "level": "43", "moves": ["smog", "sludge", "self-destruct", "toxic"] }
+    ]
+  },
+  "6": {
+    "name": "Sabrina",
+    "speciality": "psychic",
+    "img": "/leaders/frlg-sabrina",
+    "pokemon": [
+      { "name": "kadabra", "level": "38", "moves": ["disable", "recover", "psybeam", "psychic"] },
+      { "name": "mr-mime", "level": "37", "moves": ["confusion", "barrier", "light-screen", "double-slap"] },
+      { "name": "venomoth", "level": "38", "moves": ["poison-powder", "leech-life", "stun-spore", "psybeam"] },
+      { "name": "alakazam", "level": "43", "moves": ["psybeam", "psywave", "reflect", "recover"] }
+    ]
+  },
+  "7": {
+    "name": "Blaine",
+    "speciality": "fire",
+    "img": "/leaders/frlg-blaine",
+    "pokemon": [
+      { "name": "growlithe", "level": "42", "moves": ["ember", "leer", "take-down", "agility"] },
+      { "name": "ponyta", "level": "40", "moves": ["tail-whip", "stomp", "growl", "fire-spin"] },
+      { "name": "rapidash", "level": "42", "moves": ["tail-whip", "stomp", "growl", "fire-spin"] },
+      { "name": "arcanine", "level": "47", "moves": ["roar", "take-down", "fire-blast", "ember"] }
+    ]
+  },
+  "8": {
+    "name": "Giovanni",
+    "speciality": "ground",
+    "img": "/leaders/frlg-giovanni",
+    "pokemon": [
+      { "name": "rhyhorn", "level": "45", "moves": ["horn-attack", "stomp", "tail-whip"] },
+      { "name": "dugtrio", "level": "42", "moves": ["growl", "dig", "sand-attack", "slash"] },
+      { "name": "nidoqueen", "level": "44", "moves": ["scratch", "tail-whip", "body-slam", "poison-sting"] },
+      { "name": "nidoking", "level": "45", "moves": ["tackle", "horn-attack", "thrash", "poison-sting"] },
+      { "name": "rhydon", "level": "50", "moves": ["stomp", "tail-whip", "fissure", "horn-drill"] }
+    ]
+  },
+  "r1": {
+    "name": "Blue",
+    "speciality": "",
+    "img": "/leaders/frlg-blue-1",
+    "pokemon": [
+      { "name": "squirtle", "level": "5", "moves": ["tackle", "tail-whip"], "starter": "fire" },
+      { "name": "charmander", "level": "5", "moves": ["scratch", "growl"], "starter": "grass" },
+      { "name": "bulbasaur", "level": "5", "moves": ["tackle", "growl"], "starter": "water" }
+    ]
+  },
+  "r2": {
+    "name": "Blue",
+    "speciality": "",
+    "img": "/leaders/frlg-blue-1",
+    "pokemon": [
+      { "name": "pidgey", "level": "9", "moves": ["gust", "sand-attack"] },
+      { "name": "squirtle", "level": "8", "moves": ["bubble", "tackle", "tail-whip"], "starter": "fire" },
+      { "name": "charmander", "level": "8", "moves": ["scratch", "growl"], "starter": "grass" },
+      { "name": "bulbasaur", "level": "8", "moves": ["leech-seed", "tackle", "growl"], "starter": "water" }
+    ]
+  },
+  "r3": {
+    "name": "Blue",
+    "speciality": "",
+    "img": "/leaders/frlg-blue-1",
+    "pokemon": [
+      { "name": "pidgeotto", "level": "18", "moves": ["gust", "sand-attack", "quick-attack"] },
+      { "name": "abra", "level": "15", "moves": ["teleport"] },
+      { "name": "rattata", "level": "15", "moves": ["tackle", "tail-whip", "quick-attack", "hyper-fang"] },
+      { "name": "squirtle", "level": "17", "moves": ["bubble", "water-gun", "tackle", "tail-whip"], "starter": "fire" },
+      { "name": "charmander", "level": "17", "moves": ["ember", "scratch", "growl", "leer"], "starter": "grass" },
+      { "name": "bulbasaur", "level": "17", "moves": ["leech-seed", "vine-whip", "tackle", "growl"], "starter": "water" }
+    ]
+  },
+  "r4": {
+    "name": "Blue",
+    "speciality": "",
+    "img": "/leaders/frlg-blue-2",
+    "pokemon": [
+      { "name": "pidgeotto", "level": "19", "moves": ["gust", "sand-attack", "quick-attack"] },
+      { "name": "kadabra", "level": "18", "moves": ["teleport", "confusion", "disable"] },
+      { "name": "raticate", "level": "16", "moves": ["tackle", "tail-whip", "quick-attack", "hyper-fang"] },
+      { "name": "wartortle", "level": "20", "moves": ["bubble", "water-gun", "tackle", "tail-whip"], "starter": "fire" },
+      { "name": "charmeleon", "level": "20", "moves": ["ember", "scratch", "growl", "leer"], "starter": "grass" },
+      { "name": "ivysaur", "level": "20", "moves": ["leech-seed", "vine-whip", "tackle", "growl"], "starter": "water" }
+    ]
+  },
+  "r5": {
+    "name": "Blue",
+    "speciality": "",
+    "img": "/leaders/frlg-blue-2",
+    "pokemon": [
+      { "name": "pidgeotto", "level": "25", "moves": ["gust", "sand-attack", "quick-attack", "whirlwind"] },
+      { "name": "exeggcute", "level": "22", "moves": ["barrage", "hypnosis"], "starter": "fire" },
+      { "name": "exeggcute", "level": "23", "moves": ["barrage", "hypnosis"], "starter": "grass" },
+      {
+        "name": "gyarados",
+        "level": "23",
+        "moves": [
+          "leer",
+          { "power": 60, "type": "normal", "damage_class": "physical", "name": "Bite", "effect": "" },
+          "dragon-rage",
+          "hydro-pump"
+        ],
+        "starter": "water"
+      },
+      {
+        "name": "growlithe",
+        "level": "23",
+        "moves": [
+          { "power": 60, "type": "normal", "damage_class": "physical", "name": "Bite", "effect": "" },
+          "roar",
+          "ember"
+        ],
+        "starter": "fire"
+      },
+      {
+        "name": "gyarados",
+        "level": "22",
+        "moves": [
+          "leer",
+          { "power": 60, "type": "normal", "damage_class": "physical", "name": "Bite", "effect": "" },
+          "dragon-rage",
+          "hydro-pump"
+        ],
+        "starter": "grass"
+      },
+      {
+        "name": "growlithe",
+        "level": "22",
+        "moves": [
+          { "power": 60, "type": "normal", "damage_class": "physical", "name": "Bite", "effect": "" },
+          "roar",
+          "ember"
+        ],
+        "starter": "water"
+      },
+      { "name": "kadabra", "level": "20", "moves": ["teleport", "confusion", "disable"] },
+      { "name": "wartortle", "level": "25", "moves": ["bubble", "water-gun", "tackle", "tail-whip"], "starter": "fire" },
+      { "name": "charmeleon", "level": "25", "moves": ["ember", "scratch", "growl", "leer"], "starter": "grass" },
+      { "name": "ivysaur", "level": "25", "moves": ["leech-seed", "vine-whip", "tackle", "growl"], "starter": "water" }
+    ]
+  },
+  "r6": {
+    "name": "Blue",
+    "speciality": "",
+    "img": "/leaders/frlg-blue-2",
+    "pokemon": [
+      { "name": "pidgeot", "level": "37", "moves": ["wing-attack", "sand-attack", "quick-attack", "whirlwind"] },
+      { "name": "exeggcute", "level": "35", "moves": ["reflect", "poison-powder", "leech-seed", "stun-spore"], "starter": "fire" },
+      { "name": "exeggcute", "level": "38", "moves": ["reflect", "poison-powder", "leech-seed", "stun-spore"], "starter": "grass" },
+      {
+        "name": "gyarados",
+        "level": "38",
+        "moves": [
+          "leer",
+          { "power": 60, "type": "normal", "damage_class": "physical", "name": "Bite", "effect": "" },
+          "dragon-rage",
+          "hydro-pump"
+        ],
+        "starter": "water"
+      },
+      { "name": "growlithe", "level": "38", "moves": ["take-down", "roar", "leer", "ember"], "starter": "fire" },
+      {
+        "name": "gyarados",
+        "level": "35",
+        "moves": [
+          "leer",
+          { "power": 60, "type": "normal", "damage_class": "physical", "name": "Bite", "effect": "" },
+          "dragon-rage",
+          "hydro-pump"
+        ],
+        "starter": "grass"
+      },
+      { "name": "growlithe", "level": "35", "moves": ["take-down", "roar", "leer", "ember"], "starter": "water" },
+      { "name": "alakazam", "level": "35", "moves": ["psybeam", "confusion", "disable", "recover"] },
+      {
+        "name": "blastoise",
+        "level": "40",
+        "moves": [
+          "bubble",
+          "water-gun",
+          { "power": 60, "type": "normal", "damage_class": "physical", "name": "Bite", "effect": "" },
+          "withdraw"
+        ],
+        "starter": "fire"
+      },
+      { "name": "charizard", "level": "40", "moves": ["slash", "ember", "leer", "rage"], "starter": "grass" },
+      { "name": "venusaur", "level": "40", "moves": ["leech-seed", "vine-whip", "poison-powder", "razor-leaf"], "starter": "water" }
+    ]
+  },
+  "r7": {
+    "name": "Blue",
+    "speciality": "",
+    "img": "/leaders/frlg-blue-2",
+    "pokemon": [
+      { "name": "pidgeot", "level": "47", "moves": ["wing-attack", "agility", "quick-attack", "whirlwind"] },
+      { "name": "rhyhorn", "level": "45", "moves": ["fury-attack", "stomp", "horn-drill", "tail-whip"] },
+      { "name": "exeggcute", "level": "47", "moves": ["leech-seed", "poison-powder", "solar-beam", "growth"], "starter": "fire" },
+      { "name": "exeggcute", "level": "45", "moves": ["leech-seed", "poison-powder", "solar-beam", "growth"], "starter": "grass" },
+      {
+        "name": "gyarados",
+        "level": "45",
+        "moves": [
+          "leer",
+          { "power": 60, "type": "normal", "damage_class": "physical", "name": "Bite", "effect": "" },
+          "dragon-rage",
+          "hydro-pump"
+        ],
+        "starter": "water"
+      },
+      { "name": "growlithe", "level": "45", "moves": ["take-down", "leer", "agility", "ember"], "starter": "fire" },
+      {
+        "name": "gyarados",
+        "level": "47",
+        "moves": [
+          "leer",
+          { "power": 60, "type": "normal", "damage_class": "physical", "name": "Bite", "effect": "" },
+          "dragon-rage",
+          "hydro-pump"
+        ],
+        "starter": "grass"
+      },
+      { "name": "growlithe", "level": "47", "moves": ["take-down", "leer", "agility", "ember"], "starter": "water" },
+      { "name": "alakazam", "level": "50", "moves": ["psychic", "psybeam", "reflect", "recover"] },
+      {
+        "name": "blastoise",
+        "level": "53",
+        "moves": [
+          "hydro-pump",
+          "withdraw",
+          "skull-bash",
+          { "power": 60, "type": "normal", "damage_class": "physical", "name": "Bite", "effect": "" }
+        ],
+        "starter": "fire"
+      },
+      { "name": "charizard", "level": "53", "moves": ["flamethrower", "slash", "leer", "rage"], "starter": "grass" },
+      { "name": "venusaur", "level": "53", "moves": ["razor-leaf", "vine-whip", "poison-powder", "growth"], "starter": "water" }
+    ]
+  },
+  "g1": {
+    "name": "Giovanni",
+    "speciality": "ground",
+    "img": "/leaders/frlg-giovanni",
+    "pokemon": [
+      { "name": "onix", "level": "25", "moves": ["screech", "bind", "rage", "rock-throw"] },
+      { "name": "rhyhorn", "level": "24", "moves": ["horn-attack"] },
+      {
+        "name": "kangaskhan",
+        "level": "29",
+        "moves": [
+          "comet-punch",
+          "rage",
+          { "power": 60, "type": "normal", "damage_class": "physical", "name": "Bite", "effect": "" }
+        ]
+      }
+    ]
+  },
+  "g2": {
+    "name": "Giovanni",
+    "speciality": "ground",
+    "img": "/leaders/frlg-giovanni",
+    "pokemon": [
+      { "name": "nidorino", "level": "37", "moves": ["horn-attack", "poison-sting", "focus-energy", "fury-attack"] },
+      {
+        "name": "kangaskhan",
+        "level": "35",
+        "moves": [
+          "comet-punch",
+          "rage",
+          { "power": 60, "type": "normal", "damage_class": "physical", "name": "Bite", "effect": "" },
+          "tail-whip"
+        ]
+      },
+      { "name": "rhyhorn", "level": "37", "moves": ["horn-attack", "stomp", "tail-whip"] },
+      { "name": "nidoqueen", "level": "41", "moves": ["scratch", "tail-whip", "body-slam", "poison-sting"] }
+    ]
+  },
+  "e1": {
+    "name": "Lorelei",
+    "speciality": "ice",
+    "img": "/leaders/frlg-lorelei",
+    "pokemon": [
+      { "name": "dewgong", "level": "54", "moves": ["growl", "aurora-beam", "rest", "take-down"] },
+      { "name": "cloyster", "level": "53", "moves": ["supersonic", "clamp", "ice-beam", "spike-cannon"] },
+      { "name": "slowbro", "level": "54", "moves": ["growl", "withdraw", "psychic", "amnesia"] },
+      { "name": "jynx", "level": "56", "moves": ["ice-punch", "double-slap", "lovely-kiss", "thrash"] },
+      { "name": "lapras", "level": "56", "moves": ["body-slam", "confuse-ray", "hydro-pump", "blizzard"] }
+    ]
+  },
+  "e2": {
+    "name": "Bruno",
+    "speciality": "fighting",
+    "img": "/leaders/frlg-bruno",
+    "pokemon": [
+      { "name": "onix", "level": "53", "moves": ["rock-throw", "rage", "slam", "harden"] },
+      { "name": "hitmonchan", "level": "55", "moves": ["ice-punch", "thunder-punch", "mega-punch", "counter"] },
+      { "name": "hitmonlee", "level": "55", "moves": ["jump-kick", "high-jump-kick", "focus-energy", "mega-kick"] },
+      { "name": "onix", "level": "56", "moves": ["rock-throw", "rage", "slam", "harden"] },
+      { "name": "machamp", "level": "58", "moves": ["leer", "focus-energy", "fissure", "submission"] }
+    ]
+  },
+  "e3": {
+    "name": "Agatha",
+    "speciality": "ghost",
+    "img": "/leaders/frlg-agatha",
+    "pokemon": [
+      { "name": "gengar", "level": "56", "moves": ["confuse-ray", "night-shade", "hypnosis", "dream-eater"] },
+      { "name": "golbat", "level": "56", "moves": ["supersonic", "confuse-ray", "wing-attack", "haze"] },
+      { "name": "haunter", "level": "55", "moves": ["confuse-ray", "night-shade", "hypnosis", "dream-eater"] },
+      {
+        "name": "arbok",
+        "level": "58",
+        "moves": [
+          { "power": 60, "type": "normal", "damage_class": "physical", "name": "Bite", "effect": "" },
+          "glare",
+          "screech",
+          "acid"
+        ]
+      },
+      { "name": "gengar", "level": "60", "moves": ["confuse-ray", "night-shade", "toxic", "dream-eater"] }
+    ]
+  },
+  "e4": {
+    "name": "Lance",
+    "speciality": "dragon",
+    "img": "/leaders/frlg-lance",
+    "pokemon": [
+      { "name": "gyarados", "level": "58", "moves": ["hydro-pump", "dragon-rage", "leer", "hyper-beam"] },
+      { "name": "dragonair", "level": "56", "moves": ["agility", "slam", "dragon-rage", "hyper-beam"] },
+      { "name": "dragonair", "level": "56", "moves": ["agility", "slam", "dragon-rage", "hyper-beam"] },
+      {
+        "name": "aerodactyl",
+        "level": "60",
+        "moves": [
+          "supersonic",
+          { "power": 60, "type": "normal", "damage_class": "physical", "name": "Bite", "effect": "" },
+          "take-down",
+          "hyper-beam"
+        ]
+      },
+      { "name": "dragonite", "level": "62", "moves": ["agility", "slam", "barrier", "hyper-beam"] }
+    ]
+  },
+  "c": {
+    "name": "Blue",
+    "speciality": "",
+    "img": "/leaders/frlg-blue-3",
+    "pokemon": [
+      { "name": "pidgeot", "level": "61", "moves": ["wing-attack", "mirror-move", "sky-attack", "whirlwind"] },
+      { "name": "alakazam", "level": "59", "moves": ["psybeam", "psychic", "reflect", "recover"] },
+      { "name": "rhydon", "level": "61", "moves": ["leer", "tail-whip", "fury-attack", "horn-drill"] },
+      { "name": "exeggutor", "level": "63", "moves": ["hypnosis", "barrage", "stomp"], "starter": "fire" },
+      { "name": "exeggutor", "level": "61", "moves": ["hypnosis", "barrage", "stomp"], "starter": "grass" },
+      { "name": "gyarados", "level": "61", "moves": ["leer", "hyper-beam", "dragon-rage", "hydro-pump"], "starter": "water" },
+      { "name": "arcanine", "level": "61", "moves": ["take-down", "roar", "leer", "ember"], "starter": "fire" },
+      { "name": "gyarados", "level": "63", "moves": ["leer", "hyper-beam", "dragon-rage", "hydro-pump"], "starter": "grass" },
+      { "name": "arcanine", "level": "63", "moves": ["take-down", "roar", "leer", "ember"], "starter": "water" },
+      {
+        "name": "blastoise",
+        "level": "65",
+        "moves": [
+          "hydro-pump",
+          { "power": 60, "type": "normal", "damage_class": "physical", "name": "Bite", "effect": "" },
+          "blizzard",
+          "withdraw"
+        ],
+        "starter": "fire"
+      },
+      { "name": "charizard", "level": "65", "moves": ["slash", "rage", "fire-spin", "fire-blast"], "starter": "grass" },
+      { "name": "venusaur", "level": "65", "moves": ["growth", "mega-drain", "razor-leaf", "solar-beam"], "starter": "water" }
+    ]
+  }
+}

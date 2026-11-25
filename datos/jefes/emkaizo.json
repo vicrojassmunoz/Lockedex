@@ -9,49 +9,35 @@
         "level": "15",
         "moves": ["self-destruct", "attract", "seismic-toss", "thunder-wave"],
         "ability": "battle-armor",
-        "abilities": ["battle-armor"],
         "held": "sitrus-berry"
       },
       {
         "name": "lileep",
         "level": "14",
-        "moves": ["sludge-bomb", "giga-drain", "recover", "ancient-power"],
+        "moves": [
+          { "power": 90, "type": "poison", "damage_class": "physical", "name": "Sludge Bomb", "effect": "" },
+          "giga-drain",
+          "recover",
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" }
+        ],
         "ability": "suction-cups",
-        "abilities": ["suction-cups"],
         "held": "sitrus-berry"
       },
-      {
-        "name": "anorith",
-        "level": "14",
-        "moves": ["aerial-ace", "brick-break", "x-scissor", "rock-slide"],
-        "ability": "battle-armor",
-        "abilities": ["battle-armor"],
-        "held": "lum-berry"
-      },
-      {
-        "name": "relicanth",
-        "level": "14",
-        "moves": ["rock-throw", "secret-power", "yawn", "water-pulse"],
-        "ability": "rock-head",
-        "abilities": ["rock-head"],
-        "held": "sitrus-berry"
-      },
+      { "name": "anorith", "level": "14", "moves": ["aerial-ace", "brick-break", "x-scissor", "rock-slide"], "ability": "battle-armor", "held": "lum-berry" },
+      { "name": "relicanth", "level": "14", "moves": ["rock-throw", "secret-power", "yawn", "water-pulse"], "ability": "rock-head", "held": "sitrus-berry" },
       {
         "name": "shuckle",
         "level": "14",
-        "moves": ["toxic", "curse", "rollout", "sunny-day"],
+        "moves": [
+          "toxic",
+          { "type": "???", "damage_class": "status", "name": "Curse", "effect": "" },
+          "rollout",
+          "sunny-day"
+        ],
         "ability": "shell-armor",
-        "abilities": ["shell-armor"],
         "held": "sitrus-berry"
       },
-      {
-        "name": "lunatone",
-        "level": "15",
-        "moves": ["hypnosis", "moonlight", "confusion", "rock-slide"],
-        "ability": "levitate",
-        "abilities": ["levitate"],
-        "held": "lum-berry"
-      }
+      { "name": "lunatone", "level": "15", "moves": ["hypnosis", "moonlight", "confusion", "rock-slide"], "ability": "levitate", "held": "lum-berry" }
     ]
   },
   "2": {
@@ -59,54 +45,34 @@
     "speciality": "fighting",
     "img": "/leaders/rs-brawly",
     "pokemon": [
-      {
-        "name": "hitmontop",
-        "level": "17",
-        "moves": ["fake-out", "mach-punch", "rock-slide", "secret-power"],
-        "ability": "intimidate",
-        "abilities": ["intimidate"],
-        "held": "lum-berry"
-      },
-      {
-        "name": "hitmonlee",
-        "level": "17",
-        "moves": ["sleep-talk", "rolling-kick", "rock-slide", "secret-power"],
-        "ability": "limber",
-        "abilities": ["limber"],
-        "held": "sitrus-berry"
-      },
-      {
-        "name": "hitmonchan",
-        "level": "17",
-        "moves": ["shadow-punch", "mach-punch", "rock-slide", "facade"],
-        "ability": "guts",
-        "abilities": ["guts"],
-        "held": "chesto-berry"
-      },
+      { "name": "hitmontop", "level": "17", "moves": ["fake-out", "mach-punch", "rock-slide", "secret-power"], "ability": "intimidate", "held": "lum-berry" },
+      { "name": "hitmonlee", "level": "17", "moves": ["sleep-talk", "rolling-kick", "rock-slide", "secret-power"], "ability": "limber", "held": "sitrus-berry" },
+      { "name": "hitmonchan", "level": "17", "moves": ["shadow-punch", "mach-punch", "rock-slide", "facade"], "ability": "guts", "held": "chesto-berry" },
       {
         "name": "meditite",
         "level": "19",
-        "moves": ["brick-break", "shadow-ball", "rock-slide", "fake-out"],
+        "moves": [
+          "brick-break",
+          { "power": 80, "type": "ghost", "damage_class": "physical", "name": "Shadow Ball", "effect": "" },
+          "rock-slide",
+          "fake-out"
+        ],
         "ability": "pure-power",
-        "abilities": ["pure-power"],
         "held": "lum-berry"
       },
       {
         "name": "poliwrath",
         "level": "17",
-        "moves": ["hypnosis", "surf", "ice-punch", "brick-break"],
+        "moves": [
+          "hypnosis",
+          "surf",
+          { "power": 75, "type": "ice", "damage_class": "special", "name": "Ice Punch", "effect": "" },
+          "brick-break"
+        ],
         "ability": "swift-swim",
-        "abilities": ["swift-swim"],
         "held": "lum-berry"
       },
-      {
-        "name": "hariyama",
-        "level": "19",
-        "moves": ["force-palm", "shadow-punch", "rock-slide", "fake-out"],
-        "ability": "thick-fat",
-        "abilities": ["thick-fat"],
-        "held": "lum-berry"
-      }
+      { "name": "hariyama", "level": "19", "moves": ["force-palm", "shadow-punch", "rock-slide", "fake-out"], "ability": "thick-fat", "held": "lum-berry" }
     ]
   },
   "3": {
@@ -117,49 +83,51 @@
       {
         "name": "jolteon",
         "level": "28",
-        "moves": ["thunder-wave", "thunderbolt", "hp-grass", "bite"],
+        "moves": [
+          "thunder-wave",
+          "thunderbolt",
+          "hidden-power-grass",
+          { "power": 60, "type": "dark", "damage_class": "special", "name": "Bite", "effect": "" }
+        ],
         "ability": "static",
-        "abilities": ["static"],
         "held": "lum-berry"
       },
-      {
-        "name": "lanturn",
-        "level": "28",
-        "moves": ["thunder-wave", "thunderbolt", "ice-beam", "surf"],
-        "ability": "volt-absorb",
-        "abilities": ["volt-absorb"],
-        "held": "leftovers"
-      },
+      { "name": "lanturn", "level": "28", "moves": ["thunder-wave", "thunderbolt", "ice-beam", "surf"], "ability": "volt-absorb", "held": "leftovers" },
       {
         "name": "ampharos",
         "level": "29",
-        "moves": ["thunder-wave", "thunderbolt", "hp-grass", "fire-punch"],
+        "moves": [
+          "thunder-wave",
+          "thunderbolt",
+          "hidden-power-grass",
+          { "power": 75, "type": "fire", "damage_class": "special", "name": "Fire Punch", "effect": "" }
+        ],
         "ability": "static",
-        "abilities": ["static"],
         "held": "leftovers"
       },
-      {
-        "name": "raichu",
-        "level": "28",
-        "moves": ["thunder-wave", "thunderbolt", "body-slam", "body-slam"],
-        "ability": "static",
-        "abilities": ["static"],
-        "held": "lum-berry"
-      },
+      { "name": "raichu", "level": "28", "moves": ["thunder-wave", "thunderbolt", "body-slam", "body-slam"], "ability": "static", "held": "lum-berry" },
       {
         "name": "electabuzz",
         "level": "28",
-        "moves": ["psychic", "thunderbolt", "ice-punch", "fire-punch"],
+        "moves": [
+          "psychic",
+          "thunderbolt",
+          { "power": 75, "type": "ice", "damage_class": "special", "name": "Ice Punch", "effect": "" },
+          { "power": 75, "type": "fire", "damage_class": "special", "name": "Fire Punch", "effect": "" }
+        ],
         "ability": "static",
-        "abilities": ["static"],
         "held": "lum-berry"
       },
       {
         "name": "manectric",
         "level": "29",
-        "moves": ["thunder-wave", "thunderbolt", "crunch", "flamethrower"],
+        "moves": [
+          "thunder-wave",
+          "thunderbolt",
+          { "power": 80, "type": "dark", "damage_class": "special", "name": "Crunch", "effect": "" },
+          "flamethrower"
+        ],
         "ability": "intimidate",
-        "abilities": ["intimidate"],
         "held": "lum-berry"
       }
     ]
@@ -172,51 +140,59 @@
       {
         "name": "ninetales",
         "level": "41",
-        "moves": ["hp-electric", "overheat", "solar-beam", "hypnosis"],
+        "moves": ["hidden-power-electric", "overheat", "solar-beam", "hypnosis"],
         "ability": "pressure",
-        "abilities": ["pressure"],
         "held": "lum-berry"
       },
       {
         "name": "charizard",
         "level": "42",
-        "moves": ["heat-wave", "earthquake", "solar-beam", "dragon-claw"],
+        "moves": [
+          "heat-wave",
+          "earthquake",
+          "solar-beam",
+          { "power": 80, "type": "dragon", "damage_class": "special", "name": "Dragon Claw", "effect": "" }
+        ],
         "ability": "blaze",
-        "abilities": ["blaze"],
         "held": "lum-berry"
       },
       {
         "name": "blaziken",
         "level": "42",
-        "moves": ["blaze-kick", "sky-uppercut", "solar-beam", "thunder-punch"],
+        "moves": [
+          { "power": "100", "type": "fire", "damage_class": "special", "name": "Blaze Kick", "effect": "" },
+          "sky-uppercut",
+          "solar-beam",
+          { "power": 75, "type": "electric", "damage_class": "special", "name": "Thunder Punch", "effect": "" }
+        ],
         "ability": "blaze",
-        "abilities": ["blaze"],
         "held": "lum-berry"
       },
       {
         "name": "arcanine",
         "level": "41",
-        "moves": ["wild-charge", "heat-wave", "solar-beam", "extreme-speed"],
+        "moves": [
+          { "power": 90, "type": "electric", "damage_class": "special", "name": "Wild Charge", "effect": "" },
+          "heat-wave",
+          "solar-beam",
+          "extreme-speed"
+        ],
         "ability": "intimidate",
-        "abilities": ["intimidate"],
         "held": "leftovers"
       },
       {
         "name": "typhlosion",
         "level": "42",
-        "moves": ["heat-wave", "earthquake", "solar-beam", "wild-charge"],
+        "moves": [
+          "heat-wave",
+          "earthquake",
+          "solar-beam",
+          { "power": 90, "type": "electric", "damage_class": "special", "name": "Wild Charge", "effect": "" }
+        ],
         "ability": "blaze",
-        "abilities": ["blaze"],
         "held": "lum-berry"
       },
-      {
-        "name": "castform",
-        "level": "42",
-        "moves": ["flamethrower", "ice-beam", "solar-beam", "thunderbolt"],
-        "ability": "forecast",
-        "abilities": ["forecast"],
-        "held": "lum-berry"
-      }
+      { "name": "castform", "level": "42", "moves": ["flamethrower", "ice-beam", "solar-beam", "thunderbolt"], "ability": "forecast", "held": "lum-berry" }
     ]
   },
   "5": {
@@ -227,44 +203,64 @@
       {
         "name": "slaking",
         "level": "48",
-        "moves": ["hyper-beam", "crush-claw", "shadow-ball", "superpower"],
+        "moves": [
+          { "power": 150, "type": "normal", "damage_class": "physical", "name": "Hyper Beam", "effect": "" },
+          "crush-claw",
+          { "power": 80, "type": "ghost", "damage_class": "physical", "name": "Shadow Ball", "effect": "" },
+          "superpower"
+        ],
         "ability": "truant",
-        "abilities": ["truant"],
         "held": "lum-berry"
       },
-      {
-        "name": "espeon",
-        "level": "48",
-        "moves": ["psychic", "light-screen", "skill-swap", "sing"],
-        "ability": "synchronize",
-        "abilities": ["synchronize"],
-        "held": "lum-berry"
-      },
+      { "name": "espeon", "level": "48", "moves": ["psychic", "light-screen", "skill-swap", "sing"], "ability": "synchronize", "held": "lum-berry" },
       {
         "name": "kangaskhan",
         "level": "48",
-        "moves": ["fake-out", "crush-claw", "shadow-ball", "superpower"],
+        "moves": [
+          "fake-out",
+          "crush-claw",
+          { "power": 80, "type": "ghost", "damage_class": "physical", "name": "Shadow Ball", "effect": "" },
+          "superpower"
+        ],
         "ability": "early-bird",
-        "abilities": ["early-bird"],
         "held": "lum-berry"
       },
       {
         "name": "swellow",
         "level": "48",
-        "moves": ["double-edge", "sky-attack", "steel-wing", "hp-ground"],
+        "moves": [
+          "double-edge",
+          "sky-attack",
+          "steel-wing",
+          { "power": "60", "type": "ground", "damage_class": "physical", "name": "Hidden Power", "effect": "" }
+        ],
         "ability": "guts",
-        "abilities": ["guts"],
         "held": "lum-berry"
       },
       {
         "name": "tauros",
         "level": "48",
-        "moves": ["body-slam", "iron-tail", "quick-attack", "earth-power"],
+        "moves": [
+          "body-slam",
+          "iron-tail",
+          "quick-attack",
+          { "power": "90", "type": "ground", "damage_class": "physical", "name": "Earth Power", "effect": "" }
+        ],
         "ability": "intimidate",
-        "abilities": ["intimidate"],
         "held": "lum-berry"
       },
-      { "name": "snorlax", "level": "48", "moves": ["curse", "snore", "rest", "stockpile"], "ability": "guts", "abilities": ["guts"], "held": "leftovers" }
+      {
+        "name": "snorlax",
+        "level": "48",
+        "moves": [
+          { "type": "???", "damage_class": "status", "name": "Curse", "effect": "" },
+          { "power": 50, "type": "normal", "damage_class": "physical", "name": "Snore", "effect": "" },
+          "rest",
+          "stockpile"
+        ],
+        "ability": "guts",
+        "held": "leftovers"
+      }
     ],
     "doubleBattle": true
   },
@@ -276,51 +272,53 @@
       {
         "name": "aerodactyl",
         "level": "54",
-        "moves": ["hp-flying", "ancient-power", "double-edge", "earthquake"],
+        "moves": [
+          { "power": "60", "type": "flying", "damage_class": "physical", "name": "Hidden Power", "effect": "" },
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" },
+          "double-edge",
+          "earthquake"
+        ],
         "ability": "rock-head",
-        "abilities": ["rock-head"],
         "held": "lum-berry"
       },
-      {
-        "name": "zapdos",
-        "level": "55",
-        "moves": ["sky-attack", "thunderbolt", "hp-ice", "return"],
-        "ability": "pressure",
-        "abilities": ["pressure"],
-        "held": "lum-berry"
-      },
+      { "name": "zapdos", "level": "55", "moves": ["sky-attack", "thunderbolt", "hidden-power-ice", "return"], "ability": "pressure", "held": "lum-berry" },
       {
         "name": "crobat",
         "level": "54",
-        "moves": ["sky-attack", "poison-fang", "giga-drain", "hp-ground"],
+        "moves": [
+          "sky-attack",
+          "poison-fang",
+          "giga-drain",
+          { "power": "60", "type": "ground", "damage_class": "physical", "name": "Hidden Power", "effect": "" }
+        ],
         "ability": "inner-focus",
-        "abilities": ["inner-focus"],
         "held": "lum-berry"
       },
       {
         "name": "articuno",
         "level": "55",
-        "moves": ["sky-attack", "ice-beam", "hp-grass", "ice-shard"],
+        "moves": [
+          "sky-attack",
+          "ice-beam",
+          "hidden-power-grass",
+          { "power": 40, "type": "ice", "damage_class": "special", "name": "Ice Shard", "effect": "", "priority": 1 }
+        ],
         "ability": "pressure",
-        "abilities": ["pressure"],
         "held": "lum-berry"
       },
       {
         "name": "flygon",
         "level": "55",
-        "moves": ["dragon-claw", "flamethrower", "earthquake", "giga-drain"],
+        "moves": [
+          { "power": 80, "type": "dragon", "damage_class": "special", "name": "Dragon Claw", "effect": "" },
+          "flamethrower",
+          "earthquake",
+          "giga-drain"
+        ],
         "ability": "levitate",
-        "abilities": ["levitate"],
         "held": "lum-berry"
       },
-      {
-        "name": "moltres",
-        "level": "55",
-        "moves": ["sky-attack", "overheat", "hp-grass", "steel-wing"],
-        "ability": "pressure",
-        "abilities": ["pressure"],
-        "held": "lum-berry"
-      }
+      { "name": "moltres", "level": "55", "moves": ["sky-attack", "overheat", "hidden-power-grass", "steel-wing"], "ability": "pressure", "held": "lum-berry" }
     ],
     "doubleBattle": true
   },
@@ -332,49 +330,65 @@
       {
         "name": "latias",
         "level": "70",
-        "moves": ["dragon-claw", "mist-ball", "hp-fire", "waterfall"],
+        "moves": [
+          { "power": 80, "type": "dragon", "damage_class": "special", "name": "Dragon Claw", "effect": "" },
+          "mist-ball",
+          "hidden-power-fire",
+          { "power": 80, "type": "water", "damage_class": "special", "name": "Waterfall", "effect": "" }
+        ],
         "ability": "levitate",
-        "abilities": ["levitate"],
         "held": "lum-berry"
       },
       {
         "name": "latios",
         "level": "70",
-        "moves": ["dragon-claw", "luster-purge", "hp-fire", "thunderbolt"],
+        "moves": [
+          { "power": 80, "type": "dragon", "damage_class": "special", "name": "Dragon Claw", "effect": "" },
+          "luster-purge",
+          "hidden-power-fire",
+          "thunderbolt"
+        ],
         "ability": "levitate",
-        "abilities": ["levitate"],
         "held": "lum-berry"
       },
       {
         "name": "gardevoir",
         "level": "70",
-        "moves": ["psychic", "fire-punch", "hp-grass", "thunderbolt"],
+        "moves": [
+          "psychic",
+          { "power": 75, "type": "fire", "damage_class": "special", "name": "Fire Punch", "effect": "" },
+          "hidden-power-grass",
+          "thunderbolt"
+        ],
         "ability": "synchronize",
-        "abilities": ["synchronize"],
-        "held": "lum-berry"
+        "held": "lum-berry",
+        "sprite": "282",
+        "types": ["psychic"],
+        "stats": { "hp": 68, "atk": 65, "def": 65, "spa": 125, "spd": 115, "spe": 80 }
       },
       {
         "name": "medicham",
         "level": "70",
-        "moves": ["fake-out", "brick-break", "hp-psychic", "shadow-ball"],
+        "moves": [
+          "fake-out",
+          "brick-break",
+          "hidden-power-psychic",
+          { "power": 80, "type": "ghost", "damage_class": "physical", "name": "Shadow Ball", "effect": "" }
+        ],
         "ability": "pure-power",
-        "abilities": ["pure-power"],
         "held": "lum-berry"
       },
-      {
-        "name": "starmie",
-        "level": "70",
-        "moves": ["psychic", "hydro-pump", "hydro-pump", "thunderbolt"],
-        "ability": "natural-cure",
-        "abilities": ["natural-cure"],
-        "held": "lum-berry"
-      },
+      { "name": "starmie", "level": "70", "moves": ["psychic", "hydro-pump", "hydro-pump", "thunderbolt"], "ability": "natural-cure", "held": "lum-berry" },
       {
         "name": "jirachi",
         "level": "70",
-        "moves": ["meteor-mash", "signal-beam", "fire-punch", "ancient-power"],
+        "moves": [
+          "meteor-mash",
+          { "power": 75, "type": "bug", "damage_class": "physical", "name": "Signal Beam", "effect": "" },
+          { "power": 75, "type": "fire", "damage_class": "special", "name": "Fire Punch", "effect": "" },
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" }
+        ],
         "ability": "serene-grace",
-        "abilities": ["serene-grace"],
         "held": "lum-berry"
       }
     ],
@@ -388,43 +402,41 @@
       {
         "name": "eevee",
         "level": "9",
-        "moves": ["quick-attack", "rest", "snore", "curse"],
+        "moves": [
+          "quick-attack",
+          "rest",
+          { "power": 50, "type": "normal", "damage_class": "physical", "name": "Snore", "effect": "" },
+          { "type": "???", "damage_class": "status", "name": "Curse", "effect": "" }
+        ],
         "ability": "run-away",
-        "abilities": ["run-away"],
         "held": "sitrus-berry"
       },
-      {
-        "name": "bulbasaur",
-        "level": "9",
-        "moves": ["sleep-powder", "mega-drain", "cut", "light-screen"],
-        "ability": "overgrow",
-        "abilities": ["overgrow"],
-        "held": "berry-juice"
-      },
+      { "name": "bulbasaur", "level": "9", "moves": ["sleep-powder", "mega-drain", "cut", "light-screen"], "ability": "overgrow", "held": "berry-juice" },
       {
         "name": "charmander",
         "level": "9",
-        "moves": ["flame-wheel", "quick-attack", "bite", "will-o-wisp"],
+        "moves": [
+          { "power": 60, "type": "fire", "damage_class": "special", "name": "Flame Wheel", "effect": "" },
+          "quick-attack",
+          { "power": 60, "type": "dark", "damage_class": "special", "name": "Bite", "effect": "" },
+          "will-o-wisp"
+        ],
         "ability": "blaze",
-        "abilities": ["blaze"],
         "held": "berry-juice"
       },
       {
         "name": "squirtle",
         "level": "9",
-        "moves": ["fake-out", "water-pulse", "yawn", "bite"],
+        "moves": [
+          "fake-out",
+          "water-pulse",
+          "yawn",
+          { "power": 60, "type": "dark", "damage_class": "special", "name": "Bite", "effect": "" }
+        ],
         "ability": "torrent",
-        "abilities": ["torrent"],
         "held": "berry-juice"
       },
-      {
-        "name": "pikachu",
-        "level": "9",
-        "moves": ["shock-wave", "quick-attack", "surf", "thunder-wave"],
-        "ability": "static",
-        "abilities": ["static"],
-        "held": "sitrus-berry"
-      }
+      { "name": "pikachu", "level": "9", "moves": ["shock-wave", "quick-attack", "surf", "thunder-wave"], "ability": "static", "held": "sitrus-berry" }
     ]
   },
   "red2": {
@@ -435,42 +447,62 @@
       {
         "name": "pikachu",
         "level": "37",
-        "moves": ["volt-tackle", "surf", "hp-ice", "sing"],
+        "moves": [
+          { "power": 120, "type": "electric", "damage_class": "special", "name": "Volt Tackle", "effect": "" },
+          "surf",
+          "hidden-power-ice",
+          "sing"
+        ],
         "ability": "static",
-        "abilities": ["static"],
         "held": "light-ball"
       },
       {
         "name": "espeon",
         "level": "36",
-        "moves": ["reflect", "psychic", "bite", "signal-beam"],
+        "moves": [
+          "reflect",
+          "psychic",
+          { "power": 60, "type": "dark", "damage_class": "special", "name": "Bite", "effect": "" },
+          { "power": 75, "type": "bug", "damage_class": "physical", "name": "Signal Beam", "effect": "" }
+        ],
         "ability": "synchronize",
-        "abilities": ["synchronize"],
         "held": "lum-berry"
       },
-      { "name": "snorlax", "level": "36", "moves": ["curse", "snore", "earthquake", "rest"], "ability": "guts", "abilities": ["guts"], "held": "leftovers" },
       {
-        "name": "blastoise",
+        "name": "snorlax",
         "level": "36",
-        "moves": ["surf", "yawn", "ice-beam", "mirror-coat"],
-        "ability": "torrent",
-        "abilities": ["torrent"],
-        "held": "lum-berry"
+        "moves": [
+          { "type": "???", "damage_class": "status", "name": "Curse", "effect": "" },
+          { "power": 50, "type": "normal", "damage_class": "physical", "name": "Snore", "effect": "" },
+          "earthquake",
+          "rest"
+        ],
+        "ability": "guts",
+        "held": "leftovers"
       },
+      { "name": "blastoise", "level": "36", "moves": ["surf", "yawn", "ice-beam", "mirror-coat"], "ability": "torrent", "held": "lum-berry" },
       {
         "name": "venusaur",
         "level": "36",
-        "moves": ["sleep-powder", "giga-drain", "sludge-bomb", "synthesis"],
+        "moves": [
+          "sleep-powder",
+          "giga-drain",
+          { "power": 90, "type": "poison", "damage_class": "physical", "name": "Sludge Bomb", "effect": "" },
+          "synthesis"
+        ],
         "ability": "chlorophyll",
-        "abilities": ["chlorophyll"],
         "held": "lum-berry"
       },
       {
         "name": "charizard",
         "level": "36",
-        "moves": ["flamethrower", "aerial-ace", "dragon-claw", "earthquake"],
+        "moves": [
+          "flamethrower",
+          "aerial-ace",
+          { "power": 80, "type": "dragon", "damage_class": "special", "name": "Dragon Claw", "effect": "" },
+          "earthquake"
+        ],
         "ability": "blaze",
-        "abilities": ["blaze"],
         "held": "lum-berry"
       }
     ]
@@ -483,49 +515,68 @@
       {
         "name": "dodrio",
         "level": "37",
-        "moves": ["double-edge", "hp-ground", "quick-attack", "drill-peck"],
+        "moves": [
+          "double-edge",
+          { "power": "60", "type": "ground", "damage_class": "physical", "name": "Hidden Power", "effect": "" },
+          "quick-attack",
+          "drill-peck"
+        ],
         "ability": "early-bird",
-        "abilities": ["early-bird"],
         "held": "lum-berry"
       },
       {
         "name": "manectric",
         "level": "37",
-        "moves": ["crunch", "overheat", "hp-water", "thunderbolt"],
+        "moves": [
+          { "power": 80, "type": "dark", "damage_class": "special", "name": "Crunch", "effect": "" },
+          "overheat",
+          "hidden-power-water",
+          "thunderbolt"
+        ],
         "ability": "intimidate",
-        "abilities": ["intimidate"],
         "held": "lum-berry"
       },
       {
         "name": "weezing",
         "level": "37",
-        "moves": ["explosion", "gunk-shot", "flamethrower", "hp-grass"],
+        "moves": ["explosion", "gunk-shot", "flamethrower", "hidden-power-grass"],
         "ability": "levitate",
-        "abilities": ["levitate"],
         "held": "lum-berry"
       },
       {
         "name": "aggron",
         "level": "38",
-        "moves": ["head-smash", "superpower", "earthquake", "flash-cannon"],
+        "moves": [
+          "head-smash",
+          "superpower",
+          "earthquake",
+          { "power": "90", "type": "steel", "damage_class": "physical", "name": "Flash Cannon", "effect": "" }
+        ],
         "ability": "rock-head",
-        "abilities": ["rock-head"],
         "held": "quick-claw"
       },
       {
         "name": "flygon",
         "level": "37",
-        "moves": ["earthquake", "giga-drain", "signal-beam", "rock-slide"],
+        "moves": [
+          "earthquake",
+          "giga-drain",
+          { "power": 75, "type": "bug", "damage_class": "physical", "name": "Signal Beam", "effect": "" },
+          "rock-slide"
+        ],
         "ability": "levitate",
-        "abilities": ["levitate"],
         "held": "lum-berry"
       },
       {
         "name": "arcanine",
         "level": "38",
-        "moves": ["overheat", "extreme-speed", "hp-grass", "wild-charge"],
+        "moves": [
+          "overheat",
+          "extreme-speed",
+          "hidden-power-grass",
+          { "power": 90, "type": "electric", "damage_class": "special", "name": "Wild Charge", "effect": "" }
+        ],
         "ability": "intimidate",
-        "abilities": ["intimidate"],
         "held": "lum-berry"
       }
     ]
@@ -538,49 +589,73 @@
       {
         "name": "registeel",
         "level": "38",
-        "moves": ["explosion", "thunder-wave", "ancient-power", "earthquake"],
+        "moves": [
+          "explosion",
+          "thunder-wave",
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" },
+          "earthquake"
+        ],
         "ability": "clear-body",
-        "abilities": ["clear-body"],
         "held": "lum-berry"
       },
       {
         "name": "crobat",
         "level": "39",
-        "moves": ["giga-drain", "poison-fang", "heat-wave", "air-slash"],
+        "moves": [
+          "giga-drain",
+          "poison-fang",
+          "heat-wave",
+          { "power": "80", "type": "flying", "damage_class": "physical", "name": "Air Slash", "effect": "" }
+        ],
         "ability": "inner-focus",
-        "abilities": ["inner-focus"],
         "held": "lum-berry"
       },
       {
         "name": "claydol",
         "level": "39",
-        "moves": ["explosion", "psychic", "signal-beam", "earthquake"],
+        "moves": [
+          "explosion",
+          "psychic",
+          { "power": 75, "type": "bug", "damage_class": "physical", "name": "Signal Beam", "effect": "" },
+          "earthquake"
+        ],
         "ability": "levitate",
-        "abilities": ["levitate"],
         "held": "lum-berry"
       },
       {
         "name": "alakazam",
         "level": "38",
-        "moves": ["fire-punch", "psychic", "thunder-punch", "ice-punch"],
+        "moves": [
+          { "power": 75, "type": "fire", "damage_class": "special", "name": "Fire Punch", "effect": "" },
+          "psychic",
+          { "power": 75, "type": "electric", "damage_class": "special", "name": "Thunder Punch", "effect": "" },
+          { "power": 75, "type": "ice", "damage_class": "special", "name": "Ice Punch", "effect": "" }
+        ],
         "ability": "synchronize",
-        "abilities": ["synchronize"],
         "held": "lum-berry"
       },
       {
         "name": "dusclops",
         "level": "38",
-        "moves": ["will-o-wisp", "shadow-ball", "seismic-toss", "rest"],
+        "moves": [
+          "will-o-wisp",
+          { "power": 80, "type": "ghost", "damage_class": "physical", "name": "Shadow Ball", "effect": "" },
+          "seismic-toss",
+          "rest"
+        ],
         "ability": "pressure",
-        "abilities": ["pressure"],
         "held": "leftovers"
       },
       {
         "name": "houndoom",
         "level": "39",
-        "moves": ["overheat", "crunch", "hp-grass", "poison-fang"],
+        "moves": [
+          "overheat",
+          { "power": 80, "type": "dark", "damage_class": "special", "name": "Crunch", "effect": "" },
+          "hidden-power-grass",
+          "poison-fang"
+        ],
         "ability": "intimidate",
-        "abilities": ["intimidate"],
         "held": "lum-berry"
       }
     ]
@@ -593,49 +668,57 @@
       {
         "name": "tyranitar",
         "level": "66",
-        "moves": ["solar-beam", "fire-blast", "ancient-power", "earthquake"],
+        "moves": [
+          "solar-beam",
+          "fire-blast",
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" },
+          "earthquake"
+        ],
         "ability": "intimidate",
-        "abilities": ["intimidate"],
         "held": "lum-berry"
       },
-      {
-        "name": "flygon",
-        "level": "66",
-        "moves": ["solar-beam", "draco-meteor", "heat-wave", "earthquake"],
-        "ability": "levitate",
-        "abilities": ["levitate"],
-        "held": "lum-berry"
-      },
+      { "name": "flygon", "level": "66", "moves": ["solar-beam", "draco-meteor", "heat-wave", "earthquake"], "ability": "levitate", "held": "lum-berry" },
       {
         "name": "gengar",
         "level": "66",
-        "moves": ["ice-punch", "thunderbolt", "psychic", "fire-punch"],
+        "moves": [
+          { "power": 75, "type": "ice", "damage_class": "special", "name": "Ice Punch", "effect": "" },
+          "thunderbolt",
+          "psychic",
+          { "power": 75, "type": "fire", "damage_class": "special", "name": "Fire Punch", "effect": "" }
+        ],
         "ability": "levitate",
-        "abilities": ["levitate"],
         "held": "lum-berry"
       },
       {
         "name": "arcanine",
         "level": "66",
-        "moves": ["solar-beam", "heat-wave", "extreme-speed", "hp-ice"],
+        "moves": ["solar-beam", "heat-wave", "extreme-speed", "hidden-power-ice"],
         "ability": "intimidate",
-        "abilities": ["intimidate"],
         "held": "lum-berry"
       },
       {
         "name": "exeggutor",
         "level": "66",
-        "moves": ["solar-beam", "psychic", "ancient-power", "hp-fire"],
+        "moves": [
+          "solar-beam",
+          "psychic",
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" },
+          "hidden-power-fire"
+        ],
         "ability": "chlorophyll",
-        "abilities": ["chlorophyll"],
         "held": "lum-berry"
       },
       {
         "name": "entei",
         "level": "66",
-        "moves": ["solar-beam", "sacred-fire", "extreme-speed", "ancient-power"],
+        "moves": [
+          "solar-beam",
+          { "power": 100, "type": "fire", "damage_class": "special", "name": "Sacred Fire", "effect": "" },
+          "extreme-speed",
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" }
+        ],
         "ability": "inner-focus",
-        "abilities": ["inner-focus"],
         "held": "lum-berry"
       }
     ]
@@ -648,49 +731,73 @@
       {
         "name": "gengar",
         "level": "70",
-        "moves": ["giga-drain", "thunderbolt", "fire-punch", "ice-punch"],
+        "moves": [
+          "giga-drain",
+          "thunderbolt",
+          { "power": 75, "type": "fire", "damage_class": "special", "name": "Fire Punch", "effect": "" },
+          { "power": 75, "type": "ice", "damage_class": "special", "name": "Ice Punch", "effect": "" }
+        ],
         "ability": "levitate",
-        "abilities": ["levitate"],
         "held": "lum-berry"
       },
       {
         "name": "tauros",
         "level": "71",
-        "moves": ["earthquake", "double-edge", "hp-ghost", "iron-tail"],
+        "moves": [
+          "earthquake",
+          "double-edge",
+          { "power": "60", "type": "ghost", "damage_class": "physical", "name": "Hidden Power", "effect": "" },
+          "iron-tail"
+        ],
         "ability": "intimidate",
-        "abilities": ["intimidate"],
         "held": "lum-berry"
       },
       {
         "name": "salamence",
         "level": "70",
-        "moves": ["draco-meteor", "air-slash", "flamethrower", "hp-grass"],
+        "moves": [
+          "draco-meteor",
+          { "power": "80", "type": "flying", "damage_class": "physical", "name": "Air Slash", "effect": "" },
+          "flamethrower",
+          "hidden-power-grass"
+        ],
         "ability": "intimidate",
-        "abilities": ["intimidate"],
         "held": "lum-berry"
       },
       {
         "name": "flygon",
         "level": "71",
-        "moves": ["earthquake", "flamethrower", "signal-beam", "ancient-power"],
+        "moves": [
+          "earthquake",
+          "flamethrower",
+          { "power": 75, "type": "bug", "damage_class": "physical", "name": "Signal Beam", "effect": "" },
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" }
+        ],
         "ability": "levitate",
-        "abilities": ["levitate"],
         "held": "lum-berry"
       },
       {
         "name": "charizard",
         "level": "71",
-        "moves": ["overheat", "thunder-punch", "dragon-claw", "hp-ice"],
+        "moves": [
+          "overheat",
+          { "power": 75, "type": "electric", "damage_class": "special", "name": "Thunder Punch", "effect": "" },
+          { "power": 80, "type": "dragon", "damage_class": "special", "name": "Dragon Claw", "effect": "" },
+          "hidden-power-ice"
+        ],
         "ability": "blaze",
-        "abilities": ["blaze"],
         "held": "lum-berry"
       },
       {
         "name": "metagross",
         "level": "72",
-        "moves": ["earthquake", "meteor-mash", "shadow-ball", "hp-grass"],
+        "moves": [
+          "earthquake",
+          "meteor-mash",
+          { "power": 80, "type": "ghost", "damage_class": "physical", "name": "Shadow Ball", "effect": "" },
+          "hidden-power-grass"
+        ],
         "ability": "clear-body",
-        "abilities": ["clear-body"],
         "held": "lum-berry"
       }
     ],
@@ -704,49 +811,73 @@
       {
         "name": "charizard",
         "level": "64",
-        "moves": ["overheat", "dragon-claw", "solar-beam", "earthquake"],
+        "moves": [
+          "overheat",
+          { "power": 80, "type": "dragon", "damage_class": "special", "name": "Dragon Claw", "effect": "" },
+          "solar-beam",
+          "earthquake"
+        ],
         "ability": "blaze",
-        "abilities": ["blaze"],
         "held": "lum-berry"
       },
       {
         "name": "regirock",
         "level": "65",
-        "moves": ["counter", "explosion", "ancient-power", "earthquake"],
+        "moves": [
+          "counter",
+          "explosion",
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" },
+          "earthquake"
+        ],
         "ability": "clear-body",
-        "abilities": ["clear-body"],
         "held": "lum-berry"
       },
       {
         "name": "salamence",
         "level": "64",
-        "moves": ["draco-meteor", "air-slash", "flamethrower", "earthquake"],
+        "moves": [
+          "draco-meteor",
+          { "power": "80", "type": "flying", "damage_class": "physical", "name": "Air Slash", "effect": "" },
+          "flamethrower",
+          "earthquake"
+        ],
         "ability": "intimidate",
-        "abilities": ["intimidate"],
         "held": "lum-berry"
       },
       {
         "name": "kangaskhan",
         "level": "63",
-        "moves": ["fake-out", "crush-claw", "shadow-ball", "earthquake"],
+        "moves": [
+          "fake-out",
+          "crush-claw",
+          { "power": 80, "type": "ghost", "damage_class": "physical", "name": "Shadow Ball", "effect": "" },
+          "earthquake"
+        ],
         "ability": "early-bird",
-        "abilities": ["early-bird"],
         "held": "lum-berry"
       },
       {
         "name": "venusaur",
         "level": "65",
-        "moves": ["sleep-powder", "weather-ball", "solar-beam", "ancient-power"],
+        "moves": [
+          "sleep-powder",
+          { "power": 50, "type": "normal", "damage_class": "physical", "name": "Weather Ball", "effect": "" },
+          "solar-beam",
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" }
+        ],
         "ability": "chlorophyll",
-        "abilities": ["chlorophyll"],
         "held": "lum-berry"
       },
       {
         "name": "castform",
         "level": "64",
-        "moves": ["weather-ball", "ice-beam", "solar-beam", "thunderbolt"],
+        "moves": [
+          { "power": 50, "type": "normal", "damage_class": "physical", "name": "Weather Ball", "effect": "" },
+          "ice-beam",
+          "solar-beam",
+          "thunderbolt"
+        ],
         "ability": "forecast",
-        "abilities": ["forecast"],
         "held": "lum-berry"
       }
     ]
@@ -759,49 +890,76 @@
       {
         "name": "crobat",
         "level": "70",
-        "moves": ["heat-wave", "sky-attack", "hp-ground", "giga-drain"],
+        "moves": [
+          "heat-wave",
+          "sky-attack",
+          { "power": "60", "type": "ground", "damage_class": "physical", "name": "Hidden Power", "effect": "" },
+          "giga-drain"
+        ],
         "ability": "inner-focus",
-        "abilities": ["inner-focus"],
         "held": "lum-berry"
       },
       {
         "name": "regirock",
         "level": "70",
-        "moves": ["thunder-wave", "explosion", "ancient-power", "earthquake"],
+        "moves": [
+          "thunder-wave",
+          "explosion",
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" },
+          "earthquake"
+        ],
         "ability": "clear-body",
-        "abilities": ["clear-body"],
         "held": "lum-berry"
       },
       {
         "name": "gardevoir",
         "level": "70",
-        "moves": ["calm-mind", "psychic", "thunderbolt", "fire-punch"],
+        "moves": [
+          "calm-mind",
+          "psychic",
+          "thunderbolt",
+          { "power": 75, "type": "fire", "damage_class": "special", "name": "Fire Punch", "effect": "" }
+        ],
         "ability": "synchronize",
-        "abilities": ["synchronize"],
-        "held": "lum-berry"
+        "held": "lum-berry",
+        "sprite": "282",
+        "types": ["psychic"],
+        "stats": { "hp": 68, "atk": 65, "def": 65, "spa": 125, "spd": 115, "spe": 80 }
       },
       {
         "name": "arcanine",
         "level": "70",
-        "moves": ["overheat", "extreme-speed", "wild-charge", "hp-grass"],
+        "moves": [
+          "overheat",
+          "extreme-speed",
+          { "power": 90, "type": "electric", "damage_class": "special", "name": "Wild Charge", "effect": "" },
+          "hidden-power-grass"
+        ],
         "ability": "intimidate",
-        "abilities": ["intimidate"],
         "held": "lum-berry"
       },
       {
         "name": "meganium",
         "level": "70",
-        "moves": ["grass-whistle", "giga-drain", "earthquake", "ancient-power"],
+        "moves": [
+          "grass-whistle",
+          "giga-drain",
+          "earthquake",
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" }
+        ],
         "ability": "thick-fat",
-        "abilities": ["thick-fat"],
         "held": "lum-berry"
       },
       {
         "name": "dusclops",
         "level": "70",
-        "moves": ["will-o-wisp", "rest", "shadow-ball", "earthquake"],
+        "moves": [
+          "will-o-wisp",
+          "rest",
+          { "power": 80, "type": "ghost", "damage_class": "physical", "name": "Shadow Ball", "effect": "" },
+          "earthquake"
+        ],
         "ability": "pressure",
-        "abilities": ["pressure"],
         "held": "leftovers"
       }
     ]
@@ -811,54 +969,56 @@
     "speciality": "",
     "img": "/leaders/rs-matt",
     "pokemon": [
-      {
-        "name": "wailord",
-        "level": "57",
-        "moves": ["self-destruct", "water-spout", "earthquake", "ice-beam"],
-        "ability": "pressure",
-        "abilities": ["pressure"],
-        "held": "quick-claw"
-      },
+      { "name": "wailord", "level": "57", "moves": ["self-destruct", "water-spout", "earthquake", "ice-beam"], "ability": "pressure", "held": "quick-claw" },
       {
         "name": "machamp",
         "level": "56",
-        "moves": ["superpower", "rock-slide", "earthquake", "hp-ghost"],
+        "moves": [
+          "superpower",
+          "rock-slide",
+          "earthquake",
+          { "power": "60", "type": "ghost", "damage_class": "physical", "name": "Hidden Power", "effect": "" }
+        ],
         "ability": "guts",
-        "abilities": ["guts"],
         "held": "chesto-berry"
       },
       {
         "name": "slaking",
         "level": "56",
-        "moves": ["hyper-beam", "surf", "earthquake", "shadow-ball"],
+        "moves": [
+          { "power": 150, "type": "normal", "damage_class": "physical", "name": "Hyper Beam", "effect": "" },
+          "surf",
+          "earthquake",
+          { "power": 80, "type": "ghost", "damage_class": "physical", "name": "Shadow Ball", "effect": "" }
+        ],
         "ability": "truant",
-        "abilities": ["truant"],
         "held": "lum-berry"
       },
       {
         "name": "exeggutor",
         "level": "56",
-        "moves": ["explosion", "egg-bomb", "psychic", "ancient-power"],
+        "moves": [
+          "explosion",
+          { "power": "120", "type": "grass", "damage_class": "special", "name": "Egg Bomb", "effect": "" },
+          "psychic",
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" }
+        ],
         "ability": "chlorophyll",
-        "abilities": ["chlorophyll"],
         "held": "quick-claw"
       },
       {
         "name": "gyarados",
         "level": "58",
-        "moves": ["hp-flying", "dragon-dance", "earthquake", "frustration"],
+        "moves": [
+          { "power": "60", "type": "flying", "damage_class": "physical", "name": "Hidden Power", "effect": "" },
+          "dragon-dance",
+          "earthquake",
+          "frustration"
+        ],
         "ability": "intimidate",
-        "abilities": ["intimidate"],
         "held": "bright-powder"
       },
-      {
-        "name": "dragonite",
-        "level": "57",
-        "moves": ["superpower", "rock-slide", "earthquake", "extreme-speed"],
-        "ability": "thick-fat",
-        "abilities": ["thick-fat"],
-        "held": "lum-berry"
-      }
+      { "name": "dragonite", "level": "57", "moves": ["superpower", "rock-slide", "earthquake", "extreme-speed"], "ability": "thick-fat", "held": "lum-berry" }
     ]
   },
   "am2": {
@@ -869,51 +1029,42 @@
       {
         "name": "glalie",
         "level": "66",
-        "moves": ["explosion", "ice-shard", "ice-beam", "earthquake"],
+        "moves": [
+          "explosion",
+          { "power": 40, "type": "ice", "damage_class": "special", "name": "Ice Shard", "effect": "", "priority": 1 },
+          "ice-beam",
+          "earthquake"
+        ],
         "ability": "intimidate",
-        "abilities": ["intimidate"],
         "held": "lum-berry"
       },
-      {
-        "name": "kingdra",
-        "level": "66",
-        "moves": ["rain-dance", "octazooka", "draco-meteor", "ice-beam"],
-        "ability": "swift-swim",
-        "abilities": ["swift-swim"],
-        "held": "lum-berry"
-      },
+      { "name": "kingdra", "level": "66", "moves": ["rain-dance", "octazooka", "draco-meteor", "ice-beam"], "ability": "swift-swim", "held": "lum-berry" },
       {
         "name": "machamp",
         "level": "67",
-        "moves": ["superpower", "earthquake", "rock-slide", "hp-ghost"],
+        "moves": [
+          "superpower",
+          "earthquake",
+          "rock-slide",
+          { "power": "60", "type": "ghost", "damage_class": "physical", "name": "Hidden Power", "effect": "" }
+        ],
         "ability": "guts",
-        "abilities": ["guts"],
         "held": "quick-claw"
       },
-      {
-        "name": "tauros",
-        "level": "66",
-        "moves": ["double-edge", "earthquake", "iron-tail", ""],
-        "ability": "intimidate",
-        "abilities": ["intimidate"],
-        "held": "choice-band"
-      },
+      { "name": "tauros", "level": "66", "moves": ["double-edge", "earthquake", "iron-tail"], "ability": "intimidate", "held": "choice-band" },
       {
         "name": "dragonite",
         "level": "66",
-        "moves": ["dragon-dance", "hp-flying", "earthquake", "superpower"],
+        "moves": [
+          "dragon-dance",
+          { "power": "60", "type": "flying", "damage_class": "physical", "name": "Hidden Power", "effect": "" },
+          "earthquake",
+          "superpower"
+        ],
         "ability": "thick-fat",
-        "abilities": ["thick-fat"],
         "held": "lum-berry"
       },
-      {
-        "name": "wailord",
-        "level": "67",
-        "moves": ["amnesia", "earthquake", "ice-beam", "rest"],
-        "ability": "pressure",
-        "abilities": ["pressure"],
-        "held": "leftovers"
-      }
+      { "name": "wailord", "level": "67", "moves": ["amnesia", "earthquake", "ice-beam", "rest"], "ability": "pressure", "held": "leftovers" }
     ]
   },
   "as1": {
@@ -921,54 +1072,45 @@
     "speciality": "",
     "img": "/leaders/rs-shelly",
     "pokemon": [
-      {
-        "name": "milotic",
-        "level": "48",
-        "moves": ["mirror-coat", "ice-beam", "surf", "recover"],
-        "ability": "swift-swim",
-        "abilities": ["swift-swim"],
-        "held": "lum-berry"
-      },
+      { "name": "milotic", "level": "48", "moves": ["mirror-coat", "ice-beam", "surf", "recover"], "ability": "swift-swim", "held": "lum-berry" },
       {
         "name": "hypno",
         "level": "47",
-        "moves": ["hypnosis", "psychic", "signal-beam", "fire-punch"],
+        "moves": [
+          "hypnosis",
+          "psychic",
+          { "power": 75, "type": "bug", "damage_class": "physical", "name": "Signal Beam", "effect": "" },
+          { "power": 75, "type": "fire", "damage_class": "special", "name": "Fire Punch", "effect": "" }
+        ],
         "ability": "insomnia",
-        "abilities": ["insomnia"],
         "held": "leftovers"
       },
-      {
-        "name": "shuckle",
-        "level": "47",
-        "moves": ["toxic", "double-team", "rest", "protect"],
-        "ability": "shell-armor",
-        "abilities": ["shell-armor"],
-        "held": "leftovers"
-      },
+      { "name": "shuckle", "level": "47", "moves": ["toxic", "double-team", "rest", "protect"], "ability": "shell-armor", "held": "leftovers" },
       {
         "name": "medicham",
         "level": "47",
-        "moves": ["fake-out", "brick-break", "shadow-ball", "rock-slide"],
+        "moves": [
+          "fake-out",
+          "brick-break",
+          { "power": 80, "type": "ghost", "damage_class": "physical", "name": "Shadow Ball", "effect": "" },
+          "rock-slide"
+        ],
         "ability": "pure-power",
-        "abilities": ["pure-power"],
         "held": "lum-berry"
       },
       {
         "name": "dragonite",
         "level": "48",
-        "moves": ["thunder-wave", "surf", "dragon-claw", "return"],
+        "moves": [
+          "thunder-wave",
+          "surf",
+          { "power": 80, "type": "dragon", "damage_class": "special", "name": "Dragon Claw", "effect": "" },
+          "return"
+        ],
         "ability": "thick-fat",
-        "abilities": ["thick-fat"],
         "held": "lum-berry"
       },
-      {
-        "name": "lapras",
-        "level": "49",
-        "moves": ["surf", "ice-beam", "thunderbolt", "drill-run"],
-        "ability": "shell-armor",
-        "abilities": ["shell-armor"],
-        "held": "leftovers"
-      }
+      { "name": "lapras", "level": "49", "moves": ["surf", "ice-beam", "thunderbolt", "drill-run"], "ability": "shell-armor", "held": "leftovers" }
     ]
   },
   "as2": {
@@ -976,54 +1118,34 @@
     "speciality": "",
     "img": "/leaders/rs-shelly",
     "pokemon": [
-      {
-        "name": "lapras",
-        "level": "72",
-        "moves": ["drill-run", "hydro-pump", "ice-beam", "thunder"],
-        "ability": "shell-armor",
-        "abilities": ["shell-armor"],
-        "held": "lum-berry"
-      },
+      { "name": "lapras", "level": "72", "moves": ["drill-run", "hydro-pump", "ice-beam", "thunder"], "ability": "shell-armor", "held": "lum-berry" },
       {
         "name": "ludicolo",
         "level": "72",
-        "moves": ["leech-seed", "waterfall", "ice-beam", "protect"],
+        "moves": [
+          "leech-seed",
+          { "power": 80, "type": "water", "damage_class": "special", "name": "Waterfall", "effect": "" },
+          "ice-beam",
+          "protect"
+        ],
         "ability": "swift-swim",
-        "abilities": ["swift-swim"],
         "held": "leftovers"
       },
-      {
-        "name": "starmie",
-        "level": "72",
-        "moves": ["hydro-pump", "psychic", "ice-beam", "thunder"],
-        "ability": "natural-cure",
-        "abilities": ["natural-cure"],
-        "held": "lum-berry"
-      },
-      {
-        "name": "raichu",
-        "level": "72",
-        "moves": ["surf", "extreme-speed", "sing", "thunder"],
-        "ability": "static",
-        "abilities": ["static"],
-        "held": "lum-berry"
-      },
+      { "name": "starmie", "level": "72", "moves": ["hydro-pump", "psychic", "ice-beam", "thunder"], "ability": "natural-cure", "held": "lum-berry" },
+      { "name": "raichu", "level": "72", "moves": ["surf", "extreme-speed", "sing", "thunder"], "ability": "static", "held": "lum-berry" },
       {
         "name": "dragonite",
         "level": "72",
-        "moves": ["earthquake", "extreme-speed", "hp-flying", "thunder"],
+        "moves": [
+          "earthquake",
+          "extreme-speed",
+          { "power": "60", "type": "flying", "damage_class": "physical", "name": "Hidden Power", "effect": "" },
+          "thunder"
+        ],
         "ability": "thick-fat",
-        "abilities": ["thick-fat"],
         "held": "lum-berry"
       },
-      {
-        "name": "vaporeon",
-        "level": "73",
-        "moves": ["sing", "muddy-water", "ice-beam", "hp-grass"],
-        "ability": "swift-swim",
-        "abilities": ["swift-swim"],
-        "held": "leftovers"
-      }
+      { "name": "vaporeon", "level": "73", "moves": ["sing", "muddy-water", "ice-beam", "hidden-power-grass"], "ability": "swift-swim", "held": "leftovers" }
     ]
   },
   "aqarc": {
@@ -1034,49 +1156,46 @@
       {
         "name": "raikou",
         "level": "75",
-        "moves": ["thunder", "hp-grass", "weather-ball", "calm-mind"],
+        "moves": [
+          "thunder",
+          "hidden-power-grass",
+          { "power": 50, "type": "normal", "damage_class": "physical", "name": "Weather Ball", "effect": "" },
+          "calm-mind"
+        ],
         "ability": "pressure",
-        "abilities": ["pressure"],
         "held": "lum-berry"
       },
       {
         "name": "suicune",
         "level": "75",
-        "moves": ["ice-beam", "hp-grass", "hydro-pump", "calm-mind"],
+        "moves": ["ice-beam", "hidden-power-grass", "hydro-pump", "calm-mind"],
         "ability": "battle-armor",
-        "abilities": ["battle-armor"],
         "held": "lum-berry"
       },
       {
         "name": "metagross",
         "level": "75",
-        "moves": ["meteor-mash", "earth-power", "sludge-bomb", "protect"],
+        "moves": [
+          "meteor-mash",
+          { "power": "90", "type": "ground", "damage_class": "physical", "name": "Earth Power", "effect": "" },
+          { "power": 90, "type": "poison", "damage_class": "physical", "name": "Sludge Bomb", "effect": "" },
+          "protect"
+        ],
         "ability": "clear-body",
-        "abilities": ["clear-body"],
         "held": "lum-berry"
       },
-      {
-        "name": "dragonite",
-        "level": "75",
-        "moves": ["thunder", "draco-meteor", "hydro-pump", "extreme-speed"],
-        "ability": "thick-fat",
-        "abilities": ["thick-fat"],
-        "held": "lum-berry"
-      },
-      {
-        "name": "qwilfish",
-        "level": "75",
-        "moves": ["destiny-bond", "gunk-shot", "hydro-pump", "swords-dance"],
-        "ability": "swift-swim",
-        "abilities": ["swift-swim"],
-        "held": "lum-berry"
-      },
+      { "name": "dragonite", "level": "75", "moves": ["thunder", "draco-meteor", "hydro-pump", "extreme-speed"], "ability": "thick-fat", "held": "lum-berry" },
+      { "name": "qwilfish", "level": "75", "moves": ["destiny-bond", "gunk-shot", "hydro-pump", "swords-dance"], "ability": "swift-swim", "held": "lum-berry" },
       {
         "name": "kingdra",
         "level": "75",
-        "moves": ["octazooka", "draco-meteor", "signal-beam", "yawn"],
+        "moves": [
+          "octazooka",
+          "draco-meteor",
+          { "power": 75, "type": "bug", "damage_class": "physical", "name": "Signal Beam", "effect": "" },
+          "yawn"
+        ],
         "ability": "swift-swim",
-        "abilities": ["swift-swim"],
         "held": "lum-berry"
       }
     ],
@@ -1092,8 +1211,10 @@
         "level": "70",
         "moves": ["pain-split", "teleport", "encore", "will-o-wisp"],
         "ability": "synchronize",
-        "abilities": ["synchronize"],
-        "held": "oran-berry"
+        "held": "oran-berry",
+        "sprite": "280",
+        "types": ["psychic"],
+        "stats": { "hp": 28, "atk": 25, "def": 25, "spa": 45, "spd": 35, "spe": 40 }
       }
     ]
   },
@@ -1105,50 +1226,61 @@
       {
         "name": "meganium",
         "level": "85",
-        "moves": ["synthesis", "giga-drain", "earthquake", "ancient-power"],
+        "moves": [
+          "synthesis",
+          "giga-drain",
+          "earthquake",
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" }
+        ],
         "ability": "thick-fat",
-        "abilities": ["thick-fat"],
         "held": "lum-berry"
       },
       {
         "name": "raichu",
         "level": "85",
-        "moves": ["volt-tackle", "extreme-speed", "surf", "hp-ice"],
+        "moves": [
+          { "power": 120, "type": "electric", "damage_class": "special", "name": "Volt Tackle", "effect": "" },
+          "extreme-speed",
+          "surf",
+          "hidden-power-ice"
+        ],
         "ability": "static",
-        "abilities": ["static"],
         "held": "lum-berry"
       },
       {
         "name": "hitmontop",
         "level": "85",
-        "moves": ["mach-punch", "brick-break", "rock-slide", "hp-ghost"],
+        "moves": [
+          "mach-punch",
+          "brick-break",
+          "rock-slide",
+          { "power": "60", "type": "ghost", "damage_class": "physical", "name": "Hidden Power", "effect": "" }
+        ],
         "ability": "intimidate",
-        "abilities": ["intimidate"],
         "held": "lum-berry"
       },
       {
         "name": "vaporeon",
         "level": "85",
-        "moves": ["muddy-water", "ice-beam", "quick-attack", "hp-grass"],
+        "moves": ["muddy-water", "ice-beam", "quick-attack", "hidden-power-grass"],
         "ability": "swift-swim",
-        "abilities": ["swift-swim"],
         "held": "leftovers"
       },
-      {
-        "name": "blissey",
-        "level": "85",
-        "moves": ["counter", "soft-boiled", "seismic-toss", "psywave"],
-        "ability": "natural-cure",
-        "abilities": ["natural-cure"],
-        "held": "leftovers"
-      },
+      { "name": "blissey", "level": "85", "moves": ["counter", "soft-boiled", "seismic-toss", "psywave"], "ability": "natural-cure", "held": "leftovers" },
       {
         "name": "gardevoir",
         "level": "88",
-        "moves": ["calm-mind", "psychic", "fire-punch", "thunderbolt"],
+        "moves": [
+          "calm-mind",
+          "psychic",
+          { "power": 75, "type": "fire", "damage_class": "special", "name": "Fire Punch", "effect": "" },
+          "thunderbolt"
+        ],
         "ability": "synchronize",
-        "abilities": ["synchronize"],
-        "held": "lum-berry"
+        "held": "lum-berry",
+        "sprite": "282",
+        "types": ["psychic"],
+        "stats": { "hp": 68, "atk": 65, "def": 65, "spa": 125, "spd": 115, "spe": 80 }
       }
     ]
   },
@@ -1158,109 +1290,110 @@
     "img": "/leaders/rs-brendan",
     "pokemon": [
       {
-        "name": "farfetchd",
+        "name": "farfetch-d",
         "level": "14",
-        "moves": ["quick-attack", "aerial-ace", "mud-slap", "cut"],
+        "moves": [
+          "quick-attack",
+          "aerial-ace",
+          { "power": 20, "type": "ground", "damage_class": "physical", "name": "Mud-Slap", "effect": "" },
+          "cut"
+        ],
         "ability": "keen-eye",
-        "abilities": ["keen-eye"],
         "held": "stick"
       },
+      { "name": "plusle", "level": "14", "moves": ["thunder-wave", "thunder-shock", "quick-attack", "seismic-toss"], "ability": "plus", "held": "magnet" },
+      { "name": "nidorino", "level": "16", "moves": ["toxic", "secret-power", "drill-run", "protect"], "ability": "poison-point", "held": "silk-scarf" },
       {
-        "name": "plusle",
-        "level": "14",
-        "moves": ["thunder-wave", "thunder-shock", "quick-attack", "seismic-toss"],
-        "ability": "plus",
-        "abilities": ["plus"],
-        "held": "magnet"
-      },
-      {
-        "name": "nidorino",
-        "level": "16",
-        "moves": ["toxic", "secret-power", "drill-run", "protect"],
-        "ability": "poison-point",
-        "abilities": ["poison-point"],
-        "held": "silk-scarf"
+        "name": "bulbasaur",
+        "level": "15",
+        "moves": ["mega-drain", "secret-power", "toxic", "attract"],
+        "ability": "overgrow",
+        "held": "sitrus-berry",
+        "starter": "fire"
       },
       {
         "name": "chikorita",
         "level": "15",
         "moves": ["light-screen", "reflect", "mega-drain", "secret-power"],
         "ability": "overgrow",
-        "abilities": ["overgrow"],
         "held": "sitrus-berry",
-        "starter": "grass"
-      },
-      {
-        "name": "squirtle",
-        "level": "15",
-        "moves": ["water-gun", "attract", "secret-power", "icy-wind"],
-        "ability": "torrent",
-        "abilities": ["torrent"],
-        "held": "mystic-water",
-        "starter": "grass"
-      },
-      {
-        "name": "combusken",
-        "level": "16",
-        "moves": ["ember", "double-kick", "rock-tomb", "quick-attack"],
-        "ability": "blaze",
-        "abilities": ["blaze"],
-        "held": "charcoal",
         "starter": "grass"
       },
       {
         "name": "totodile",
         "level": "15",
-        "moves": ["water-gun", "bite", "cut", "aerial-ace"],
+        "moves": [
+          "water-gun",
+          { "power": 60, "type": "dark", "damage_class": "special", "name": "Bite", "effect": "" },
+          "cut",
+          "aerial-ace"
+        ],
         "ability": "torrent",
-        "abilities": ["torrent"],
         "held": "mystic-water",
         "starter": "water"
-      },
-      {
-        "name": "charmander",
-        "level": "15",
-        "moves": ["ember", "quick-attack", "bite", "rock-tomb"],
-        "ability": "blaze",
-        "abilities": ["blaze"],
-        "held": "charcoal",
-        "starter": "water"
-      },
-      {
-        "name": "grovyle",
-        "level": "16",
-        "moves": ["mega-drain", "pursuit", "rock-tomb", "quick-attack"],
-        "ability": "overgrow",
-        "abilities": ["overgrow"],
-        "held": "miracle-seed",
-        "starter": "water"
-      },
-      {
-        "name": "bulbasaur",
-        "level": "15",
-        "moves": ["mega-drain", "secret-power", "toxic", "attract"],
-        "ability": "overgrow",
-        "abilities": ["overgrow"],
-        "held": "sitrus-berry",
-        "starter": "fire"
       },
       {
         "name": "quilava",
         "level": "15",
         "moves": ["ember", "quick-attack", "attract", "secret-power"],
         "ability": "blaze",
-        "abilities": ["blaze"],
         "held": "charcoal",
         "starter": "fire"
       },
       {
+        "name": "squirtle",
+        "level": "15",
+        "moves": ["water-gun", "attract", "secret-power", "icy-wind"],
+        "ability": "torrent",
+        "held": "mystic-water",
+        "starter": "grass"
+      },
+      {
+        "name": "charmander",
+        "level": "15",
+        "moves": [
+          "ember",
+          "quick-attack",
+          { "power": 60, "type": "dark", "damage_class": "special", "name": "Bite", "effect": "" },
+          "rock-tomb"
+        ],
+        "ability": "blaze",
+        "held": "charcoal",
+        "starter": "water"
+      },
+      {
         "name": "marshtomp",
         "level": "16",
-        "moves": ["mud-shot", "water-gun", "rock-tomb", "secret-power"],
+        "moves": [
+          { "power": 55, "type": "ground", "damage_class": "physical", "name": "Mud Shot", "effect": "" },
+          "water-gun",
+          "rock-tomb",
+          "secret-power"
+        ],
         "ability": "torrent",
-        "abilities": ["torrent"],
         "held": "mystic-water",
         "starter": "fire"
+      },
+      {
+        "name": "combusken",
+        "level": "16",
+        "moves": ["ember", "double-kick", "rock-tomb", "quick-attack"],
+        "ability": "blaze",
+        "held": "charcoal",
+        "starter": "grass"
+      },
+      {
+        "name": "grovyle",
+        "level": "16",
+        "moves": [
+          "mega-drain",
+          { "power": 40, "type": "dark", "damage_class": "special", "name": "Pursuit", "effect": "" },
+          "rock-tomb",
+          "quick-attack"
+        ],
+        "ability": "overgrow",
+        "held": "miracle-seed",
+        "starter": "water"
       }
     ]
   },
@@ -1270,109 +1403,110 @@
     "img": "/leaders/rs-may",
     "pokemon": [
       {
-        "name": "farfetchd",
+        "name": "farfetch-d",
         "level": "14",
-        "moves": ["quick-attack", "aerial-ace", "mud-slap", "cut"],
+        "moves": [
+          "quick-attack",
+          "aerial-ace",
+          { "power": 20, "type": "ground", "damage_class": "physical", "name": "Mud-Slap", "effect": "" },
+          "cut"
+        ],
         "ability": "keen-eye",
-        "abilities": ["keen-eye"],
         "held": "stick"
       },
+      { "name": "minun", "level": "14", "moves": ["thunder-wave", "thunder-shock", "quick-attack", "seismic-toss"], "ability": "minus", "held": "berry-juice" },
+      { "name": "nidorina", "level": "16", "moves": ["toxic", "secret-power", "drill-run", "protect"], "ability": "poison-point", "held": "silk-scarf" },
       {
-        "name": "minun",
-        "level": "14",
-        "moves": ["thunder-wave", "thunder-shock", "quick-attack", "seismic-toss"],
-        "ability": "minus",
-        "abilities": ["minus"],
-        "held": "berry-juice"
-      },
-      {
-        "name": "nidorina",
-        "level": "16",
-        "moves": ["toxic", "secret-power", "drill-run", "protect"],
-        "ability": "poison-point",
-        "abilities": ["poison-point"],
-        "held": "silk-scarf"
+        "name": "bulbasaur",
+        "level": "15",
+        "moves": ["mega-drain", "secret-power", "toxic", "attract"],
+        "ability": "overgrow",
+        "held": "sitrus-berry",
+        "starter": "fire"
       },
       {
         "name": "chikorita",
         "level": "15",
         "moves": ["light-screen", "reflect", "mega-drain", "secret-power"],
         "ability": "overgrow",
-        "abilities": ["overgrow"],
         "held": "sitrus-berry",
-        "starter": "grass"
-      },
-      {
-        "name": "squirtle",
-        "level": "15",
-        "moves": ["water-gun", "attract", "secret-power", "icy-wind"],
-        "ability": "torrent",
-        "abilities": ["torrent"],
-        "held": "mystic-water",
-        "starter": "grass"
-      },
-      {
-        "name": "combusken",
-        "level": "16",
-        "moves": ["ember", "double-kick", "rock-tomb", "quick-attack"],
-        "ability": "blaze",
-        "abilities": ["blaze"],
-        "held": "charcoal",
         "starter": "grass"
       },
       {
         "name": "totodile",
         "level": "15",
-        "moves": ["water-gun", "bite", "cut", "aerial-ace"],
+        "moves": [
+          "water-gun",
+          { "power": 60, "type": "dark", "damage_class": "special", "name": "Bite", "effect": "" },
+          "cut",
+          "aerial-ace"
+        ],
         "ability": "torrent",
-        "abilities": ["torrent"],
         "held": "mystic-water",
         "starter": "water"
-      },
-      {
-        "name": "charmander",
-        "level": "15",
-        "moves": ["ember", "quick-attack", "bite", "rock-tomb"],
-        "ability": "blaze",
-        "abilities": ["blaze"],
-        "held": "charcoal",
-        "starter": "water"
-      },
-      {
-        "name": "grovyle",
-        "level": "16",
-        "moves": ["mega-drain", "pursuit", "rock-tomb", "quick-attack"],
-        "ability": "overgrow",
-        "abilities": ["overgrow"],
-        "held": "miracle-seed",
-        "starter": "water"
-      },
-      {
-        "name": "bulbasaur",
-        "level": "15",
-        "moves": ["mega-drain", "secret-power", "toxic", "attract"],
-        "ability": "overgrow",
-        "abilities": ["overgrow"],
-        "held": "sitrus-berry",
-        "starter": "fire"
       },
       {
         "name": "quilava",
         "level": "15",
         "moves": ["ember", "quick-attack", "attract", "secret-power"],
         "ability": "blaze",
-        "abilities": ["blaze"],
         "held": "charcoal",
         "starter": "fire"
       },
       {
+        "name": "squirtle",
+        "level": "15",
+        "moves": ["water-gun", "attract", "secret-power", "icy-wind"],
+        "ability": "torrent",
+        "held": "mystic-water",
+        "starter": "grass"
+      },
+      {
+        "name": "charmander",
+        "level": "15",
+        "moves": [
+          "ember",
+          "quick-attack",
+          { "power": 60, "type": "dark", "damage_class": "special", "name": "Bite", "effect": "" },
+          "rock-tomb"
+        ],
+        "ability": "blaze",
+        "held": "charcoal",
+        "starter": "water"
+      },
+      {
         "name": "marshtomp",
         "level": "16",
-        "moves": ["mud-shot", "water-gun", "rock-tomb", "secret-power"],
+        "moves": [
+          { "power": 55, "type": "ground", "damage_class": "physical", "name": "Mud Shot", "effect": "" },
+          "water-gun",
+          "rock-tomb",
+          "secret-power"
+        ],
         "ability": "torrent",
-        "abilities": ["torrent"],
         "held": "mystic-water",
         "starter": "fire"
+      },
+      {
+        "name": "combusken",
+        "level": "16",
+        "moves": ["ember", "double-kick", "rock-tomb", "quick-attack"],
+        "ability": "blaze",
+        "held": "charcoal",
+        "starter": "grass"
+      },
+      {
+        "name": "grovyle",
+        "level": "16",
+        "moves": [
+          "mega-drain",
+          { "power": 40, "type": "dark", "damage_class": "special", "name": "Pursuit", "effect": "" },
+          "rock-tomb",
+          "quick-attack"
+        ],
+        "ability": "overgrow",
+        "held": "miracle-seed",
+        "starter": "water"
       }
     ]
   },
@@ -1381,91 +1515,124 @@
     "speciality": "",
     "img": "/leaders/rs-brendan",
     "pokemon": [
-      { "name": "plusle", "level": "22", "moves": ["headbutt", "thunder-wave", "wild-charge", "signal-beam"], "ability": "plus", "abilities": ["plus"] },
       {
-        "name": "pidgeotto",
-        "level": "24",
-        "moves": ["steel-wing", "quick-attack", "secret-power", "aerial-ace"],
-        "ability": "keen-eye",
-        "abilities": ["keen-eye"]
+        "name": "plusle",
+        "level": "22",
+        "moves": [
+          "headbutt",
+          "thunder-wave",
+          { "power": 90, "type": "electric", "damage_class": "special", "name": "Wild Charge", "effect": "" },
+          { "power": 75, "type": "bug", "damage_class": "physical", "name": "Signal Beam", "effect": "" }
+        ],
+        "ability": "plus"
       },
+      { "name": "pidgeotto", "level": "24", "moves": ["steel-wing", "quick-attack", "secret-power", "aerial-ace"], "ability": "keen-eye" },
       {
         "name": "nidorino",
         "level": "24",
-        "moves": ["body-slam", "sludge-bomb", "drill-run", "water-pulse"],
-        "ability": "poison-point",
-        "abilities": ["poison-point"]
-      },
-      {
-        "name": "bayleef",
-        "level": "24",
-        "moves": ["body-slam", "grass-whistle", "giga-drain", "synthesis"],
-        "ability": "overgrow",
-        "abilities": ["overgrow"],
-        "starter": "grass"
-      },
-      {
-        "name": "wartortle",
-        "level": "25",
-        "moves": ["body-slam", "fake-out", "water-pulse", "ice-punch"],
-        "ability": "torrent",
-        "abilities": ["torrent"],
-        "starter": "grass"
-      },
-      {
-        "name": "combusken",
-        "level": "26",
-        "moves": ["bulk-up", "fire-punch", "rock-slide", "brick-break"],
-        "ability": "blaze",
-        "abilities": ["blaze"],
-        "starter": "grass"
+        "moves": [
+          "body-slam",
+          { "power": 90, "type": "poison", "damage_class": "physical", "name": "Sludge Bomb", "effect": "" },
+          "drill-run",
+          "water-pulse"
+        ],
+        "ability": "poison-point"
       },
       {
         "name": "quilava",
         "level": "24",
-        "moves": ["iron-tail", "attract", "flame-wheel", "body-slam"],
+        "moves": [
+          "iron-tail",
+          "attract",
+          { "power": 60, "type": "fire", "damage_class": "special", "name": "Flame Wheel", "effect": "" },
+          "body-slam"
+        ],
         "ability": "blaze",
-        "abilities": ["blaze"],
         "starter": "fire"
+      },
+      { "name": "bayleef", "level": "24", "moves": ["body-slam", "grass-whistle", "giga-drain", "synthesis"], "ability": "overgrow", "starter": "grass" },
+      {
+        "name": "croconaw",
+        "level": "24",
+        "moves": [
+          "body-slam",
+          "attract",
+          { "power": 80, "type": "water", "damage_class": "special", "name": "Waterfall", "effect": "" },
+          "aerial-ace"
+        ],
+        "ability": "torrent",
+        "starter": "water"
       },
       {
         "name": "ivysaur",
         "level": "25",
-        "moves": ["body-slam", "attract", "sludge-bomb", "giga-drain"],
+        "moves": [
+          "body-slam",
+          "attract",
+          { "power": 90, "type": "poison", "damage_class": "physical", "name": "Sludge Bomb", "effect": "" },
+          "giga-drain"
+        ],
         "ability": "overgrow",
-        "abilities": ["overgrow"],
         "starter": "fire"
       },
       {
-        "name": "marshtomp",
-        "level": "26",
-        "moves": ["body-slam", "attract", "mud-shot", "water-pulse"],
+        "name": "wartortle",
+        "level": "25",
+        "moves": [
+          "body-slam",
+          "fake-out",
+          "water-pulse",
+          { "power": 75, "type": "ice", "damage_class": "special", "name": "Ice Punch", "effect": "" }
+        ],
         "ability": "torrent",
-        "abilities": ["torrent"],
-        "starter": "fire"
-      },
-      {
-        "name": "croconaw",
-        "level": "24",
-        "moves": ["body-slam", "attract", "waterfall", "aerial-ace"],
-        "ability": "torrent",
-        "abilities": ["torrent"],
-        "starter": "water"
+        "starter": "grass"
       },
       {
         "name": "charmeleon",
         "level": "25",
-        "moves": ["quick-attack", "fire-punch", "dragon-claw", "brick-break"],
+        "moves": [
+          "quick-attack",
+          { "power": 75, "type": "fire", "damage_class": "special", "name": "Fire Punch", "effect": "" },
+          { "power": 80, "type": "dragon", "damage_class": "special", "name": "Dragon Claw", "effect": "" },
+          "brick-break"
+        ],
         "ability": "blaze",
-        "abilities": ["blaze"],
         "starter": "water"
+      },
+      {
+        "name": "marshtomp",
+        "level": "26",
+        "moves": [
+          "body-slam",
+          "attract",
+          { "power": 55, "type": "ground", "damage_class": "physical", "name": "Mud Shot", "effect": "" },
+          "water-pulse"
+        ],
+        "ability": "torrent",
+        "starter": "fire"
+      },
+      {
+        "name": "combusken",
+        "level": "26",
+        "moves": [
+          "bulk-up",
+          { "power": 75, "type": "fire", "damage_class": "special", "name": "Fire Punch", "effect": "" },
+          "rock-slide",
+          "brick-break"
+        ],
+        "ability": "blaze",
+        "starter": "grass"
       },
       {
         "name": "grovyle",
         "level": "26",
-        "moves": ["headbutt", "giga-drain", "quick-attack", "pursuit"],
+        "moves": [
+          "headbutt",
+          "giga-drain",
+          "quick-attack",
+          { "power": 40, "type": "dark", "damage_class": "special", "name": "Pursuit", "effect": "" }
+        ],
         "ability": "overgrow",
-        "abilities": ["overgrow"],
         "starter": "water"
       }
     ]
@@ -1475,91 +1642,124 @@
     "speciality": "",
     "img": "/leaders/rs-may",
     "pokemon": [
-      { "name": "minun", "level": "22", "moves": ["signal-beam", "attract", "thunder-wave", "thunderbolt"], "ability": "minus", "abilities": ["minus"] },
       {
-        "name": "pidgeotto",
-        "level": "24",
-        "moves": ["aerial-ace", "quick-attack", "secret-power", "steel-wing"],
-        "ability": "keen-eye",
-        "abilities": ["keen-eye"]
+        "name": "minun",
+        "level": "22",
+        "moves": [
+          { "power": 75, "type": "bug", "damage_class": "physical", "name": "Signal Beam", "effect": "" },
+          "attract",
+          "thunder-wave",
+          "thunderbolt"
+        ],
+        "ability": "minus"
       },
+      { "name": "pidgeotto", "level": "24", "moves": ["aerial-ace", "quick-attack", "secret-power", "steel-wing"], "ability": "keen-eye" },
       {
         "name": "nidorina",
         "level": "24",
-        "moves": ["body-slam", "drill-run", "sludge-bomb", "shadow-ball"],
-        "ability": "poison-point",
-        "abilities": ["poison-point"]
-      },
-      {
-        "name": "bayleef",
-        "level": "24",
-        "moves": ["body-slam", "grass-whistle", "giga-drain", "synthesis"],
-        "ability": "overgrow",
-        "abilities": ["overgrow"],
-        "starter": "grass"
-      },
-      {
-        "name": "wartortle",
-        "level": "25",
-        "moves": ["body-slam", "fake-out", "water-pulse", "ice-punch"],
-        "ability": "torrent",
-        "abilities": ["torrent"],
-        "starter": "grass"
-      },
-      {
-        "name": "combusken",
-        "level": "26",
-        "moves": ["bulk-up", "fire-punch", "rock-slide", "brick-break"],
-        "ability": "blaze",
-        "abilities": ["blaze"],
-        "starter": "grass"
+        "moves": [
+          "body-slam",
+          "drill-run",
+          { "power": 90, "type": "poison", "damage_class": "physical", "name": "Sludge Bomb", "effect": "" },
+          { "power": 80, "type": "ghost", "damage_class": "physical", "name": "Shadow Ball", "effect": "" }
+        ],
+        "ability": "poison-point"
       },
       {
         "name": "quilava",
         "level": "24",
-        "moves": ["iron-tail", "attract", "flame-wheel", "body-slam"],
+        "moves": [
+          "iron-tail",
+          "attract",
+          { "power": 60, "type": "fire", "damage_class": "special", "name": "Flame Wheel", "effect": "" },
+          "body-slam"
+        ],
         "ability": "blaze",
-        "abilities": ["blaze"],
         "starter": "fire"
+      },
+      { "name": "bayleef", "level": "24", "moves": ["body-slam", "grass-whistle", "giga-drain", "synthesis"], "ability": "overgrow", "starter": "grass" },
+      {
+        "name": "croconaw",
+        "level": "24",
+        "moves": [
+          "body-slam",
+          "attract",
+          { "power": 80, "type": "water", "damage_class": "special", "name": "Waterfall", "effect": "" },
+          "aerial-ace"
+        ],
+        "ability": "torrent",
+        "starter": "water"
       },
       {
         "name": "ivysaur",
         "level": "25",
-        "moves": ["body-slam", "attract", "sludge-bomb", "giga-drain"],
+        "moves": [
+          "body-slam",
+          "attract",
+          { "power": 90, "type": "poison", "damage_class": "physical", "name": "Sludge Bomb", "effect": "" },
+          "giga-drain"
+        ],
         "ability": "overgrow",
-        "abilities": ["overgrow"],
         "starter": "fire"
       },
       {
-        "name": "marshtomp",
-        "level": "26",
-        "moves": ["body-slam", "attract", "mud-shot", "water-pulse"],
+        "name": "wartortle",
+        "level": "25",
+        "moves": [
+          "body-slam",
+          "fake-out",
+          "water-pulse",
+          { "power": 75, "type": "ice", "damage_class": "special", "name": "Ice Punch", "effect": "" }
+        ],
         "ability": "torrent",
-        "abilities": ["torrent"],
-        "starter": "fire"
-      },
-      {
-        "name": "croconaw",
-        "level": "24",
-        "moves": ["body-slam", "attract", "waterfall", "aerial-ace"],
-        "ability": "torrent",
-        "abilities": ["torrent"],
-        "starter": "water"
+        "starter": "grass"
       },
       {
         "name": "charmeleon",
         "level": "25",
-        "moves": ["quick-attack", "fire-punch", "dragon-claw", "brick-break"],
+        "moves": [
+          "quick-attack",
+          { "power": 75, "type": "fire", "damage_class": "special", "name": "Fire Punch", "effect": "" },
+          { "power": 80, "type": "dragon", "damage_class": "special", "name": "Dragon Claw", "effect": "" },
+          "brick-break"
+        ],
         "ability": "blaze",
-        "abilities": ["blaze"],
         "starter": "water"
+      },
+      {
+        "name": "marshtomp",
+        "level": "26",
+        "moves": [
+          "body-slam",
+          "attract",
+          { "power": 55, "type": "ground", "damage_class": "physical", "name": "Mud Shot", "effect": "" },
+          "water-pulse"
+        ],
+        "ability": "torrent",
+        "starter": "fire"
+      },
+      {
+        "name": "combusken",
+        "level": "26",
+        "moves": [
+          "bulk-up",
+          { "power": 75, "type": "fire", "damage_class": "special", "name": "Fire Punch", "effect": "" },
+          "rock-slide",
+          "brick-break"
+        ],
+        "ability": "blaze",
+        "starter": "grass"
       },
       {
         "name": "grovyle",
         "level": "26",
-        "moves": ["headbutt", "giga-drain", "quick-attack", "pursuit"],
+        "moves": [
+          "headbutt",
+          "giga-drain",
+          "quick-attack",
+          { "power": 40, "type": "dark", "damage_class": "special", "name": "Pursuit", "effect": "" }
+        ],
         "ability": "overgrow",
-        "abilities": ["overgrow"],
         "starter": "water"
       }
     ]
@@ -1572,78 +1772,86 @@
       {
         "name": "raichu",
         "level": "50",
-        "moves": ["thunder", "surf", "signal-beam", "rain-dance"],
+        "moves": [
+          "thunder",
+          "surf",
+          { "power": 75, "type": "bug", "damage_class": "physical", "name": "Signal Beam", "effect": "" },
+          "rain-dance"
+        ],
         "ability": "static",
-        "abilities": ["static"],
         "held": "lum-berry"
       },
       {
         "name": "clefable",
         "level": "50",
-        "moves": ["thunder", "hp-water", "body-slam", "ice-beam"],
+        "moves": ["thunder", "hidden-power-water", "body-slam", "ice-beam"],
         "ability": "cute-charm",
-        "abilities": ["cute-charm"],
-        "held": "lum-berry"
-      },
-      {
-        "name": "nidoqueen",
-        "level": "50",
-        "moves": ["earthquake", "poison-tail", "thunder", "surf"],
-        "ability": "poison-point",
-        "abilities": ["poison-point"],
-        "held": "lum-berry"
-      },
-      {
-        "name": "meganium",
-        "level": "50",
-        "moves": ["giga-drain", "earthquake", "ancient-power", "synthesis"],
-        "ability": "overgrow",
-        "abilities": ["overgrow"],
         "held": "lum-berry",
-        "starter": "grass"
+        "sprite": "36",
+        "types": ["normal"],
+        "stats": { "hp": 95, "atk": 70, "def": 73, "spa": 95, "spd": 90, "spe": 60 }
       },
-      {
-        "name": "blastoise",
-        "level": "50",
-        "moves": ["water-spout", "mirror-coat", "ice-beam", "hp-electric"],
-        "ability": "torrent",
-        "abilities": ["torrent"],
-        "held": "lum-berry",
-        "starter": "grass"
-      },
+      { "name": "nidoqueen", "level": "50", "moves": ["earthquake", "poison-tail", "thunder", "surf"], "ability": "poison-point", "held": "lum-berry" },
       {
         "name": "swampert",
         "level": "50",
         "moves": ["muddy-water", "earthquake", "ice-beam", "attract"],
         "ability": "swift-swim",
-        "abilities": ["swift-swim"],
         "held": "lum-berry",
         "starter": "fire"
       },
       {
-        "name": "venusaur",
+        "name": "meganium",
         "level": "50",
-        "moves": ["sleep-powder", "giga-drain", "earthquake", "ancient-power"],
-        "ability": "chlorophyll",
-        "abilities": ["chlorophyll"],
+        "moves": [
+          "giga-drain",
+          "earthquake",
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" },
+          "synthesis"
+        ],
+        "ability": "overgrow",
         "held": "lum-berry",
-        "starter": "fire"
+        "starter": "grass"
       },
       {
         "name": "feraligatr",
         "level": "50",
-        "moves": ["hydro-pump", "ice-beam", "earthquake", "hp-electric"],
+        "moves": ["hydro-pump", "ice-beam", "earthquake", "hidden-power-electric"],
         "ability": "torrent",
-        "abilities": ["torrent"],
         "held": "lum-berry",
         "starter": "water"
       },
       {
+        "name": "venusaur",
+        "level": "50",
+        "moves": [
+          "sleep-powder",
+          "giga-drain",
+          "earthquake",
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" }
+        ],
+        "ability": "chlorophyll",
+        "held": "lum-berry",
+        "starter": "fire"
+      },
+      {
+        "name": "blastoise",
+        "level": "50",
+        "moves": ["water-spout", "mirror-coat", "ice-beam", "hidden-power-electric"],
+        "ability": "torrent",
+        "held": "lum-berry",
+        "starter": "grass"
+      },
+      {
         "name": "sceptile",
         "level": "50",
-        "moves": ["leaf-blade", "hp-water", "thunder-punch", "dragon-claw"],
+        "moves": [
+          { "power": "90", "type": "grass", "damage_class": "special", "name": "Leaf Blade", "effect": "" },
+          "hidden-power-water",
+          { "power": 75, "type": "electric", "damage_class": "special", "name": "Thunder Punch", "effect": "" },
+          { "power": 80, "type": "dragon", "damage_class": "special", "name": "Dragon Claw", "effect": "" }
+        ],
         "ability": "overgrow",
-        "abilities": ["overgrow"],
         "held": "lum-berry",
         "starter": "water"
       }
@@ -1657,78 +1865,88 @@
       {
         "name": "raichu",
         "level": "50",
-        "moves": ["thunder", "surf", "signal-beam", "rain-dance"],
+        "moves": [
+          "thunder",
+          "surf",
+          { "power": 75, "type": "bug", "damage_class": "physical", "name": "Signal Beam", "effect": "" },
+          "rain-dance"
+        ],
         "ability": "static",
-        "abilities": ["static"],
         "held": "lum-berry"
       },
       {
         "name": "porygon2",
         "level": "50",
-        "moves": ["tri-attack", "thunder", "hp-water", "recover"],
+        "moves": [
+          { "power": 80, "type": "normal", "damage_class": "physical", "name": "Tri Attack", "effect": "" },
+          "thunder",
+          "hidden-power-water",
+          "recover"
+        ],
         "ability": "download",
-        "abilities": ["download"],
         "held": "lum-berry"
       },
-      {
-        "name": "nidoking",
-        "level": "50",
-        "moves": ["thunder", "surf", "earthquake", "poison-tail"],
-        "ability": "poison-point",
-        "abilities": ["poison-point"],
-        "held": "lum-berry"
-      },
-      {
-        "name": "meganium",
-        "level": "50",
-        "moves": ["giga-drain", "earthquake", "ancient-power", "synthesis"],
-        "ability": "overgrow",
-        "abilities": ["overgrow"],
-        "held": "lum-berry",
-        "starter": "grass"
-      },
-      {
-        "name": "blastoise",
-        "level": "50",
-        "moves": ["water-spout", "mirror-coat", "ice-beam", "hp-electric"],
-        "ability": "torrent",
-        "abilities": ["torrent"],
-        "held": "lum-berry",
-        "starter": "grass"
-      },
+      { "name": "nidoking", "level": "50", "moves": ["thunder", "surf", "earthquake", "poison-tail"], "ability": "poison-point", "held": "lum-berry" },
       {
         "name": "swampert",
         "level": "50",
         "moves": ["muddy-water", "earthquake", "ice-beam", "attract"],
         "ability": "swift-swim",
-        "abilities": ["swift-swim"],
         "held": "lum-berry",
         "starter": "fire"
       },
       {
-        "name": "venusaur",
+        "name": "meganium",
         "level": "50",
-        "moves": ["sleep-powder", "giga-drain", "earthquake", "ancient-power"],
-        "ability": "chlorophyll",
-        "abilities": ["chlorophyll"],
+        "moves": [
+          "giga-drain",
+          "earthquake",
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" },
+          "synthesis"
+        ],
+        "ability": "overgrow",
         "held": "lum-berry",
-        "starter": "fire"
+        "starter": "grass"
       },
       {
         "name": "feraligatr",
         "level": "50",
-        "moves": ["hydro-pump", "ice-beam", "earthquake", "hp-electric"],
+        "moves": ["hydro-pump", "ice-beam", "earthquake", "hidden-power-electric"],
         "ability": "torrent",
-        "abilities": ["torrent"],
         "held": "lum-berry",
         "starter": "water"
       },
       {
+        "name": "venusaur",
+        "level": "50",
+        "moves": [
+          "sleep-powder",
+          "giga-drain",
+          "earthquake",
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" }
+        ],
+        "ability": "chlorophyll",
+        "held": "lum-berry",
+        "starter": "fire"
+      },
+      {
+        "name": "blastoise",
+        "level": "50",
+        "moves": ["water-spout", "mirror-coat", "ice-beam", "hidden-power-electric"],
+        "ability": "torrent",
+        "held": "lum-berry",
+        "starter": "grass"
+      },
+      {
         "name": "sceptile",
         "level": "50",
-        "moves": ["leaf-blade", "hp-water", "thunder-punch", "dragon-claw"],
+        "moves": [
+          { "power": "90", "type": "grass", "damage_class": "special", "name": "Leaf Blade", "effect": "" },
+          "hidden-power-water",
+          { "power": 75, "type": "electric", "damage_class": "special", "name": "Thunder Punch", "effect": "" },
+          { "power": 80, "type": "dragon", "damage_class": "special", "name": "Dragon Claw", "effect": "" }
+        ],
         "ability": "overgrow",
-        "abilities": ["overgrow"],
         "held": "lum-berry",
         "starter": "water"
       }
@@ -1742,102 +1960,145 @@
       {
         "name": "miltank",
         "level": "59",
-        "moves": ["earthquake", "milk-drink", "shadow-ball", "body-slam"],
+        "moves": [
+          "earthquake",
+          "milk-drink",
+          { "power": 80, "type": "ghost", "damage_class": "physical", "name": "Shadow Ball", "effect": "" },
+          "body-slam"
+        ],
         "ability": "thick-fat",
-        "abilities": ["thick-fat"],
         "held": "lum-berry"
       },
       {
         "name": "ampharos",
         "level": "59",
-        "moves": ["thunder-wave", "thunderbolt", "fire-punch", "hp-water"],
+        "moves": [
+          "thunder-wave",
+          "thunderbolt",
+          { "power": 75, "type": "fire", "damage_class": "special", "name": "Fire Punch", "effect": "" },
+          "hidden-power-water"
+        ],
         "ability": "static",
-        "abilities": ["static"],
         "held": "lum-berry"
       },
       {
         "name": "nidoqueen",
         "level": "59",
-        "moves": ["earthquake", "shadow-ball", "superpower", "poison-fang"],
+        "moves": [
+          "earthquake",
+          { "power": 80, "type": "ghost", "damage_class": "physical", "name": "Shadow Ball", "effect": "" },
+          "superpower",
+          "poison-fang"
+        ],
         "ability": "poison-point",
-        "abilities": ["poison-point"],
         "held": "lum-berry"
       },
       {
         "name": "typhlosion",
         "level": "59",
-        "moves": ["earthquake", "overheat", "hp-grass", "thunder-punch"],
+        "moves": [
+          "earthquake",
+          "overheat",
+          "hidden-power-grass",
+          { "power": 75, "type": "electric", "damage_class": "special", "name": "Thunder Punch", "effect": "" }
+        ],
         "ability": "blaze",
-        "abilities": ["blaze"],
-        "held": "lum-berry",
-        "starter": "fire"
-      },
-      {
-        "name": "venusaur",
-        "level": "59",
-        "moves": ["earthquake", "giga-drain", "sleep-powder", "ancient-power"],
-        "ability": "chlorophyll",
-        "abilities": ["chlorophyll"],
-        "held": "lum-berry",
-        "starter": "fire"
-      },
-      {
-        "name": "swampert",
-        "level": "60",
-        "moves": ["earthquake", "muddy-water", "ice-beam", "sludge-bomb"],
-        "ability": "swift-swim",
-        "abilities": ["swift-swim"],
         "held": "lum-berry",
         "starter": "fire"
       },
       {
         "name": "meganium",
         "level": "59",
-        "moves": ["grass-whistle", "earthquake", "ancient-power", "giga-drain"],
+        "moves": [
+          "grass-whistle",
+          "earthquake",
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" },
+          "giga-drain"
+        ],
         "ability": "overgrow",
-        "abilities": ["overgrow"],
-        "held": "lum-berry",
-        "starter": "grass"
-      },
-      {
-        "name": "blastoise",
-        "level": "59",
-        "moves": ["water-spout", "hp-electric", "ice-beam", "mirror-coat"],
-        "ability": "torrent",
-        "abilities": ["torrent"],
-        "held": "lum-berry",
-        "starter": "grass"
-      },
-      {
-        "name": "blaziken",
-        "level": "60",
-        "moves": ["overheat", "superpower", "thunder-punch", "rock-slide"],
-        "ability": "blaze",
-        "abilities": ["blaze"],
         "held": "lum-berry",
         "starter": "grass"
       },
       {
         "name": "feraligatr",
         "level": "59",
-        "moves": ["earthquake", "hydro-pump", "hp-flying", "ancient-power"],
-        "abilities": [""],
+        "moves": [
+          "earthquake",
+          "hydro-pump",
+          { "power": "60", "type": "flying", "damage_class": "physical", "name": "Hidden Power", "effect": "" },
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" }
+        ],
         "held": "lum-berry",
         "starter": "water"
+      },
+      {
+        "name": "venusaur",
+        "level": "59",
+        "moves": [
+          "earthquake",
+          "giga-drain",
+          "sleep-powder",
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" }
+        ],
+        "ability": "chlorophyll",
+        "held": "lum-berry",
+        "starter": "fire"
+      },
+      {
+        "name": "blastoise",
+        "level": "59",
+        "moves": ["water-spout", "hidden-power-electric", "ice-beam", "mirror-coat"],
+        "ability": "torrent",
+        "held": "lum-berry",
+        "starter": "grass"
       },
       {
         "name": "charizard",
         "level": "59",
-        "moves": ["heat-wave", "dragon-dance", "earthquake", "air-slash"],
-        "abilities": [""],
+        "moves": [
+          "heat-wave",
+          "dragon-dance",
+          "earthquake",
+          { "power": "80", "type": "flying", "damage_class": "physical", "name": "Air Slash", "effect": "" }
+        ],
         "held": "lum-berry",
         "starter": "water"
       },
       {
+        "name": "swampert",
+        "level": "60",
+        "moves": [
+          "earthquake",
+          "muddy-water",
+          "ice-beam",
+          { "power": 90, "type": "poison", "damage_class": "physical", "name": "Sludge Bomb", "effect": "" }
+        ],
+        "ability": "swift-swim",
+        "held": "lum-berry",
+        "starter": "fire"
+      },
+      {
+        "name": "blaziken",
+        "level": "60",
+        "moves": [
+          "overheat",
+          "superpower",
+          { "power": 75, "type": "electric", "damage_class": "special", "name": "Thunder Punch", "effect": "" },
+          "rock-slide"
+        ],
+        "ability": "blaze",
+        "held": "lum-berry",
+        "starter": "grass"
+      },
+      {
         "name": "sceptile",
         "level": "60",
-        "moves": ["giga-drain", "thunder-punch", "earthquake", "dragon-claw"],
-        "abilities": [""],
+        "moves": [
+          "giga-drain",
+          { "power": 75, "type": "electric", "damage_class": "special", "name": "Thunder Punch", "effect": "" },
+          "earthquake",
+          { "power": 80, "type": "dragon", "damage_class": "special", "name": "Dragon Claw", "effect": "" }
+        ],
         "held": "lum-berry",
         "starter": "water"
       }
@@ -1851,102 +2112,145 @@
       {
         "name": "tauros",
         "level": "59",
-        "moves": ["double-edge", "earthquake", "hp-ghost", "iron-tail"],
+        "moves": [
+          "double-edge",
+          "earthquake",
+          { "power": "60", "type": "ghost", "damage_class": "physical", "name": "Hidden Power", "effect": "" },
+          "iron-tail"
+        ],
         "ability": "intimidate",
-        "abilities": ["intimidate"],
         "held": "lum-berry"
       },
       {
         "name": "ampharos",
         "level": "59",
-        "moves": ["thunder-wave", "thunderbolt", "fire-punch", "hp-ice"],
+        "moves": [
+          "thunder-wave",
+          "thunderbolt",
+          { "power": 75, "type": "fire", "damage_class": "special", "name": "Fire Punch", "effect": "" },
+          "hidden-power-ice"
+        ],
         "ability": "static",
-        "abilities": ["static"],
         "held": "lum-berry"
       },
       {
         "name": "nidoking",
         "level": "59",
-        "moves": ["earthquake", "shadow-ball", "poison-tail", "ice-beam"],
+        "moves": [
+          "earthquake",
+          { "power": 80, "type": "ghost", "damage_class": "physical", "name": "Shadow Ball", "effect": "" },
+          "poison-tail",
+          "ice-beam"
+        ],
         "ability": "poison-point",
-        "abilities": ["poison-point"],
         "held": "lum-berry"
       },
       {
         "name": "typhlosion",
         "level": "59",
-        "moves": ["earthquake", "overheat", "hp-grass", "thunder-punch"],
+        "moves": [
+          "earthquake",
+          "overheat",
+          "hidden-power-grass",
+          { "power": 75, "type": "electric", "damage_class": "special", "name": "Thunder Punch", "effect": "" }
+        ],
         "ability": "blaze",
-        "abilities": ["blaze"],
-        "held": "lum-berry",
-        "starter": "fire"
-      },
-      {
-        "name": "venusaur",
-        "level": "59",
-        "moves": ["earthquake", "giga-drain", "sleep-powder", "ancient-power"],
-        "ability": "chlorophyll",
-        "abilities": ["chlorophyll"],
-        "held": "lum-berry",
-        "starter": "fire"
-      },
-      {
-        "name": "swampert",
-        "level": "60",
-        "moves": ["earthquake", "muddy-water", "ice-beam", "sludge-bomb"],
-        "ability": "swift-swim",
-        "abilities": ["swift-swim"],
         "held": "lum-berry",
         "starter": "fire"
       },
       {
         "name": "meganium",
         "level": "59",
-        "moves": ["grass-whistle", "earthquake", "ancient-power", "giga-drain"],
+        "moves": [
+          "grass-whistle",
+          "earthquake",
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" },
+          "giga-drain"
+        ],
         "ability": "overgrow",
-        "abilities": ["overgrow"],
-        "held": "lum-berry",
-        "starter": "grass"
-      },
-      {
-        "name": "blastoise",
-        "level": "59",
-        "moves": ["water-spout", "hp-electric", "ice-beam", "mirror-coat"],
-        "ability": "torrent",
-        "abilities": ["torrent"],
-        "held": "lum-berry",
-        "starter": "grass"
-      },
-      {
-        "name": "blaziken",
-        "level": "60",
-        "moves": ["overheat", "superpower", "thunder-punch", "rock-slide"],
-        "ability": "blaze",
-        "abilities": ["blaze"],
         "held": "lum-berry",
         "starter": "grass"
       },
       {
         "name": "feraligatr",
         "level": "59",
-        "moves": ["earthquake", "hydro-pump", "hp-flying", "ancient-power"],
-        "abilities": [""],
+        "moves": [
+          "earthquake",
+          "hydro-pump",
+          { "power": "60", "type": "flying", "damage_class": "physical", "name": "Hidden Power", "effect": "" },
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" }
+        ],
         "held": "lum-berry",
         "starter": "water"
+      },
+      {
+        "name": "venusaur",
+        "level": "59",
+        "moves": [
+          "earthquake",
+          "giga-drain",
+          "sleep-powder",
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" }
+        ],
+        "ability": "chlorophyll",
+        "held": "lum-berry",
+        "starter": "fire"
+      },
+      {
+        "name": "blastoise",
+        "level": "59",
+        "moves": ["water-spout", "hidden-power-electric", "ice-beam", "mirror-coat"],
+        "ability": "torrent",
+        "held": "lum-berry",
+        "starter": "grass"
       },
       {
         "name": "charizard",
         "level": "59",
-        "moves": ["heat-wave", "dragon-dance", "earthquake", "air-slash"],
-        "abilities": [""],
+        "moves": [
+          "heat-wave",
+          "dragon-dance",
+          "earthquake",
+          { "power": "80", "type": "flying", "damage_class": "physical", "name": "Air Slash", "effect": "" }
+        ],
         "held": "lum-berry",
         "starter": "water"
       },
       {
+        "name": "swampert",
+        "level": "60",
+        "moves": [
+          "earthquake",
+          "muddy-water",
+          "ice-beam",
+          { "power": 90, "type": "poison", "damage_class": "physical", "name": "Sludge Bomb", "effect": "" }
+        ],
+        "ability": "swift-swim",
+        "held": "lum-berry",
+        "starter": "fire"
+      },
+      {
+        "name": "blaziken",
+        "level": "60",
+        "moves": [
+          "overheat",
+          "superpower",
+          { "power": 75, "type": "electric", "damage_class": "special", "name": "Thunder Punch", "effect": "" },
+          "rock-slide"
+        ],
+        "ability": "blaze",
+        "held": "lum-berry",
+        "starter": "grass"
+      },
+      {
         "name": "sceptile",
         "level": "60",
-        "moves": ["giga-drain", "thunder-punch", "earthquake", "dragon-claw"],
-        "abilities": [""],
+        "moves": [
+          "giga-drain",
+          { "power": 75, "type": "electric", "damage_class": "special", "name": "Thunder Punch", "effect": "" },
+          "earthquake",
+          { "power": 80, "type": "dragon", "damage_class": "special", "name": "Dragon Claw", "effect": "" }
+        ],
         "held": "lum-berry",
         "starter": "water"
       }
@@ -1960,51 +2264,53 @@
       {
         "name": "kingdra",
         "level": "76",
-        "moves": ["octazooka", "ice-beam", "draco-meteor", "hp-ground"],
+        "moves": [
+          "octazooka",
+          "ice-beam",
+          "draco-meteor",
+          { "power": "60", "type": "ground", "damage_class": "physical", "name": "Hidden Power", "effect": "" }
+        ],
         "ability": "swift-swim",
-        "abilities": ["swift-swim"],
         "held": "lum-berry"
       },
       {
         "name": "castform",
         "level": "76",
-        "moves": ["thunder", "ice-beam", "weather-ball", "hp-grass"],
+        "moves": [
+          "thunder",
+          "ice-beam",
+          { "power": 50, "type": "normal", "damage_class": "physical", "name": "Weather Ball", "effect": "" },
+          "hidden-power-grass"
+        ],
         "ability": "forecast",
-        "abilities": ["forecast"],
         "held": "lum-berry"
       },
-      {
-        "name": "ludicolo",
-        "level": "76",
-        "moves": ["surf", "ice-beam", "grass-whistle", "giga-drain"],
-        "ability": "swift-swim",
-        "abilities": ["swift-swim"],
-        "held": "lum-berry"
-      },
+      { "name": "ludicolo", "level": "76", "moves": ["surf", "ice-beam", "grass-whistle", "giga-drain"], "ability": "swift-swim", "held": "lum-berry" },
       {
         "name": "swampert",
         "level": "77",
-        "moves": ["yawn", "earthquake", "ancient-power", "muddy-water"],
+        "moves": [
+          "yawn",
+          "earthquake",
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" },
+          "muddy-water"
+        ],
         "ability": "swift-swim",
-        "abilities": ["swift-swim"],
         "held": "lum-berry"
       },
       {
         "name": "lapras",
         "level": "76",
-        "moves": ["thunder", "ice-beam", "surf", "hp-bug"],
+        "moves": [
+          "thunder",
+          "ice-beam",
+          "surf",
+          { "power": "60", "type": "bug", "damage_class": "physical", "name": "Hidden Power", "effect": "" }
+        ],
         "ability": "shell-armor",
-        "abilities": ["shell-armor"],
         "held": "lum-berry"
       },
-      {
-        "name": "milotic",
-        "level": "77",
-        "moves": ["hypnosis", "ice-beam", "surf", "recover"],
-        "ability": "swift-swim",
-        "abilities": ["swift-swim"],
-        "held": "lum-berry"
-      }
+      { "name": "milotic", "level": "77", "moves": ["hypnosis", "ice-beam", "surf", "recover"], "ability": "swift-swim", "held": "lum-berry" }
     ]
   },
   "8b": {
@@ -2015,51 +2321,42 @@
       {
         "name": "kingdra",
         "level": "77",
-        "moves": ["octazooka", "ice-beam", "draco-meteor", "hp-ground"],
+        "moves": [
+          "octazooka",
+          "ice-beam",
+          "draco-meteor",
+          { "power": "60", "type": "ground", "damage_class": "physical", "name": "Hidden Power", "effect": "" }
+        ],
         "ability": "swift-swim",
-        "abilities": ["swift-swim"],
         "held": "lum-berry"
       },
-      {
-        "name": "lapras",
-        "level": "76",
-        "moves": ["hydro-pump", "ice-beam", "thunder", "hp-grass"],
-        "ability": "shell-armor",
-        "abilities": ["shell-armor"],
-        "held": "lum-berry"
-      },
+      { "name": "lapras", "level": "76", "moves": ["hydro-pump", "ice-beam", "thunder", "hidden-power-grass"], "ability": "shell-armor", "held": "lum-berry" },
       {
         "name": "castform",
         "level": "76",
-        "moves": ["weather-ball", "ice-beam", "thunder", "hp-grass"],
+        "moves": [
+          { "power": 50, "type": "normal", "damage_class": "physical", "name": "Weather Ball", "effect": "" },
+          "ice-beam",
+          "thunder",
+          "hidden-power-grass"
+        ],
         "ability": "forecast",
-        "abilities": ["forecast"],
         "held": "lum-berry"
       },
-      {
-        "name": "lanturn",
-        "level": "77",
-        "moves": ["hydro-pump", "ice-beam", "thunder", "hp-grass"],
-        "ability": "volt-absorb",
-        "abilities": ["volt-absorb"],
-        "held": "lum-berry"
-      },
+      { "name": "lanturn", "level": "77", "moves": ["hydro-pump", "ice-beam", "thunder", "hidden-power-grass"], "ability": "volt-absorb", "held": "lum-berry" },
       {
         "name": "ludicolo",
         "level": "76",
-        "moves": ["hydro-pump", "ice-beam", "thunder-punch", "giga-drain"],
+        "moves": [
+          "hydro-pump",
+          "ice-beam",
+          { "power": 75, "type": "electric", "damage_class": "special", "name": "Thunder Punch", "effect": "" },
+          "giga-drain"
+        ],
         "ability": "swift-swim",
-        "abilities": ["swift-swim"],
         "held": "lum-berry"
       },
-      {
-        "name": "vaporeon",
-        "level": "77",
-        "moves": ["hydro-pump", "ice-beam", "sing", "hp-grass"],
-        "ability": "swift-swim",
-        "abilities": ["swift-swim"],
-        "held": "lum-berry"
-      }
+      { "name": "vaporeon", "level": "77", "moves": ["hydro-pump", "ice-beam", "sing", "hidden-power-grass"], "ability": "swift-swim", "held": "lum-berry" }
     ],
     "doubleBattle": true
   },
@@ -2071,49 +2368,73 @@
       {
         "name": "sableye",
         "level": "100",
-        "moves": ["shadow-sneak", "shadow-ball", "brick-break", "hp-rock"],
+        "moves": [
+          "shadow-sneak",
+          { "power": 80, "type": "ghost", "damage_class": "physical", "name": "Shadow Ball", "effect": "" },
+          "brick-break",
+          { "power": "60", "type": "rock", "damage_class": "physical", "name": "Hidden Power", "effect": "" }
+        ],
         "ability": "pressure",
-        "abilities": ["pressure"],
         "held": "lum-berry"
       },
       {
         "name": "jolteon",
         "level": "100",
-        "moves": ["thunderbolt", "bite", "hp-grass", "signal-beam"],
+        "moves": [
+          "thunderbolt",
+          { "power": 60, "type": "dark", "damage_class": "special", "name": "Bite", "effect": "" },
+          "hidden-power-grass",
+          { "power": 75, "type": "bug", "damage_class": "physical", "name": "Signal Beam", "effect": "" }
+        ],
         "ability": "static",
-        "abilities": ["static"],
         "held": "lum-berry"
       },
       {
         "name": "tauros",
         "level": "100",
-        "moves": ["double-edge", "earthquake", "hp-ghost", "quick-attack"],
+        "moves": [
+          "double-edge",
+          "earthquake",
+          { "power": "60", "type": "ghost", "damage_class": "physical", "name": "Hidden Power", "effect": "" },
+          "quick-attack"
+        ],
         "ability": "intimidate",
-        "abilities": ["intimidate"],
         "held": "lum-berry"
       },
       {
         "name": "alakazam",
         "level": "100",
-        "moves": ["psychic", "fire-punch", "hp-water", "thunder-punch"],
+        "moves": [
+          "psychic",
+          { "power": 75, "type": "fire", "damage_class": "special", "name": "Fire Punch", "effect": "" },
+          "hidden-power-water",
+          { "power": 75, "type": "electric", "damage_class": "special", "name": "Thunder Punch", "effect": "" }
+        ],
         "ability": "synchronize",
-        "abilities": ["synchronize"],
         "held": "lum-berry"
       },
       {
         "name": "machamp",
         "level": "100",
-        "moves": ["superpower", "earthquake", "hp-ghost", "rock-slide"],
+        "moves": [
+          "superpower",
+          "earthquake",
+          { "power": "60", "type": "ghost", "damage_class": "physical", "name": "Hidden Power", "effect": "" },
+          "rock-slide"
+        ],
         "ability": "guts",
-        "abilities": ["guts"],
         "held": "chesto-berry"
       },
       {
         "name": "houndoom",
         "level": "100",
-        "moves": ["heat-wave", "crunch", "hp-grass", "pursuit"],
+        "moves": [
+          "heat-wave",
+          { "power": 80, "type": "dark", "damage_class": "special", "name": "Crunch", "effect": "" },
+          "hidden-power-grass",
+          { "power": 40, "type": "dark", "damage_class": "special", "name": "Pursuit", "effect": "" }
+        ],
         "ability": "intimidate",
-        "abilities": ["intimidate"],
         "held": "lum-berry"
       }
     ]
@@ -2126,49 +2447,65 @@
       {
         "name": "gengar",
         "level": "100",
-        "moves": ["hypnosis", "destiny-bond", "thunderbolt", "ice-punch"],
+        "moves": [
+          "hypnosis",
+          "destiny-bond",
+          "thunderbolt",
+          { "power": 75, "type": "ice", "damage_class": "special", "name": "Ice Punch", "effect": "" }
+        ],
         "ability": "levitate",
-        "abilities": ["levitate"],
         "held": "lum-berry"
       },
-      {
-        "name": "ludicolo",
-        "level": "100",
-        "moves": ["grass-whistle", "giga-drain", "ice-beam", "surf"],
-        "ability": "swift-swim",
-        "abilities": ["swift-swim"],
-        "held": "lum-berry"
-      },
+      { "name": "ludicolo", "level": "100", "moves": ["grass-whistle", "giga-drain", "ice-beam", "surf"], "ability": "swift-swim", "held": "lum-berry" },
       {
         "name": "crobat",
         "level": "100",
-        "moves": ["hypnosis", "air-slash", "heat-wave", "hp-ground"],
+        "moves": [
+          "hypnosis",
+          { "power": "80", "type": "flying", "damage_class": "physical", "name": "Air Slash", "effect": "" },
+          "heat-wave",
+          { "power": "60", "type": "ground", "damage_class": "physical", "name": "Hidden Power", "effect": "" }
+        ],
         "ability": "inner-focus",
-        "abilities": ["inner-focus"],
         "held": "leftovers"
       },
       {
         "name": "gardevoir",
         "level": "100",
-        "moves": ["thunder-wave", "psychic", "thunderbolt", "fire-punch"],
+        "moves": [
+          "thunder-wave",
+          "psychic",
+          "thunderbolt",
+          { "power": 75, "type": "fire", "damage_class": "special", "name": "Fire Punch", "effect": "" }
+        ],
         "ability": "synchronize",
-        "abilities": ["synchronize"],
-        "held": "lum-berry"
+        "held": "lum-berry",
+        "sprite": "282",
+        "types": ["psychic"],
+        "stats": { "hp": 68, "atk": 65, "def": 65, "spa": 125, "spd": 115, "spe": 80 }
       },
       {
         "name": "sableye",
         "level": "100",
-        "moves": ["double-team", "recover", "shadow-ball", "brick-break"],
+        "moves": [
+          "double-team",
+          "recover",
+          { "power": 80, "type": "ghost", "damage_class": "physical", "name": "Shadow Ball", "effect": "" },
+          "brick-break"
+        ],
         "ability": "pressure",
-        "abilities": ["pressure"],
         "held": "lum-berry"
       },
       {
         "name": "dusclops",
         "level": "100",
-        "moves": ["double-team", "rest", "shadow-ball", "brick-break"],
+        "moves": [
+          "double-team",
+          "rest",
+          { "power": 80, "type": "ghost", "damage_class": "physical", "name": "Shadow Ball", "effect": "" },
+          "brick-break"
+        ],
         "ability": "pressure",
-        "abilities": ["pressure"],
         "held": "lum-berry"
       }
     ]
@@ -2181,49 +2518,51 @@
       {
         "name": "glalie",
         "level": "100",
-        "moves": ["weather-ball", "ice-beam", "spikes", "explosion"],
+        "moves": [
+          { "power": 50, "type": "normal", "damage_class": "physical", "name": "Weather Ball", "effect": "" },
+          "ice-beam",
+          "spikes",
+          "explosion"
+        ],
         "ability": "intimidate",
-        "abilities": ["intimidate"],
         "held": "lum-berry"
       },
       {
         "name": "wailord",
         "level": "100",
-        "moves": ["hyper-voice", "water-spout", "amnesia", "self-destruct"],
+        "moves": [
+          { "power": "120", "type": "normal", "damage_class": "physical", "name": "Hyper Voice", "effect": "" },
+          "water-spout",
+          "amnesia",
+          "self-destruct"
+        ],
         "ability": "pressure",
-        "abilities": ["pressure"],
         "held": "lum-berry"
       },
-      {
-        "name": "regice",
-        "level": "100",
-        "moves": ["counter", "ice-beam", "thunder", "explosion"],
-        "ability": "clear-body",
-        "abilities": ["clear-body"],
-        "held": "lum-berry"
-      },
-      {
-        "name": "dewgong",
-        "level": "100",
-        "moves": ["drill-run", "ice-beam", "hp-grass", "surf"],
-        "ability": "swift-swim",
-        "abilities": ["swift-swim"],
-        "held": "lum-berry"
-      },
+      { "name": "regice", "level": "100", "moves": ["counter", "ice-beam", "thunder", "explosion"], "ability": "clear-body", "held": "lum-berry" },
+      { "name": "dewgong", "level": "100", "moves": ["drill-run", "ice-beam", "hidden-power-grass", "surf"], "ability": "swift-swim", "held": "lum-berry" },
       {
         "name": "swampert",
         "level": "100",
-        "moves": ["yawn", "ancient-power", "muddy-water", "earthquake"],
+        "moves": [
+          "yawn",
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" },
+          "muddy-water",
+          "earthquake"
+        ],
         "ability": "swift-swim",
-        "abilities": ["swift-swim"],
         "held": "lum-berry"
       },
       {
         "name": "lapras",
         "level": "100",
-        "moves": ["ice-shard", "ice-beam", "thunder", "hydro-pump"],
+        "moves": [
+          { "power": 40, "type": "ice", "damage_class": "special", "name": "Ice Shard", "effect": "", "priority": 1 },
+          "ice-beam",
+          "thunder",
+          "hydro-pump"
+        ],
         "ability": "shell-armor",
-        "abilities": ["shell-armor"],
         "held": "lum-berry"
       }
     ]
@@ -2233,36 +2572,41 @@
     "speciality": "dragon",
     "img": "/leaders/rs-drake",
     "pokemon": [
-      {
-        "name": "latios",
-        "level": "100",
-        "moves": ["draco-meteor", "luster-purge", "hp-fire", "recover"],
-        "ability": "levitate",
-        "abilities": ["levitate"],
-        "held": "soul-dew"
-      },
+      { "name": "latios", "level": "100", "moves": ["draco-meteor", "luster-purge", "hidden-power-fire", "recover"], "ability": "levitate", "held": "soul-dew" },
       {
         "name": "tyranitar",
         "level": "100",
-        "moves": ["dragon-dance", "ancient-power", "earthquake", "hp-bug"],
+        "moves": [
+          "dragon-dance",
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" },
+          "earthquake",
+          { "power": "60", "type": "bug", "damage_class": "physical", "name": "Hidden Power", "effect": "" }
+        ],
         "ability": "intimidate",
-        "abilities": ["intimidate"],
         "held": "lum-berry"
       },
       {
         "name": "salamence",
         "level": "100",
-        "moves": ["draco-meteor", "air-slash", "earthquake", "flamethrower"],
+        "moves": [
+          "draco-meteor",
+          { "power": "80", "type": "flying", "damage_class": "physical", "name": "Air Slash", "effect": "" },
+          "earthquake",
+          "flamethrower"
+        ],
         "ability": "intimidate",
-        "abilities": ["intimidate"],
         "held": "lum-berry"
       },
       {
         "name": "kingdra",
         "level": "100",
-        "moves": ["draco-meteor", "octazooka", "ice-beam", "hp-fighting"],
+        "moves": [
+          "draco-meteor",
+          "octazooka",
+          "ice-beam",
+          { "power": "60", "type": "fighting", "damage_class": "physical", "name": "Hidden Power", "effect": "" }
+        ],
         "ability": "swift-swim",
-        "abilities": ["swift-swim"],
         "held": "lum-berry"
       },
       {
@@ -2270,15 +2614,18 @@
         "level": "100",
         "moves": ["dragon-dance", "extreme-speed", "earthquake", "rock-slide"],
         "ability": "thick-fat",
-        "abilities": ["thick-fat"],
         "held": "lum-berry"
       },
       {
         "name": "latias",
         "level": "100",
-        "moves": ["calm-mind", "dragon-claw", "recover", "hp-fire"],
+        "moves": [
+          "calm-mind",
+          { "power": 80, "type": "dragon", "damage_class": "special", "name": "Dragon Claw", "effect": "" },
+          "recover",
+          "hidden-power-fire"
+        ],
         "ability": "levitate",
-        "abilities": ["levitate"],
         "held": "soul-dew"
       }
     ]
@@ -2288,53 +2635,58 @@
     "speciality": "rock",
     "img": "/leaders/rs-steven",
     "pokemon": [
-      {
-        "name": "metagross",
-        "level": "100",
-        "moves": ["agility", "meteor-mash", "earthquake", "explosion"],
-        "ability": "clear-body",
-        "abilities": ["clear-body"],
-        "held": "lum-berry"
-      },
-      {
-        "name": "starmie",
-        "level": "100",
-        "moves": ["psychic", "hydro-pump", "thunderbolt", "ice-beam"],
-        "ability": "natural-cure",
-        "abilities": ["natural-cure"],
-        "held": "lum-berry"
-      },
+      { "name": "metagross", "level": "100", "moves": ["agility", "meteor-mash", "earthquake", "explosion"], "ability": "clear-body", "held": "lum-berry" },
+      { "name": "starmie", "level": "100", "moves": ["psychic", "hydro-pump", "thunderbolt", "ice-beam"], "ability": "natural-cure", "held": "lum-berry" },
       {
         "name": "jirachi",
         "level": "100",
-        "moves": ["meteor-mash", "extrasensory", "thunderbolt", "fire-punch"],
+        "moves": [
+          "meteor-mash",
+          "extrasensory",
+          "thunderbolt",
+          { "power": 75, "type": "fire", "damage_class": "special", "name": "Fire Punch", "effect": "" }
+        ],
         "ability": "serene-grace",
-        "abilities": ["serene-grace"],
         "held": "lum-berry"
       },
       {
         "name": "mewtwo",
         "level": "100",
-        "moves": ["psychic", "shadow-ball", "brick-break", "flamethrower"],
+        "moves": [
+          "psychic",
+          { "power": 80, "type": "ghost", "damage_class": "physical", "name": "Shadow Ball", "effect": "" },
+          "brick-break",
+          "flamethrower"
+        ],
         "ability": "pressure",
-        "abilities": ["pressure"],
         "held": "lum-berry"
       },
       {
         "name": "aerodactyl",
         "level": "100",
-        "moves": ["sky-attack", "ancient-power", "earthquake", "flamethrower"],
+        "moves": [
+          "sky-attack",
+          { "power": "80", "type": "rock", "damage_class": "physical", "name": "Ancient Power", "effect": "" },
+          "earthquake",
+          "flamethrower"
+        ],
         "ability": "rock-head",
-        "abilities": ["rock-head"],
         "held": "lum-berry"
       },
       {
-        "name": "deoxys-attack",
+        "name": "deoxys",
         "level": "100",
-        "moves": ["psycho-boost", "superpower", "shadow-ball", "fire-punch"],
+        "moves": [
+          "psycho-boost",
+          "superpower",
+          { "power": 80, "type": "ghost", "damage_class": "physical", "name": "Shadow Ball", "effect": "" },
+          { "power": 75, "type": "fire", "damage_class": "special", "name": "Fire Punch", "effect": "" }
+        ],
         "ability": "pressure",
-        "abilities": ["pressure"],
-        "held": "lum-berry"
+        "held": "lum-berry",
+        "sprite": "10001",
+        "types": ["psychic"],
+        "stats": { "hp": 50, "atk": 180, "def": 20, "spa": 180, "spd": 20, "spe": 150 }
       }
     ]
   }

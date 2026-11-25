@@ -81,7 +81,7 @@
 </script>
 
 <svelte:head>
-  <title>Lockedex | Graveyard</title>
+  <title>Lockedex | Cementerio</title>
 </svelte:head>
 
 <main

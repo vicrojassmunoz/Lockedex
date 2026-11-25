@@ -25,7 +25,11 @@ export async function GET({ params }) {
   const patchData = patches[gameData?.patchId] || patches[game];
   if (!gameData) return new Response({ status: 404 });
 
-  const league = leagues[gameData.lid] || leagues[gameData.pid];
+  // league.json va por juego (pid); las dificultades usan claves como radred_hard o bl2c
+  const league =
+    leagues[gameData.pid] ||
+    leagues[gameData.lid] ||
+    leagues[Object.keys(leagues).find((k) => k.startsWith(gameData.pid))];
   if (!league) return new Response({ status: 404 });
 
   const all = Object.values(league).reduce(

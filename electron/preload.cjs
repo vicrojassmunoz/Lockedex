@@ -18,6 +18,14 @@ contextBridge.exposeInMainWorld('lockedex', {
     return () => ipcRenderer.removeListener('lx:sav-cambiado', f)
   },
 
+  // Acciones rápidas del modo compacto: se envían a la ventana principal, que es la que guarda
+  accionPartida: (datos) => ipcRenderer.invoke('lx:accion-partida', datos),
+  alAccionPartida: (cb) => {
+    const f = (_e, datos) => cb(datos)
+    ipcRenderer.on('lx:accion-partida', f)
+    return () => ipcRenderer.removeListener('lx:accion-partida', f)
+  },
+
   // Actualizaciones
   alActualizar: (cb) => {
     const f = (_e, estado) => cb(estado)
