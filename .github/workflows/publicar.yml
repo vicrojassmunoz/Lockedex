@@ -32,7 +32,8 @@ jobs:
         run: |
           v=$(node -p "require('./electron/package.json').version")
           echo "numero=$v" >> "$GITHUB_OUTPUT"
-          if gh release view "v$v" > /dev/null 2>&1; then
+          # Un borrador a medias (subida fallida) no cuenta como publicada
+          if [ "$(gh release view "v$v" --json isDraft --jq .isDraft 2>/dev/null)" = "false" ]; then
             echo "nueva=no" >> "$GITHUB_OUTPUT"
             echo "La versión v$v ya está publicada: solo se compila y se prueba"
           else
@@ -95,13 +96,23 @@ jobs:
 
       - name: Publicar la versión
         if: steps.version.outputs.nueva == 'si'
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: v${{ steps.version.outputs.numero }}
-          target_commitish: ${{ github.sha }}
-          name: Lockedex v${{ steps.version.outputs.numero }}
-          body_path: NOVEDADES.md
-          files: |
-            electron/dist/*.exe
-            electron/dist/*.blockmap
-            electron/dist/latest.yml
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          v="v${{ steps.version.outputs.numero }}"
+          archivos=(electron/dist/*.exe electron/dist/*.blockmap electron/dist/latest.yml)
+          # Se crea como borrador y se publica al final, cuando están todos los archivos.
+          # Si un intento anterior dejó un borrador a medias, se reutiliza.
+          if [ "$(gh release view "$v" --json isDraft --jq .isDraft 2>/dev/null)" = "true" ]; then
+            gh release edit "$v" --target "$GITHUB_SHA" --title "Lockedex $v" --notes-file NOVEDADES.md
+          else
+            gh release create "$v" --draft --target "$GITHUB_SHA" --title "Lockedex $v" --notes-file NOVEDADES.md
+          fi
+          for intento in 1 2 3 4 5; do
+            if gh release upload "$v" "${archivos[@]}" --clobber; then break; fi
+            if [ "$intento" = 5 ]; then exit 1; fi
+            echo "La subida ha fallado (intento $intento), se reintenta..."
+            sleep $((intento * 20))
+          done
+          gh release edit "$v" --draft=false --latest
