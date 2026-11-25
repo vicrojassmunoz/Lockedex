@@ -8,6 +8,8 @@
   export let consejos = []
   export let ocultarConsejos = false
   export let modo = ''
+  // Sin ventana flotante al pasar el ratón (el modo compacto enseña los consejos debajo)
+  export let sinPopover = false
 
   const es = idioma() === 'es'
   let abierto = false
@@ -21,7 +23,7 @@
     class:lx-grande={grande}
     class:lx-mortal={nivel === 4}
     style="--c:{r.color}"
-    on:mouseenter={() => (abierto = !grande)}
+    on:mouseenter={() => (abierto = !grande && !sinPopover)}
     on:mouseleave={() => (abierto = false)}
     data-lx-original
   >

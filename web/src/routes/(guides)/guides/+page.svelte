@@ -99,7 +99,7 @@
         {#if difficulty}
           <span>
 
-            <small class='px-3 py-1 absolute top-2 left-2 z-40 text-gray-900 bg-gray-50 dark:bg-gray-900 dark:text-white rounded-xl'>
+            <small class='lx-dificultad absolute top-2 left-2 z-40'>
               {difficulty}
             </small>
             </span>
@@ -144,6 +144,16 @@
     font-size: 18px;
     opacity: 0.7;
   }
+  .lx-dificultad {
+    padding: 2px 10px;
+    font-family: 'VT323', monospace;
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: var(--lx-amarillo);
+    background: var(--lx-lcd);
+    border: 2px solid var(--lx-tinta);
+    border-radius: 6px;
+  }
   .lx-sin-guias {
     width: 100%;
     text-align: center;
@@ -171,16 +181,22 @@
     @apply flex w-full md:w-1/2 lg:w-1/3 p-2
   }
 
+  /* Tarjetas de guía: contorno de tinta, cabecera con el color del juego y sombra plana */
   main > a > div {
-    @apply transition rounded-xl overflow-hidden border shadow-md relative
+    @apply transition overflow-hidden relative;
+    background: var(--lx-panel);
+    border: 3px solid var(--lx-tinta);
+    border-radius: var(--lx-radio);
+    box-shadow: var(--lx-sombra);
   }
 
   main > a > div:hover {
-    @apply -translate-y-3 translate-x-1 shadow-xl
+    transform: translate(-2px, -3px);
+    box-shadow: 7px 8px 0 rgba(0, 0, 0, 0.2);
   }
 
   :global(.dark) main > a > div {
-    @apply border-gray-900 bg-gray-900
+    background: var(--lx-panel);
   }
 
   div > div:first-child + div {
@@ -188,7 +204,11 @@
   }
 
   h2 {
-    @apply text-lg mb-2 font-bold;
+    @apply mb-2;
+    font-family: 'VT323', monospace;
+    font-size: 24px;
+    line-height: 1.05;
+    letter-spacing: 0.3px;
   }
 
   p {
@@ -200,7 +220,9 @@
   }
 
   div div:first-child {
-    background: linear-gradient(130deg, var(--col1), var(--col2));
+    background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0 2px, transparent 2px 7px),
+      linear-gradient(130deg, var(--col1), var(--col2));
+    border-bottom: 3px solid var(--lx-tinta);
     @apply px-3 py-6 md:py-4 flex justify-center rounded-none;
   }
 

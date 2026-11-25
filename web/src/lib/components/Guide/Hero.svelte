@@ -20,7 +20,7 @@
   style="--col1: {theme?.[0]}; --col2: {theme?.[1]}; --col3: {theme?.[2] ||
     '#000'}"
 >
-  <div class="g-container nav">
+  <div class="g-container nav lx-nav-vieja">
     <a title="Home" href="/">
       <Icon inline={true} height="1.4rem" icon={Home} class="fill-current" />
     </a>

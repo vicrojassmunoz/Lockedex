@@ -1,7 +1,10 @@
-## Novedades de la 1.5.4
+## Novedades de la 1.6.0
 
-- **Modo compacto, jefes a mano:**
-  - Con las flechas **◀ ▶** te mueves por todos los jefes de la partida, y con **⟲** vuelves al próximo.
-  - **🏅 Vencido** marca el jefe que estés viendo, y **Quitar** le quita la marca.
-- **Modo compacto, nivel máximo:** el «NV. MÁX» es siempre el del **próximo líder de gimnasio** (o el Alto Mando al final), aunque estés viendo a un rival o a un equipo malvado.
-- **Más lugares en español:** Pueblo Paleta, Ciudad Verde, Bosque Verde, Ciudad Trigal, Ciudad Corazón, Isla Prima… (Kanto, Johto, Sinnoh y algunos de Hoenn).
+- **Iconos propios en pixel art:** los 92 iconos de la app (estados de captura, botones, estadísticas, tipos, lugares…) están dibujados de cero en una rejilla de 16×16, con el mismo estilo retro que el resto de Lockedex.
+- **Adiós a lo heredado del original:**
+  - La casita y la luna de arriba desaparecen; el tema claro/oscuro está ahora en la barra roja.
+  - Las pestañas de la partida son fichas, con la activa en rojo, y «Seguir en…» es una pantallita con cursor.
+  - Los jefes tienen un botón **VS** propio.
+  - Las partidas guardadas son fichas, sin el resaltado amarillo.
+  - Los botones de ordenar de la Caja, el menú de Inicio (con cursor ▶ de videojuego) y las tarjetas de las guías tienen el estilo nuevo.
+- **Arreglado:** en el modo compacto, los consejos del riesgo se salían de la ventana. Ahora se abren en un desplegable debajo del medidor.

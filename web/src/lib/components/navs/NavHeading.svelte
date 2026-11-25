@@ -9,7 +9,7 @@
 </script>
 
 
-<nav>
+<nav class="lx-nav-vieja">
   <div class=p-container>
     {#if $page.url.pathname !== '/'}
       <a

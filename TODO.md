@@ -33,6 +33,13 @@ Notas para retomar el trabajo en otra sesión. Lo primero es el mapa del proyect
 - [x] **Guías**: cabecera tipo chasis (color del juego con rayado y canto oscuro) en lugar de las ondas; textos en español.
 - [x] **Pie de página** simplificado (créditos BSD-3, versión y «Avisar de un fallo» a este repo).
 
+**Hecho en la 1.6.0 (pedido el 25/11: «sigue habiendo muchos iconos e interfaces heredados»):**
+
+- [x] **Iconos pixel art propios** (92, rejilla de 16x16) generados por `herramientas/generar_iconos.py` → `web/src/lib/components/icons/pixel.js`. `IconSet.ts` los exporta con los mismos nombres de antes, así que cambian en toda la app. Solo los logotipos de marcas (GitHub, Discord) siguen viniendo de Iconify. Para retocar uno: editar su función en el generador y ejecutarlo con `--muestra` (hoja de contacto en /tmp/iconos.png).
+- [x] Fuera la cabecera vieja (casita y luna) de todas las páginas y de las guías: el tema claro/oscuro pasa a la barra roja.
+- [x] Pestañas (`core/Tabs.svelte`) como fichas con contorno; la activa, en rojo. «Seguir en…» como pantallita LCD con cursor.
+- [x] Botón **VS** propio en las tarjetas de jefe; las partidas guardadas, como fichas (sin el resaltado amarillo); botones de ordenar de la Caja como fichas; menú de Inicio con cursor ▶ de videojuego; tarjetas de las guías con contorno de tinta y etiqueta de dificultad LCD.
+
 **Pendiente:**
 
 - [ ] **Filas de encuentros, paso 2**: fichas con sprite grande, estado como sello y naturaleza como chip (ahora solo es el contenedor).
@@ -167,6 +174,11 @@ Hecho: reglas por run en `lockedex.reglas.<id>` (`web/src/lib/lockedex/reglas.js
 ---
 
 ## 6. Otras mejoras y limitaciones conocidas
+
+- [x] **Consejos del riesgo cortados en el modo compacto** (avisado el 25/11): la ventana flotante de 320 px se salía de la ventana. Desde la 1.6.0, en el compacto los consejos salen en un desplegable a todo el ancho, debajo del medidor (`Riesgo.svelte` tiene `sinPopover`).
+- [ ] **Modo batalla en el compacto** (pedido el 25/11): durante un combate contra un jefe, ver su Pokémon actual y el tuyo, con la **calculadora de daño** (`@smogon/calc`, ya en la app): daño de cada ataque en %, si hace KO y en cuántos golpes, quién es más rápido y el siguiente Pokémon del rival. Ideas: elegir tu Pokémon y el suyo con un toque, cambiar de nivel o estado (quemado, paralizado), clima y potenciadores (+1/+2), y apuntar al terminar si se ganó o quién cayó.
+- [ ] **Leer el .sav de NDS** (4.ª y 5.ª generación: DPPt, HGSS, BW, B2N2), con IVs y EVs exactos, naturaleza, habilidad y movimientos. Formato documentado (cifrado PRNG, bloques barajados, sumas de verificación); los .dsv de DeSmuME llevan un pie que hay que quitar. Hace falta un .sav real del usuario para probarlo.
+- [ ] **Reconocer equipo por captura** (pedido el 25/11): elegir la ventana del emulador, capturar la pantalla de datos del Pokémon y leer especie (por el sprite), nivel, naturaleza y estadísticas (plantillas de la fuente de cada juego o Tesseract.js sin conexión) para calcular **rangos de IVs** (los EVs no se ven en pantalla). Hay que calibrar cada juego con capturas reales. Útil sobre todo donde no hay .sav (Switch).
 
 - [x] **El rival llevaba el inicial equivocado** (avisado el 25/11: Bulbasaur y el rival con Squirtle). El tipo de inicial solo cambiaba con los iconos de la fila «Inicial» y por defecto era fuego. Desde la 1.5.2 se deduce del Pokémon apuntado (`lib/lockedex/inicial.js`, también para los iniciales de Unbound, Blazing Emerald y New Generations), salvo en Randomlocke o si ya se eligió a mano.
 - [x] **Jefes vencidos no detectados** (avisado el 25/11): `resumirPartida` leía `__teams` como objeto y es una lista `[{ id, … }]`, así que el modo compacto, las medallas y el perfil no veían los combates ganados. Arreglado en la 1.5.2, y el modo compacto tiene «🏅 Vencido» (con confirmación) y «Deshacer».

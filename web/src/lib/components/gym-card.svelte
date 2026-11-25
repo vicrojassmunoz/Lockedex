@@ -360,17 +360,12 @@
           {/if}
 
           {#if forceVs}
-            <IconButton
+            <button
+              class="lx-vs"
               on:click={openBuilder}
-              title="Load team builder against the {showBoss ? boss.name : 'hidden'} boss fight"
-              class="h-12 pl-0.5 md:mt-1"
-              rounded
-            >
-              <Vs
-                containerClass="translate-y-3 scale-90"
-                class="bg-white dark:bg-gray-800"
-              />
-            </IconButton>
+              title={showBoss ? `Preparar el equipo contra ${boss.name}` : 'Preparar el equipo para este combate'}
+              data-lx-original
+            >VS</button>
           {/if}
         {/if}
       </div>
@@ -506,5 +501,28 @@
     padding: 6px 14px;
     border-radius: 8px;
     border: 2px solid #1b1b1f;
+  }
+  /* Botón VS de Lockedex */
+  .lx-vs {
+    margin-left: 6px;
+    width: 42px;
+    height: 34px;
+    font-family: 'VT323', monospace;
+    font-size: 22px;
+    line-height: 1;
+    letter-spacing: 1px;
+    color: #fff;
+    background: linear-gradient(var(--lx-rojo-claro), var(--lx-rojo));
+    border: 2px solid var(--lx-tinta);
+    border-radius: var(--lx-radio-sm);
+    box-shadow: var(--lx-sombra-sm);
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.45);
+  }
+  .lx-vs:hover {
+    background: var(--lx-rojo-claro);
+  }
+  .lx-vs:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
   }
 </style>

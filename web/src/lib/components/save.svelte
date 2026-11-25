@@ -81,7 +81,7 @@
 </script>
 
 <div
-  class="flex flex-col items-start justify-between tracking-widest transition md:flex-row md:items-center"
+  class="lx-partida flex flex-col items-start justify-between tracking-widest transition md:flex-row md:items-center"
 >
   <button
     title="Load saved game {name}"
@@ -99,14 +99,14 @@
     <div class="text-left">
       <h2 class="max-w-[26ch] text-xl font-bold leading-7 transition">
         <mark
-          class="bg-transparent transition group-hover:bg-yellow-300 dark:text-gray-50 dark:group-hover:text-gray-900"
+          class="bg-transparent text-inherit"
         >
           {name}
           {#if attempts > 1}
             <div
               class="inline-block -translate-y-0.5 text-xs font-normal italic opacity-50"
             >
-              (Attempt {attempts})
+              (intento {attempts})
             </div>
           {/if}
         </mark>
@@ -114,13 +114,13 @@
 
       <h3 class="text-sm transition">
         <mark
-          class="bg-transparent transition group-hover:bg-yellow-300 dark:text-gray-50 dark:group-hover:text-gray-900"
+          class="bg-transparent text-inherit"
           >{date}</mark
         >
         {#if last}
           <span> - </span>
           <mark
-            class="bg-transparent transition group-hover:bg-yellow-300 dark:text-gray-50 dark:group-hover:text-gray-900"
+            class="bg-transparent text-inherit"
             >{last}</mark
           >
         {/if}
@@ -180,3 +180,29 @@
     />
   </div>
 </div>
+
+<style>
+  /* Cada partida, una ficha: contorno al pasar por encima y franja roja a la izquierda */
+  .lx-partida {
+    padding: 8px 10px 8px 14px;
+    border-radius: var(--lx-radio);
+    background: var(--lx-panel);
+    border: 2px solid var(--lx-bisel);
+    box-shadow: inset 5px 0 0 var(--lx-bisel);
+    transition: border-color 0.12s, box-shadow 0.12s;
+  }
+  .lx-partida:hover {
+    border-color: var(--lx-tinta);
+    box-shadow: inset 5px 0 0 var(--lx-rojo), var(--lx-sombra-sm);
+  }
+  .lx-partida :global(h2) {
+    font-family: 'VT323', monospace;
+    font-size: 26px;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+    line-height: 1;
+  }
+  .lx-partida :global(mark) {
+    color: inherit;
+  }
+</style>

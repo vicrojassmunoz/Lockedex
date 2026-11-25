@@ -268,3 +268,9 @@ html.dark .lx-jefe {
   line-height: 1;
   letter-spacing: 0.5px;
 }
+
+/* En escritorio la barra roja ya lleva Inicio y el tema: fuera la cabecera vieja (casa y luna) */
+html.lx-escritorio .lx-nav-vieja {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}

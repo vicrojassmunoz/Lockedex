@@ -250,7 +250,15 @@
           {/if}
         </div>
         {#if riesgo}
-          <div class="lx-mini-riesgo"><Riesgo nivel={riesgo.nivel} consejos={riesgo.consejos} modo={riesgo.modo} ocultarConsejos={spoilers >= 1} /></div>
+          <div class="lx-mini-riesgo"><Riesgo nivel={riesgo.nivel} consejos={riesgo.consejos} modo={riesgo.modo} ocultarConsejos={spoilers >= 1} sinPopover /></div>
+          {#if riesgo.consejos?.length && spoilers < 1}
+            <details class="lx-mini-consejos">
+              <summary>{es ? 'Consejos' : 'Tips'} ({riesgo.consejos.length})</summary>
+              {#each riesgo.consejos as c}
+                <p class="lx-mini-consejo lx-mc-{c.tipo}">{c.texto}</p>
+              {/each}
+            </details>
+          {/if}
         {/if}
         <div class="lx-mini-botones lx-mini-botones-jefe">
           {#if jefe.derrotado}
@@ -456,6 +464,46 @@
   }
   .lx-mini-riesgo {
     margin-top: 6px;
+  }
+  /* Consejos del riesgo: desplegable a todo el ancho (la ventana es estrecha para una ventana flotante) */
+  .lx-mini-consejos {
+    margin-top: 6px;
+    font-size: 12.5px;
+    line-height: 1.35;
+  }
+  .lx-mini-consejos summary {
+    cursor: pointer;
+    font-family: 'VT323', monospace;
+    font-size: 17px;
+    color: #1b1b1f;
+  }
+  .lx-mini-consejo {
+    position: relative;
+    margin-top: 5px;
+    padding: 5px 7px 5px 20px;
+    border-radius: 6px;
+    background: #fff;
+    border: 1.5px solid #d4d4cf;
+    color: #1b1b1f;
+  }
+  .lx-mini-consejo::before {
+    position: absolute;
+    left: 7px;
+    top: 5px;
+    font-weight: 700;
+  }
+  .lx-mc-bien::before {
+    content: '✓';
+    color: #16a34a;
+  }
+  .lx-mc-mal::before {
+    content: '✕';
+    color: #dc2626;
+  }
+  .lx-mc-aviso::before {
+    content: '!';
+    color: #d97706;
+    left: 9px;
   }
   .lx-mini-equipo {
     display: flex;

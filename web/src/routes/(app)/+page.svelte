@@ -88,7 +88,7 @@
           <a
             animate:animflip
             in:fly={{ x: -50 }}
-            class="group tracking-widest hover:drop-shadow-text {color}"
+            class="lx-menu-opcion group tracking-widest {color}"
             {href}
             aria-label={aria}
             data-sveltekit-prefetch
@@ -257,6 +257,38 @@
 
   :global(.dark) p {
     @apply text-gray-400;
+  }
+
+  /* Menú de inicio como el de un juego: cursor ▶ en la opción a la que apuntas */
+  .lx-menu-opcion {
+    position: relative;
+    padding-left: 4px;
+    transition: transform 0.1s, color 0.1s;
+  }
+  .lx-menu-opcion::before {
+    content: '▶';
+    position: absolute;
+    left: -20px;
+    top: 4px;
+    font-size: 14px;
+    color: var(--lx-rojo);
+    opacity: 0;
+    animation: lx-cursor-menu 0.9s steps(2) infinite;
+  }
+  .lx-menu-opcion:hover,
+  .lx-menu-opcion:focus-visible {
+    color: var(--lx-rojo);
+    transform: translateX(4px);
+    outline: none;
+  }
+  .lx-menu-opcion:hover::before,
+  .lx-menu-opcion:focus-visible::before {
+    opacity: 1;
+  }
+  @keyframes lx-cursor-menu {
+    50% {
+      transform: translateX(3px);
+    }
   }
 
   :global(.container__index) {

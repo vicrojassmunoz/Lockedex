@@ -1,4 +1,5 @@
 <script>
+  import { t, traducirNombre } from '$lib/lockedex/idioma'
   import AvisosReglas from '$lib/lockedex/AvisosReglas.svelte'
   import { onMount, afterUpdate } from 'svelte'
   import { browser } from '$app/environment'
@@ -155,11 +156,12 @@
             {#if filter === 'nuzlocke'}
               <button
                 transition:slide|local={{ duration: 250 }}
-                class="inline-flex items-center text-sm"
+                class="lx-continuar"
                 on:click={routeEl.setroute(latestnav(route, gameData))}
+                data-lx-original
               >
-                Continue at {latestnav(route, gameData).name}
-                <Icon inline={true} class="ml-1 fill-current" icon={Arrow} />
+                <span class="lx-continuar-cursor">▶</span>
+                {t('Seguir en', 'Continue at')} <b>{traducirNombre(latestnav(route, gameData).name)}</b>
               </button>
             {/if}
 
@@ -195,7 +197,7 @@
                   height="1.2em"
                   icon={Hide}
                   class="-mt-1 mr-1 inline-block fill-current"
-                /><b>{latestnav(route, gameData).id}</b> items hidden
+                /><b>{latestnav(route, gameData).id}</b> {t('ocultos', 'items hidden')}
               </span>
             {/if}
           </div>
@@ -224,6 +226,40 @@
 {/await}
 
 <style lang="postcss">
+  .lx-continuar {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px 3px 8px;
+    font-size: 14px;
+    color: var(--lx-lcd-texto);
+    background: var(--lx-lcd);
+    border: 2px solid var(--lx-tinta);
+    border-radius: var(--lx-radio-sm);
+    box-shadow: var(--lx-sombra-sm);
+  }
+  .lx-continuar b {
+    font-family: 'VT323', monospace;
+    font-size: 19px;
+    font-weight: normal;
+    color: #fff;
+  }
+  .lx-continuar-cursor {
+    font-size: 10px;
+    color: var(--lx-amarillo);
+    animation: lx-parpadeo-cursor 1s steps(2) infinite;
+  }
+  @keyframes lx-parpadeo-cursor {
+    50% {
+      opacity: 0;
+    }
+  }
+  .lx-continuar:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+  }
+
   :global(html, body) {
     @apply max-md:overflow-hidden;
   }

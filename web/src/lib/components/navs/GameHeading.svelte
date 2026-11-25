@@ -160,7 +160,7 @@
     {#if $page.url.pathname !== '/graveyard'}<MiniTeamController />{/if}
 
     <span class="relative inline-flex">
-      <ThemeToggle />
+      <span class="lx-nav-vieja"><ThemeToggle /></span>
 
       {#each pages as p}
         <a

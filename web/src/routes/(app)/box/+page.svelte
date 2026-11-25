@@ -300,13 +300,8 @@
 
             {#each stats as s}
               <label
-                class="row-span-1 inline-flex h-7 w-full cursor-pointer items-center justify-center rounded-lg border border-gray-400 px-2 text-center text-xs font-medium text-gray-500 shadow-sm shadow-sm transition dark:text-gray-400"
-                class:border-gray-600={stat === s}
-                class:text-gray-50={stat === s}
-                class:bg-gray-600={stat === s}
-                class:dark:bg-gray-50={stat === s}
-                class:dark:text-gray-900={stat === s}
-                class:dark:border-gray-50={stat === s}
+                class="lx-orden row-span-1 inline-flex h-7 w-full cursor-pointer items-center justify-center px-2 text-center transition"
+                class:lx-orden-activo={stat === s}
               >
                 <input
                   type="radio"
@@ -626,6 +621,26 @@
     display: none;
   }
 
+  /* Botones de ordenar: fichas como las pestañas; la activa, en pantalla LCD */
+  .lx-orden {
+    font-family: 'VT323', monospace;
+    font-size: 17px;
+    line-height: 1;
+    color: var(--lx-texto-suave);
+    background: var(--lx-panel);
+    border: 2px solid var(--lx-bisel);
+    border-radius: var(--lx-radio-sm);
+  }
+  .lx-orden:hover {
+    color: var(--lx-texto);
+    border-color: var(--lx-tinta);
+  }
+  .lx-orden-activo {
+    color: var(--lx-amarillo);
+    background: var(--lx-lcd);
+    border-color: var(--lx-tinta);
+    box-shadow: var(--lx-sombra-sm);
+  }
   .lx-vistas {
     display: inline-flex;
     border: 2px solid var(--lx-tinta);

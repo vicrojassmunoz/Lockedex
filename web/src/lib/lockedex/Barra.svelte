@@ -8,6 +8,18 @@
   import { browser } from '$app/environment'
   import { idioma, cambiarIdioma } from './idioma.js'
   import { partidaActiva, cargarRutas, resumirPartida, alCambiarDatos } from './partida.js'
+  import { theme } from '$lib/store'
+  import Icon from '@iconify/svelte/dist/OfflineIcon.svelte'
+  import { DarkMode, LightMode } from '$icons'
+
+  // Tema claro/oscuro (antes estaba en la cabecera vieja de cada página)
+  const cambiarTema = (e) => {
+    if (e.altKey) return document.documentElement.classList.toggle('greenscreen')
+    document.documentElement.classList.remove('greenscreen')
+    const oscuro = $theme !== 'dark'
+    theme.set(oscuro ? 'dark' : 'light')
+    document.documentElement.classList.toggle('dark', oscuro)
+  }
 
   const es = idioma() === 'es'
   const lx = typeof window !== 'undefined' ? window.lockedex : null
@@ -185,6 +197,9 @@
         <svg viewBox="0 0 24 24"><path d="M4 4h16v12H4zM8 20h8" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" /></svg>
       </button>
     {/if}
+    <button class="lx-boton lx-boton-tema" on:click={cambiarTema} title={$theme === 'dark' ? (es ? 'Tema claro' : 'Light theme') : es ? 'Tema oscuro' : 'Dark theme'} data-lx-original>
+      <Icon inline icon={$theme === 'dark' ? LightMode : DarkMode} />
+    </button>
     <a href="/importar" class="lx-boton" on:click={(ev) => ir(ev, '/importar')} title={es ? 'Importar partida del emulador (.sav)' : 'Import emulator save (.sav)'} data-lx-original>
       <svg viewBox="0 0 24 24"><path d="M12 3v12m0 0-4.5-4.5M12 15l4.5-4.5M4 17v3h16v-3" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg>
     </a>
@@ -456,6 +471,10 @@
   }
 
   /* Acciones */
+  .lx-boton-tema :global(svg) {
+    width: 18px;
+    height: 18px;
+  }
   .lx-acciones {
     display: flex;
     gap: 6px;
