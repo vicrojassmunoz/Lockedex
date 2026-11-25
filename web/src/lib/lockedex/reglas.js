@@ -1,6 +1,6 @@
 // Reglas del Nuzlocke de cada run (se guardan aparte de los ajustes originales)
 import { especies, clavePokemon, norm } from './datos.js'
-import { idioma } from './idioma.js'
+import { idioma, traducirNombre } from './idioma.js'
 import { claveSav } from './equipo.js'
 import { nivelMaximo } from './partida.js'
 
@@ -12,6 +12,7 @@ export const REGLAS = [
   { id: 'regalos', grupo: 'clausulas', es: 'Cláusula de regalos', en: 'Gift clause', desc: ['Los Pokémon de regalo no gastan el encuentro de la zona: puedes añadir un encuentro extra desde el menú ⋮ de esa zona.', 'Gift Pokémon do not use up the area encounter: add an extra encounter from that area’s ⋮ menu.'] },
   { id: 'variocolor', grupo: 'clausulas', es: 'Cláusula variocolor', en: 'Shiny clause', desc: ['Un shiny siempre se puede capturar, aunque ya tuvieras encuentro en esa zona (menú ⋮ → variocolor extra).', 'A shiny can always be caught, even if you already had an encounter there (⋮ menu → extra shiny).'] },
   { id: 'estaticos', grupo: 'clausulas', es: 'Estáticos aparte', en: 'Static clause', desc: ['Los encuentros estáticos y legendarios no gastan el encuentro de la zona.', 'Static and legendary encounters do not use up the area encounter.'] },
+  { id: 'especie', grupo: 'clausulas', es: 'Cláusula de especie', en: 'Species clause', desc: ['Una captura por línea evolutiva: en el buscador se marcan como «repetido» los Pokémon cuya línea ya tienes, y avisa si capturas uno.', 'One catch per evolution line: the search marks Pokémon whose line you already have as «dupe», and warns if you catch one.'] },
   { id: 'revivir', grupo: 'clausulas', tipo: 'opciones', opciones: [['', 'No', 'Off'], ['medalla', '1 por medalla', '1 per badge'], ['1', '1 en toda la run', '1 per run'], ['3', '3 en toda la run', '3 per run']], es: 'Cláusula de revivir', en: 'Revive clause', desc: ['Permite revivir Pokémon caídos desde el cementerio (botón «Revivir»): uno por cada medalla o un número fijo en toda la run.', 'Fainted Pokémon can be revived from the graveyard («Revive» button): one per badge or a fixed number per run.'] },
   { id: 'vidas', grupo: 'dificultad', tipo: 'opciones', opciones: [['', 'No', 'Off'], ['3', '3 vidas', '3 lives'], ['5', '5 vidas', '5 lives'], ['10', '10 vidas', '10 lives'], ['20', '20 vidas', '20 lives']], es: 'Modo con vidas', en: 'Lives mode', desc: ['Cada Pokémon caído, cada derrota contra un jefe y cada revivido gastan una vida; sin vidas, game over.', 'Each fainted Pokémon, boss defeat and revive costs a life; out of lives, game over.'] },
   { id: 'nivelMax', grupo: 'dificultad', es: 'Nivel máximo obligatorio', en: 'Hard level caps', desc: ['Avisa si tu equipo supera el nivel máximo del próximo jefe (necesita tu .sav importado).', 'Warns if your team is above the next boss’s level cap (needs your imported .sav).'] },
@@ -151,6 +152,42 @@ export const comprobarReglas = async ({ partida, resumen, liga, pokedex }) => {
           texto: es()
             ? `${e.lugar}: ${e.nickname || e.pokemon} no es de tipo ${reglas.monotipo} (monotipo).`
             : `${e.lugar}: ${e.nickname || e.pokemon} is not ${reglas.monotipo} type (monotype).`
+        })
+    }
+  }
+
+  // Cláusula de especie: dos capturas de la misma línea evolutiva
+  if (reglas.especie && pokedex) {
+    const porLinea = {}
+    for (const e of capturados) {
+      const p = pokedex[norm(e.pokemon)]
+      const linea = p?.evoline || p?.alias || norm(e.pokemon)
+      ;(porLinea[linea] ||= []).push(e)
+    }
+    for (const lista of Object.values(porLinea))
+      if (lista.length > 1)
+        avisos.push({
+          nivel: 'aviso',
+          texto: es()
+            ? `Cláusula de especie: ${lista.map((e) => `${e.nickname || e.pokemon} (${e.lugar})`).join(' y ')} son de la misma línea evolutiva.`
+            : `Species clause: ${lista.map((e) => `${e.nickname || e.pokemon} (${e.lugar})`).join(' and ')} share an evolution line.`
+        })
+  }
+
+  // Cláusula de regalos: recordar que el regalo no gasta el encuentro de la zona
+  if (reglas.regalos) {
+    const regalos = resumen.encuentros.filter((e) => +e.status === 2)
+    // las filas extra se llaman «<lugar> · extra» (ver nombreExtra en pokemon-selector)
+    const lugares = resumen.encuentros.map((e) => traducirNombre(String(e.lugar)))
+    for (const e of regalos) {
+      const base = traducirNombre(String(e.lugar))
+      const tieneExtra = lugares.some((l) => l.startsWith(base + ' · '))
+      if (!tieneExtra)
+        avisos.push({
+          nivel: 'info',
+          texto: es()
+            ? `${e.lugar}: ${e.nickname || e.pokemon} es un regalo, así que aún puedes tener tu encuentro de la zona (menú de la fila → «Encuentro extra»).`
+            : `${e.lugar}: ${e.nickname || e.pokemon} is a gift, so you still get the area's encounter (row menu → «Extra encounter»).`
         })
     }
   }

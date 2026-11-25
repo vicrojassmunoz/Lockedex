@@ -599,6 +599,14 @@ const prepararActualizaciones = async () => {
     const { default: eu } = await import('electron-updater')
     actualizador = eu.autoUpdater
     actualizador.autoDownload = true
+    // Registro del actualizador: ahí se ve si la descarga es diferencial («Download block maps»,
+    // «Full: … To download: …») o si ha tenido que bajar el instalador entero
+    actualizador.logger = {
+      info: (m) => registrar('actualizaciones', m),
+      warn: (m) => registrar('actualizaciones', m),
+      error: (m) => registrar('actualizaciones', m),
+      debug: () => {}
+    }
     actualizador.autoInstallOnAppQuit = true
     actualizador.on('checking-for-update', () => avisarActualizacion({ estado: 'buscando' }))
     actualizador.on('update-available', (i) => avisarActualizacion({ estado: 'descargando', version: i.version, progreso: 0 }))

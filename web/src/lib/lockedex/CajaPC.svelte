@@ -1,4 +1,5 @@
 <script>
+  import { recorte } from '$lib/lockedex/recorte.js'
   // Caja del PC: rejilla de 30 huecos por caja y panel de detalle del Pokémon elegido.
   import { createEventDispatcher, onMount } from 'svelte'
   import { PIcon, Icon } from '$c/core'
@@ -138,6 +139,7 @@
             </span>
           {/if}
           <img
+            use:recorte
             src={createImgUrl(datos, { shiny: elegido.status === 6, ext: 'png' })}
             alt={datos.name}
             on:error={(e) => (e.currentTarget.src = UNOWN)}

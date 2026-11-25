@@ -1,6 +1,7 @@
 <script>
   import { traducirNombre, t } from '$lib/lockedex/idioma.js'
   import { createImgUrl, UNOWN } from '$utils/rewrites'
+  import { recorte } from '$lib/lockedex/recorte.js'
 
   // Ficha al lado de la fila: sprite grande, el estado como sello de goma y la naturaleza como chip
   const SELLO = {
@@ -300,6 +301,7 @@
     {#if !$$slots.location && selected && !(selected.hidden || hidden) && (selected.imgId || selected.sprite)}
       <span class="lx-ficha-lado" aria-hidden="true">
         <img
+          use:recorte
           class="lx-ficha-sprite"
           class:lx-ficha-caido={status?.id === 5}
           src={createImgUrl(selected, { ext: 'png', shiny: status?.id === 6 })}
@@ -383,7 +385,7 @@
                 class="flex h-8 items-center px-4 py-5 md:py-6"
                 class:hidden={dupes === 2 &&
                   (missdupes ? misslines : dupelines).has(option?.evoline)}
-                class:dupe={dupes === 1 &&
+                class:dupe={(dupes === 1 || (reglasRun.especie && dupes !== 2)) &&
                   (missdupes ? misslines : dupelines).has(option?.evoline)}
                 aria-label={label}
                 slot="option"
@@ -395,8 +397,8 @@
                   className="transform -mb-4 -ml-6 -mt-5 -mr-2"
                 />
                 {@html label}
-                {#if dupes === 1 && (missdupes ? misslines : dupelines).has(option?.evoline)}
-                  <span class="dupe__span absolute right-4 text-tiny">dupe</span
+                {#if (dupes === 1 || (reglasRun.especie && dupes !== 2)) && (missdupes ? misslines : dupelines).has(option?.evoline)}
+                  <span class="dupe__span absolute right-4 text-tiny">{t('repetido', 'dupe')}</span
                   >
                 {/if}
               </span>
@@ -622,7 +624,7 @@
           <li>
             <button on:click={onnew}>
               <Icon inline={true} icon={Add} class="mr-2 fill-current" />
-              Add Location
+              {t('Añadir lugar', 'Add Location')}
             </button>
           </li>
           {#if reglasRun.regalos && status?.id === 2}
@@ -654,7 +656,7 @@
             <li slot="else">
               <button on:click={handleClear}>
                 <Icon inline={true} icon={Delete} class="mr-2 fill-current" />
-                Clear Encounter
+                {t('Borrar encuentro', 'Clear Encounter')}
               </button>
             </li>
           </SettingsWrapper>
@@ -771,10 +773,10 @@
     }
   }
   .lx-ficha-sprite {
-    /* los sprites vienen en un lienzo de 96×96 con mucho margen: se enseñan a 80 px y se dejan salir */
-    width: 80px;
-    height: 80px;
-    margin: -16px -12px;
+    /* recortado a su dibujo (use:recorte), así que ya llena su hueco */
+    width: 56px;
+    height: 56px;
+    margin: -4px 0;
     object-fit: contain;
     image-rendering: pixelated;
     filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.18));

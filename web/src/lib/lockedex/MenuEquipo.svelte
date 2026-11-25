@@ -7,6 +7,7 @@
   import { Physical, Special, Status } from '$icons'
   import { createImgUrl, UNOWN } from '$utils/rewrites'
   import { marco, bola, TIPO_GBA } from './gba.js'
+  import { recorte } from '$lib/lockedex/recorte.js'
   import { t, traducirNombre } from './idioma.js'
 
   export let pokemon = []
@@ -167,6 +168,7 @@
         <div class="lx-gf-ventana" style={MARCOS.ventana}>
           {#key elegido.name}
             <img
+              use:recorte
               src={animado(elegido) || fijo(elegido)}
               data-fase={animado(elegido) ? 'animado' : 'fijo'}
               alt=""

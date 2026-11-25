@@ -6,6 +6,7 @@
 
   import { capitalise, regionise } from '$lib/utils/string'
   import { IMG, createImgUrl } from '$utils/rewrites'
+  import { recorte } from '$lib/lockedex/recorte.js'
 
   import GraveEpitaph from './GraveEpitaph.svelte'
   import Lapida from './Lapida.svelte'
@@ -109,6 +110,7 @@
 
     {#if Pokemon}
       <img
+        use:recorte
         class="pkmn z-10 -mt-4 -mb-7 mix-blend-darken"
         alt="{nickname} the {pokemon}"
         src={createImgUrl(Pokemon, { ext: 'png' })}
