@@ -11,6 +11,7 @@
   import { idioma, traducirNombre } from '$lib/lockedex/idioma.js'
   import * as A from '$lib/lockedex/analista.js'
   import Riesgo from '$lib/lockedex/Riesgo.svelte'
+  import MenuEquipo from '$lib/lockedex/MenuEquipo.svelte'
   import { COLOR_TIPO, RIESGO } from '$lib/lockedex/colores.js'
 
   const es = idioma() === 'es'
@@ -412,25 +413,9 @@
         </div>
         {#if cap}<span class="lx-a-cap"><small>{t('NV. MÁX', 'LV. CAP')}</small>{cap}</span>{/if}
       </div>
-      <div class="lx-a-rival-equipo">
-        {#each jefe.pokemon as p}
-          <article>
-            <div class="lx-a-p-cab">
-              <img src={sprite(p.name)} alt="" />
-              <div>
-                <b>{p.name.replace(/-/g, ' ')}</b>
-                <span>{t('Nv.', 'Lv.')} {p.level}</span>
-              </div>
-            </div>
-            {#if p.ability?.name}<span class="lx-a-hab" data-lx-hab={p.ability.name}>{traducirNombre(p.ability.name)}</span>{/if}
-            {#if p.held?.name}<span class="lx-a-hab" data-lx-obj={p.held.name}>@ {traducirNombre(p.held.name)}</span>{/if}
-            <div class="lx-a-movs">
-              {#each (p.moves || []).filter(Boolean) as mv}
-                <span data-lx-mov={mv.name} style="--c:{COLOR_TIPO[mv.type] || '#888'}">{movEs(mv.name)}</span>
-              {/each}
-            </div>
-          </article>
-        {/each}
+      <!-- El equipo del jefe con el menú de equipo de GBA (como en las tarjetas de jefe) -->
+      <div class="lx-a-rival-menu">
+        <MenuEquipo pokemon={jefe.pokemon} comparar={false} />
       </div>
     </section>
   {/if}
@@ -1327,5 +1312,53 @@
     .lx-a-equipo {
       grid-template-columns: 1fr;
     }
+  }
+
+  /* ---- Lavado de cara GBA/NDS: títulos con la letra de la consola, números de paso como recuadros
+     de menú, huecos del equipo como los del menú de equipo y el nombre de cada Pokémon en pixel ---- */
+  .lx-a-titulo h2 {
+    font-family: 'LX Pixel', 'VT323', monospace !important;
+    font-size: 24px !important;
+    line-height: 24px;
+    font-weight: normal !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-shadow: 2px 2px 0 var(--lx-bisel);
+  }
+  .lx-a-num {
+    border-radius: 0 !important;
+    font-family: 'LX Pixel', 'VT323', monospace !important;
+    font-weight: normal !important;
+    clip-path: polygon(2px 0, calc(100% - 2px) 0, 100% 2px, 100% calc(100% - 2px), calc(100% - 2px) 100%, 2px 100%, 0 calc(100% - 2px), 0 2px);
+    box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.3), inset 0 2px 0 rgba(255, 255, 255, 0.3);
+  }
+  .lx-a-equipo article {
+    border-style: solid !important;
+    border-radius: 0 !important;
+    clip-path: polygon(4px 0, calc(100% - 4px) 0, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px), 0 4px);
+    box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.5), inset 0 -3px 0 rgba(0, 0, 0, 0.08);
+  }
+  .lx-a-vacio-slot {
+    border-style: dashed !important;
+  }
+  .lx-a-m-cab {
+    margin: -2px -2px 6px;
+    padding: 4px 6px;
+    background: #98d8f8;
+    box-shadow: inset 0 -2px 0 #68b8e8, inset 0 2px 0 #d8f4ff;
+  }
+  :global(.dark) .lx-a-m-cab {
+    background: #3a4f7a;
+    box-shadow: inset 0 -2px 0 #2a3a5c, inset 0 2px 0 #4f6a9c;
+  }
+  .lx-a-m-nombre input {
+    font-family: 'LX Pixel', 'VT323', monospace !important;
+    font-size: 24px !important;
+    line-height: 26px;
+    text-transform: uppercase;
+    border-radius: 0 !important;
+  }
+  .lx-a-rival-menu {
+    margin-top: 8px;
   }
 </style>

@@ -11,6 +11,7 @@
   import { t, traducirNombre } from './idioma.js'
 
   export let pokemon = []
+  export let comparar = true // botón «Comparar con mi equipo» (en el Analista no hace falta)
 
   const despachar = createEventDispatcher()
 
@@ -238,11 +239,13 @@
       </div>
     </div>
 
+    {#if comparar}
     <div class="lx-gf-pie">
       <button class="lx-gf-boton" style={MARCOS.boton} on:click={() => despachar('comparar', abierto)}>
         {t('Comparar con mi equipo', 'Compare with my team')}
       </button>
     </div>
+    {/if}
   </section>
 {/if}
 

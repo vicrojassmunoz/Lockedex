@@ -1,6 +1,6 @@
-## Novedades de la 1.13.0
+## Novedades de la 1.14.0
 
-- **Pokémon más grandes:** los sprites venían en un lienzo de 96×96 con mucho margen y se veían pequeños. Ahora se recorta ese margen (como mucho al doble de tamaño, para que un Bulbasaur no salga como un Groudon) en la ficha de las filas de encuentros, el cementerio, el detalle del PC y la ficha de los jefes.
-- **Cláusula de especie** (regla nueva): una captura por línea evolutiva. En el buscador se marcan como «repetido» los Pokémon cuya línea ya tienes, y la app avisa si capturas dos de la misma línea.
-- **Cláusula de regalos:** si tienes un regalo en una zona y aún no has añadido su encuentro extra, la app te lo recuerda. El menú de cada fila ya está en español («Añadir lugar», «Borrar encuentro»).
-- **Actualizaciones:** comprobado que ya solo se baja lo que cambia: de una versión a la siguiente, alrededor de **1–2 MB** en vez de los 143 MB del instalador (salvo la primera vez si instalaste a mano una versión antigua). El registro de la app apunta ahora qué baja el actualizador.
+- **Animaciones en la Caja:** el detalle del PC enseña el sprite animado de Negro/Blanco del Pokémon que eliges (sin internet, el de siempre), y en la vista de fichas el Pokémon salta al pasar el ratón por encima.
+- **Fichas de la Caja con estética GBA:** cabecera con el color del tipo y las líneas de barrido de la consola, nombre y nivel con la letra pixelada y los movimientos como en la pantalla de datos. Y en español: «Capturado en…», «Regalo en…», «Tu inicial».
+- **Analista renovado:** el equipo del jefe sale con el menú de equipo de GBA, el mismo de las tarjetas de jefe, con su ficha al pulsar cada Pokémon. Los títulos y números de paso van en pixel y tus huecos tienen marcos de menú.
+- **Guías con el estilo de la app:** títulos en banda de pantalla de datos, cada grupo de encuentros en su recuadro y los Pokémon en casillas como las del PC.

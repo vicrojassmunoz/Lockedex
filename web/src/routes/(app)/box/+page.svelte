@@ -1,4 +1,5 @@
 <script>
+  import { traducirNombre } from '$lib/lockedex/idioma.js'
   import { onMount, getContext } from 'svelte'
   import { fade } from 'svelte/transition'
 
@@ -463,7 +464,7 @@
                 ability={p.nickname
                   ? {
                       name:
-                        p.nickname + ' the ' + (p.nature || '').toLowerCase()
+                        p.nickname + (p.nature ? ' · ' + traducirNombre(capitalise(p.nature)) : '')
                     }
                   : null}
                 name={Pokemon[p.pokemon].name}
@@ -520,24 +521,15 @@
                   let:id
                 >
                   {#if p.location === 'Starter'}
-                    Met in a fateful encounter
+                    {t('Tu inicial', 'Met in a fateful encounter')}
                   {:else if p.status === 2}
-                    Obtained from {p.location || p.customName}
+                    {t('Regalo en', 'Obtained from')} {traducirNombre(p.location || p.customName)}
                   {:else if p.status === 3}
-                    Received in a trade {(
-                      p.customName || p.location
-                    ).startsWith('Route')
-                      ? 'on'
-                      : 'in'}
-                    {p.customName || p.location}
+                    {t('Intercambio en', 'Received in a trade in')} {traducirNombre(p.customName || p.location)}
                   {:else if !p.location || (p.customId && !p.customName)}
-                    Met in an unknown place
-                  {:else if p.customName}
-                    Met {p.customName.startsWith('Route') ? 'on' : 'in'}
-                    {p.customName}
+                    {t('Lugar desconocido', 'Met in an unknown place')}
                   {:else}
-                    Met {p.location.startsWith('Route') ? 'on' : 'in'}
-                    {p.location}
+                    {t('Capturado en', 'Met in')} {traducirNombre(p.customName || p.location)}
                   {/if}
 
                   {#if !p.customName}

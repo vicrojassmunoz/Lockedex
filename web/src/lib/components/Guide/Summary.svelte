@@ -92,7 +92,7 @@
           <li class="text-xs" title={name}>
             <PIcon lazy name={sprite} />
             <Tooltip>
-              Find {name} at {toList(
+              {t('Dónde:', 'Find it at:')} {toList(
                 encounterMap[sprite] || [],
                 (i) => i,
                 t('y', 'and')

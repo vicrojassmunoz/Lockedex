@@ -1,5 +1,6 @@
 <script>
   import { recorte } from '$lib/lockedex/recorte.js'
+  import { urlAnimada, alFallarSprite, ajustarGif } from '$lib/lockedex/animado.js'
   // Caja del PC: rejilla de 30 huecos por caja y panel de detalle del Pokémon elegido.
   import { createEventDispatcher, onMount } from 'svelte'
   import { PIcon, Icon } from '$c/core'
@@ -138,12 +139,18 @@
               <svelte:component this={Particles} amount={25} icons={['ice-stone', 'dawn-stone', 'fire-stone']} on:end={() => despachar('finEvo')} />
             </span>
           {/if}
-          <img
-            use:recorte
-            src={createImgUrl(datos, { shiny: elegido.status === 6, ext: 'png' })}
-            alt={datos.name}
-            on:error={(e) => (e.currentTarget.src = UNOWN)}
-          />
+          {#key `${elegido.id}@${elegido.location}`}
+            <!-- Sprite animado de Negro/Blanco; sin internet, el fijo de siempre -->
+            <img
+              use:recorte
+              class="lx-det-img"
+              src={urlAnimada(datos, elegido.status === 6) || createImgUrl(datos, { shiny: elegido.status === 6, ext: 'png' })}
+              data-fase={urlAnimada(datos, elegido.status === 6) ? 'animado' : 'fijo'}
+              alt={datos.name}
+              on:load={ajustarGif(124)}
+              on:error={alFallarSprite(createImgUrl(datos, { shiny: elegido.status === 6, ext: 'png' }), UNOWN)}
+            />
+          {/key}
           {#if elegido.status === 6}<Icon inline icon={Shiny} class="lx-det-brillo fill-current" />{/if}
         </div>
         <div class="lx-det-nombres">
@@ -418,10 +425,13 @@
     border-radius: 12px;
     background: radial-gradient(circle at 50% 60%, rgba(142, 232, 255, 0.25), transparent 70%);
   }
+  .lx-det-sprite {
+    display: grid;
+    place-items: center;
+  }
   .lx-det-sprite img {
     width: 100%;
     height: 100%;
-    transform: scale(1.25);
     object-fit: contain;
     image-rendering: pixelated;
     filter: drop-shadow(2px 3px 0 rgba(0, 0, 0, 0.45));

@@ -11,7 +11,7 @@
 
 </script>
 
-<div class='my-2'>
+<div class='lx-mov-gba my-2'>
   <p class='text-sm overflow-ellipsis mb-1 relative items-center flex flex-row space-x-1'>
     <span class='w-auto relative mr-2 cursor-help lx-mov' data-lx-mov={name} data-lx-pot={power || ''}>
       <Icon
@@ -35,7 +35,7 @@
         <!-- Desktop power -->
         <span class='w-0 invisible sm:w-auto sm:visible relative'>
           {#if stab}
-            <Tooltip>Base power {power}</Tooltip>
+            <Tooltip>{power} de potencia base (×1,5 por STAB)</Tooltip>
             <Icon inline icon={Boost} class='absolute left-1/2 -translate-x-1/2 -translate-y-1/2 fill-current' />
             <span class='font-bold cursor-help'>
               {Math.round(power * 1.5)}
@@ -78,3 +78,19 @@
     {/if}
   </div>
 </div>
+
+<style>
+  /* Movimiento como en la lista de la pantalla de datos de GBA: letra pixelada en mayúsculas,
+     separador de puntos entre movimientos */
+  .lx-mov-gba {
+    padding-bottom: 6px;
+    border-bottom: 2px dotted var(--lx-bisel, #b8c0cc);
+  }
+  .lx-mov-gba :global(.lx-mov .font-medium) {
+    font-family: 'LX Pixel', 'VT323', monospace;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+</style>

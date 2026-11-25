@@ -1,4 +1,5 @@
 <script>
+  import { t } from '$lib/lockedex/idioma.js'
   export let sprite,
     fallback,
     name,
@@ -54,11 +55,11 @@
       <div class="pointer-events-none flex flex-row items-end gap-x-2">
         {#if level}
           <div class="pointer-events-auto flex flex-col items-center">
-            <span class="-mb-2 text-xs">Level</span>
-            <span class="text-3xl font-bold">{level}</span>
+            <span class="lx-pc-nvtxt -mb-2 text-xs">{t('Nv', 'Lv')}</span>
+            <span class="lx-pc-nv text-3xl font-bold">{level}</span>
             {#if level.startsWith('+') || level.startsWith('-')}
               <Tooltip>
-                Calculated as your party's Max Level {level}
+                {t(`Calculado como el nivel máximo de tu equipo ${level}`, `Calculated as your party's Max Level ${level}`)}
               </Tooltip>
             {/if}
           </div>
@@ -74,7 +75,7 @@
             {/if}
           </p>
 
-          {regionise(capitalise(name))}
+          <b class="lx-pc-nombre">{regionise(capitalise(name))}</b>
 
           {#if held}
             <div
@@ -174,6 +175,51 @@
 </SettingWrapper>
 
 <style lang="postcss">
+  /* Estética de la pantalla de datos de GBA: cabecera con el color del tipo y líneas de barrido (en vez
+     del patrón), nombre y nivel con la letra pixelada y sombra, y el Pokémon salta al pasar por encima */
+  .card__header {
+    background-color: var(--t-col);
+    background-image: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.16) 0 2px, transparent 2px 4px) !important;
+    box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.25), inset 0 2px 0 rgba(255, 255, 255, 0.3);
+  }
+  .lx-pc-nombre,
+  .lx-pc-nv,
+  .lx-pc-nvtxt {
+    font-family: 'LX Pixel', 'VT323', monospace;
+    font-weight: normal;
+    color: #f8f8f8;
+    text-shadow: 2px 2px 0 rgba(30, 30, 50, 0.65);
+  }
+  .lx-pc-nombre {
+    font-size: 24px;
+    line-height: 24px;
+    text-transform: uppercase;
+  }
+  .lx-pc-nv {
+    font-size: 24px !important;
+    line-height: 24px;
+  }
+  .lx-pc-nvtxt {
+    font-size: 12px !important;
+  }
+  /* sin el velo blanco del original: color del tipo entero para que el nombre se lea */
+  .card__header::before {
+    display: none !important;
+  }
+  .card:hover :global(.img__pkm) {
+    animation: lx-ficha-salto 0.5s steps(1, end) infinite !important;
+  }
+  @keyframes lx-ficha-salto {
+    50% {
+      translate: 0 -6px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card:hover :global(.img__pkm) {
+      animation: none !important;
+    }
+  }
+
   img {
     image-rendering: pixelated;
   }
