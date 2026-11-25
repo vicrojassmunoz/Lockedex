@@ -8,8 +8,10 @@
     { name: 'nuzlocke-redux', autor: 'Bassel', href: 'https://github.com/Bassel-T/nuzlocke.app', es: 'La versión mantenida de la que parte Lockedex.', en: 'The maintained fork Lockedex is based on.' },
     { name: 'PokeAPI', autor: 'PokeAPI', href: 'https://pokeapi.co', es: 'Nombres en español, movimientos, habilidades, objetos y aprendizaje por nivel. Y los sprites de PokeAPI/sprites.', en: 'Spanish names, moves, abilities, items and learnsets. Plus the PokeAPI/sprites images.' },
     { name: '@smogon/calc', autor: 'Smogon', href: 'https://github.com/smogon/damage-calc', es: 'La calculadora de daño del medidor de riesgo y el Analista.', en: 'The damage calculator behind the risk meter and the Analyst.' },
-    { name: 'pret', autor: 'pret', href: 'https://github.com/pret', es: 'Los desensamblados de los juegos de GBA, para leer las partidas .sav.', en: 'The GBA disassemblies, used to read .sav files.' },
-    { name: 'VT323', autor: 'Peter Hull', href: 'https://fonts.google.com/specimen/VT323', es: 'La tipografía pixel (licencia OFL).', en: 'The pixel font (OFL licence).' }
+    { name: 'pret', autor: 'pret', href: 'https://github.com/pret', es: 'Los desensamblados de los juegos de GB y GBA, para leer las partidas .sav y sacar los sprites de los personajes del mapa.', en: 'The GB and GBA disassemblies, used to read .sav files and for the overworld character sprites.' },
+    { name: 'PokéSprite', autor: 'msikma', href: 'https://github.com/msikma/pokesprite', es: 'Los sprites de objetos de los juegos que usan algunos iconos (Poké Ball, piedras evolutivas…).', en: 'The in-game item sprites used by some icons (Poké Ball, evolution stones…).' },
+    { name: 'VT323', autor: 'Peter Hull', href: 'https://fonts.google.com/specimen/VT323', es: 'La tipografía pixel de los títulos (licencia OFL).', en: 'The pixel font used for headings (OFL licence).' },
+    { name: 'Fusion Pixel', autor: 'TakWolf', href: 'https://github.com/TakWolf/fusion-pixel-font', es: 'La letra de los menús estilo GBA (licencia OFL).', en: 'The font of the GBA-style menus (OFL licence).' }
   ]
   import { Picture, Icon } from '$lib/components/core'
   import { Heart } from '$icons'

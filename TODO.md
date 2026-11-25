@@ -47,6 +47,7 @@ Notas para retomar el trabajo en otra sesión. Lo primero es el mapa del proyect
 - [x] **Sprites de mapa** de 1.ª a 3.ª generación sacados de los desensamblados de pret con su paleta real (`herramientas/generar_sprites_mapa.py` → `web/static/lx/mapa/`; FRLG, RSE, GSC y RBY). `lib/lockedex/mapa.js` elige el sprite por nombre del jefe y región (con alias: Lt. Surge, Tabitha, Silver…); si no hay, usa el de combate. **Pendiente:** 4.ª y 5.ª generación (no hay gráficos extraídos en pret) y comprobar las paletas de FRLG (Misty sale rubia).
 - [x] Algunos iconos son **sprites de objetos** de los juegos (`icons/sprites.js`): Poké Ball (capturado), Amuleto Iris (variocolor), Cuerda Huida (huyó) y Mapa del pueblo.
 - [x] 1.7.3: selector de inicial con Piedra Fuego, Agua y Hoja (sprites del juego).
+- [x] 1.7.4: menú de equipo de los jefes **a píxeles como en GBA** (marcos escalonados en `lib/lockedex/gba.js`, letra Fusion Pixel, barra de PS de la consola) y ficha rehecha como la pantalla «INFO. POKéMON»: estadísticas al nivel del jefe junto a las base, iconos de tipo de 3.ª gen, habilidad/objeto y ◀ ▶ para pasar de Pokémon.
 - [ ] **Más iconos con sprites de los juegos:** el usuario va a elegir en PokéSprite (github.com/msikma/pokesprite) cuál quiere para cada icono. Hoja de referencia con los actuales: `herramientas/generar_iconos.py --muestra`. Se añaden a `web/static/lx/objetos/` y a `icons/sprites.js`.
 - [x] Nombres de gimnasio traducidos con un patrón («Cerulean City Gym» → «Gimnasio de Ciudad Celeste»).
 

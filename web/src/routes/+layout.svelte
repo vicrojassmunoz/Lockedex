@@ -86,6 +86,15 @@
     --input-bg: theme('colors.gray.800');
   }
 
+  /* Letra de los menús estilo GBA: Fusion Pixel 12px (OFL), recortada a latín */
+  @font-face {
+    font-family: 'LX Pixel';
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url(/fonts/fusion-pixel-12-latin.woff2) format('woff2');
+  }
+
   /* latin */
   @font-face {
     font-family: 'VT323';

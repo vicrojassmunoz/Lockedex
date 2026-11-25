@@ -1,11 +1,12 @@
 <script>
-  // Equipo de un jefe como el menú de equipo de los juegos: el primer Pokémon en grande y el resto
-  // en barras. Al pulsar uno se despliega su ficha.
+  // Equipo de un jefe como el menú de equipo de los juegos de GBA: el primer Pokémon en grande y el
+  // resto en barras. Al pulsar uno se abre su ficha, hecha como la pantalla de datos del Pokémon.
+  // Todo va a píxeles: marcos escalonados (gba.js), letra pixelada y barras de PS de la consola.
   import { createEventDispatcher } from 'svelte'
   import { PIcon, Icon } from '$c/core'
   import { Physical, Special, Status } from '$icons'
   import { createImgUrl, UNOWN } from '$utils/rewrites'
-  import { COLOR_TIPO } from './colores.js'
+  import { marco, bola, TIPO_GBA } from './gba.js'
   import { t, traducirNombre } from './idioma.js'
 
   export let pokemon = []
@@ -16,7 +17,9 @@
 
   const mayus = (s) => String(s || '').replace(/(^|[-\s])([a-z])/g, (m, a, b) => a + b.toUpperCase())
   const nombreEspecie = (p) => traducirNombre(mayus(String(p.name || '').replace(/-/g, ' ')))
-  // PS al nivel del jefe con IVs perfectos y sin EVs (el peor caso, igual que el medidor de riesgo)
+  const colorTipo = (tipo) => TIPO_GBA[String(tipo || '').toLowerCase()] || '#a8a878'
+
+  // Estadísticas al nivel del jefe con IVs perfectos y sin EVs (el peor caso, igual que el medidor de riesgo)
   const ps = (p) => {
     const b = +p.stats?.hp || 0
     const n = +p.level || 1
@@ -24,140 +27,197 @@
     if (b === 1) return 1
     return Math.floor(((2 * b + 31) * n) / 100) + n + 10
   }
+  const stat = (p, k) => {
+    if (k === 'hp') return ps(p)
+    const b = +p.stats?.[k] || 0
+    if (!b) return null
+    return Math.floor(((2 * b + 31) * (+p.level || 1)) / 100) + 5
+  }
   const total = (s) => Object.values(s || {}).reduce((a, b) => a + (+b || 0), 0)
-  const colorStat = (v) => (v >= 110 ? '#38bdf8' : v >= 85 ? '#4ade80' : v >= 60 ? '#facc15' : '#f87171')
   const ICONO_CLASE = { physical: Physical, special: Special, status: Status }
   const ETIQUETAS = [
     ['hp', 'PS', 'HP'],
-    ['atk', 'Atq.', 'Atk'],
-    ['def', 'Def.', 'Def'],
-    ['spa', 'At. Esp.', 'Sp. Atk'],
-    ['spd', 'Def. Esp.', 'Sp. Def'],
-    ['spe', 'Vel.', 'Speed']
+    ['atk', 'ATAQUE', 'ATTACK'],
+    ['def', 'DEFENSA', 'DEFENSE'],
+    ['spa', 'AT. ESP.', 'SP. ATK'],
+    ['spd', 'DEF. ESP.', 'SP. DEF'],
+    ['spe', 'VELOCID.', 'SPEED']
   ]
 
+  // Paleta de la consola
+  const MARCOS = {
+    fondo: marco({ tinta: '#183c38', fondo: '#2b766d', luz: '#3c9488', sombra: '#215c55', r: 3, relleno: false }),
+    hueco: marco({ tinta: '#283850', fondo: '#4890e8', luz: '#88c8f8', sombra: '#3070c8', r: 3 }),
+    elegido: marco({ tinta: '#e85020', fondo: '#98d8f8', luz: '#d8f4ff', sombra: '#68b8e8', r: 3 }),
+    vacio: marco({ tinta: '#1d5650', fondo: '#2f7f76', luz: '#2f7f76', sombra: '#2f7f76', r: 3 }),
+    ficha: marco({ tinta: '#283850', fondo: '#e0e8f0', luz: '#f8fcff', sombra: '#b0c0d0', r: 3, relleno: false }),
+    panel: marco({ tinta: '#687890', fondo: '#f8f8f8', luz: '#ffffff', sombra: '#d8e0e8', r: 2 }),
+    ventana: marco({ tinta: '#283850', fondo: '#c8e8f8', luz: '#e8f8ff', sombra: '#98c8e8', r: 2, relleno: false }),
+    boton: marco({ tinta: '#283850', fondo: '#f8f8f8', luz: '#ffffff', sombra: '#c8d0d8', r: 2 }),
+    mini: marco({ tinta: '#283850', fondo: '#f8f8f8', luz: '#ffffff', sombra: '#c8d0d8', r: 1 })
+  }
+  const BOLA = bola()
+
   const elegir = (i) => (abierto = abierto === i ? null : i)
+  const mover = (d) => (abierto = (abierto + d + pokemon.length) % pokemon.length)
   $: primero = pokemon[0]
   $: resto = pokemon.slice(1)
   $: huecosVacios = Math.max(0, 5 - resto.length)
   $: elegido = abierto !== null ? pokemon[abierto] : null
 </script>
 
-<div class="lx-me">
+<div class="lx-me" style={MARCOS.fondo}>
   <div class="lx-me-izq">
     {#if primero}
-      <button class="lx-me-slot lx-me-grande" class:lx-me-sel={abierto === 0} on:click={() => elegir(0)} title={t('Ver su ficha', 'See details')}>
-        <span class="lx-me-ball" aria-hidden="true" />
+      <button
+        class="lx-me-slot lx-me-grande"
+        class:lx-me-sel={abierto === 0}
+        style={abierto === 0 ? MARCOS.elegido : MARCOS.hueco}
+        on:click={() => elegir(0)}
+        title={t('Ver su ficha', 'See details')}
+      >
+        <img class="lx-me-ball" src={BOLA} alt="" aria-hidden="true" />
         <PIcon name={primero.name} className="lx-me-icono" />
         <span class="lx-me-datos">
           <b>{nombreEspecie(primero)}</b>
-          <small>{t('Nv', 'Lv')}{primero.level}</small>
+          <span class="lx-me-nv"><small>{t('Nv', 'Lv')}</small>{primero.level}</span>
         </span>
-        <span class="lx-me-ps">
-          <i>PS</i><span class="lx-me-barra"><span /></span>
-        </span>
-        {#if ps(primero)}<span class="lx-me-num" title={t('PS con IVs perfectos (el peor caso)', 'HP with perfect IVs (worst case)')}>{ps(primero)}/ {ps(primero)}</span>{/if}
+        {#if primero.held}<span class="lx-me-objeto" title={primero.held.name}><PIcon type="item" name={primero.held.sprite} /></span>{/if}
+        <span class="lx-me-ps"><i>{t('PS', 'HP')}</i><span class="lx-me-barra"><span /></span></span>
+        {#if ps(primero)}<span class="lx-me-num" title={t('PS con IVs perfectos (el peor caso)', 'HP with perfect IVs (worst case)')}>{ps(primero)}/{ps(primero)}</span>{/if}
       </button>
     {/if}
   </div>
 
   <div class="lx-me-der">
     {#each resto as p, i (p.name + i)}
-      <button class="lx-me-slot" class:lx-me-sel={abierto === i + 1} on:click={() => elegir(i + 1)} title={t('Ver su ficha', 'See details')}>
+      <button
+        class="lx-me-slot"
+        class:lx-me-sel={abierto === i + 1}
+        style={abierto === i + 1 ? MARCOS.elegido : MARCOS.hueco}
+        on:click={() => elegir(i + 1)}
+        title={t('Ver su ficha', 'See details')}
+      >
         <PIcon name={p.name} className="lx-me-icono" />
         <span class="lx-me-datos">
           <b>{nombreEspecie(p)}</b>
-          <small>{t('Nv', 'Lv')}{p.level}</small>
+          <span class="lx-me-nv"><small>{t('Nv', 'Lv')}</small>{p.level}</span>
         </span>
         {#if p.held}<span class="lx-me-objeto" title={p.held.name}><PIcon type="item" name={p.held.sprite} /></span>{/if}
-        <span class="lx-me-ps">
-          <i>PS</i><span class="lx-me-barra"><span /></span>
+        <span class="lx-me-vida">
+          <span class="lx-me-ps"><i>{t('PS', 'HP')}</i><span class="lx-me-barra"><span /></span></span>
+          {#if ps(p)}<span class="lx-me-num" title={t('PS con IVs perfectos (el peor caso)', 'HP with perfect IVs (worst case)')}>{ps(p)}/{ps(p)}</span>{/if}
         </span>
-        {#if ps(p)}<span class="lx-me-num" title={t('PS con IVs perfectos (el peor caso)', 'HP with perfect IVs (worst case)')}>{ps(p)}/ {ps(p)}</span>{/if}
       </button>
     {/each}
     {#each Array(huecosVacios) as _}
-      <span class="lx-me-slot lx-me-vacio" aria-hidden="true" />
+      <span class="lx-me-slot lx-me-vacio" style={MARCOS.vacio} aria-hidden="true" />
     {/each}
   </div>
 </div>
 
 {#if elegido}
-  <section class="lx-me-ficha">
-    <div class="lx-me-ficha-cab">
-      <img
-        class="lx-me-sprite"
-        src={createImgUrl(elegido, { ext: 'png' })}
-        alt=""
-        on:error={(e) => (e.currentTarget.src = UNOWN)}
-      />
-      <div class="lx-me-ficha-nombre">
-        <h4>{nombreEspecie(elegido)} <small>{t('Nv', 'Lv')}{elegido.level}</small></h4>
-        <div class="lx-me-tipos">
+  <section class="lx-gf" style={MARCOS.ficha}>
+    <header class="lx-gf-cab">
+      <span class="lx-gf-titulo">{t('INFO. POKéMON', 'POKéMON INFO')}</span>
+      {#if pokemon.length > 1}
+        <span class="lx-gf-nav">
+          <button style={MARCOS.mini} on:click={() => mover(-1)} title={t('Anterior', 'Previous')}>◀</button>
+          <span>{abierto + 1}/{pokemon.length}</span>
+          <button style={MARCOS.mini} on:click={() => mover(1)} title={t('Siguiente', 'Next')}>▶</button>
+        </span>
+      {/if}
+      <button class="lx-gf-cerrar" style={MARCOS.mini} on:click={() => (abierto = null)} title={t('Cerrar', 'Close')}>×</button>
+    </header>
+
+    <div class="lx-gf-cuerpo">
+      <div class="lx-gf-izq">
+        <div class="lx-gf-ventana" style={MARCOS.ventana}>
+          {#key elegido.name}
+            <img src={createImgUrl(elegido, { ext: 'png' })} alt="" on:error={(e) => (e.currentTarget.src = UNOWN)} />
+          {/key}
+        </div>
+        <div class="lx-gf-placa">
+          <img src={BOLA} alt="" aria-hidden="true" />
+          <b>{nombreEspecie(elegido)}</b>
+          <span class="lx-me-nv"><small>{t('Nv', 'Lv')}</small>{elegido.level}</span>
+        </div>
+        <div class="lx-gf-tipos">
           {#each elegido.types || [] as tipo}
-            <span class="lx-me-tipo" style="--c:{COLOR_TIPO[String(tipo).toLowerCase()] || '#888'}">{traducirNombre(mayus(tipo))}</span>
+            <span class="lx-gf-tipo" style="--c:{colorTipo(tipo)}">{traducirNombre(mayus(tipo))}</span>
           {/each}
         </div>
-        <dl>
+        <div class="lx-gf-panel lx-gf-datos" style={MARCOS.panel}>
           {#if elegido.ability?.name}
-            <div><dt>{t('Habilidad', 'Ability')}</dt><dd><span class="cursor-help" data-lx-hab={elegido.ability.name}>{elegido.ability.name}</span></dd></div>
+            <span class="lx-gf-etq">{t('HABILIDAD', 'ABILITY')}</span>
+            <span class="lx-gf-valor"><span class="cursor-help" data-lx-hab={elegido.ability.name}>{elegido.ability.name}</span></span>
           {/if}
+          <span class="lx-gf-etq">{t('OBJETO', 'ITEM')}</span>
           {#if elegido.held?.name}
-            <div>
-              <dt>{t('Objeto', 'Item')}</dt>
-              <dd class="lx-me-obj"><PIcon type="item" name={elegido.held.sprite} /><span class="cursor-help" data-lx-obj={elegido.held.name}>{elegido.held.name}</span></dd>
-            </div>
+            <span class="lx-gf-valor lx-gf-obj"><PIcon type="item" name={elegido.held.sprite} /><span class="cursor-help" data-lx-obj={elegido.held.name}>{elegido.held.name}</span></span>
+          {:else}
+            <span class="lx-gf-valor lx-gf-nada">{t('NINGUNO', 'NONE')}</span>
           {/if}
-        </dl>
+        </div>
       </div>
-      <button class="lx-me-cerrar" on:click={() => (abierto = null)} title={t('Cerrar', 'Close')}>✕</button>
-    </div>
 
-    <div class="lx-me-cuerpo">
-      <div class="lx-me-movs">
+      <div class="lx-gf-panel lx-gf-stats" style={MARCOS.panel}>
+        <span />
+        <span class="lx-gf-col" title={t('Con IVs perfectos y sin EVs: el peor caso', 'Perfect IVs and no EVs: worst case')}>
+          {t('Nv', 'Lv')}{elegido.level}
+        </span>
+        <span class="lx-gf-col">{t('BASE', 'BASE')}</span>
+        {#each ETIQUETAS as [k, es, en]}
+          <span class="lx-gf-st">{t(es, en)}</span>
+          <span class="lx-gf-v">{stat(elegido, k) ?? '—'}</span>
+          <span class="lx-gf-b">{+(elegido.stats?.[k] || 0) || '—'}</span>
+        {/each}
+        <span class="lx-gf-st lx-gf-total">{t('TOTAL', 'TOTAL')}</span>
+        <span />
+        <span class="lx-gf-b lx-gf-total">{total(elegido.stats)}</span>
+      </div>
+
+      <div class="lx-gf-panel lx-gf-movs" style={MARCOS.panel}>
         {#each elegido.moves || [] as m}
-          <div class="lx-me-mov" style="--c:{COLOR_TIPO[String(m.type).toLowerCase()] || '#888'}">
-            <span class="lx-me-mov-nombre cursor-help" data-lx-mov={m.name} data-lx-pot={m.power || ''}>{m.name}</span>
-            <span class="lx-me-mov-datos">
-              <span class="lx-me-mov-tipo">{traducirNombre(mayus(m.type))}</span>
-              {#if ICONO_CLASE[m.damage_class]}<Icon inline icon={ICONO_CLASE[m.damage_class]} class="fill-current" />{/if}
-              {#if m.power}<b>{m.power}</b>{:else}<b>—</b>{/if}
+          <div class="lx-gf-mov">
+            <span class="lx-gf-mov-nombre cursor-help" data-lx-mov={m.name} data-lx-pot={m.power || ''}>{m.name}</span>
+            <span class="lx-gf-mov-datos">
+              <span class="lx-gf-tipo" style="--c:{colorTipo(m.type)}">{traducirNombre(mayus(m.type))}</span>
+              {#if ICONO_CLASE[m.damage_class]}<Icon inline icon={ICONO_CLASE[m.damage_class]} class="lx-gf-clase" />{/if}
+              <span class="lx-gf-pot"><small>{t('POT', 'PWR')}</small>{m.power || '—'}</span>
             </span>
           </div>
+        {:else}
+          <span class="lx-gf-nada">{t('Sin movimientos conocidos', 'No known moves')}</span>
         {/each}
-      </div>
-
-      <div class="lx-me-stats">
-        {#each ETIQUETAS as [k, es, en]}
-          {@const v = +(elegido.stats?.[k] || 0)}
-          <span class="lx-me-st-n">{t(es, en)}</span>
-          <span class="lx-me-st-v">{v}</span>
-          <span class="lx-me-st-b"><i style="width:{Math.min(100, (v / 180) * 100)}%;background:{colorStat(v)}" /></span>
-        {/each}
-        <span class="lx-me-st-n lx-me-total">{t('Total', 'Total')}</span>
-        <span class="lx-me-st-v lx-me-total">{total(elegido.stats)}</span>
-        <span />
       </div>
     </div>
 
-    <button class="lx-me-comparar" on:click={() => despachar('comparar', abierto)}>
-      {t('Comparar con mi equipo', 'Compare with my team')} ▸
-    </button>
+    <div class="lx-gf-pie">
+      <button class="lx-gf-boton" style={MARCOS.boton} on:click={() => despachar('comparar', abierto)}>
+        {t('Comparar con mi equipo', 'Compare with my team')}
+      </button>
+    </div>
   </section>
 {/if}
 
 <style>
+  /* Todo lo de este menú va con la letra pixelada a tamaños enteros (12 px = escala 1, 24 px = escala 2) */
+  .lx-me,
+  .lx-gf {
+    font-family: 'LX Pixel', 'VT323', monospace;
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+  }
+
   /* Fondo del menú: verde azulado con rayas, como la pantalla de equipo de la 3.ª generación */
   .lx-me {
     display: grid;
     grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
-    gap: 10px 14px;
-    padding: 14px;
-    border: 3px solid var(--lx-tinta);
-    border-radius: var(--lx-radio);
-    background-color: #2f7f76;
-    background-image: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.07) 0 2px, transparent 2px 6px);
-    box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.15);
+    gap: 8px 12px;
+    padding: 6px 4px;
+    background-color: #2b766d;
+    background-image: repeating-linear-gradient(0deg, #317f75 0 2px, #2b766d 2px 6px);
   }
   @media (max-width: 700px) {
     .lx-me {
@@ -167,330 +227,435 @@
   .lx-me-izq {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    padding: 10px 0 0 6px;
   }
   .lx-me-der {
     display: flex;
     flex-direction: column;
-    gap: 7px;
+    gap: 4px;
   }
 
   /* Huecos del equipo */
   .lx-me-slot {
     position: relative;
     display: grid;
-    grid-template-columns: 40px minmax(0, 1fr) auto;
-    grid-template-rows: auto auto;
+    grid-template-columns: 50px minmax(0, 1fr) auto;
     align-items: center;
-    column-gap: 8px;
-    min-height: 54px;
-    padding: 4px 12px 4px 6px;
+    column-gap: 4px;
+    min-height: 58px;
+    padding: 0 4px 0 0;
     text-align: left;
-    color: #fff;
-    border-radius: 8px;
-    background: linear-gradient(#4a9ae8 0 58%, #3a86d8 58%);
-    border: 3px solid #384858;
-    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.25);
-    transition: transform 0.08s;
+    color: #f8f8f8;
   }
-  button.lx-me-slot:hover {
-    transform: translateX(2px);
+  button.lx-me-slot:hover:not(.lx-me-sel) {
+    filter: brightness(1.08);
   }
+  /* El elegido lleva el doble contorno naranja de la consola */
   .lx-me-sel {
-    border-color: #f87830;
-    box-shadow: 0 0 0 2px #f87830, inset 0 0 0 2px rgba(255, 255, 255, 0.4);
+    filter: drop-shadow(2px 0 0 #f8a848) drop-shadow(-2px 0 0 #f8a848) drop-shadow(0 2px 0 #f8a848)
+      drop-shadow(0 -2px 0 #f8a848);
   }
   .lx-me-vacio {
     min-height: 40px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 3px solid rgba(0, 0, 0, 0.18);
-    box-shadow: none;
   }
   .lx-me-slot :global(.lx-me-icono) {
-    grid-row: 1 / span 2;
+    justify-self: center;
     transform: scale(1.25);
     image-rendering: pixelated;
-    filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.35));
   }
   .lx-me-datos {
-    grid-row: 1 / span 2;
     display: flex;
     flex-direction: column;
     min-width: 0;
+    gap: 2px;
   }
-  .lx-me-datos b {
-    font-family: 'VT323', monospace;
-    font-size: 23px;
-    line-height: 1;
+  .lx-me-datos b,
+  .lx-gf-placa b {
+    font-size: 24px;
+    line-height: 20px;
     font-weight: normal;
-    letter-spacing: 0.5px;
-    text-shadow: 2px 2px 0 #304060;
+    text-transform: uppercase;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .lx-me-datos small {
-    font-family: 'VT323', monospace;
-    font-size: 19px;
-    line-height: 1;
-    padding-left: 18px;
-    text-shadow: 2px 2px 0 #304060;
-  }
-  .lx-me-ps {
-    display: flex;
-    align-items: center;
-    width: 120px;
-    height: 13px;
-    border-radius: 7px;
-    background: #404050;
-    padding: 2px 3px 2px 2px;
-  }
-  .lx-me-ps i {
-    font-style: normal;
-    font-family: 'VT323', monospace;
-    font-size: 13px;
-    line-height: 1;
-    color: #f8c030;
-    padding: 0 4px 0 2px;
-  }
-  .lx-me-barra {
-    flex: 1;
-    height: 7px;
-    border-radius: 4px;
-    background: #fff;
-    overflow: hidden;
-  }
-  .lx-me-barra span {
-    display: block;
-    height: 100%;
-    background: linear-gradient(#70f8a8 0 50%, #58d080 50%);
-  }
+  .lx-me-datos b,
+  .lx-me-nv,
   .lx-me-num {
-    font-family: 'VT323', monospace;
-    font-size: 19px;
-    line-height: 1;
-    text-align: right;
-    text-shadow: 2px 2px 0 #304060;
+    text-shadow: 2px 2px 0 #283850;
+  }
+  .lx-me-sel .lx-me-datos b,
+  .lx-me-sel .lx-me-nv,
+  .lx-me-sel .lx-me-num {
+    color: #f8f8f8;
+    text-shadow: 2px 2px 0 #305890;
+  }
+  .lx-me-nv {
+    font-size: 24px;
+    line-height: 20px;
+    padding-left: 16px;
+  }
+  .lx-me-nv small {
+    font-size: 12px;
+    margin-right: 2px;
   }
   .lx-me-objeto {
     position: absolute;
-    left: 28px;
-    bottom: 2px;
-    transform: scale(0.7);
+    left: 30px;
+    bottom: -4px;
+    transform: scale(0.65);
     transform-origin: left bottom;
+    image-rendering: pixelated;
+  }
+
+  /* Barra de PS de la consola: etiqueta amarilla en un marco oscuro, verde a dos tonos */
+  .lx-me-vida {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+  }
+  .lx-me-ps {
+    display: flex;
+    align-items: stretch;
+    width: 112px;
+    height: 14px;
+    padding: 2px 2px 2px 0;
+    background: #404858;
+    clip-path: polygon(
+      2px 0,
+      calc(100% - 2px) 0,
+      100% 2px,
+      100% calc(100% - 2px),
+      calc(100% - 2px) 100%,
+      2px 100%,
+      0 calc(100% - 2px),
+      0 2px
+    );
+  }
+  .lx-me-ps i {
+    font-style: normal;
+    font-size: 12px;
+    line-height: 10px;
+    color: #f8c838;
+    padding: 0 3px 0 4px;
+  }
+  .lx-me-barra {
+    flex: 1;
+    background: #283040;
+  }
+  .lx-me-barra span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#78f8a8 0 4px, #58d080 4px);
+  }
+  .lx-me-num {
+    font-size: 24px;
+    line-height: 20px;
+    text-align: right;
   }
 
   /* Primer Pokémon, en grande */
   .lx-me-grande {
-    grid-template-columns: 40px minmax(0, 1fr);
+    grid-template-columns: 50px minmax(0, 1fr);
     grid-template-rows: auto auto auto;
-    padding: 12px 14px 10px 10px;
-    background: linear-gradient(#90d8f8 0 55%, #70c0e8 55%);
-    border-color: #384858;
-  }
-  .lx-me-grande .lx-me-datos {
-    grid-row: 1 / span 1;
+    row-gap: 6px;
+    padding: 8px 8px 4px 4px;
   }
   .lx-me-grande .lx-me-ps {
     grid-column: 1 / span 2;
     width: 100%;
-    margin-top: 8px;
   }
   .lx-me-grande .lx-me-num {
     grid-column: 1 / span 2;
-    margin-top: 3px;
+  }
+  .lx-me-grande .lx-me-objeto {
+    left: 30px;
+    bottom: auto;
+    top: 22px;
   }
   .lx-me-ball {
     position: absolute;
-    left: -12px;
-    top: -12px;
+    left: -18px;
+    top: -18px;
     width: 24px;
     height: 24px;
-    border-radius: 50%;
-    border: 3px solid #404050;
-    background: linear-gradient(#f87830 0 44%, #404050 44% 56%, #f8f8f8 56%);
+    image-rendering: pixelated;
   }
 
-  /* Ficha desplegada */
-  .lx-me-ficha {
-    margin-top: 10px;
-    padding: 12px 14px 14px;
-    border: 3px solid var(--lx-tinta);
-    border-radius: var(--lx-radio);
-    background: var(--lx-panel);
-    box-shadow: var(--lx-sombra);
-    color: var(--lx-texto);
+  /* ---------- Ficha: la pantalla de datos del Pokémon ---------- */
+  .lx-gf {
+    margin-top: 8px;
+    color: #404850;
+    background-color: #e0e8f0;
+    background-image: repeating-linear-gradient(45deg, #e8eef6 0 4px, #e0e8f0 4px 8px);
   }
-  .lx-me-ficha-cab {
-    position: relative;
+  .lx-gf-cab {
     display: flex;
-    gap: 12px;
     align-items: center;
-  }
-  .lx-me-sprite {
-    width: 96px;
-    height: 96px;
-    image-rendering: pixelated;
-    object-fit: contain;
-    border-radius: 12px;
-    background: radial-gradient(circle at 50% 65%, rgba(0, 0, 0, 0.08), transparent 65%);
-  }
-  .lx-me-ficha-nombre h4 {
-    font-family: 'VT323', monospace;
-    font-size: 30px;
-    line-height: 1;
-    font-weight: normal;
-  }
-  .lx-me-ficha-nombre h4 small {
-    font-size: 20px;
-    color: var(--lx-texto-suave);
-  }
-  .lx-me-tipos {
-    display: flex;
-    gap: 4px;
-    margin: 4px 0 6px;
-  }
-  .lx-me-tipo {
-    padding: 1px 8px;
-    font-family: 'VT323', monospace;
-    font-size: 16px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: #fff;
-    background: var(--c);
-    border: 2px solid rgba(0, 0, 0, 0.35);
-    border-radius: 6px;
-  }
-  .lx-me-ficha dl {
-    display: grid;
-    gap: 2px;
-    font-size: 13px;
-  }
-  .lx-me-ficha dl div {
-    display: flex;
     gap: 8px;
+    margin: -2px -2px 8px;
+    padding: 4px 6px 6px 10px;
+    background: #4868a0;
+    box-shadow: inset 0 -2px 0 #304878, inset 0 2px 0 #6888c0;
+  }
+  .lx-gf-titulo {
+    flex: 1;
+    font-size: 24px;
+    line-height: 24px;
+    color: #f8f8f8;
+    text-shadow: 2px 2px 0 #283850;
+  }
+  .lx-gf-nav {
+    display: flex;
     align-items: center;
+    gap: 6px;
+    font-size: 24px;
+    line-height: 20px;
+    color: #f8f8f8;
+    text-shadow: 2px 2px 0 #283850;
   }
-  .lx-me-ficha dt {
-    width: 72px;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--lx-texto-suave);
+  .lx-gf-nav button,
+  .lx-gf-cerrar {
+    min-width: 28px;
+    font-size: 12px;
+    line-height: 12px;
+    color: #404850;
+    text-shadow: none;
   }
-  .lx-me-obj {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
+  .lx-gf-cerrar {
+    font-size: 24px;
+    line-height: 12px;
   }
-  .lx-me-cerrar {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
-    border: 2px solid var(--lx-tinta);
-    background: var(--lx-panel);
-    box-shadow: var(--lx-sombra-sm);
+  .lx-gf-nav button:hover,
+  .lx-gf-cerrar:hover {
+    filter: brightness(0.94);
   }
-  .lx-me-cuerpo {
+
+  .lx-gf-cuerpo {
     display: grid;
-    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-    gap: 14px;
-    margin-top: 10px;
+    grid-template-columns: 168px minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 10px;
+    align-items: start;
+    padding: 0 4px;
   }
-  @media (max-width: 700px) {
-    .lx-me-cuerpo {
-      grid-template-columns: minmax(0, 1fr);
+  @media (max-width: 760px) {
+    .lx-gf-cuerpo {
+      grid-template-columns: 168px minmax(0, 1fr);
+    }
+    .lx-gf-movs {
+      grid-column: 1 / -1;
     }
   }
-  /* Movimientos como en el menú de combate */
-  .lx-me-movs {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .lx-gf-izq {
+    display: flex;
+    flex-direction: column;
     gap: 6px;
-    align-content: start;
   }
-  .lx-me-mov {
+  .lx-gf-ventana {
+    display: grid;
+    place-items: center;
+    height: 148px;
+    background-color: #c8e8f8;
+    background-image: linear-gradient(transparent 70%, #a8d8f0 70%);
+  }
+  .lx-gf-ventana img {
+    width: 128px;
+    height: 128px;
+    object-fit: contain;
+    image-rendering: pixelated;
+  }
+  .lx-gf-placa {
+    display: grid;
+    grid-template-columns: 24px minmax(0, 1fr);
+    align-items: center;
+    column-gap: 6px;
+    color: #404850;
+    text-shadow: 2px 2px 0 #c8d0d8;
+  }
+  .lx-gf-placa img {
+    width: 24px;
+    height: 24px;
+    image-rendering: pixelated;
+  }
+  .lx-gf-placa .lx-me-nv {
+    grid-column: 2;
+    padding-left: 0;
+  }
+
+  /* Iconos de tipo de la 3.ª generación */
+  .lx-gf-tipos {
+    display: flex;
+    gap: 4px;
+  }
+  .lx-gf-tipo {
+    display: inline-grid;
+    place-items: center;
+    min-width: 64px;
+    height: 24px;
+    padding: 0 6px;
+    font-size: 12px;
+    line-height: 12px;
+    text-transform: uppercase;
+    color: #f8f8f8;
+    text-shadow: 1px 1px 0 color-mix(in srgb, var(--c) 45%, #000);
+    background: linear-gradient(color-mix(in srgb, var(--c) 75%, #fff) 0 50%, var(--c) 50%);
+    box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--c) 50%, #000);
+    clip-path: polygon(
+      2px 0,
+      calc(100% - 2px) 0,
+      100% 2px,
+      100% calc(100% - 2px),
+      calc(100% - 2px) 100%,
+      2px 100%,
+      0 calc(100% - 2px),
+      0 2px
+    );
+  }
+
+  /* Recuadros blancos con texto oscuro y sombra clara, como en la consola */
+  .lx-gf-panel {
+    color: #404850;
+    text-shadow: 2px 2px 0 #d0d8e0;
+    font-size: 24px;
+    line-height: 22px;
+  }
+  .lx-gf-datos {
     display: flex;
     flex-direction: column;
     gap: 2px;
-    padding: 6px 8px 5px 12px;
-    border-radius: 8px;
-    border: 2px solid var(--lx-tinta);
-    background: linear-gradient(90deg, var(--c) 0 6px, var(--lx-panel-2) 6px);
+    padding: 2px 2px 4px;
   }
-  .lx-me-mov-nombre {
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 1.15;
+  .lx-gf-etq {
+    align-self: flex-start;
+    padding: 2px 6px;
+    font-size: 12px;
+    line-height: 12px;
+    color: #f8f8f8;
+    text-shadow: 1px 1px 0 #283850;
+    background: #6880b0;
   }
-  .lx-me-mov-datos {
+  .lx-gf-valor {
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+  }
+  .lx-gf-valor + .lx-gf-etq {
+    margin-top: 4px;
+  }
+  .lx-gf-obj {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+  .lx-gf-obj :global(img) {
+    image-rendering: pixelated;
+  }
+  .lx-gf-nada {
+    color: #98a0a8;
+    text-shadow: none;
+  }
+
+  .lx-gf-stats {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    column-gap: 10px;
+    row-gap: 4px;
+    padding: 4px 6px 6px;
+  }
+  .lx-gf-col {
+    font-size: 12px;
+    line-height: 12px;
+    text-align: right;
+    color: #6880b0;
+    text-shadow: none;
+  }
+  .lx-gf-st {
+    white-space: nowrap;
+  }
+  .lx-gf-v {
+    text-align: right;
+  }
+  .lx-gf-b {
+    text-align: right;
+    min-width: 36px;
+    color: #8890a0;
+    text-shadow: 2px 2px 0 #e0e4ea;
+  }
+  .lx-gf-total {
+    margin-top: 4px;
+    padding-top: 4px;
+    border-top: 2px dotted #b8c0cc;
+  }
+
+  .lx-gf-movs {
+    display: flex;
+    flex-direction: column;
+    padding: 2px 6px;
+  }
+  .lx-gf-mov {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 5px 0 6px;
+  }
+  .lx-gf-mov + .lx-gf-mov {
+    border-top: 2px dotted #b8c0cc;
+  }
+  .lx-gf-mov-nombre {
+    text-transform: uppercase;
+  }
+  .lx-gf-mov-datos {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 12px;
-    color: var(--lx-texto-suave);
   }
-  .lx-me-mov-tipo {
-    font-family: 'VT323', monospace;
-    font-size: 15px;
-    text-transform: uppercase;
-    color: var(--c);
-    filter: brightness(0.8);
+  .lx-gf-mov-datos :global(.lx-gf-clase) {
+    width: 20px;
+    height: 20px;
+    fill: #687890;
   }
-  .lx-me-mov-datos b {
+  .lx-gf-pot {
     margin-left: auto;
-    font-family: 'VT323', monospace;
-    font-size: 18px;
-    font-weight: normal;
-    color: var(--lx-texto);
   }
-  .lx-me-stats {
-    display: grid;
-    grid-template-columns: 64px 30px minmax(0, 1fr);
-    align-items: center;
-    gap: 4px 8px;
-    font-size: 12.5px;
+  .lx-gf-pot small {
+    font-size: 12px;
+    margin-right: 4px;
+    color: #6880b0;
+    text-shadow: none;
   }
-  .lx-me-st-n {
-    color: var(--lx-texto-suave);
+
+  .lx-gf-pie {
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px 4px 2px;
   }
-  .lx-me-st-v {
-    text-align: right;
-    font-weight: 700;
-    font-variant-numeric: tabular-nums;
+  /* Botón de menú: aparece el cursor ▶ al pasar por encima */
+  .lx-gf-boton {
+    position: relative;
+    padding: 0 8px 0 22px;
+    font-size: 24px;
+    line-height: 26px;
+    color: #404850;
+    text-shadow: 2px 2px 0 #d0d8e0;
   }
-  .lx-me-st-b {
-    height: 9px;
-    border-radius: 5px;
-    background: var(--lx-panel-2);
-    border: 1.5px solid var(--lx-tinta);
-    overflow: hidden;
+  .lx-gf-boton::before {
+    content: '▶';
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    line-height: 12px;
+    color: #404850;
+    text-shadow: none;
+    opacity: 0;
   }
-  .lx-me-st-b i {
-    display: block;
-    height: 100%;
+  .lx-gf-boton:hover::before,
+  .lx-gf-boton:focus-visible::before {
+    opacity: 1;
   }
-  .lx-me-total {
-    margin-top: 3px;
-    color: var(--lx-texto);
-    font-weight: 700;
-  }
-  .lx-me-comparar {
-    margin-top: 12px;
-    padding: 5px 12px;
-    font-family: 'VT323', monospace;
-    font-size: 19px;
-    border: 2px solid var(--lx-tinta);
-    border-radius: var(--lx-radio-sm);
-    background: var(--lx-lcd);
-    color: var(--lx-lcd-texto);
-    box-shadow: var(--lx-sombra-sm);
-  }
-  .lx-me-comparar:active {
-    transform: translate(2px, 2px);
-    box-shadow: none;
+  .lx-gf-boton:active {
+    transform: translateY(2px);
   }
 </style>
