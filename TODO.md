@@ -74,6 +74,11 @@ Cómo hacerlo: ir componente a componente, con capturas antes y después. Se pue
 
 ---
 
+- [ ] **Actualizaciones más ligeras** (idea del usuario, 25/11). Hoy cada versión baja el instalador entero (~148 MB). Medido en local: `electron/app` ocupa 252 MB sin comprimir, de los que **171 MB son `app/prerendered`** (páginas y JSON prerenderizados, en parte duplicados de `static/api`), 46 MB `client` y 35 MB `server/chunks`.
+  1. **Adelgazar lo que se empaqueta:** ver qué se prerenderiza (probablemente las rutas `/api/...` de cada juego/Pokémon) y servirlo desde `static/` o generarlo al vuelo; quitar duplicados. Puede bajar el instalador a la mitad o menos.
+  2. **Comprobar que funciona la descarga diferencial** de electron-updater (ya se publican los `.blockmap`): mirar en el registro de la app si pone «Downloading … differential»; si no compensa por la compresión sólida del NSIS, probar `nsis.differentialPackage`.
+  3. **Actualizaciones solo de contenido:** si Electron no cambia, bajar solo un zip de `app/` (unos MB) firmado con hash SHA-256 publicado en la release, descomprimirlo en `userData` y servir desde ahí; el instalador completo solo cuando cambia la versión de Electron o `main.mjs`.
+
 ## 2. Base de datos propia de Lockedex
 
 **Situación actual:** los datos de juego vienen del original y están repartidos en formatos distintos:

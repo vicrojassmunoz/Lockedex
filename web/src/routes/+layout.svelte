@@ -14,6 +14,7 @@
     escritorio = document.documentElement.classList.contains('lx-escritorio')
     iniciarTraduccion()
     // Solo la ventana principal aplica las acciones rápidas del modo compacto
+    vigilarScroll()
     if (!window.lockedex?.compacto) return escucharAcciones()
   })
 
@@ -29,6 +30,34 @@
     const ruta = destino?.url?.pathname || ''
     return id.startsWith('/(guides)') || ruta === '/guides' || ruta.startsWith('/guides/') ? 'guias' : 'app'
   }
+  // svelte-simple-modal bloquea el scroll del body al abrir una ventana (position: fixed) y al cerrarla
+  // restaura lo que había antes. Si se abre dos veces seguidas (doble clic en VS, una ventana que abre
+  // otra…), lo que «había antes» ya era el bloqueo, y al cerrar la página se queda sin poder bajar.
+  // Vigilante: si el body sigue bloqueado y no hay ninguna ventana abierta, se desbloquea.
+  const vigilarScroll = () => {
+    let espera
+    const desbloquear = () => {
+      const b = document.body
+      if (b.style.position !== 'fixed' && b.style.overflow !== 'hidden') return
+      if (document.querySelector('[role="dialog"][aria-modal="true"]')) return
+      const arriba = -parseInt(b.style.top || '0', 10) || 0
+      b.style.position = ''
+      b.style.top = ''
+      b.style.overflow = ''
+      b.style.width = ''
+      if (arriba) window.scrollTo({ top: arriba, left: 0, behavior: 'instant' })
+    }
+    new MutationObserver(() => {
+      // se mira un poco después, cuando ya ha terminado la animación de cierre de la ventana
+      if (!espera)
+        espera = setTimeout(() => {
+          espera = null
+          desbloquear()
+        }, 600)
+    }).observe(document.body, { attributes: true, attributeFilter: ['style'], childList: true, subtree: true })
+    desbloquear()
+  }
+
   beforeNavigate((nav) => {
     if (!nav.from || !nav.to || nav.type === 'leave') return
     if (nav.to.url.origin !== location.origin) return
