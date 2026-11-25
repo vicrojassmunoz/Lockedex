@@ -49,7 +49,7 @@
   {#if $theme == 'light'}
     <div
       in:fadefly={{ duration, delay, y: -y }}
-      out:fadefly={{ duration, y: -y }}
+      out:fadefly|local={{ duration, y: -y }}
     >
       <Icon
         inline={true}
@@ -59,7 +59,7 @@
       />
     </div>
   {:else if $theme == 'dark'}
-    <div in:fadefly={{ duration, delay, y }} out:fadefly={{ duration, y }}>
+    <div in:fadefly={{ duration, delay, y }} out:fadefly|local={{ duration, y }}>
       <Icon
         inline={true}
         height="1.2em"

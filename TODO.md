@@ -168,6 +168,8 @@ Hecho: reglas por run en `lockedex.reglas.<id>` (`web/src/lib/lockedex/reglas.js
 
 ## 6. Otras mejoras y limitaciones conocidas
 
+- [x] **Página anterior visible ~1 s al cambiar de pestaña** (sobre todo desde Inicio y Partidas; avisado el 25/11). Causa: en Svelte 3 las transiciones son globales, así que la animación de salida de la página vieja (el menú de Inicio, la lista de Partidas) se reproducía encima de la nueva. Arreglado en la 1.5.1 marcando todas las transiciones de salida como `|local` y dejando solo de entrada la de Partidas, que estaba en la raíz de la página. Prueba: `pruebas/solape.mjs` mide cuánto sigue visible la página vieja (ahora 0 ms en todos los cambios). **Al añadir transiciones nuevas, usar siempre `|local`.**
+
 - [ ] **Lector de .sav:** probado solo con partidas sintéticas. Hay que probarlo con partidas reales de Rubí, Zafiro, Esmeralda, RojoFuego y VerdeHoja (y con hacks CFRU como Radical Red y Unbound, que amplían especies y pueden no ser compatibles).
 - [ ] Añadir .sav de otras generaciones (1–2 en GB/GBC y 4–5 en NDS, siguiendo los formatos de PKHeX).
 - [x] **Modo compacto con acciones rápidas** (1.5.0): apuntar el encuentro de la siguiente zona (capturado o fallido) y marcar como caído a un miembro del equipo. Se envían por IPC a la ventana principal (`lib/lockedex/acciones.js`), que es la que guarda.

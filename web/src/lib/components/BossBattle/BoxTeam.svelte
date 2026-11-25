@@ -49,7 +49,7 @@
           on:click={select(og)}
           animate:flip={{ duration: 200 }}
           in:receive={{ key: locid(og) }}
-          out:send={{ key: locid(og) }}
+          out:send|local={{ key: locid(og) }}
         >
           <PIcon class="picon" name={og.pokemon} />
         </button>
@@ -101,7 +101,7 @@
             on:click={select(og)}
             animate:flip={{ duration: 200 }}
             in:receive={{ key: locid(og) }}
-            out:send={{ key: locid(og) }}
+            out:send|local={{ key: locid(og) }}
           >
             <PIcon class="picon -scale-x-100" name={og.pokemon} />
           </button>

@@ -104,7 +104,7 @@
     {#if !mons.length && boxLength}
       <small
         in:fade={{ duration: 500 }}
-        out:fade={{ duration: 200 }}
+        out:fade|local={{ duration: 200 }}
         class:hidden={seenTeam}
         class="absolute left-1/2 mb-1 w-full -translate-x-1/2 translate-y-full italic text-gray-500 md:bottom-2 md:block"
       >

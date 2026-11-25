@@ -144,7 +144,7 @@
 
 {#if error}
   <div
-    transition:fly={{ y: 50 }}
+    transition:fly|local={{ y: 50 }}
     class="fixed bottom-0 left-0 z-50 w-full px-4 md:left-1/2 md:w-auto md:-translate-x-1/2"
   >
     <div

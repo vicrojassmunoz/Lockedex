@@ -117,7 +117,7 @@
 
           <ul
             in:fly={{ duration: 250, y: 50 }}
-            out:fade={{ duration: 100 }}
+            out:fade|local={{ duration: 100 }}
             class="popover mt-6 ml-4 flex max-h-[80vh] w-60 flex-col divide-y overflow-scroll rounded-xl bg-white shadow-lg dark:divide-gray-700 dark:bg-gray-900 sm:mt-4 sm:ml-2"
             slot="popover"
           >

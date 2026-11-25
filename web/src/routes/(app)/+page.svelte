@@ -136,7 +136,7 @@
               rel="external"
               alt="Pokemon #{id}"
               class="absolute right-0 -my-2 -ml-12 w-full transition md:-my-12"
-              out:fly={{ y: distance, duration }}
+              out:fly|local={{ y: distance, duration }}
               in:fly={{ y: -distance, duration }}
             />
           {/if}
@@ -146,7 +146,7 @@
               rel="external"
               alt="Pokemon #{id}"
               class="absolute right-0 -my-2 -ml-12 w-full transition md:-my-12"
-              out:fly={{ y: distance, duration }}
+              out:fly|local={{ y: distance, duration }}
               in:fly={{ y: -distance, duration }}
             />
           {/if}
