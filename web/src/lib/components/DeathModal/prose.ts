@@ -1,4 +1,5 @@
 import { capitalise } from '$utils/string'
+import { idioma, traducirNombre } from '$lib/lockedex/idioma.js'
 
 export enum Tokens {
     TPoke = '<TRAINER POKEMON>',
@@ -19,7 +20,7 @@ export enum ELossType {
     Dramatic = 'drama',
 }
 
-const Templates = {
+const TemplatesEN = {
     [ELossType.Sacrifice]: [
         `In a heroic display, ${Tokens.TPoke} sacrificed themselves to allow the rest of their team to set up and sweep ${Tokens.OName}'s team.`,
         `${Tokens.TPoke} knew that sacrificing themselves was necessary to give the team a better chance in future battles.`,
@@ -70,6 +71,58 @@ const Templates = {
     ],
 }
 
+// Las mismas ideas en español. «el <POKÉMON RIVAL> de <RIVAL>» se arregla en format() cuando es salvaje.
+const TemplatesES = {
+    [ELossType.Sacrifice]: [
+        `En un acto heroico, ${Tokens.TPoke} se sacrificó para que el resto del equipo pudiera prepararse y barrer al equipo de ${Tokens.OName}.`,
+        `${Tokens.TPoke} sabía que sacrificarse era necesario para dar al equipo más opciones en los combates que quedaban.`,
+        `Sacrificar a ${Tokens.TPoke} fue una decisión calculada para acabar con el ${Tokens.OPoke} de ${Tokens.OName} y asegurar la victoria.`,
+        `${Tokens.TPoke} se sacrificó para poder sacar a un compañero con ventaja de tipo y darle la vuelta al combate.`,
+        `Aunque perder a ${Tokens.TPoke} dolió, a la larga su sacrificio era la mejor jugada.`,
+        `${Tokens.TPoke} no era muy eficaz contra el ${Tokens.OPoke} de ${Tokens.OName}, pero el resto del equipo tampoco.`,
+        `El equipo se enfrentaba a un ${Tokens.OPoke} durísimo. Para ganar, hubo que sacrificar a ${Tokens.TPoke}...`,
+    ],
+    [ELossType.Mistake]: [
+        `El ${Tokens.OPoke} de ${Tokens.OName} tenía una habilidad que pilló a ${Tokens.TPoke} totalmente desprevenido antes de debilitarlo.`,
+        `El ${Tokens.OPoke} de ${Tokens.OName} llevaba un objeto que le daba ventaja, y ${Tokens.TPoke} no supo contrarrestarlo.`,
+        `${Tokens.TPoke} creía que podía con un simple ${Tokens.OPoke} ${Tokens.OType}. Pero sus ataques no hacían suficiente daño.`,
+        `A pesar de prepararse a conciencia, ${Tokens.TPoke} no pudo con ${Tokens.OName} y sus Pokémon ${Tokens.OType}.`,
+        `Confiarlo todo a ${Tokens.TPoke} fue un error: no pudo con el variado equipo de ${Tokens.OName}.`,
+        `Subestimar el extraño equipo de ${Tokens.OName} le costó la vida a ${Tokens.TPoke}.`,
+        `${Tokens.TPoke} no se esperaba que el ${Tokens.OPoke} de ${Tokens.OName} usara ${Tokens.OAtk}.`,
+        `En un momento de desesperación, ${Tokens.TPoke} usó el movimiento equivocado contra el Pokémon ${Tokens.OType} de ${Tokens.OName}, y lo pagó caro.`,
+    ],
+    [ELossType.Luck]: [
+        `El ${Tokens.OAtk} del ${Tokens.OPoke} de ${Tokens.OName} paralizó a ${Tokens.TPoke}, que no pudo moverse en varios turnos y cayó sin remedio.`,
+        `${Tokens.TPoke} se enfrentaba al último Pokémon de ${Tokens.OName}, un ${Tokens.OPoke}, pero no paraba de recibir golpes críticos.`,
+        `${Tokens.TPoke} iba bien en el combate hasta que el ${Tokens.OPoke} de ${Tokens.OName} le asestó un crítico que lo debilitó de un golpe.`,
+        `Pese a tener ventaja de tipo, ${Tokens.TPoke} fallaba un ataque tras otro, y el ${Tokens.OPoke} de ${Tokens.OName} no perdonó.`,
+        `En un combate muy tenso, ${Tokens.TPoke} cayó ante el ${Tokens.OPoke} de ${Tokens.OName}, que encadenó crítico tras crítico.`,
+        `El ${Tokens.OPoke} de ${Tokens.OName} confundió a ${Tokens.TPoke}, que se hirió a sí mismo una y otra vez hasta debilitarse.`,
+        `${Tokens.TPoke} estaba a punto de rematar al ${Tokens.OPoke} de ${Tokens.OName}, pero falló, y quedó a merced de un ${Tokens.OAtk} devastador.`,
+        `Ni con toda la preparación del mundo viste venir la Explosión del ${Tokens.OPoke}, que se llevó por delante a ${Tokens.TPoke}.`,
+        `${Tokens.TPoke} tuvo mala suerte: sus movimientos fallaron una y otra vez, y eso lo condenó.`,
+        `${Tokens.TPoke} se quedó dormido y no había manera de despertarlo, así que el ${Tokens.OPoke} de ${Tokens.OName} tuvo tiempo de sobra.`,
+        `¡El ${Tokens.OAtk} del ${Tokens.OPoke} de ${Tokens.OName} fue superefectivo!`,
+        `En su combate contra ${Tokens.OName}, ${Tokens.TPoke} cayó enseguida por un ${Tokens.OAtk} bien colocado de ${Tokens.OPoke}.`,
+    ],
+    [ELossType.Dramatic]: [
+        `Mientras ${Tokens.TPoke} surcaba los cielos, un ${Tokens.OPoke} salvaje lo pilló por sorpresa y lo hizo caer en picado.`,
+        `Con un rugido feroz, ${Tokens.TPoke} se lanzó contra un ${Tokens.OPoke} aparentemente inofensivo. Pero un ${Tokens.OAtk} repentino lo dejó fuera de combate.`,
+        `El fiel ${Tokens.TPoke} plantó cara a un extraño ${Tokens.OPoke}, pero acabó sucumbiendo a su implacable ${Tokens.OAtk}.`,
+        `Curtido en mil batallas, ${Tokens.TPoke} se lanzó de cabeza contra un ${Tokens.OPoke}, deseando demostrar su fuerza. Pero un ${Tokens.OAtk} por sorpresa cambió el combate.`,
+        `${Tokens.TPoke} se preparaba para vencer a un ${Tokens.OPoke} que parecía débil, hasta que una extraña aura lo paralizó. Para cuando quiso responder, era tarde.`,
+        `${Tokens.TPoke} se plantó confiado ante un ${Tokens.OPoke} que no parecía gran cosa. Pero lo confundió, y ${Tokens.TPoke} acabó debilitándose él solo.`,
+        `${Tokens.TPoke} entró en combate con una determinación feroz contra un ${Tokens.OPoke}, pero un ${Tokens.OAtk} limpio e inesperado lo tumbó.`,
+        `Joven e inexperto, ${Tokens.TPoke} cargó con valentía contra un temible ${Tokens.OPoke}. Su ${Tokens.OAtk} no dejó más que cenizas.`,
+        `Aunque estaba en desventaja, ${Tokens.TPoke} luchó con todas sus fuerzas. Pero el ${Tokens.OPoke} respondió con un ${Tokens.OAtk} crítico del que no pudo recuperarse.`,
+        `Un ${Tokens.OPoke} emboscó a ${Tokens.TPoke} y lo arrolló con una precisión mortal. En el caos del combate, ${Tokens.TPoke} no resistió su ${Tokens.OAtk}.`,
+        `${Tokens.TPoke} dio guerra, pero el ${Tokens.OPoke} de ${Tokens.OName} fue más fuerte y se llevó la victoria con un ${Tokens.OAtk} bien colocado.`,
+    ],
+}
+
+const Templates = () => (idioma() === 'es' ? TemplatesES : TemplatesEN)
+
 enum EType { Boss = 'boss', Wild = 'encounter', Trainer = 'trainer' }
 interface ILvl { from?: number, to?: number }
 interface IPokémon { name?: string, types?: [string, string] | [string] }
@@ -91,9 +144,10 @@ interface ICtx {
 
 
 export const randomTemplate = (category = ELossType.Dramatic): string => {
-    const TCat = category === ELossType.Random
-        ? Object.values(Templates).flat()
-        : Templates[category]
+    const T = Templates()
+    const TCat = category === ELossType.Random || !T[category]
+        ? Object.values(T).flat()
+        : T[category]
 
   return TCat[Math.floor(Math.random() * TCat.length)]
 }
@@ -103,6 +157,7 @@ export const format = (
     ctx: ICtx
 ): string  => {
     if (!text) return
+    if (idioma() === 'es') return formatES(text, ctx)
 
     let otype: string = ''
     if (ctx?.trainer?.speciality) otype = ctx?.trainer?.speciality + ' type'
@@ -125,5 +180,34 @@ export const format = (
         .replace(/the wild's (\w+)/g, 'the wild $1')
         .replace(/to use attack/g, 'to use a surprise attack')
 
+    return capitalise(res)
+}
+
+// Igual que format(), con las concordancias del español:
+// «Sparky (Pikachu)», «el Rattata salvaje», «de tipo Fuego», «ataque» si no se sabe el movimiento.
+const SALVAJE = '\u00a7salvaje\u00a7'
+const formatES = (text: string, ctx: ICtx): string => {
+    const tipo = (t?: string) => t ? 'de tipo ' + traducirNombre(capitalise(t)) : ''
+    let otype = ''
+    if (ctx?.trainer?.speciality) otype = tipo(ctx.trainer.speciality)
+    if (ctx?.opponent?.types) otype = tipo(ctx.opponent.types[0])
+
+    const defaultOName = ctx.type === EType.Wild ? SALVAJE : 'su rival'
+    const pokemon = ctx?.pokemon?.name
+    const res = text
+        .replace(Tokens.TPoke, ctx?.nickname && pokemon ? `${ctx.nickname} (${pokemon})` : (ctx?.nickname || pokemon || 'tu Pokémon'))
+        .replaceAll(Tokens.TPoke, ctx?.nickname || pokemon || 'tu Pokémon')
+        .replaceAll(Tokens.OName, ctx.type === EType.Trainer
+            ? (((ctx?.trainer?.type || '') + ' ' + (ctx?.trainer?.name || '')).trim() || defaultOName)
+            : (ctx?.trainer?.name || defaultOName))
+        .replaceAll(Tokens.OPoke, ctx?.opponent?.name || 'Pokémon')
+        .replaceAll(Tokens.OAtk, ctx?.attack?.name || 'ataque')
+        .replaceAll(Tokens.OType, otype)
+        .replace(new RegExp(' de ' + SALVAJE, 'g'), ' salvaje')
+        .replace(new RegExp(SALVAJE, 'g'), 'el Pokémon salvaje')
+        .replace(/ de el /g, ' del ')
+        .replace(/ a el /g, ' al ')
+        .replace(/ +/g, ' ')
+        .replace(/ ([.,])/g, '$1')
     return capitalise(res)
 }

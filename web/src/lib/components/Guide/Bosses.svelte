@@ -9,6 +9,8 @@
   import { Link } from '$icons'
 
   import { GuideBossOrder } from '$lib/data/groups'
+  import { t, idioma, traducirNombre, grupoGuia } from '$lib/lockedex/idioma.js'
+  const es = idioma() === 'es'
 
   const count = Object.values(gyms).flat().length
   const order = GuideBossOrder.filter(i => gyms[i])
@@ -25,15 +27,27 @@
 </script>
 
 <h2 id=boss-summary class=max-w-[36ch]>
-  <a title='{game.title} Boss Battles' href='{path}#boss-summary'>
+  <a title={t('Jefes de ' + game.title, game.title + ' Boss Battles')} href='{path}#boss-summary'>
     <Icon inline={true} icon={Link} height=1.8rem class=fill-current />
   </a>
-  {game.title} Boss Battles
+  {t('Jefes de ' + game.title, game.title + ' Boss Battles')}
 </h2>
 
 
 <section class=copy>
   <div>
+    {#if es}
+    <p>
+      Para completar un Nuzlocke de <b>{game.title}</b> y llegar a Campeón tendrás que ganar
+      <span class=figure>{count}</span> combates contra jefes por la región de {traducirNombre(capitalise(game.region))}:
+      desde los piques con el rival y el equipo malvado hasta los Líderes de gimnasio y, al final, el Alto Mando.
+    </p>
+    <p>
+      Pueden costar, sobre todo cuando arriesgas a tus Pokémon con mote. Por eso abajo tienes cada combate al
+      detalle, con todo lo que necesitas para enfrentarte desde el <b>{capitalise(rivalData.pokemon[0].name)} de {rivalData.name}</b>
+      hasta el <b>{capitalise(champData.pokemon.slice(-1)[0].name)} de {champData.name}</b>.
+    </p>
+    {:else}
     <p>
       In order to complete a <b>{game.title}</b> Nuzlocke and become the
       Champion, you will need to win <span class=figure>{count}</span>
@@ -47,45 +61,54 @@
       face everything from <b>{rivalData.name}'s {capitalise(rivalData.pokemon[0].name)}</b> to
       <b>{champData.name}'s {capitalise(champData.pokemon.slice(-1)[0].name)}</b>.
     </p>
+    {/if}
   </div>
   <div>
     {#each order as group}
       <p>
         {gyms[group].length}
-        <span>{group} fight{gyms[group].length !== 1 ? 's' : ''}</span>
+        <span>{es ? grupoGuia(group) : group + ' fight' + (gyms[group].length !== 1 ? 's' : '')}</span>
       </p>
     {/each}
   </div>
 </section>
 
 <section class=starter>
-  <h3>Select your starter type</h3>
+  <h3>{t('Elige el tipo de tu inicial', 'Select your starter type')}</h3>
   <ul role=radiogroup class=flex>
     {#each ['grass', 'water', 'fire'] as type}
       <li class={type} aria-checked={starter === type} role=radio>
-        <button title='Select {type}' on:click={setstarter(type)}>
+        <button title={t('Elegir ' + traducirNombre(capitalise(type)), 'Select ' + type)} on:click={setstarter(type)}>
           <PIcon className='starter-icon' type=symbol name='type-{type}' />
         </button>
       </li>
     {/each}
   </ul>
 
+  {#if es}
+  <p>
+    Como en todos los juegos de Pokémon, tendrás que elegir un inicial. Su tipo cambia algunos equipos de
+    los jefes: por ejemplo, si tu inicial es de tipo Planta, <b>{rivalData.name}</b> podría llevar uno de tipo
+    Fuego para aprovecharse.
+  </p>
+  {:else}
   <p>
     Like all Pokémon games, you will have to select a starter. The
     type will update some of the boss teams to match. For
     example, if your starter was a grass type <b>{rivalData.name}</b> might have a
     fire type to take advantage!
   </p>
+  {/if}
 </section>
 
 {#each order as group, i}
   <section>
     <h3 id={toSlug(group)}>
-      <a title='{group} fights' href='{path}#{toSlug(group)}'>
+      <a title={grupoGuia(group)} href='{path}#{toSlug(group)}'>
         <Icon inline={true} icon={Link} height=1.8rem class=fill-current />
       </a>
 
-      {group} fights
+      {grupoGuia(group)}
     </h3>
 
     <ul>

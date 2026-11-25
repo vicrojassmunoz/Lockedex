@@ -26,3 +26,15 @@ export const traducirNombre = (texto = '') => {
 
 // Para textos propios de Lockedex
 export const t = (es, en) => (idioma() === 'es' ? es : en ?? es)
+
+// Grupos de jefes de las guías, en plural («Líderes de gimnasio»)
+const GRUPOS = {
+  'Gym Leader': ['Líderes de gimnasio', 'Gym Leader fights'],
+  'Elite Four': ['Alto Mando', 'Elite Four fights'],
+  Rival: ['Rival', 'Rival fights'],
+  'Evil Team': ['Equipo malvado', 'Evil Team fights'],
+  'Mini Boss': ['Minijefes', 'Mini Boss fights'],
+  Titan: ['Titanes', 'Titan fights'],
+  Other: ['Otros', 'Other fights']
+}
+export const grupoGuia = (g) => t(...(GRUPOS[g] || [g, g + ' fights']))

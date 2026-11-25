@@ -5,7 +5,9 @@ import { Expanded as Games } from '$lib/data/games.js'
 import Themes from '$lib/data/theme.json'
 
 export const csr = true
-export const prerender = true
+// No se prerenderiza: cada guía salía en un HTML de 3–6 MB con todos sus datos dentro (171 MB en total
+// en el instalador). En la app de escritorio el servidor local la genera al abrirla, y tarda poco.
+export const prerender = false
 
 export async function load({ params, url, fetch }) {
   const { game } = params

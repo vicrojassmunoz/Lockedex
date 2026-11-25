@@ -32,6 +32,7 @@
 
   import { createImgUrl } from '$utils/rewrites'
   import { toList } from '$utils/string'
+  import { t as tr } from '$lib/lockedex/idioma.js'
 
   import { Picture, Icon, PIcon, IconButton, Accordion, Tooltip } from '$c/core'
   import { Wrapper as SettingWrapper } from '$lib/components/Settings'
@@ -208,9 +209,10 @@
     {name} - {#if location}{location}{/if}
   </h4>
   <p class="sr-only">
-    {name} has a team of {pokemon.length}, made up of
-    {toList(pokemon, (p) => `a level ${p?.level} ${p?.name}`)}. The level cap
-    for this fight is level {levelCap}.
+    {tr(
+      `${name} tiene un equipo de ${pokemon.length}: ${toList(pokemon, (p) => `${p?.name} de nivel ${p?.level}`, 'y')}. El nivel máximo para este combate es ${levelCap}.`,
+      `${name} has a team of ${pokemon.length}, made up of ${toList(pokemon, (p) => `a level ${p?.level} ${p?.name}`)}. The level cap for this fight is level ${levelCap}.`
+    )}
   </p>
 {/if}
 

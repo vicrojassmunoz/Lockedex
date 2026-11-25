@@ -7,35 +7,50 @@
 
   import Icon from '@iconify/svelte/dist/OfflineIcon.svelte'
   import { Link } from '$icons'
+  import { t, traducirNombre, idioma } from '$lib/lockedex/idioma.js'
+  const es = idioma() === 'es'
 </script>
 
 <h2 id="encounters">
-  <a title="{game.title} Encounters" href="{path}#encounters">
+  <a title={t('Encuentros de ' + game.title, game.title + ' Encounters')} href="{path}#encounters">
     <Icon inline={true} icon={Link} height="1.8rem" class="fill-current" />
   </a>
-  {game.title} Encounters
+  {t('Encuentros de ' + game.title, game.title + ' Encounters')}
 </h2>
 
-<p>
-  A fun aspect of Nuzlocke runs is the variety of encounters forcing you to try
-  out new Pokémon you've never used before. That is why it's important to know
-  which Pokémon will be available during a run. We've compiled a list of every
-  encounter for <b>Pokémon {game.title}</b> so you can quickly see who you might
-  want on your team!
-</p>
-<p>
-  <b>Pokémon {game.title}</b> has <span class="figure">{routes.length}</span>
-  different encounter locations with
-  <span class="figure">{count}</span> different Pokémon available as wild
-  encounters.
-  <span aria-hidden>Hover over a Pokémon to see where to encounter it!</span>
-</p>
+{#if es}
+  <p>
+    Lo bonito de un Nuzlocke es la variedad de encuentros, que te obliga a probar Pokémon que nunca habías
+    usado. Por eso conviene saber qué Pokémon vas a poder conseguir. Aquí tienes todos los encuentros de
+    <b>Pokémon {game.title}</b> para ver de un vistazo a quién querrías en tu equipo.
+  </p>
+  <p>
+    <b>Pokémon {game.title}</b> tiene <span class="figure">{routes.length}</span> lugares con encuentros y
+    <span class="figure">{count}</span> Pokémon distintos que se pueden encontrar en estado salvaje.
+    <span aria-hidden>Pasa el ratón por encima de un Pokémon para ver dónde aparece.</span>
+  </p>
+{:else}
+  <p>
+    A fun aspect of Nuzlocke runs is the variety of encounters forcing you to try
+    out new Pokémon you've never used before. That is why it's important to know
+    which Pokémon will be available during a run. We've compiled a list of every
+    encounter for <b>Pokémon {game.title}</b> so you can quickly see who you might
+    want on your team!
+  </p>
+  <p>
+    <b>Pokémon {game.title}</b> has <span class="figure">{routes.length}</span>
+    different encounter locations with
+    <span class="figure">{count}</span> different Pokémon available as wild
+    encounters.
+    <span aria-hidden>Hover over a Pokémon to see where to encounter it!</span>
+  </p>
+{/if}
 
 <p>
   {#each Object.entries(encounters).sort(([, a], [, b]) => a.length - b.length) as [type, encounters]}
     <h3 class="sr-only">
       {encounters.length}
-      {capitalise(type)} Pokémon encounters
+      {t('encuentros de Pokémon de tipo ' + traducirNombre(capitalise(type)), capitalise(type) + ' Pokémon encounters')}
     </h3>
     <ul class="sr-only">
       {#each encounters as { name, sprite }}
@@ -43,7 +58,7 @@
           {capitalise(name)} - {toList(
             encounterMap[sprite] || [],
             (i) => i,
-            'and'
+            t('y', 'and')
           )}
         </li>
       {/each}
@@ -57,7 +72,7 @@
       <h3>
         <span>
           <a
-            title="{capitalise(type)} Pokémon"
+            title={t('Pokémon de tipo ' + traducirNombre(capitalise(type)), capitalise(type) + ' Pokémon')}
             href="{path}#{toId.encounter(type)}"
           >
             <Icon
@@ -67,7 +82,7 @@
               class="fill-current"
             />
           </a>
-          <span class="figure">{encounters.length}</span>{capitalise(type)} Pokémon
+          <span class="figure">{encounters.length}</span>{t('Pokémon de tipo ' + traducirNombre(capitalise(type)), capitalise(type) + ' Pokémon')}
         </span>
         <TypeBadge type={type.toLowerCase()} />
       </h3>
@@ -80,7 +95,7 @@
               Find {name} at {toList(
                 encounterMap[sprite] || [],
                 (i) => i,
-                'and'
+                t('y', 'and')
               )}
             </Tooltip>
           </li>

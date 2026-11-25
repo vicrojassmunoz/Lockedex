@@ -5,6 +5,7 @@
   import { PIcon } from '$c/core'
   import Icon from '@iconify/svelte/dist/OfflineIcon.svelte'
   import { Chevron } from '$icons'
+  import { t, traducirNombre, grupoGuia } from '$lib/lockedex/idioma.js'
 
   const splitAt = (arr, i) => [arr.slice(0, i), arr.slice(i)]
 
@@ -17,7 +18,7 @@
 
 <aside class:show class=g-container>
   <button class='head w-full' on:click={onshow}>
-    <h2>In this guide</h2>
+    <h2>{t('En esta guía', 'In this guide')}</h2>
 
     <Icon inline={true} icon={Chevron} class=fill-current height=2rem />
   </button>
@@ -25,14 +26,14 @@
   <div class=main>
     <div class=encounters>
       <h3>
-        <a href='{path}#encounters'>Encounters</a>
+        <a href='{path}#encounters'>{t('Encuentros', 'Encounters')}</a>
       </h3>
       <ul>
         {#each Object.keys(encounters) as type}
           <li>
             <a href='{path}#{toId.encounter(type)}'>
               <PIcon type=symbol className=icon name='type-{type.toLowerCase()}-badge-32px' />
-              {capitalise(type)} Encounters
+              {t('Encuentros de tipo ' + traducirNombre(capitalise(type)), capitalise(type) + ' Encounters')}
             </a>
           </li>
         {/each}
@@ -41,7 +42,7 @@
 
     <div class=boss>
       <h3>
-        <a href='{path}#boss-summary'>Boss battles</a>
+        <a href='{path}#boss-summary'>{t('Combates contra jefes', 'Boss battles')}</a>
       </h3>
     </div>
 
@@ -49,13 +50,13 @@
       <div class=boss-group>
         {#each groups as group}
           <h4>
-            <a href='{path}#{toSlug(group)}'>{group} fights</a>
+            <a href='{path}#{toSlug(group)}'>{grupoGuia(group)}</a>
           </h4>
 
           <ul>
             {#each gyms[group] as { boss, name }}
               <li>
-                <a href='{path}#{toId.boss(boss, name)}'>{boss} at {name}</a>
+                <a href='{path}#{toId.boss(boss, name)}'>{boss} {t('en', 'at')} {name}</a>
               </li>
             {/each}
           </ul>

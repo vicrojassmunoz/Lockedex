@@ -17,7 +17,8 @@ pals = [pal(raiz+prim+f'/palettes/{i:02}.pal') for i in range(NPRIM_P)] + [pal(r
 def tile(i): return tp[i] if i < NPRIM_T else ts[i-NPRIM_T] if i-NPRIM_T < len(ts) else [0]*64
 def metas(p):
     d = open(p, 'rb').read(); return [struct.unpack('<8H', d[i:i+16]) for i in range(0, len(d), 16)]
-ms = metas(raiz+sec+'/metatiles.bin')
+PRIMARIO = len(sys.argv) > 4 and sys.argv[4] == 'primario'  # dibujar los metatiles del primario
+ms = metas(raiz+(prim if PRIMARIO else sec)+'/metatiles.bin')
 def render(m):
     im = Image.new('RGBA', (16, 16), (0, 0, 0, 0))
     for capa in range(2):
@@ -37,5 +38,5 @@ if __name__ == '__main__':
     for i, m in enumerate(ms):
         x, y = (i % cols)*(16*E+2), (i//cols)*(16*E+12)
         hoja.paste(render(m).resize((16*E, 16*E), Image.NEAREST), (x, y+12))
-        d.text((x+2, y), str(NPRIM_M+i), fill=(255, 255, 0))
+        d.text((x+2, y), str(i if PRIMARIO else NPRIM_M+i), fill=(255, 255, 0))
     hoja.save(salida); print(len(ms), hoja.size)

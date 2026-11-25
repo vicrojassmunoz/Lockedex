@@ -1,4 +1,5 @@
 <script>
+  import { t } from '$lib/lockedex/idioma.js'
   export let links
   import { SVGs } from './'
   const order = ['romhack', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX']
@@ -8,7 +9,7 @@
   {@html SVGs.lines}
 
   <div class=g-container>
-    <h2>Other Nuzlocke Guides</h2>
+    <h2>{t('Otras guías Nuzlocke', 'Other Nuzlocke Guides')}</h2>
 
     <div class=g-grid>
       {#each order as id}

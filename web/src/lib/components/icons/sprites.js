@@ -31,6 +31,23 @@ export const Spa = objeto('power-lens')
 export const Spd = objeto('power-band')
 export const Spe = objeto('power-anklet')
 
+// Lugares: trozos del mapa de RojoFuego (tileset general) y objetos del mapa
+export const LongGrass = objeto('hierba-alta') // Hierba alta (botón de revelar)
+export const Forest = objeto('arbol')
+export const City = objeto('centro-pokemon')
+export const Town = objeto('cartel-pueblo')
+export const Route = objeto('cartel-ruta')
+export const Tunnel = objeto('cueva')
+export const Mountain = objeto('monte')
+export const Stadium = objeto('cartel-gimnasio')
+export const Ruins = objeto('fosil')
+export const Shrine = objeto('piedra-mistica')
+
+// Clase del movimiento, a la manera de los iconos de la 4.ª generación
+export const Physical = objeto('clase-fisico')
+export const Special = objeto('clase-especial')
+export const Status = objeto('clase-estado')
+
 // Equipo: el personaje del mapa del avatar del perfil (Rojo si no hay o no tiene sprite).
 // El cuerpo se lee al dibujar el icono, así que vale con cambiar la ruta cuando se sepa.
 let hrefEquipo = '/lx/mapa/frlg/red_normal.png'
