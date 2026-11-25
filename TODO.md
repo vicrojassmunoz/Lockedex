@@ -222,6 +222,17 @@ Hecho: reglas por run en `lockedex.reglas.<id>` (`web/src/lib/lockedex/reglas.js
 
 ---
 
+## 5b. Modos de juego (pedido el 25/11)
+
+Ampliar los modos además de Nuzlocke clásico, Hardcore y Randomlocke. Cada modo = plantilla de reglas + lo que la app tenga que llevar (contadores, avisos, pantallas):
+
+- [ ] **Modo con vidas** (p. ej. «Extremo: 10 vidas»): un contador de vidas por run; cada Pokémon caído resta una y al llegar a 0 es game over (con «nuevo intento»). Que el número sea configurable.
+- [ ] **Egglocke:** los encuentros se cambian por huevos (los Pokémon que salen de ellos son los que usas). Apuntar qué sale de cada huevo.
+  - [ ] **Generador de Egglocke** (más adelante, «fumada pero se tendrá que poder»): reparto de huevos con Pokémon aleatorios **por juego oficial** (solo especies que existen en ese juego/generación), con opciones (sin legendarios, por tipo, equilibrado por evoluciones…) y una lista para compartir/imprimir.
+- [ ] **Cláusula de revivir:** cuándo se puede revivir a un Pokémon, si se permite (p. ej. uno por cada medalla/gimnasio, o X en toda la run). La app lleva la cuenta de revividos disponibles y saca al Pokémon del cementerio de vuelta a la Caja.
+- [ ] **Duallocke / Soul Link:** dos jugadores con runs enlazadas (los encuentros de cada zona van en pareja; si cae uno, cae su pareja). **Con un sistema de amigos sería la repanocha:** enlazar dos runs entre dos Lockedex (cuenta o código de amigo, sincronización por la nube o por archivo/QR), ver la run del otro y que las muertes se propaguen.
+- [ ] Otras variantes populares a valorar: **Wonderlocke** (intercambio prodigioso), **Monotype** (solo un tipo), **Genlocke** (varias generaciones seguidas con el equipo del anterior), **Wedlocke** (parejas), **Sacrificio**, **Nuzlocke por niveles (level cap estricto)**…
+
 ## 6. Otras mejoras y limitaciones conocidas
 
 - [x] **Consejos del riesgo cortados en el modo compacto** (avisado el 25/11): la ventana flotante de 320 px se salía de la ventana. Desde la 1.6.0, en el compacto los consejos salen en un desplegable a todo el ancho, debajo del medidor (`Riesgo.svelte` tiene `sinPopover`).
