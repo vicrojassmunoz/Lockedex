@@ -66,7 +66,7 @@
     let paraRiesgo = datos
     if (aleatorio) {
       const real = leerEquiposJefes(partida.id)[jefe.value]
-      paraRiesgo = real?.length ? comoJefe(jefe.boss || jefe.name, real, await cargarCalc(partida.info.gen || 9)) : null
+      paraRiesgo = real?.length ? await comoJefe(jefe.boss || jefe.name, real, await cargarCalc(partida.info.gen || 9)) : null
     }
     const r = paraRiesgo ? await calcularRiesgo({ jefe: paraRiesgo, equipo: equipoActual, gen: partida.info.gen, cap: nivel }) : null
     if (jefe?.value !== visto) return // se cambió de jefe mientras se calculaba

@@ -20,6 +20,14 @@ export const guardarEquipoJefe = (partidaId, jefeId, equipo) => {
 }
 
 // Lo convierte al formato de la liga para el cálculo de riesgo
+// Hasta la 3.ª gen la clase del movimiento (físico/especial) la decide su tipo; la división por
+// movimiento llega con Diamante y Perla (4.ª gen)
+const TIPOS_FISICOS = ['normal', 'fighting', 'flying', 'poison', 'ground', 'rock', 'bug', 'ghost', 'steel']
+export const claseSegunGen = (clase, tipo, gen) =>
+  gen && gen <= 3 && clase && clase !== 'status' && tipo
+    ? TIPOS_FISICOS.includes(String(tipo).toLowerCase()) ? 'physical' : 'special'
+    : clase
+
 export const comoJefe = async (nombre, equipo, datosCalc) => {
   const movs = await movimientos()
   const norm = (s = '') => ('' + s).toLowerCase().replace(/[^a-z0-9]/g, '')
@@ -34,7 +42,7 @@ export const comoJefe = async (nombre, equipo, datosCalc) => {
         moves: (p.movimientos || [])
           .map((m) => movs[norm(m)])
           .filter(Boolean)
-          .map((m) => ({ name: m.en, type: m.tipo, damage_class: m.clase, power: m.potencia }))
+          .map((m) => ({ name: m.en, type: m.tipo, damage_class: claseSegunGen(m.clase, m.tipo, datosCalc?.g?.num), power: m.potencia }))
       }
     })
   }

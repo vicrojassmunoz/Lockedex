@@ -1,5 +1,4 @@
-## Novedades de la 1.10.1
+## Novedades de la 1.10.2
 
-- **Perfil con más logros:** pasan de 8 a 15 (Ocho de ocho, Cazajefes, Equipo completo, ¡Brilla!, Veterano, A la suerte, Superviviente…). Cada uno lleva el sprite de un objeto de los juegos (Master Ball, Cinta Campeón, Pepita, Revivir…) en vez de un símbolo, y se ve en gris hasta conseguirlo.
-- **Estadísticas por juego** en el perfil: runs, intentos, medallas de tu mejor run, capturas, caídos y ligas ganadas de cada juego.
-- **Riesgo:** los jefes de **Rubí y Zafiro** también usan sus IVs reales del juego (ya son 525 Pokémon con los de RojoFuego, VerdeHoja y Esmeralda).
+- **Clase de los movimientos según la generación:** hasta la 3.ª generación, si un movimiento es físico o especial lo decide su tipo (Fuego, Agua, Planta… especiales; Normal, Lucha, Roca… físicos). Ya se tenía en cuenta en los jefes y en el medidor de riesgo; ahora también en los equipos de jefe que apuntas en Randomlocke.
+- **Arreglado:** en el modo compacto, el riesgo de un jefe de Randomlocke con el equipo apuntado no llegaba a calcularse.
