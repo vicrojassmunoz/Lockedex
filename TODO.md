@@ -80,17 +80,17 @@ Cómo hacerlo: ir componente a componente, con capturas antes y después. Se pue
   3. **Actualizaciones solo de contenido:** si Electron no cambia, bajar solo un zip de `app/` (unos MB) firmado con hash SHA-256 publicado en la release, descomprimirlo en `userData` y servir desde ahí; el instalador completo solo cuando cambia la versión de Electron o `main.mjs`.
 
 ### Repaso del usuario (25/11, tarde) — pendiente
-- [ ] **Iconos que siguen igual que en nuzlocke-redux** (cambiarlos por sprites de los juegos ≤ 5.ª gen o pixel art propio):
+- [x] **1.9.1** — **Iconos que siguen igual que en nuzlocke-redux** (Guardar = Diario, Ajustes = Pieza Máquina, Partida = Pokédex del mapa, Tipo = Tabla Llama, Total = Brazal Firme, análisis de Caja/Equipo = Periscopio, daño máximo del VS = Protección Especial; VS traducido y barras a píxeles). Queda: rediseñar la ventana de VS entera con estética GBA/NDS (cabeceras, pestañas) y los huecos vacíos del equipo: (cambiarlos por sprites de los juegos ≤ 5.ª gen o pixel art propio):
   - **Guardar** (disquete), **Partida** (mando de la pestaña), **Ajustes** (engranaje).
   - En la Caja (dentro de Partida): los botones **«Caja» y «Equipo»** de arriba a la izquierda (matraces) y el aviso de **coberturas que le faltan a tu equipo**.
   - Botones de ordenar **«Tipo»** (llama) y **«Total»** (barras).
   - Ventana de **versus** (VS): las pestañas **«Equipo» y «Comparar»** y el icono de **súper eficaz**.
-- [ ] **Icono de movimiento de estado** (el círculo gris tipo yin-yang, p. ej. Ataque Arena): **no le convence** → buscar otro (p. ej. el icono de estado real de la 4.ª gen: círculo gris con espiral, o un símbolo más claro).
-- [ ] **Capturado, Fallido y Descartado se ven muy pequeños** en las filas de encuentros; además **falta icono para «Descartado»**. Agrandarlos (o recortar los sprites de PokéSprite al contenido y escalarlos ×2).
+- [x] 1.9.1: **Icono de movimiento de estado** → espiral morada (como Hipnosis) en vez del yin-yang. Antes: (el círculo gris tipo yin-yang, p. ej. Ataque Arena): **no le convence** → buscar otro (p. ej. el icono de estado real de la 4.ª gen: círculo gris con espiral, o un símbolo más claro).
+- [x] 1.9.1: los iconos-sprite se recortan a su dibujo (`icons/recortes.js`, generado) y se ven grandes; Descartado = papelera metálica. Antes: **Capturado, Fallido y Descartado se ven muy pequeños** en las filas de encuentros; además **falta icono para «Descartado»**. Agrandarlos (o recortar los sprites de PokéSprite al contenido y escalarlos ×2).
 - [ ] **Analista: lavado de cara a fondo** — se parece demasiado al original. Misma línea que el menú de equipo y la ficha (estética GBA/NDS: marcos de `gba.js`, letra Fusion Pixel, paneles de la pantalla de datos).
 - [ ] **Perfil: no tocar** (le gusta como está).
-- [ ] **Equipo con el avatar: no sale Eusine** (`gs-eusine`): no hay sprite de mapa con ese nombre. En Cristal Eusine usa el sprite genérico de «super nerd» → añadir alias en `mapa.js` (FAMILIAS_AVATAR/ALIAS) y, para los avatares sin sprite de mapa (Sinnoh, Teselia…), usar como plan B la cabeza del propio sprite del avatar (`/assets/img/leaders/<id>.png`) en vez de Rojo.
-- [ ] **La Piedra Fuego del selector de inicial sigue cortada** (el arreglo de la 1.7.5 no bastó): mirar qué contenedor la recorta (probablemente `overflow` de la fila de encuentros o del `slot="location"` en `Game/Route.svelte`) con la ventana a 1000–1200 px.
+- [x] 1.9.1: Eusine → «super_nerd» de Cristal; sin sprite de mapa se usa el propio sprite del avatar recortado. Antes: **Equipo con el avatar: no sale Eusine** (`gs-eusine`): no hay sprite de mapa con ese nombre. En Cristal Eusine usa el sprite genérico de «super nerd» → añadir alias en `mapa.js` (FAMILIAS_AVATAR/ALIAS) y, para los avatares sin sprite de mapa (Sinnoh, Teselia…), usar como plan B la cabeza del propio sprite del avatar (`/assets/img/leaders/<id>.png`) en vez de Rojo.
+- [x] 1.9.1: la recortaba `overflow-hidden` del contenedor de la partida porque la celda de 1/8 no cabía; ahora con la ventana mediana las piedras bajan debajo de «Inicial» (probado a 1100, 1300 y 1600 px). Antes: **La Piedra Fuego del selector de inicial sigue cortada** (el arreglo de la 1.7.5 no bastó): mirar qué contenedor la recorta (probablemente `overflow` de la fila de encuentros o del `slot="location"` en `Game/Route.svelte`) con la ventana a 1000–1200 px.
 
 ## 2. Base de datos propia de Lockedex
 

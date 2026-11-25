@@ -28,7 +28,7 @@ const ALIAS = {
   },
   frlg: { gary: 'blue', rival: 'blue', grunt: 'rocket_m', rocketgrunt: 'rocket_m', ltsurge: 'lt_surge', surge: 'lt_surge' },
   gsc: {
-    silver: 'rival', ltsurge: 'surge', proton: 'rocket', petrel: 'rocket', archer: 'rocket', ariana: 'rocket_girl',
+    silver: 'rival', ltsurge: 'surge', eusine: 'super_nerd', proton: 'rocket', petrel: 'rocket', archer: 'rocket', ariana: 'rocket_girl',
     executive: 'rocket', grunt: 'rocket', gary: 'blue'
   },
   rby: { gary: 'blue', rival: 'blue', grunt: 'rocket', ltsurge: 'oak' }

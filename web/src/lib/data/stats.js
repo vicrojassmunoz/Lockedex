@@ -1,9 +1,9 @@
-import { Atk, BarChart, Def, Fire, HP, Spa, Spd, Spe, Team } from '$icons'
+import { Atk, Total, Def, Tipo, HP, Spa, Spd, Spe, Team } from '$icons'
 
 export const StatIconMap = {
   team: Team,
-  total: BarChart,
-  type: Fire,
+  total: Total,
+  type: Tipo,
   hp: HP,
   atk: Atk,
   spa: Spa,

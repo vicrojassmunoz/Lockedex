@@ -50,12 +50,16 @@ def en16(im):
 guardar(en16(objeto_mapa('secondary/pokemon_center', 741)), 'pc')
 guardar(en16(objeto_mapa('secondary/pokemon_tower', 657)), 'lapida')
 guardar(en16(misc_pret('town_map')), 'mapa-pared')
+guardar(en16(misc_pret('pokedex')), 'pokedex')
 for origen, nombre in [
     ('items/hold-item/smoke-ball', 'smoke-ball'), ('items/ball/cherish', 'cherish-ball'),
     ('misc/ribbon/champion-ribbon', 'champion-ribbon'),
     ('items/ev-item/power-weight', 'power-weight'), ('items/ev-item/power-bracer', 'power-bracer'),
     ('items/ev-item/power-belt', 'power-belt'), ('items/ev-item/power-lens', 'power-lens'),
-    ('items/ev-item/power-band', 'power-band'), ('items/ev-item/power-anklet', 'power-anklet')]:
+    ('items/ev-item/power-band', 'power-band'), ('items/ev-item/power-anklet', 'power-anklet'),
+    ('items/key-item/journal', 'diario'), ('items/key-item/machine-part', 'pieza-maquina'),
+    ('items/plate/flame', 'tabla-llama'), ('items/ev-item/macho-brace', 'brazal-firme'),
+    ('items/hold-item/scope-lens', 'periscopio'), ('items/battle-item/guard-spec', 'proteccion-especial')]:
     # Los de PokéSprite ya son de 32×32 con su margen, como los demás iconos de objetos
     im = Image.open(PS + origen + '.png').convert('RGBA')
     if im.size != (32, 32):  # las cintas son de 40×40: se centran en 32×32 sin escalar
@@ -103,10 +107,57 @@ def clase(tipo):
         d.ellipse((4, 4, 11, 11), fill='#c8d8f8', outline='#3850a8')
         d.ellipse((6, 6, 9, 9), fill='#6890f0')
     else:
-        d.ellipse((1, 1, 14, 14), fill='#d0d0d0', outline='#585858')
-        d.pieslice((1, 1, 14, 14), 90, 270, fill='#808080', outline='#585858')
-        d.ellipse((5, 1, 10, 7), fill='#d0d0d0'); d.ellipse((5, 8, 10, 14), fill='#808080')
-        d.point([(7, 4), (8, 4)], fill='#585858'); d.point([(7, 11), (8, 11)], fill='#f0f0f0')
+        # Estado: una espiral (como la de Hipnosis/Confusión) sobre un disco gris
+        d.ellipse((1, 1, 14, 14), fill='#e0e0e8', outline='#585868')
+        pts = []
+        for k in range(0, 130):
+            a = k * 0.12; r = 0.55 * a
+            if r > 5.6: break
+            pts.append((7.5 + r * math.cos(a), 7.5 + r * math.sin(a)))
+        d.line(pts, fill='#7058a0', width=1)
     return im
 for t in ('fisico', 'especial', 'estado'):
     guardar(clase(t), 'clase-' + t)
+
+# --- Descartado: papelera metálica dibujada a la manera de los objetos del mapa ---
+PAPELERA = [
+    '................',
+    '......XXXX......',
+    '....XXLLLLXX....',
+    '..XXLLLLLLLLXX..',
+    '..XMMMMMMMMMMX..',
+    '..XXXXXXXXXXXX..',
+    '...XLMDLMDLMX...',
+    '...XLMDLMDLMX...',
+    '...XLMDLMDLMX...',
+    '...XLMDLMDLMX...',
+    '...XLMDLMDLMX...',
+    '...XLMDLMDLMX...',
+    '....XMDLMDLX....',
+    '....XXXXXXXX....',
+    '................',
+    '................']
+COL = {'X': (64, 72, 80, 255), 'L': (224, 232, 240, 255), 'M': (160, 176, 192, 255), 'D': (112, 128, 144, 255)}
+pap = Image.new('RGBA', (16, 16), (0, 0, 0, 0))
+for y, fila in enumerate(PAPELERA):
+    for x, c in enumerate(fila):
+        if c in COL: pap.putpixel((x, y), COL[c])
+guardar(pap, 'papelera')
+
+# --- Recortes: cada icono enseña solo su dibujo (sin el margen del sprite), en un cuadrado ---
+import glob, json
+recortes = {}
+for f in sorted(glob.glob(os.path.join(DESTINO, '*.png'))):
+    im = Image.open(f).convert('RGBA'); w, h = im.size; caja = im.getbbox()
+    if not caja: continue
+    k = 32 / max(w, h)  # el icono dibuja el sprite a 32×32
+    x0, y0, x1, y1 = [round(v * k) for v in caja]
+    lado = max(x1 - x0, y1 - y0); lado += lado % 2
+    cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
+    recortes[os.path.basename(f)[:-4]] = [round(cx - lado / 2), round(cy - lado / 2), lado]
+salida = os.path.join(os.path.dirname(__file__), '..', 'web', 'src', 'lib', 'components', 'icons', 'recortes.js')
+with open(salida, 'w') as fh:
+    fh.write('// Generado por herramientas/iconos_juego.py: el cuadrado que ocupa el dibujo de cada sprite\n')
+    fh.write('// dentro de su icono de 32×32 ([x, y, lado]), para que se vea grande y sin el margen.\n')
+    fh.write('export default ' + json.dumps(recortes, indent=1) + '\n')
+print('recortes', len(recortes))

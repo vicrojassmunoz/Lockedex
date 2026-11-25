@@ -304,5 +304,11 @@
  "Spa": "At. Esp.",
  "Def": "Defensa",
  "Spd": "Def. Esp.",
- "Spe": "Velocidad"
+ "Spe": "Velocidad",
+ "hp": "PS",
+ "atk": "Ataque",
+ "def": "Defensa",
+ "spa": "At. Esp.",
+ "spd": "Def. Esp.",
+ "spe": "Velocidad"
 }

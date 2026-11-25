@@ -166,9 +166,12 @@
         >
           <div
             slot="location"
-            class="flex shrink-0 flex-row-reverse items-center gap-x-2 lg:-ml-6 lg:flex-row"
+            class="flex shrink-0 flex-row-reverse items-center gap-x-2 lg:flex-col-reverse lg:items-start lg:gap-y-1 2xl:flex-row 2xl:items-center"
           >
-            <StarterType {key} on:select={setstarter} bind:starter />
+            <!-- Las piedras van juntas en una fila; con la ventana mediana bajan debajo de «Inicial» para no salirse -->
+            <div class="flex shrink-0 gap-x-1">
+              <StarterType {key} on:select={setstarter} bind:starter />
+            </div>
             <p>
               Starter* <Tooltip
                 >Selecting a starter type modifies Rival encounters.</Tooltip

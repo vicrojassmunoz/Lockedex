@@ -628,9 +628,9 @@
 
   /* Botones de ordenar: fichas como las pestañas; la activa, en pantalla LCD */
   .lx-orden :global(.lx-orden-sprite) {
-    width: 26px;
-    height: 26px;
-    margin: -6px 2px -6px -6px;
+    width: 20px;
+    height: 20px;
+    margin: -4px 4px -4px -4px;
     image-rendering: pixelated;
   }
   .lx-orden {

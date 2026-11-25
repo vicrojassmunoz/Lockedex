@@ -1,4 +1,5 @@
 <script>
+  import { t } from '$lib/lockedex/idioma.js'
   import { Tabs, Icon, Tooltip, Accordion } from '$lib/components/core'
   import { Plus, Minus } from '$icons'
 
@@ -168,7 +169,7 @@
           {:else if teamList.length > 1}
             <Tooltip>Remove {compare[0].name} from team</Tooltip>
             <Icon inline icon={Minus} />
-            Remove from team
+            {t('Quitar del equipo', 'Remove from team')}
           {/if}
         </button>
       {/key}

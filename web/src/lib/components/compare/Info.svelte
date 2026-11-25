@@ -1,4 +1,5 @@
 <script>
+  import { t, traducirNombre } from '$lib/lockedex/idioma.js'
   export let dmg,
     weakness,
     moves,
@@ -24,12 +25,12 @@
   }
 
   const dmgModMap = {
-    1: 'neutral',
-    2: 'Super Effective',
-    4: '4x Super Effective',
-    0.5: '½ not very effective',
-    0.25: '¼ not very effective',
-    0: 'no'
+    1: t('daño neutro', 'neutral'),
+    2: t('daño súper eficaz', 'Super Effective'),
+    4: t('daño súper eficaz ×4', '4x Super Effective'),
+    0.5: t('½ del daño (poco eficaz)', '½ not very effective'),
+    0.25: t('¼ del daño (poco eficaz)', '¼ not very effective'),
+    0: t('ningún daño', 'no')
   }
 </script>
 
@@ -38,7 +39,7 @@
   style="transform: translateY(-5.5px)"
   class="relative w-1/2 text-center tracking-tighter md:mr-4 md:w-auto"
 >
-  <span class="text-tiny">Max dmg</span>
+  <span class="text-tiny">{t('Daño máx.', 'Max dmg')}</span>
   <Icon
     inline={true}
     height="2.2rem"
@@ -49,8 +50,10 @@
     class="absolute top-8 -mt-2 -translate-x-1/2 cursor-help font-mono text-2xl"
   >
     <Tooltip
-      >Based on {opp.name}'s moveset, the maximum damage they could could do to {team.name}
-      is {dmgModMap[dmg[team.alias][opp.alias] || 1]} damage.
+      >{t(
+        `Según los movimientos de ${opp.name}, lo máximo que le puede hacer a ${team.name} es ${dmgModMap[dmg[team.alias][opp.alias] || 1]}.`,
+        `Based on ${opp.name}'s moveset, the maximum damage they could do to ${team.name} is ${dmgModMap[dmg[team.alias][opp.alias] || 1]} damage.`
+      )}
     </Tooltip>
 
     {toFraction(dmg[team.alias][opp.alias] || 1)}x
@@ -59,7 +62,7 @@
 
 <!-- Phys vs Spec distribution -->
 <div class="-mt-px w-1/2 text-tiny font-medium tracking-tighter md:w-auto">
-  <span class="text-tiny font-normal">Dmg types</span>
+  <span class="text-tiny font-normal">{t('Tipos de daño', 'Dmg types')}</span>
   <div class="my-1 flex items-center gap-x-1">
     <TypeBadge type="physical" />
     {moves[opp.alias]?.physical || 0}%
@@ -73,7 +76,7 @@
 <!-- Type weaknesses of attacking pokemon -->
 <div class="mt-4.5 flex w-72 flex-wrap items-start md:ml-4 md:mt-px">
   <span class="w-full text-xs font-normal">
-    {opp.name}'s weaknesses
+    {t('Debilidades de ' + opp.name, opp.name + "'s weaknesses")}
   </span>
 
   {#each toGroups(opp.alias) as [mod, types], i}

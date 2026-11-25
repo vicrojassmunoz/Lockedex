@@ -25,7 +25,7 @@
 </span>
 
 <span class='{c} {className} transition col-span-3 sm:col-span-1 -ml-1 font-bold text-xs text-right'>{val}</span>
-<div style='width: {100 * val / max}%' class='{c} {className} transition col-span-5 sm:col-span-4 h-2 rounded-md ring-2' />
+<div style='width: {100 * val / max}%' class='{c} {className} lx-barra-stat transition col-span-5 sm:col-span-4 h-2 ring-2' />
 
 <style lang="postcss">
 

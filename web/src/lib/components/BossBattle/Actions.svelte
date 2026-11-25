@@ -1,4 +1,5 @@
 <script>
+  import { t } from '$lib/lockedex/idioma.js'
   export let badge, name, team
 
   import { onMount, createEventDispatcher } from 'svelte'
@@ -32,12 +33,17 @@
     class:hidden={!team.length}
     class="text-center text-xs italic opacity-50 md:w-[360px] md:text-right"
   >
-    {#if badge}
-      Mark <b>{name}</b> as <b>defeated</b> and claim their badge
+    {#if t('es', 'en') === 'es'}
+      Marcar a <b>{name}</b> como <b>derrotado</b>{#if badge} y conseguir su medalla{/if}
+      con tu equipo: {toList(team.map(format), (i) => i, 'y')}
     {:else}
-      Mark <b>{name}</b> as <b>defeated</b>
+      {#if badge}
+        Mark <b>{name}</b> as <b>defeated</b> and claim their badge
+      {:else}
+        Mark <b>{name}</b> as <b>defeated</b>
+      {/if}
+      with your team of {toList(team.map(format))}
     {/if}
-    with your team of {toList(team.map(format))}
   </p>
 
   <div class="my-4 flex justify-center gap-x-2 md:justify-end">
@@ -53,10 +59,10 @@
       rounded
     >
       {#if badge}
-        Claim badge
+        {t('Conseguir medalla', 'Claim badge')}
         <PIcon class="coin -mt-3 md:ml-2" type="b" name={badge} />
       {:else}
-        Mark victory
+        {t('Marcar victoria', 'Mark victory')}
       {/if}
     </Button>
   </div>
