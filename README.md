@@ -35,7 +35,7 @@ Windows puede mostrar el aviso «Windows protegió su PC» porque el instalador 
 
 - `web/`: la app (SvelteKit), basada en nuzlocke-redux. Lo propio de Lockedex está en `web/src/lib/lockedex/` y los datos generados en `web/static/lx/`.
 - `electron/`: el programa de escritorio (ventana, guardado en archivo, modo compacto, lectura de .sav y actualizaciones).
-- `herramientas/`: scripts que generan los datos de `web/static/lx/` a partir de PokeAPI y de los proyectos pret, `generar_marca.py`, que crea el logo y las imágenes de marca, y `generar_iconos.py`, que dibuja los iconos pixel art de la interfaz.
+- `herramientas/`: scripts que generan los datos de `web/static/lx/` a partir de PokeAPI y de los proyectos pret, `generar_marca.py`, que crea el logo y las imágenes de marca, `generar_iconos.py`, que dibuja los iconos pixel art de la interfaz, y `generar_sprites_mapa.py`, que saca los sprites de mapa de los entrenadores de los desensamblados de pret.
 - `datos/`: la base de datos propia (juegos, rutas, jefes y parches de ROM hacks). Ver `datos/LEEME.md`.
 - `marca/`: el logo de Lockedex en SVG (`icono.svg` y una versión simplificada para 16–48 px). Si lo cambias, ejecuta `python3 herramientas/generar_marca.py`.
 

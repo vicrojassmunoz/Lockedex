@@ -16,6 +16,7 @@
     img
 
   $: boss = { pokemon, name, speciality, id, img, type }
+  $: nombre = name
 
   // Extra leader data
   let doubleBattle = false,
@@ -39,6 +40,7 @@
   import { Loop as Badge, Ball, Info } from '$icons'
   import { Vs } from '$lib/components/BossBattle'
   import { bossToImage } from '$utils/rewrites'
+  import MenuEquipo from '$lib/lockedex/MenuEquipo.svelte'
 
   import Effect from '$lib/components/Effect.svelte'
 
@@ -409,43 +411,18 @@
           </button>
         </div>
       {:else}
-      {#each pokemon as p, id (p.name + id)}
-        <Pokemon
-          {...p}
-          class="snap-start scroll-mt-6"
-          sprite={createImgUrl(p, { ext: 'png' })}
-          {maxStat}
-        >
-          <button
-            class:mt-0={p.moves.length < 3}
-            class="compare z-50 mx-8 mb-2 opacity-25 transition hover:opacity-75"
-            slot="footer"
-            on:click={openCompare(id)}
-          >
-            <span class="absolute -mb-2 h-8 w-8 transform md:scale-75">
-              <Icon
-                inline={true}
-                class="absolute"
-                height="1.4em"
-                icon={Badge}
-              />
-              <Icon
-                inline={true}
-                class="absolute -top-0.5 right-1.5 rounded-full bg-white dark:bg-gray-800"
-                height="0.8em"
-                icon={Ball}
-              />
-              <Icon
-                inline={true}
-                class="absolute bottom-2 -left-0.5 rounded-full bg-white dark:bg-gray-800"
-                height="0.8em"
-                icon={Ball}
-              />
-            </span>
-            <span class="ml-8 md:ml-6 md:text-xs"> Compare </span>
-          </button>
-        </Pokemon>
-      {/each}
+      <div class="col-span-full">
+        <MenuEquipo
+          {pokemon}
+          juego={game}
+          {nombre}
+          grupo={type}
+          lugar={location}
+          especialidad={speciality}
+          imagenBatalla={img?.src}
+          on:comparar={(e) => openCompare(e.detail)()}
+        />
+      </div>
       {/if}
     </div>
   </Accordion>

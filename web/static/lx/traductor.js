@@ -42,7 +42,9 @@
     [/^Route (\d+)$/, 'Ruta $1'],
     [/^Route (\d+) \((.+)\)$/, 'Ruta $1 ($2)'],
     [/^Lvl (\d+)$/, 'Nv. $1'],
-    [/^Level (\d+)$/, 'Nivel $1']
+    [/^Level (\d+)$/, 'Nivel $1'],
+    // «Cerulean City Gym» → «Gimnasio de Ciudad Celeste» (si se conoce el nombre del lugar)
+    [/^(.+) Gym$/, function (_, lugar) { var l = dicc.get(lugar); return l ? 'Gimnasio de ' + l : _ }]
   ]
 
   var ATRIBUTOS = ['placeholder', 'title', 'aria-label', 'alt']

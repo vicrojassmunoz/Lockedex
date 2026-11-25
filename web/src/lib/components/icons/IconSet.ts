@@ -1,5 +1,5 @@
 // Iconos de Lockedex: pixel art propio (pixel.js, generado por herramientas/generar_iconos.py).
-// Solo los logotipos de marcas siguen viniendo de Iconify.
+// Algunos son sprites de objetos de los juegos (sprites.js). Solo los logotipos de marcas vienen de Iconify.
 export {
   Add,
   Analysis,
@@ -7,7 +7,6 @@ export {
   ArrowToTop,
   Asterisk,
   Atk,
-  Ball,
   BarChart,
   Bin,
   Boost,
@@ -50,10 +49,8 @@ export {
   Link,
   LongGrass,
   Loop,
-  Map,
   Menu,
   Minus,
-  Missed,
   Mobile,
   Mountain,
   Off,
@@ -71,7 +68,6 @@ export {
   Settings,
   Share,
   Shield,
-  Shiny,
   Shrine,
   Sort,
   Spa,
@@ -94,6 +90,8 @@ export {
   Water,
   X
 } from './pixel.js'
+// Sprites de objetos de los juegos
+export { Ball, Shiny, Missed, Map } from './sprites.js'
 export { default as Coffee } from '@iconify-icons/simple-icons/buymeacoffee'
 export { default as Discord } from '@iconify-icons/simple-icons/discord'
 export { default as GitHub } from '@iconify-icons/simple-icons/github'
