@@ -205,7 +205,7 @@ Hecho: reglas por run en `lockedex.reglas.<id>` (`web/src/lib/lockedex/reglas.js
 - [ ] **Cláusula de especie:** como la de repetidos, pero por línea evolutiva (ya existe `evoline` en los datos).
 - [ ] **Modo Set** (sin cambio gratis tras debilitar) y **objetos en combate**: prohibidos, o limitados a X por combate.
 - [ ] **Hardcore:** nivel máximo obligatorio (aviso si tu equipo lo supera antes del combate), sin objetos en combate y modo Set.
-- [ ] **Game over** si cae todo el equipo, con opción de "nuevo intento", que ya existe en Cargar partida.
+- [x] **Game over** (1.12.0: derrotas, «He perdido», pantalla de FIN DE LA PARTIDA, nuevo intento con historial y modo con vidas; probado por el usuario). Falta: proponerlo solo al caer todo el equipo con la regla normal.
 - [ ] Variantes populares activables:
   - [ ] Wedlocke: parejas, y solo combate un miembro de la pareja.
   - [ ] Monotipo.
