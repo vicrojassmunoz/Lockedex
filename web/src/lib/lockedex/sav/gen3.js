@@ -79,7 +79,7 @@ const leerPokemon = (v, o, completo, tablas, juego) => {
   const esp = tablas.especies[especieInterna]
   if (!esp) return null
 
-  const genes = u32(datos, m + 8)
+  const genes = u32(datos, m + 4) // IVs, huevo y habilidad: bytes 4–7 de la subestructura M (los 8–11 son las cintas)
   if ((genes >>> 30) & 1) return null // huevo
 
   const movimientos = [0, 2, 4, 6].map((d) => u16(datos, a + d)).filter((x) => x > 0 && x < 400)
