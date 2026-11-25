@@ -80,6 +80,7 @@ Cómo hacerlo: ir componente a componente, con capturas antes y después. Se pue
   3. **Actualizaciones solo de contenido:** si Electron no cambia, bajar solo un zip de `app/` (unos MB) firmado con hash SHA-256 publicado en la release, descomprimirlo en `userData` y servir desde ahí; el instalador completo solo cuando cambia la versión de Electron o `main.mjs`.
 
 ### Repaso del usuario (25/11, tarde) — pendiente
+- [ ] **Revisar el tamaño de los Pokémon en toda la app** (pedido el 25/11): hay sitios donde se ven pequeños o a escalas raras. Los sprites base vienen en un lienzo de 96×96 con mucho margen y los iconos de caja (PIcon) a 40×30; repasar filas de encuentros, selector, Caja (fichas y PC), tarjetas de jefe, VS, cementerio, equipo de la barra y modo compacto: recortar el margen o escalar a múltiplos enteros (×1, ×2) para que se vean grandes y nítidos.
 - [ ] **Revisar y cambiar las «mecánicas» de la app para desmarcarnos del todo de nuzlocke-redux** (pedido el 25/11). No solo la estética: también cómo se usa. Primero hacer un inventario de los flujos heredados tal cual y proponer al usuario alternativas propias antes de tocar nada. Candidatos:
   - **Apuntar un encuentro:** hoy es la fila con buscador + mote + estado + naturaleza. Idea: flujo tipo juego (pantalla «¡Un Pokémon salvaje!» → Capturar / Huyó / Debilitado), o rellenar desde el .sav.
   - **Ventana de VS / comparar:** rehacerla como pantalla de combate (tu Pokémon abajo a la izquierda, el rival arriba a la derecha, barras de PS) en vez de pestañas «Equipo/Comparar».
