@@ -166,7 +166,7 @@
         >
           <div
             slot="location"
-            class="-mr-1 flex flex-row-reverse items-center gap-x-2 lg:-ml-6 lg:flex-row"
+            class="flex shrink-0 flex-row-reverse items-center gap-x-2 lg:-ml-6 lg:flex-row"
           >
             <StarterType {key} on:select={setstarter} bind:starter />
             <p>

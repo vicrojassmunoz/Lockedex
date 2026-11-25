@@ -1,8 +1,4 @@
-## Novedades de la 1.7.4
+## Novedades de la 1.7.5
 
-- **Equipo de los jefes como en la Game Boy Advance:** los marcos ya no son redondeados y limpios, sino a píxeles, con la letra y la barra de PS de la consola (etiqueta amarilla y verde a dos tonos). El Pokémon que miras se marca con el doble contorno naranja del juego.
-- **Ficha nueva al pulsar un Pokémon**, hecha como la pantalla «INFO. POKéMON»:
-  - sprite en su ventana, tipos con los iconos de la 3.ª generación, habilidad y objeto;
-  - estadísticas al nivel del jefe (con IVs perfectos, el peor caso) junto a las base;
-  - movimientos con su tipo, clase y potencia;
-  - flechas ◀ ▶ para pasar al Pokémon anterior o siguiente sin cerrarla.
+- **Menú de equipo de los jefes:** los nombres ya no se cortan por abajo (se veía mal la base de las letras y su sombra).
+- **Selector de inicial:** las piedras ya no se encogen ni se cortan cuando la ventana es estrecha.

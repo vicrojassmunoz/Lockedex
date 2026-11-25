@@ -272,7 +272,8 @@
   .lx-me-datos b,
   .lx-gf-placa b {
     font-size: 24px;
-    line-height: 20px;
+    /* 26 px: con menos, el «overflow: hidden» del puntos suspensivos corta la base de las letras y su sombra */
+    line-height: 26px;
     font-weight: normal;
     text-transform: uppercase;
     white-space: nowrap;

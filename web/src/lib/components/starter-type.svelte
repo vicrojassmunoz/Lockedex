@@ -49,7 +49,7 @@
 <SettingWrapper id="theme" let:setting={themeId}>
   {#each starters as s, i}
     <label
-      class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border-2 p-0 transition"
+      class="flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-full border-2 p-0 transition"
       class:opacity-50={starter !== s.name}
       class:hover:opacity-75={starter !== s.name}
       class:opacity-100={starter === s.name}
