@@ -79,6 +79,19 @@ Cómo hacerlo: ir componente a componente, con capturas antes y después. Se pue
   2. **Comprobar que funciona la descarga diferencial** de electron-updater (ya se publican los `.blockmap`): mirar en el registro de la app si pone «Downloading … differential»; si no compensa por la compresión sólida del NSIS, probar `nsis.differentialPackage`.
   3. **Actualizaciones solo de contenido:** si Electron no cambia, bajar solo un zip de `app/` (unos MB) firmado con hash SHA-256 publicado en la release, descomprimirlo en `userData` y servir desde ahí; el instalador completo solo cuando cambia la versión de Electron o `main.mjs`.
 
+### Repaso del usuario (25/11, tarde) — pendiente
+- [ ] **Iconos que siguen igual que en nuzlocke-redux** (cambiarlos por sprites de los juegos ≤ 5.ª gen o pixel art propio):
+  - **Guardar** (disquete), **Partida** (mando de la pestaña), **Ajustes** (engranaje).
+  - En la Caja (dentro de Partida): los botones **«Caja» y «Equipo»** de arriba a la izquierda (matraces) y el aviso de **coberturas que le faltan a tu equipo**.
+  - Botones de ordenar **«Tipo»** (llama) y **«Total»** (barras).
+  - Ventana de **versus** (VS): las pestañas **«Equipo» y «Comparar»** y el icono de **súper eficaz**.
+- [ ] **Icono de movimiento de estado** (el círculo gris tipo yin-yang, p. ej. Ataque Arena): **no le convence** → buscar otro (p. ej. el icono de estado real de la 4.ª gen: círculo gris con espiral, o un símbolo más claro).
+- [ ] **Capturado, Fallido y Descartado se ven muy pequeños** en las filas de encuentros; además **falta icono para «Descartado»**. Agrandarlos (o recortar los sprites de PokéSprite al contenido y escalarlos ×2).
+- [ ] **Analista: lavado de cara a fondo** — se parece demasiado al original. Misma línea que el menú de equipo y la ficha (estética GBA/NDS: marcos de `gba.js`, letra Fusion Pixel, paneles de la pantalla de datos).
+- [ ] **Perfil: no tocar** (le gusta como está).
+- [ ] **Equipo con el avatar: no sale Eusine** (`gs-eusine`): no hay sprite de mapa con ese nombre. En Cristal Eusine usa el sprite genérico de «super nerd» → añadir alias en `mapa.js` (FAMILIAS_AVATAR/ALIAS) y, para los avatares sin sprite de mapa (Sinnoh, Teselia…), usar como plan B la cabeza del propio sprite del avatar (`/assets/img/leaders/<id>.png`) en vez de Rojo.
+- [ ] **La Piedra Fuego del selector de inicial sigue cortada** (el arreglo de la 1.7.5 no bastó): mirar qué contenedor la recorta (probablemente `overflow` de la fila de encuentros o del `slot="location"` en `Game/Route.svelte`) con la ventana a 1000–1200 px.
+
 ## 2. Base de datos propia de Lockedex
 
 **Situación actual:** los datos de juego vienen del original y están repartidos en formatos distintos:
