@@ -317,13 +317,18 @@
                   <Tooltip delay="1000">Sort by {s}</Tooltip>
                 {/if}
                 {#if StatIconMap[s]}
-                  <Icon
-                    inline={true}
-                    class="text-tiny  {s !== 'spa'
-                      ? 'fill-current'
-                      : ''} -mt-2.5 mr-2 translate-y-1/2"
-                    icon={StatIconMap[s]}
-                  />
+                  {#if StatIconMap[s].body?.includes('<image')}
+                    <!-- Sprites de los juegos (objetos Recio, el personaje del equipo): más grandes para que se vean -->
+                    <Icon inline={true} class="lx-orden-sprite" icon={StatIconMap[s]} />
+                  {:else}
+                    <Icon
+                      inline={true}
+                      class="text-tiny  {s !== 'spa'
+                        ? 'fill-current'
+                        : ''} -mt-2.5 mr-2 translate-y-1/2"
+                      icon={StatIconMap[s]}
+                    />
+                  {/if}
                 {:else}
                   <span />
                 {/if}
@@ -622,6 +627,12 @@
   }
 
   /* Botones de ordenar: fichas como las pestañas; la activa, en pantalla LCD */
+  .lx-orden :global(.lx-orden-sprite) {
+    width: 26px;
+    height: 26px;
+    margin: -6px 2px -6px -6px;
+    image-rendering: pixelated;
+  }
   .lx-orden {
     font-family: 'VT323', monospace;
     font-size: 17px;

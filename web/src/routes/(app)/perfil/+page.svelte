@@ -2,6 +2,7 @@
   // Perfil de entrenador: foto, estadísticas de todas tus runs y logros
   import { onMount } from 'svelte'
   import avatares from '$lib/lockedex/avatares.js'
+  import { actualizarEquipo } from '$lib/components/icons/sprites.js'
   import Games from '$lib/data/games.json'
   import { leerPartidas, leerPartida, cargarRutas, resumirPartida } from '$lib/lockedex/partida.js'
   import { idioma } from '$lib/lockedex/idioma.js'
@@ -98,6 +99,7 @@
   const elegir = (id) => {
     perfil.avatar = id
     guardar()
+    actualizarEquipo() // el icono de «Equipo» es el personaje del mapa del avatar
     eligiendo = false
   }
   const nombreAvatar = (id) => avatares.flatMap((g) => g.avatares).find((a) => a.id === id)?.nombre || ''

@@ -58,3 +58,25 @@ export const spriteMapa = async ({ juego, nombre, grupo }) => {
   const generico = GENERICO[principal]?.[grupo]
   return generico && (idx[principal] || []).includes(generico) ? `/lx/mapa/${principal}/${generico}.png` : null
 }
+
+// Sprite del mapa del avatar del perfil (p. ej. «rs-may» → la May de Esmeralda andando).
+// Prueba el nombre tal cual y con «_normal» (los protagonistas), en las colecciones de su región.
+const FAMILIAS_AVATAR = { frlg: ['frlg', 'rby', 'gsc'], rs: ['rse', 'frlg'], gs: ['gsc', 'frlg'] }
+export const POR_DEFECTO_AVATAR = '/lx/mapa/frlg/red_normal.png'
+export const spriteAvatar = async (id) => {
+  const [prefijo, ...resto] = String(id || '').split('-')
+  const nombre = norm(resto.join('-'))
+  if (!nombre) return null
+  const sinNumero = nombre.replace(/\d+$/, '') // «misty2», «blue-1»
+  const primero = norm(resto[0]) // «maxie-courtney» → maxie
+  const idx = await cargarIndice()
+  for (const f of FAMILIAS_AVATAR[prefijo] || ['frlg', 'rse', 'gsc']) {
+    const porNorma = new Map((idx[f] || []).map((k) => [norm(k), k]))
+    const candidatos = [nombre, sinNumero, primero].flatMap((n) => [n, n + 'normal', ALIAS[f]?.[n]])
+    for (const n of candidatos.filter(Boolean)) {
+      const k = porNorma.get(norm(n)) || ((idx[f] || []).includes(n) ? n : null)
+      if (k) return `/lx/mapa/${f}/${k}.png`
+    }
+  }
+  return null
+}
