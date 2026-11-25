@@ -80,6 +80,14 @@ Cómo hacerlo: ir componente a componente, con capturas antes y después. Se pue
   3. **Actualizaciones solo de contenido:** si Electron no cambia, bajar solo un zip de `app/` (unos MB) firmado con hash SHA-256 publicado en la release, descomprimirlo en `userData` y servir desde ahí; el instalador completo solo cuando cambia la versión de Electron o `main.mjs`.
 
 ### Repaso del usuario (25/11, tarde) — pendiente
+- [ ] **Revisar y cambiar las «mecánicas» de la app para desmarcarnos del todo de nuzlocke-redux** (pedido el 25/11). No solo la estética: también cómo se usa. Primero hacer un inventario de los flujos heredados tal cual y proponer al usuario alternativas propias antes de tocar nada. Candidatos:
+  - **Apuntar un encuentro:** hoy es la fila con buscador + mote + estado + naturaleza. Idea: flujo tipo juego (pantalla «¡Un Pokémon salvaje!» → Capturar / Huyó / Debilitado), o rellenar desde el .sav.
+  - **Ventana de VS / comparar:** rehacerla como pantalla de combate (tu Pokémon abajo a la izquierda, el rival arriba a la derecha, barras de PS) en vez de pestañas «Equipo/Comparar».
+  - **Muerte de un Pokémon:** el modal heredado → escena propia (lápida, epitafio, causa) que lleve al cementerio.
+  - **Caja:** fichas vs. PC; el filtro/ordenación heredado.
+  - **Cargar/Nueva partida, ajustes y selector de juego:** pantallas al estilo de la pantalla de inicio de los juegos (CONTINUAR / NUEVA PARTIDA / OPCIONES).
+  - **Equipo (mini-team) y «Montar equipo»:** como el menú de equipo de GBA que ya tienen los jefes.
+  - **Guías y pestañas Nuzlocke / Rutas / Jefes / Próximos:** reorganizar la vista de partida.
 - [ ] **Sprites pequeños (del mapa): si hay varias versiones, usar la de NDS más nueva** (p. ej. Eusine de HeartGold/SoulSilver, no el genérico de Cristal). Hace falta sacar los sprites de mapa de la 4.ª–5.ª gen (HGSS, DPPt, BW/B2N2): mirar los decomps de pret (pokeheartgold, pokeplatinum) o hojas de sprites con licencia clara; mismo índice (`web/static/lx/mapa/<juego>/`) y que `spriteMapa`/`spriteAvatar` prueben primero `bw2 > bw > hgss > pt > dp` y luego las de GBA.
 - [x] **1.9.1** — **Iconos que siguen igual que en nuzlocke-redux** (Guardar = Diario, Ajustes = Pieza Máquina, Partida = Pokédex del mapa, Tipo = Tabla Llama, Total = Brazal Firme, análisis de Caja/Equipo = Periscopio, daño máximo del VS = Protección Especial; VS traducido y barras a píxeles). Queda: rediseñar la ventana de VS entera con estética GBA/NDS (cabeceras, pestañas) y los huecos vacíos del equipo: (cambiarlos por sprites de los juegos ≤ 5.ª gen o pixel art propio):
   - **Guardar** (disquete), **Partida** (mando de la pestaña), **Ajustes** (engranaje).
