@@ -224,6 +224,12 @@ Hecho: reglas por run en `lockedex.reglas.<id>` (`web/src/lib/lockedex/reglas.js
 
 ## 5b. Modos de juego (pedido el 25/11)
 
+- [ ] **Marcar una derrota** (pedido el 25/11, falta en la app): poder indicar que **has perdido contra un jefe** o que **has perdido la run en general** (te han debilitado a todo el equipo, te rindes…).
+  - En la tarjeta de cada jefe y en la ventana de VS, junto a «Marcar victoria»: botón **«Derrota»** → se apunta la derrota (jefe, fecha, equipo que llevabas) y, según las reglas, o es **game over** o se sigue (modo con vidas: resta una vida; reglas suaves: solo queda apuntado).
+  - Botón general **«He perdido»** en la partida (y en el modo compacto) para cuando no ha sido contra un jefe.
+  - **Game over:** la run queda marcada como perdida (no se puede seguir editando salvo deshacer), con resumen (hasta dónde llegaste, medallas, caídos, quién te ganó) y botón **«Nuevo intento»** (ya existe en Cargar partida: reutilizarlo). Que cuente en el perfil (logros, «tu mayor verdugo», runs perdidas por juego).
+  - Con el modo con vidas y el Hardcore de las reglas, la derrota la puede proponer la app sola cuando cae todo el equipo.
+
 Ampliar los modos además de Nuzlocke clásico, Hardcore y Randomlocke. Cada modo = plantilla de reglas + lo que la app tenga que llevar (contadores, avisos, pantallas):
 
 - [ ] **Modo con vidas** (p. ej. «Extremo: 10 vidas»): un contador de vidas por run; cada Pokémon caído resta una y al llegar a 0 es game over (con «nuevo intento»). Que el número sea configurable.
