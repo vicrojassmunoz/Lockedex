@@ -61,7 +61,11 @@ for origen, nombre in [
     ('items/plate/flame', 'tabla-llama'), ('items/ev-item/macho-brace', 'brazal-firme'),
     ('items/hold-item/scope-lens', 'periscopio'), ('items/battle-item/guard-spec', 'proteccion-especial'),
     ('items/other-item/heart-scale', 'escama-corazon'), ('items/key-item/coin-case', 'estuche-monedas'),
-    ('items/battle-item/x-attack', 'ataque-x')]:
+    ('items/battle-item/x-attack', 'ataque-x'),
+    # logros del perfil
+    ('items/ball/master', 'master-ball'), ('items/ball/ultra', 'ultra-ball'), ('items/ball/great', 'super-ball'),
+    ('items/valuable-item/nugget', 'pepita'), ('items/medicine/revive', 'revivir'),
+    ('items/medicine/full-restore', 'restaurar-todo'), ('items/key-item/surge-badge', 'medalla-trueno')]:
     # Los de PokéSprite ya son de 32×32 con su margen, como los demás iconos de objetos
     im = Image.open(PS + origen + '.png').convert('RGBA')
     if im.size != (32, 32):  # las cintas son de 40×40: se centran en 32×32 sin escalar

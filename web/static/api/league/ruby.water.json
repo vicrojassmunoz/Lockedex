@@ -40,6 +40,7 @@
           "name": "Rock Head",
           "effect": ""
         },
+        "iv": 18,
         "sprite": "74",
         "types": [
           "rock",
@@ -90,6 +91,7 @@
           "name": "Sturdy",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "299",
         "types": [
           "rock"
@@ -144,6 +146,7 @@
           "name": "Guts",
           "effect": ""
         },
+        "iv": 18,
         "sprite": "66",
         "types": [
           "fighting"
@@ -192,6 +195,7 @@
           "name": "Guts",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "296",
         "types": [
           "fighting"
@@ -246,6 +250,7 @@
           "name": "Magnet Pull",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "81",
         "types": [
           "electric",
@@ -296,6 +301,7 @@
           "name": "Soundproof",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "100",
         "types": [
           "electric"
@@ -343,6 +349,7 @@
           "name": "Magnet Pull",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "82",
         "types": [
           "electric",
@@ -399,6 +406,7 @@
           "name": "Magma Armor",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "218",
         "types": [
           "fire"
@@ -447,6 +455,7 @@
           "name": "Magma Armor",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "218",
         "types": [
           "fire"
@@ -495,6 +504,7 @@
           "name": "White Smoke",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "324",
         "types": [
           "fire"
@@ -550,6 +560,7 @@
           "name": "Truant",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "289",
         "types": [
           "normal"
@@ -599,6 +610,7 @@
           "name": "Vital Spirit",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "288",
         "types": [
           "normal"
@@ -649,6 +661,7 @@
           "name": "Truant",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "289",
         "types": [
           "normal"
@@ -705,6 +718,7 @@
           "name": "Guts",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "277",
         "types": [
           "normal",
@@ -754,6 +768,7 @@
           "name": "Keen Eye",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "279",
         "types": [
           "water",
@@ -804,6 +819,7 @@
           "name": "Keen Eye",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "227",
         "types": [
           "steel",
@@ -854,6 +870,7 @@
           "name": "Natural Cure",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "334",
         "types": [
           "dragon",
@@ -909,6 +926,7 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "337",
         "types": [
           "rock",
@@ -959,6 +977,7 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "338",
         "types": [
           "rock",
@@ -1015,6 +1034,7 @@
           "name": "Swift Swim",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "370",
         "types": [
           "water"
@@ -1063,6 +1083,7 @@
           "name": "Oblivious",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "340",
         "types": [
           "water",
@@ -1113,6 +1134,7 @@
           "name": "Thick Fat",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "364",
         "types": [
           "ice",
@@ -1162,6 +1184,7 @@
           "name": "Swift Swim",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "119",
         "types": [
           "water"
@@ -1211,6 +1234,7 @@
           "name": "Marvel Scale",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "350",
         "types": [
           "water"
@@ -1266,6 +1290,7 @@
           "name": "Oblivious",
           "effect": ""
         },
+        "iv": 6,
         "sprite": "322",
         "types": [
           "fire",
@@ -1315,6 +1340,7 @@
           "name": "Run Away",
           "effect": ""
         },
+        "iv": 6,
         "sprite": "261",
         "types": [
           "dark"
@@ -1363,6 +1389,7 @@
           "name": "Oblivious",
           "effect": ""
         },
+        "iv": 6,
         "sprite": "322",
         "types": [
           "fire",
@@ -1419,6 +1446,7 @@
           "name": "Oblivious",
           "effect": ""
         },
+        "iv": 6,
         "sprite": "322",
         "types": [
           "fire",
@@ -1468,6 +1496,7 @@
           "name": "Intimidate",
           "effect": ""
         },
+        "iv": 6,
         "sprite": "262",
         "types": [
           "dark"
@@ -1522,6 +1551,7 @@
           "name": "Oblivious",
           "effect": ""
         },
+        "iv": 6,
         "sprite": "322",
         "types": [
           "fire",
@@ -1571,6 +1601,7 @@
           "name": "Intimidate",
           "effect": ""
         },
+        "iv": 6,
         "sprite": "262",
         "types": [
           "dark"
@@ -1618,6 +1649,7 @@
           "name": "Magma Armor",
           "effect": ""
         },
+        "iv": 6,
         "sprite": "323",
         "types": [
           "fire",
@@ -1674,6 +1706,7 @@
           "name": "Intimidate",
           "effect": ""
         },
+        "iv": 6,
         "sprite": "262",
         "types": [
           "dark"
@@ -1723,6 +1756,7 @@
           "name": "Magma Armor",
           "effect": ""
         },
+        "iv": 6,
         "sprite": "323",
         "types": [
           "fire",
@@ -1779,6 +1813,7 @@
           "name": "Intimidate",
           "effect": ""
         },
+        "iv": 18,
         "sprite": "262",
         "types": [
           "dark"
@@ -1828,6 +1863,7 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 18,
         "sprite": "42",
         "types": [
           "poison",
@@ -1877,6 +1913,7 @@
           "name": "Magma Armor",
           "effect": ""
         },
+        "iv": 18,
         "sprite": "323",
         "types": [
           "fire",
@@ -1933,6 +1970,7 @@
           "name": "Intimidate",
           "effect": ""
         },
+        "iv": 18,
         "sprite": "262",
         "types": [
           "dark"
@@ -1982,6 +2020,7 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 18,
         "sprite": "169",
         "types": [
           "poison",
@@ -2032,6 +2071,7 @@
           "name": "Magma Armor",
           "effect": ""
         },
+        "iv": 18,
         "sprite": "323",
         "types": [
           "fire",
@@ -2132,6 +2172,7 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 6,
         "sprite": "320",
         "types": [
           "water"
@@ -2175,6 +2216,7 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 6,
         "sprite": "322",
         "types": [
           "fire",
@@ -2228,6 +2270,7 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 12,
         "sprite": "253",
         "types": [
           "grass"
@@ -2286,6 +2329,7 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 12,
         "sprite": "320",
         "types": [
           "water"
@@ -2335,6 +2379,7 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 12,
         "sprite": "322",
         "types": [
           "fire",
@@ -2386,6 +2431,7 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 18,
         "sprite": "253",
         "types": [
           "grass"
@@ -2441,6 +2487,7 @@
           "name": "Guts",
           "effect": ""
         },
+        "iv": 18,
         "sprite": "277",
         "types": [
           "normal",
@@ -2492,6 +2539,7 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 18,
         "sprite": "320",
         "types": [
           "water"
@@ -2540,6 +2588,7 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 18,
         "sprite": "322",
         "types": [
           "fire",
@@ -2591,6 +2640,7 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 24,
         "sprite": "253",
         "types": [
           "grass"
@@ -2646,6 +2696,7 @@
           "name": "Synchronize",
           "effect": ""
         },
+        "iv": 1,
         "sprite": "280",
         "types": [
           "psychic"
@@ -2701,6 +2752,7 @@
           "name": "Natural Cure",
           "effect": ""
         },
+        "iv": 14,
         "sprite": "334",
         "types": [
           "dragon",
@@ -2749,6 +2801,7 @@
           "name": "Cute Charm",
           "effect": ""
         },
+        "iv": 18,
         "sprite": "301",
         "types": [
           "normal"
@@ -2797,6 +2850,7 @@
           "name": "Poison Point",
           "effect": ""
         },
+        "iv": 18,
         "sprite": "315",
         "types": [
           "grass",
@@ -2846,6 +2900,7 @@
           "name": "Magnet Pull",
           "effect": ""
         },
+        "iv": 18,
         "sprite": "82",
         "types": [
           "electric",
@@ -2895,6 +2950,7 @@
           "name": "Synchronize",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "282",
         "types": [
           "psychic"
@@ -2951,6 +3007,7 @@
           "name": "Intimidate",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "262",
         "types": [
           "dark"
@@ -2999,6 +3056,7 @@
           "name": "Sand Veil",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "332",
         "types": [
           "grass",
@@ -3049,6 +3107,7 @@
           "name": "Chlorophyll",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "275",
         "types": [
           "grass",
@@ -3099,6 +3158,7 @@
           "name": "Rough Skin",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "319",
         "types": [
           "water",
@@ -3149,6 +3209,7 @@
           "name": "Pressure",
           "effect": ""
         },
+        "iv": 31,
         "sprite": "359",
         "types": [
           "dark"
@@ -3204,6 +3265,7 @@
           "name": "Pressure",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "356",
         "types": [
           "ghost"
@@ -3252,6 +3314,7 @@
           "name": "Insomnia",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "354",
         "types": [
           "ghost"
@@ -3300,6 +3363,7 @@
           "name": "Insomnia",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "354",
         "types": [
           "ghost"
@@ -3349,6 +3413,7 @@
           "name": "Keen Eye",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "302",
         "types": [
           "dark",
@@ -3404,6 +3469,7 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 31,
         "sprite": "356",
         "types": [
           "ghost"
@@ -3459,6 +3525,7 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "362",
         "types": [
           "ice"
@@ -3508,6 +3575,7 @@
           "name": "Thick Fat",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "364",
         "types": [
           "ice",
@@ -3557,6 +3625,7 @@
           "name": "Thick Fat",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "364",
         "types": [
           "ice",
@@ -3607,6 +3676,7 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "362",
         "types": [
           "ice"
@@ -3661,6 +3731,7 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 31,
         "sprite": "365",
         "types": [
           "ice",

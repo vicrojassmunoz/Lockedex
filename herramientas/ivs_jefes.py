@@ -5,17 +5,18 @@
 import re, json, os, sys
 from collections import Counter
 PRET = '/home/claude/sprites-pret'
-JUEGOS = {'fr': 'pokefirered', 'lg': 'pokefirered', 'em': 'pokeemerald'}
+JUEGOS = {'fr': 'pokefirered', 'lg': 'pokefirered', 'em': 'pokeemerald', 'ruby': 'pokeruby', 'saph': 'pokeruby'}
 DATOS = os.path.join(os.path.dirname(__file__), '..', 'datos', 'jefes')
 
 def partidas(repo):
     s = open(f'{PRET}/{repo}/src/data/trainer_parties.h').read()
     out = []
-    for m in re.finditer(r'static const struct \w+ (sParty_\w+)\[\] = \{(.*?)\n\};', s, re.S):
+    # pokefirered/pokeemerald: «static const struct … sParty_X[]»; pokeruby: «const struct … gTrainerParty_X[]»
+    for m in re.finditer(r'(?:static )?const struct \w+ ((?:sParty|gTrainerParty)_\w+)\[\] = \{(.*?)\n\};', s, re.S):
         mons = []
         for e in re.finditer(r'\{([^{}]*?\.species\s*=\s*SPECIES_\w+[^{}]*?)(?:\{[^{}]*\}[^{}]*)?\}', m.group(2), re.S):
             t = e.group(1)
-            iv = re.search(r'\.iv\s*=\s*(\d+)', t); lvl = re.search(r'\.lvl\s*=\s*(\d+)', t)
+            iv = re.search(r'\.iv\s*=\s*(\d+)', t); lvl = re.search(r'\.(?:lvl|level)\s*=\s*(\d+)', t)
             sp = re.search(r'\.species\s*=\s*SPECIES_(\w+)', t)
             if iv and lvl and sp:
                 mons.append((sp.group(1).lower().replace('_', '-'), int(lvl.group(1)), int(iv.group(1))))

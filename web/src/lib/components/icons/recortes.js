@@ -116,6 +116,16 @@ export default {
   0,
   30
  ],
+ "master-ball": [
+  7,
+  7,
+  18
+ ],
+ "medalla-trueno": [
+  4,
+  6,
+  22
+ ],
  "monte": [
   0,
   0,
@@ -130,6 +140,11 @@ export default {
   -1,
   0,
   32
+ ],
+ "pepita": [
+  9,
+  9,
+  14
  ],
  "periscopio": [
   5,
@@ -191,6 +206,16 @@ export default {
   6,
   20
  ],
+ "restaurar-todo": [
+  5,
+  5,
+  22
+ ],
+ "revivir": [
+  8,
+  8,
+  16
+ ],
  "shiny-charm": [
   6,
   5,
@@ -201,6 +226,11 @@ export default {
   8,
   16
  ],
+ "super-ball": [
+  7,
+  7,
+  18
+ ],
  "tabla-llama": [
   5,
   5,
@@ -210,6 +240,11 @@ export default {
   4,
   3,
   26
+ ],
+ "ultra-ball": [
+  7,
+  7,
+  18
  ],
  "water-stone": [
   6,

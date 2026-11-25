@@ -6,6 +6,8 @@
   import Games from '$lib/data/games.json'
   import { leerPartidas, leerPartida, cargarRutas, resumirPartida } from '$lib/lockedex/partida.js'
   import { idioma } from '$lib/lockedex/idioma.js'
+  import { leerReglas } from '$lib/lockedex/reglas.js'
+  import { nombreJuego } from '$lib/lockedex/juegos.js'
 
   const es = idioma() === 'es'
   const CLAVE = 'lockedex.perfil'
@@ -35,6 +37,7 @@
   })
 
   let fallo = false
+  let estJuegos = []
   const calcular = async () => {
     const lista = leerPartidas()
     // Cada run por separado: si una falla, se salta y el resto se muestra
@@ -72,6 +75,31 @@
     const intentos = runs.reduce((a, r) => a + (r.intentos || 1), 0)
     const sinMuertes = runs.some((r) => r.resumen.campeon && !r.resumen.muertos.length)
     const juegos = new Set(runs.map((r) => r.info?.titulo)).size
+    const variocolor = runs.some((r) => r.resumen.encuentros.some((e) => +e.status === 6))
+    const todasMedallas = runs.some((r) => r.resumen.totalMedallas && r.resumen.medallas >= r.resumen.totalMedallas)
+    const equipoCompleto = runs.some((r) => (r.resumen.equipo || []).length >= 6)
+    const jefesVencidos = runs.reduce((a, r) => a + (r.resumen.jefes || []).filter((j) => j.derrotado).length, 0)
+    const randomlocke = runs.some((r) => {
+      try {
+        return !!leerReglas(r.id)?.randomlocke
+      } catch {
+        return false
+      }
+    })
+
+    // Estadísticas por juego: todas las runs de un mismo juego juntas
+    const porJuego = {}
+    for (const r of runs) {
+      const k = r.juego || r.info?.titulo
+      const g = (porJuego[k] ||= { juego: r.juego, titulo: r.info?.titulo || r.juego, runs: 0, intentos: 0, capturas: 0, muertos: 0, ligas: 0, medallas: 0, total: r.resumen.totalMedallas || 0 })
+      g.runs++
+      g.intentos += r.intentos || 1
+      g.capturas += r.resumen.encuentros.filter((e) => [1, 2, 3, 5, 6].includes(+e.status)).length
+      g.muertos += r.resumen.muertos.length
+      g.ligas += r.resumen.campeon ? 1 : 0
+      g.medallas = Math.max(g.medallas, r.resumen.medallas)
+    }
+    estJuegos = Object.values(porJuego).sort((a, b) => b.runs - a.runs || b.capturas - a.capturas)
 
     est = {
       runs: runs.length,
@@ -83,15 +111,23 @@
       intentos,
       topAsesino,
       juegos,
+      // Cada logro con el sprite de un objeto de los juegos (/lx/objetos); en gris hasta conseguirlo
       logros: [
-        { ok: runs.length >= 1, icono: '◓', es: 'Primeros pasos', en: 'First steps', d: es ? 'Empieza tu primera run' : 'Start your first run' },
-        { ok: medallas >= 8, icono: '✪', es: 'Coleccionista', en: 'Collector', d: es ? 'Consigue 8 medallas en total' : 'Earn 8 badges in total' },
-        { ok: completadas >= 1, icono: '♛', es: 'Campeón', en: 'Champion', d: es ? 'Completa una run' : 'Complete a run' },
-        { ok: sinMuertes, icono: '✦', es: 'Intocable', en: 'Untouchable', d: es ? 'Gana una run sin muertes' : 'Win a run with no deaths' },
-        { ok: capturas >= 100, icono: '◎', es: 'Pokédex andante', en: 'Walking Pokédex', d: es ? 'Captura 100 Pokémon' : 'Catch 100 Pokémon' },
-        { ok: juegos >= 3, icono: '✈', es: 'Trotamundos', en: 'Globetrotter', d: es ? 'Juega en 3 juegos distintos' : 'Play 3 different games' },
-        { ok: intentos >= 10, icono: '↻', es: 'Cabezota', en: 'Stubborn', d: es ? 'Suma 10 intentos' : 'Reach 10 attempts' },
-        { ok: muertos >= 50, icono: '☠', es: 'Sepulturero', en: 'Gravedigger', d: es ? '50 Pokémon en el cementerio' : '50 Pokémon in the graveyard' }
+        { ok: runs.length >= 1, sprite: 'poke-ball', es: 'Primeros pasos', en: 'First steps', d: es ? 'Empieza tu primera run' : 'Start your first run' },
+        { ok: medallas >= 8, sprite: 'medalla-trueno', es: 'Coleccionista', en: 'Collector', d: es ? 'Consigue 8 medallas en total' : 'Earn 8 badges in total' },
+        { ok: todasMedallas, sprite: 'pepita', es: 'Ocho de ocho', en: 'Full set', d: es ? 'Todas las medallas de un juego en una misma run' : 'All badges of a game in a single run' },
+        { ok: completadas >= 1, sprite: 'champion-ribbon', es: 'Campeón', en: 'Champion', d: es ? 'Completa una run' : 'Complete a run' },
+        { ok: sinMuertes, sprite: 'master-ball', es: 'Intocable', en: 'Untouchable', d: es ? 'Gana una run sin muertes' : 'Win a run with no deaths' },
+        { ok: jefesVencidos >= 25, sprite: 'ataque-x', es: 'Cazajefes', en: 'Boss hunter', d: es ? 'Vence a 25 jefes en total' : 'Beat 25 bosses in total' },
+        { ok: equipoCompleto, sprite: 'super-ball', es: 'Equipo completo', en: 'Full party', d: es ? 'Ten 6 Pokémon en el equipo de una run' : 'Have 6 Pokémon in a run party' },
+        { ok: capturas >= 100, sprite: 'pokedex', es: 'Pokédex andante', en: 'Walking Pokédex', d: es ? 'Captura 100 Pokémon' : 'Catch 100 Pokémon' },
+        { ok: variocolor, sprite: 'shiny-charm', es: '¡Brilla!', en: 'Shiny!', d: es ? 'Encuentra un Pokémon variocolor' : 'Find a shiny Pokémon' },
+        { ok: juegos >= 3, sprite: 'mapa-pared', es: 'Trotamundos', en: 'Globetrotter', d: es ? 'Juega en 3 juegos distintos' : 'Play 3 different games' },
+        { ok: runs.length >= 5, sprite: 'ultra-ball', es: 'Veterano', en: 'Veteran', d: es ? 'Ten 5 runs' : 'Have 5 runs' },
+        { ok: randomlocke, sprite: 'estuche-monedas', es: 'A la suerte', en: 'Luck of the draw', d: es ? 'Juega una run Randomlocke' : 'Play a Randomlocke run' },
+        { ok: capturas >= 20 && capturas - muertos >= capturas * 0.8, sprite: 'restaurar-todo', es: 'Superviviente', en: 'Survivor', d: es ? '80 % de supervivencia con 20 capturas o más' : '80% survival with 20+ catches' },
+        { ok: intentos >= 10, sprite: 'revivir', es: 'Cabezota', en: 'Stubborn', d: es ? 'Suma 10 intentos' : 'Reach 10 attempts' },
+        { ok: muertos >= 50, sprite: 'lapida', es: 'Sepulturero', en: 'Gravedigger', d: es ? '50 Pokémon en el cementerio' : '50 Pokémon in the graveyard' }
       ]
     }
   }
@@ -167,13 +203,33 @@
       <div class="lx-logros">
         {#each est.logros as l}
           <div class:lx-conseguido={l.ok} title={l.d}>
-            <i>{l.icono}</i>
+            <img class="lx-logro-sprite" src="/lx/objetos/{l.sprite}.png" alt="" />
             <b>{es ? l.es : l.en}</b>
             <span>{l.d}</span>
           </div>
         {/each}
       </div>
     </section>
+
+    {#if estJuegos.length}
+      <section class="lx-panel">
+        <h2>{es ? 'Por juego' : 'By game'}</h2>
+        <div class="lx-juegos">
+          {#each estJuegos as g}
+            <div class="lx-juego">
+              {#if Games[g.juego]?.logo}<img class="lx-run-logo" src="/assets/img/logos/{Games[g.juego].logo}-small.png" alt="" />{/if}
+              <b>{nombreJuego(g.juego, Games[g.juego]) || g.titulo}</b>
+              <span><i>{g.runs}</i>{g.runs === 1 ? 'run' : 'runs'}</span>
+              <span><i>{g.intentos}</i>{es ? 'intentos' : 'attempts'}</span>
+              <span><i>{g.medallas}{g.total ? '/' + g.total : ''}</i>{es ? 'medallas (mejor run)' : 'badges (best run)'}</span>
+              <span><i>{g.capturas}</i>{es ? 'capturas' : 'catches'}</span>
+              <span><i>{g.muertos}</i>{es ? 'caídos' : 'fainted'}</span>
+              <span><i>{g.ligas}</i>{es ? 'ligas' : 'leagues'}</span>
+            </div>
+          {/each}
+        </div>
+      </section>
+    {/if}
 
     <section class="lx-panel">
       <h2>{es ? 'Tus runs' : 'Your runs'}</h2>
@@ -428,6 +484,51 @@
     border: 2px solid #1b1b1f;
     background: linear-gradient(180deg, #fff7d1, #ffe680);
     color: #1b1b1f;
+  }
+  .lx-logro-sprite {
+    width: 48px;
+    height: 48px;
+    margin: -6px 0 -4px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    filter: grayscale(1) opacity(0.45);
+  }
+  .lx-conseguido .lx-logro-sprite {
+    filter: none;
+  }
+  .lx-juegos {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .lx-juego {
+    display: grid;
+    grid-template-columns: 56px minmax(120px, 1.4fr) repeat(6, minmax(0, 1fr));
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border: 2px solid var(--lx-tinta);
+    border-radius: var(--lx-radio-sm);
+    background: var(--lx-panel-2);
+  }
+  .lx-juego span {
+    display: flex;
+    flex-direction: column;
+    font-size: 11px;
+    color: var(--lx-texto-suave);
+    line-height: 1.2;
+  }
+  .lx-juego span i {
+    font-style: normal;
+    font-family: 'VT323', monospace;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--lx-texto);
+  }
+  @media (max-width: 800px) {
+    .lx-juego {
+      grid-template-columns: 56px 1fr 1fr 1fr;
+    }
   }
   .lx-logros i {
     font-style: normal;
