@@ -76,18 +76,25 @@ export const resumirPartida = (partida, rutas = []) => {
     .filter((id) => id !== undefined && id !== null)
     .map(String)
 
+  const visitada = (nombre) => {
+    const e = nombre && datos[nombre]
+    return !!(e && (e.pokemon || e.status))
+  }
+
   let ultimo = -1
+  let zona = null // última zona con encuentros antes de cada jefe: donde suele ser el combate
   const lugares = []
   const jefes = []
   rutas.forEach((r, i) => {
     if (r.type === 'gym') {
       const derrotado = derrotados.includes('' + r.value)
-      jefes.push({ ...r, indice: i, derrotado })
+      jefes.push({ ...r, indice: i, derrotado, zona })
       if (derrotado) ultimo = Math.max(ultimo, i)
     } else if (r.type === 'route') {
       const e = datos[r.name]
       lugares.push({ ...r, indice: i, encuentro: e })
-      if (e && (e.pokemon || e.status)) ultimo = Math.max(ultimo, i)
+      if (visitada(r.name)) ultimo = Math.max(ultimo, i)
+      if ((r.encounters || []).length) zona = r.name
     }
   })
 
@@ -103,7 +110,26 @@ export const resumirPartida = (partida, rutas = []) => {
     .map((lugar) => (datos[lugar] ? { lugar, ...datos[lugar] } : null))
     .filter((e) => e && ESTADOS_VIVOS.includes(+e.status))
 
-  const jefesPasados = jefes.map((j) => ({ ...j, pasado: j.derrotado || j.indice < ultimo }))
+  // ¿Está pasado un jefe?
+  // - Sí, si lo marcaste como vencido o venciste a uno posterior.
+  // - Gimnasios y Alto Mando cortan el paso: pasados si ya capturaste más adelante.
+  // - Los demás (rivales, equipos malvados…) son a veces opcionales o se hacen en otro orden
+  //   (en Kanto puedes ir a la Ruta 2 antes que a la Ruta 22, donde espera el rival): solo cuentan
+  //   como pasados si estuviste en su zona, si es el primer combate del juego o si ya dejaste
+  //   atrás el gimnasio siguiente.
+  const ultimoVencido = jefes.reduce((m, j) => (j.derrotado ? Math.max(m, j.indice) : m), -1)
+  const BLOQUEAN = ['gym-leader', 'elite-four']
+  const nombresRutas = new Set(lugares.map((l) => l.name))
+  const zonaDe = (j) => (nombresRutas.has(j.name) ? j.name : j.zona)
+  const pasadoSeguro = (j) =>
+    j.derrotado || j.indice < ultimoVencido || (BLOQUEAN.includes(j.group) && j.indice < ultimo)
+  const pasado = (j, i) => {
+    if (pasadoSeguro(j)) return true
+    if (BLOQUEAN.includes(j.group) || j.indice >= ultimo) return false
+    if (i === 0 || !zonaDe(j) || visitada(zonaDe(j))) return true
+    return jefes.some((k) => k.indice > j.indice && BLOQUEAN.includes(k.group) && pasadoSeguro(k))
+  }
+  const jefesPasados = jefes.map((j, i) => ({ ...j, pasado: pasado(j, i) }))
   const medallas = jefesPasados.filter((j) => j.group === 'gym-leader' && j.pasado).length
   const totalMedallas = jefes.filter((j) => j.group === 'gym-leader').length
   const siguienteJefe = jefesPasados.find((j) => !j.pasado) || null

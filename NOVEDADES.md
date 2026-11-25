@@ -1,5 +1,3 @@
-## Novedades de la 1.5.2
+## Novedades de la 1.5.3
 
-- **Arreglado: el rival con el inicial equivocado.** Lockedex daba por hecho que habías elegido fuego hasta que tocabas los iconos de la fila «Inicial», así que con Bulbasaur el rival salía con Squirtle. Ahora el tipo se deduce del Pokémon que apuntas como inicial, y las partidas ya empezadas se corrigen solas al abrirlas. Si lo eliges a mano o juegas un Randomlocke, se respeta lo que pongas.
-- **Arreglado: no se detectaban los jefes vencidos.** Marcar un combate como ganado no actualizaba el modo compacto, las medallas ni el perfil. Ya lo hace.
-- **Modo compacto:** botón **🏅 Vencido** para el próximo jefe (con confirmación) y **Deshacer** por si te equivocas. Se guarda con tu equipo actual, igual que desde la ventana principal.
+- **Arreglado: el «próximo jefe» se saltaba combates.** Bastaba con capturar en una ruta posterior para que un rival se diera por pasado. Por ejemplo, en RojoFuego, capturar en la Ruta 2 antes de ir a la Ruta 22 pasaba directamente a Brock. Ahora los rivales y los equipos malvados solo cuentan como pasados si los marcas como vencidos, si ya has estado en su zona o si has dejado atrás el gimnasio siguiente. Los gimnasios y el Alto Mando cuentan como pasados en cuanto capturas más adelante. Afecta al modo compacto, a las medallas y a la barra de EXP.
