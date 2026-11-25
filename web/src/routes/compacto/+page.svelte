@@ -14,8 +14,12 @@
   let resumen = null
   let miembros = []
   let jefe = null
+  let jefeVisto = null // value del jefe elegido con las flechas; null = seguir al próximo
+  let ligaActual = null
+  let equipoActual = []
   let datosJefe = null
   let cap = null
+  let capGimnasio = null // jefe del que sale el nivel máximo (el próximo líder de gimnasio)
   let riesgo = null
   let spoilers = 0
 
@@ -30,16 +34,47 @@
     resumen = resumirPartida(partida, rutas)
     const eq = await equipoCompleto(partida, resumen)
     miembros = eq.miembros.slice(0, 6)
-    jefe = resumen.siguienteJefe
+    equipoActual = eq.miembros
+    ligaActual = await cargarLiga(partida.juego, partida.datos.__starter || 'fire')
+    await mostrarJefe()
+  }
+
+  // Jefe que se enseña: el próximo, o el elegido con ◀ ▶
+  const mostrarJefe = async () => {
+    const lista = resumen?.jefes || []
+    jefe = (jefeVisto !== null && lista.find((j) => String(j.value) === String(jefeVisto))) || resumen?.siguienteJefe || lista[lista.length - 1] || null
     datosJefe = null
     cap = null
     riesgo = null
-    if (jefe) {
-      const liga = await cargarLiga(partida.juego, partida.datos.__starter || 'fire')
-      datosJefe = liga?.[jefe.value] || null
-      cap = nivelMaximo(datosJefe)
-      if (datosJefe) riesgo = await calcularRiesgo({ jefe: datosJefe, equipo: eq.miembros, gen: partida.info.gen, cap })
-    }
+    if (!jefe) return
+    const visto = jefe.value
+    const datos = ligaActual?.[jefe.value] || null
+    // El nivel máximo de un Nuzlocke lo marca el próximo líder de gimnasio (o el Alto Mando al final),
+    // aunque el jefe que se vea sea un rival o un equipo malvado
+    const desde = lista.findIndex((j) => String(j.value) === String(jefe.value))
+    const resto = lista.slice(Math.max(0, desde))
+    const gimnasio = resto.find((j) => j.group === 'gym-leader') || resto.find((j) => j.group === 'elite-four') || jefe
+    const nivel = nivelMaximo(ligaActual?.[gimnasio.value]) ?? nivelMaximo(datos)
+    const r = datos ? await calcularRiesgo({ jefe: datos, equipo: equipoActual, gen: partida.info.gen, cap: nivel }) : null
+    if (jefe?.value !== visto) return // se cambió de jefe mientras se calculaba
+    datosJefe = datos
+    cap = nivel
+    capGimnasio = gimnasio
+    riesgo = r
+  }
+  $: listaJefes = resumen?.jefes || []
+  $: posJefe = jefe ? listaJefes.findIndex((j) => String(j.value) === String(jefe.value)) : -1
+  $: esProximo = jefe && resumen?.siguienteJefe && String(jefe.value) === String(resumen.siguienteJefe.value)
+  const moverJefe = (d) => {
+    const i = posJefe + d
+    if (i < 0 || i >= listaJefes.length) return
+    jefeVisto = listaJefes[i].value
+    confirmarJefe = false
+    mostrarJefe()
+  }
+  const volverAlProximo = () => {
+    jefeVisto = null
+    mostrarJefe()
   }
 
   onMount(() => {
@@ -92,8 +127,9 @@
     }
   }
   // Jefe vencido (con confirmación) y deshacer el último
+  // Marcar como vencido (con confirmación) o quitar la marca del jefe que se está viendo
   let confirmarJefe = false
-  let ultimoVencido = null
+  const datosMarca = () => ({ id: jefe.value, name: datosJefe?.name || jefe.boss || jefe.name, group: jefe.group, type: datosJefe?.speciality })
   const vencer = async () => {
     if (!jefe) return
     if (!confirmarJefe) {
@@ -102,17 +138,13 @@
       return
     }
     confirmarJefe = false
-    const j = { id: jefe.value, name: datosJefe?.name || jefe.boss || jefe.name, group: jefe.group, type: datosJefe?.speciality }
-    if (await enviar({ tipo: 'jefe', jefe: j })) {
-      ultimoVencido = j
-      avisar(`🏅 ${j.name}`)
-    }
+    const j = datosMarca()
+    if (await enviar({ tipo: 'jefe', jefe: j })) avisar(`🏅 ${j.name}`)
   }
   const deshacerJefe = async () => {
-    if (ultimoVencido && (await enviar({ tipo: 'jefe', jefe: ultimoVencido, deshacer: true }))) {
-      avisar(es ? `Deshecho: ${ultimoVencido.name}` : `Undone: ${ultimoVencido.name}`)
-      ultimoVencido = null
-    }
+    if (!jefe?.derrotado) return
+    const j = datosMarca()
+    if (await enviar({ tipo: 'jefe', jefe: j, deshacer: true })) avisar(es ? `Ya no está vencido: ${j.name}` : `Unmarked: ${j.name}`)
   }
 
   const caido = async (m) => {
@@ -185,7 +217,17 @@
 
     {#if jefe}
       <section class="lx-mini-jefe">
-        <small>{es ? 'PRÓXIMO JEFE' : 'NEXT BOSS'}</small>
+        <div class="lx-mini-jefe-nav">
+          <button on:click={() => moverJefe(-1)} disabled={posJefe <= 0} title={es ? 'Jefe anterior' : 'Previous boss'}>◀</button>
+          <small>
+            {#if esProximo}{es ? 'PRÓXIMO JEFE' : 'NEXT BOSS'}{:else if jefe?.derrotado}{es ? 'VENCIDO' : 'BEATEN'}{:else if jefe?.pasado}{es ? 'YA PASADO' : 'PASSED'}{:else}{es ? 'MÁS ADELANTE' : 'LATER'}{/if}
+            · {posJefe + 1}/{listaJefes.length}
+          </small>
+          <button on:click={() => moverJefe(1)} disabled={posJefe >= listaJefes.length - 1} title={es ? 'Jefe siguiente' : 'Next boss'}>▶</button>
+          {#if !esProximo}
+            <button class="lx-mini-volver" on:click={volverAlProximo} title={es ? 'Volver al próximo jefe' : 'Back to next boss'}>⟲</button>
+          {/if}
+        </div>
         <div class="lx-mini-jefe-fila">
           {#if imgJefe}
             <img
@@ -199,19 +241,31 @@
             <span>{traducirNombre(jefe.name)}</span>
           </div>
           {#if cap}
-            <span class="lx-mini-cap"><small>{es ? 'NV. MÁX' : 'LV. CAP'}</small>{cap}</span>
+            <span
+              class="lx-mini-cap"
+              title={capGimnasio && capGimnasio.value !== jefe.value
+                ? (es ? 'Nivel máximo del próximo gimnasio: ' : 'Level cap of the next gym: ') + traducirNombre(capGimnasio.name)
+                : es ? 'Nivel máximo' : 'Level cap'}
+            ><small>{es ? 'NV. MÁX' : 'LV. CAP'}</small>{cap}</span>
           {/if}
         </div>
         {#if riesgo}
           <div class="lx-mini-riesgo"><Riesgo nivel={riesgo.nivel} consejos={riesgo.consejos} modo={riesgo.modo} ocultarConsejos={spoilers >= 1} /></div>
         {/if}
         <div class="lx-mini-botones lx-mini-botones-jefe">
-          <button class="lx-mini-ok" class:lx-confirmar-jefe={confirmarJefe} on:click={vencer}>
-            {confirmarJefe ? (es ? '¿Seguro? 🏅' : 'Sure? 🏅') : es ? '🏅 Vencido' : '🏅 Beaten'}
-          </button>
-          <button class="lx-mini-ko" on:click={deshacerJefe} disabled={!ultimoVencido} title={es ? 'Deshacer el último jefe marcado' : 'Undo last boss'}>
-            ↶ {es ? 'Deshacer' : 'Undo'}
-          </button>
+          {#if jefe.derrotado}
+            <span class="lx-mini-vencido">🏅 {es ? 'Vencido' : 'Beaten'}</span>
+            <button class="lx-mini-ko" on:click={deshacerJefe} title={es ? 'Quitar la marca de vencido' : 'Unmark as beaten'}>
+              ↶ {es ? 'Quitar' : 'Unmark'}
+            </button>
+          {:else}
+            <button class="lx-mini-ok" class:lx-confirmar-jefe={confirmarJefe} on:click={vencer}>
+              {confirmarJefe ? (es ? '¿Seguro? 🏅' : 'Sure? 🏅') : es ? '🏅 Vencido' : '🏅 Beaten'}
+            </button>
+            <button class="lx-mini-ko" on:click={() => moverJefe(1)} disabled={posJefe >= listaJefes.length - 1}>
+              {es ? 'Siguiente ▶' : 'Next ▶'}
+            </button>
+          {/if}
         </div>
       </section>
     {/if}
@@ -503,6 +557,50 @@
   }
   .lx-mini-botones-jefe {
     margin-top: 6px;
+  }
+  .lx-mini-jefe-nav {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+  }
+  .lx-mini-jefe-nav small {
+    flex: 1;
+    text-align: center;
+  }
+  .lx-mini-jefe-nav button {
+    width: 24px;
+    height: 22px;
+    border-radius: 6px;
+    border: 2px solid #1b1b1f;
+    background: #fff;
+    color: #dc0a2d;
+    font-size: 11px;
+    line-height: 1;
+    box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+  }
+  .lx-mini-jefe-nav button:disabled {
+    opacity: 0.35;
+    box-shadow: none;
+  }
+  .lx-mini-jefe-nav button:not(:disabled):active {
+    transform: translate(1px, 1px);
+    box-shadow: none;
+  }
+  .lx-mini-jefe-nav .lx-mini-volver {
+    color: #1b1b1f;
+    font-size: 13px;
+  }
+  .lx-mini-vencido {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'VT323', monospace;
+    font-size: 18px;
+    border-radius: 6px;
+    background: #ffd23f;
+    color: #1b1b1f;
+    border: 2px solid #1b1b1f;
   }
   .lx-confirmar-jefe {
     background: #ffd23f !important;

@@ -1,3 +1,7 @@
-## Novedades de la 1.5.3
+## Novedades de la 1.5.4
 
-- **Arreglado: el «próximo jefe» se saltaba combates.** Bastaba con capturar en una ruta posterior para que un rival se diera por pasado. Por ejemplo, en RojoFuego, capturar en la Ruta 2 antes de ir a la Ruta 22 pasaba directamente a Brock. Ahora los rivales y los equipos malvados solo cuentan como pasados si los marcas como vencidos, si ya has estado en su zona o si has dejado atrás el gimnasio siguiente. Los gimnasios y el Alto Mando cuentan como pasados en cuanto capturas más adelante. Afecta al modo compacto, a las medallas y a la barra de EXP.
+- **Modo compacto, jefes a mano:**
+  - Con las flechas **◀ ▶** te mueves por todos los jefes de la partida, y con **⟲** vuelves al próximo.
+  - **🏅 Vencido** marca el jefe que estés viendo, y **Quitar** le quita la marca.
+- **Modo compacto, nivel máximo:** el «NV. MÁX» es siempre el del **próximo líder de gimnasio** (o el Alto Mando al final), aunque estés viendo a un rival o a un equipo malvado.
+- **Más lugares en español:** Pueblo Paleta, Ciudad Verde, Bosque Verde, Ciudad Trigal, Ciudad Corazón, Isla Prima… (Kanto, Johto, Sinnoh y algunos de Hoenn).
