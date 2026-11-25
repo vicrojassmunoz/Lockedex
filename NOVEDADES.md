@@ -1,3 +1,5 @@
-## Novedades de la 1.5.1
+## Novedades de la 1.5.2
 
-- **Arreglado:** al cambiar de pestaña, sobre todo desde Inicio o Partidas, la página anterior se quedaba un momento encima de la nueva. Era la animación de salida, que se reproducía aunque ya hubieras cambiado de página. Ahora el cambio es limpio.
+- **Arreglado: el rival con el inicial equivocado.** Lockedex daba por hecho que habías elegido fuego hasta que tocabas los iconos de la fila «Inicial», así que con Bulbasaur el rival salía con Squirtle. Ahora el tipo se deduce del Pokémon que apuntas como inicial, y las partidas ya empezadas se corrigen solas al abrirlas. Si lo eliges a mano o juegas un Randomlocke, se respeta lo que pongas.
+- **Arreglado: no se detectaban los jefes vencidos.** Marcar un combate como ganado no actualizaba el modo compacto, las medallas ni el perfil. Ya lo hace.
+- **Modo compacto:** botón **🏅 Vencido** para el próximo jefe (con confirmación) y **Deshacer** por si te equivocas. Se guarda con tu equipo actual, igual que desde la ventana principal.

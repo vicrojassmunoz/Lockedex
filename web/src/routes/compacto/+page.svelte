@@ -91,6 +91,30 @@
       especieTexto = ''
     }
   }
+  // Jefe vencido (con confirmación) y deshacer el último
+  let confirmarJefe = false
+  let ultimoVencido = null
+  const vencer = async () => {
+    if (!jefe) return
+    if (!confirmarJefe) {
+      confirmarJefe = true
+      setTimeout(() => (confirmarJefe = false), 3000)
+      return
+    }
+    confirmarJefe = false
+    const j = { id: jefe.value, name: datosJefe?.name || jefe.boss || jefe.name, group: jefe.group, type: datosJefe?.speciality }
+    if (await enviar({ tipo: 'jefe', jefe: j })) {
+      ultimoVencido = j
+      avisar(`🏅 ${j.name}`)
+    }
+  }
+  const deshacerJefe = async () => {
+    if (ultimoVencido && (await enviar({ tipo: 'jefe', jefe: ultimoVencido, deshacer: true }))) {
+      avisar(es ? `Deshecho: ${ultimoVencido.name}` : `Undone: ${ultimoVencido.name}`)
+      ultimoVencido = null
+    }
+  }
+
   const caido = async (m) => {
     if (confirmar !== m.lugar) {
       confirmar = m.lugar
@@ -181,6 +205,14 @@
         {#if riesgo}
           <div class="lx-mini-riesgo"><Riesgo nivel={riesgo.nivel} consejos={riesgo.consejos} modo={riesgo.modo} ocultarConsejos={spoilers >= 1} /></div>
         {/if}
+        <div class="lx-mini-botones lx-mini-botones-jefe">
+          <button class="lx-mini-ok" class:lx-confirmar-jefe={confirmarJefe} on:click={vencer}>
+            {confirmarJefe ? (es ? '¿Seguro? 🏅' : 'Sure? 🏅') : es ? '🏅 Vencido' : '🏅 Beaten'}
+          </button>
+          <button class="lx-mini-ko" on:click={deshacerJefe} disabled={!ultimoVencido} title={es ? 'Deshacer el último jefe marcado' : 'Undo last boss'}>
+            ↶ {es ? 'Deshacer' : 'Undo'}
+          </button>
+        </div>
       </section>
     {/if}
 
@@ -468,6 +500,13 @@
   .lx-mini-ko {
     background: #e5e7eb;
     color: #1b1b1f;
+  }
+  .lx-mini-botones-jefe {
+    margin-top: 6px;
+  }
+  .lx-confirmar-jefe {
+    background: #ffd23f !important;
+    color: #1b1b1f !important;
   }
   .lx-mini-aviso {
     font-family: 'VT323', monospace;

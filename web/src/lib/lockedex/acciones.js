@@ -23,6 +23,26 @@ export const aplicarAccion = (accion = {}) => {
     return true
   }
 
+  // Jefe vencido: se guarda como lo hace la ventana de progreso, con el equipo actual
+  if (accion.tipo === 'jefe' && accion.jefe?.id !== undefined) {
+    almacen.update((texto) => {
+      const datos = JSON.parse(texto || '{}')
+      const j = accion.jefe
+      const equipo = (datos.__team || [])
+        .filter((l) => datos[l]?.pokemon)
+        .map((l) => ({ sprite: datos[l].pokemon, id: l }))
+      const entrada = Object.fromEntries(
+        Object.entries({ id: j.id, name: j.name, group: j.group, type: j.type, team: equipo }).filter(([, v]) => v !== undefined && v !== null)
+      )
+      const lista = Array.isArray(datos.__teams) ? datos.__teams : []
+      datos.__teams = accion.deshacer
+        ? lista.filter((t) => String(t.id) !== String(j.id))
+        : lista.filter((t) => String(t.id) !== String(j.id)).concat(entrada)
+      return JSON.stringify(datos)
+    })
+    return true
+  }
+
   if (accion.tipo === 'caido' && accion.ubicacion) {
     almacen.update((texto) => {
       const datos = JSON.parse(texto || '{}')

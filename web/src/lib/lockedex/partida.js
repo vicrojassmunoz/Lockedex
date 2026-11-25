@@ -70,7 +70,11 @@ export const nivelMaximo = (jefe) => {
 
 export const resumirPartida = (partida, rutas = []) => {
   const datos = partida?.datos || {}
-  const derrotados = Object.keys(datos.__teams || {})
+  // __teams es una lista [{ id, name, group, type, team }] con los jefes vencidos (id = value de la ruta)
+  const equiposJefes = datos.__teams || []
+  const derrotados = (Array.isArray(equiposJefes) ? equiposJefes.map((t) => t?.id) : Object.keys(equiposJefes))
+    .filter((id) => id !== undefined && id !== null)
+    .map(String)
 
   let ultimo = -1
   const lugares = []

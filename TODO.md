@@ -168,6 +168,9 @@ Hecho: reglas por run en `lockedex.reglas.<id>` (`web/src/lib/lockedex/reglas.js
 
 ## 6. Otras mejoras y limitaciones conocidas
 
+- [x] **El rival llevaba el inicial equivocado** (avisado el 25/11: Bulbasaur y el rival con Squirtle). El tipo de inicial solo cambiaba con los iconos de la fila «Inicial» y por defecto era fuego. Desde la 1.5.2 se deduce del Pokémon apuntado (`lib/lockedex/inicial.js`, también para los iniciales de Unbound, Blazing Emerald y New Generations), salvo en Randomlocke o si ya se eligió a mano.
+- [x] **Jefes vencidos no detectados** (avisado el 25/11): `resumirPartida` leía `__teams` como objeto y es una lista `[{ id, … }]`, así que el modo compacto, las medallas y el perfil no veían los combates ganados. Arreglado en la 1.5.2, y el modo compacto tiene «🏅 Vencido» (con confirmación) y «Deshacer».
+
 - [x] **Página anterior visible ~1 s al cambiar de pestaña** (sobre todo desde Inicio y Partidas; avisado el 25/11). Causa: en Svelte 3 las transiciones son globales, así que la animación de salida de la página vieja (el menú de Inicio, la lista de Partidas) se reproducía encima de la nueva. Arreglado en la 1.5.1 marcando todas las transiciones de salida como `|local` y dejando solo de entrada la de Partidas, que estaba en la raíz de la página. Prueba: `pruebas/solape.mjs` mide cuánto sigue visible la página vieja (ahora 0 ms en todos los cambios). **Al añadir transiciones nuevas, usar siempre `|local`.**
 
 - [ ] **Lector de .sav:** probado solo con partidas sintéticas. Hay que probarlo con partidas reales de Rubí, Zafiro, Esmeralda, RojoFuego y VerdeHoja (y con hacks CFRU como Radical Red y Unbound, que amplían especies y pueden no ser compatibles).

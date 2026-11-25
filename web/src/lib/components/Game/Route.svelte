@@ -17,6 +17,10 @@
   import { Tooltip } from '$lib/components/core'
   import CustomLocation from './CustomLocation.svelte'
   import StarterType from '$lib/components/starter-type.svelte'
+  import { get } from 'svelte/store'
+  import { activeGame } from '$lib/store'
+  import { tipoInicial } from '$lib/lockedex/inicial'
+  import { leerReglas } from '$lib/lockedex/reglas'
   import GymCard from '$lib/components/gym-card.svelte'
   import PokemonSelector from '$lib/components/pokemon-selector.svelte'
 
@@ -45,6 +49,21 @@
   let starter = data.__starter || 'fire'
   let element
 
+  // El tipo del inicial se deduce del Pokémon apuntado en «Inicial» (el rival depende de él):
+  // al cambiarlo aquí, o al abrir una partida en la que nunca se eligió el tipo a mano.
+  // En Randomlocke no, porque el Pokémon no dice qué Poké Ball elegiste.
+  let inicialVisto = data.Starter?.pokemon
+  const deducirInicial = async (especie, alAbrir) => {
+    if (!especie || leerReglas(get(activeGame))?.randomlocke) return
+    if (alAbrir && data.__starter) return
+    const tipo = await tipoInicial(especie, key)
+    if (tipo && tipo !== starter) {
+      starter = tipo
+      store.update(patch({ __starter: tipo }))
+    }
+  }
+  deducirInicial(inicialVisto, true)
+
   /** Custom route handlers & Empty routes */
   let custom = [],
     hidden = [],
@@ -57,6 +76,11 @@
 
       bossTeamIds = (d.__teams || []).map((i) => i.id)
       hideRoute = hideRouteF(d)
+
+      if (d.Starter?.pokemon !== inicialVisto) {
+        inicialVisto = d.Starter?.pokemon
+        deducirInicial(inicialVisto, false)
+      }
     })
   )
 
