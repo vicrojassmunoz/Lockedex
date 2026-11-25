@@ -1,5 +1,19 @@
 <script>
-  import { traducirNombre } from '$lib/lockedex/idioma.js'
+  import { traducirNombre, t } from '$lib/lockedex/idioma.js'
+  import { createImgUrl, UNOWN } from '$utils/rewrites'
+
+  // Ficha al lado de la fila: sprite grande, el estado como sello de goma y la naturaleza como chip
+  const SELLO = {
+    1: ['CAPTURADO', 'CAUGHT', '#2e9e4f'],
+    2: ['REGALO', 'GIFT', '#2f78df'],
+    3: ['CAMBIO', 'TRADED', '#8a4fd8'],
+    4: ['HUYÓ', 'FLED', '#7a7a84'],
+    5: ['CAÍDO', 'FAINTED', 'var(--lx-texto)'],
+    6: ['VARIOCOLOR', 'SHINY', '#d39a00'],
+    7: ['DESCARTADO', 'DISCARDED', '#9a6a3a']
+  }
+  const ABREV = { atk: ['Atq', 'Atk'], def: ['Def', 'Def'], spa: ['AtE', 'SpA'], spd: ['DfE', 'SpD'], spe: ['Vel', 'Spe'] }
+  const abrev = (k) => t(...(ABREV[k] || [k, k]))
   import { leerReglas } from '$lib/lockedex/reglas.js'
   const reglasRun = typeof window !== 'undefined' ? leerReglas(localStorage.getItem('nuzlocke')) : {}
   const nombreExtra = (sufijo) => `${traducirNombre(locationName || location)} · ${sufijo}`
@@ -283,6 +297,28 @@
     class:lg:grid-cols-6={!nicknames}
     class="lx-fila relative flex grid w-full grid-cols-2 gap-y-3 gap-x-2 md:grid-cols-4 md:gap-y-2 lg:grid-cols-8 lg:gap-y-0"
   >
+    {#if !$$slots.location && selected && !(selected.hidden || hidden) && (selected.imgId || selected.sprite)}
+      <span class="lx-ficha-lado" aria-hidden="true">
+        <img
+          class="lx-ficha-sprite"
+          class:lx-ficha-caido={status?.id === 5}
+          src={createImgUrl(selected, { ext: 'png', shiny: status?.id === 6 })}
+          alt=""
+          on:error={(e) => (e.currentTarget.src = UNOWN)}
+        />
+        <span class="lx-ficha-datos">
+          {#if status && SELLO[status.id]}
+            <span class="lx-sello" style="--c: {SELLO[status.id][2]}">{t(SELLO[status.id][0], SELLO[status.id][1])}</span>
+          {/if}
+          {#if nature?.value?.length}
+            <span class="lx-chip-nat"><b>↑</b>{abrev(nature.value[0])} <i>↓</i>{abrev(nature.value[1])}</span>
+          {:else if nature}
+            <span class="lx-chip-nat">{t('neutra', 'neutral')}</span>
+          {/if}
+        </span>
+      </span>
+    {/if}
+
     <span class="location group relative z-50">
       {#if $$slots.location}
         <slot name="location" />
@@ -716,6 +752,74 @@
 </SettingsWrapper>
 
 <style lang="postcss">
+  /* Ficha al lado de la fila (solo con la ventana ancha, donde hay sitio a la izquierda) */
+  .lx-ficha-lado {
+    display: none;
+  }
+  @media (min-width: 1200px) {
+    .lx-ficha-lado {
+      position: absolute;
+      right: calc(100% + 10px);
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      width: 150px;
+      justify-content: flex-end;
+      pointer-events: none;
+    }
+  }
+  .lx-ficha-sprite {
+    /* los sprites vienen en un lienzo de 96×96 con mucho margen: se enseñan a 80 px y se dejan salir */
+    width: 80px;
+    height: 80px;
+    margin: -16px -12px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.18));
+  }
+  .lx-ficha-caido {
+    filter: grayscale(1) opacity(0.55);
+  }
+  .lx-ficha-datos {
+    order: -1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+  }
+  /* Sello de goma: torcido, con el color del estado */
+  .lx-sello {
+    transform: rotate(-6deg);
+    padding: 1px 4px 0;
+    font-family: 'LX Pixel', 'VT323', monospace;
+    font-size: 12px;
+    line-height: 13px;
+    letter-spacing: 1px;
+    color: var(--c);
+    border: 2px solid var(--c);
+    background: color-mix(in srgb, var(--c) 10%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 35%, transparent);
+  }
+  .lx-chip-nat {
+    padding: 0 4px;
+    font-family: 'LX Pixel', 'VT323', monospace;
+    font-size: 12px;
+    line-height: 14px;
+    color: var(--lx-texto-suave);
+    background: var(--lx-panel-2);
+    border: 1px solid var(--lx-bisel);
+  }
+  .lx-chip-nat b {
+    font-weight: normal;
+    color: #e0503a;
+  }
+  .lx-chip-nat i {
+    font-style: normal;
+    color: #3a78e0;
+  }
+
   .dupe {
     @apply mr-2 text-tiny opacity-25 grayscale;
   }

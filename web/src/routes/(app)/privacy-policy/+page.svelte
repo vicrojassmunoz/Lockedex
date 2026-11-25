@@ -84,6 +84,7 @@
           <li><b>Actualizaciones:</b> al abrirse, Lockedex mira en GitHub (repositorio <i>vicrojassmunoz/Lockedex</i>) si hay una versión nueva y, si la hay, la descarga de allí.</li>
           <li><b>Imágenes de algunos ROM hacks</b> (fakemon y formas propias) se cargan desde el servidor del proyecto original, <i>img.nuzlocke.app</i>.</li>
           <li><b>Importar con código QR</b> consulta el servicio para compartir del original y el lector de QR se descarga de <i>cdn.jsdelivr.net</i>.</li>
+          <li><b>Sprites animados:</b> al abrir la ficha de un Pokémon de un jefe, se pide su sprite animado de Negro/Blanco al repositorio público <i>PokeAPI/sprites</i> de GitHub. Si no hay internet, se usa el sprite que trae la app.</li>
           <li>Los enlaces externos (Pokémon DB, guías, GitHub…) se abren en tu navegador.</li>
         </ul>
         <p>El resto, incluidos los sprites, los datos de los juegos y la calculadora, viene dentro de la app.</p>
@@ -102,6 +103,7 @@
           <li><b>Updates:</b> on launch, Lockedex checks GitHub (<i>vicrojassmunoz/Lockedex</i>) for a new version and downloads it from there.</li>
           <li><b>Some ROM hack images</b> (fakemon and custom forms) load from the original project's server, <i>img.nuzlocke.app</i>.</li>
           <li><b>QR code import</b> queries the original's sharing service, and the QR reader is downloaded from <i>cdn.jsdelivr.net</i>.</li>
+          <li><b>Animated sprites:</b> opening a boss Pokémon's details requests its Black/White animated sprite from the public <i>PokeAPI/sprites</i> GitHub repository. Offline, the bundled sprite is used.</li>
           <li>External links (Pokémon DB, guides, GitHub…) open in your browser.</li>
         </ul>
         <p>Everything else, sprites, game data and the calculator included, ships with the app.</p>

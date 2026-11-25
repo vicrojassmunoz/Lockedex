@@ -65,6 +65,31 @@
   }
   const BOLA = bola()
 
+  // Sprite animado de Negro/Blanco (5.ª gen, hasta el n.º 649) para la ficha. Se baja de PokeAPI/sprites;
+  // sin internet o si no existe, se queda el sprite fijo de siempre.
+  const animado = (p) => {
+    const n = parseInt(String(p?.sprite || p?.imgId || ''), 10)
+    return n > 0 && n <= 649 && /^\d+$/.test(String(p?.sprite || p?.imgId || ''))
+      ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${n}.gif`
+      : null
+  }
+  const fijo = (p) => createImgUrl(p, { ext: 'png' })
+  const alFallar = (p) => (e) => {
+    const img = e.currentTarget
+    if (img.dataset.fase !== 'fijo') {
+      img.dataset.fase = 'fijo'
+      img.src = fijo(p)
+    } else img.src = UNOWN
+  }
+  // Los GIF de Negro/Blanco miden distinto según el Pokémon: se amplían ×2 exacto (sin pasar de la ventana)
+  const ajustar = (e) => {
+    const img = e.currentTarget
+    if (img.dataset.fase === 'fijo') return img.removeAttribute('style')
+    const k = Math.max(1, Math.min(2, Math.floor(132 / Math.max(img.naturalWidth, img.naturalHeight))))
+    img.style.width = img.naturalWidth * k + 'px'
+    img.style.height = img.naturalHeight * k + 'px'
+  }
+
   const elegir = (i) => (abierto = abierto === i ? null : i)
   const mover = (d) => (abierto = (abierto + d + pokemon.length) % pokemon.length)
   $: primero = pokemon[0]
@@ -141,7 +166,13 @@
       <div class="lx-gf-izq">
         <div class="lx-gf-ventana" style={MARCOS.ventana}>
           {#key elegido.name}
-            <img src={createImgUrl(elegido, { ext: 'png' })} alt="" on:error={(e) => (e.currentTarget.src = UNOWN)} />
+            <img
+              src={animado(elegido) || fijo(elegido)}
+              data-fase={animado(elegido) ? 'animado' : 'fijo'}
+              alt=""
+              on:load={ajustar}
+              on:error={alFallar(elegido)}
+            />
           {/key}
         </div>
         <div class="lx-gf-placa">
@@ -274,6 +305,23 @@
     justify-self: center;
     transform: scale(1.25);
     image-rendering: pixelated;
+  }
+  /* El Pokémon elegido «salta» a dos fotogramas, como el icono del menú de equipo de la GBA */
+  .lx-me-sel :global(.lx-me-icono) {
+    animation: lx-me-salto 0.5s steps(1, end) infinite;
+  }
+  @keyframes lx-me-salto {
+    0% {
+      transform: scale(1.25) translateY(0);
+    }
+    50% {
+      transform: scale(1.25) translateY(-4px);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lx-me-sel :global(.lx-me-icono) {
+      animation: none;
+    }
   }
   .lx-me-datos {
     display: flex;

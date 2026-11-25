@@ -302,3 +302,26 @@ html.lx-escritorio .lx-nav-vieja {
   visibility: hidden !important;
   pointer-events: none !important;
 }
+
+/* Pestañas de la ventana de VS como las de las pantallas de los juegos: cuadradas, letra pixelada,
+   la activa con el doble contorno naranja del cursor del menú de equipo */
+.lx-vs-pestanas label {
+  font-family: 'LX Pixel', 'VT323', monospace !important;
+  font-size: 24px !important;
+  line-height: 24px !important;
+  padding: 2px 12px 4px !important;
+  border-radius: 0 !important;
+  border: 2px solid #283850 !important;
+  background: #f8f8f8 !important;
+  color: #404850 !important;
+  text-shadow: 2px 2px 0 #d0d8e0;
+  box-shadow: inset 0 -3px 0 #c8d0d8 !important;
+  clip-path: polygon(2px 0, calc(100% - 2px) 0, 100% 2px, 100% calc(100% - 2px), calc(100% - 2px) 100%, 2px 100%, 0 calc(100% - 2px), 0 2px);
+}
+.lx-vs-pestanas label.active {
+  background: #98d8f8 !important;
+  border-color: #e85020 !important;
+  color: #f8f8f8 !important;
+  text-shadow: 2px 2px 0 #305890;
+  box-shadow: inset 0 -3px 0 #68b8e8 !important;
+}

@@ -56,10 +56,7 @@
       {/each}
       {#each Array(6 - team.length) as _}
         <div class="relative h-10 w-10">
-          <PIcon
-            class="picon opacity-30 dark:opacity-80 dark:contrast-50"
-            name="unknown-pokemon2"
-          />
+          <img class="lx-hueco-ball" src="/lx/objetos/poke-ball.png" alt="" aria-hidden="true" />
         </div>
       {/each}
     </ul>
@@ -129,6 +126,16 @@
 </div>
 
 <style>
+  /* Hueco libre del equipo: Poké Ball apagada, como un hueco vacío del menú de los juegos */
+  .lx-hueco-ball {
+    position: absolute;
+    inset: 4px;
+    width: 32px;
+    height: 32px;
+    image-rendering: pixelated;
+    filter: grayscale(1) opacity(0.35);
+  }
+
   h2 {
     @apply text-sm font-bold;
   }

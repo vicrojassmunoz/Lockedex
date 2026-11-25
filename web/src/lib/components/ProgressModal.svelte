@@ -8,6 +8,7 @@
 
   import { X } from '$icons'
   import { Tabs, Button, IconButton, Loader } from '$c/core'
+  import { t } from '$lib/lockedex/idioma.js'
   import { TeamBuildCard, CompareCard, Actions } from '$c/BossBattle'
   import {
     getGameStore,
@@ -140,9 +141,9 @@
     class="lx-panel px-6 py-8 text-center text-lg"
   >
     <p class="mb-2">
-      How do you expect to beat <b>{boss.name}</b> with no Pokémon?
+      {#if t('es', 'en') === 'es'}¿Cómo piensas vencer a <b>{boss.name}</b> sin Pokémon?{:else}How do you expect to beat <b>{boss.name}</b> with no Pokémon?{/if}
     </p>
-    <p class="mb-4">Go back out there and Catch 'em All!</p>
+    <p class="mb-4">{t('¡Sal ahí fuera y hazte con todos!', "Go back out there and Catch 'em All!")}</p>
 
     <IconButton
       borderless
@@ -152,7 +153,7 @@
       containerClassName="fixed top-4 right-4 z-[100]"
     />
 
-    <Button solid rounded on:click={close}>Close</Button>
+    <Button solid rounded on:click={close}>{t('Cerrar', 'Close')}</Button>
   </div>
 {:else}
   {@const team = makeTeam(teamLocs, analysisResult.mons)}
@@ -174,7 +175,7 @@
     gym={analysisResult.gym}
     advice={analysisResult}
   >
-    <Tabs class="flex-1" slot="tabs" bind:active={tab} {tabs} />
+    <Tabs className="lx-vs-pestanas flex-1" slot="tabs" bind:active={tab} {tabs} />
     <Actions
       slot="actions"
       on:toggle={settab(0)}
@@ -183,7 +184,7 @@
       {...boss}
       {team}
     >
-      <span slot="switch-text">Build team</span>
+      <span slot="switch-text">{t('Montar equipo', 'Build team')}</span>
     </Actions>
   </CompareCard>
 
@@ -198,7 +199,7 @@
     gym={analysisResult.gym}
     summary={analysisResult.summary}
   >
-    <Tabs slot="tabs" bind:active={tab} {tabs} />
+    <Tabs className="lx-vs-pestanas" slot="tabs" bind:active={tab} {tabs} />
     <Actions
       slot="actions"
       on:toggle={settab(1)}
@@ -206,7 +207,7 @@
       {...boss}
       {team}
     >
-      <span slot="switch-text">Compare team</span>
+      <span slot="switch-text">{t('Comparar equipo', 'Compare team')}</span>
     </Actions>
   </TeamBuildCard>
 {/if}

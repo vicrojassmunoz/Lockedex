@@ -5,13 +5,13 @@
   import { fade } from 'svelte/transition'
 
   import { Icon, PIcon, Tooltip } from '$c/core'
-  import { Hand, Ball, Loop as Badge } from '$icons'
+  import { Hand } from '$icons'
+  import Vs from '$lib/components/BossBattle/Vs.svelte'
 
   import { Wrapper as SettingWrapper } from '$lib/components/Settings'
   import { color } from '$lib/data/colors.ts'
 
   import { createImgUrl } from '$utils/rewrites'
-  import { Stars as Pattern } from '$utils/pattern'
 
   $: atk = pokemon[0]
   $: def = pokemon[1]
@@ -41,9 +41,7 @@
         >
           <div
             class="absolute inset-0"
-            style={`background-image: url("${Pattern(
-              color(atk.types[1] || atk.types[0], themeId)
-            )}");`}
+            style="background-image: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.14) 0 2px, transparent 2px 4px)"
           />
         </div>
       {/key}
@@ -56,9 +54,7 @@
         >
           <div
             class="absolute inset-0"
-            style={`background-image: url("${Pattern(
-              color(def.types[1] || def.types[0], themeId)
-            )}");`}
+            style="background-image: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.14) 0 2px, transparent 2px 4px)"
           />
         </div>
       {/key}
@@ -110,24 +106,9 @@
         {/key}
       {/if}
 
-      <!-- VS Icon -->
-      <div class="absolute left-1/2 bottom-1 h-8 w-8 -translate-x-1/2">
-        <span class="flex">
-          <Icon inline={true} class="absolute" height="1.4em" icon={Badge} />
-          <Icon
-            inline={true}
-            class="absolute -top-0.5 right-2 rounded-full bg-white dark:bg-gray-800"
-            height="0.8em"
-            icon={Ball}
-          />
-          <Icon
-            inline={true}
-            class="absolute bottom-2 -left-0.5 rounded-full bg-white dark:bg-gray-800"
-            height="0.8em"
-            icon={Ball}
-          />
-        </span>
-        <p class="absolute left-0.5 bottom-7 font-mono text-2xl">vs</p>
+      <!-- Insignia VS a píxeles -->
+      <div class="absolute left-1/2 bottom-2 z-30 -translate-x-1/2">
+        <Vs />
       </div>
     </div>
 

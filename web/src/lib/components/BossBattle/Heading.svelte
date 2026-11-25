@@ -31,45 +31,52 @@
 {/if}
 
 <SettingWrapper id="theme" let:setting={themeId}>
-  <!-- Desktop gradients inlined -->
+  <!-- Presentación de combate como en los juegos: dos mitades con el color de cada lado, corte en
+       diagonal, líneas de barrido de la GBA y un canto oscuro abajo -->
   <div
-    class="bbheading desk-only transition"
-    style="background: linear-gradient(90deg, {lCol(themeId)} 0%, {lCol(
-      themeId
-    )} {center - 1}%, {rCol(themeId)} {center + 1}%, {rCol(themeId)});"
-  >
-    <div
-      class="absolute inset-0 opacity-30 mix-blend-overlay"
-      style={`background-image: url("${Pattern('white')}")`}
-    />
-  </div>
-
-  <div
-    class="anim-bg bbheading bbanim desk-only"
-    style="background: linear-gradient(180deg, transparent 0%, white 48%, white 52%, transparent 100%);"
+    class="bbheading lx-vs-fondo"
+    style="--izq: {lCol(themeId)}; --der: {rCol(themeId)}"
   />
-
-  <div
-    class="bbheading desk-only"
-    style="background: linear-gradient(60deg, transparent 25%, var(--bbbgcol) {center -
-      2}%, var(--bbbgcol) {center}%, var(--bbbgcol) {center +
-      2}%, transparent 75%);"
-  />
-
-  <div
-    class="desk-only absolute left-0 top-24 right-0 z-50 h-[2px] -translate-y-4 md:top-28"
-    style="background: linear-gradient(90deg, {lCol(themeId)}, {rCol(
-      themeId
-    )});"
-  />
-
   <!-- Base stat totals -->
 
-  <div style="--b-col: {lCol(themeId)}" class="bst"><b>{atkStats}</b></div>
-  <div style="--b-col: {rCol(themeId)}" class="bst"><b>{defStats}</b></div>
+  <div style="--b-col: {lCol(themeId)}" class="bst lx-vs-pb" title="Puntos base del equipo"><small>PB</small><b>{atkStats}</b></div>
+  <div style="--b-col: {rCol(themeId)}" class="bst lx-vs-pb" title="Puntos base del equipo"><small>PB</small><b>{defStats}</b></div>
 </SettingWrapper>
 
 <style>
+  .lx-vs-fondo {
+    background:
+      repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.14) 0 2px, transparent 2px 4px),
+      linear-gradient(105deg, var(--izq) 0 48.6%, #f8f8f8 48.6% 50%, #283850 50% 51.4%, var(--der) 51.4%);
+    box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.35), inset 0 2px 0 rgba(255, 255, 255, 0.25);
+    image-rendering: pixelated;
+  }
+  /* Recuadros de puntos base como los de PS de la consola: blanco, contorno oscuro, letra pixelada */
+  .lx-vs-pb {
+    display: flex !important;
+    align-items: baseline;
+    gap: 4px;
+    padding: 0 8px !important;
+    border-radius: 0 !important;
+    border: 2px solid #283850 !important;
+    box-shadow: inset 0 -3px 0 #c8d0d8, 3px 3px 0 rgba(0, 0, 0, 0.25);
+    background: #f8f8f8 !important;
+    color: #404850;
+    font-family: 'LX Pixel', 'VT323', monospace;
+    clip-path: polygon(2px 0, calc(100% - 2px) 0, 100% 2px, 100% calc(100% - 2px), calc(100% - 2px) 100%, 2px 100%, 0 calc(100% - 2px), 0 2px);
+  }
+  .lx-vs-pb small {
+    font-size: 12px;
+    color: var(--b-col);
+  }
+  .lx-vs-pb b {
+    font-size: 24px;
+    line-height: 26px;
+    font-weight: normal;
+  }
+  .lx-vs-pb b::before {
+    display: none;
+  }
   img {
     image-rendering: pixelated;
   }
