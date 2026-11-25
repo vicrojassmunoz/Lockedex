@@ -52,6 +52,19 @@ Notas para retomar el trabajo en otra sesión. Lo primero es el mapa del proyect
   - Criterio: **objeto de la mochila** (PokéSprite, `/home/claude/pokesprite/items`) cuando el icono representa algo que se lleva (Poké Ball, piedras, Mapa, Cuerda Huida, MT…); **objeto del tileset/mapa** (pret: pokefirered/pokeemerald `data/tilesets/.../metatiles`, `graphics/`) cuando es mobiliario o escenario: el **PC** mejor como el PC del Centro Pokémon, la Caja, la Tienda, la Liga (estatua/puerta), el cementerio (lápida de la Torre Pokémon)…
   - **No** usar proteínas/vitaminas para las estadísticas (no le gustan). Los iconos de estadísticas actuales (Atk, Def, Spa, Spd…) son «feotes»: rehacerlos a mi manera (p. ej. símbolos pixel claros o las barras de colores de la pantalla de datos).
   - Se añaden a `web/static/lx/objetos/` (o `lx/tiles/`) y a `icons/sprites.js` + `IconSet.ts`; los créditos ya citan PokéSprite y pret.
+  - **La Cuerda Huida (icono de «Fallido») no se ve bien** → cambiarla (propuesta: Bola Humo o Poké Muñeco).
+  - **Propuesta enseñada al usuario (25/11, pendiente de que elija)** — hoja hecha con `herramientas/propuesta_iconos.py` (usa `herramientas/tiles_mapa.py`, que dibuja los metatiles de pokefirered numerados):
+    - Caja → **PC del Centro Pokémon** (metatile 815 de `secondary/pokemon_center`, solo capa de arriba) · alt. 741.
+    - Equipo → personaje del mapa (`mapa/frlg/red_normal` o `green_normal`).
+    - Muerto / Cementerio → **lápida de la Torre Pokémon** (metatile 657 morada, 731 dorada; `secondary/pokemon_tower`, solo capa de arriba).
+    - Fallido → Bola Humo (`items/hold-item/smoke-ball`) · alt. Poké Muñeco (`items/other-item/poke-doll`).
+    - Intercambiado → recepcionista del Club de Cable (`mapa/frlg/cable_club_receptionist`) · alt. la de la Sala Unión.
+    - Regalo → Poké Ball del suelo (`pics/misc/item_ball` de pret) · alt. Huevo Suerte.
+    - Medallas / logros → Cinta Campeón (`misc/ribbon/champion-ribbon`) · alt. la de Hoenn.
+    - Analista → Pokédex del mapa (`pics/misc/pokedex`) · alt. Periscopio (`hold-item/scope-lens`).
+    - PS → Poción · Favorito → Escama Corazón · Mapa → Mapa Pueblo de la 3.ª gen (`key-item/town-map-gen3`).
+    - Estadísticas → sin iconos: chips de texto con la letra de la ficha (ATQ, DEF, AT.E, DF.E, VEL) en colores.
+    - Siguiente tanda: lugares (ruta/hierba alta, bosque, cueva, ciudad, pueblo, estadio…) con metatiles del tileset `primary/general` + secundarios de ciudades; clases físico/especial/estado como los iconos de la 4.ª gen.
 - [ ] **Sprites animados al seleccionar un Pokémon** en el menú de equipo / ficha (como el icono que se mueve en el menú de GBA, y el sprite animado de la 4.ª–5.ª gen en la ficha). «Yo por pedir que no quede». Ver qué sprites animados hay (PokeAPI/sprites `versions/generation-v/black-white/animated/*.gif`, iconos de 2 frames de pokeemerald `graphics/pokemon/*/icon.png`).
 - [ ] **Tema oscuro con estética Pokémon**: el claro le encanta, pero el oscuro «es muy moderno, muy poco pokémon». Rehacer la paleta oscura inspirándose en los juegos (noche de los juegos, menús de la 4.ª gen en DS, PC/Pokédex de noche) en vez del azul marino plano tipo web; revisar `--lx-*` oscuros en `lockedex.css`.
 - [ ] **Responsive al ancho de la ventana**: con la ventana estrecha se cortan cosas, p. ej. la Piedra Fuego del selector de inicial (`starter-type.svelte`) se ve cortada en el borde derecho de la cabecera de la partida. Revisar cabecera de la partida, barra, tarjetas de jefe y el menú de equipo a 800–1000 px.
