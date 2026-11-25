@@ -40,7 +40,16 @@ const config = {
         250: '2.5'
       },
       colors: {
-        orange: colors.orange,
+        // El naranja de la web original pasa a ser el rojo de Lockedex, y el índigo, el turquesa de las
+        // pantallas LCD: así los componentes heredados ya no traen sus colores
+        orange: {
+          50: '#fff1f3', 100: '#ffe0e5', 200: '#ffc6cf', 300: '#ff9aab', 400: '#ff5c78',
+          500: '#f5294a', 600: '#dc0a2d', 700: '#b80624', 800: '#8b0a1e', 900: '#6b0b1b'
+        },
+        indigo: {
+          50: '#eefbff', 100: '#d6f4ff', 200: '#b0eaff', 300: '#8ee8ff', 400: '#4fd0f5',
+          500: '#29b6f6', 600: '#1d8fc0', 700: '#1d4a5e', 800: '#12303f', 900: '#0b1f29'
+        },
         lime: colors.lime,
         gray: colors.neutral
       }

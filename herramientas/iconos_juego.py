@@ -59,7 +59,9 @@ for origen, nombre in [
     ('items/ev-item/power-band', 'power-band'), ('items/ev-item/power-anklet', 'power-anklet'),
     ('items/key-item/journal', 'diario'), ('items/key-item/machine-part', 'pieza-maquina'),
     ('items/plate/flame', 'tabla-llama'), ('items/ev-item/macho-brace', 'brazal-firme'),
-    ('items/hold-item/scope-lens', 'periscopio'), ('items/battle-item/guard-spec', 'proteccion-especial')]:
+    ('items/hold-item/scope-lens', 'periscopio'), ('items/battle-item/guard-spec', 'proteccion-especial'),
+    ('items/other-item/heart-scale', 'escama-corazon'), ('items/key-item/coin-case', 'estuche-monedas'),
+    ('items/battle-item/x-attack', 'ataque-x')]:
     # Los de PokéSprite ya son de 32×32 con su margen, como los demás iconos de objetos
     im = Image.open(PS + origen + '.png').convert('RGBA')
     if im.size != (32, 32):  # las cintas son de 40×40: se centran en 32×32 sin escalar

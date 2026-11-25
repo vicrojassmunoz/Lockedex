@@ -6,6 +6,11 @@ export default {
   0,
   32
  ],
+ "ataque-x": [
+  6,
+  6,
+  20
+ ],
  "brazal-firme": [
   4,
   6,
@@ -66,8 +71,18 @@ export default {
   5,
   22
  ],
+ "escama-corazon": [
+  7,
+  8,
+  18
+ ],
  "escape-rope": [
   4,
+  6,
+  22
+ ],
+ "estuche-monedas": [
+  5,
   6,
   22
  ],

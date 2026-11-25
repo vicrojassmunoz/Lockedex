@@ -61,7 +61,7 @@
     "name": "Eterna Forest",
     "encounters": ["buneary", "shroomish", "paras", "slakoth", "nincada", "taillow", "murkrow", "misdreavus", "beautifly", "dustox", "beedrill"]
   },
-  { "type": "gym", "name": "Eterna Forest", "value": "cheryl", "group": "", "boss": "Cheryl" },
+  { "type": "gym", "name": "Eterna Forest", "value": "cheryl", "group": "mini-boss", "boss": "Cheryl" },
   { "type": "route", "name": "The Old Chateau", "encounters": ["rotom", "gastly", "haunter", "gengar", "rattata", "raticate", "duskull", "shuppet"] },
   {
     "type": "route",
@@ -79,7 +79,7 @@
     "encounters": ["stunky", "slugma", "mankey", "magby", "spoink", "numel", "gligar", "torkoal", "combee", "burmy", "pineco", "silcoon", "cascoon", "heracross"]
   },
   { "type": "route", "name": "Wayward Cave", "encounters": ["gabite", "zubat", "geodude", "gible", "baltoy", "sandshrew", "onix", "sableye", "mawile"] },
-  { "type": "gym", "name": "Wayward Cave", "value": "mira", "group": "", "boss": "Mira" },
+  { "type": "gym", "name": "Wayward Cave", "value": "mira", "group": "mini-boss", "boss": "Mira" },
   {
     "type": "route",
     "name": "Mt. Coronet",
@@ -90,7 +90,7 @@
     "name": "Route 208",
     "encounters": ["bibarel", "roselia", "skitty", "jigglypuff", "kirlia", "zangoose", "seviper", "smeargle", "dunsparce", "psyduck", "golduck", "magikarp", "goldeen", "remoraid", "gyarados", "seaking", "octillery", "cherubi", "shroomish", "exeggcute", "seedot", "tangela"]
   },
-  { "type": "gym", "name": "Route 208", "value": "aaron", "group": "", "boss": "Aaron" },
+  { "type": "gym", "name": "Route 208", "value": "aaron", "group": "mini-boss", "boss": "Aaron" },
   { "type": "gym", "name": "Hearthome Gym", "value": "3", "group": "gym-leader", "boss": "Fantina" },
   { "type": "gym", "name": "Hearthome City", "value": "b3", "group": "rival", "boss": "Barry" },
   { "type": "gym", "name": "Route 212", "value": "sat1", "group": "evil-team", "boss": "Saturn & Gentleman Backlot" },
@@ -163,7 +163,7 @@
     "name": "Route 221",
     "encounters": ["sudowoodo", "skuntank", "nidorina", "nidorino", "farfetchd", "girafarig", "dodrio", "wingull", "tentacool", "pelipper", "tentacruel", "krabby", "horsea", "clamperl", "kingler", "huntail", "gorebyss", "cherrim", "shroomish", "exeggcute", "nuzleaf", "tangela"]
   },
-  { "type": "gym", "name": "Pal Park", "value": "darach", "group": "", "boss": "Castle Valet Darach" },
+  { "type": "gym", "name": "Pal Park", "value": "darach", "group": "mini-boss", "boss": "Castle Valet Darach" },
   {
     "type": "route",
     "name": "Route 218",
@@ -180,7 +180,7 @@
     "name": "Iron Island",
     "encounters": ["wingull", "tentacool", "pelipper", "tentacruel", "magikarp", "finneon", "qwilfish", "gyarados", "lumineon", "graveler", "golbat", "lairon", "mawile", "sableye", "nosepass", "rhydon", "steelix"]
   },
-  { "type": "gym", "name": "Iron Island", "value": "riley", "group": "", "boss": "Riley" },
+  { "type": "gym", "name": "Iron Island", "value": "riley", "group": "mini-boss", "boss": "Riley" },
   { "type": "gym", "name": "Canalave Gym", "value": "6", "group": "gym-leader", "boss": "Byron" },
   {
     "type": "route",
@@ -214,7 +214,7 @@
     "name": "Sunyshore City",
     "encounters": ["tentacruel", "pelipper", "mantine", "magikarp", "krabby", "staryu", "gyarados", "kingler", "starmie"]
   },
-  { "type": "gym", "name": "Sunyshore City", "value": "dahlia", "group": "", "boss": "Arcade Star Dahlia" },
+  { "type": "gym", "name": "Sunyshore City", "value": "dahlia", "group": "mini-boss", "boss": "Arcade Star Dahlia" },
   { "type": "gym", "name": "Sunyshore Gym", "value": "8", "group": "gym-leader", "boss": "Volkner" },
   {
     "type": "route",

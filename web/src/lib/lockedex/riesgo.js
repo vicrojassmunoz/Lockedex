@@ -99,9 +99,19 @@ const riesgoConCalculadora = async (jefe, equipo, gen, cap) => {
     })
     .filter(Boolean)
 
+  // Clima que pone el jefe al salir (Sequía, Llovizna, Chorro Arena, Nevada): cambia el daño de los dos lados
+  const CLIMA = { drought: 'Sun', drizzle: 'Rain', 'sand stream': 'Sand', 'snow warning': gen >= 9 ? 'Snow' : 'Hail' }
+  let campo = undefined
+  const prioridad = (mov) => {
+    try {
+      return new calc.Move(g, mov).priority || 0
+    } catch {
+      return 0
+    }
+  }
   const daño = (atq, def, mov) => {
     try {
-      const r = calc.calculate(g, atq, def, new calc.Move(g, mov))
+      const r = calc.calculate(g, atq, def, new calc.Move(g, mov), campo)
       const [min, max] = r.range()
       const ps = def.maxHP()
       return { min: min / ps, max: max / ps }
@@ -122,13 +132,18 @@ const riesgoConCalculadora = async (jefe, equipo, gen, cap) => {
 
   function evaluar(b) {
     const movsJefe = (b.moves || []).map((m) => m?.name).filter(Boolean)
+    // IVs: los reales del juego cuando se conocen (3.ª gen, de pret: «iv» de 0 a 31); si no, 31 (el peor caso)
+    const iv = Number.isFinite(+b.iv) && b.iv !== null && b.iv !== '' ? +b.iv : 31
     const pb = crear(b.name, {
       level: nivelJefe(b, cap),
       ability: b.ability?.name,
       item: b.held?.name,
+      ivs: { hp: iv, atk: iv, def: iv, spa: iv, spd: iv, spe: iv },
       moves: movsJefe
     })
     const nb = nombreBonito(b.name)
+    const clima = CLIMA[String(b.ability?.name || '').toLowerCase().replace(/-/g, ' ')]
+    campo = clima ? new calc.Field({ weather: clima }) : undefined
     if (!pb) {
       matriz.push({ jefe: b, filas: [] })
       return 2
@@ -157,10 +172,15 @@ const riesgoConCalculadora = async (jefe, equipo, gen, cap) => {
           mejor = m
         }
       }
-      const rapido = p.stats.spe > pb.stats.spe
+      // Prioridad: si un movimiento con prioridad remata de un golpe, ese lado pega primero aunque sea más lento
+      let rapido = p.stats.spe > pb.stats.spe
+      const suPrio = movsJefe.filter((m) => prioridad(m) > 0).some((m) => daño(pb, p, m).max >= 1)
+      const miPrio = moves.filter((m) => prioridad(m) > 0).some((m) => daño(p, pb, m).min >= 1)
+      if (miPrio && !suPrio) rapido = true
+      else if (suPrio && !miPrio) rapido = false
       // Duelo 1 contra 1: golpes que necesitas (con tu daño mínimo) frente a
       // golpes que aguantas (con su daño máximo). Si eres más lento, pega antes.
-      const tu = hace > 0 ? Math.ceil(1 / hace) : 99
+      const tu = miPrio ? 1 : hace > 0 ? Math.ceil(1 / hace) : 99
       const el = recibe > 0 ? Math.ceil(1 / recibe) : 99
       const ganas = rapido ? tu <= el : tu < el
       const margen = (rapido ? el : el - 1) - tu

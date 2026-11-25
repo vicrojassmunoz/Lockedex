@@ -26,6 +26,7 @@
           "name": "Rock Head",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "74",
         "types": [
           "rock",
@@ -76,6 +77,7 @@
           "name": "Rock Head",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "95",
         "types": [
           "rock",
@@ -132,6 +134,7 @@
           "name": "Natural Cure",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "120",
         "types": [
           "water"
@@ -181,6 +184,7 @@
           "name": "Natural Cure",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "121",
         "types": [
           "water",
@@ -237,6 +241,7 @@
           "name": "Soundproof",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "100",
         "types": [
           "electric"
@@ -286,6 +291,7 @@
           "name": "Static",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "25",
         "types": [
           "electric"
@@ -335,6 +341,7 @@
           "name": "Static",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "26",
         "types": [
           "electric"
@@ -390,6 +397,7 @@
           "name": "Chlorophyll",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "71",
         "types": [
           "grass",
@@ -439,6 +447,7 @@
           "name": "Chlorophyll",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "114",
         "types": [
           "grass"
@@ -487,6 +496,7 @@
           "name": "Chlorophyll",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "45",
         "types": [
           "grass",
@@ -543,6 +553,7 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "109",
         "types": [
           "poison"
@@ -591,6 +602,7 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "109",
         "types": [
           "poison"
@@ -638,6 +650,7 @@
           "name": "Sticky Hold",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "89",
         "types": [
           "poison"
@@ -686,6 +699,7 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "110",
         "types": [
           "poison"
@@ -741,6 +755,7 @@
           "name": "Synchronize",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "64",
         "types": [
           "psychic"
@@ -788,6 +803,7 @@
           "name": "Synchronize",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "122",
         "types": [
           "psychic"
@@ -837,6 +853,7 @@
           "name": "Synchronize",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "49",
         "types": [
           "bug",
@@ -886,6 +903,7 @@
           "name": "Synchronize",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "65",
         "types": [
           "psychic"
@@ -943,6 +961,7 @@
           "name": "Intimidate",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "58",
         "types": [
           "fire"
@@ -993,6 +1012,7 @@
           "name": "Flash Fire",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "77",
         "types": [
           "fire"
@@ -1043,6 +1063,7 @@
           "name": "Flash Fire",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "78",
         "types": [
           "fire"
@@ -1093,6 +1114,7 @@
           "name": "Intimidate",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "59",
         "types": [
           "fire"
@@ -1149,6 +1171,7 @@
           "name": "Lightning Rod",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "111",
         "types": [
           "ground",
@@ -1200,6 +1223,7 @@
           "name": "Sand Veil",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "51",
         "types": [
           "ground"
@@ -1250,6 +1274,7 @@
           "name": "Poison Point",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "31",
         "types": [
           "poison",
@@ -1301,6 +1326,7 @@
           "name": "Poison Point",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "34",
         "types": [
           "poison",
@@ -1351,6 +1377,7 @@
           "name": "Lightning Rod",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "111",
         "types": [
           "ground",
@@ -1445,6 +1472,7 @@
           "name": "Keen Eye",
           "effect": ""
         },
+        "iv": 0,
         "sprite": "16",
         "types": [
           "normal",
@@ -1488,6 +1516,7 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 6,
         "sprite": "1",
         "types": [
           "grass",
@@ -1726,6 +1755,7 @@
           "name": "Keen Eye",
           "effect": ""
         },
+        "iv": 6,
         "sprite": "17",
         "types": [
           "normal",
@@ -1775,6 +1805,7 @@
           "name": "Synchronize",
           "effect": ""
         },
+        "iv": 6,
         "sprite": "64",
         "types": [
           "psychic"
@@ -1825,6 +1856,7 @@
           "name": "Guts",
           "effect": ""
         },
+        "iv": 6,
         "sprite": "20",
         "types": [
           "normal"
@@ -1874,6 +1906,7 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 12,
         "sprite": "2",
         "types": [
           "grass",
@@ -1932,6 +1965,7 @@
           "name": "Keen Eye",
           "effect": ""
         },
+        "iv": 12,
         "sprite": "17",
         "types": [
           "normal",
@@ -1977,6 +2011,7 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 12,
         "sprite": "130",
         "types": [
           "water",
@@ -2028,6 +2063,7 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 12,
         "sprite": "58",
         "types": [
           "fire"
@@ -2076,6 +2112,7 @@
           "name": "Synchronize",
           "effect": ""
         },
+        "iv": 12,
         "sprite": "64",
         "types": [
           "psychic"
@@ -2124,6 +2161,7 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 12,
         "sprite": "2",
         "types": [
           "grass",
@@ -2182,6 +2220,7 @@
           "name": "Keen Eye",
           "effect": ""
         },
+        "iv": 12,
         "sprite": "18",
         "types": [
           "normal",
@@ -2232,6 +2271,7 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 12,
         "sprite": "130",
         "types": [
           "water",
@@ -2283,6 +2323,7 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 12,
         "sprite": "58",
         "types": [
           "fire"
@@ -2330,6 +2371,7 @@
           "name": "Synchronize",
           "effect": ""
         },
+        "iv": 12,
         "sprite": "65",
         "types": [
           "psychic"
@@ -2378,6 +2420,7 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 18,
         "sprite": "3",
         "types": [
           "grass",
@@ -2436,6 +2479,7 @@
           "name": "Keen Eye",
           "effect": ""
         },
+        "iv": 18,
         "sprite": "18",
         "types": [
           "normal",
@@ -2486,6 +2530,7 @@
           "name": "Lightning Rod",
           "effect": ""
         },
+        "iv": 18,
         "sprite": "111",
         "types": [
           "ground",
@@ -2536,6 +2581,7 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 18,
         "sprite": "130",
         "types": [
           "water",
@@ -2586,6 +2632,7 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 18,
         "sprite": "58",
         "types": [
           "fire"
@@ -2634,6 +2681,7 @@
           "name": "Synchronize",
           "effect": ""
         },
+        "iv": 18,
         "sprite": "65",
         "types": [
           "psychic"
@@ -2682,6 +2730,7 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 30,
         "sprite": "3",
         "types": [
           "grass",
@@ -2739,6 +2788,7 @@
           "name": "Rock Head",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "95",
         "types": [
           "rock",
@@ -2788,6 +2838,7 @@
           "name": "Rock Head",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "111",
         "types": [
           "ground",
@@ -2839,6 +2890,7 @@
           "name": "Early Bird",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "115",
         "types": [
           "normal"
@@ -2896,6 +2948,7 @@
           "name": "Poison Point",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "33",
         "types": [
           "poison"
@@ -2944,6 +2997,7 @@
           "name": "Rock Head",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "111",
         "types": [
           "ground",
@@ -2995,6 +3049,7 @@
           "name": "Early Bird",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "115",
         "types": [
           "normal"
@@ -3044,6 +3099,7 @@
           "name": "Poison Point",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "31",
         "types": [
           "poison",
@@ -3100,6 +3156,7 @@
           "name": "Thick Fat",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "87",
         "types": [
           "water",
@@ -3149,6 +3206,7 @@
           "name": "Shell Armor",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "91",
         "types": [
           "water",
@@ -3198,6 +3256,7 @@
           "name": "Oblivious",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "80",
         "types": [
           "water",
@@ -3247,6 +3306,7 @@
           "name": "Oblivious",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "124",
         "types": [
           "ice",
@@ -3302,6 +3362,7 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "131",
         "types": [
           "water",
@@ -3360,6 +3421,7 @@
           "name": "Rock Head",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "95",
         "types": [
           "rock",
@@ -3412,6 +3474,7 @@
           "name": "Keen Eye",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "107",
         "types": [
           "fighting"
@@ -3461,6 +3524,7 @@
           "name": "Limber",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "106",
         "types": [
           "fighting"
@@ -3511,6 +3575,7 @@
           "name": "Rock Head",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "95",
         "types": [
           "rock",
@@ -3565,6 +3630,7 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "68",
         "types": [
           "fighting"
@@ -3619,6 +3685,7 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "94",
         "types": [
           "ghost",
@@ -3669,6 +3736,7 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "42",
         "types": [
           "poison",
@@ -3717,6 +3785,7 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "93",
         "types": [
           "ghost",
@@ -3767,6 +3836,7 @@
           "name": "Intimidate",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "24",
         "types": [
           "poison"
@@ -3820,6 +3890,7 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "94",
         "types": [
           "ghost",
@@ -3877,6 +3948,7 @@
           "name": "Intimidate",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "130",
         "types": [
           "water",
@@ -3926,6 +3998,7 @@
           "name": "Shed Skin",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "148",
         "types": [
           "dragon"
@@ -3974,6 +4047,7 @@
           "name": "Shed Skin",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "148",
         "types": [
           "dragon"
@@ -4023,6 +4097,7 @@
           "name": "Pressure",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "142",
         "types": [
           "rock",
@@ -4078,6 +4153,7 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "149",
         "types": [
           "dragon",
@@ -4134,6 +4210,7 @@
           "name": "Keen Eye",
           "effect": ""
         },
+        "iv": 31,
         "sprite": "18",
         "types": [
           "normal",
@@ -4183,6 +4260,7 @@
           "name": "Synchronize",
           "effect": ""
         },
+        "iv": 31,
         "sprite": "65",
         "types": [
           "psychic"
@@ -4232,6 +4310,7 @@
           "name": "Lightning Rod",
           "effect": ""
         },
+        "iv": 31,
         "sprite": "112",
         "types": [
           "ground",
@@ -4283,6 +4362,7 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 31,
         "sprite": "130",
         "types": [
           "water",
@@ -4336,6 +4416,7 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 31,
         "sprite": "59",
         "types": [
           "fire"
@@ -4389,6 +4470,7 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 31,
         "sprite": "3",
         "types": [
           "grass",

@@ -5,6 +5,9 @@
   import { equipoCompleto } from '$lib/lockedex/equipo.js'
   import { calcularRiesgo } from '$lib/lockedex/riesgo.js'
   import Riesgo from '$lib/lockedex/Riesgo.svelte'
+  import { leerReglas } from '$lib/lockedex/reglas.js'
+  import { leerEquiposJefes, comoJefe } from '$lib/lockedex/jefes.js'
+  import { cargarCalc } from '$lib/lockedex/analista.js'
   import { idioma, iniciarTraduccion, traducirNombre } from '$lib/lockedex/idioma.js'
   import { COLOR_TIPO } from '$lib/lockedex/colores.js'
   import { nombreJuego } from '$lib/lockedex/juegos.js'
@@ -19,6 +22,7 @@
   let equipoActual = []
   let datosJefe = null
   let cap = null
+  let aleatorio = false
   let capGimnasio = null // jefe del que sale el nivel máximo (el próximo líder de gimnasio)
   let riesgo = null
   let spoilers = 0
@@ -55,7 +59,16 @@
     const resto = lista.slice(Math.max(0, desde))
     const gimnasio = resto.find((j) => j.group === 'gym-leader') || resto.find((j) => j.group === 'elite-four') || jefe
     const nivel = nivelMaximo(ligaActual?.[gimnasio.value]) ?? nivelMaximo(datos)
-    const r = datos ? await calcularRiesgo({ jefe: datos, equipo: equipoActual, gen: partida.info.gen, cap: nivel }) : null
+    // Randomlocke con entrenadores aleatorios: el equipo de la liga no vale. El riesgo sale solo si se ha
+    // apuntado el equipo real del jefe; si no, se enseña el jefe y su nivel máximo, sin equipo
+    const reglas = leerReglas(partida.id) || {}
+    aleatorio = !!(reglas.randomlocke && reglas.entrenadoresAleatorios)
+    let paraRiesgo = datos
+    if (aleatorio) {
+      const real = leerEquiposJefes(partida.id)[jefe.value]
+      paraRiesgo = real?.length ? comoJefe(jefe.boss || jefe.name, real, await cargarCalc(partida.info.gen || 9)) : null
+    }
+    const r = paraRiesgo ? await calcularRiesgo({ jefe: paraRiesgo, equipo: equipoActual, gen: partida.info.gen, cap: nivel }) : null
     if (jefe?.value !== visto) return // se cambió de jefe mientras se calculaba
     datosJefe = datos
     cap = nivel
@@ -249,6 +262,9 @@
             ><small>{es ? 'NV. MÁX' : 'LV. CAP'}</small>{cap}</span>
           {/if}
         </div>
+        {#if aleatorio && !riesgo}
+          <p class="lx-mini-aleatorio">{es ? 'Randomlocke: equipo aleatorio. Apúntalo en la app cuando lo veas para ver el riesgo.' : 'Randomlocke: random team. Log it in the app when you see it to get the risk.'}</p>
+        {/if}
         {#if riesgo}
           <div class="lx-mini-riesgo"><Riesgo nivel={riesgo.nivel} consejos={riesgo.consejos} modo={riesgo.modo} ocultarConsejos={spoilers >= 1} sinPopover /></div>
           {#if riesgo.consejos?.length && spoilers < 1}
@@ -461,6 +477,12 @@
   .lx-mini-cap small {
     color: #a1a1aa;
     font-size: 11px;
+  }
+  .lx-mini-aleatorio {
+    margin: 4px 0 0;
+    font-size: 11px;
+    line-height: 1.3;
+    color: var(--lx-texto-suave);
   }
   .lx-mini-riesgo {
     margin-top: 6px;

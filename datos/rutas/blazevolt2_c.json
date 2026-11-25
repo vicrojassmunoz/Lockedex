@@ -219,10 +219,10 @@
     "name": "Route 23",
     "encounters": ["bouffalant", "mienfoo", "mienshao", "sawk", "throh", "vullaby", "mandibuzz", "rufflet", "braviary", "tropius", "amoonguss", "gligar", "tauros", "audino", "emolga", "wooper", "shellos", "quagsire", "gastrodon", "krabby", "basculin", "basculin", "kingler"]
   },
-  { "type": "gym", "name": "Victory Road", "value": "o9_hail", "group": "", "boss": "Hail Trainer Caroll" },
-  { "type": "gym", "name": "Victory Road", "value": "o9_sun", "group": "", "boss": "Sun Trainer Elmer" },
-  { "type": "gym", "name": "Victory Road", "value": "o9_rain", "group": "", "boss": "Rain Trainer Porta" },
-  { "type": "gym", "name": "Victory Road", "value": "o9_sand", "group": "", "boss": "Sand Trainer Sterling" },
+  { "type": "gym", "name": "Victory Road", "value": "o9_hail", "group": "mini-boss", "boss": "Hail Trainer Caroll" },
+  { "type": "gym", "name": "Victory Road", "value": "o9_sun", "group": "mini-boss", "boss": "Sun Trainer Elmer" },
+  { "type": "gym", "name": "Victory Road", "value": "o9_rain", "group": "mini-boss", "boss": "Rain Trainer Porta" },
+  { "type": "gym", "name": "Victory Road", "value": "o9_sand", "group": "mini-boss", "boss": "Sand Trainer Sterling" },
   {
     "type": "route",
     "name": "Victory Road",

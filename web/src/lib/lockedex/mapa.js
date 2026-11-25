@@ -11,7 +11,8 @@ const cargarIndice = async () => {
 const norm = (s) => String(s || '').toLowerCase().normalize('NFD').replace(/[^a-z0-9]/g, '')
 
 // Qué colección usar según la región y la generación del juego
-const familias = (juego) => {
+const familias = (juego) => ['dppt', ...familiasGBA(juego)] // Platino (NDS) primero, si tiene al personaje
+const familiasGBA = (juego) => {
   const g = Games[juego] || {}
   const gen = String(g.gen || '')
   if (g.region === 'kanto') return gen === 'I' ? ['rby', 'frlg'] : ['frlg', 'rby', 'gsc']
@@ -22,6 +23,7 @@ const familias = (juego) => {
 
 // Nombres que no coinciden con el del archivo
 const ALIAS = {
+  dppt: { wake: 'crasher_wake', crasherwake: 'crasher_wake', oak: 'prof_oak', rowan: 'prof_rowan', grunt: 'grunt_m' },
   rse: {
     may: 'rival_may_normal', brendan: 'rival_brendan_normal', tabitha: 'magma_member_m', courtney: 'magma_member_f',
     matt: 'aqua_member_m', shelly: 'aqua_member_f', grunt: 'magma_member_m', magmagrunt: 'magma_member_m', aquagrunt: 'aqua_member_m'
@@ -54,14 +56,21 @@ export const spriteMapa = async ({ juego, nombre, grupo }) => {
     for (const p of partes) if (porNorma.has(p)) return `/lx/mapa/${f}/${porNorma.get(p)}.png`
   }
   // Genérico solo con la colección principal del juego
-  const [principal] = familias(juego)
+  const [principal] = familiasGBA(juego)
   const generico = GENERICO[principal]?.[grupo]
   return generico && (idx[principal] || []).includes(generico) ? `/lx/mapa/${principal}/${generico}.png` : null
 }
 
 // Sprite del mapa del avatar del perfil (p. ej. «rs-may» → la May de Esmeralda andando).
 // Prueba el nombre tal cual y con «_normal» (los protagonistas), en las colecciones de su región.
-const FAMILIAS_AVATAR = { frlg: ['frlg', 'rby', 'gsc'], rs: ['rse', 'frlg'], gs: ['gsc', 'frlg'] }
+// Si un personaje está en varias, gana la de NDS más nueva (Platino) y luego las de GBA/GB
+const FAMILIAS_AVATAR = {
+  frlg: ['dppt', 'frlg', 'rby', 'gsc'],
+  rs: ['dppt', 'rse', 'frlg'],
+  gs: ['dppt', 'gsc', 'frlg'],
+  dp: ['dppt', 'rse', 'frlg', 'gsc'],
+  blwh: ['dppt', 'rse', 'frlg', 'gsc']
+}
 export const POR_DEFECTO_AVATAR = '/lx/mapa/frlg/red_normal.png'
 export const spriteAvatar = async (id) => {
   const [prefijo, ...resto] = String(id || '').split('-')

@@ -6,8 +6,8 @@
   import { page } from '$app/stores'
   import { goto } from '$app/navigation'
   import { browser } from '$app/environment'
-  import { idioma, cambiarIdioma } from './idioma.js'
-  import { partidaActiva, cargarRutas, resumirPartida, alCambiarDatos } from './partida.js'
+  import { idioma, cambiarIdioma, traducirNombre } from './idioma.js'
+  import { partidaActiva, cargarRutas, resumirPartida, alCambiarDatos, cargarLiga, nivelMaximo } from './partida.js'
   import { theme } from '$lib/store'
   import Icon from '@iconify/svelte/dist/OfflineIcon.svelte'
   import { DarkMode, LightMode } from '$icons'
@@ -50,9 +50,23 @@
       if (!partida?.info) return (resumen = null)
       const rutas = await cargarRutas(partida.info.lid)
       resumen = resumirPartida(partida, rutas)
+      proximo = await proximoJefe(partida, resumen)
     } catch (e) {
       console.error('[barra]', e)
     }
+  }
+
+  // Próximo jefe y el nivel máximo que marca (el del próximo gimnasio, o el Alto Mando al final).
+  // Solo nombre y nivel: sirve igual en Randomlocke, donde el equipo es aleatorio pero los niveles no.
+  let proximo = null
+  const proximoJefe = async (p, r) => {
+    const jefe = r?.siguienteJefe
+    if (!jefe) return null
+    const liga = await cargarLiga(p.juego, p.datos?.__starter || 'fire').catch(() => null)
+    const lista = r.jefes || []
+    const resto = lista.slice(Math.max(0, lista.findIndex((j) => String(j.value) === String(jefe.value))))
+    const gim = resto.find((j) => j.group === 'gym-leader') || resto.find((j) => j.group === 'elite-four') || jefe
+    return { nombre: traducirNombre(jefe.boss || jefe.name), nivel: nivelMaximo(liga?.[gim.value]) ?? nivelMaximo(liga?.[jefe.value]) }
   }
 
   // Navegación interna con plan B: si en 2,5 s no ha cambiado de página,
@@ -175,7 +189,10 @@
     href="/game"
     class="lx-exp"
     class:lx-exp-vacia={!resumen}
-    title={resumen ? `${partida.nombre} · ${partida.info.titulo}` : es ? 'Sin partida activa' : 'No active run'}
+    title={resumen
+      ? `${partida.nombre} · ${partida.info.titulo}` +
+        (proximo ? (es ? `\nPróximo jefe: ${proximo.nombre}` : `\nNext boss: ${proximo.nombre}`) + (proximo.nivel ? (es ? ` · nivel máximo ${proximo.nivel}` : ` · level cap ${proximo.nivel}`) : '') : '')
+      : es ? 'Sin partida activa' : 'No active run'}
     on:click={(ev) => ir(ev, resumen ? '/game' : '/saves')}
     data-lx-original
   >
@@ -189,6 +206,9 @@
       </span>
       <span class="lx-exp-pct">{resumen ? porcentaje + '%' : '—'}</span>
     </span>
+    {#if resumen && proximo?.nivel}
+      <span class="lx-exp-nivel lx-exp-cap"><small>{es ? 'MÁX' : 'CAP'}</small>{proximo.nivel}</span>
+    {/if}
   </a>
 
   <div class="lx-acciones">
@@ -431,6 +451,9 @@
     background: #2c2c33;
     padding: 2px 6px 1px;
     border-radius: 5px;
+  }
+  .lx-exp-cap {
+    margin-left: 6px;
   }
   .lx-exp-nivel small {
     font-size: 13px;

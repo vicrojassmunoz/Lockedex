@@ -40,6 +40,9 @@ export const Tipo = objeto('tabla-llama') // Ordenar por tipo: una Tabla (4.ª g
 export const Total = objeto('brazal-firme') // Total de estadísticas: el Brazal Firme
 export const Analysis = objeto('periscopio') // Análisis del equipo y de la caja: el Periscopio
 export const Shield = objeto('proteccion-especial') // Daño máximo que te pueden hacer: Protección Especial
+export const Heart = objeto('escama-corazon') // Corazón: la Escama Corazón
+export const Dice = objeto('estuche-monedas') // Aleatorio: el Estuche Monedas del Casino
+export const Boost = objeto('ataque-x') // Movimientos que suben estadísticas: Ataque X
 
 // Estadísticas: los objetos Recio de la 4.ª gen, uno por estadística
 export const HP = objeto('power-weight')

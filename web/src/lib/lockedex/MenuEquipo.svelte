@@ -19,20 +19,27 @@
   const nombreEspecie = (p) => traducirNombre(mayus(String(p.name || '').replace(/-/g, ' ')))
   const colorTipo = (tipo) => TIPO_GBA[String(tipo || '').toLowerCase()] || '#a8a878'
 
-  // Estadísticas al nivel del jefe con IVs perfectos y sin EVs (el peor caso, igual que el medidor de riesgo)
+  // Estadísticas al nivel del jefe sin EVs: con sus IVs reales si se conocen (3.ª gen, de pret) y, si no,
+  // con IVs perfectos (el peor caso), igual que el medidor de riesgo
+  const ivDe = (p) => (p?.iv !== undefined && p?.iv !== null && p?.iv !== '' && Number.isFinite(+p.iv) ? +p.iv : 31)
+  const ivReal = (p) => ivDe(p) !== 31 || (p?.iv !== undefined && p?.iv !== null)
   const ps = (p) => {
     const b = +p.stats?.hp || 0
     const n = +p.level || 1
     if (!b) return null
     if (b === 1) return 1
-    return Math.floor(((2 * b + 31) * n) / 100) + n + 10
+    return Math.floor(((2 * b + ivDe(p)) * n) / 100) + n + 10
   }
   const stat = (p, k) => {
     if (k === 'hp') return ps(p)
     const b = +p.stats?.[k] || 0
     if (!b) return null
-    return Math.floor(((2 * b + 31) * (+p.level || 1)) / 100) + 5
+    return Math.floor(((2 * b + ivDe(p)) * (+p.level || 1)) / 100) + 5
   }
+  const textoPs = (p) =>
+    ivReal(p)
+      ? t(`PS reales (IVs ${ivDe(p)}, los del juego)`, `Real HP (IVs ${ivDe(p)}, from the game)`)
+      : t('PS con IVs perfectos (el peor caso)', 'HP with perfect IVs (worst case)')
   const total = (s) => Object.values(s || {}).reduce((a, b) => a + (+b || 0), 0)
   const ICONO_CLASE = { physical: Physical, special: Special, status: Status }
   const ETIQUETAS = [
@@ -84,7 +91,7 @@
         </span>
         {#if primero.held}<span class="lx-me-objeto" title={primero.held.name}><PIcon type="item" name={primero.held.sprite} /></span>{/if}
         <span class="lx-me-ps"><i>{t('PS', 'HP')}</i><span class="lx-me-barra"><span /></span></span>
-        {#if ps(primero)}<span class="lx-me-num" title={t('PS con IVs perfectos (el peor caso)', 'HP with perfect IVs (worst case)')}>{ps(primero)}/{ps(primero)}</span>{/if}
+        {#if ps(primero)}<span class="lx-me-num" title={textoPs(primero)}>{ps(primero)}/{ps(primero)}</span>{/if}
       </button>
     {/if}
   </div>
@@ -106,7 +113,7 @@
         {#if p.held}<span class="lx-me-objeto" title={p.held.name}><PIcon type="item" name={p.held.sprite} /></span>{/if}
         <span class="lx-me-vida">
           <span class="lx-me-ps"><i>{t('PS', 'HP')}</i><span class="lx-me-barra"><span /></span></span>
-          {#if ps(p)}<span class="lx-me-num" title={t('PS con IVs perfectos (el peor caso)', 'HP with perfect IVs (worst case)')}>{ps(p)}/{ps(p)}</span>{/if}
+          {#if ps(p)}<span class="lx-me-num" title={textoPs(p)}>{ps(p)}/{ps(p)}</span>{/if}
         </span>
       </button>
     {/each}
@@ -163,7 +170,12 @@
 
       <div class="lx-gf-panel lx-gf-stats" style={MARCOS.panel}>
         <span />
-        <span class="lx-gf-col" title={t('Con IVs perfectos y sin EVs: el peor caso', 'Perfect IVs and no EVs: worst case')}>
+        <span
+          class="lx-gf-col"
+          title={ivReal(elegido)
+            ? t(`Con sus IVs reales (${ivDe(elegido)}) y sin EVs`, `With its real IVs (${ivDe(elegido)}) and no EVs`)
+            : t('Con IVs perfectos y sin EVs: el peor caso', 'Perfect IVs and no EVs: worst case')}
+        >
           {t('Nv', 'Lv')}{elegido.level}
         </span>
         <span class="lx-gf-col">{t('BASE', 'BASE')}</span>

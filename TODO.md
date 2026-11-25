@@ -68,7 +68,7 @@ Notas para retomar el trabajo en otra sesión. Lo primero es el mapa del proyect
 - [x] **Cementerio** (1.5.0): lápidas pixel art propias dibujadas en SVG (`graveyard/Lapida.svelte`, 4 formas con musgo y grietas al azar) y la causa de la muerte al pasar por encima.
 - [ ] **Tarjetas de los jefes por dentro** (`move-card.svelte`, cabecera de `pokemon-card`): pantalla oscura y estadísticas en barras tipo PS.
 - [ ] **Página de cada guía**: listados en pantallas, mismo estilo que la app.
-- [ ] Repasar el tema oscuro pantalla por pantalla y los colores sueltos de Tailwind que quedan (`grep -rn "orange-\|indigo-" web/src`).
+- [x] 1.10.0: repasado el tema oscuro en Partida, Caja, Cementerio, Analista, Partidas, Nueva partida y Guías; el naranja heredado pasa a ser el rojo de Lockedex y el índigo el turquesa LCD (`tailwind.config.cjs`). Antes: Repasar el tema oscuro pantalla por pantalla y los colores sueltos de Tailwind que quedan (`grep -rn "orange-\|indigo-" web/src`).
 
 Cómo hacerlo: ir componente a componente, con capturas antes y después. Se puede abrir Electron con `--remote-debugging-port` y hacer capturas con puppeteer-core, como en las pruebas de esta sesión. Sería útil maquetar primero cada pantalla (por ejemplo, como diseño en Claude) y luego pasarla a código.
 
@@ -88,7 +88,7 @@ Cómo hacerlo: ir componente a componente, con capturas antes y después. Se pue
   - **Cargar/Nueva partida, ajustes y selector de juego:** pantallas al estilo de la pantalla de inicio de los juegos (CONTINUAR / NUEVA PARTIDA / OPCIONES).
   - **Equipo (mini-team) y «Montar equipo»:** como el menú de equipo de GBA que ya tienen los jefes.
   - **Guías y pestañas Nuzlocke / Rutas / Jefes / Próximos:** reorganizar la vista de partida.
-- [ ] **Sprites pequeños (del mapa): si hay varias versiones, usar la de NDS más nueva** (p. ej. Eusine de HeartGold/SoulSilver, no el genérico de Cristal). Hace falta sacar los sprites de mapa de la 4.ª–5.ª gen (HGSS, DPPt, BW/B2N2): mirar los decomps de pret (pokeheartgold, pokeplatinum) o hojas de sprites con licencia clara; mismo índice (`web/static/lx/mapa/<juego>/`) y que `spriteMapa`/`spriteAvatar` prueben primero `bw2 > bw > hgss > pt > dp` y luego las de GBA.
+- [x] 1.10.0 (en parte): sprites de mapa de **Platino** (118, de pret/pokeplatinum; `herramientas/sprites_mapa_nds.py` → `lx/mapa/dppt/`) y se prefieren a los de GBA. 88 de 131 avatares ya tienen sprite de mapa. **Falta HGSS y BW**: pokeheartgold no tiene los sprites de mapa en PNG (van en NARC) y no hay decomp de BW; Eusine sigue con el de Cristal. Antes: **Sprites pequeños (del mapa): si hay varias versiones, usar la de NDS más nueva** (p. ej. Eusine de HeartGold/SoulSilver, no el genérico de Cristal). Hace falta sacar los sprites de mapa de la 4.ª–5.ª gen (HGSS, DPPt, BW/B2N2): mirar los decomps de pret (pokeheartgold, pokeplatinum) o hojas de sprites con licencia clara; mismo índice (`web/static/lx/mapa/<juego>/`) y que `spriteMapa`/`spriteAvatar` prueben primero `bw2 > bw > hgss > pt > dp` y luego las de GBA.
 - [x] **1.9.1** — **Iconos que siguen igual que en nuzlocke-redux** (Guardar = Diario, Ajustes = Pieza Máquina, Partida = Pokédex del mapa, Tipo = Tabla Llama, Total = Brazal Firme, análisis de Caja/Equipo = Periscopio, daño máximo del VS = Protección Especial; VS traducido y barras a píxeles). Queda: rediseñar la ventana de VS entera con estética GBA/NDS (cabeceras, pestañas) y los huecos vacíos del equipo: (cambiarlos por sprites de los juegos ≤ 5.ª gen o pixel art propio):
   - **Guardar** (disquete), **Partida** (mando de la pestaña), **Ajustes** (engranaje).
   - En la Caja (dentro de Partida): los botones **«Caja» y «Equipo»** de arriba a la izquierda (matraces) y el aviso de **coberturas que le faltan a tu equipo**.
@@ -127,7 +127,7 @@ Además están los datos propios de Lockedex en `web/static/lx/`, sacados de Pok
 
 **Siguiente fase:**
 
-- [ ] Revisar los avisos que quedan (`TODOS=1 node herramientas/datos.mjs comprobar`): formas `-hoenn` de Blazing Emerald y `-sevii` de Radical Red que faltan en el parche, `darmanitan-standard`, y los datos de Rejuvenation (no lo usa ningún juego de la lista).
+- [x] 1.10.0: avisos de la base de datos a cero (jefes opcionales de Renegade Platinum y Blaze Black/Volt White 2 como «mini-boss»; métodos de encuentro colados como Pokémon en Rejuvenation). Antes: Revisar los avisos que quedan (`TODOS=1 node herramientas/datos.mjs comprobar`): formas `-hoenn` de Blazing Emerald y `-sevii` de Radical Red que faltan en el parche, `darmanitan-standard`, y los datos de Rejuvenation (no lo usa ningún juego de la lista).
 - [ ] Ampliar: juegos nuevos, encuentros por método (hierba, surf, caña…) y niveles de los encuentros.
 - [ ] Más adelante, que la app lea directamente el formato nuevo y quitar la compilación intermedia.
 
@@ -185,7 +185,7 @@ En un juego pasado por un randomizer, los Pokémon de cada ruta y los equipos de
   - [ ] Sin estadísticas, tipos sugeridos ni análisis basados en datos del juego cuando no aplican.
   - [ ] Jefes: solo nombre, lugar y **nivel máximo**. Si los entrenadores están aleatorizados, ocultar el equipo, el riesgo y el asistente; se puede reutilizar la lógica del modo sin spoilers (`gym-card.svelte`, ajuste `spoilers`).
   - [ ] Opción de apuntar a mano el equipo real del jefe cuando lo veas en el juego, para que el riesgo y el asistente funcionen con esos datos.
-- [ ] En el modo compacto y en la barra de EXP: el próximo jefe con su nivel máximo, sin equipo.
+- [x] 1.10.0: compacto en Randomlocke con riesgo solo si se apuntó el equipo real; barra de EXP con «MÁX n» y el próximo jefe en el título.
 - [ ] La importación del .sav sigue funcionando igual: el lector no depende de las tablas del juego.
 
 ---
@@ -239,7 +239,7 @@ Hecho: reglas por run en `lockedex.reglas.<id>` (`web/src/lib/lockedex/reglas.js
 - [ ] **Lector de .sav:** probado solo con partidas sintéticas. Hay que probarlo con partidas reales de Rubí, Zafiro, Esmeralda, RojoFuego y VerdeHoja (y con hacks CFRU como Radical Red y Unbound, que amplían especies y pueden no ser compatibles).
 - [ ] Añadir .sav de otras generaciones (1–2 en GB/GBC y 4–5 en NDS, siguiendo los formatos de PKHeX).
 - [x] **Modo compacto con acciones rápidas** (1.5.0): apuntar el encuentro de la siguiente zona (capturado o fallido) y marcar como caído a un miembro del equipo. Se envían por IPC a la ventana principal (`lib/lockedex/acciones.js`), que es la que guarda.
-- [ ] **Afinar el riesgo:** IVs y EVs reales de los jefes por juego, cambios de forma o tipo, objetos, clima y prioridad.
+- [x] 1.10.0 (en parte): **IVs reales de los jefes de RojoFuego, VerdeHoja y Esmeralda** (347 Pokémon, de pret: `herramientas/ivs_jefes.py` → campo «iv» en `datos/jefes`); clima de Sequía/Llovizna/Chorro Arena/Nevada; movimientos con prioridad que rematan. Falta: IVs de otros juegos (Rubí/Zafiro con pokeruby; 4.ª+ gen), naturalezas de los entrenadores y EVs. Antes: **Afinar el riesgo:** IVs y EVs reales de los jefes por juego, cambios de forma o tipo, objetos, clima y prioridad.
 - [ ] Sincronizar la partida del emulador con la run de forma más fina (evoluciones, muertes cuando el Pokémon sale debilitado en el .sav).
 - [ ] Más logros en el perfil y estadísticas por juego.
 - [x] Privacidad y créditos reescritos en español (1.5.0), con lo que de verdad hace la versión de escritorio y los proyectos en los que se apoya.
