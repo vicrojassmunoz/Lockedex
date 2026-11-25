@@ -100,23 +100,33 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          R="$GITHUB_REPOSITORY"
           v="v${{ steps.version.outputs.numero }}"
-          archivos=(electron/dist/*.exe electron/dist/*.blockmap electron/dist/latest.yml)
-          # La API de releases a veces responde 500/503: cada llamada se reintenta.
-          reintentar() {
-            for intento in 1 2 3 4 5; do
-              if "$@"; then return 0; fi
-              if [ "$intento" = 5 ]; then return 1; fi
-              echo "GitHub ha fallado (intento $intento), se reintenta..."
-              sleep $((intento * 20))
+          # Cada intento crea un borrador nuevo, sube los archivos y solo entonces lo
+          # publica. Si GitHub falla a mitad (errores 500 de la API de releases, o un
+          # archivo que se queda «a medio subir» y ya no se puede borrar), el borrador
+          # roto se abandona y se empieza otro limpio.
+          intentar() {
+            id=$(gh api "repos/$R/releases" -f tag_name="$v" -f target_commitish="$GITHUB_SHA" \
+                   -f name="Lockedex $v" -F body=@NOVEDADES.md -F draft=true --jq .id) || return 1
+            [[ "$id" =~ ^[0-9]+$ ]] || return 1
+            echo "Borrador $id"
+            for f in electron/dist/*.exe electron/dist/*.blockmap electron/dist/latest.yml; do
+              echo "Subiendo $(basename "$f")..."
+              gh api -X POST "https://uploads.github.com/repos/$R/releases/$id/assets?name=$(basename "$f")" \
+                -H "Content-Type: application/octet-stream" --input "$f" --silent || return 1
             done
+            gh api -X PATCH "repos/$R/releases/$id" -F draft=false -f make_latest=true --silent || return 1
           }
-          # Se crea como borrador y se publica al final, cuando están todos los archivos.
-          # Si un intento anterior dejó un borrador a medias, se reutiliza.
-          if [ "$(gh release view "$v" --json isDraft --jq .isDraft 2>/dev/null)" = "true" ]; then
-            reintentar gh release edit "$v" --target "$GITHUB_SHA" --title "Lockedex $v" --notes-file NOVEDADES.md
-          else
-            reintentar gh release create "$v" --draft --target "$GITHUB_SHA" --title "Lockedex $v" --notes-file NOVEDADES.md
-          fi
-          reintentar gh release upload "$v" "${archivos[@]}" --clobber
-          reintentar gh release edit "$v" --draft=false --latest
+          publicado=no
+          for intento in 1 2 3 4 5; do
+            if intentar; then publicado=si; break; fi
+            echo "GitHub ha fallado (intento $intento), se vuelve a probar con un borrador nuevo..."
+            sleep $((intento * 45))
+          done
+          [ "$publicado" = si ] || exit 1
+          # Limpieza: borradores que dejaron intentos fallidos (los crea siempre esta CI)
+          gh api "repos/$R/releases?per_page=50" \
+            --jq '.[] | select(.draft and (.name|startswith("Lockedex v"))) | .id' |
+            while read -r viejo; do gh api -X DELETE "repos/$R/releases/$viejo" --silent || true; done || true
+          echo "Publicada $v"
