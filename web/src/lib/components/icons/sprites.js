@@ -9,3 +9,8 @@ export const Ball = objeto('poke-ball') // Capturado, equipo
 export const Shiny = objeto('shiny-charm') // Variocolor
 export const Missed = objeto('escape-rope') // Huyó (Cuerda Huida)
 export const Map = objeto('town-map') // Mapa
+
+// Selector de inicial: las piedras evolutivas de cada tipo
+export const PiedraFuego = objeto('fire-stone')
+export const PiedraAgua = objeto('water-stone')
+export const PiedraHoja = objeto('leaf-stone')

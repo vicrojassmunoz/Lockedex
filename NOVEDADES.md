@@ -1,3 +1,3 @@
-## Novedades de la 1.7.1
+## Novedades de la 1.7.2
 
-- **Menú de equipo de los jefes más limpio:** fuera el entrenador pequeño de dentro del menú, que repetía lo que ya sale en la cabecera de la tarjeta. Ahora solo están sus Pokémon, como en el juego.
+- **Selector de inicial con piedras evolutivas:** los tres botones junto a «Inicial» son ahora la Piedra Fuego, la Piedra Agua y la Piedra Hoja de los juegos, un poco más grandes.

@@ -91,7 +91,7 @@ export {
   X
 } from './pixel.js'
 // Sprites de objetos de los juegos
-export { Ball, Shiny, Missed, Map } from './sprites.js'
+export { Ball, Shiny, Missed, Map, PiedraFuego, PiedraAgua, PiedraHoja } from './sprites.js'
 export { default as Coffee } from '@iconify-icons/simple-icons/buymeacoffee'
 export { default as Discord } from '@iconify-icons/simple-icons/discord'
 export { default as GitHub } from '@iconify-icons/simple-icons/github'
