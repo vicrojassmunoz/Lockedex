@@ -31,27 +31,24 @@
     window.location.reload()
   }
 
+  // Abandonar la run: nuevo intento (lo que se consiguió queda en el historial de intentos)
   const reset = (_) => {
     if (
       !window.confirm(
-        "This will reset all data for this run, including your encounters, team & box. You cannot recover this data when it's reset. Are you sure?"
+        t(
+          'Esto vacía la run: encuentros, equipo y caja. Lo conseguido queda en tu historial de intentos. ¿Seguro?',
+          "This will reset all data for this run, including your encounters, team & box. What you achieved stays in your attempt history. Are you sure?"
+        )
       )
     )
       return
-
     const [, , id] = readdata()
-    const gameStore = getGameStore(id)
-
-    savedGames.update(
-      updateGame({
-        ...game,
-        attempts: +(game?.attempts || 1) + 1
-      })
-    )
-    gameStore.set('{}')
+    nuevoIntento(id)
   }
 
   import ThemeToggle from '$lib/components/theme-toggle.svelte'
+  import { nuevoIntento } from '$lib/lockedex/derrotas.js'
+  import { t } from '$lib/lockedex/idioma.js'
   import { Icon, Logo, Button, Popover } from '$lib/components/core'
   import { Box, Save, Game, Grave, Caret, CaretRight, Dots } from '$icons'
 

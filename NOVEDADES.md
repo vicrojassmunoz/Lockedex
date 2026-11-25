@@ -1,11 +1,9 @@
-## Novedades de la 1.11.0
+## Novedades de la 1.12.0
 
-- **Ventana de VS con estética de juego:**
-  - La cabecera es una presentación de combate a píxeles: el color de cada lado con un corte en diagonal, las líneas de barrido de la GBA y una insignia «VS».
-  - Los puntos base van en recuadros como los de PS.
-  - Las pestañas «Equipo / Comparar» son como las de las pantallas de los juegos.
-  - Los huecos libres del equipo se ven como una Poké Ball apagada.
-- **Sprites animados:**
-  - En el menú de equipo de los jefes, el Pokémon que eliges salta como el icono del menú de equipo de la GBA.
-  - Al abrir su ficha sale su sprite animado de Negro/Blanco (si no hay internet, el de siempre).
-- **Filas de encuentros con ficha:** con la ventana ancha, a la izquierda de cada fila sale el Pokémon en grande (en gris si ha caído, variocolor si lo es), su estado como un **sello de goma** de color (CAPTURADO, CAÍDO, HUYÓ…) y su naturaleza como una etiqueta con lo que sube y baja.
+- **Ya se puede perder:**
+  - Botón **«Derrota»** en la ventana de VS de cada jefe y en el modo compacto, y **«He perdido»** en la partida.
+  - Según tus reglas, la derrota es game over o solo queda apuntada.
+  - Al terminar sale la pantalla de **FIN DE LA PARTIDA** (contra quién perdiste, medallas, capturas, caídos y derrotas) con **«Nuevo intento»** o **«Deshacer»**. Lo que conseguiste en cada intento queda en tu historial.
+- **Modo con vidas** (regla nueva y plantilla **«Extremo (10 vidas)»**): cada Pokémon caído, cada derrota y cada revivido gastan una vida. El contador ♥ sale en la partida y en el modo compacto, y al quedarte sin vidas es game over.
+- **Cláusula de revivir** (regla nueva): uno por medalla, o 1 o 3 en toda la run. En el cementerio sale el botón **«Revivir»** y el Pokémon vuelve a la caja.
+- **Perfil:** runs perdidas, derrotas por juego, los jefes que te han ganado cuentan para «tu mayor verdugo» y logro nuevo, «Levántate».

@@ -1,6 +1,8 @@
 <script>
   import { t, traducirNombre } from '$lib/lockedex/idioma'
   import AvisosReglas from '$lib/lockedex/AvisosReglas.svelte'
+  import FinPartida from '$lib/lockedex/FinPartida.svelte'
+  let runTerminada = false
   import { onMount, afterUpdate } from 'svelte'
   import { browser } from '$app/environment'
   import { fade, slide } from 'svelte/transition'
@@ -153,6 +155,7 @@
         >
           <div class="flex w-full flex-col gap-y-2">
             <AvisosReglas />
+            <FinPartida id={$activeGame} datos={gameData} bind:terminada={runTerminada} />
             {#if filter === 'nuzlocke'}
               <button
                 transition:slide|local={{ duration: 250 }}
@@ -211,6 +214,7 @@
           </div>
         </div>
 
+        <div class:lx-run-terminada={runTerminada}>
         <GameRoute
           {route}
           {search}
@@ -220,12 +224,20 @@
           game={{ data: gameData, store: gameStore, key: gameKey }}
           progress={latestnav(route, gameData).id}
         />
+        </div>
       </main>
     </div>
   </div>
 {/await}
 
 <style lang="postcss">
+  /* Run terminada: la lista se ve apagada y no se puede tocar hasta deshacer o empezar otro intento */
+  .lx-run-terminada {
+    opacity: 0.45;
+    filter: grayscale(0.6);
+    pointer-events: none;
+    user-select: none;
+  }
   .lx-continuar {
     align-self: flex-start;
     display: inline-flex;

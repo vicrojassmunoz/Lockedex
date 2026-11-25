@@ -6,6 +6,7 @@
   import { calcularRiesgo } from '$lib/lockedex/riesgo.js'
   import Riesgo from '$lib/lockedex/Riesgo.svelte'
   import { leerReglas } from '$lib/lockedex/reglas.js'
+  import { estadoRun, registrarDerrota, vidasRestantes, contarCaidos } from '$lib/lockedex/derrotas.js'
   import { leerEquiposJefes, comoJefe } from '$lib/lockedex/jefes.js'
   import { cargarCalc } from '$lib/lockedex/analista.js'
   import { idioma, iniciarTraduccion, traducirNombre } from '$lib/lockedex/idioma.js'
@@ -154,6 +155,25 @@
     const j = datosMarca()
     if (await enviar({ tipo: 'jefe', jefe: j })) avisar(`🏅 ${j.name}`)
   }
+  // Derrota contra el jefe que se está viendo (con confirmación). Se guarda directamente: la ventana
+  // principal se entera por el evento «storage» y enseña el fin de la partida si toca
+  let confirmarDerrota = false
+  $: tiendaDerrotas = estadoRun(partida?.id || '')
+  $: reglasRun = partida?.id ? leerReglas(partida.id) : {}
+  $: vidasRun = vidasRestantes(reglasRun, $tiendaDerrotas, contarCaidos(partida?.datos || {}))
+  const perder = () => {
+    if (!jefe || !partida) return
+    if (!confirmarDerrota) {
+      confirmarDerrota = true
+      setTimeout(() => (confirmarDerrota = false), 3000)
+      return
+    }
+    confirmarDerrota = false
+    const j = datosMarca()
+    const r = registrarDerrota({ id: partida.id, jefe: { id: j.id, nombre: j.name, tipo: j.group }, motivo: 'jefe', equipo: partida.datos?.__team || [], caidos: contarCaidos(partida.datos || {}) })
+    avisar(r.fin ? (es ? '☠ Fin de la partida' : '☠ Game over') : r.vidas !== null ? (es ? `Derrota · quedan ${r.vidas} vidas` : `Defeat · ${r.vidas} lives left`) : es ? 'Derrota apuntada' : 'Defeat logged')
+  }
+
   const deshacerJefe = async () => {
     if (!jefe?.derrotado) return
     const j = datosMarca()
@@ -187,8 +207,11 @@
     <p class="lx-mini-vacio">{es ? 'Abre o crea una partida en Lockedex.' : 'Open or create a run in Lockedex.'}</p>
   {:else if resumen}
     <section class="lx-mini-run">
+      {#if $tiendaDerrotas?.fin}
+        <p class="lx-mini-fin">☠ {es ? 'FIN DE LA PARTIDA' : 'GAME OVER'}</p>
+      {/if}
       <div class="lx-mini-titulo">
-        <span>{partida.nombre || partida.info.titulo}</span>
+        <span>{partida.nombre || partida.info.titulo}{#if vidasRun !== null}<b class="lx-mini-vidas"> ♥{vidasRun}</b>{/if}</span>
         <small>{nombreJuego(partida.juego, { title: partida.info.titulo })}</small>
       </div>
       <div class="lx-mini-exp">
@@ -285,6 +308,9 @@
           {:else}
             <button class="lx-mini-ok" class:lx-confirmar-jefe={confirmarJefe} on:click={vencer}>
               {confirmarJefe ? (es ? '¿Seguro? 🏅' : 'Sure? 🏅') : es ? '🏅 Vencido' : '🏅 Beaten'}
+            </button>
+            <button class="lx-mini-ko" class:lx-confirmar-jefe={confirmarDerrota} on:click={perder} title={es ? 'Has perdido contra este jefe' : 'You lost to this boss'}>
+              {confirmarDerrota ? (es ? '¿Seguro? ✖' : 'Sure? ✖') : es ? '✖ Derrota' : '✖ Defeat'}
             </button>
             <button class="lx-mini-ko" on:click={() => moverJefe(1)} disabled={posJefe >= listaJefes.length - 1}>
               {es ? 'Siguiente ▶' : 'Next ▶'}
@@ -385,6 +411,19 @@
     font-size: 14px;
     letter-spacing: 1px;
     opacity: 0.7;
+  }
+  .lx-mini-fin {
+    margin: 0 0 4px;
+    padding: 2px 6px;
+    font-family: 'LX Pixel', 'VT323', monospace;
+    font-size: 12px;
+    color: #f8f8f8;
+    background: #c02838;
+    border: 2px solid var(--lx-tinta);
+  }
+  .lx-mini-vidas {
+    color: #ff5a6e;
+    font-weight: normal;
   }
   .lx-mini-titulo span {
     display: block;

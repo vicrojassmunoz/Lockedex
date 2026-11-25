@@ -23,6 +23,7 @@
 
   const ontoggle = (_) => dispatch('toggle')
   const oncomplete = (_) => dispatch('complete')
+  const onderrota = (_) => dispatch('derrota')
 </script>
 
 <div
@@ -49,6 +50,10 @@
   <div class="my-4 flex justify-center gap-x-2 md:justify-end">
     <Button on:click={ontoggle} class="!py-1 text-xs" rounded>
       <slot name="switch-text" />
+    </Button>
+
+    <Button on:click={onderrota} class="lx-derrota !py-1 text-xs" rounded title={t('Has perdido contra este jefe', 'You lost to this boss')}>
+      {t('Derrota', 'Defeat')}
     </Button>
 
     <Button

@@ -8,6 +8,7 @@
   import { idioma } from '$lib/lockedex/idioma.js'
   import { leerReglas } from '$lib/lockedex/reglas.js'
   import { nombreJuego } from '$lib/lockedex/juegos.js'
+  import { leerEstado, leerHistorial } from '$lib/lockedex/derrotas.js'
 
   const es = idioma() === 'es'
   const CLAVE = 'lockedex.perfil'
@@ -67,6 +68,12 @@
       else if (d.tab === 'encounter') quien = es ? 'Pokémon salvajes' : 'Wild Pokémon'
       if (quien) asesinos[quien] = (asesinos[quien] || 0) + 1
     }
+    // Derrotas contra jefes (las de la run actual y las de intentos anteriores) también cuentan como verdugo
+    const derrotasDe = (r) => [...leerEstado(r.id).derrotas, ...leerHistorial(r.id).map((h) => h.fin).filter(Boolean)]
+    for (const r of runs)
+      for (const d of derrotasDe(r)) if (d?.jefe?.nombre) asesinos[d.jefe.nombre] = (asesinos[d.jefe.nombre] || 0) + 1
+    const perdidas = runs.reduce((a, r) => a + leerHistorial(r.id).filter((h) => h.fin).length + (leerEstado(r.id).fin ? 1 : 0), 0)
+    const levantado = runs.some((r) => leerHistorial(r.id).some((h) => h.fin))
     const topAsesino = Object.entries(asesinos).sort((a, b) => b[1] - a[1])[0]
     const capturas = runs.reduce((a, r) => a + r.resumen.encuentros.filter((e) => [1, 2, 3, 5, 6].includes(+e.status)).length, 0)
     const muertos = muertes.length
@@ -98,6 +105,7 @@
       g.muertos += r.resumen.muertos.length
       g.ligas += r.resumen.campeon ? 1 : 0
       g.medallas = Math.max(g.medallas, r.resumen.medallas)
+      g.derrotas = (g.derrotas || 0) + leerEstado(r.id).derrotas.length + leerHistorial(r.id).reduce((n, h) => n + (h.derrotas || 0), 0)
     }
     estJuegos = Object.values(porJuego).sort((a, b) => b.runs - a.runs || b.capturas - a.capturas)
 
@@ -109,6 +117,7 @@
       supervivencia: capturas ? Math.round(((capturas - muertos) / capturas) * 100) : 0,
       medallas,
       intentos,
+      perdidas,
       topAsesino,
       juegos,
       // Cada logro con el sprite de un objeto de los juegos (/lx/objetos); en gris hasta conseguirlo
@@ -126,6 +135,7 @@
         { ok: runs.length >= 5, sprite: 'ultra-ball', es: 'Veterano', en: 'Veteran', d: es ? 'Ten 5 runs' : 'Have 5 runs' },
         { ok: randomlocke, sprite: 'estuche-monedas', es: 'A la suerte', en: 'Luck of the draw', d: es ? 'Juega una run Randomlocke' : 'Play a Randomlocke run' },
         { ok: capturas >= 20 && capturas - muertos >= capturas * 0.8, sprite: 'restaurar-todo', es: 'Superviviente', en: 'Survivor', d: es ? '80 % de supervivencia con 20 capturas o más' : '80% survival with 20+ catches' },
+        { ok: levantado, sprite: 'restaurar-todo', es: 'Levántate', en: 'Get back up', d: es ? 'Pierde una run y empieza un nuevo intento' : 'Lose a run and start a new attempt' },
         { ok: intentos >= 10, sprite: 'revivir', es: 'Cabezota', en: 'Stubborn', d: es ? 'Suma 10 intentos' : 'Reach 10 attempts' },
         { ok: muertos >= 50, sprite: 'lapida', es: 'Sepulturero', en: 'Gravedigger', d: es ? '50 Pokémon en el cementerio' : '50 Pokémon in the graveyard' }
       ]
@@ -192,6 +202,7 @@
       <div><b>{est.muertos}</b><span>{es ? 'en el cementerio' : 'in the graveyard'}</span></div>
       <div><b>{est.supervivencia}%</b><span>{es ? 'supervivencia' : 'survival rate'}</span></div>
       <div><b>{est.intentos}</b><span>{es ? 'intentos en total' : 'total attempts'}</span></div>
+      <div><b>{est.perdidas}</b><span>{es ? 'runs perdidas' : 'runs lost'}</span></div>
       <div class="lx-asesino">
         <b>{est.topAsesino ? est.topAsesino[0] : '—'}</b>
         <span>{es ? 'tu mayor verdugo' : 'your nemesis'}{est.topAsesino ? ` (${est.topAsesino[1]})` : ''}</span>
@@ -225,6 +236,7 @@
               <span><i>{g.capturas}</i>{es ? 'capturas' : 'catches'}</span>
               <span><i>{g.muertos}</i>{es ? 'caídos' : 'fainted'}</span>
               <span><i>{g.ligas}</i>{es ? 'ligas' : 'leagues'}</span>
+              <span><i>{g.derrotas || 0}</i>{es ? 'derrotas' : 'defeats'}</span>
             </div>
           {/each}
         </div>
@@ -503,7 +515,7 @@
   }
   .lx-juego {
     display: grid;
-    grid-template-columns: 56px minmax(120px, 1.4fr) repeat(6, minmax(0, 1fr));
+    grid-template-columns: 56px minmax(120px, 1.4fr) repeat(7, minmax(0, 1fr));
     align-items: center;
     gap: 8px;
     padding: 6px 10px;

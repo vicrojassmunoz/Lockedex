@@ -9,6 +9,9 @@
   import { X } from '$icons'
   import { Tabs, Button, IconButton, Loader } from '$c/core'
   import { t } from '$lib/lockedex/idioma.js'
+  import { registrarDerrota, contarCaidos } from '$lib/lockedex/derrotas.js'
+  import { activeGame } from '$lib/store'
+  import { get as leerTienda } from 'svelte/store'
   import { TeamBuildCard, CompareCard, Actions } from '$c/BossBattle'
   import {
     getGameStore,
@@ -71,6 +74,29 @@
     )
 
     close()
+  }
+
+  // Derrota contra este jefe: se apunta y, según las reglas, es game over (lo enseña la pantalla de la partida)
+  const handlederrota = (team) => () => {
+    const id = leerTienda(activeGame)
+    let datos = {}
+    try {
+      datos = JSON.parse(leerTienda(gameStore) || '{}')
+    } catch {}
+    const r = registrarDerrota({
+      id,
+      jefe: { id: boss.id, nombre: boss.name, tipo: boss.type },
+      motivo: 'jefe',
+      equipo: team.map((i) => i.alias),
+      caidos: contarCaidos(datos)
+    })
+    close()
+    if (!r.fin)
+      window.alert(
+        r.vidas !== null
+          ? t(`Derrota apuntada. Te quedan ${r.vidas} vidas.`, `Defeat logged. ${r.vidas} lives left.`)
+          : t('Derrota apuntada. Con tus reglas la run sigue.', 'Defeat logged. With your rules the run goes on.')
+      )
   }
 
   const resetTeam = () => (teamLocs = readTeam(rawData))
@@ -180,6 +206,7 @@
       slot="actions"
       on:toggle={settab(0)}
       on:complete={handlesubmit(team)}
+      on:derrota={handlederrota(team)}
       class="justify-center rounded-b-lg bg-white px-6 pt-1 pb-2 dark:bg-gray-900 md:-mt-4"
       {...boss}
       {team}
@@ -204,6 +231,7 @@
       slot="actions"
       on:toggle={settab(1)}
       on:complete={handlesubmit(team)}
+      on:derrota={handlederrota(team)}
       {...boss}
       {team}
     >

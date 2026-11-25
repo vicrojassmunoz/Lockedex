@@ -16,6 +16,9 @@
   import { Loader, Toggle, Tooltip, PIcon } from '$c/core'
 
   import { IMG } from '$utils/rewrites'
+  import { leerReglas } from '$lib/lockedex/reglas.js'
+  import { estadoRun, revividosDisponibles, revivir } from '$lib/lockedex/derrotas.js'
+  import { t } from '$lib/lockedex/idioma.js'
 
   let DeathModal
   const openDeathModal = async (args) => {
@@ -64,6 +67,18 @@
   }
 
   const chunkSize = 6
+  // Cláusula de revivir: cuántos quedan (por medalla o un número fijo) y el botón de cada tumba
+  let idRun = ''
+  activeGame.subscribe((g) => (idRun = g))
+  $: tiendaDerrotas = estadoRun(idRun)
+  $: reglasRun = browser ? leerReglas(idRun) : {}
+  $: medallasRun = (Array.isArray(box?.__teams) ? box.__teams : []).filter((e) => e?.group === 'gym-leader').length
+  $: revivibles = revividosDisponibles(reglasRun, $tiendaDerrotas, medallasRun)
+  const revivirP = (p) => () => {
+    if (!window.confirm(t(`¿Revivir a ${p.nickname || capitalise(p.pokemon)}? Vuelve a la caja como capturado.`, `Revive ${p.nickname || capitalise(p.pokemon)}? It goes back to the box as caught.`))) return
+    revivir(idRun, p._id, p.pokemon, gameStore)
+  }
+
   let graveyard = []
   $: graveyard = Object.keys(box)
     .map(key => ({...box[key], _id: key}))
@@ -124,6 +139,13 @@
     {/if}
   </div>
 
+  {#if graveyard.length && reglasRun?.revivir}
+    <p class="lx-revivir-info">
+      {revivibles > 0
+        ? t(`Cláusula de revivir: puedes revivir a ${revivibles} Pokémon.`, `Revive clause: you can revive ${revivibles} Pokémon.`)
+        : t('Cláusula de revivir: no te quedan revividos ahora mismo.', 'Revive clause: no revives left right now.')}
+    </p>
+  {/if}
   {#if graveyard.length}
     <div class="mt-8 pb-48 sm:pb-64">
       {#each chunked as row, i}
@@ -162,6 +184,11 @@
                   {/if}
                 </svelte:fragment>
               </Grave>
+              {#if revivibles > 0}
+                <button class="lx-revivir" on:click={revivirP(p)} title={t('Cláusula de revivir', 'Revive clause')}>
+                  <img src="/lx/objetos/revivir.png" alt="" />{t('Revivir', 'Revive')}
+                </button>
+              {/if}
             </div>
           {/each}
         </GraveRow>
@@ -171,6 +198,34 @@
 </main>
 
 <style>
+  .lx-revivir-info {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 13px;
+    color: var(--lx-texto-suave);
+  }
+  .lx-revivir {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    margin: 4px auto 0;
+    padding: 1px 8px 1px 2px;
+    font-family: 'LX Pixel', 'VT323', monospace;
+    font-size: 12px;
+    color: var(--lx-texto);
+    background: var(--lx-panel);
+    border: 2px solid var(--lx-tinta);
+    border-radius: var(--lx-radio-sm);
+    box-shadow: var(--lx-sombra-sm);
+  }
+  .lx-revivir img {
+    width: 22px;
+    height: 22px;
+    image-rendering: pixelated;
+  }
+  .lx-revivir:hover {
+    background: var(--lx-acento-suave);
+  }
   @media (max-width: theme('screens.md')) {
     main {
       height: calc(100vh - 38px);

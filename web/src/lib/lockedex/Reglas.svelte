@@ -36,6 +36,12 @@
     guardar()
   }
 
+  const elegirOpcion = (r) => (e) => {
+    reglas[r.id] = e.target.value
+    reglas.plantilla = 'libre'
+    guardar()
+  }
+
   const elegirTipo = (e) => {
     reglas.monotipo = e.target.value
     reglas.plantilla = 'libre'
@@ -60,8 +66,12 @@
     <div class="lx-r-lista">
       {#each lista as r}
         {#if !r.depende || reglas[r.depende]}
-          <div class="lx-r-regla" class:lx-on={r.tipo === 'tipo' ? !!reglas[r.id] : reglas[r.id]} class:lx-r-hija={r.depende}>
-            {#if r.tipo === 'tipo'}
+          <div class="lx-r-regla" class:lx-on={r.tipo === 'tipo' || r.tipo === 'opciones' ? !!reglas[r.id] : reglas[r.id]} class:lx-r-hija={r.depende}>
+            {#if r.tipo === 'opciones'}
+              <select value={reglas[r.id] || ''} on:change={elegirOpcion(r)}>
+                {#each r.opciones as [valor, oes, oen]}<option value={valor}>{es ? oes : oen}</option>{/each}
+              </select>
+            {:else if r.tipo === 'tipo'}
               <select value={reglas[r.id] || ''} on:change={elegirTipo}>
                 <option value="">{es ? 'No' : 'Off'}</option>
                 {#each TIPOS as tp}<option value={tp}>{traducirNombre(tp.charAt(0).toUpperCase() + tp.slice(1))}</option>{/each}

@@ -12,6 +12,8 @@ export const REGLAS = [
   { id: 'regalos', grupo: 'clausulas', es: 'Cláusula de regalos', en: 'Gift clause', desc: ['Los Pokémon de regalo no gastan el encuentro de la zona: puedes añadir un encuentro extra desde el menú ⋮ de esa zona.', 'Gift Pokémon do not use up the area encounter: add an extra encounter from that area’s ⋮ menu.'] },
   { id: 'variocolor', grupo: 'clausulas', es: 'Cláusula variocolor', en: 'Shiny clause', desc: ['Un shiny siempre se puede capturar, aunque ya tuvieras encuentro en esa zona (menú ⋮ → variocolor extra).', 'A shiny can always be caught, even if you already had an encounter there (⋮ menu → extra shiny).'] },
   { id: 'estaticos', grupo: 'clausulas', es: 'Estáticos aparte', en: 'Static clause', desc: ['Los encuentros estáticos y legendarios no gastan el encuentro de la zona.', 'Static and legendary encounters do not use up the area encounter.'] },
+  { id: 'revivir', grupo: 'clausulas', tipo: 'opciones', opciones: [['', 'No', 'Off'], ['medalla', '1 por medalla', '1 per badge'], ['1', '1 en toda la run', '1 per run'], ['3', '3 en toda la run', '3 per run']], es: 'Cláusula de revivir', en: 'Revive clause', desc: ['Permite revivir Pokémon caídos desde el cementerio (botón «Revivir»): uno por cada medalla o un número fijo en toda la run.', 'Fainted Pokémon can be revived from the graveyard («Revive» button): one per badge or a fixed number per run.'] },
+  { id: 'vidas', grupo: 'dificultad', tipo: 'opciones', opciones: [['', 'No', 'Off'], ['3', '3 vidas', '3 lives'], ['5', '5 vidas', '5 lives'], ['10', '10 vidas', '10 lives'], ['20', '20 vidas', '20 lives']], es: 'Modo con vidas', en: 'Lives mode', desc: ['Cada Pokémon caído, cada derrota contra un jefe y cada revivido gastan una vida; sin vidas, game over.', 'Each fainted Pokémon, boss defeat and revive costs a life; out of lives, game over.'] },
   { id: 'nivelMax', grupo: 'dificultad', es: 'Nivel máximo obligatorio', en: 'Hard level caps', desc: ['Avisa si tu equipo supera el nivel máximo del próximo jefe (necesita tu .sav importado).', 'Warns if your team is above the next boss’s level cap (needs your imported .sav).'] },
   { id: 'sinObjetos', grupo: 'dificultad', es: 'Sin objetos en combate', en: 'No items in battle', desc: ['Recordatorio en el asistente de combate.', 'Reminder in the battle assistant.'] },
   { id: 'set', grupo: 'dificultad', es: 'Modo Set', en: 'Set mode', desc: ['Sin cambio gratis cuando debilitas a un Pokémon del rival. Recordatorio en el asistente.', 'No free switch after knocking out a foe. Reminder in the assistant.'] },
@@ -41,6 +43,12 @@ export const PLANTILLAS = {
     en: 'Hardcore',
     reglas: { regalos: false, variocolor: true, nivelMax: true, sinObjetos: true, set: true, gameover: true },
     ajustes: { 0: '1', 2: '2', 3: '3', 6: '1' }
+  },
+  extremo: {
+    es: 'Extremo (10 vidas)',
+    en: 'Extreme (10 lives)',
+    reglas: { regalos: true, variocolor: true, vidas: '10', nivelMax: true, sinObjetos: true },
+    ajustes: { 2: '1', 3: '3' }
   },
   randomlocke: {
     es: 'Randomlocke',
