@@ -102,17 +102,21 @@ jobs:
         run: |
           v="v${{ steps.version.outputs.numero }}"
           archivos=(electron/dist/*.exe electron/dist/*.blockmap electron/dist/latest.yml)
+          # La API de releases a veces responde 500/503: cada llamada se reintenta.
+          reintentar() {
+            for intento in 1 2 3 4 5; do
+              if "$@"; then return 0; fi
+              if [ "$intento" = 5 ]; then return 1; fi
+              echo "GitHub ha fallado (intento $intento), se reintenta..."
+              sleep $((intento * 20))
+            done
+          }
           # Se crea como borrador y se publica al final, cuando están todos los archivos.
           # Si un intento anterior dejó un borrador a medias, se reutiliza.
           if [ "$(gh release view "$v" --json isDraft --jq .isDraft 2>/dev/null)" = "true" ]; then
-            gh release edit "$v" --target "$GITHUB_SHA" --title "Lockedex $v" --notes-file NOVEDADES.md
+            reintentar gh release edit "$v" --target "$GITHUB_SHA" --title "Lockedex $v" --notes-file NOVEDADES.md
           else
-            gh release create "$v" --draft --target "$GITHUB_SHA" --title "Lockedex $v" --notes-file NOVEDADES.md
+            reintentar gh release create "$v" --draft --target "$GITHUB_SHA" --title "Lockedex $v" --notes-file NOVEDADES.md
           fi
-          for intento in 1 2 3 4 5; do
-            if gh release upload "$v" "${archivos[@]}" --clobber; then break; fi
-            if [ "$intento" = 5 ]; then exit 1; fi
-            echo "La subida ha fallado (intento $intento), se reintenta..."
-            sleep $((intento * 20))
-          done
-          gh release edit "$v" --draft=false --latest
+          reintentar gh release upload "$v" "${archivos[@]}" --clobber
+          reintentar gh release edit "$v" --draft=false --latest
