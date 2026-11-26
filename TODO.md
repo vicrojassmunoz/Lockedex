@@ -33,6 +33,8 @@ Notas para retomar el trabajo en otra sesión. Lo primero es el mapa del proyect
   - «Entrenadores · tu mayor verdugo»: ahora «tu peor enemigo · te ha ganado N veces», con el nombre del entrenador o del Pokémon salvaje si se apuntó.
   - Medallas imposibles en la Caja (Hypno con la de Brock): no se cuentan las de jefes que van antes de un líder de gimnasio anterior a donde lo capturaste (`combatesPosibles.js`). Pasaba al marcar jefes antiguos con el equipo de ahora.
 
+- [x] **1.20.2 — Medallas y próximo jefe mal en RojoFuego** (avisado el 26/11 por la noche: «me dice que me puedo pegar con Giovanni»). Un gimnasio contaba como pasado con una sola captura en cualquier zona de después en la lista, y la Ruta 21 va tras Blaine aunque se llega antes surfeando. Ahora hacen falta capturas en dos zonas de después (`partida.js`, `frente`). Además el lector de la 3.ª gen saca las 8 medallas y el Salón de la Fama de las banderas de SaveBlock1 (posiciones de pret: RFVH 0xEE0/0x820, RZ 0x1220/0x807, Esmeralda 0x1270/0x867): con el .sav vinculado mandan ellas; importado a mano solo suman. La copia guardada de antes se relee una vez al abrir. La ficha ordena las medallas por número (Sabrina es la 6 y Koga la 5).
+
 ## 1. Estética propia (desmarcarse de nuzlocke-redux)
 
 **Ya es Lockedex:** el chasis rojo con la lente y los LEDs, la barra con EXP, el logo de la portada, la tarjeta de información, el medidor de riesgo, el asistente, la importación, el perfil, el modo compacto y el Analista.

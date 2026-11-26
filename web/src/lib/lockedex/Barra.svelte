@@ -197,6 +197,7 @@
     class:lx-exp-vacia={!resumen}
     title={resumen
       ? `${partida.nombre} · ${partida.info.titulo}` +
+        (resumen.medallasDelSav ? (es ? `\nMedallas: ${resumen.medallas} (según tu .sav)` : `\nBadges: ${resumen.medallas} (from your .sav)`) : '') +
         (proximo ? (es ? `\nPróximo jefe: ${proximo.nombre}` : `\nNext boss: ${proximo.nombre}`) + (proximo.nivel ? (es ? ` · nivel máximo ${proximo.nivel}` : ` · level cap ${proximo.nivel}`) : '') : '')
       : es ? 'Sin partida activa' : 'No active run'}
     on:click={(ev) => ir(ev, resumen ? '/game' : '/saves')}

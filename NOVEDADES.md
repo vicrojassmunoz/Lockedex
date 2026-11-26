@@ -1,3 +1,9 @@
+## Novedades de la 1.20.2
+
+- **Medallas del .sav:** en RojoFuego, VerdeHoja, Rubí, Zafiro y Esmeralda, con la partida del emulador vinculada, las medallas y el próximo jefe salen de tu partida y no de dónde has capturado. La barra lo indica («Medallas: 5 (según tu .sav)»).
+- **Una captura suelta ya no te salta gimnasios:** apuntar algo en una zona a la que se llega antes de tiempo (como la Ruta 21 surfeando desde Pueblo Paleta) ya no daba por vencido a Blaine ni ponía a Giovanni de próximo jefe. Sin .sav, un gimnasio cuenta como pasado si lo marcaste o si has capturado en al menos dos zonas de después.
+- **Ficha de entrenador:** las medallas van en su sitio; en RojoFuego la de Sabrina y la de Koga salían cambiadas.
+
 ## Novedades de la 1.20.1
 
 - **Arreglos de textos:** las insignias de tipo ya no enseñan el nombre en inglés por debajo («FIGHTING» bajo «LUCHA»), y en el buscador de encuentros «repetido» va debajo del nombre en vez de encima. El análisis de tipos y las recomendaciones del VS están traducidos, y el análisis ya no enseña el tipo Hada en juegos que no lo tienen.

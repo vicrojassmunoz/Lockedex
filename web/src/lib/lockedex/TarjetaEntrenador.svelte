@@ -63,7 +63,9 @@
     const equipo = salon?.equipo?.length ? salon.equipo : await miembrosConSprite(lugaresEquipo, p.datos, sav)
     const plantilla = PLANTILLAS[reglas.plantilla]
     const activas = REGLAS.filter((r) => reglas[r.id] && reglas[r.id] !== '').length
-    const gimnasios = resumen.jefes.filter((j) => j.group === 'gym-leader')
+    // por número de medalla, no por el orden de la lista (en RojoFuego Sabrina, la 6, va antes que Koga, la 5)
+    const orden = (j) => (/^\d+$/.test(String(j.value)) ? +j.value : 1000 + j.indice)
+    const gimnasios = resumen.jefes.filter((j) => j.group === 'gym-leader').sort((a, b) => orden(a) - orden(b))
     return {
       nombre: sav?.entrenador?.nombre || perfil.nombre || t('ENTRENADOR', 'TRAINER'),
       avatar: perfil.avatar || 'rs-may',

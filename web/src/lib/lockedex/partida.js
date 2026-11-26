@@ -68,8 +68,25 @@ export const nivelMaximo = (jefe) => {
   return niveles.length ? Math.max(...niveles) : null
 }
 
+// Medallas de la partida del emulador (.sav importado o vinculado) si es del mismo juego que la run.
+// Solo los juegos originales de la 3.ª gen: los hacks pueden mover las banderas de sitio.
+const SAV_DE_JUEGO = { fr: 'rfvh', lg: 'rfvh', em: 'esmeralda', ruby: 'rz', saph: 'rz' }
+const medallasDelSav = (partida) => {
+  if (typeof window === 'undefined' || !partida?.id) return null
+  const esperado = SAV_DE_JUEGO[partida.juego]
+  const sav = esperado ? leerJSON(`lockedex.sav.${partida.id}`) : null
+  if (!sav || sav.juego !== esperado || !Array.isArray(sav.medallas)) return null
+  return {
+    medallas: sav.medallas,
+    campeon: !!sav.campeon,
+    // vinculado = Lockedex lo relee cada vez que guardas; importado a mano puede estar viejo
+    vinculado: !!localStorage.getItem(`lockedex.savruta.${partida.id}`)
+  }
+}
+
 export const resumirPartida = (partida, rutas = []) => {
   const datos = partida?.datos || {}
+  const sav = medallasDelSav(partida)
   // __teams es una lista [{ id, name, group, type, team }] con los jefes vencidos (id = value de la ruta)
   const equiposJefes = datos.__teams || []
   const derrotados = (Array.isArray(equiposJefes) ? equiposJefes.map((t) => t?.id) : Object.keys(equiposJefes))
@@ -85,6 +102,7 @@ export const resumirPartida = (partida, rutas = []) => {
   let zona = null // última zona con encuentros antes de cada jefe: donde suele ser el combate
   const lugares = []
   const jefes = []
+  const visitadas = [] // posiciones de las zonas con algo apuntado
   rutas.forEach((r, i) => {
     if (r.type === 'gym') {
       const derrotado = derrotados.includes('' + r.value)
@@ -93,10 +111,18 @@ export const resumirPartida = (partida, rutas = []) => {
     } else if (r.type === 'route') {
       const e = datos[r.name]
       lugares.push({ ...r, indice: i, encuentro: e })
-      if (visitada(r.name)) ultimo = Math.max(ultimo, i)
+      if (visitada(r.name)) {
+        ultimo = Math.max(ultimo, i)
+        visitadas.push(i)
+      }
       if ((r.encounters || []).length) zona = r.name
     }
   })
+  // Hasta dónde has llegado seguro: la penúltima zona con capturas. Una zona suelta más adelante no
+  // basta, porque hay sitios a los que se llega antes de tiempo (en RojoFuego la Ruta 21 va después
+  // de Blaine en la lista, pero se llega surfeando desde Pueblo Paleta con la medalla de Koga)
+  visitadas.sort((a, b) => b - a)
+  const frente = visitadas.length > 1 ? visitadas[1] : -1
 
   const encuentros = Object.entries(datos)
     .filter(([k, v]) => !k.startsWith('__') && v && typeof v === 'object' && v.pokemon)
@@ -112,7 +138,9 @@ export const resumirPartida = (partida, rutas = []) => {
 
   // ¿Está pasado un jefe?
   // - Sí, si lo marcaste como vencido o venciste a uno posterior.
-  // - Gimnasios y Alto Mando cortan el paso: pasados si ya capturaste más adelante.
+  // - Con un .sav de la 3.ª gen, si el juego dice que tienes su medalla (o que ya eres campeón).
+  // - Gimnasios y Alto Mando cortan el paso: pasados si ya capturaste en al menos dos zonas más
+  //   adelante. Con el .sav vinculado esto no se deduce: manda el juego.
   // - Los demás (rivales, equipos malvados…) son a veces opcionales o se hacen en otro orden
   //   (en Kanto puedes ir a la Ruta 2 antes que a la Ruta 22, donde espera el rival): solo cuentan
   //   como pasados si estuviste en su zona, si es el primer combate del juego o si ya dejaste
@@ -121,8 +149,16 @@ export const resumirPartida = (partida, rutas = []) => {
   const BLOQUEAN = ['gym-leader', 'elite-four']
   const nombresRutas = new Set(lugares.map((l) => l.name))
   const zonaDe = (j) => (nombresRutas.has(j.name) ? j.name : j.zona)
-  const pasadoSeguro = (j) =>
-    j.derrotado || j.indice < ultimoVencido || (BLOQUEAN.includes(j.group) && j.indice < ultimo)
+  // En los juegos de la 3.ª gen el value de cada gimnasio es el número de su medalla (en RojoFuego
+  // Sabrina es la 6 aunque en la lista vaya antes que Koga, la 5)
+  const delSav = (j) => {
+    if (!sav) return false
+    if (j.group === 'gym-leader') return /^[1-8]$/.test(String(j.value)) && !!sav.medallas[+j.value - 1]
+    if (j.group === 'elite-four') return sav.campeon
+    return false
+  }
+  const porCapturas = (j) => BLOQUEAN.includes(j.group) && !sav?.vinculado && j.indice < frente
+  const pasadoSeguro = (j) => j.derrotado || j.indice < ultimoVencido || delSav(j) || porCapturas(j)
   const pasado = (j, i) => {
     if (pasadoSeguro(j)) return true
     if (BLOQUEAN.includes(j.group) || j.indice >= ultimo) return false
@@ -148,6 +184,7 @@ export const resumirPartida = (partida, rutas = []) => {
     medallas,
     totalMedallas,
     siguienteJefe,
+    medallasDelSav: !!sav?.vinculado,
     campeon: jefes.length > 0 && jefesPasados.every((j) => j.pasado)
   }
 }

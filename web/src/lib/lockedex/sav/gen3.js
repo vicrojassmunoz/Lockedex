@@ -6,6 +6,14 @@ const FIRMA = 0x08012025
 const TAM_RANURA = TAM_SECCION * 14
 // Tamaño útil de cada sección del PC (secciones 5 a 13)
 export const TAM_PC = [3968, 3968, 3968, 3968, 3968, 3968, 3968, 3968, 2000]
+const DATOS_SECCION = 3968
+
+// Banderas de SaveBlock1: dónde empieza la tabla, la de la 1.ª medalla (las 8 van seguidas) y la del Salón de la Fama
+const BANDERAS = {
+  rfvh: { inicio: 0xee0, medalla: 0x820, campeon: 0x82c },
+  rz: { inicio: 0x1220, medalla: 0x807, campeon: 0x804 },
+  esmeralda: { inicio: 0x1270, medalla: 0x867, campeon: 0x864 }
+}
 
 // Orden de las subestructuras según personalidad % 24 (G=0, A=1, E=2, M=3)
 export const ORDENES = [
@@ -174,6 +182,17 @@ export const leerPartidaGen3 = (buffer, tablas) => {
   // la sección 1 es el principio de SaveBlock1 en los cinco juegos
   const ubicacion = { grupo: v.getUint8(s1 + 4), mapa: v.getUint8(s1 + 5) }
 
+  // Medallas y Salón de la Fama: banderas del sistema dentro de SaveBlock1, que ocupa las secciones 1–4
+  // (3968 bytes de datos cada una). Posiciones de los decomps de pret (include/global.h y constants/flags.h)
+  const ban = BANDERAS[juego]
+  const bandera = (n) => {
+    const x = ban.inicio + (n >> 3)
+    const o = secciones[1 + Math.floor(x / DATOS_SECCION)]
+    return o === undefined ? false : !!((v.getUint8(o + (x % DATOS_SECCION)) >> (n & 7)) & 1)
+  }
+  const medallas = Array.from({ length: 8 }, (_, i) => bandera(ban.medalla + i))
+  const campeon = bandera(ban.campeon)
+
   const tamEquipo = Math.min(6, u32(v, s1 + desplazEquipo))
   const equipo = []
   for (let i = 0; i < tamEquipo; i++) {
@@ -198,5 +217,5 @@ export const leerPartidaGen3 = (buffer, tablas) => {
     }
   }
 
-  return { juego, entrenador, ubicacion, equipo, cajas }
+  return { juego, entrenador, ubicacion, medallas, campeon, equipo, cajas }
 }
