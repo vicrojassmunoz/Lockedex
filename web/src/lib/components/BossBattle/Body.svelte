@@ -10,6 +10,8 @@
 
   import { summarise } from '$utils/types'
   import { capitalise } from '$utils/string'
+  import { t, traducirNombre } from '$lib/lockedex/idioma'
+  const esp = t('es', 'en') === 'es'
 
   export let name,
     team = [],
@@ -56,14 +58,20 @@
                   {/each}
                   <TypeLogo class="scale-75" {type}>
                     <p class="py-2 px-1 text-center">
-                      <b>{resist || 'None'}</b>
-                      of your Team resist{resist === 1 ? 's' : ''}
-                      <b>{capitalise(type)}</b>
-                      <br />
-                      <b>{weak || 'None'}</b> of your Team {weak === 1
-                        ? 'is'
-                        : 'are'} weak to
-                      <b>{capitalise(type)}</b>
+                      {#if esp}
+                        <b>{resist || 'Ninguno'}</b> de tu equipo {resist === 1 ? 'resiste' : 'resisten'}
+                        <b>{traducirNombre(capitalise(type))}</b>
+                        <br />
+                        <b>{weak || 'Ninguno'}</b> de tu equipo {weak === 1 ? 'es débil' : 'son débiles'} a
+                        <b>{traducirNombre(capitalise(type))}</b>
+                      {:else}
+                        <b>{resist || 'None'}</b>
+                        of your Team resist{resist === 1 ? 's' : ''}
+                        <b>{capitalise(type)}</b>
+                        <br />
+                        <b>{weak || 'None'}</b> of your Team {weak === 1 ? 'is' : 'are'} weak to
+                        <b>{capitalise(type)}</b>
+                      {/if}
                     </p>
                   </TypeLogo>
                   {#each Array(weak).fill() as _}
@@ -86,9 +94,10 @@
         <span class="ml-2 cursor-help">
           <Icon class="inline scale-150" inline icon={Info} />
           <Tooltip side="right">
-            Based on {name}'s team's movesets, weaknesses and your Pokemon's
-            beneficial stats and both resistive and offesnsive potential. You
-            should still use your own knowledge to properly craft a team.
+            {t(
+              `Según los movimientos y debilidades del equipo de ${name}, y las estadísticas, resistencias y potencial ofensivo de tus Pokémon. Usa también tu propio criterio para montar el equipo.`,
+              `Based on ${name}'s team's movesets, weaknesses and your Pokémon's beneficial stats and both resistive and offensive potential. You should still use your own knowledge to properly craft a team.`
+            )}
           </Tooltip>
         </span>
       </h2>
@@ -107,24 +116,30 @@
             <p
               class="mt-2 w-auto text-center text-xs italic max-md:mb-2 md:text-left"
             >
-              {name}'s team only uses <b>{dclass}</b> moves.
-              <br class="hidden md:block" />
-              You should use Pokemon with a high <b>{defclass}</b> stat.
+              {#if esp}
+                El equipo de {name} solo usa movimientos <b>{dclass === 'physical' ? 'físicos' : 'especiales'}</b>.
+                <br class="hidden md:block" />
+                Te conviene usar Pokémon con mucha <b>{dclass === 'physical' ? 'Defensa' : 'Defensa Especial'}</b>.
+              {:else}
+                {name}'s team only uses <b>{dclass}</b> moves.
+                <br class="hidden md:block" />
+                You should use Pokémon with a high <b>{defclass}</b> stat.
+              {/if}
             </p>
           {/if}
         </div>
 
         <div class="md:min-w-1/2 flex w-full flex-col justify-start md:flex-1">
           <Advice types={advice.weak}>
-            {name}'s team are <b class="dark:text-gray-400">all</b> weak to:
+            {#if esp}<b class="dark:text-gray-400">Todo</b> el equipo de {name} es débil a:{:else}{name}'s team are <b class="dark:text-gray-400">all</b> weak to:{/if}
           </Advice>
 
           <Advice types={advice.resist}>
-            {name}'s team are <b class="dark:text-gray-400">all</b> resistant to:
+            {#if esp}<b class="dark:text-gray-400">Todo</b> el equipo de {name} resiste:{:else}{name}'s team are <b class="dark:text-gray-400">all</b> resistant to:{/if}
           </Advice>
 
           <Advice types={advice.immunity}>
-            {name}'s team have immunities to:
+            {t(`El equipo de ${name} es inmune a:`, `${name}'s team have immunities to:`)}
           </Advice>
         </div>
       </div>

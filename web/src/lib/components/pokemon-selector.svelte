@@ -417,11 +417,13 @@
                   name={option?.sprite}
                   className="transform -mb-4 -ml-6 -mt-5 -mr-2"
                 />
-                {@html label}
-                {#if (dupes === 1 || (reglasRun.especie && dupes !== 2)) && (missdupes ? misslines : dupelines).has(option?.evoline)}
-                  <span class="dupe__span absolute right-4 text-tiny">{t('repetido', 'dupe')}</span
-                  >
-                {/if}
+                <!-- nombre y, debajo, «repetido»: así no se pisan en las listas estrechas -->
+                <span class="lx-opcion-texto">
+                  <span class="lx-opcion-nombre">{@html label}</span>
+                  {#if (dupes === 1 || (reglasRun.especie && dupes !== 2)) && (missdupes ? misslines : dupelines).has(option?.evoline)}
+                    <span class="dupe__span text-tiny">{t('repetido', 'dupe')}</span>
+                  {/if}
+                </span>
               </span>
 
               <svelte:fragment slot="icon" let:iconClass>
@@ -886,8 +888,20 @@
     color: #3a78e0;
   }
 
+  .lx-opcion-texto {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    line-height: 1.1;
+  }
+  .lx-opcion-nombre {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
   .dupe {
-    @apply mr-2 text-tiny opacity-25 grayscale;
+    @apply mr-2 text-tiny grayscale;
+    opacity: 0.45;
   }
 
   .location {

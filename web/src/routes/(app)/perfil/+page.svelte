@@ -9,7 +9,7 @@
   import { actualizarEquipo } from '$lib/components/icons/sprites.js'
   import Games from '$lib/data/games.json'
   import { leerPartidas, leerPartida, cargarRutas, resumirPartida } from '$lib/lockedex/partida.js'
-  import { idioma } from '$lib/lockedex/idioma.js'
+  import { idioma, traducirNombre } from '$lib/lockedex/idioma.js'
   import { leerReglas } from '$lib/lockedex/reglas.js'
   import { nombreJuego } from '$lib/lockedex/juegos.js'
   import { leerEstado, leerHistorial } from '$lib/lockedex/derrotas.js'
@@ -74,9 +74,11 @@
       let quien = null
       // { type, trainer: { name } } (o { tab, result } en las muertes apuntadas con versiones antiguas)
       const tipo = d.type || d.tab
+      // Con nombre y apellidos cuando se apuntó: «Misty», «Cazabichos Rick», «Rattata salvaje»
+      const nombreDe = (o) => (typeof o === 'string' ? o : o?.name || null)
       if (tipo === 'boss') quien = d.trainer?.name || d.result?.name || d.result?.boss || (typeof d.result === 'string' ? d.result : null)
-      else if (tipo === 'trainer') quien = es ? 'Entrenadores' : 'Trainers'
-      else if (tipo === 'encounter') quien = es ? 'Pokémon salvajes' : 'Wild Pokémon'
+      else if (tipo === 'trainer') quien = nombreDe(d.trainer) || (es ? 'Entrenadores de ruta' : 'Route trainers')
+      else if (tipo === 'encounter') quien = nombreDe(d.opponent) ? (es ? `${traducirNombre(nombreDe(d.opponent))} salvaje` : `Wild ${nombreDe(d.opponent)}`) : es ? 'Pokémon salvajes' : 'Wild Pokémon'
       if (quien) asesinos[quien] = (asesinos[quien] || 0) + 1
     }
     // Derrotas contra jefes (las de la run actual y las de intentos anteriores) también cuentan como verdugo
@@ -216,7 +218,13 @@
       <div><b>{est.perdidas}</b><span>{es ? 'runs perdidas' : 'runs lost'}</span></div>
       <div class="lx-asesino">
         <b>{est.topAsesino ? est.topAsesino[0] : '—'}</b>
-        <span>{es ? 'tu mayor verdugo' : 'your nemesis'}{est.topAsesino ? ` (${est.topAsesino[1]})` : ''}</span>
+        <span
+          >{es ? 'tu peor enemigo' : 'your nemesis'}{est.topAsesino
+            ? es
+              ? ` · te ha ganado ${est.topAsesino[1]} ${est.topAsesino[1] === 1 ? 'vez' : 'veces'}`
+              : ` · beat you ${est.topAsesino[1]} time${est.topAsesino[1] === 1 ? '' : 's'}`
+            : ''}</span
+        >
       </div>
     </section>
 

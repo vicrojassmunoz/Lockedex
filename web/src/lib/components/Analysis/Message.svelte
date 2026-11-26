@@ -6,6 +6,7 @@
   import Icon from './Icon.svelte'
 
   export let weakTypes = [], gapTypes = [], suggestions
+  import { t } from '$lib/lockedex/idioma'
 
   const shardicons = [ 'yellow-shard', 'green-shard', 'red-shard']
   const sashicons = [ 'focus-sash', 'red-chain' ]
@@ -23,13 +24,13 @@
     </Icon>
 
     <p style='text-align: left !important; max-width: 300px !important' class='text-gray-800 px-4 max-w-xs'>
-      Your box is full of <b>Pokémon</b> that resist <b>every</b> offensive type!
+      {#if t('es', 'en') === 'es'}Tienes <b>Pokémon</b> que resisten <b>todos</b> los tipos de ataque.{:else}Your box is full of <b>Pokémon</b> that resist <b>every</b> offensive type!{/if}
     </p>
   </div>
 
   {#if weakTypes.length}
     <p in:fade class='text-center my-4 text-sm'>
-      But you have <b>poor</b> coverage against
+      {#if t('es', 'en') === 'es'}Pero tienes <b>poca</b> cobertura contra{:else}But you have <b>poor</b> coverage against{/if}
       {#each weakTypes as type, i}
         <span class=ml-1>
           {#if weakTypes.length > 1 && i === weakTypes.length - 1}
@@ -52,25 +53,25 @@
     </Icon>
 
     <div class='px-4 p-2 text-gray-900 text-sm leading-5'>
-      <p class='font-bold text-gray-900'>Your team is missing coverage</p>
+      <p class='font-bold text-gray-900'>{t('A tu equipo le falta cobertura', 'Your team is missing coverage')}</p>
     </div>
   </div>
 
   <p class=mb-3>
-    Your team has <b class=text-lg>no</b> resistances for <b class=text-lg>{gapTypes.length}</b> types
+    {#if t('es', 'en') === 'es'}Nadie de tu equipo resiste <b class=text-lg>{gapTypes.length}</b> {gapTypes.length === 1 ? 'tipo' : 'tipos'}{:else}Your team has <b class=text-lg>no</b> resistances for <b class=text-lg>{gapTypes.length}</b> types{/if}
   </p>
 
   <slot />
 
   <p class='mb-2 mt-4' in:fade={{ delay: 1800 }}>
-    You should add some
+    {t('Te vendría bien añadir algún Pokémon de tipo', 'You should add some')}
     {#each suggestions.slice(0, 3) as type, i}
       <span class=ml-1>
-        {#if i === 2}or{/if}
+        {#if i === 2}{t('o', 'or')}{/if}
       </span>
       <TypeBadge className='leading-4' {type} />
     {/each}
-    types to your team to improve your coverage
+    {t('a tu equipo para mejorar la cobertura.', 'types to your team to improve your coverage')}
   </p>
 {/if}
 

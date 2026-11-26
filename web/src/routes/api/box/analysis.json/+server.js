@@ -12,8 +12,10 @@ export async function POST({ request }) {
   // cada Pokémon puede traer sus habilidades posibles («habilidades») y la generación del juego («gen»):
   // Gengar con Levitación no cuenta como débil a Tierra
   const { box, gen = 9 } = await request.json()
+  // solo los tipos que existen en la generación del juego (sin Hada antes de la 6.ª, sin Siniestro ni Acero en la 1.ª)
+  const tiposGen = types.filter((x) => !(gen < 6 && x === 'fairy') && !(gen < 2 && ['dark', 'steel'].includes(x)))
   const analysis = Object.entries(
-    types.reduce((acc, it) => {
+    tiposGen.reduce((acc, it) => {
       const dmg = box.map(({ types, habilidades }) => efectividad(it, types, habilidades, gen))
       const minDmg = dmg.reduce((acc, it) => {
         const id = it < 1 ? 'resist' : it > 1 ? 'weak' : 'neutral'
@@ -33,7 +35,7 @@ export async function POST({ request }) {
       return [
         ...(typeAdvantages[type]['0.5'] || []),
         ...(typeAdvantages[type]['0'] || [])
-      ]
+      ].filter((x) => tiposGen.includes(x))
     })
     .flat()
     .reduce(

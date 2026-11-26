@@ -25,6 +25,8 @@
   export let victorias = []
   export let evoHecha = false
   export let Particles = null
+  // (idJefe, lugar) → ¿pudo estar en ese combate? (combatesPosibles.js)
+  export let posible = () => true
 
   const despachar = createEventDispatcher()
   const HUECOS = 30
@@ -44,7 +46,7 @@
   $: datos = elegido ? Pokemon[elegido.pokemon] : null
   $: enEquipo = elegido && (equipo || []).includes(locid(elegido))
   $: puedeEquipo = elegido && (enEquipo || !equipo || equipo.length < 6)
-  $: medallas = elegido ? summarise(elegido, victorias) : null
+  $: medallas = elegido ? summarise(elegido, (victorias || []).filter((v) => posible(v.id, locid(elegido)))) : null
 
   // Wedlocke: pareja del elegido (se elige en el detalle) y ♥ en los huecos emparejados
   $: wedlocke = !!leerReglas($activeGame).wedlocke

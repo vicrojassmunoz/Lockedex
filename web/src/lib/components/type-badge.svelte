@@ -147,13 +147,10 @@
     padding: 1px 5px 1px 8px;
   }
 
-  div::before {
-    position: absolute;
-    filter: blur(0.5px);
-    margin: 0.5px 0 0 1px;
-    color: rgba(0, 0, 0, 0.3);
-    content: var(--badge-content);
-    z-index: -1;
+  /* La sombra del texto era un ::before con el nombre en inglés: con la app en español se veía «FIGHTING»
+     debajo de «LUCHA». Ahora es una sombra del propio texto */
+  div {
+    text-shadow: 1px 1px 0.5px rgba(0, 0, 0, 0.3);
   }
 
   :global(.greenscreen) div {

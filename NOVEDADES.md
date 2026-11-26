@@ -1,3 +1,9 @@
+## Novedades de la 1.20.1
+
+- **Arreglos de textos:** las insignias de tipo ya no enseñan el nombre en inglés por debajo («FIGHTING» bajo «LUCHA»), y en el buscador de encuentros «repetido» va debajo del nombre en vez de encima. El análisis de tipos y las recomendaciones del VS están traducidos, y el análisis ya no enseña el tipo Hada en juegos que no lo tienen.
+- **Tu peor enemigo:** en el Perfil, en vez de «Entrenadores · tu mayor verdugo», sale quién te ha ganado más veces, con su nombre si lo apuntaste («Misty · te ha ganado 3 veces», «Rattata salvaje»).
+- **Medallas imposibles:** si marcaste jefes antiguos con el equipo de ahora, un Pokémon capturado después ya no sale con medallas que no pudo ganar (Hypno, capturado en la Ruta 11, ya no tiene la de Brock).
+
 ## Novedades de la 1.20.0
 
 - **Generador de Egglocke:** con la regla Egglocke activa, el botón «Huevos» de la partida reparte huevos al azar con especies del juego, con opciones (formas básicas, sin legendarios, sin repetir línea, por tipo). En RojoFuego, VerdeHoja, Rubí, Zafiro y Esmeralda los mete directamente en el PC de tu partida, como si te los hubiera dado el juego, con una copia de seguridad antes. Cierra el juego en el emulador antes de hacerlo.

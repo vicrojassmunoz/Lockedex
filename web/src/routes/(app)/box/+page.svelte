@@ -15,6 +15,8 @@
   import { Modal as AnalysisModal } from '$lib/components/Analysis'
   import CajaPC from '$lib/lockedex/CajaPC.svelte'
   import EquipoEquilibrado from '$lib/lockedex/EquipoEquilibrado.svelte'
+  import { filtroCombates } from '$lib/lockedex/combatesPosibles.js'
+  import { partidaActiva, cargarRutas } from '$lib/lockedex/partida.js'
   import { leerReglas, sinCalculos } from '$lib/lockedex/reglas.js'
   import { activeGame as runActiva } from '$lib/store'
   import { t } from '$lib/lockedex/idioma'
@@ -65,8 +67,14 @@
     winData,
     setTeam = (_) => _
 
+  // Medallas de cada Pokémon: sin las de jefes de antes de que lo capturases (ver combatesPosibles.js)
+  let posible = () => true
+  const victoriasDe = (p, lista, filtro) => (lista || []).filter((w) => filtro(w.id, locid(p)))
+
   onMount(() => {
     import('$lib/components/particles').then((m) => (Particles = m.default))
+    const pa = partidaActiva()
+    if (pa?.info?.lid) cargarRutas(pa.info.lid).then((r) => (posible = filtroCombates(Array.isArray(r) ? r : [])))
 
     const [, , gameId] = readdata()
     gameStore = getGameStore(gameId)
@@ -417,6 +425,7 @@
             {Pokemon}
             equipo={teamData}
             victorias={winData}
+            {posible}
             evoHecha={evoComplete}
             {Particles}
             on:finEvo={() => (evoComplete = false)}
@@ -452,7 +461,7 @@
             >
           {/if}
           {#each (stat === 'team' ? mons : box).filter(filter) as p (locid(p))}
-            {@const badgeSummary = summarise(p, winData)}
+            {@const badgeSummary = summarise(p, victoriasDe(p, winData, posible))}
 
             <span
               use:drag={{ data: p, effect: 'add', hideImg: true }}

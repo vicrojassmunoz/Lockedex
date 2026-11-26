@@ -27,6 +27,12 @@ Notas para retomar el trabajo en otra sesión. Lo primero es el mapa del proyect
 
 - [x] **1.19.1 — Las habilidades cuentan en la efectividad de tipos** (pedido el 26/11: «Gengar no es débil a Tierra, es inmune»). `lib/lockedex/tiposHabilidad.js` + `static/lx/habilidades-especie.json` (habilidades de cada especie por generación, de PokeAPI con `herramientas/habilidades_especies.py`): Levitación, Absorbe Agua/Electricidad, Absorbe Fuego, Sebo, Ignífugo, Piel Seca, Pararrayos y Colector (5.ª+), Herbívoro, Superguarda… Se usa en «Equilibrar equipo» (chip «Inmune a Tierra (Levitación)»), en el análisis de tipos de Caja/Equipo, en la estimación por tipos del riesgo y en el Analista (que ahora ofrece las habilidades reales de cada especie en ese juego, con la oculta marcada). Sin .sav, con varias posibles cuenta lo peor para ti. 1.20.0: también la ventana antigua de «Preparar el equipo contra…» (`utils/advice` usa `resistenciaDe`/`debilidadesDe`).
 
+- [x] **1.20.1 — Arreglos avisados el 26/11 (tarde):**
+  - Insignias de tipo con el nombre en inglés debajo («FIGHTING» bajo «LUCHA»): la sombra era un `::before` con el texto original; ahora es `text-shadow` (`type-badge.svelte`). El análisis de tipos de Caja/Equipo ya no enseña Hada en juegos sin ella y está traducido; también las recomendaciones del VS antiguo.
+  - En el buscador de encuentros, «repetido» se pisaba con el nombre en listas estrechas: ahora va debajo del nombre (`pokemon-selector.svelte`).
+  - «Entrenadores · tu mayor verdugo»: ahora «tu peor enemigo · te ha ganado N veces», con el nombre del entrenador o del Pokémon salvaje si se apuntó.
+  - Medallas imposibles en la Caja (Hypno con la de Brock): no se cuentan las de jefes que van antes de un líder de gimnasio anterior a donde lo capturaste (`combatesPosibles.js`). Pasaba al marcar jefes antiguos con el equipo de ahora.
+
 ## 1. Estética propia (desmarcarse de nuzlocke-redux)
 
 **Ya es Lockedex:** el chasis rojo con la lente y los LEDs, la barra con EXP, el logo de la portada, la tarjeta de información, el medidor de riesgo, el asistente, la importación, el perfil, el modo compacto y el Analista.

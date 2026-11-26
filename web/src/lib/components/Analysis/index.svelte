@@ -13,6 +13,7 @@
   import { Sort, X } from '$icons'
 
   const { close } = getContext('simple-modal')
+  import { t } from '$lib/lockedex/idioma'
 
   const weakest = analysis // Calculate the weakest ratio of resists to weaknesses
     .filter(([, { weak, resist }]) => {
@@ -27,7 +28,7 @@
 
   let sort = 0
   const sortFns = [sorts.weak, sorts.resist, sorts.ratio]
-  const sortDescs = ['Most weaknesses', 'Most resistances', 'Worst coverage']
+  const sortDescs = [t('Más debilidades', 'Most weaknesses'), t('Más resistencias', 'Most resistances'), t('Peor cobertura', 'Worst coverage')]
   const nextsort = _ => sort = (sort + 1) % sortFns.length
   const filter = ([, { weak, resist }]) => weak || resist
 
@@ -37,7 +38,7 @@
   <div class='flex justify-between items-center mb-2'>
     <IconButton containerClassName='ml-1' rounded src={Sort} on:click={nextsort} />
     <h3 class='inline-flex gap-x-1 items-center text-sm'>
-      <span class='ml-1 text-gray-500 '>Sorted: </span>
+      <span class='ml-1 text-gray-500 '>{t('Orden:', 'Sorted:')} </span>
       <strong>{sortDescs[sort]}</strong>
     </h3>
     <IconButton
