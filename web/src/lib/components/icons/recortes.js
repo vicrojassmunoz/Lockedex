@@ -16,6 +16,11 @@ export default {
   6,
   22
  ],
+ "buscapelea": [
+  6,
+  6,
+  20
+ ],
  "cartel-gimnasio": [
   -1,
   0,
@@ -106,6 +111,11 @@ export default {
   0,
   30
  ],
+ "galleta-lava": [
+  7,
+  8,
+  18
+ ],
  "hierba-alta": [
   0,
   0,
@@ -170,6 +180,11 @@ export default {
   0,
   0,
   32
+ ],
+ "piedra-solar": [
+  5,
+  5,
+  22
  ],
  "pieza-maquina": [
   6,

@@ -72,9 +72,11 @@
     for (const m of muertes) {
       const d = m.death || {}
       let quien = null
-      if (d.tab === 'boss') quien = d.result?.name || d.result?.boss || (typeof d.result === 'string' ? d.result : null)
-      else if (d.tab === 'trainer') quien = es ? 'Entrenadores' : 'Trainers'
-      else if (d.tab === 'encounter') quien = es ? 'Pokémon salvajes' : 'Wild Pokémon'
+      // { type, trainer: { name } } (o { tab, result } en las muertes apuntadas con versiones antiguas)
+      const tipo = d.type || d.tab
+      if (tipo === 'boss') quien = d.trainer?.name || d.result?.name || d.result?.boss || (typeof d.result === 'string' ? d.result : null)
+      else if (tipo === 'trainer') quien = es ? 'Entrenadores' : 'Trainers'
+      else if (tipo === 'encounter') quien = es ? 'Pokémon salvajes' : 'Wild Pokémon'
       if (quien) asesinos[quien] = (asesinos[quien] || 0) + 1
     }
     // Derrotas contra jefes (las de la run actual y las de intentos anteriores) también cuentan como verdugo

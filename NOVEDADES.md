@@ -1,3 +1,15 @@
+## Novedades de la 1.19.0
+
+- **Equilibrar equipo:** en la Caja, un botón propone los 6 que mejor se complementan de tu Caja y tu equipo, con el motivo de cada uno («Cubre Planta, Bicho», «Resiste Fantasma», «Gana a Tangela») y una tabla de antes y después. Tiene un modo general y otro contra el próximo jefe, que enseña el riesgo con tu equipo y con la propuesta. Respeta el monotipo, el nivel máximo y las parejas del Wedlocke, puedes fijar a quien quieras y «Usar este equipo» lo cambia en la run.
+- **Modo batalla en el compacto:** durante el combate eliges tu Pokémon y el del jefe y ves el daño de cada ataque, si hace KO, quién pega primero y qué saca después. Tiene estados, clima, PS y potenciadores, y puedes apuntar quién ha caído desde ahí.
+- **Variantes nuevas:**
+  - **Egglocke:** apuntas qué sale de cada huevo en la Caja.
+  - **Wonderlocke:** apuntas qué te llega por el Intercambio Prodigioso.
+  - **Sacrificio por medalla:** una ruleta elige a quién pierdes tras cada medalla.
+  - **Genlocke:** desde el Salón de la Fama empiezas el siguiente juego con las mismas reglas y tu equipo campeón como herencia.
+- **Iconos:** Piedra Lunar y Piedra Solar para el tema, Galleta Lava para el aviso de cookies, Buscapelea para el modo batalla y el Huevo de Esmeralda en la Caja.
+- **Arreglo:** el diario y el Perfil ya dicen bien quién debilitó a cada Pokémon.
+
 ## Novedades de la 1.18.0
 
 - **Salón de la Fama:** al vencer al Campeón, la vista de partida enseña tu equipo campeón con sus números (medallas, capturas, caídos, tiempo de juego). Queda guardado y en el Perfil aparece la lista de tus runs campeonas.

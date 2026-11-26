@@ -39,12 +39,16 @@ export const anotarNota = (id, texto, intento) => {
 
 export const borrarEntrada = (id, t) => guardarDiario(id, leerDiario(id).filter((e) => e.t !== t))
 
-// Quién debilitó a un Pokémon (lo mismo que enseña el cementerio)
+// Quién debilitó a un Pokémon. La ventana de «¿quién fue?» guarda { type: 'boss' | 'trainer' | 'encounter',
+// trainer: { name }, opponent: { name } }; las versiones antiguas guardaban { tab, result }
 export const causaMuerte = (d) => {
   if (!d) return null
-  if (d.tab === 'boss') return d.result?.name || d.result?.boss || (typeof d.result === 'string' ? d.result : null)
-  if (d.tab === 'trainer') return typeof d.result === 'string' && d.result ? d.result : 'trainer'
-  if (d.tab === 'encounter') return 'wild'
+  const tipo = d.type || d.tab
+  const nombre = (o) => (typeof o === 'string' ? o : o?.name || o?.boss || null)
+  if (tipo === 'sacrificio') return 'sacrificio'
+  if (tipo === 'boss') return nombre(d.trainer) || nombre(d.result) || null
+  if (tipo === 'trainer') return nombre(d.trainer) || nombre(d.result) || 'trainer'
+  if (tipo === 'encounter') return 'wild'
   return null
 }
 
@@ -56,7 +60,7 @@ const foto = (p) => {
   const encuentros = {}
   for (const [k, v] of Object.entries(datos)) {
     if (k.startsWith('__') || !v || typeof v !== 'object' || !(v.pokemon || v.status)) continue
-    encuentros[k] = { p: v.pokemon || '', s: +v.status || 0, m: v.nickname || '', c: causaMuerte(v.death) }
+    encuentros[k] = { p: v.pokemon || '', s: +v.status || 0, m: v.nickname || '', c: causaMuerte(v.death), h: v.cambio?.tipo || null }
   }
   const jefes = (Array.isArray(datos.__teams) ? datos.__teams : []).filter((e) => e && e.id != null).map((e) => String(e.id))
   const estado = leerEstado(p.id)
@@ -108,7 +112,10 @@ export const registrarCambios = (id = typeof localStorage !== 'undefined' ? loca
         else if (!VIVOS.includes(a.s) && VIVOS.includes(e.s)) anade({ tipo: ESTADO_TIPO[e.s], ...base })
         else if (ESTADO_TIPO[e.s] && !(VIVOS.includes(a.s) && VIVOS.includes(e.s))) anade({ tipo: ESTADO_TIPO[e.s], ...base })
       } else if (VIVOS.includes(e.s) && a.p && e.p && a.p !== e.p) {
-        anade({ tipo: 'evolucion', ...base, de: a.p })
+        // Egglocke / Wonderlocke: no es una evolución, es lo que salió del huevo o llegó por el intercambio
+        if (e.h && !a.h) anade({ tipo: e.h === 'huevo' ? 'huevo' : 'prodigioso', ...base, de: a.p })
+        else if (!e.h && a.h) anade({ tipo: 'cambioDeshecho', ...base, de: a.p })
+        else anade({ tipo: 'evolucion', ...base, de: a.p })
       }
       // La causa de la muerte llega justo después (ventana de «¿quién fue?»): se completa la entrada
       if (e.s === 5 && e.c && !a.c && a.s === 5) completarCausa(id, lugar, e.c, intento)

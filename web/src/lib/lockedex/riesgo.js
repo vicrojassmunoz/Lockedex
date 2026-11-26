@@ -228,7 +228,7 @@ const riesgoConCalculadora = async (jefe, equipo, gen, cap) => {
 
 // --- Movimientos probables por nivel --------------------------------------------------------------
 // Los 4 últimos que aprende por nivel hasta ese nivel (lo que lleva un Pokémon que no ha cambiado nada)
-const probablesANivel = (lista = [], nivel = 100) => {
+export const probablesANivel = (lista = [], nivel = 100) => {
   const ultimo = new Map()
   for (const [nv, k] of lista) if (nv <= nivel) ultimo.set(k, nv)
   return [...ultimo.entries()].sort((a, b) => a[1] - b[1]).map(([k]) => k).slice(-4)
@@ -236,7 +236,7 @@ const probablesANivel = (lista = [], nivel = 100) => {
 
 // Completa niveles y movimientos que falten: tus Pokémon al nivel máximo del combate (o al del jefe) con
 // lo que aprenden por nivel; el jefe, con lo que aprende a su nivel si sus datos no traen movimientos
-const completarConAprendizaje = async (jefe, equipo, grupo, cap) => {
+export const completarConAprendizaje = async (jefe, equipo, grupo, cap) => {
   if (!grupo) return null
   const [movs, tabla] = await Promise.all([movimientos(), aprendizaje(grupo)])
   const porNivel = tabla?.nivel || {}

@@ -12,8 +12,6 @@ export {
   CaretRight,
   Check,
   Chevron,
-  Cookie,
-  DarkMode,
   Delete,
   Desktop,
   Dots,
@@ -30,7 +28,6 @@ export {
   Hide,
   Home,
   Info,
-  LightMode,
   Link,
   Loop,
   Menu,
@@ -101,7 +98,11 @@ export {
   Status,
   PiedraFuego,
   PiedraAgua,
-  PiedraHoja
+  PiedraHoja,
+  DarkMode,
+  LightMode,
+  Cookie,
+  Battle
 } from './sprites.js'
 export { default as Coffee } from '@iconify-icons/simple-icons/buymeacoffee'
 export { default as Discord } from '@iconify-icons/simple-icons/discord'

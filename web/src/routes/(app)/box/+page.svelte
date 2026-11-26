@@ -14,6 +14,7 @@
   import TypeLogo from '$lib/components/type-logo.svelte'
   import { Modal as AnalysisModal } from '$lib/components/Analysis'
   import CajaPC from '$lib/lockedex/CajaPC.svelte'
+  import EquipoEquilibrado from '$lib/lockedex/EquipoEquilibrado.svelte'
   import { leerReglas, sinCalculos } from '$lib/lockedex/reglas.js'
   import { activeGame as runActiva } from '$lib/store'
   import { t } from '$lib/lockedex/idioma'
@@ -265,6 +266,14 @@
             <AnalysisModal box={mons.map((p) => Pokemon[p.pokemon])}>
               <small>Team</small>
             </AnalysisModal>
+            <button
+              class="lx-equilibrar"
+              data-lx-original
+              title={t('Propone los 6 que mejor se complementan de tu Caja y tu equipo', 'Suggests the 6 that complement each other best from your box and team')}
+              on:click={() => open(EquipoEquilibrado, { aplicar: (lugares) => setTeam(lugares) })}
+            >
+              {t('Equilibrar equipo', 'Balance team')}
+            </button>
           {/if}
 
           <Settings class="absolute right-0" />
@@ -667,6 +676,21 @@
   }
   .lx-vistas button + button {
     border-left: 2px solid var(--lx-tinta);
+  }
+  .lx-equilibrar {
+    padding: 3px 12px;
+    font-family: 'VT323', monospace;
+    font-size: 19px;
+    line-height: 1.1;
+    background: var(--lx-panel);
+    color: var(--lx-texto);
+    border: 2px solid var(--lx-tinta);
+    border-radius: var(--lx-radio-sm);
+    box-shadow: var(--lx-sombra-sm);
+  }
+  .lx-equilibrar:hover {
+    background: var(--lx-rojo);
+    color: #fff;
   }
   .lx-vistas button.lx-vista-activa {
     background: var(--lx-rojo);

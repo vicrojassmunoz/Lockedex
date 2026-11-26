@@ -2,7 +2,20 @@
   import { savedGames, createGame, activeGame, parse, updateGame } from '$lib/store'
   import { get } from 'svelte/store'
   import Reglas from '$lib/lockedex/Reglas.svelte'
-  import { PLANTILLAS, guardarReglas, aplicarAjustes } from '$lib/lockedex/reglas.js'
+  import { PLANTILLAS, guardarReglas, aplicarAjustes, leerReglas } from '$lib/lockedex/reglas.js'
+  import { enlazarGenlocke } from '$lib/lockedex/genlocke.js'
+  import { leerPartida } from '$lib/lockedex/partida.js'
+  import { onMount } from 'svelte'
+
+  // Genlocke: «/new?genlocke=<run anterior>» copia sus reglas y enlaza la run nueva con ella
+  let genlockeDe = null
+  onMount(() => {
+    const previa = new URLSearchParams(location.search).get('genlocke')
+    const p = previa && leerPartida(previa)
+    if (!p) return
+    genlockeDe = p
+    reglasNuevas = { ...leerReglas(previa), genlocke: true }
+  })
 
   let reglasNuevas = { ...PLANTILLAS.clasico.reglas, plantilla: 'clasico' }
   let personalizar = false
@@ -13,6 +26,7 @@
     const id = get(activeGame)
     if (!id) return
     guardarReglas(id, reglasNuevas)
+    if (genlockeDe) enlazarGenlocke(id, genlockeDe.id)
     const plantilla = reglasNuevas.plantilla || 'libre'
     parse((saves) => {
       const g = saves[id]
@@ -135,6 +149,13 @@
   icon={File}
   className="mb-20 relative"
 >
+  {#if genlockeDe}
+    <p class="lx-nuevo-genlocke" data-lx-original>
+      {es
+        ? `Genlocke: siguiente juego después de «${genlockeDe.nombre}». Se copian sus reglas y tu equipo campeón pasa a la nueva run como herencia.`
+        : `Genlocke: next game after «${genlockeDe.nombre}». Its rules are copied and your champion team carries over as an inheritance.`}
+    </p>
+  {/if}
   <div class="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-y-4">
     <Input
       rounded
@@ -305,6 +326,16 @@
 <div class="h-28 w-8" />
 
 <style>
+  .lx-nuevo-genlocke {
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    color: #e8f0ff;
+    background: #182848;
+    border: 3px solid #5078c8;
+    font-family: 'LX Pixel', 'VT323', monospace;
+    font-size: 12px;
+    line-height: 16px;
+  }
 
   .lx-buscar-juego {
     align-items: center;

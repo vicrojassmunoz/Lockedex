@@ -24,9 +24,13 @@ export const REGLAS = [
   { id: 'nivelMax', grupo: 'dificultad', es: 'Nivel máximo obligatorio', en: 'Hard level caps', desc: ['Avisa si tu equipo supera el nivel máximo del próximo jefe: en los avisos de la partida, en el VS y en la ventana compacta (necesita tu .sav importado o vinculado).', 'Warns if your team is above the next boss’s level cap: in the run warnings, the VS window and the compact window (needs your .sav imported or linked).'] },
   { id: 'sinObjetos', grupo: 'dificultad', tipo: 'opciones', opciones: [['', 'Sin límite', 'No limit'], ['0', 'Prohibidos', 'Banned'], ['1', '1 por combate', '1 per battle'], ['2', '2 por combate', '2 per battle'], ['3', '3 por combate', '3 per battle']], es: 'Objetos en combate', en: 'Items in battle', desc: ['Prohibidos o limitados a unos pocos por combate contra un jefe. Con límite, la ventana compacta lleva la cuenta de los que gastas.', 'Banned, or limited to a few per boss battle. With a limit, the compact window counts the ones you use.'] },
   { id: 'set', grupo: 'dificultad', es: 'Modo Set', en: 'Set mode', desc: ['Sin cambio gratis cuando debilitas a un Pokémon del rival (en los juegos, «Estilo: Fijo»). Recordatorio en el asistente, el VS y la ventana compacta.', 'No free switch after knocking out a foe (the games’ «Battle style: Set»). Reminder in the assistant, the VS window and the compact window.'] },
+  { id: 'sacrificio', grupo: 'dificultad', es: 'Sacrificio por medalla', en: 'Progression sacrifice', desc: ['Tras cada medalla, la app elige al azar a uno de tu equipo y va al cementerio. Las medallas que ya tenías al activarla no cuentan.', 'After each badge, the app picks a random team member who goes to the graveyard. Badges you already had when turning it on do not count.'] },
   { id: 'gameover', grupo: 'dificultad', es: 'Game over si cae todo el equipo', en: 'Game over on wipe', desc: ['Si cae todo tu equipo, la app te propone dar la run por perdida (puedes seguir si no fue así) y avisa si no te queda ningún Pokémon vivo.', 'If your whole team faints, the app offers to end the run (you can keep playing if it did not) and warns if no Pokémon are left alive.'] },
   { id: 'sinLegendarios', grupo: 'variantes', es: 'Sin legendarios', en: 'No legendaries', desc: ['Avisa si capturas un legendario o singular.', 'Warns if you catch a legendary or mythical.'] },
   { id: 'wedlocke', grupo: 'variantes', es: 'Wedlocke (parejas)', en: 'Wedlocke (pairs)', desc: ['Cada Pokémon va en pareja con otro (se elige en la Caja) y en cada combate solo puede salir uno de los dos. Si uno cae, el otro puede buscar pareja nueva. El asistente y el VS lo recuerdan.', 'Each Pokémon is paired with another (set in the Box) and only one of each pair may fight in a battle. If one faints, the other can find a new partner. The assistant and VS window remind you.'] },
+  { id: 'egglocke', grupo: 'variantes', es: 'Egglocke (huevos)', en: 'Egglocke (eggs)', desc: ['Cada captura se cambia por un huevo y usas lo que sale. Apunta qué ha salido en el detalle del PC (Caja): el Pokémon de la zona pasa a ser el del huevo y se guarda qué habías capturado.', 'Every catch is swapped for an egg and you use what hatches. Log it in the PC detail (Box): the area’s Pokémon becomes the hatched one and the original catch is kept.'] },
+  { id: 'wonderlocke', grupo: 'variantes', es: 'Wonderlocke (Intercambio Prodigioso)', en: 'Wonderlocke (Wonder Trade)', desc: ['Cada captura se manda por Intercambio Prodigioso (juegos de la 6.ª gen en adelante) y usas lo que te llega. Se apunta en el detalle del PC, como el Egglocke.', 'Every catch is sent via Wonder Trade (Gen 6 games onwards) and you use what you get. Log it in the PC detail, like the Egglocke.'] },
+  { id: 'genlocke', grupo: 'variantes', es: 'Genlocke (varios juegos)', en: 'Genlocke (several games)', desc: ['Varias partidas seguidas. Al vencer al Campeón, el Salón de la Fama te deja empezar el siguiente juego con las mismas reglas, y tu equipo campeón pasa a la nueva run como herencia.', 'Several games in a row. After beating the Champion, the Hall of Fame lets you start the next game with the same rules, and your champion team carries over as an inheritance.'] },
   { id: 'monotipo', grupo: 'variantes', tipo: 'tipo', es: 'Monotipo', en: 'Monotype', desc: ['Solo Pokémon del tipo elegido. Avisa si capturas uno que no lo es.', 'Only Pokémon of the chosen type. Warns otherwise.'] },
   { id: 'randomlocke', grupo: 'variantes', es: 'Randomlocke (juego aleatorizado)', en: 'Randomlocke (randomized game)', desc: ['Puedes registrar cualquier Pokémon en cada ruta y no se muestran sugerencias de encuentros.', 'Any Pokémon can be logged on each route and encounter suggestions are off.'] },
   { id: 'entrenadoresAleatorios', grupo: 'variantes', depende: 'randomlocke', es: 'Entrenadores también aleatorizados', en: 'Trainers randomized too', desc: ['Oculta los equipos de los jefes; puedes apuntar el equipo real cuando lo veas.', 'Hides boss teams; you can log the real team when you see it.'] },
@@ -130,7 +134,8 @@ export const recordatorios = (reglas) =>
     limiteObjetos(reglas) > 0 && (es() ? `Máx. ${limiteObjetos(reglas)} objeto${limiteObjetos(reglas) > 1 ? 's' : ''} por combate` : `Max ${limiteObjetos(reglas)} item${limiteObjetos(reglas) > 1 ? 's' : ''} per battle`),
     reglas.set && (es() ? 'Modo Set' : 'Set mode'),
     reglas.wedlocke && (es() ? 'Wedlocke: de cada pareja solo combate uno' : 'Wedlocke: only one of each pair fights'),
-    reglas.nivelMax && (es() ? 'Nivel máximo obligatorio' : 'Hard level caps')
+    reglas.nivelMax && (es() ? 'Nivel máximo obligatorio' : 'Hard level caps'),
+    reglas.sacrificio && (es() ? 'Sacrificio tras cada medalla' : 'Sacrifice after each badge')
   ].filter(Boolean)
 
 // Comprueba la run contra sus reglas y devuelve avisos
@@ -146,6 +151,26 @@ export const comprobarReglas = async ({ partida, resumen, liga, pokedex }) => {
         ? 'Game over: no te queda ningún Pokémon vivo. Puedes empezar un nuevo intento desde el menú de la partida.'
         : 'Game over: no Pokémon left alive. Start a new attempt from the run menu.'
     })
+  }
+
+  // Egglocke / Wonderlocke: capturas que aún no se han cambiado
+  if (reglas.egglocke || reglas.wonderlocke) {
+    const ya = new Set()
+    const pend = Object.entries(partida.datos || {}).filter(
+      ([k, e]) => !k.startsWith('__') && e && typeof e === 'object' && e.pokemon && [1, 6].includes(+e.status) && !e.cambio && !ya.has(k) && ya.add(k)
+    )
+    if (pend.length)
+      avisos.push({
+        nivel: 'info',
+        lugares: pend.map(([k]) => k),
+        texto: reglas.egglocke
+          ? es()
+            ? `${pend.length} ${pend.length > 1 ? 'huevos sin abrir' : 'huevo sin abrir'}: apunta qué ha salido en la Caja (detalle del PC).`
+            : `${pend.length} unhatched egg${pend.length > 1 ? 's' : ''}: log what hatched in the Box (PC detail).`
+          : es()
+          ? `${pend.length} ${pend.length > 1 ? 'capturas' : 'captura'} sin mandar por Intercambio Prodigioso: apunta qué te ha llegado en la Caja.`
+          : `${pend.length} catch${pend.length > 1 ? 'es' : ''} not Wonder Traded yet: log what you got in the Box.`
+      })
   }
 
   if (reglas.nivelMax && resumen.siguienteJefe && liga) {

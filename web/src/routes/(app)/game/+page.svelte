@@ -3,6 +3,8 @@
   import AvisosReglas from '$lib/lockedex/AvisosReglas.svelte'
   import FinPartida from '$lib/lockedex/FinPartida.svelte'
   import SalonFama from '$lib/lockedex/SalonFama.svelte'
+  import Sacrificio from '$lib/lockedex/Sacrificio.svelte'
+  import Genlocke from '$lib/lockedex/Genlocke.svelte'
   import TarjetaEntrenador from '$lib/lockedex/TarjetaEntrenador.svelte'
   import Diario from '$lib/lockedex/Diario.svelte'
   let runTerminada = false
@@ -163,6 +165,8 @@
             <AvisosReglas />
             <FinPartida id={$activeGame} datos={gameData} bind:terminada={runTerminada} />
             <SalonFama id={$activeGame} datos={gameData} />
+            <Sacrificio id={$activeGame} datos={gameData} />
+            <Genlocke id={$activeGame} datos={gameData} />
             <div class="lx-acciones-run">
               {#if filter === 'nuzlocke'}
                 <button

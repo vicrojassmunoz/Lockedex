@@ -23,8 +23,8 @@
 
   const FILTROS = [
     ['todo', 'Todo', 'All', null],
-    ['capturas', 'Capturas', 'Catches', ['captura', 'regalo', 'intercambio', 'variocolor', 'fallo', 'descarte', 'evolucion']],
-    ['caidos', 'Caídos', 'Fainted', ['muerte', 'revivido']],
+    ['capturas', 'Capturas', 'Catches', ['captura', 'regalo', 'intercambio', 'variocolor', 'fallo', 'descarte', 'evolucion', 'huevo', 'prodigioso', 'cambioDeshecho']],
+    ['caidos', 'Caídos', 'Fainted', ['muerte', 'revivido', 'sacrificio']],
     ['jefes', 'Jefes', 'Bosses', ['jefe', 'derrota', 'gameover', 'deshecho', 'intento']],
     ['notas', 'Notas', 'Notes', ['nota']]
   ]
@@ -51,7 +51,15 @@
   const quien = (e) => (e.mote ? `${e.mote} (${nombrePk(e.pokemon)})` : nombrePk(e.pokemon))
   const lugar = (l) => traducirNombre(String(l || '').replace(/ · (extra|variocolor|estático)$/, ''))
   const causa = (c) =>
-    !c ? '' : c === 'wild' ? t(' contra un Pokémon salvaje', ' to a wild Pokémon') : c === 'trainer' ? t(' contra un entrenador', ' to a trainer') : t(` contra ${c}`, ` to ${c}`)
+    !c
+      ? ''
+      : c === 'wild'
+      ? t(' contra un Pokémon salvaje', ' to a wild Pokémon')
+      : c === 'trainer'
+      ? t(' contra un entrenador', ' to a trainer')
+      : c === 'sacrificio'
+      ? t(' (sacrificio)', ' (sacrifice)')
+      : t(` contra ${c}`, ` to ${c}`)
 
   const frase = (e) => {
     switch (e.tipo) {
@@ -73,6 +81,14 @@
         return t(`${quien(e)} volvió del cementerio`, `${quien(e)} came back from the graveyard`)
       case 'evolucion':
         return t(`${e.mote || nombrePk(e.de)} evolucionó a ${nombrePk(e.pokemon)}`, `${e.mote || nombrePk(e.de)} evolved into ${nombrePk(e.pokemon)}`)
+      case 'huevo':
+        return t(`Del huevo de ${nombrePk(e.de)} salió ${quien(e)}`, `${quien(e)} hatched from the ${nombrePk(e.de)} egg`)
+      case 'prodigioso':
+        return t(`Mandaste a ${nombrePk(e.de)} por Intercambio Prodigioso y llegó ${quien(e)}`, `Wonder Traded ${nombrePk(e.de)} and got ${quien(e)}`)
+      case 'cambioDeshecho':
+        return t(`Deshiciste el cambio: vuelve ${nombrePk(e.pokemon)}`, `Undid the swap: back to ${nombrePk(e.pokemon)}`)
+      case 'sacrificio':
+        return t(`${quien(e)} fue sacrificado tras la medalla de ${e.nombre}`, `${quien(e)} was sacrificed after ${e.nombre}'s badge`)
       case 'jefe':
         return t(`Venciste a ${e.nombre}`, `Defeated ${e.nombre}`)
       case 'derrota':
@@ -95,7 +111,7 @@
         return e.tipo
     }
   }
-  const MARCA = { captura: '◓', regalo: '✉', intercambio: '⇄', variocolor: '✦', fallo: '✕', descarte: '–', muerte: '✝', revivido: '♥', evolucion: '↑', jefe: '★', derrota: '!', gameover: '☗', deshecho: '↺', intento: '▶', nota: '✎' }
+  const MARCA = { huevo: '◖', prodigioso: '⇄', cambioDeshecho: '↺', sacrificio: '✝', captura: '◓', regalo: '✉', intercambio: '⇄', variocolor: '✦', fallo: '✕', descarte: '–', muerte: '✝', revivido: '♥', evolucion: '↑', jefe: '★', derrota: '!', gameover: '☗', deshecho: '↺', intento: '▶', nota: '✎' }
 
   $: lista = (FILTROS.find((f) => f[0] === filtro)?.[3] || null) ? entradas.filter((e) => FILTROS.find((f) => f[0] === filtro)[3].includes(e.tipo)) : entradas
   const dia = (ms) => {

@@ -10,6 +10,7 @@
   import { createImgUrl } from '$utils/rewrites'
   import { t, traducirNombre } from './idioma.js'
   import TarjetaEntrenador from './TarjetaEntrenador.svelte'
+  import { goto } from '$app/navigation'
 
   export let id = ''
   export let datos = {}
@@ -74,6 +75,9 @@
     visible = false
   }
   const abrirFicha = () => open(TarjetaEntrenador, { id })
+  // Genlocke: el siguiente juego empieza desde aquí, con las mismas reglas y este equipo de herencia
+  $: genlocke = !!leerReglas(id).genlocke
+  const siguienteJuego = () => goto(`/new?genlocke=${encodeURIComponent(id)}`)
   const tiempoTexto = (tm) =>
     !tm ? '' : tm.horas != null ? `${tm.horas} h ${String(tm.minutos || 0).padStart(2, '0')} min` : t(`${tm.dias} día${tm.dias > 1 ? 's' : ''}`, `${tm.dias} day${tm.dias > 1 ? 's' : ''}`)
 </script>
@@ -112,6 +116,7 @@
     </ul>
     <div class="lx-salon-botones">
       <button on:click={abrirFicha}>{t('Ficha de entrenador', 'Trainer card')}</button>
+      {#if genlocke}<button on:click={siguienteJuego}>{t('Siguiente juego del Genlocke ▶', 'Next Genlocke game ▶')}</button>{/if}
       <button on:click={cerrar}>{t('Cerrar', 'Close')}</button>
     </div>
   </section>

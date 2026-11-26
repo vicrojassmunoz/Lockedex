@@ -16,6 +16,8 @@
   import { activeGame } from '$lib/store'
   import { leerReglas, sinCalculos } from './reglas.js'
   import { tiendaParejas, parejaDe, emparejar } from './parejas.js'
+  import { tipoCambio, pendienteDeCambio, aplicarCambio, deshacerCambio } from './cambios.js'
+  import { fetchData } from '$utils/fetchers'
 
   export let lista = []
   export let Pokemon = {}
@@ -50,6 +52,18 @@
   $: parejas = $tParejas || []
   $: pareja = elegido ? parejaDe(parejas, elegido.location) : null
   $: candidatos = elegido ? lista.filter((p) => p.location !== elegido.location && [1, 2, 3, 6].includes(+p.status)) : []
+  // Egglocke / Wonderlocke: lo que ha salido del huevo (o ha llegado por el intercambio)
+  $: cambio = tipoCambio(leerReglas($activeGame))
+  let especiesTodas = []
+  $: if (cambio && !especiesTodas.length)
+    fetchData().then((d) => (especiesTodas = Object.values(d?.aliasMap || {}).map((x) => ({ alias: x.alias, nombre: traducirNombre(x.name) }))))
+  let nuevaEspecie = ''
+  $: elegidaNueva = especiesTodas.find((x) => x.nombre.toLowerCase() === nuevaEspecie.trim().toLowerCase() || x.alias === nuevaEspecie.trim().toLowerCase())
+  const apuntarCambio = () => {
+    if (!elegidaNueva || !elegido) return
+    aplicarCambio($activeGame, elegido.location, elegidaNueva.alias)
+    nuevaEspecie = ''
+  }
   const nombreDe = (lugarP) => {
     const p = lista.find((x) => x.location === lugarP)
     return p ? p.nickname || traducirNombre(Pokemon[p.pokemon]?.name || p.pokemon) : traducirNombre(lugarP)
@@ -136,6 +150,11 @@
               <span class="lx-hueco-equipo-marca" title={t('En el equipo', 'In your team')}><Icon inline icon={Ball} /></span>
             {/if}
             {#if p.status === 6}<span class="lx-hueco-shiny" title={t('Variocolor', 'Shiny')}>✦</span>{/if}
+            {#if cambio && pendienteDeCambio(p, { egglocke: cambio === 'huevo', wonderlocke: cambio === 'prodigioso' })}
+              <span class="lx-hueco-huevo" title={cambio === 'huevo' ? t('Huevo sin abrir', 'Unhatched egg') : t('Sin intercambiar', 'Not traded yet')}
+                >{#if cambio === 'huevo'}<img src="/lx/iconos/huevo.png" alt="" width="32" height="32" />{:else}⇄{/if}</span
+              >
+            {/if}
           </button>
         {:else}
           <span class="lx-hueco lx-vacio" aria-hidden="true" />
@@ -194,6 +213,32 @@
           <div><dt>{t('Naturaleza', 'Nature')}</dt><dd>{traducirNombre(elegido.nature)}</dd></div>
         {/if}
         <div><dt>{t('Origen', 'Origin')}</dt><dd>{lugar(elegido)}</dd></div>
+        {#if cambio && elegido.cambio}
+          <div>
+            <dt>{elegido.cambio.tipo === 'huevo' ? t('Huevo', 'Egg') : t('Intercambio', 'Trade')}</dt>
+            <dd class="lx-det-cambio">
+              {elegido.cambio.tipo === 'huevo'
+                ? t(`Salió del huevo · capturaste ${traducirNombre(Pokemon[elegido.cambio.de]?.name || elegido.cambio.de.charAt(0).toUpperCase() + elegido.cambio.de.slice(1))}`, `Hatched · you caught ${elegido.cambio.de}`)
+                : t(`Llegó por Intercambio Prodigioso · mandaste ${traducirNombre(Pokemon[elegido.cambio.de]?.name || elegido.cambio.de.charAt(0).toUpperCase() + elegido.cambio.de.slice(1))}`, `Came via Wonder Trade · you sent ${elegido.cambio.de}`)}
+              <button class="lx-det-deshacer" title={t('Deshacer: vuelve el Pokémon capturado', 'Undo: back to the caught Pokémon')} on:click={() => deshacerCambio($activeGame, elegido.location)}>↶</button>
+            </dd>
+          </div>
+        {:else if pendienteDeCambio(elegido, { egglocke: cambio === 'huevo', wonderlocke: cambio === 'prodigioso' })}
+          <div class="lx-det-cambio-pend">
+            <dt>{cambio === 'huevo' ? t('Huevo sin abrir', 'Unhatched egg') : t('Sin intercambiar', 'Not traded yet')}</dt>
+            <dd>
+              <form on:submit|preventDefault={apuntarCambio}>
+                <input
+                  list="lx-especies-cambio"
+                  bind:value={nuevaEspecie}
+                  placeholder={cambio === 'huevo' ? t('¿Qué ha salido?', 'What hatched?') : t('¿Qué te ha llegado?', 'What did you get?')}
+                />
+                <button type="submit" disabled={!elegidaNueva}>{t('Apuntar', 'Log')}</button>
+              </form>
+              <datalist id="lx-especies-cambio">{#each especiesTodas as x}<option value={x.nombre} />{/each}</datalist>
+            </dd>
+          </div>
+        {/if}
         {#if wedlocke}
           <div>
             <dt>{t('Pareja', 'Partner')}</dt>
@@ -429,6 +474,58 @@
     line-height: 14px;
     color: #f05080;
     text-shadow: 0 1px 0 #fff;
+  }
+  .lx-hueco-huevo {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 22px;
+    height: 22px;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+    color: #3868c0;
+    text-shadow: 0 1px 0 #fff;
+    pointer-events: none;
+  }
+  .lx-hueco-huevo img {
+    width: 32px;
+    height: 32px;
+    max-width: none;
+    margin: -6px -5px;
+    image-rendering: pixelated;
+  }
+  .lx-det-cambio {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .lx-det-deshacer {
+    padding: 0 6px;
+    border: 2px solid var(--lx-bisel);
+    border-radius: var(--lx-radio-sm);
+  }
+  .lx-det-cambio-pend form {
+    display: flex;
+    gap: 4px;
+  }
+  .lx-det-cambio-pend input {
+    flex: 1;
+    min-width: 0;
+    padding: 2px 6px;
+    font-size: 13px;
+    border: 2px solid var(--lx-bisel);
+    border-radius: var(--lx-radio-sm);
+    background: var(--lx-panel);
+    color: inherit;
+  }
+  .lx-det-cambio-pend button {
+    padding: 0 8px;
+    border: 2px solid var(--lx-bisel);
+    border-radius: var(--lx-radio-sm);
+  }
+  .lx-det-cambio-pend button:disabled {
+    opacity: 0.5;
   }
   .lx-det-pareja {
     display: flex;

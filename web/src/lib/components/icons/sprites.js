@@ -50,6 +50,10 @@ export const Shield = objeto('proteccion-especial') // Daño máximo que te pued
 export const Heart = objeto('escama-corazon') // Corazón: la Escama Corazón
 export const Dice = objeto('estuche-monedas') // Aleatorio: el Estuche Monedas del Casino
 export const Boost = objeto('ataque-x') // Movimientos que suben estadísticas: Ataque X
+export const DarkMode = objeto('piedra-lunar') // Tema oscuro: la Piedra Lunar
+export const LightMode = objeto('piedra-solar') // Tema claro: la Piedra Solar
+export const Cookie = objeto('galleta-lava') // Aviso de cookies: la Galleta Lava de Pueblo Lavacalda
+export const Battle = objeto('buscapelea') // Modo batalla: el Buscapelea de RojoFuego
 
 // Estadísticas: los objetos Recio de la 4.ª gen, uno por estadística
 export const HP = objeto('power-weight')

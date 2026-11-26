@@ -87,7 +87,10 @@ for origen, nombre in [
     ('items/hold-item/smooth-rock', 'roca-suave'), ('items/hold-item/icy-rock', 'roca-helada'),
     ('items/hold-item/bright-powder', 'polvo-brillo'), ('items/hold-item/miracle-seed', 'semilla-milagro'),
     ('items/hold-item/cell-battery', 'pila'), ('items/hold-item/twisted-spoon', 'cuchara-torcida'),
-    ('items/evo-item/moon-stone', 'piedra-lunar')]:
+    ('items/evo-item/moon-stone', 'piedra-lunar'),
+    # 1.19.0: tema claro/oscuro, aviso de cookies y modo batalla
+    ('items/evo-item/sun-stone', 'piedra-solar'), ('items/medicine/lava-cookie', 'galleta-lava'),
+    ('items/key-item/vs-seeker', 'buscapelea')]:
     # Los de PokéSprite ya son de 32×32 con su margen, como los demás iconos de objetos
     im = Image.open(PS + origen + '.png').convert('RGBA')
     if im.size != (32, 32):  # las cintas son de 40×40: se centran en 32×32 sin escalar

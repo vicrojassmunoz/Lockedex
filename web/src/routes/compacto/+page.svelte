@@ -14,6 +14,9 @@
   import { COLOR_TIPO } from '$lib/lockedex/colores.js'
   import { nombreJuego } from '$lib/lockedex/juegos.js'
   import { zonaDelSav } from '$lib/lockedex/zonas.js'
+  import ModoBatalla from '$lib/lockedex/ModoBatalla.svelte'
+  import { Icon } from '$c/core'
+  import { Battle } from '$icons'
 
   const es = idioma() === 'es'
   let partida = null
@@ -66,6 +69,7 @@
     datosJefe = null
     cap = null
     riesgo = null
+    jefeBatalla = null
     if (!jefe) return
     const visto = jefe.value
     const datos = ligaActual?.[jefe.value] || null
@@ -93,7 +97,11 @@
     cap = nivel
     capGimnasio = gimnasio
     riesgo = r
+    jefeBatalla = paraRiesgo
   }
+  // Modo batalla: la calculadora del duelo con el jefe que se está viendo
+  let jefeBatalla = null
+  let batalla = false
   $: listaJefes = resumen?.jefes || []
   $: posJefe = jefe ? listaJefes.findIndex((j) => String(j.value) === String(jefe.value)) : -1
   $: esProximo = jefe && resumen?.siguienteJefe && String(jefe.value) === String(resumen.siguienteJefe.value)
@@ -381,6 +389,22 @@
                 <p class="lx-mini-consejo lx-mc-{c.tipo}">{c.texto}</p>
               {/each}
             </details>
+          {/if}
+        {/if}
+        {#if jefeBatalla && !ocultoJefe}
+          <button class="lx-mini-batalla" class:lx-activo={batalla} on:click={() => (batalla = !batalla)} aria-expanded={batalla}>
+            <Icon inline icon={Battle} class="lx-mini-batalla-icono" />
+            {batalla ? (es ? 'Cerrar modo batalla' : 'Close battle mode') : es ? 'Modo batalla' : 'Battle mode'}
+          </button>
+          {#if batalla}
+            <ModoBatalla
+              jefe={jefeBatalla}
+              equipo={equipoActual}
+              gen={partida.info.gen}
+              {cap}
+              grupo={partida.info.grupo}
+              on:caido={async (e) => (await enviar({ tipo: 'caido', ubicacion: e.detail.lugar })) && avisar(`☠ ${e.detail.nombre}`)}
+            />
           {/if}
         {/if}
         <div class="lx-mini-botones lx-mini-botones-jefe">
@@ -743,6 +767,26 @@
   }
   section .lx-mini-vacio {
     color: inherit;
+  }
+  .lx-mini-batalla {
+    width: 100%;
+    margin-top: 6px;
+    padding: 4px 8px;
+    font-family: 'VT323', monospace;
+    font-size: 18px;
+    line-height: 1.1;
+    color: #fff;
+    background: #1b1b1f;
+    border-radius: 6px;
+  }
+  .lx-mini-batalla :global(.lx-mini-batalla-icono) {
+    width: 22px;
+    height: 22px;
+    vertical-align: -5px;
+    margin-right: 4px;
+  }
+  .lx-mini-batalla.lx-activo {
+    background: #dc0a2d;
   }
   .lx-mini-zona-sav {
     display: block;
