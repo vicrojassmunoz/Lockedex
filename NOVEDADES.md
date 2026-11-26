@@ -1,3 +1,7 @@
+## Novedades de la 1.20.3
+
+- **Los gimnasios cuentan solo si los marcas:** las medallas y el próximo jefe ya no se deducen de dónde has capturado. Un gimnasio está pasado si lo marcaste como vencido o, con el .sav de RojoFuego, VerdeHoja, Rubí, Zafiro o Esmeralda, si tienes su medalla en la partida.
+
 ## Novedades de la 1.20.2
 
 - **Medallas del .sav:** en RojoFuego, VerdeHoja, Rubí, Zafiro y Esmeralda, con la partida del emulador vinculada, las medallas y el próximo jefe salen de tu partida y no de dónde has capturado. La barra lo indica («Medallas: 5 (según tu .sav)»).

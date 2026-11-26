@@ -102,7 +102,6 @@ export const resumirPartida = (partida, rutas = []) => {
   let zona = null // última zona con encuentros antes de cada jefe: donde suele ser el combate
   const lugares = []
   const jefes = []
-  const visitadas = [] // posiciones de las zonas con algo apuntado
   rutas.forEach((r, i) => {
     if (r.type === 'gym') {
       const derrotado = derrotados.includes('' + r.value)
@@ -111,18 +110,10 @@ export const resumirPartida = (partida, rutas = []) => {
     } else if (r.type === 'route') {
       const e = datos[r.name]
       lugares.push({ ...r, indice: i, encuentro: e })
-      if (visitada(r.name)) {
-        ultimo = Math.max(ultimo, i)
-        visitadas.push(i)
-      }
+      if (visitada(r.name)) ultimo = Math.max(ultimo, i)
       if ((r.encounters || []).length) zona = r.name
     }
   })
-  // Hasta dónde has llegado seguro: la penúltima zona con capturas. Una zona suelta más adelante no
-  // basta, porque hay sitios a los que se llega antes de tiempo (en RojoFuego la Ruta 21 va después
-  // de Blaine en la lista, pero se llega surfeando desde Pueblo Paleta con la medalla de Koga)
-  visitadas.sort((a, b) => b - a)
-  const frente = visitadas.length > 1 ? visitadas[1] : -1
 
   const encuentros = Object.entries(datos)
     .filter(([k, v]) => !k.startsWith('__') && v && typeof v === 'object' && v.pokemon)
@@ -137,10 +128,10 @@ export const resumirPartida = (partida, rutas = []) => {
     .filter((e) => e && ESTADOS_VIVOS.includes(+e.status))
 
   // ¿Está pasado un jefe?
-  // - Sí, si lo marcaste como vencido o venciste a uno posterior.
-  // - Con un .sav de la 3.ª gen, si el juego dice que tienes su medalla (o que ya eres campeón).
-  // - Gimnasios y Alto Mando cortan el paso: pasados si ya capturaste en al menos dos zonas más
-  //   adelante. Con el .sav vinculado esto no se deduce: manda el juego.
+  // - Gimnasios: solo si lo marcaste como vencido o, con un .sav de la 3.ª gen, si tienes su medalla.
+  //   No se deduce de las capturas (hay zonas a las que se llega antes de tiempo, como la Ruta 21 de
+  //   RojoFuego antes de Blaine) ni de haber marcado otro gimnasio posterior.
+  // - Alto Mando: si lo marcaste, si marcaste a alguien de después o si el .sav dice que eres campeón.
   // - Los demás (rivales, equipos malvados…) son a veces opcionales o se hacen en otro orden
   //   (en Kanto puedes ir a la Ruta 2 antes que a la Ruta 22, donde espera el rival): solo cuentan
   //   como pasados si estuviste en su zona, si es el primer combate del juego o si ya dejaste
@@ -157,8 +148,7 @@ export const resumirPartida = (partida, rutas = []) => {
     if (j.group === 'elite-four') return sav.campeon
     return false
   }
-  const porCapturas = (j) => BLOQUEAN.includes(j.group) && !sav?.vinculado && j.indice < frente
-  const pasadoSeguro = (j) => j.derrotado || j.indice < ultimoVencido || delSav(j) || porCapturas(j)
+  const pasadoSeguro = (j) => j.derrotado || delSav(j) || (j.group !== 'gym-leader' && j.indice < ultimoVencido)
   const pasado = (j, i) => {
     if (pasadoSeguro(j)) return true
     if (BLOQUEAN.includes(j.group) || j.indice >= ultimo) return false

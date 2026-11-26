@@ -35,6 +35,8 @@ Notas para retomar el trabajo en otra sesión. Lo primero es el mapa del proyect
 
 - [x] **1.20.2 — Medallas y próximo jefe mal en RojoFuego** (avisado el 26/11 por la noche: «me dice que me puedo pegar con Giovanni»). Un gimnasio contaba como pasado con una sola captura en cualquier zona de después en la lista, y la Ruta 21 va tras Blaine aunque se llega antes surfeando. Ahora hacen falta capturas en dos zonas de después (`partida.js`, `frente`). Además el lector de la 3.ª gen saca las 8 medallas y el Salón de la Fama de las banderas de SaveBlock1 (posiciones de pret: RFVH 0xEE0/0x820, RZ 0x1220/0x807, Esmeralda 0x1270/0x867): con el .sav vinculado mandan ellas; importado a mano solo suman. La copia guardada de antes se relee una vez al abrir. La ficha ordena las medallas por número (Sabrina es la 6 y Koga la 5).
 
+- [x] **1.20.3 — Gimnasios solo marcados** (pedido el 26/11: «un gimnasio está marcado si está marcado; si alguien se olvida de marcarlo ya es su problema»). Fuera la deducción por capturas de la 1.20.2 (y la de siempre): un líder de gimnasio cuenta si está en `__teams` o si el .sav de la 3.ª gen tiene su medalla. Tampoco cuenta por haber marcado otro posterior. El Alto Mando sigue contando si marcas a alguien de después o si el .sav dice campeón.
+
 ## 1. Estética propia (desmarcarse de nuzlocke-redux)
 
 **Ya es Lockedex:** el chasis rojo con la lente y los LEDs, la barra con EXP, el logo de la portada, la tarjeta de información, el medidor de riesgo, el asistente, la importación, el perfil, el modo compacto y el Analista.
