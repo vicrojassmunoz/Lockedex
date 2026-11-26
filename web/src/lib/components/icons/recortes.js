@@ -26,6 +26,11 @@ export default {
   6,
   20
  ],
+ "carta": [
+  0,
+  0,
+  32
+ ],
  "cartel-gimnasio": [
   -1,
   0,
@@ -157,6 +162,11 @@ export default {
   22
  ],
  "monte": [
+  0,
+  0,
+  32
+ ],
+ "objeto-equipado": [
   0,
   0,
   32

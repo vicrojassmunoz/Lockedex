@@ -1,5 +1,5 @@
 <script>
-  import { traducirNombre, t } from '$lib/lockedex/idioma.js'
+  import { traducirNombre, t, idioma } from '$lib/lockedex/idioma.js'
   import { createImgUrl, UNOWN } from '$utils/rewrites'
   import { recorte } from '$lib/lockedex/recorte.js'
 
@@ -19,6 +19,12 @@
   import { capturasAlEquipo } from '$lib/lockedex/ajustes.js'
   import { activeGame as runActivaSel } from '$lib/store'
   const reglasRun = typeof window !== 'undefined' ? leerReglas(localStorage.getItem('nuzlocke')) : {}
+  // Lockedex: método, niveles y probabilidad de cada Pokémon en esta zona (juegos oficiales, de PokeAPI)
+  import { cargarEncuentros, resumenEspecie } from '$lib/lockedex/encuentros.js'
+  import { norm as normLx } from '$lib/lockedex/datos.js'
+  let encuentrosZona = null
+  const esLx = idioma() === 'es'
+  const comoSaleDe = (option, mapa) => (mapa && option ? resumenEspecie(mapa[normLx(option.alias || option.name || '')], location, esLx) : null)
   const nombreExtra = (sufijo) => `${traducirNombre(locationName || location)} · ${sufijo}`
   export let id,
     store,
@@ -77,7 +83,8 @@
 
   let Particles, EvoModal, DeathModal
   onMount(() => {
-    const [data] = readdata()
+    const [data, claveJuego] = readdata()
+    cargarEncuentros(claveJuego).then((m) => (encuentrosZona = m?.[location] || null))
     const loc = data[location]
     if (typeof loc?.pokemon !== 'undefined') {
       const o = {
@@ -417,11 +424,13 @@
                   name={option?.sprite}
                   className="transform -mb-4 -ml-6 -mt-5 -mr-2"
                 />
-                <!-- nombre y, debajo, «repetido»: así no se pisan en las listas estrechas -->
-                <span class="lx-opcion-texto">
+                <!-- nombre y, debajo, «repetido» y cómo se encuentra: así no se pisan en las listas estrechas -->
+                <span class="lx-opcion-texto" title={comoSaleDe(option, encuentrosZona)?.detalle || null}>
                   <span class="lx-opcion-nombre">{@html label}</span>
-                  {#if (dupes === 1 || (reglasRun.especie && dupes !== 2)) && (missdupes ? misslines : dupelines).has(option?.evoline)}
-                    <span class="dupe__span text-tiny">{t('repetido', 'dupe')}</span>
+                  {#if ((dupes === 1 || (reglasRun.especie && dupes !== 2)) && (missdupes ? misslines : dupelines).has(option?.evoline)) || comoSaleDe(option, encuentrosZona)}
+                    <span class="lx-opcion-sub text-tiny">
+                      {#if (dupes === 1 || (reglasRun.especie && dupes !== 2)) && (missdupes ? misslines : dupelines).has(option?.evoline)}<span class="dupe__span">{t('repetido', 'dupe')}</span>{#if comoSaleDe(option, encuentrosZona)} · {/if}{/if}{#if comoSaleDe(option, encuentrosZona)}<span class="lx-opcion-metodo">{comoSaleDe(option, encuentrosZona).linea}</span>{/if}
+                    </span>
                   {/if}
                 </span>
               </span>
@@ -688,7 +697,7 @@
             <li>
               <button on:click={ondelete}>
                 <Icon inline={true} icon={Bin} class="mr-2 fill-current" />
-                Delete Location
+                {t('Borrar lugar', 'Delete Location')}
               </button>
             </li>
           {/if}
@@ -766,7 +775,7 @@
                   icon={External}
                   class="-mt-0.5 mr-2 inline fill-current"
                 />
-                Route Info
+                {t('Información de la zona', 'Route Info')}
               </a>
             </li>
           {/if}
@@ -894,10 +903,14 @@
     min-width: 0;
     line-height: 1.1;
   }
-  .lx-opcion-nombre {
+  .lx-opcion-nombre,
+  .lx-opcion-sub {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+  .lx-opcion-metodo {
+    opacity: 0.7;
   }
   .dupe {
     @apply mr-2 text-tiny grayscale;

@@ -86,7 +86,11 @@ export const infoJuego = (clave = '') => {
   return {
     clave,
     titulo: base.title,
-    lid: base.lid,
+    // Clave de su lista de rutas: la misma que usa la página de la partida (pid). Antes era base.lid, que
+    // en 21 juegos (HGSS, Negro/Blanco, Rubí/Zafiro, ORAS, Sol/Luna, Espada/Escudo…) no tiene lista y
+    // dejaba sin jefes, medallas ni nivel máximo a todo lo de Lockedex; en el resto, la lista conjunta
+    // (frlg, gsc…) no siempre coincide con la de la versión que se ve en la partida
+    lid: base.pid || base.lid,
     grupo,
     gen: GEN_POR_GRUPO[grupo] || 9,
     romhack: base.gen === 'romhack'

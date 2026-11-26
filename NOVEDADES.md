@@ -1,3 +1,9 @@
+## Novedades de la 1.21.0
+
+- **Cómo sale cada Pokémon en cada zona:** en el buscador de encuentros, debajo de cada Pokémon pone cómo se encuentra, con sus niveles y su probabilidad («Hierba Nv. 2–5 · 50 %», «Supercaña Nv. 15–25 · 40 %», «Hierba Nv. 2–4 · 85 % (noche)»). Si sale de varias formas, pasa el ratón para verlas todas. Está en los juegos oficiales de la 1.ª a la 7.ª generación y en Espada y Escudo, con datos de PokeAPI. En Rubí Omega y Zafiro Alfa faltan bastantes zonas, y los hacks se quedan como estaban.
+- **HeartGold, SoulSilver, Negro, Blanco, Rubí, Zafiro y otros juegos sin jefes en Lockedex:** las medallas, el próximo jefe, el nivel máximo, el riesgo del compacto y el Salón de la Fama no encontraban la lista de rutas de 21 juegos y se quedaban vacíos. Ahora usan la misma lista que la página de la partida.
+- **Iconos:** la marca de objeto equipado del menú de equipo de Esmeralda, la Carta Puerto para compartir y la papelera para borrar un encuentro o un lugar. «Borrar lugar» e «Información de la zona» ya están traducidos.
+
 ## Novedades de la 1.20.5
 
 - **Desplegables en modo oscuro:** las opciones (vidas, revivir, nivel máximo en la Liga…) salían en blanco sobre blanco y no se leían.

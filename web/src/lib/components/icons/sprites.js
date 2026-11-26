@@ -23,6 +23,10 @@ export const Ball = objeto('poke-ball') // Capturado
 export const Shiny = objeto('shiny-charm') // Variocolor
 export const Missed = objeto('smoke-ball') // Fallido: la Bola Humo, para huir
 export const Descartado = objeto('papelera') // Descartado: papelera metálica
+export const Bin = Descartado // Borrar un lugar propio: la misma papelera
+export const Delete = Descartado // Borrar encuentro
+export const Hand = objeto('objeto-equipado') // Objeto equipado: la marca del menú de equipo de Esmeralda
+export const Share = objeto('carta') // Compartir: la Carta Puerto
 export const Gift = objeto('cherish-ball') // Regalo: la Gloria Ball de los Pokémon de evento
 // Intercambiado: la consola de la pantalla de intercambio de Esmeralda. Es apaisada (104×48): va a lo
 // ancho del icono cuadrado, un poco desbordada por los lados para que se vea más grande, y se reduce sin

@@ -178,6 +178,39 @@ for y, fila in enumerate(PAPELERA):
         if c in COL: pap.putpixel((x, y), COL[c])
 guardar(pap, 'papelera')
 
+# --- 1.21.0: marca de objeto equipado (menú de equipo de Esmeralda) y la Carta Puerto ---
+import urllib.request
+CACHE_PRET = '/tmp/pret-iconos'
+def pret_raw(ruta, repo='pokeemerald'):
+    """Un archivo de pret (de la copia local si está, si no de GitHub, guardado en /tmp/pret-iconos)."""
+    local = f'/home/claude/sprites-pret/{repo}/{ruta}'
+    if os.path.exists(local): return local
+    os.makedirs(CACHE_PRET, exist_ok=True)
+    destino = os.path.join(CACHE_PRET, os.path.basename(ruta))
+    if not os.path.exists(destino):
+        urllib.request.urlretrieve(f'https://raw.githubusercontent.com/pret/{repo}/master/{ruta}', destino)
+    return destino
+
+def indexada(png, pal=None, caja=None):
+    """PNG indexado de pret con su paleta (la del PNG o un .pal JASC aparte); el índice 0 es transparente."""
+    im = Image.open(png)
+    if caja: im = im.crop(caja)
+    if pal:
+        filas = [l for l in open(pal).read().split('\n')[3:] if l.strip()]
+        cols = [tuple(map(int, l.split())) for l in filas]
+    else:
+        pl = im.getpalette(); cols = [tuple(pl[i:i + 3]) for i in range(0, len(pl), 3)]
+    out = Image.new('RGBA', im.size, (0, 0, 0, 0)); p = im.load()
+    for y in range(im.size[1]):
+        for x in range(im.size[0]):
+            if p[x, y]: out.putpixel((x, y), cols[p[x, y]] + (255,))
+    return out.crop(out.getbbox())
+
+# Objeto equipado: la mitad de arriba de graphics/party_menu/hold_icons.png (la de abajo es la de carta)
+guardar(indexada(pret_raw('graphics/party_menu/hold_icons.png'), caja=(0, 0, 8, 8)), 'objeto-equipado')
+# Compartir: la Carta Puerto de la mochila (azul clarito: es la que mejor se lee como sobre)
+guardar(en16(indexada(pret_raw('graphics/items/icons/harbor_mail.png'), pret_raw('graphics/items/icon_palettes/harbor_mail.pal'))), 'carta')
+
 # --- Recortes: cada icono enseña solo su dibujo (sin el margen del sprite), en un cuadrado ---
 import glob, json
 recortes = {}
