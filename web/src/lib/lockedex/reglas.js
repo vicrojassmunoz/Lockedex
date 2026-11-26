@@ -3,7 +3,7 @@ import { writable } from 'svelte/store'
 import { especies, clavePokemon, norm } from './datos.js'
 import { idioma, traducirNombre } from './idioma.js'
 import { claveSav } from './equipo.js'
-import { nivelMaximo } from './partida.js'
+import { nivelMaximo, cargarLiga } from './partida.js'
 import { leerParejas, parejaDe } from './parejas.js'
 
 const es = () => idioma() === 'es'
@@ -45,6 +45,20 @@ export const ajustarEquipoJefe = (pokemon, reglas) =>
   factorNiveles(reglas) === 1
     ? pokemon
     : (pokemon || []).map((p) => (/^[+-]/.test('' + p?.level) || isNaN(parseInt(p?.level, 10)) ? p : { ...p, level: '' + ajustarNivel(parseInt(p.level, 10), reglas) }))
+// Nivel máximo del Nuzlocke para el combate contra un jefe: el del próximo líder de gimnasio desde ese
+// jefe (o del Alto Mando al final), ajustado al Randomlocke. Es el que usan el compacto, los avisos, el
+// asistente y el VS. null si no se puede saber.
+export const capDelCombate = async (partida, resumen, valorJefe) => {
+  const lista = resumen?.jefes || []
+  const desde = lista.findIndex((j) => String(j.value) === String(valorJefe))
+  if (desde < 0) return null
+  const resto = lista.slice(desde)
+  const gim = resto.find((j) => j.group === 'gym-leader') || resto.find((j) => j.group === 'elite-four')
+  if (!gim) return null
+  const liga = await cargarLiga(partida.juego, partida.datos?.__starter || 'fire')
+  return ajustarNivel(nivelMaximo(liga?.[gim.value]), leerReglas(partida.id)) || null
+}
+
 // Con tipos, habilidades o movimientos aleatorizados, los cálculos con datos de las especies no valen
 export const sinCalculos = (reglas) => !!(reglas?.randomlocke && reglas?.datosAleatorios)
 

@@ -2,6 +2,7 @@
 // con el mismo almacén que usa el resto de la app (así nada se pisa).
 import { get } from 'svelte/store'
 import { activeGame, getGameStore, patch } from '$lib/store'
+import { capturasAlEquipo } from './ajustes.js'
 
 export const aplicarAccion = (accion = {}) => {
   const id = get(activeGame)
@@ -21,7 +22,7 @@ export const aplicarAccion = (accion = {}) => {
       }
       // Captura (o regalo, intercambio, shiny) con hueco en el equipo: entra sola
       const equipo = (datos.__team || []).filter(Boolean)
-      if ([1, 2, 3, 6].includes(+estado) && equipo.length < 6 && !equipo.includes(accion.ubicacion))
+      if ([1, 2, 3, 6].includes(+estado) && equipo.length < 6 && !equipo.includes(accion.ubicacion) && capturasAlEquipo(id))
         datos.__team = [...equipo, accion.ubicacion]
       return JSON.stringify(datos)
     })

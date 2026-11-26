@@ -52,6 +52,7 @@
     advice={summary.advice}
     name={boss.name}
     pokemon={boss.pokemon}
+    jefe={boss.id}
     {box}
     {team}
   >

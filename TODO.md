@@ -253,7 +253,8 @@ Ampliar los modos además de Nuzlocke clásico, Hardcore y Randomlocke. Cada mod
 
 ## 6. Otras mejoras y limitaciones conocidas
 
-- [x] **1.17.0 — Capturas al equipo solas** (pedido el 26/11): al pasar una fila a capturado, regalo, intercambio o shiny, si hay hueco en el equipo entra sola (`pokemon-selector.svelte` y `acciones.js` para el compacto).
+- [x] **1.17.0 — Capturas al equipo solas** (pedido el 26/11): al pasar una fila a capturado, regalo, intercambio o shiny, si hay hueco en el equipo entra sola (`pokemon-selector.svelte` y `acciones.js` para el compacto). 1.17.1: ajuste «Capturas al equipo» (index 10 de los ajustes de la run, `ajustes.js`); de paso, los ajustes se guardan ya cada uno en su posición (antes el de Greenscreen caía en la 9).
+- [x] **1.17.1 — Un solo nivel máximo:** `capDelCombate` (en `reglas.js`) da el del próximo líder de gimnasio; lo usan el asistente y el VS como ya hacían el compacto y los avisos.
 
 - [x] **Consejos del riesgo cortados en el modo compacto** (avisado el 25/11): la ventana flotante de 320 px se salía de la ventana. Desde la 1.6.0, en el compacto los consejos salen en un desplegable a todo el ancho, debajo del medidor (`Riesgo.svelte` tiene `sinPopover`).
 - [ ] **Modo batalla en el compacto** (pedido el 25/11): durante un combate contra un jefe, ver su Pokémon actual y el tuyo, con la **calculadora de daño** (`@smogon/calc`, ya en la app): daño de cada ataque en %, si hace KO y en cuántos golpes, quién es más rápido y el siguiente Pokémon del rival. Ideas: elegir tu Pokémon y el suyo con un toque, cambiar de nivel o estado (quemado, paralizado), clima y potenciadores (+1/+2), y apuntar al terminar si se ganó o quién cayó.

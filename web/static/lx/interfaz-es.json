@@ -310,5 +310,7 @@
  "def": "Defensa",
  "spa": "At. Esp.",
  "spd": "Def. Esp.",
- "spe": "Velocidad"
+ "spe": "Velocidad",
+ "Auto team": "Capturas al equipo",
+ "New catches (and gifts, trades and shinies) join your team when it has room": "Lo que capturas (y los regalos, intercambios y shinies) entra solo en el equipo si hay hueco"
 }

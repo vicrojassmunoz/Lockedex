@@ -1,7 +1,9 @@
 <script>
   // Reglas de combate a la vista en la ventana de VS: quién de tu equipo pasa del nivel máximo (con «Nivel
   // máximo obligatorio» y el .sav importado o vinculado), modo Set y objetos en combate
-  import { leerReglas, limiteObjetos, ajustarNivel } from './reglas.js'
+  import { onMount } from 'svelte'
+  import { leerReglas, limiteObjetos, ajustarNivel, capDelCombate } from './reglas.js'
+  import { partidaActiva, cargarRutas, resumirPartida } from './partida.js'
   import { claveSav } from './equipo.js'
   import { t, traducirNombre } from './idioma.js'
   import { tiendaParejas, parejaDe } from './parejas.js'
@@ -9,6 +11,19 @@
   export let id = ''
   export let pokemon = [] // equipo del jefe (para su nivel máximo)
   export let equipo = [] // tu equipo elegido en el VS (objetos con .original = el encuentro de la run)
+  export let jefe = '' // valor del jefe, para el nivel máximo del Nuzlocke (el del próximo gimnasio)
+
+  let capRegla = null
+  onMount(async () => {
+    try {
+      const partida = partidaActiva()
+      if (!partida?.info || jefe === '' || jefe === null || jefe === undefined) return
+      const resumen = resumirPartida(partida, await cargarRutas(partida.info.lid))
+      capRegla = await capDelCombate(partida, resumen, jefe)
+    } catch (e) {
+      console.error('[VS] nivel máximo', e)
+    }
+  })
 
   // Wedlocke: parejas que tienes juntas en el equipo (de cada una solo combate uno)
   $: tParejas = tiendaParejas(id)
@@ -33,7 +48,7 @@
 
   $: reglas = leerReglas(id)
   $: limite = limiteObjetos(reglas)
-  $: cap = ajustarNivel(Math.max(0, ...(pokemon || []).map((p) => parseInt(p?.level, 10)).filter((n) => !isNaN(n))), reglas)
+  $: cap = capRegla || ajustarNivel(Math.max(0, ...(pokemon || []).map((p) => parseInt(p?.level, 10)).filter((n) => !isNaN(n))), reglas)
   $: pasados = (() => {
     if (!reglas.nivelMax || !cap || typeof localStorage === 'undefined') return []
     try {

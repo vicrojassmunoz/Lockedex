@@ -16,7 +16,8 @@
     box = [],
     recommendations = [],
     advice = {},
-    pokemon = []
+    pokemon = [],
+    jefe = ''
 </script>
 
 <div
@@ -27,7 +28,7 @@
   >
     <slot name="tabs" />
 
-    <ReglasCombate id={$activeGame} {pokemon} equipo={team} />
+    <ReglasCombate id={$activeGame} {pokemon} equipo={team} {jefe} />
 
     <BoxTeam on:clear on:reset on:select {team} {box} boss={{ name }} />
 

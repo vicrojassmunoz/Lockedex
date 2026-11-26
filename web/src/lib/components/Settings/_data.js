@@ -3,8 +3,10 @@ import { Themes } from '$lib/data/colors.ts'
 
 /**
   0 Permadeath
+  9 (sin uso: ahí se guardaba sin querer el de Greenscreen)
+  10 Capturas al equipo (Lockedex)
  */
-export const settingsDefault = '011101000'
+export const settingsDefault = '01110100001'
 
 export const settingsData = [
   { index: 1, name: 'Encounter suggestions', help: 'Show a prefiltered list of possible encounters - You should turn this off for randomized runs' },
@@ -20,6 +22,7 @@ export const settingsData = [
     options: [ 'Off', 'Green', 'Blue']
   },
   { index: 7, name: 'Theme', help: 'Select the Colour Theme for the Pokémon types', options: Object.keys(Themes).map(capitalise) },
+  { index: 10, id: 'auto-team', name: 'Auto team', help: 'New catches (and gifts, trades and shinies) join your team when it has room' },
   { index: 0, name: 'Permadeath', help: 'Setting a Pokémon\'s status to Killed prevents you from changing it' },
 ].map((i) => ({ ...i, id: i.id || toKebabCase(i.name) }))
 

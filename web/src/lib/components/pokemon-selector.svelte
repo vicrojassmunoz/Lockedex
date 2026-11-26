@@ -16,6 +16,8 @@
   const ABREV = { atk: ['Atq', 'Atk'], def: ['Def', 'Def'], spa: ['AtE', 'SpA'], spd: ['DfE', 'SpD'], spe: ['Vel', 'Spe'] }
   const abrev = (k) => t(...(ABREV[k] || [k, k]))
   import { leerReglas, avisosFila } from '$lib/lockedex/reglas.js'
+  import { capturasAlEquipo } from '$lib/lockedex/ajustes.js'
+  import { activeGame as runActivaSel } from '$lib/store'
   const reglasRun = typeof window !== 'undefined' ? leerReglas(localStorage.getItem('nuzlocke')) : {}
   const nombreExtra = (sufijo) => `${traducirNombre(locationName || location)} · ${sufijo}`
   export let id,
@@ -183,7 +185,7 @@
 
     // Captura nueva (o regalo, intercambio, shiny) con hueco en el equipo: entra sola
     const OBTENIDO = [1, 2, 3, 6]
-    if (OBTENIDO.includes(status?.id) && !OBTENIDO.includes(estadoAntes) && !(team || []).includes(location) && (team || []).filter(Boolean).length < 6) {
+    if (OBTENIDO.includes(status?.id) && !OBTENIDO.includes(estadoAntes) && !(team || []).includes(location) && (team || []).filter(Boolean).length < 6 && capturasAlEquipo($runActivaSel)) {
       store.update(patch({ __team: [...(team || []).filter(Boolean), location] }));
     }
   }

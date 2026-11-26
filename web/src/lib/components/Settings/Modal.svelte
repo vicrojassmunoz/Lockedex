@@ -47,10 +47,13 @@
     })($savedGames)
   })
 
-  $: settingHash = [...settings]
-    .sort((a, b) => a.index - b.index)
-    .map((i) => +i.state)
-    .join('')
+  // Cada ajuste en su posición (index); antes se guardaban en orden y el de Greenscreen (index 999)
+  // acababa en la posición 9. Los de index ≥ 100 no se guardan.
+  $: settingHash = (() => {
+    const lista = settingsDefault.split('')
+    for (const st of settings) if (st.index < 100) lista[st.index] = String(+st.state || 0)
+    return Array.from({ length: lista.length }, (_, i) => lista[i] ?? '0').join('')
+  })()
 
   $: themeId = settingHash.split('')[getSetting('theme')]
   $: Theme = Object.fromEntries(

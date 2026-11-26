@@ -1,3 +1,8 @@
+## Novedades de la 1.17.1
+
+- **Un solo nivel máximo:** el asistente de combate y la ventana de VS usan ya el del próximo líder de gimnasio, como la ventana compacta y los avisos. Antes, contra un rival, usaban el nivel del propio rival y dejaban fuera del plan a casi todo el equipo.
+- **«Capturas al equipo» en Ajustes:** el interruptor está en los ajustes de la partida, encendido por defecto, por si prefieres meter a mano lo que capturas.
+
 ## Novedades de la 1.17.0
 
 - **Wedlocke:** nueva variante en las reglas. Empareja a tus Pokémon en la Caja (detalle del PC) y en cada combate solo puede salir uno de cada pareja. La app avisa de quién no tiene pareja, de quién se ha quedado sin ella, y te recuerda las parejas en el VS, la ventana compacta y el asistente.

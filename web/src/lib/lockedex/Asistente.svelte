@@ -8,11 +8,14 @@
   import { aprendizaje, movimientos, clavePokemon, norm } from './datos.js'
   import { idioma } from './idioma.js'
   import { COLOR_TIPO } from './colores.js'
-  import { leerReglas, recordatorios } from './reglas.js'
+  import { leerReglas, recordatorios, capDelCombate } from './reglas.js'
   import { leerParejas, parejaDe } from './parejas.js'
   let reglasActivas = []
   // Lo que el plan haría y tus reglas no dejan: quién queda fuera del cálculo y por qué
   let avisosRegla = []
+  // Nivel máximo del Nuzlocke: el del próximo líder de gimnasio (o del Alto Mando al final), como en la
+  // ventana compacta y en los avisos, aunque el combate sea contra un rival o un equipo malvado
+  let capRegla = null
 
   export let jefe
   export let cap = null
@@ -44,6 +47,12 @@
     if (!partida) return (cargando = false)
     const rutas = await cargarRutas(info.lid)
     const resumen = resumirPartida(partida, rutas)
+    try {
+      capRegla = await capDelCombate(partida, resumen, valor)
+    } catch (e) {
+      console.error('[asistente] nivel máximo', e)
+    }
+    capRegla = capRegla || cap
     const eq = await equipoCompleto(partida, resumen)
     movs = await movimientos()
     const tabla = await aprendizaje(info.grupo)
@@ -51,7 +60,7 @@
 
     miembros = eq.miembros.map((m) => {
       const lista = porNivel[clavePokemon(m.especie || m.alias, porNivel)] || []
-      const hasta = cap || 100
+      const hasta = capRegla || cap || 100
       const desde = m.nivel || 0
       const actuales = (m.movimientos || []).map((id) => Object.values(movs).find((x) => x.id === id)).filter(Boolean)
       const proximos = lista
@@ -65,14 +74,14 @@
     const reglas = leerReglas(partida.id)
     const nom = (m) => m.nombre
     const fuera = []
-    if (reglas.nivelMax && cap) {
-      const pasados = eq.miembros.filter((m) => m.nivel && m.nivel > cap)
+    if (reglas.nivelMax && capRegla) {
+      const pasados = eq.miembros.filter((m) => m.nivel && m.nivel > capRegla)
       if (pasados.length) {
         fuera.push(...pasados)
         avisosRegla.push(
           es
-            ? `Nivel máximo ${cap}: ${pasados.map((m) => `${nom(m)} (Nv. ${m.nivel})`).join(', ')} no ${pasados.length > 1 ? 'pueden' : 'puede'} combatir, así que el plan cuenta sin ${pasados.length > 1 ? 'ellos' : 'él'}.`
-            : `Level cap ${cap}: ${pasados.map((m) => `${nom(m)} (Lv. ${m.nivel})`).join(', ')} can't fight, so the plan leaves them out.`
+            ? `Nivel máximo ${capRegla}: ${pasados.map((m) => `${nom(m)} (Nv. ${m.nivel})`).join(', ')} no ${pasados.length > 1 ? 'pueden' : 'puede'} combatir, así que el plan cuenta sin ${pasados.length > 1 ? 'ellos' : 'él'}.`
+            : `Level cap ${capRegla}: ${pasados.map((m) => `${nom(m)} (Lv. ${m.nivel})`).join(', ')} can't fight, so the plan leaves them out.`
         )
       }
     }
@@ -127,7 +136,7 @@
     <div>
       <small>{es ? 'ASISTENTE DE COMBATE' : 'BATTLE ASSISTANT'}</small>
       <h2>{ocultarEquipo ? '???' : jefe?.name}</h2>
-      {#if cap}<span class="lx-cap">{es ? 'Nivel máximo' : 'Level cap'} {cap}</span>{/if}
+      {#if capRegla || cap}<span class="lx-cap">{es ? 'Nivel máximo' : 'Level cap'} {capRegla || cap}</span>{/if}
       {#each reglasActivas as r}<span class="lx-regla-chip">{r}</span>{/each}
     </div>
     {#if riesgo}<Riesgo nivel={riesgo.nivel} grande />{/if}
@@ -177,7 +186,7 @@
     {/if}
 
     <div class="lx-bloque">
-      <h3>{es ? `Tu equipo hasta el nivel ${cap || '—'}` : `Your team up to level ${cap || '—'}`}</h3>
+      <h3>{es ? `Tu equipo hasta el nivel ${capRegla || cap || '—'}` : `Your team up to level ${capRegla || cap || '—'}`}</h3>
       {#if info?.romhack}
         <p class="lx-modo">{es ? 'ROM hack: los movimientos por nivel son los del juego base y pueden no coincidir.' : 'ROM hack: level-up moves are from the base game and may differ.'}</p>
       {/if}
