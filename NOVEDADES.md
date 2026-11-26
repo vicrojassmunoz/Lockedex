@@ -1,3 +1,11 @@
+## Novedades de la 1.16.0
+
+- **Game over al caer todo el equipo:** con la regla normal, si no te queda nadie en pie en el equipo la app te propone dar la run por perdida, igual que con las vidas. Si no fue así, «Sigo jugando» y no vuelve a preguntar por ese equipo.
+- **Avisos de reglas más listos:** la luz de la barra se enciende en rojo si algo es grave (te pasas del nivel máximo, game over) y en ámbar si es un aviso (cláusula de especie, legendarios, monotipo…). Las filas que rompen una regla llevan un «!» con el motivo, y avisa de un segundo encuentro en una zona sin su cláusula.
+- **Objetos en combate con límite:** la regla ahora deja elegir prohibidos o de 1 a 3 por combate. Con límite, la ventana compacta lleva la cuenta de los que gastas contra cada jefe.
+- **Hardcore completo:** objetos prohibidos, modo Set, nivel máximo obligatorio y sin regalos ni estáticos aparte. El VS y la ventana compacta avisan de quién se pasa del nivel máximo y recuerdan el modo Set y los objetos.
+- **Iconos:** los climas y campos de los jefes salen con objetos de los juegos (Roca Lluvia, Roca Calor, Roca Suave, Roca Helada, Semilla Milagro…). Y los Pokémon grandes, como Venusaur u Onix, ya no se salen de su hueco en la barra de equipo, el menú de equipo, el PC ni el VS.
+
 ## Novedades de la 1.15.1
 
 - **Analista:** el sello «MEJOR» de la tabla de daño ya se ve entero (se cortaba por la mitad).

@@ -51,6 +51,7 @@
     recommendations={summary.recommendations}
     advice={summary.advice}
     name={boss.name}
+    pokemon={boss.pokemon}
     {box}
     {team}
   >

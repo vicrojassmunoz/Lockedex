@@ -7,6 +7,7 @@
 
   import { PIcon } from '$c/core'
   import { t } from '$lib/lockedex/idioma.js'
+  import { encajarIcono } from '$lib/lockedex/encajar.js'
 
   import { chunk } from '$utils/arr'
   import { locid } from '$utils/pokemon'
@@ -58,8 +59,9 @@
           animate:flip={{ duration: 200 }}
           in:receive={{ key: locid(og) }}
           out:send|local={{ key: locid(og) }}
+          use:encajarIcono={{ nombre: og.pokemon, max: 60, escala: 2 }}
         >
-          <PIcon class="lx-bt-icono" name={og.pokemon} />
+          <PIcon class="lx-bt-icono lx-encajar" name={og.pokemon} />
         </button>
       {/each}
       {#each Array(Math.max(0, 6 - team.length)) as _}
@@ -98,8 +100,9 @@
             animate:flip={{ duration: 200 }}
             in:receive={{ key: locid(og) }}
             out:send|local={{ key: locid(og) }}
+            use:encajarIcono={{ nombre: og.pokemon, max: 60, escala: 2 }}
           >
-            <PIcon class="lx-bt-icono" name={og.pokemon} />
+            <PIcon class="lx-bt-icono lx-encajar" name={og.pokemon} />
           </button>
         {/each}
       {/key}
@@ -240,11 +243,11 @@
 
   .lx-bt-hueco :global(.lx-bt-icono) {
     pointer-events: none;
-    transform: scale(2);
+    transform: scale(var(--lx-esc, 2));
     image-rendering: pixelated;
   }
   .lx-bt-caja :global(.lx-bt-icono) {
-    transform: scale(-2, 2);
+    transform: scale(calc(var(--lx-esc, 2) * -1), var(--lx-esc, 2));
   }
   /* Salto a dos fotogramas, como el icono del menú de equipo de la GBA */
   .lx-bt-lleno :global(.lx-bt-icono) {
@@ -255,12 +258,12 @@
   }
   @keyframes lx-bt-salto {
     50% {
-      transform: scale(2) translateY(-2px);
+      transform: scale(var(--lx-esc, 2)) translateY(-2px);
     }
   }
   @keyframes lx-bt-salto-caja {
     50% {
-      transform: scale(-2, 2) translateY(-2px);
+      transform: scale(calc(var(--lx-esc, 2) * -1), var(--lx-esc, 2)) translateY(-2px);
     }
   }
   @media (prefers-reduced-motion: reduce) {

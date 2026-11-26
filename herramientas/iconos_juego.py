@@ -65,7 +65,13 @@ for origen, nombre in [
     # logros del perfil
     ('items/ball/master', 'master-ball'), ('items/ball/ultra', 'ultra-ball'), ('items/ball/great', 'super-ball'),
     ('items/valuable-item/nugget', 'pepita'), ('items/medicine/revive', 'revivir'),
-    ('items/medicine/full-restore', 'restaurar-todo'), ('items/key-item/surge-badge', 'medalla-trueno')]:
+    ('items/medicine/full-restore', 'restaurar-todo'), ('items/key-item/surge-badge', 'medalla-trueno'),
+    # efectos de campo de los jefes (clima y campos), con objetos de la 2.ª a la 5.ª gen
+    ('items/hold-item/damp-rock', 'roca-lluvia'), ('items/hold-item/heat-rock', 'roca-calor'),
+    ('items/hold-item/smooth-rock', 'roca-suave'), ('items/hold-item/icy-rock', 'roca-helada'),
+    ('items/hold-item/bright-powder', 'polvo-brillo'), ('items/hold-item/miracle-seed', 'semilla-milagro'),
+    ('items/hold-item/cell-battery', 'pila'), ('items/hold-item/twisted-spoon', 'cuchara-torcida'),
+    ('items/evo-item/moon-stone', 'piedra-lunar')]:
     # Los de PokéSprite ya son de 32×32 con su margen, como los demás iconos de objetos
     im = Image.open(PS + origen + '.png').convert('RGBA')
     if im.size != (32, 32):  # las cintas son de 40×40: se centran en 32×32 sin escalar

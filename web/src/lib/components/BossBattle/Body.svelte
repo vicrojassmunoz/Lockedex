@@ -1,5 +1,7 @@
 <script>
   import { Recommendation, BoxTeam, Advice } from './'
+  import ReglasCombate from '$lib/lockedex/ReglasCombate.svelte'
+  import { activeGame } from '$lib/store'
 
   import TypeLogo from '$c/type-logo.svelte'
   import { Icon, Tooltip, Accordion } from '$c/core'
@@ -12,7 +14,8 @@
     team = [],
     box = [],
     recommendations = [],
-    advice = {}
+    advice = {},
+    pokemon = []
 </script>
 
 <div
@@ -22,6 +25,8 @@
     class="mx-auto flex w-auto flex-wrap items-start pt-2 md:w-[48ch] md:pt-0"
   >
     <slot name="tabs" />
+
+    <ReglasCombate id={$activeGame} {pokemon} />
 
     <BoxTeam on:clear on:reset on:select {team} {box} boss={{ name }} />
 

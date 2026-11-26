@@ -48,7 +48,7 @@ Notas para retomar el trabajo en otra sesión. Lo primero es el mapa del proyect
 - [x] Algunos iconos son **sprites de objetos** de los juegos (`icons/sprites.js`): Poké Ball (capturado), Amuleto Iris (variocolor), Cuerda Huida (huyó) y Mapa del pueblo.
 - [x] 1.7.3: selector de inicial con Piedra Fuego, Agua y Hoja (sprites del juego).
 - [x] 1.7.4: menú de equipo de los jefes **a píxeles como en GBA** (marcos escalonados en `lib/lockedex/gba.js`, letra Fusion Pixel, barra de PS de la consola) y ficha rehecha como la pantalla «INFO. POKéMON»: estadísticas al nivel del jefe junto a las base, iconos de tipo de 3.ª gen, habilidad/objeto y ◀ ▶ para pasar de Pokémon.
-- [ ] **Iconos con sprites de los juegos (≤ 5.ª gen, nada de 3D)** — el usuario deja libertad para elegir los mejores; ir poco a poco, unos cuantos por versión. Hoja de los actuales: `herramientas/generar_iconos.py --muestra`.
+- [ ] (1.16.0: efectos de campo de los jefes con las rocas de clima y objetos de la 2.ª–5.ª gen en `Effect.svelte`, e iconos grandes encajados con `encajar.js`. Pendiente: que el usuario elija entre la recepcionista y la consola del intercambio para «Intercambio»; recorte de la consola en `/home/claude/pruebas/intercambio-consola.png`, sacado de `graphics/trade/gba.png` de pokeemerald) **Iconos con sprites de los juegos (≤ 5.ª gen, nada de 3D)** — el usuario deja libertad para elegir los mejores; ir poco a poco, unos cuantos por versión. Hoja de los actuales: `herramientas/generar_iconos.py --muestra`.
   - Criterio: **objeto de la mochila** (PokéSprite, `/home/claude/pokesprite/items`) cuando el icono representa algo que se lleva (Poké Ball, piedras, Mapa, Cuerda Huida, MT…); **objeto del tileset/mapa** (pret: pokefirered/pokeemerald `data/tilesets/.../metatiles`, `graphics/`) cuando es mobiliario o escenario: el **PC** mejor como el PC del Centro Pokémon, la Caja, la Tienda, la Liga (estatua/puerta), el cementerio (lápida de la Torre Pokémon)…
   - **No** usar proteínas/vitaminas para las estadísticas (no le gustan). Los iconos de estadísticas actuales (Atk, Def, Spa, Spd…) son «feotes»: rehacerlos a mi manera (p. ej. símbolos pixel claros o las barras de colores de la pantalla de datos).
   - Se añaden a `web/static/lx/objetos/` (o `lx/tiles/`) y a `icons/sprites.js` + `IconSet.ts`; los créditos ya citan PokéSprite y pret.
@@ -204,17 +204,17 @@ Hecho: reglas por run en `lockedex.reglas.<id>` (`web/src/lib/lockedex/reglas.js
 - [x] (ya existía: «Variocolor extra» en el menú de la fila) **Cláusula variocolor:** un shiny siempre se puede capturar, aunque ya hayas tenido encuentro en esa zona. Añade un hueco extra automáticamente.
 - [x] (ya existía: «Estático extra» en el menú de la fila) **Cláusula de estáticos:** los encuentros estáticos o legendarios cuentan, o no, como encuentro de la zona.
 - [x] 1.13.0: regla «Cláusula de especie»: marca «repetido» en el buscador y avisa si capturas dos de la misma línea evolutiva. Original: **Cláusula de especie:** como la de repetidos, pero por línea evolutiva (ya existe `evoline` en los datos).
-- [ ] **Modo Set** (sin cambio gratis tras debilitar) y **objetos en combate**: prohibidos, o limitados a X por combate.
-- [ ] **Hardcore:** nivel máximo obligatorio (aviso si tu equipo lo supera antes del combate), sin objetos en combate y modo Set.
-- [x] **Game over** (1.12.0: derrotas, «He perdido», pantalla de FIN DE LA PARTIDA, nuevo intento con historial y modo con vidas; probado por el usuario). Falta: proponerlo solo al caer todo el equipo con la regla normal.
+- [x] 1.16.0: «Objetos en combate» con límite (prohibidos o 1–3 por combate; `limiteObjetos`), contador en el compacto y recordatorios en el VS. **Modo Set** (sin cambio gratis tras debilitar) y **objetos en combate**: prohibidos, o limitados a X por combate.
+- [x] 1.16.0: plantilla Hardcore con objetos prohibidos, Set, nivel máximo y sin regalos ni estáticos; aviso de nivel máximo en el VS (`ReglasCombate.svelte`) y en el compacto. **Hardcore:** nivel máximo obligatorio (aviso si tu equipo lo supera antes del combate), sin objetos en combate y modo Set.
+- [x] **Game over** (1.12.0: derrotas, «He perdido», pantalla de FIN DE LA PARTIDA, nuevo intento con historial y modo con vidas; probado por el usuario). 1.16.0: la app lo propone sola al caer todo el equipo con la regla normal (`recordarEquipo`/`equipoCaido` en `derrotas.js`, panel «¡TU EQUIPO HA CAÍDO!»). Antes: Falta: proponerlo solo al caer todo el equipo con la regla normal.
 - [ ] Variantes populares activables:
   - [ ] Wedlocke: parejas, y solo combate un miembro de la pareja.
   - [ ] Monotipo.
   - [ ] Sin legendarios.
   - [ ] Soul Link a dos jugadores, emparejando encuentros por zona.
   - [ ] Wonderlocke.
-- [ ] **Plantillas de reglas:** "Nuzlocke clásico", "Hardcore", "Randomlocke", "A mi manera", y elegir la plantilla al crear la partida.
-- [ ] **Reglas inteligentes:** avisos cuando registras algo que rompe una regla. Por ejemplo:
+- [x] (hecho: las plantillas salen en Nueva partida) **Plantillas de reglas:** "Nuzlocke clásico", "Hardcore", "Randomlocke", "A mi manera", y elegir la plantilla al crear la partida.
+- [x] 1.16.0: segundo encuentro en una zona sin su cláusula, filas marcadas con «!» (`avisosFila`) y luz roja (graves) o ámbar (avisos) en la barra. Falta integrarlo con el asistente. **Reglas inteligentes:** avisos cuando registras algo que rompe una regla. Por ejemplo:
   - segundo encuentro en una zona sin regalo ni shiny;
   - un Pokémon por encima del nivel máximo antes del jefe;
   - un repetido según la cláusula de especie.

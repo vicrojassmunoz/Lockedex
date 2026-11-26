@@ -1,130 +1,61 @@
 <script>
-  import { capitalise } from '$utils/string'
-  export let effect
-  const Effect = {
-    Fog: 'fog',
-    Rain: 'rain',
-    Hail: 'hail',
-    Sunlight: 'sunlight',
-    Sandstorm: 'sandstorm',
-
-    PsychicTerrain: 'psychic-terrain',
-    MistyTerrain: 'misty-terrain',
-    GrassyTerrain: 'grassy-terrain',
-    ElectricTerrain: 'electric-terrain',
-
-    DoubleBattle: 'double-battle'
-  }
-
-  const DescriptionMap = {
-    [Effect.Rain]: 'Increases the effectiveness of Water-type moves by ½ and reduces the effectiveness of Fire-type moves by ½. Thunder and Hurricane never miss.',
-    [Effect.Sunlight]: 'Increases the effectiveness of Fire-type moves by ½ and reduces the effectiveness of Water-type moves by ½. Lowers accuracy of Thunder and Hurricane to 50%.',
-    [Effect.Sandstorm]: 'At the end of each turn, damages each Pokémon for 1/16th of its maximum HP, unless immune. Improves the Sp. Def of Rock-types by ½.',
-    [Effect.Hail]: 'At the end of each turn, damages each Pokémon for 1/16th of its maximum HP, unless immune. Blizzard never misses.',
-
-    [Effect.ElectricTerrain]: 'Boosts the power of Electric-type moves. Pokémon cannot be affected by sleep status.',
-    [Effect.PsychicTerrain]: 'Boosts the power of Psychic-type moves. Priority moves have no effect.',
-    [Effect.MistyTerrain]: 'Halves the power of Dragon-type moves. Pokémon cannot be affected by status conditions.',
-    [Effect.GrassyTerrain]: 'Boosts the power of Grass-type moves. At the end of each turn, the terrain restores each Pokémon\'s HP by 1/16th.',
-  }
-
-  // Rain
+  // Efecto de campo permanente de un jefe (clima o campo) o combate doble. Cada efecto se enseña con el
+  // objeto de los juegos que lo representa (las rocas que alargan cada clima, semillas y demás, de la 2.ª a
+  // la 5.ª gen), en vez de los iconos de línea heredados.
   import { Icon, Tooltip } from '$c/core'
-
-  import { default as RainA } from '@iconify-icons/wi/showers'
-  import { default as RainB } from '@iconify-icons/wi/rain-mix'
-  import { default as Snow } from '@iconify-icons/tabler/snowflake'
-  import { default as Sun } from '@iconify-icons/wi/day-sunny'
-  import { default as Sandstorm } from '@iconify-icons/wi/sandstorm'
-
-  import { default as Terrain } from '@iconify-icons/gg/terrain'
-  import { default as Psychic } from '@iconify-icons/ph/hand-eye'
-  import { default as Electric } from '@iconify-icons/ph/lightning-bold'
-  import { default as Grass } from '@iconify-icons/ph/leaf-bold'
-  import { default as Mist } from '@iconify-icons/wi/fog'
-
   import { Double } from '$icons'
+  import { t } from '$lib/lockedex/idioma.js'
 
-  const switcher = (node, opts) => {
-    const [a, b] = node.children
-    const ts = opts?.interval || 250
-    const intervalId = setInterval(() => {
-      a.classList.toggle('hidden')
-      b.classList.toggle('hidden')
-    }, ts)
+  export let effect
 
-    return { destroy () { clearInterval(intervalId) } }
+  const EFECTOS = {
+    rain: { img: 'roca-lluvia', es: 'Lluvia', en: 'Rain', d: ['Los movimientos de tipo Agua hacen la mitad más de daño y los de tipo Fuego, la mitad menos. Trueno y Vendaval no fallan.', 'Water moves deal 50% more damage and Fire moves 50% less. Thunder and Hurricane never miss.'] },
+    sunlight: { img: 'roca-calor', es: 'Sol', en: 'Sunlight', d: ['Los movimientos de tipo Fuego hacen la mitad más de daño y los de tipo Agua, la mitad menos. Trueno y Vendaval bajan su precisión al 50 %.', 'Fire moves deal 50% more damage and Water moves 50% less. Thunder and Hurricane drop to 50% accuracy.'] },
+    sandstorm: { img: 'roca-suave', es: 'Tormenta de arena', en: 'Sandstorm', d: ['Al final de cada turno resta 1/16 de los PS a quien no sea de tipo Roca, Tierra o Acero. La Defensa Especial de los de tipo Roca sube la mitad.', 'At the end of each turn, non Rock, Ground or Steel Pokémon lose 1/16 of their HP. Rock types get 50% more Sp. Def.'] },
+    hail: { img: 'roca-helada', es: 'Granizo', en: 'Hail', d: ['Al final de cada turno resta 1/16 de los PS a quien no sea de tipo Hielo. Ventisca no falla.', 'At the end of each turn, non Ice Pokémon lose 1/16 of their HP. Blizzard never misses.'] },
+    fog: { img: 'polvo-brillo', es: 'Niebla', en: 'Fog', d: ['Baja la precisión de todos los movimientos. Despejar la quita.', 'Lowers the accuracy of every move. Defog clears it.'] },
+    'electric-terrain': { img: 'pila', es: 'Campo Eléctrico', en: 'Electric Terrain', d: ['Potencia los movimientos de tipo Eléctrico y nadie en el suelo puede dormirse.', 'Boosts Electric moves and grounded Pokémon cannot fall asleep.'] },
+    'psychic-terrain': { img: 'cuchara-torcida', es: 'Campo Psíquico', en: 'Psychic Terrain', d: ['Potencia los movimientos de tipo Psíquico y anula los de prioridad contra quien está en el suelo.', 'Boosts Psychic moves and blocks priority moves against grounded Pokémon.'] },
+    'misty-terrain': { img: 'piedra-lunar', es: 'Campo de Niebla', en: 'Misty Terrain', d: ['Reduce a la mitad el daño de los movimientos de tipo Dragón y nadie en el suelo sufre problemas de estado.', 'Halves Dragon move damage and grounded Pokémon cannot get status conditions.'] },
+    'grassy-terrain': { img: 'semilla-milagro', es: 'Campo de Hierba', en: 'Grassy Terrain', d: ['Potencia los movimientos de tipo Planta y cura 1/16 de los PS al final de cada turno.', 'Boosts Grass moves and heals 1/16 HP at the end of each turn.'] }
   }
+  // «sunglight» viene así en algunos datos heredados
+  $: datos = EFECTOS[effect === 'sunglight' ? 'sunlight' : effect]
 </script>
 
-{#if effect !== Effect.DoubleBattle}
-  <div class='relative {$$restProps.class || ''}'>
-    <Tooltip>
-      <b>Permanent {capitalise(effect).replace('-', ' ')}</b>
-      {#if DescriptionMap?.[effect]}
-        <p>{DescriptionMap[effect]}</p>
-      {/if}
-    </Tooltip>
-
-    {#if effect.includes('-terrain')}
-      <Icon class='-bottom-2 absolute transform scale-y-50 scale-x-110 opacity-50' inline icon={Terrain} />
-    {/if}
-
-    {#if effect === Effect.MistyTerrain}
-      <span>
-        <Icon class='transform scale-75' inline icon={Mist} />
-        <Icon class='hidden transform -scale-x-75 scale-75' inline icon={Mist} />
-      </span>
-    {:else if effect === Effect.PsychicTerrain}
-      <Icon class='transform scale-50' inline icon={Psychic} />
-    {:else if effect === Effect.ElectricTerrain}
-      <Icon class='transform scale-50' inline icon={Electric} />
-    {:else if effect === Effect.GrassyTerrain}
-      <Icon class='transform scale-50' inline icon={Grass} />
-
-    {:else if effect === Effect.Rain}
-      <span use:switcher>
-        <Icon inline icon={RainA} />
-        <Icon class='hidden' inline icon={RainB} />
-      </span>
-
-    {:else if effect === Effect.Hail}
-      <span use:switcher={{ interval: 750 }}>
-        <Icon class='transform scale-75' inline icon={Snow} />
-        <Icon class='hidden transform scale-75 -rotate-30 origin-center' inline icon={Snow} />
-      </span>
-
-    {:else if effect === Effect.Sunlight}
-      <span use:switcher={{ interval: 750 }}>
-        <Icon class='transform scale-25' inline icon={Sun} />
-        <Icon class='hidden transform scale-110 origin-center' inline icon={Sun} />
-      </span>
-    {:else if effect === Effect.Sandstorm}
-        <span use:switcher={{ interval: 1000 }}>
-          <Icon inline icon={Sandstorm} />
-          <Icon class='hidden transform -scale-y-100 origin-center' inline icon={Sandstorm} />
-        </span>
-    {/if}
-  </div>
-{/if}
-
-{#if effect === Effect.DoubleBattle}
+{#if effect === 'double-battle'}
   <span class={$$restProps.class || ''}>
     <Tooltip>
-      <b>Double Battle</b>
+      <b>{t('Combate doble', 'Double battle')}</b>
     </Tooltip>
     <Icon inline icon={Double} />
   </span>
+{:else if datos}
+  <div class="lx-efecto relative {$$restProps.class || ''}">
+    <Tooltip>
+      <b>{t(`${datos.es} permanente`, `Permanent ${datos.en.toLowerCase()}`)}</b>
+      <p>{t(...datos.d)}</p>
+    </Tooltip>
+    <img src="/lx/objetos/{datos.img}.png" width="32" height="32" alt={t(datos.es, datos.en)} />
+  </div>
 {/if}
 
 <style>
-  .field::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    height: 1px;
-    width: 100%;
-    @apply bg-gray-50;
+  .lx-efecto img {
+    display: block;
+    width: 32px;
+    height: 32px;
+    image-rendering: pixelated;
+    animation: lx-efecto-salto 1.2s steps(1, end) infinite;
+  }
+  @keyframes lx-efecto-salto {
+    50% {
+      transform: translateY(-2px);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lx-efecto img {
+      animation: none;
+    }
   }
 </style>

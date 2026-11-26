@@ -1,5 +1,6 @@
 <script>
   import { PIcon, Icon } from '$c/core'
+  import { encajarIcono } from '$lib/lockedex/encajar.js'
   import { X, Plus } from '$icons'
   import { fade, scale } from 'svelte/transition'
   import { drag } from '$utils/drag'
@@ -96,14 +97,14 @@
       ondragover="return false"
       class="lx-hueco-equipo group relative h-10 w-10 cursor-pointer transition"
     >
-      <span class="pointer-events-none" in:scale={{ duration: 500 }}>
+      <span class="pointer-events-none" in:scale={{ duration: 500 }} use:encajarIcono={{ nombre: p?.[iconKey], max: 46 }}>
         <PIcon
           class="pointer-events-none absolute left-1/2 top-1/2 -mt-0.5 -translate-y-1/2 -translate-x-1/2 opacity-30 dark:opacity-80 dark:contrast-50 lx-silueta"
           name="unknown-pokemon2"
         />
 
         <PIcon
-          class="data-drag-img pointer-events-none absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 scale-150 transform"
+          class="data-drag-img lx-encajar pointer-events-none absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 scale-150 transform"
           name={p?.[iconKey]}
         />
       </span>

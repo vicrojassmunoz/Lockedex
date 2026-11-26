@@ -1,4 +1,5 @@
 <script>
+  import { encajarIcono } from './encajar.js'
   // Equipo de un jefe como el menú de equipo de los juegos de GBA: el primer Pokémon en grande y el
   // resto en barras. Al pulsar uno se abre su ficha, hecha como la pantalla de datos del Pokémon.
   // Todo va a píxeles: marcos escalonados (gba.js), letra pixelada y barras de PS de la consola.
@@ -134,7 +135,7 @@
         title={t('Ver su ficha', 'See details')}
       >
         <img class="lx-me-ball" src={BOLA} alt="" aria-hidden="true" />
-        <PIcon name={primero.name} className="lx-me-icono" />
+        <span class="lx-me-encaje" use:encajarIcono={{ nombre: primero.name, max: 64, escala: 2 }}><PIcon name={primero.name} className="lx-me-icono lx-encajar" /></span>
         <span class="lx-me-datos">
           <b>{nombreEspecie(primero)}</b>
           <span class="lx-me-nv"><small>{t('Nv', 'Lv')}</small>{primero.level}</span>
@@ -155,7 +156,7 @@
         on:click={() => elegir(i + 1)}
         title={t('Ver su ficha', 'See details')}
       >
-        <PIcon name={p.name} className="lx-me-icono" />
+        <span class="lx-me-encaje" use:encajarIcono={{ nombre: p.name, max: 64, escala: 2 }}><PIcon name={p.name} className="lx-me-icono lx-encajar" /></span>
         <span class="lx-me-datos">
           <b>{nombreEspecie(p)}</b>
           <span class="lx-me-nv"><small>{t('Nv', 'Lv')}</small>{p.level}</span>
@@ -332,9 +333,12 @@
   .lx-me-vacio {
     min-height: 40px;
   }
+  .lx-me-encaje {
+    display: contents;
+  }
   .lx-me-slot :global(.lx-me-icono) {
     justify-self: center;
-    transform: scale(2);
+    transform: scale(var(--lx-esc, 2));
     image-rendering: pixelated;
   }
   /* El Pokémon elegido «salta» a dos fotogramas, como el icono del menú de equipo de la GBA */
@@ -343,10 +347,10 @@
   }
   @keyframes lx-me-salto {
     0% {
-      transform: scale(2) translateY(0);
+      transform: scale(var(--lx-esc, 2)) translateY(0);
     }
     50% {
-      transform: scale(2) translateY(-2px);
+      transform: scale(var(--lx-esc, 2)) translateY(-2px);
     }
   }
   @media (prefers-reduced-motion: reduce) {

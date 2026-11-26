@@ -52,7 +52,8 @@ export const vidasRestantes = (reglas, estado, caidos = 0) => {
 }
 
 /**
- * Apunta una derrota. motivo: 'jefe' (contra un jefe) o 'general' («He perdido»).
+ * Apunta una derrota. motivo: 'jefe' (contra un jefe), 'general' («He perdido») o 'equipo' (ha caído todo
+ * el equipo y aceptas el game over que propone la app).
  * Es game over si es general, si se acaban las vidas o, sin modo de vidas, si la regla
  * «Game over si cae todo el equipo» está puesta (perder contra un jefe es que ha caído el equipo).
  */
@@ -62,7 +63,7 @@ export const registrarDerrota = ({ id, jefe = null, motivo = 'jefe', equipo = []
   const derrota = { fecha: Date.now(), motivo, jefe, equipo }
   estado.derrotas = [...estado.derrotas, derrota]
   const vidas = vidasRestantes(reglas, estado, caidos)
-  const fin = motivo === 'general' || (vidas !== null ? vidas <= 0 : !!reglas.gameover)
+  const fin = motivo === 'general' || motivo === 'equipo' || (vidas !== null ? vidas <= 0 : !!reglas.gameover)
   if (fin) estado.fin = { ...derrota, vidas }
   guardar(id, estado)
   return { fin, vidas }
@@ -140,3 +141,32 @@ export const nuevoIntento = (id, resumen = {}) => {
   getGameStore(id).set('{}')
   guardar(id, vacio())
 }
+
+// ¿Ha caído todo el equipo? Al morir, cada Pokémon sale del equipo, así que se mira el último equipo
+// que hubo (se guarda en «lockedex.ultimoEquipo.<id>» cada vez que cambia): es un «wipe» si el equipo
+// actual no tiene a nadie vivo y todos los de ese último equipo están caídos.
+const VIVOS = [1, 2, 3, 6]
+const claveUltimo = (id) => `lockedex.ultimoEquipo.${id}`
+const claveVisto = (id) => `lockedex.wipeVisto.${id}`
+
+export const recordarEquipo = (id, datos = {}) => {
+  if (!id || typeof localStorage === 'undefined') return
+  const equipo = (datos.__team || []).filter((l) => l && VIVOS.includes(+datos[l]?.status))
+  if (equipo.length) localStorage.setItem(claveUltimo(id), JSON.stringify(equipo))
+}
+
+export const equipoCaido = (id, datos = {}) => {
+  if (!id || typeof localStorage === 'undefined') return null
+  const vivosEnEquipo = (datos.__team || []).filter((l) => l && VIVOS.includes(+datos[l]?.status))
+  if (vivosEnEquipo.length) return null
+  let ultimo = []
+  try {
+    ultimo = JSON.parse(localStorage.getItem(claveUltimo(id)) || '[]') || []
+  } catch {}
+  if (!ultimo.length || !ultimo.every((l) => +datos[l]?.status === 5)) return null
+  // ya contestado («no ha sido un wipe») para este mismo equipo
+  if (localStorage.getItem(claveVisto(id)) === JSON.stringify(ultimo)) return null
+  return ultimo
+}
+
+export const descartarWipe = (id, ultimo = []) => localStorage.setItem(claveVisto(id), JSON.stringify(ultimo))

@@ -15,7 +15,7 @@
   }
   const ABREV = { atk: ['Atq', 'Atk'], def: ['Def', 'Def'], spa: ['AtE', 'SpA'], spd: ['DfE', 'SpD'], spe: ['Vel', 'Spe'] }
   const abrev = (k) => t(...(ABREV[k] || [k, k]))
-  import { leerReglas } from '$lib/lockedex/reglas.js'
+  import { leerReglas, avisosFila } from '$lib/lockedex/reglas.js'
   const reglasRun = typeof window !== 'undefined' ? leerReglas(localStorage.getItem('nuzlocke')) : {}
   const nombreExtra = (sufijo) => `${traducirNombre(locationName || location)} · ${sufijo}`
   export let id,
@@ -110,6 +110,7 @@
 
   let resetd, hiddenLength
   let especiePendiente = null
+  $: avisoFila = $avisosFila?.[location]
   store &&
     store.subscribe(
       read((data) => {
@@ -328,6 +329,10 @@
     {/if}
 
     <span class="location group relative z-50">
+      {#if avisoFila?.length}
+        <!-- esta fila rompe una regla (los avisos completos están arriba, en los avisos de la partida) -->
+        <span class="lx-fila-aviso" title={avisoFila.join('\n')}>!</span>
+      {/if}
       {#if $$slots.location}
         <slot name="location" />
       {:else}
@@ -760,6 +765,30 @@
 </SettingsWrapper>
 
 <style lang="postcss">
+  .lx-fila-aviso {
+    position: absolute;
+    left: -12px;
+    top: 0;
+    z-index: 2;
+    width: 18px;
+    height: 18px;
+    font-family: 'LX Pixel', 'VT323', monospace;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+    color: #403000;
+    background: #ffc830;
+    border: 2px solid #283850;
+    clip-path: polygon(2px 0, calc(100% - 2px) 0, 100% 2px, 100% calc(100% - 2px), calc(100% - 2px) 100%, 2px 100%, 0 calc(100% - 2px), 0 2px);
+    cursor: help;
+    animation: lx-fila-aviso 1s steps(1, end) infinite;
+  }
+  @keyframes lx-fila-aviso {
+    50% {
+      background: #ffe080;
+    }
+  }
+
   /* Fila en una línea (ventana de 1024 px o más): columnas con su ancho en vez de ocho iguales, para
      que el estado («Intercambiado») quepa entero, el lugar no se corte y los botones de la derecha no
      se salgan de la ficha. Las de ancho fijo mantienen las filas alineadas entre sí. */

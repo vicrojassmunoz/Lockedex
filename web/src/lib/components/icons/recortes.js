@@ -61,6 +61,11 @@ export default {
   0,
   30
  ],
+ "cuchara-torcida": [
+  5,
+  6,
+  22
+ ],
  "cueva": [
   0,
   0,
@@ -151,6 +156,11 @@ export default {
   6,
   22
  ],
+ "piedra-lunar": [
+  4,
+  6,
+  22
+ ],
  "piedra-mistica": [
   0,
   0,
@@ -161,6 +171,11 @@ export default {
   6,
   20
  ],
+ "pila": [
+  5,
+  6,
+  22
+ ],
  "poke-ball": [
   7,
   7,
@@ -170,6 +185,11 @@ export default {
   2,
   1,
   28
+ ],
+ "polvo-brillo": [
+  5,
+  6,
+  22
  ],
  "power-anklet": [
   5,
@@ -215,6 +235,31 @@ export default {
   8,
   8,
   16
+ ],
+ "roca-calor": [
+  5,
+  6,
+  22
+ ],
+ "roca-helada": [
+  5,
+  5,
+  22
+ ],
+ "roca-lluvia": [
+  5,
+  5,
+  22
+ ],
+ "roca-suave": [
+  5,
+  5,
+  22
+ ],
+ "semilla-milagro": [
+  6,
+  8,
+  18
  ],
  "shiny-charm": [
   6,

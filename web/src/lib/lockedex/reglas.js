@@ -1,4 +1,5 @@
 // Reglas del Nuzlocke de cada run (se guardan aparte de los ajustes originales)
+import { writable } from 'svelte/store'
 import { especies, clavePokemon, norm } from './datos.js'
 import { idioma, traducirNombre } from './idioma.js'
 import { claveSav } from './equipo.js'
@@ -6,6 +7,10 @@ import { nivelMaximo } from './partida.js'
 
 const es = () => idioma() === 'es'
 const clave = (id) => `lockedex.reglas.${id}`
+
+// Avisos de reglas por fila de encuentro (lugar → textos), para marcar la fila que rompe una regla.
+// Lo rellena AvisosReglas.svelte y lo lee pokemon-selector.svelte.
+export const avisosFila = writable({})
 
 // Catálogo de reglas. tipo: 'si' (activable) o 'tipo' (elige un tipo)
 export const REGLAS = [
@@ -15,10 +20,10 @@ export const REGLAS = [
   { id: 'especie', grupo: 'clausulas', es: 'Cláusula de especie', en: 'Species clause', desc: ['Una captura por línea evolutiva: en el buscador se marcan como «repetido» los Pokémon cuya línea ya tienes, y avisa si capturas uno.', 'One catch per evolution line: the search marks Pokémon whose line you already have as «dupe», and warns if you catch one.'] },
   { id: 'revivir', grupo: 'clausulas', tipo: 'opciones', opciones: [['', 'No', 'Off'], ['medalla', '1 por medalla', '1 per badge'], ['1', '1 en toda la run', '1 per run'], ['3', '3 en toda la run', '3 per run']], es: 'Cláusula de revivir', en: 'Revive clause', desc: ['Permite revivir Pokémon caídos desde el cementerio (botón «Revivir»): uno por cada medalla o un número fijo en toda la run.', 'Fainted Pokémon can be revived from the graveyard («Revive» button): one per badge or a fixed number per run.'] },
   { id: 'vidas', grupo: 'dificultad', tipo: 'opciones', opciones: [['', 'No', 'Off'], ['3', '3 vidas', '3 lives'], ['5', '5 vidas', '5 lives'], ['10', '10 vidas', '10 lives'], ['20', '20 vidas', '20 lives']], es: 'Modo con vidas', en: 'Lives mode', desc: ['Cada Pokémon caído, cada derrota contra un jefe y cada revivido gastan una vida; sin vidas, game over.', 'Each fainted Pokémon, boss defeat and revive costs a life; out of lives, game over.'] },
-  { id: 'nivelMax', grupo: 'dificultad', es: 'Nivel máximo obligatorio', en: 'Hard level caps', desc: ['Avisa si tu equipo supera el nivel máximo del próximo jefe (necesita tu .sav importado).', 'Warns if your team is above the next boss’s level cap (needs your imported .sav).'] },
-  { id: 'sinObjetos', grupo: 'dificultad', es: 'Sin objetos en combate', en: 'No items in battle', desc: ['Recordatorio en el asistente de combate.', 'Reminder in the battle assistant.'] },
-  { id: 'set', grupo: 'dificultad', es: 'Modo Set', en: 'Set mode', desc: ['Sin cambio gratis cuando debilitas a un Pokémon del rival. Recordatorio en el asistente.', 'No free switch after knocking out a foe. Reminder in the assistant.'] },
-  { id: 'gameover', grupo: 'dificultad', es: 'Game over si cae todo el equipo', en: 'Game over on wipe', desc: ['Si no te queda ningún Pokémon vivo, la run termina (puedes empezar un nuevo intento).', 'If no Pokémon are left alive, the run ends (you can start a new attempt).'] },
+  { id: 'nivelMax', grupo: 'dificultad', es: 'Nivel máximo obligatorio', en: 'Hard level caps', desc: ['Avisa si tu equipo supera el nivel máximo del próximo jefe: en los avisos de la partida, en el VS y en la ventana compacta (necesita tu .sav importado o vinculado).', 'Warns if your team is above the next boss’s level cap: in the run warnings, the VS window and the compact window (needs your .sav imported or linked).'] },
+  { id: 'sinObjetos', grupo: 'dificultad', tipo: 'opciones', opciones: [['', 'Sin límite', 'No limit'], ['0', 'Prohibidos', 'Banned'], ['1', '1 por combate', '1 per battle'], ['2', '2 por combate', '2 per battle'], ['3', '3 por combate', '3 per battle']], es: 'Objetos en combate', en: 'Items in battle', desc: ['Prohibidos o limitados a unos pocos por combate contra un jefe. Con límite, la ventana compacta lleva la cuenta de los que gastas.', 'Banned, or limited to a few per boss battle. With a limit, the compact window counts the ones you use.'] },
+  { id: 'set', grupo: 'dificultad', es: 'Modo Set', en: 'Set mode', desc: ['Sin cambio gratis cuando debilitas a un Pokémon del rival (en los juegos, «Estilo: Fijo»). Recordatorio en el asistente, el VS y la ventana compacta.', 'No free switch after knocking out a foe (the games’ «Battle style: Set»). Reminder in the assistant, the VS window and the compact window.'] },
+  { id: 'gameover', grupo: 'dificultad', es: 'Game over si cae todo el equipo', en: 'Game over on wipe', desc: ['Si cae todo tu equipo, la app te propone dar la run por perdida (puedes seguir si no fue así) y avisa si no te queda ningún Pokémon vivo.', 'If your whole team faints, the app offers to end the run (you can keep playing if it did not) and warns if no Pokémon are left alive.'] },
   { id: 'sinLegendarios', grupo: 'variantes', es: 'Sin legendarios', en: 'No legendaries', desc: ['Avisa si capturas un legendario o singular.', 'Warns if you catch a legendary or mythical.'] },
   { id: 'monotipo', grupo: 'variantes', tipo: 'tipo', es: 'Monotipo', en: 'Monotype', desc: ['Solo Pokémon del tipo elegido. Avisa si capturas uno que no lo es.', 'Only Pokémon of the chosen type. Warns otherwise.'] },
   { id: 'randomlocke', grupo: 'variantes', es: 'Randomlocke (juego aleatorizado)', en: 'Randomlocke (randomized game)', desc: ['Puedes registrar cualquier Pokémon en cada ruta y no se muestran sugerencias de encuentros.', 'Any Pokémon can be logged on each route and encounter suggestions are off.'] },
@@ -58,13 +63,13 @@ export const PLANTILLAS = {
   hardcore: {
     es: 'Hardcore',
     en: 'Hardcore',
-    reglas: { regalos: false, variocolor: true, nivelMax: true, sinObjetos: true, set: true, gameover: true },
+    reglas: { regalos: false, variocolor: true, estaticos: false, nivelMax: true, sinObjetos: '0', set: true, gameover: true },
     ajustes: { 0: '1', 2: '2', 3: '3', 6: '1' }
   },
   extremo: {
     es: 'Extremo (10 vidas)',
     en: 'Extreme (10 lives)',
-    reglas: { regalos: true, variocolor: true, vidas: '10', nivelMax: true, sinObjetos: true },
+    reglas: { regalos: true, variocolor: true, vidas: '10', nivelMax: true, sinObjetos: '0' },
     ajustes: { 2: '1', 3: '3' }
   },
   randomlocke: {
@@ -84,7 +89,10 @@ export const PLANTILLAS = {
 export const leerReglas = (id) => {
   if (typeof window === 'undefined' || !id) return {}
   try {
-    return JSON.parse(localStorage.getItem(clave(id)) || '{}') || {}
+    const r = JSON.parse(localStorage.getItem(clave(id)) || '{}') || {}
+    // «Sin objetos en combate» era un sí/no: ahora es «Objetos en combate» con límite (true = prohibidos)
+    if (r.sinObjetos === true) r.sinObjetos = '0'
+    return r
   } catch {
     return {}
   }
@@ -99,9 +107,11 @@ export const aplicarAjustes = (ajustes = '', plantilla) => {
 }
 
 // Recordatorios cortos para el asistente de combate
+export const limiteObjetos = (reglas) => (reglas?.sinObjetos === true || reglas?.sinObjetos === '0' ? 0 : +reglas?.sinObjetos || null)
 export const recordatorios = (reglas) =>
   [
-    reglas.sinObjetos && (es() ? 'Sin objetos en combate' : 'No items in battle'),
+    limiteObjetos(reglas) === 0 && (es() ? 'Sin objetos en combate' : 'No items in battle'),
+    limiteObjetos(reglas) > 0 && (es() ? `Máx. ${limiteObjetos(reglas)} objeto${limiteObjetos(reglas) > 1 ? 's' : ''} por combate` : `Max ${limiteObjetos(reglas)} item${limiteObjetos(reglas) > 1 ? 's' : ''} per battle`),
     reglas.set && (es() ? 'Modo Set' : 'Set mode'),
     reglas.nivelMax && (es() ? 'Nivel máximo obligatorio' : 'Hard level caps')
   ].filter(Boolean)
@@ -154,6 +164,7 @@ export const comprobarReglas = async ({ partida, resumen, liga, pokedex }) => {
       if (esp[clavePokemon(e.pokemon, esp)]?.l)
         avisos.push({
           nivel: 'aviso',
+          lugares: [e.lugar],
           texto: es() ? `${e.lugar}: ${e.nickname || e.pokemon} es legendario o singular.` : `${e.lugar}: ${e.nickname || e.pokemon} is legendary or mythical.`
         })
     }
@@ -165,6 +176,7 @@ export const comprobarReglas = async ({ partida, resumen, liga, pokedex }) => {
       if (tipos.length && !tipos.includes(reglas.monotipo))
         avisos.push({
           nivel: 'aviso',
+          lugares: [e.lugar],
           texto: es()
             ? `${e.lugar}: ${e.nickname || e.pokemon} no es de tipo ${reglas.monotipo} (monotipo).`
             : `${e.lugar}: ${e.nickname || e.pokemon} is not ${reglas.monotipo} type (monotype).`
@@ -184,10 +196,34 @@ export const comprobarReglas = async ({ partida, resumen, liga, pokedex }) => {
       if (lista.length > 1)
         avisos.push({
           nivel: 'aviso',
+          lugares: lista.map((e) => e.lugar),
           texto: es()
             ? `Cláusula de especie: ${lista.map((e) => `${e.nickname || e.pokemon} (${e.lugar})`).join(' y ')} son de la misma línea evolutiva.`
             : `Species clause: ${lista.map((e) => `${e.nickname || e.pokemon} (${e.lugar})`).join(' and ')} share an evolution line.`
         })
+  }
+
+  // Segundo encuentro en una zona: las filas extra («<lugar> · extra / variocolor / estático») solo valen
+  // con su cláusula y si de verdad son un regalo, un shiny o un estático
+  for (const e of capturados) {
+    const m = String(e.lugar).match(/^(.*) · (extra|variocolor|estático)$/)
+    if (!m) continue
+    const [, base, tipo] = m
+    const deLaZona = resumen.encuentros.filter((x) => traducirNombre(String(x.lugar)) === base || x.lugar === base)
+    const nombre = e.nickname || e.pokemon
+    let motivo = null
+    if (tipo === 'extra') {
+      if (!reglas.regalos) motivo = es() ? 'sin la cláusula de regalos' : 'without the gift clause'
+      else if (+e.status !== 2 && !deLaZona.some((x) => +x.status === 2)) motivo = es() ? 'y ninguno de los dos es un regalo' : 'and neither is a gift'
+    } else if (tipo === 'variocolor') {
+      if (+e.status !== 6) motivo = es() ? 'por la cláusula variocolor, pero no está marcado como shiny' : 'under the shiny clause, but it is not marked shiny'
+    } else if (!reglas.estaticos) motivo = es() ? 'sin la regla de estáticos aparte' : 'without the static clause'
+    if (motivo)
+      avisos.push({
+        nivel: 'aviso',
+        lugares: [e.lugar],
+        texto: es() ? `Segundo encuentro en ${base} (${nombre}) ${motivo}.` : `Second encounter in ${base} (${nombre}) ${motivo}.`
+      })
   }
 
   // Cláusula de regalos: recordar que el regalo no gasta el encuentro de la zona

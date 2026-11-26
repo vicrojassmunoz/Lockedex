@@ -4,7 +4,7 @@
   import { equipoActual } from './equipo.js'
   import { cargarLiga, alCambiarDatos } from './partida.js'
   import { cargarPokedex } from './analista.js'
-  import { comprobarReglas, leerReglas, REGLAS, PLANTILLAS } from './reglas.js'
+  import { comprobarReglas, leerReglas, REGLAS, PLANTILLAS, avisosFila } from './reglas.js'
   import { idioma, traducirNombre } from './idioma.js'
 
   const es = idioma() === 'es'
@@ -19,15 +19,30 @@
       if (!actual) return
       const reglas = leerReglas(actual.partida.id)
       plantilla = reglas.plantilla && PLANTILLAS[reglas.plantilla] ? (es ? PLANTILLAS[reglas.plantilla].es : PLANTILLAS[reglas.plantilla].en) : ''
-      activas = REGLAS.filter((r) => reglas[r.id]).map((r) =>
-        r.tipo === 'tipo' ? `${es ? r.es : r.en}: ${traducirNombre(reglas[r.id].charAt(0).toUpperCase() + reglas[r.id].slice(1))}` : es ? r.es : r.en
-      )
+      activas = REGLAS.filter((r) => reglas[r.id] && (!r.depende || reglas[r.depende])).map((r) => {
+        const nombre = es ? r.es : r.en
+        if (r.tipo === 'tipo') return `${nombre}: ${traducirNombre(reglas[r.id].charAt(0).toUpperCase() + reglas[r.id].slice(1))}`
+        if (r.tipo === 'opciones') {
+          const op = (r.opciones || []).find((o) => o[0] === String(reglas[r.id]))
+          return op ? `${nombre}: ${es ? op[1] : op[2]}` : nombre
+        }
+        return nombre
+      })
       const [liga, pokedex] = await Promise.all([
         cargarLiga(actual.partida.juego, actual.partida.datos?.__starter || 'fire'),
         cargarPokedex(actual.partida.juego)
       ])
       avisos = await comprobarReglas({ partida: actual.partida, resumen: actual.resumen, liga, pokedex })
-      window.dispatchEvent(new CustomEvent('lx:avisos', { detail: avisos.filter((a) => a.nivel !== 'info').length }))
+      // luz de la barra: roja si algo es grave (game over, nivel máximo), ámbar si es un aviso
+      window.dispatchEvent(
+        new CustomEvent('lx:avisos', {
+          detail: { errores: avisos.filter((a) => a.nivel === 'error').length, avisos: avisos.filter((a) => a.nivel === 'aviso').length }
+        })
+      )
+      // y cada fila que rompe una regla, marcada
+      const porFila = {}
+      for (const a of avisos) for (const l of a.lugares || []) (porFila[l] ||= []).push(a.texto)
+      avisosFila.set(porFila)
     } catch (e) {
       console.error('[reglas]', e)
     }

@@ -1,4 +1,5 @@
 <script>
+  import { encajarIcono } from './encajar.js'
   import { recorte } from '$lib/lockedex/recorte.js'
   import { urlAnimada, alFallarSprite, ajustarGif } from '$lib/lockedex/animado.js'
   // Caja del PC: rejilla de 30 huecos por caja y panel de detalle del Pokémon elegido.
@@ -113,7 +114,7 @@
           >
             <PIcon class="data-drag-img invisible absolute -left-20 -top-20 -z-20" name={p.pokemon} />
             {#if sel}<span class="lx-mano" aria-hidden="true">▼</span>{/if}
-            <PIcon class="lx-hueco-icono" name={p.pokemon} />
+            <span class="lx-hueco-encaje" use:encajarIcono={{ nombre: p.pokemon, max: 64, escala: 2 }}><PIcon class="lx-hueco-icono lx-encajar" name={p.pokemon} /></span>
             {#if (equipo || []).includes(locid(p))}
               <span class="lx-hueco-equipo-marca" title={t('En el equipo', 'In your team')}><Icon inline icon={Ball} /></span>
             {/if}
@@ -226,6 +227,9 @@
 </div>
 
 <style>
+  .lx-hueco-encaje {
+    display: contents;
+  }
   .lx-caja {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
@@ -354,7 +358,7 @@
     background: rgba(255, 255, 255, 0.16) !important;
   }
   .lx-hueco :global(.lx-hueco-icono) {
-    transform: scale(2);
+    transform: scale(var(--lx-esc, 2));
     image-rendering: pixelated;
   }
   .lx-sel :global(.lx-hueco-icono) {
@@ -362,7 +366,7 @@
   }
   @keyframes lx-salto {
     50% {
-      transform: scale(2) translateY(-2px);
+      transform: scale(var(--lx-esc, 2)) translateY(-2px);
     }
   }
   .lx-mano {

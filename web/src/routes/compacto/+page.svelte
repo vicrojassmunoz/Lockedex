@@ -5,7 +5,7 @@
   import { equipoCompleto } from '$lib/lockedex/equipo.js'
   import { calcularRiesgo } from '$lib/lockedex/riesgo.js'
   import Riesgo from '$lib/lockedex/Riesgo.svelte'
-  import { leerReglas, ajustarNivel, ajustarEquipoJefe, sinCalculos } from '$lib/lockedex/reglas.js'
+  import { leerReglas, ajustarNivel, ajustarEquipoJefe, sinCalculos, limiteObjetos } from '$lib/lockedex/reglas.js'
   import { estadoRun, registrarDerrota, vidasRestantes, contarCaidos } from '$lib/lockedex/derrotas.js'
   import { leerEquiposJefes, comoJefe } from '$lib/lockedex/jefes.js'
   import { cargarCalc } from '$lib/lockedex/analista.js'
@@ -164,6 +164,26 @@
   $: tiendaDerrotas = estadoRun(partida?.id || '')
   $: reglasRun = partida?.id ? leerReglas(partida.id) : {}
   $: vidasRun = vidasRestantes(reglasRun, $tiendaDerrotas, contarCaidos(partida?.datos || {}))
+
+  // Reglas de combate a la vista: nivel máximo obligatorio (quién se pasa), modo Set y objetos en combate.
+  // Con límite de objetos se lleva la cuenta de los gastados contra el jefe que se está viendo.
+  $: limite = limiteObjetos(reglasRun)
+  $: pasados = reglasRun.nivelMax && cap ? miembros.filter((m) => +m.nivel > +cap) : []
+  const claveObjetos = () => `lockedex.objetosCombate.${partida?.id}`
+  const leerUsados = (v) => {
+    try {
+      const o = JSON.parse(localStorage.getItem(claveObjetos()) || 'null')
+      return o && o.jefe === v ? +o.usados || 0 : 0
+    } catch {
+      return 0
+    }
+  }
+  let usados = 0
+  $: usados = jefe && partida ? leerUsados(jefe.value) : 0
+  const marcarObjeto = (i) => {
+    usados = usados === i + 1 ? i : i + 1
+    localStorage.setItem(claveObjetos(), JSON.stringify({ jefe: jefe.value, usados }))
+  }
   const perder = () => {
     if (!jefe || !partida) return
     if (!confirmarDerrota) {
@@ -288,6 +308,26 @@
             ><small>{es ? 'NV. MÁX' : 'LV. CAP'}</small>{cap}</span>
           {/if}
         </div>
+        {#if pasados.length || reglasRun.set || limite !== null}
+          <div class="lx-mini-reglas">
+            {#if pasados.length}
+              <p class="lx-mini-pasados">
+                ⚠ {pasados.map((m) => m.nombre).join(', ')}
+                {es ? (pasados.length > 1 ? 'superan' : 'supera') + ` el nivel máximo (${cap})` : `over the level cap (${cap})`}
+              </p>
+            {/if}
+            {#if reglasRun.set}<span class="lx-mini-regla">{es ? 'Modo Set' : 'Set mode'}</span>{/if}
+            {#if limite === 0}<span class="lx-mini-regla">{es ? 'Sin objetos' : 'No items'}</span>{/if}
+            {#if limite > 0}
+              <span class="lx-mini-regla lx-mini-objetos" title={es ? 'Objetos gastados en este combate (pulsa para contar)' : 'Items used in this battle (click to count)'}>
+                {es ? 'Objetos' : 'Items'}
+                {#each Array(limite) as _, i}
+                  <button class:lx-gastado={i < usados} on:click={() => marcarObjeto(i)} aria-label={es ? `Objeto ${i + 1}` : `Item ${i + 1}`} />
+                {/each}
+              </span>
+            {/if}
+          </div>
+        {/if}
         {#if aleatorio && !riesgo}
           <p class="lx-mini-aleatorio">{es ? 'Randomlocke: equipo aleatorio. Apúntalo en la app cuando lo veas para ver el riesgo.' : 'Randomlocke: random team. Log it in the app when you see it to get the risk.'}</p>
         {/if}
@@ -333,7 +373,7 @@
             <span class="lx-mini-tipos">{#each m.types as t}<i style="background:{COLOR_TIPO[t]}" />{/each}</span>
           </div>
           <span class="lx-mini-derecha">
-            {#if m.nivel}<span class="lx-mini-nv">{es ? 'Nv' : 'Lv'} {m.nivel}</span>{/if}
+            {#if m.nivel}<span class="lx-mini-nv" class:lx-mini-pasado={reglasRun.nivelMax && cap && +m.nivel > +cap}>{es ? 'Nv' : 'Lv'} {m.nivel}</span>{/if}
             {#if m.lugar}
               <button
                 class="lx-mini-caido"
@@ -602,6 +642,42 @@
   .lx-mini-nv {
     font-family: 'VT323', monospace;
     font-size: 18px;
+  }
+  .lx-mini-pasado {
+    color: #ff5a5a;
+  }
+  .lx-mini-reglas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 6px;
+    margin: 6px 0 2px;
+  }
+  .lx-mini-pasados {
+    flex-basis: 100%;
+    font-size: 12px;
+    color: #ff7a7a;
+  }
+  .lx-mini-regla {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 1px 7px;
+    font-size: 11px;
+    color: #e4e4e7;
+    background: #2a2a31;
+    border: 1px solid #3f3f46;
+    border-radius: 4px;
+  }
+  .lx-mini-objetos button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ffcb05;
+    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.35);
+  }
+  .lx-mini-objetos button.lx-gastado {
+    background: #52525b;
   }
   .lx-mini-ps {
     grid-column: 2 / span 2;

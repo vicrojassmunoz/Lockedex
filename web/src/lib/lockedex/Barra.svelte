@@ -33,7 +33,7 @@
   let version = lx?.version || ''
   let aviso = null
   let avisoVisible = false
-  let avisosReglas = 0
+  let avisosReglas = { errores: 0, avisos: 0 }
   let temporizadorAviso
 
   const enlaces = [
@@ -114,7 +114,7 @@
       setTimeout(() => (parpadeo = false), 700)
     }
     window.addEventListener('lx:guardado', guardado)
-    const alAvisar = (e) => (avisosReglas = e.detail || 0)
+    const alAvisar = (e) => (avisosReglas = typeof e.detail === 'object' && e.detail ? e.detail : { errores: +e.detail || 0, avisos: 0 })
     window.addEventListener('lx:avisos', alAvisar)
     const cerrar = (e) => {
       if (!e.target.closest?.('.lx-menu, .lx-boton-menu')) menuAbierto = false
@@ -148,8 +148,12 @@
       <span />
     </div>
     <div class="lx-luces">
-      <i class="lx-luz lx-r" class:lx-encendida-r={avisosReglas > 0} title={avisosReglas ? (es ? 'Hay avisos de reglas en tu partida' : 'Your run has rule warnings') : ''} />
-      <i class="lx-luz lx-a" class:lx-encendida-a={aviso?.estado === 'descargando' || aviso?.estado === 'buscando'} />
+      <i class="lx-luz lx-r" class:lx-encendida-r={avisosReglas.errores > 0} title={avisosReglas.errores ? (es ? 'Tu partida rompe una regla (mira los avisos de la partida)' : 'Your run breaks a rule (see the run warnings)') : ''} />
+      <i
+        class="lx-luz lx-a"
+        class:lx-encendida-a={aviso?.estado === 'descargando' || aviso?.estado === 'buscando' || avisosReglas.avisos > 0}
+        title={avisosReglas.avisos ? (es ? `${avisosReglas.avisos} aviso${avisosReglas.avisos > 1 ? 's' : ''} de reglas en tu partida` : `${avisosReglas.avisos} rule warning${avisosReglas.avisos > 1 ? 's' : ''} in your run`) : ''}
+      />
       <i class="lx-luz lx-v" class:lx-encendida={parpadeo} />
     </div>
     <span class="lx-marca">LOCKEDEX</span>

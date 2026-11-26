@@ -3,7 +3,7 @@
   import { get } from 'svelte/store'
   import { savedGames, parse } from '$lib/store'
   import { leerReglas } from './reglas.js'
-  import { estadoRun, vidasRestantes, registrarDerrota, deshacerFin, finPorVidas, nuevoIntento, contarCaidos } from './derrotas.js'
+  import { estadoRun, vidasRestantes, registrarDerrota, deshacerFin, finPorVidas, nuevoIntento, contarCaidos, recordarEquipo, equipoCaido, descartarWipe } from './derrotas.js'
   import { marco } from './gba.js'
   import { t, traducirNombre } from './idioma.js'
 
@@ -24,6 +24,17 @@
   // Sin vidas: la app propone el game over sola
   $: if (id && vidas !== null && vidas <= 0 && !estado?.fin) finPorVidas(id)
 
+  // Sin vidas y con la regla normal de game over (o una run sin reglas guardadas): si cae todo el equipo,
+  // la app propone terminar la run, igual que hace con las vidas
+  $: if (id && datos) recordarEquipo(id, datos)
+  $: conGameover = !!reglas.gameover || !Object.keys(reglas || {}).length
+  $: caidoEntero = id && vidas === null && conGameover && !estado?.fin ? equipoCaido(id, datos || {}) : null
+  const aceptarWipe = () => registrarDerrota({ id, motivo: 'equipo', equipo: caidoEntero || [], caidos })
+  const noEraWipe = () => {
+    descartarWipe(id, caidoEntero)
+    caidoEntero = null
+  }
+
   $: equipos = Array.isArray(datos?.__teams) ? datos.__teams : []
   $: medallas = equipos.filter((e) => e?.group === 'gym-leader').length
   $: capturas = Object.entries(datos || {}).filter(([k, v]) => !k.startsWith('__') && [1, 2, 3, 5, 6].includes(+v?.status)).length
@@ -33,6 +44,7 @@
     return +(p?.attempts || 1)
   })()
 
+  const mayuscula = (x) => String(x).charAt(0).toUpperCase() + String(x).slice(1)
   const fecha = (ms) => new Date(ms).toLocaleDateString(t('es-ES', 'en-GB'), { day: 'numeric', month: 'long' })
 
   const hePerdido = () => {
@@ -58,6 +70,20 @@
   </div>
 {/if}
 
+{#if caidoEntero && !estado?.fin}
+  <section class="lx-fin lx-wipe" style={MARCO}>
+    <header>{t('¡TU EQUIPO HA CAÍDO!', 'YOUR TEAM FAINTED!')}</header>
+    <p class="lx-fin-motivo">
+      {t('No te queda nadie en pie en el equipo. En un Nuzlocke eso es game over.', 'Nobody is left standing in your team. In a Nuzlocke that is game over.')}
+      <small>· {caidoEntero.map((l) => datos?.[l]?.nickname || traducirNombre(mayuscula(datos?.[l]?.pokemon || l))).join(', ')}</small>
+    </p>
+    <div class="lx-fin-botones">
+      <button style={BOTON} on:click={aceptarWipe}>{t('Game over', 'Game over')}</button>
+      <button style={BOTON} class="lx-fin-deshacer" on:click={noEraWipe}>{t('Sigo jugando', 'Keep playing')}</button>
+    </div>
+  </section>
+{/if}
+
 {#if estado?.fin}
   <section class="lx-fin" style={MARCO}>
     <header>{t('FIN DE LA PARTIDA', 'GAME OVER')}</header>
@@ -66,6 +92,8 @@
         {t('Perdiste contra', 'You lost to')} <b>{traducirNombre(estado.fin.jefe.nombre)}</b>
       {:else if estado.fin.motivo === 'vidas'}
         {t('Te has quedado sin vidas', 'You ran out of lives')}
+      {:else if estado.fin.motivo === 'equipo'}
+        {t('Cayó todo tu equipo', 'Your whole team fainted')}
       {:else}
         {t('Has dado la run por perdida', 'You marked the run as lost')}
       {/if}
@@ -195,6 +223,9 @@
   }
   .lx-fin-botones button:hover {
     filter: brightness(0.95);
+  }
+  .lx-wipe {
+    margin-bottom: 8px;
   }
   .lx-fin-deshacer {
     color: #6880b0 !important;
