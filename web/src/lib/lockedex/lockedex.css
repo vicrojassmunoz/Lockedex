@@ -50,6 +50,13 @@ html.dark {
   --lx-sombra: 4px 4px 0 rgba(0, 0, 0, 0.5);
   --lx-sombra-sm: 2px 2px 0 rgba(0, 0, 0, 0.45);
 }
+/* Las opciones de los desplegables se abren en una lista nativa con fondo blanco: con el texto claro
+   heredado del modo oscuro no se leían (las vidas, el revivir…). Fondo y texto del panel de noche */
+html.dark option,
+html.dark optgroup {
+  background-color: var(--lx-panel);
+  color: var(--lx-texto);
+}
 html.dark.lx-escritorio body,
 html.dark body {
   background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.022) 0 4px, transparent 4px 8px);

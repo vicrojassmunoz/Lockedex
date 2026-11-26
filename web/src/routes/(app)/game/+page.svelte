@@ -126,25 +126,23 @@
   const _onsearch = (e) => (search = e.detail.search)
   const onsearch = debounce(_onsearch, 350)
 
+  // «Seguir en…»: la zona siguiente a la última de la lista con algo apuntado. Lo que no es de la lista
+  // (herencia del Genlocke, capturas añadidas desde el .sav sin zona, zonas personalizadas) no cuenta;
+  // antes se esperaba a «gastar» todas las entradas y con una de esas acababa en la última zona
   const latestnav = (routes, game) => {
-    const custom = (game?.__custom || []).reduce(
-      (acc, c) => ({ ...acc, [c.id]: true }),
-      {}
-    )
-    const locations = new Set(
-      Object.entries(game)
-        .filter(([id, loc]) => loc.pokemon && !!loc.status && !custom[id])
-        .map(([, i]) => i.location)
-    )
-
-    let i = 0
-    while (
-      i < routes.length &&
-      (locations.size || routes[i].type !== 'route')
-    ) {
-      locations.delete(routes[i]?.name)
-      i++
+    const custom = new Set((game?.__custom || []).map((c) => c.id))
+    const apuntadas = new Set()
+    for (const [id, loc] of Object.entries(game || {})) {
+      if (id.startsWith('__') || !loc?.pokemon || !loc.status || custom.has(id)) continue
+      apuntadas.add(id)
+      if (loc.location) apuntadas.add(loc.location)
     }
+    let ultima = -1
+    routes.forEach((r, n) => {
+      if (r.type === 'route' && apuntadas.has(r.name)) ultima = n
+    })
+    let i = ultima + 1
+    while (i < routes.length && routes[i].type !== 'route') i++
 
     const r = routes[Math.min(i, routes.length - 1)]
     return { ...r, id: i }

@@ -39,6 +39,8 @@ Notas para retomar el trabajo en otra sesión. Lo primero es el mapa del proyect
 
 - [x] **1.20.4 — Nivel máximo de la Liga** (pedido el 26/11: «el del primer miembro del Alto Mando no me gusta»). Regla `capLiga` (Dificultad): el del Campeón (por defecto), la media de los niveles máximos del Alto Mando y el Campeón, o el de cada combate. Todo sale de `capTramo` en `reglas.js` (barra, compacto, avisos, asistente/VS, equilibrar y las fichas del Alto Mando en la partida), que antes se calculaba en cuatro sitios. El Campeón se reconoce por su value (c, ch2, ec, ca, cn, champ_c…); en hacks con varias Ligas seguidas (Glazed) vale la del primer Campeón por delante. De paso, los avisos de nivel máximo usan el del próximo gimnasio aunque el próximo jefe sea un rival.
 
+- [x] **1.20.5 — Avisos del 26/11 (noche):** las `option` de los desplegables en modo oscuro salían con texto claro sobre la lista nativa blanca (`lockedex.css`: fondo y texto del panel de noche). «Seguir en…» (`latestnav` de la partida) esperaba a «gastar» todas las entradas de la run recorriendo la lista y, con una que no es de ninguna zona (herencia del Genlocke, capturas importadas del .sav sin `location`), acababa en la última; ahora va a la zona siguiente a la última de la lista con algo apuntado.
+
 ## 1. Estética propia (desmarcarse de nuzlocke-redux)
 
 **Ya es Lockedex:** el chasis rojo con la lente y los LEDs, la barra con EXP, el logo de la portada, la tarjeta de información, el medidor de riesgo, el asistente, la importación, el perfil, el modo compacto y el Analista.

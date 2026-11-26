@@ -1,3 +1,8 @@
+## Novedades de la 1.20.5
+
+- **Desplegables en modo oscuro:** las opciones (vidas, revivir, nivel máximo en la Liga…) salían en blanco sobre blanco y no se leían.
+- **«Seguir en…»:** al empezar una partida podía mandarte a la última zona del juego. Pasaba si la run tenía Pokémon que no son de ninguna zona de la lista (la herencia del Genlocke o capturas añadidas desde el .sav). Ahora sigue desde la última zona donde has apuntado algo.
+
 ## Novedades de la 1.20.4
 
 - **Nivel máximo en la Liga:** para el Alto Mando y el Campeón vale ahora por defecto el nivel máximo del Campeón, en vez del del primer miembro del Alto Mando. En las reglas de la partida, «Nivel máximo en la Liga» deja elegir también la media de los niveles máximos de la Liga o el de cada combate por separado. Se usa en la barra, la ventana compacta, las fichas de los jefes, los avisos, el VS y «Equilibrar equipo».
