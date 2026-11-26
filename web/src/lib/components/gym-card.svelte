@@ -68,7 +68,7 @@
   import { onMount as alMontar } from 'svelte'
 
   // Lockedex: Randomlocke (equipos de jefes aleatorizados, apuntados a mano)
-  import { leerReglas, ajustarEquipoJefe, sinCalculos } from '$lib/lockedex/reglas.js'
+  import { leerReglas, ajustarEquipoJefe, sinCalculos, capDelCombate } from '$lib/lockedex/reglas.js'
   import { leerEquiposJefes, comoJefe } from '$lib/lockedex/jefes.js'
   import { cargarCalc, urlSprite, cargarPokedex } from '$lib/lockedex/analista.js'
   import { infoJuego } from '$lib/lockedex/datos.js'
@@ -96,12 +96,22 @@
       juego: game,
       jefeId: id,
       nombre: name,
-      cap: levelCap,
+      cap: capJefe,
       alGuardar: () => {
         leerRandom()
         evaluarRiesgo()
       }
     })
+
+  // Lockedex: en la Liga el nivel máximo lo marca la regla capLiga (por defecto, el del Campeón), no el
+  // equipo de cada miembro del Alto Mando
+  let capLiga = null
+  const actualizarCapLiga = async () => {
+    if (!browser || reader || type !== 'elite-four') return
+    const actual = await equipoActual()
+    capLiga = actual ? await capDelCombate(actual.partida, actual.resumen, id) : null
+  }
+  $: capJefe = type === 'elite-four' && capLiga ? capLiga : levelCap
 
   let riesgo = null
   let tarjetaEl
@@ -115,7 +125,9 @@
       if (!actual) return
       leerRandom()
       const jefeRiesgo = sinCalculos(reglasRun) ? null : await jefeParaRiesgo()
-      riesgo = jefeRiesgo ? await calcularRiesgo({ jefe: jefeRiesgo, equipo: actual.eq.miembros, gen: actual.partida.info.gen, cap: levelCap, grupo: actual.partida.info.grupo }) : null
+      if (type === 'elite-four') capLiga = await capDelCombate(actual.partida, actual.resumen, id)
+      const cap = type === 'elite-four' && capLiga ? capLiga : levelCap
+      riesgo = jefeRiesgo ? await calcularRiesgo({ jefe: jefeRiesgo, equipo: actual.eq.miembros, gen: actual.partida.info.gen, cap, grupo: actual.partida.info.grupo }) : null
     } catch (e) {
       console.error('[riesgo]', e)
     }
@@ -130,7 +142,9 @@
       }
     }, { rootMargin: '200px' })
     if (tarjetaEl) io.observe(tarjetaEl)
+    actualizarCapLiga()
     const quitar = alCambiarDatos(() => {
+      actualizarCapLiga()
       if (!vista) return
       clearTimeout(pendienteRiesgo)
       pendienteRiesgo = setTimeout(evaluarRiesgo, 600)
@@ -144,7 +158,7 @@
   const abrirAsistente = async () => {
     const jefeRiesgo = await jefeParaRiesgo()
     if (!jefeRiesgo) return apuntarEquipo()
-    open(Asistente, { jefe: jefeRiesgo, cap: levelCap, ocultarEquipo: !showBoss, valor: id, juego: game, inicial: starter })
+    open(Asistente, { jefe: jefeRiesgo, cap: capJefe, ocultarEquipo: !showBoss, valor: id, juego: game, inicial: starter })
   }
 
   $: showTeam = !aleatorio && (reader || spoilers < 1 || revealed || defeated)
@@ -211,8 +225,8 @@
   </h4>
   <p class="sr-only">
     {tr(
-      `${name} tiene un equipo de ${pokemon.length}: ${toList(pokemon, (p) => `${p?.name} de nivel ${p?.level}`, 'y')}. El nivel máximo para este combate es ${levelCap}.`,
-      `${name} has a team of ${pokemon.length}, made up of ${toList(pokemon, (p) => `a level ${p?.level} ${p?.name}`)}. The level cap for this fight is level ${levelCap}.`
+      `${name} tiene un equipo de ${pokemon.length}: ${toList(pokemon, (p) => `${p?.name} de nivel ${p?.level}`, 'y')}. El nivel máximo para este combate es ${capJefe}.`,
+      `${name} has a team of ${pokemon.length}, made up of ${toList(pokemon, (p) => `a level ${p?.level} ${p?.name}`)}. The level cap for this fight is level ${capJefe}.`
     )}
   </p>
 {/if}
@@ -355,10 +369,10 @@
             </button>
           {/if}
 
-          {#if levelCap}
+          {#if capJefe}
             <SettingWrapper let:setting id="level-caps">
               {#if (setting === 1 && (type === 'gym-leader' || type === 'elite-four')) || (setting === 2 && (type === 'gym-leader' || type === 'elite-four' || type === 'rival')) || setting === 3 || forceLevelCap}
-                <Label heading="Lvl cap" body={levelCap} />
+                <Label heading="Lvl cap" body={capJefe} />
               {/if}
             </SettingWrapper>
           {/if}

@@ -22,6 +22,7 @@ export const REGLAS = [
   { id: 'revivir', grupo: 'clausulas', tipo: 'opciones', opciones: [['', 'No', 'Off'], ['medalla', '1 por medalla', '1 per badge'], ['1', '1 en toda la run', '1 per run'], ['3', '3 en toda la run', '3 per run']], es: 'Cláusula de revivir', en: 'Revive clause', desc: ['Permite revivir Pokémon caídos desde el cementerio (botón «Revivir»): uno por cada medalla o un número fijo en toda la run.', 'Fainted Pokémon can be revived from the graveyard («Revive» button): one per badge or a fixed number per run.'] },
   { id: 'vidas', grupo: 'dificultad', tipo: 'opciones', opciones: [['', 'No', 'Off'], ['3', '3 vidas', '3 lives'], ['5', '5 vidas', '5 lives'], ['10', '10 vidas', '10 lives'], ['20', '20 vidas', '20 lives']], es: 'Modo con vidas', en: 'Lives mode', desc: ['Cada Pokémon caído, cada derrota contra un jefe y cada revivido gastan una vida; sin vidas, game over.', 'Each fainted Pokémon, boss defeat and revive costs a life; out of lives, game over.'] },
   { id: 'nivelMax', grupo: 'dificultad', es: 'Nivel máximo obligatorio', en: 'Hard level caps', desc: ['Avisa si tu equipo supera el nivel máximo del próximo jefe: en los avisos de la partida, en el VS y en la ventana compacta (necesita tu .sav importado o vinculado).', 'Warns if your team is above the next boss’s level cap: in the run warnings, the VS window and the compact window (needs your .sav imported or linked).'] },
+  { id: 'capLiga', grupo: 'dificultad', tipo: 'opciones', opciones: [['', 'El del Campeón', 'The Champion’s'], ['media', 'Media de la Liga', 'League average'], ['cada', 'El de cada combate', 'Each battle’s own']], es: 'Nivel máximo en la Liga', en: 'League level cap', desc: ['Qué nivel máximo vale para el Alto Mando y el Campeón: el del Campeón (por defecto), la media de los niveles máximos del Alto Mando y el Campeón, o el de cada combate por separado. Se usa en la barra, la ventana compacta, los avisos y el VS.', 'Which level cap applies to the Elite Four and Champion: the Champion’s (default), the average of their level caps, or each battle’s own. Used in the bar, compact window, warnings and VS window.'] },
   { id: 'sinObjetos', grupo: 'dificultad', tipo: 'opciones', opciones: [['', 'Sin límite', 'No limit'], ['0', 'Prohibidos', 'Banned'], ['1', '1 por combate', '1 per battle'], ['2', '2 por combate', '2 per battle'], ['3', '3 por combate', '3 per battle']], es: 'Objetos en combate', en: 'Items in battle', desc: ['Prohibidos o limitados a unos pocos por combate contra un jefe. Con límite, la ventana compacta lleva la cuenta de los que gastas.', 'Banned, or limited to a few per boss battle. With a limit, the compact window counts the ones you use.'] },
   { id: 'set', grupo: 'dificultad', es: 'Modo Set', en: 'Set mode', desc: ['Sin cambio gratis cuando debilitas a un Pokémon del rival (en los juegos, «Estilo: Fijo»). Recordatorio en el asistente, el VS y la ventana compacta.', 'No free switch after knocking out a foe (the games’ «Battle style: Set»). Reminder in the assistant, the VS window and the compact window.'] },
   { id: 'sacrificio', grupo: 'dificultad', es: 'Sacrificio por medalla', en: 'Progression sacrifice', desc: ['Tras cada medalla, la app elige al azar a uno de tu equipo y va al cementerio. Las medallas que ya tenías al activarla no cuentan.', 'After each badge, the app picks a random team member who goes to the graveyard. Badges you already had when turning it on do not count.'] },
@@ -49,18 +50,66 @@ export const ajustarEquipoJefe = (pokemon, reglas) =>
   factorNiveles(reglas) === 1
     ? pokemon
     : (pokemon || []).map((p) => (/^[+-]/.test('' + p?.level) || isNaN(parseInt(p?.level, 10)) ? p : { ...p, level: '' + ajustarNivel(parseInt(p.level, 10), reglas) }))
-// Nivel máximo del Nuzlocke para el combate contra un jefe: el del próximo líder de gimnasio desde ese
-// jefe (o del Alto Mando al final), ajustado al Randomlocke. Es el que usan el compacto, los avisos, el
-// asistente y el VS. null si no se puede saber.
+// Nivel máximo del Nuzlocke desde un jefe (posición `desde` en resumen.jefes): el del próximo líder de
+// gimnasio. Si lo próximo es la Liga, según la regla capLiga: el del Campeón (por defecto), la media de
+// los niveles máximos del Alto Mando y el Campeón, o el de cada combate. Ajustado al Randomlocke.
+// Devuelve { nivel, fuente, modo } (fuente = el jefe del que sale; en la media, el Campeón) o null.
+export const capTramo = (lista = [], desde, liga, reglas) => {
+  if (desde < 0 || !liga) return null
+  const sig = lista.slice(desde).find((j) => j.group === 'gym-leader' || j.group === 'elite-four')
+  if (!sig) return null
+  const max = (j) => nivelMaximo(liga[j.value])
+  if (sig.group === 'gym-leader') {
+    const nivel = ajustarNivel(max(sig), reglas)
+    return nivel ? { nivel, fuente: sig, modo: 'gimnasio' } : null
+  }
+  // La Liga: el Alto Mando entre el gimnasio de antes y el de después (en HGSS sigue Kanto)
+  const pos = lista.indexOf(sig)
+  let a = pos
+  let b = pos
+  while (a > 0 && lista[a - 1].group !== 'gym-leader') a--
+  while (b < lista.length - 1 && lista[b + 1].group !== 'gym-leader') b++
+  const bloque = lista.slice(a, b + 1).filter((j) => j.group === 'elite-four')
+  // El Campeón: c, ch2, ec, ca, cn, champ_c… (los del Alto Mando empiezan por e). Algunos hacks tienen
+  // varias Ligas seguidas (Glazed: Tunod y Johto): vale la del primer Campeón que queda por delante
+  const campeones = bloque.filter((j) => /^(c|ec)/i.test(String(j.value)))
+  const campeon = campeones.find((j) => lista.indexOf(j) >= pos) || campeones[campeones.length - 1] || bloque[bloque.length - 1]
+  const ci = bloque.indexOf(campeon)
+  const anterior = campeones.filter((j) => bloque.indexOf(j) < ci).pop()
+  const miembros = bloque.slice(anterior ? bloque.indexOf(anterior) + 1 : 0, ci + 1)
+  const modo = ['media', 'cada'].includes(reglas?.capLiga) ? reglas.capLiga : 'campeon'
+  let nivel = null
+  let fuente = campeon
+  if (modo === 'cada') {
+    nivel = max(sig)
+    fuente = sig
+  } else if (modo === 'media') {
+    const niveles = miembros.map(max).filter((n) => n != null)
+    nivel = niveles.length ? Math.round(niveles.reduce((x, y) => x + y, 0) / niveles.length) : null
+  } else nivel = max(campeon)
+  nivel = ajustarNivel(nivel, reglas)
+  return nivel ? { nivel, fuente, modo } : null
+}
+export const posicionJefe = (lista = [], valor) => lista.findIndex((j) => String(j.value) === String(valor))
+
+// Texto de dónde sale el nivel máximo (para los títulos), o '' si es el del propio jefe
+export const origenCap = (c, valorJefe, esp = es()) => {
+  if (!c) return ''
+  if (c.modo === 'media') return esp ? 'Media de los niveles máximos de la Liga' : 'League level cap average'
+  if (String(c.fuente?.value) === String(valorJefe)) return ''
+  const nombre = traducirNombre(c.fuente.boss || c.fuente.name)
+  if (c.modo === 'campeon') return (esp ? 'Nivel máximo del Campeón: ' : "Champion's level cap: ") + nombre
+  if (c.modo === 'cada') return (esp ? 'Nivel máximo de: ' : 'Level cap of: ') + nombre
+  return (esp ? 'Nivel máximo del próximo gimnasio: ' : 'Level cap of the next gym: ') + traducirNombre(c.fuente.name)
+}
+
+// El del combate contra un jefe. Es el que usan el asistente, el VS y «Equilibrar equipo». null si no se sabe.
 export const capDelCombate = async (partida, resumen, valorJefe) => {
   const lista = resumen?.jefes || []
-  const desde = lista.findIndex((j) => String(j.value) === String(valorJefe))
+  const desde = posicionJefe(lista, valorJefe)
   if (desde < 0) return null
-  const resto = lista.slice(desde)
-  const gim = resto.find((j) => j.group === 'gym-leader') || resto.find((j) => j.group === 'elite-four')
-  if (!gim) return null
   const liga = await cargarLiga(partida.juego, partida.datos?.__starter || 'fire')
-  return ajustarNivel(nivelMaximo(liga?.[gim.value]), leerReglas(partida.id)) || null
+  return capTramo(lista, desde, liga, leerReglas(partida.id))?.nivel || null
 }
 
 // Con tipos, habilidades o movimientos aleatorizados, los cálculos con datos de las especies no valen
@@ -174,7 +223,7 @@ export const comprobarReglas = async ({ partida, resumen, liga, pokedex }) => {
   }
 
   if (reglas.nivelMax && resumen.siguienteJefe && liga) {
-    const cap = ajustarNivel(nivelMaximo(liga[resumen.siguienteJefe.value]), reglas)
+    const cap = capTramo(resumen.jefes, posicionJefe(resumen.jefes, resumen.siguienteJefe.value), liga, reglas)?.nivel
     let sav = null
     try {
       sav = JSON.parse(localStorage.getItem(claveSav(partida.id)) || 'null')

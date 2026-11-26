@@ -5,7 +5,7 @@
   import { equipoCompleto } from '$lib/lockedex/equipo.js'
   import { calcularRiesgo } from '$lib/lockedex/riesgo.js'
   import Riesgo from '$lib/lockedex/Riesgo.svelte'
-  import { leerReglas, ajustarNivel, ajustarEquipoJefe, sinCalculos, limiteObjetos } from '$lib/lockedex/reglas.js'
+  import { leerReglas, ajustarNivel, ajustarEquipoJefe, sinCalculos, limiteObjetos, capTramo, posicionJefe, origenCap } from '$lib/lockedex/reglas.js'
   import { leerParejas, parejaDe } from '$lib/lockedex/parejas.js'
   import { estadoRun, registrarDerrota, vidasRestantes, contarCaidos } from '$lib/lockedex/derrotas.js'
   import { leerEquiposJefes, comoJefe } from '$lib/lockedex/jefes.js'
@@ -29,7 +29,7 @@
   let datosJefe = null
   let cap = null
   let aleatorio = false
-  let capGimnasio = null // jefe del que sale el nivel máximo (el próximo líder de gimnasio)
+  let origenNivel = '' // de dónde sale el nivel máximo si no es del propio jefe (próximo gimnasio, Campeón…)
   let riesgo = null
   let spoilers = 0
 
@@ -73,16 +73,14 @@
     if (!jefe) return
     const visto = jefe.value
     const datos = ligaActual?.[jefe.value] || null
-    // El nivel máximo de un Nuzlocke lo marca el próximo líder de gimnasio (o el Alto Mando al final),
-    // aunque el jefe que se vea sea un rival o un equipo malvado
-    const desde = lista.findIndex((j) => String(j.value) === String(jefe.value))
-    const resto = lista.slice(Math.max(0, desde))
-    const gimnasio = resto.find((j) => j.group === 'gym-leader') || resto.find((j) => j.group === 'elite-four') || jefe
+    // El nivel máximo de un Nuzlocke lo marca el próximo líder de gimnasio (o la Liga, según la regla
+    // capLiga), aunque el jefe que se vea sea un rival o un equipo malvado
+    const reglas = leerReglas(partida.id) || {}
+    const c = capTramo(lista, posicionJefe(lista, jefe.value), ligaActual, reglas)
     // Randomlocke con entrenadores aleatorios: el equipo de la liga no vale. El riesgo sale solo si se ha
     // apuntado el equipo real del jefe; si no, se enseña el jefe y su nivel máximo, sin equipo. Con los
     // niveles de los jefes subidos, nivel máximo y equipo van ajustados; con tipos aleatorios, sin riesgo
-    const reglas = leerReglas(partida.id) || {}
-    const nivel = ajustarNivel(nivelMaximo(ligaActual?.[gimnasio.value]) ?? nivelMaximo(datos), reglas)
+    const nivel = c?.nivel ?? ajustarNivel(nivelMaximo(datos), reglas)
     aleatorio = !!(reglas.randomlocke && reglas.entrenadoresAleatorios)
     const datosAj = datos && { ...datos, pokemon: ajustarEquipoJefe(datos.pokemon, reglas) }
     let paraRiesgo = datosAj
@@ -95,7 +93,7 @@
     if (jefe?.value !== visto) return // se cambió de jefe mientras se calculaba
     datosJefe = datosAj
     cap = nivel
-    capGimnasio = gimnasio
+    origenNivel = origenCap(c, visto, es)
     riesgo = r
     jefeBatalla = paraRiesgo
   }
@@ -347,9 +345,7 @@
           {#if cap}
             <span
               class="lx-mini-cap"
-              title={capGimnasio && capGimnasio.value !== jefe.value
-                ? (es ? 'Nivel máximo del próximo gimnasio: ' : 'Level cap of the next gym: ') + traducirNombre(capGimnasio.name)
-                : es ? 'Nivel máximo' : 'Level cap'}
+              title={origenNivel || (es ? 'Nivel máximo' : 'Level cap')}
             ><small>{es ? 'NV. MÁX' : 'LV. CAP'}</small>{cap}</span>
           {/if}
         </div>

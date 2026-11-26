@@ -9,7 +9,7 @@
   import { idioma, cambiarIdioma, traducirNombre } from './idioma.js'
   import { partidaActiva, cargarRutas, resumirPartida, alCambiarDatos, cargarLiga, nivelMaximo } from './partida.js'
   import { theme } from '$lib/store'
-  import { leerReglas, ajustarNivel } from './reglas.js'
+  import { leerReglas, ajustarNivel, capTramo, posicionJefe, origenCap } from './reglas.js'
   import Icon from '@iconify/svelte/dist/OfflineIcon.svelte'
   import { DarkMode, LightMode } from '$icons'
 
@@ -57,7 +57,7 @@
     }
   }
 
-  // Próximo jefe y el nivel máximo que marca (el del próximo gimnasio, o el Alto Mando al final).
+  // Próximo jefe y el nivel máximo que marca (el del próximo gimnasio, o el de la Liga según capLiga).
   // Solo nombre y nivel: sirve igual en Randomlocke, donde el equipo es aleatorio pero los niveles no.
   let proximo = null
   const proximoJefe = async (p, r) => {
@@ -65,10 +65,9 @@
     if (!jefe) return null
     const liga = await cargarLiga(p.juego, p.datos?.__starter || 'fire').catch(() => null)
     const lista = r.jefes || []
-    const resto = lista.slice(Math.max(0, lista.findIndex((j) => String(j.value) === String(jefe.value))))
-    const gim = resto.find((j) => j.group === 'gym-leader') || resto.find((j) => j.group === 'elite-four') || jefe
-    const nivel = nivelMaximo(liga?.[gim.value]) ?? nivelMaximo(liga?.[jefe.value])
-    return { nombre: traducirNombre(jefe.boss || jefe.name), nivel: ajustarNivel(nivel, leerReglas(p.id)) }
+    const reglas = leerReglas(p.id)
+    const c = capTramo(lista, posicionJefe(lista, jefe.value), liga, reglas)
+    return { nombre: traducirNombre(jefe.boss || jefe.name), nivel: c?.nivel ?? ajustarNivel(nivelMaximo(liga?.[jefe.value]), reglas), origen: origenCap(c, jefe.value, es) }
   }
 
   // Navegación interna con plan B: si en 2,5 s no ha cambiado de página,
@@ -198,7 +197,7 @@
     title={resumen
       ? `${partida.nombre} · ${partida.info.titulo}` +
         (resumen.medallasDelSav ? (es ? `\nMedallas: ${resumen.medallas} (según tu .sav)` : `\nBadges: ${resumen.medallas} (from your .sav)`) : '') +
-        (proximo ? (es ? `\nPróximo jefe: ${proximo.nombre}` : `\nNext boss: ${proximo.nombre}`) + (proximo.nivel ? (es ? ` · nivel máximo ${proximo.nivel}` : ` · level cap ${proximo.nivel}`) : '') : '')
+        (proximo ? (es ? `\nPróximo jefe: ${proximo.nombre}` : `\nNext boss: ${proximo.nombre}`) + (proximo.nivel ? (es ? ` · nivel máximo ${proximo.nivel}` : ` · level cap ${proximo.nivel}`) + (proximo.origen ? ` (${proximo.origen})` : '') : '') : '')
       : es ? 'Sin partida activa' : 'No active run'}
     on:click={(ev) => ir(ev, resumen ? '/game' : '/saves')}
     data-lx-original

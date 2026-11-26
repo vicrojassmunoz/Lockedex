@@ -1,3 +1,7 @@
+## Novedades de la 1.20.4
+
+- **Nivel máximo en la Liga:** para el Alto Mando y el Campeón vale ahora por defecto el nivel máximo del Campeón, en vez del del primer miembro del Alto Mando. En las reglas de la partida, «Nivel máximo en la Liga» deja elegir también la media de los niveles máximos de la Liga o el de cada combate por separado. Se usa en la barra, la ventana compacta, las fichas de los jefes, los avisos, el VS y «Equilibrar equipo».
+
 ## Novedades de la 1.20.3
 
 - **Los gimnasios cuentan solo si los marcas:** las medallas y el próximo jefe ya no se deducen de dónde has capturado. Un gimnasio está pasado si lo marcaste como vencido o, con el .sav de RojoFuego, VerdeHoja, Rubí, Zafiro o Esmeralda, si tienes su medalla en la partida.

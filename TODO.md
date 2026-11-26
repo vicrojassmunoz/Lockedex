@@ -37,6 +37,8 @@ Notas para retomar el trabajo en otra sesión. Lo primero es el mapa del proyect
 
 - [x] **1.20.3 — Gimnasios solo marcados** (pedido el 26/11: «un gimnasio está marcado si está marcado; si alguien se olvida de marcarlo ya es su problema»). Fuera la deducción por capturas de la 1.20.2 (y la de siempre): un líder de gimnasio cuenta si está en `__teams` o si el .sav de la 3.ª gen tiene su medalla. Tampoco cuenta por haber marcado otro posterior. El Alto Mando sigue contando si marcas a alguien de después o si el .sav dice campeón.
 
+- [x] **1.20.4 — Nivel máximo de la Liga** (pedido el 26/11: «el del primer miembro del Alto Mando no me gusta»). Regla `capLiga` (Dificultad): el del Campeón (por defecto), la media de los niveles máximos del Alto Mando y el Campeón, o el de cada combate. Todo sale de `capTramo` en `reglas.js` (barra, compacto, avisos, asistente/VS, equilibrar y las fichas del Alto Mando en la partida), que antes se calculaba en cuatro sitios. El Campeón se reconoce por su value (c, ch2, ec, ca, cn, champ_c…); en hacks con varias Ligas seguidas (Glazed) vale la del primer Campeón por delante. De paso, los avisos de nivel máximo usan el del próximo gimnasio aunque el próximo jefe sea un rival.
+
 ## 1. Estética propia (desmarcarse de nuzlocke-redux)
 
 **Ya es Lockedex:** el chasis rojo con la lente y los LEDs, la barra con EXP, el logo de la portada, la tarjeta de información, el medidor de riesgo, el asistente, la importación, el perfil, el modo compacto y el Analista.
