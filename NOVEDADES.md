@@ -1,3 +1,10 @@
+## Novedades de la 1.22.0
+
+- **«¡Un Pokémon salvaje!»:** junto al nombre de cada zona vacía hay una mata de hierba alta. Al pulsarla eliges qué ha salido (los Pokémon de la zona con su método, nivel y probabilidad, o escribe otro), aparece en la hierba como en un combate y eliges en el menú CAPTURADO, VARIOCOLOR, HUYÓ o LO DEBILITÉ. Si lo capturas, la Poké Ball se mueve y te pregunta el mote. Se maneja con las flechas e Intro, y se puede seguir escribiendo en el buscador como antes.
+- **Escena al caer un Pokémon:** parpadea y se hunde, y sale una lápida donde eliges quién fue (el próximo jefe ya viene puesto, con su equipo para elegir con qué Pokémon y qué ataque, o un salvaje o un entrenador en la zona donde estás según el .sav) y el epitafio. Sustituye al formulario en inglés de antes.
+- **Escena de evolución:** «¿Eh? ¡PIO está evolucionando!», la silueta cambia de forma cada vez más rápido y «¡Enhorabuena!». Escape la cancela, como el botón B. Las evoluciones que llegan del .sav también tienen su escena cuando vuelves a la ventana de Lockedex.
+- **Recargar el .sav:** en la partida, «Recargar .sav» vuelve a leer la partida vinculada sin elegirla otra vez. Al elegir un .sav en Importar queda vinculado a la run, y en una run nueva te ofrece la última partida que usaste.
+
 ## Novedades de la 1.21.0
 
 - **Cómo sale cada Pokémon en cada zona:** en el buscador de encuentros, debajo de cada Pokémon pone cómo se encuentra, con sus niveles y su probabilidad («Hierba Nv. 2–5 · 50 %», «Supercaña Nv. 15–25 · 40 %», «Hierba Nv. 2–4 · 85 % (noche)»). Si sale de varias formas, pasa el ratón para verlas todas. Está en los juegos oficiales de la 1.ª a la 7.ª generación y en Espada y Escudo, con datos de PokeAPI. En Rubí Omega y Zafiro Alfa faltan bastantes zonas, y los hacks se quedan como estaban.

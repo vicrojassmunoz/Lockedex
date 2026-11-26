@@ -23,7 +23,7 @@
   let DeathModal
   const openDeathModal = async (args) => {
     if (DeathModal) open(DeathModal, args)
-    import('$lib/components/DeathModal/index.svelte').then((m) => {
+    import('$lib/lockedex/EscenaMuerte.svelte').then((m) => {
       DeathModal = m.default
       open(DeathModal, args)
     })

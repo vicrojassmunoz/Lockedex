@@ -81,6 +81,7 @@
   const elegirSav = async () => {
     if (!window.lockedex?.elegirSav) return (error = t('Esto solo funciona en la aplicación de escritorio.', 'This only works in the desktop app.'))
     const r = await window.lockedex.elegirSav()
+    if (r?.ruta) localStorage.setItem('lockedex.ultimaRutaSav', r.ruta)
     if (r) sav = prepararSav(r)
   }
   $: savValido = sav && sav.libres && sav.juegoSav === SAV_DE[partida?.juego]

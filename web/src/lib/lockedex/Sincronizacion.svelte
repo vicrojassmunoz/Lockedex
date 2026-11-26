@@ -3,6 +3,7 @@
   // run lo que no admite dudas (evoluciones, y mote o naturaleza si estaban vacíos) y pregunta por los
   // Pokémon del equipo que estén debilitados en la partida (en un Nuzlocke, caídos)
   import { onMount } from 'svelte'
+  import { goto } from '$app/navigation'
   import { leerPartidaGen3 } from './sav/gen3.js'
   import { cargar, norm } from './datos.js'
   import { claveSav, claveRutaSav } from './equipo.js'
@@ -39,6 +40,9 @@
     if (seguros.length) getGameStore(partida.id).update(patch(parcheCambiosSav({ ...contexto, cambios: seguros })))
     const nombre = (e) => (pkdx?.aliasMap?.[norm(e)] || pkdx?.nameMap?.[norm(e)])?.name || e
     const evoluciones = seguros.filter((c) => c.parche.pokemon).map((c) => `${c.antes.nickname || nombre(c.antes.pokemon)} → ${nombre(c.s.especie)}`)
+    // La escena de evolución de cada una (la abre EscenasSav.svelte, dentro de la app, al volver a la ventana)
+    const escenas = seguros.filter((c) => c.parche.pokemon && c.parche.pokemon !== c.antes.pokemon).map((c) => ({ base: c.antes.pokemon, evo: c.parche.pokemon, mote: c.antes.nickname || '' }))
+    if (escenas.length) window.dispatchEvent(new CustomEvent('lx:evoluciones-sav', { detail: escenas }))
     return { caidos, nuevos, evoluciones }
   }
 
@@ -81,12 +85,31 @@
       }
     }
 
-    return lx.alCambiarSav(async (r) => {
+    // «Recargar .sav» (botón de la partida): lo mismo que cuando el emulador guarda, con la partida vinculada
+    const recargar = () => {
+      const idActual = localStorage.getItem('nuzlocke')
+      const r = idActual && localStorage.getItem(claveRutaSav(idActual))
+      if (!r) return goto('/importar')
+      llega(r, true)
+    }
+    window.addEventListener('lx:recargar-sav', recargar)
+    const quitar = lx.alCambiarSav((r) => llega(r))
+    return () => {
+      window.removeEventListener('lx:recargar-sav', recargar)
+      quitar?.()
+    }
+  })
+
+  const llega = async (r, aMano = false) => {
+      const lx = window.lockedex
       const idActual = localStorage.getItem('nuzlocke')
       if (!idActual || localStorage.getItem(claveRutaSav(idActual)) !== r) return
       try {
         const archivo = await lx.leerSav(r)
-        if (!archivo) return
+        if (!archivo) {
+          if (aMano) mostrar(es ? 'No se encuentra la partida vinculada. ¿La has movido? Vuelve a elegirla en Importar.' : 'The linked save is missing. Was it moved? Choose it again in Import.', true)
+          return
+        }
         const tablas = await cargar('gen3.json')
         const b = archivo.datos
         const res = leerPartidaGen3(b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength), tablas)
@@ -105,8 +128,7 @@
       } catch (e) {
         mostrar((es ? 'No se pudo leer la partida: ' : 'Could not read the save: ') + e.message, true)
       }
-    })
-  })
+  }
 </script>
 
 {#if aviso}

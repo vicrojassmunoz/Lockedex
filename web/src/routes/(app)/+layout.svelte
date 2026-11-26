@@ -12,6 +12,7 @@
   import { normalise } from '$utils/string'
 
   import Modal from 'svelte-simple-modal'
+  import EscenasSav from '$lib/lockedex/EscenasSav.svelte'
   import deferStyles from '$lib/utils/defer-styles'
 
   // Reactivo: así la cabecera correcta aparece también al navegar sin recargar
@@ -81,4 +82,5 @@
     <NavHeading />
   {/if}
   <slot />
+  <EscenasSav />
 </Modal>

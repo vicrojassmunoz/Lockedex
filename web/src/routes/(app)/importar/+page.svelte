@@ -19,6 +19,10 @@
   let sav = null
   let error = ''
   let rutaSav = ''
+  // La última partida elegida (en cualquier run), para no tener que volver a buscarla
+  const CLAVE_ULTIMA = 'lockedex.ultimaRutaSav'
+  let ultima = ''
+  const nombreArchivo = (r = '') => r.split(/[\\/]/).pop()
   let movs = {}, nats = {}, habs = {}
   let pkdx = null
   let cambios = []
@@ -37,6 +41,7 @@
       sav = leerSavGuardado(partida.id)
       rutaSav = localStorage.getItem(claveRutaSav(partida.id)) || ''
       vigilando = !!rutaSav
+      ultima = rutaSav ? '' : localStorage.getItem(CLAVE_ULTIMA) || ''
       if (sav) calcularCambios()
     }
   })
@@ -82,7 +87,28 @@
       if (!r) return
       rutaSav = r.ruta
       await procesar(r.datos, r.nombre, r.ruta, r.fecha)
+      await vincular(r.ruta)
     } else entrada.click()
+  }
+
+  // Al elegir una partida en el escritorio queda vinculada a la run (se puede desvincular abajo)
+  const vincular = async (ruta) => {
+    if (!ruta) return
+    localStorage.setItem(CLAVE_ULTIMA, ruta)
+    ultima = ''
+    if (!partida || error) return
+    localStorage.setItem(claveRutaSav(partida.id), ruta)
+    vigilando = true
+    await lx?.vigilarSav?.(ruta)
+  }
+  // Volver a leer la vinculada (o la última que usaste) sin abrir el diálogo
+  const recargar = async (ruta = rutaSav) => {
+    if (!lx?.leerSav || !ruta) return
+    const r = await lx.leerSav(ruta).catch(() => null)
+    if (!r) return (error = es ? `No se pudo leer ${nombreArchivo(ruta)}. ¿Lo has movido o borrado?` : `Could not read ${nombreArchivo(ruta)}. Was it moved or deleted?`)
+    rutaSav = ruta
+    await procesar(r.datos, r.nombre || nombreArchivo(ruta), ruta, r.fecha)
+    await vincular(ruta)
   }
 
   const desdeInput = async (e) => {
@@ -136,7 +162,12 @@
       {/if}
     </div>
     <div class="lx-acciones-imp">
-      <button class="lx-btn" on:click={elegir}>{sav ? (es ? 'Importar de nuevo' : 'Import again') : es ? 'Elegir archivo .sav' : 'Choose .sav file'}</button>
+      {#if lx && rutaSav}
+        <button class="lx-btn" on:click={() => recargar()} title={rutaSav}>{es ? 'Recargar' : 'Reload'} {nombreArchivo(rutaSav)}</button>
+      {:else if lx && ultima && partida}
+        <button class="lx-btn" on:click={() => recargar(ultima)} title={ultima}>{es ? 'Usar la última:' : 'Use the last one:'} {nombreArchivo(ultima)}</button>
+      {/if}
+      <button class="lx-btn" on:click={elegir}>{rutaSav ? (es ? 'Elegir otro .sav' : 'Choose another .sav') : sav ? (es ? 'Importar de nuevo' : 'Import again') : es ? 'Elegir archivo .sav' : 'Choose .sav file'}</button>
       <input bind:this={entrada} type="file" accept=".sav,.srm,.sa1,.sa2" hidden on:change={desdeInput} />
       {#if lx && rutaSav && partida}
         <label class="lx-vigilar">

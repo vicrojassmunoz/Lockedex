@@ -97,10 +97,10 @@
     }
 
     import('$lib/components/particles').then((m) => (Particles = m.default))
-    import('$lib/components/EvolutionModal.svelte').then(
+    import('$lib/lockedex/EscenaEvolucion.svelte').then(
       (m) => (EvoModal = m.default)
     )
-    import('$lib/components/DeathModal/index.svelte').then(
+    import('$lib/lockedex/EscenaMuerte.svelte').then(
       (m) => (DeathModal = m.default)
     )
     prevstatus = null
@@ -295,7 +295,7 @@
   const { open } = getContext('simple-modal')
   let evoComplete = false
   const handleSplitEvolution = (base, evolutions) =>
-    open(EvoModal, { evolutions, base, select: handleSingleEvolution })
+    open(EvoModal, { evolutions, base, nickname, select: handleSingleEvolution })
   const handleSingleEvolution = async (id) =>
     getPkmn(id).then((p) => {
       selected = p
@@ -305,6 +305,27 @@
 
   const handleEvolution = (base, evos) => async () =>
     handleSplitEvolution(base, evos)
+  // Lockedex: escena «¡Un Pokémon salvaje!» para apuntar el encuentro de la zona
+  let EscenaEncuentro
+  const abrirEncuentro = async (conMote) => {
+    EscenaEncuentro ||= (await import('$lib/lockedex/EscenaEncuentro.svelte')).default
+    const candidatos = reglasRun.randomlocke ? [] : await encounterF().catch(() => [])
+    open(EscenaEncuentro, {
+      zona: location,
+      candidatos,
+      metodos: encuentrosZona,
+      buscarTodos: () => getEncounterablePkmn(),
+      repetidos: dupelines,
+      conMote: !!conMote,
+      elegir: ({ pokemon, estado, mote }) => {
+        selected = pokemon
+        if (conMote && mote) nickname = mote
+        status = NuzlockeStates[estado]
+        _animateStatus(estado)
+      }
+    })
+  }
+
   const handleDeath = (submit) =>
     open(DeathModal, { submit, pokemon: selected, nickname })
 
@@ -354,6 +375,12 @@
         <slot name="location" />
       {:else}
         {location}
+      {/if}
+      {#if !selected && !especiePendiente}
+        <!-- Lockedex: «¡Un Pokémon salvaje!» (también se puede escribir a mano en el buscador) -->
+        <button class="lx-salvaje" on:click={() => abrirEncuentro(nicknames)} title={t('¡Un Pokémon salvaje! Elige qué ha salido', 'A wild Pokémon! Pick what appeared')} aria-label={t('Apuntar encuentro', 'Log encounter')} data-lx-original>
+          <Icon icon={LongGrass} height="1.25rem" />
+        </button>
       {/if}
     </span>
 
@@ -911,6 +938,21 @@
   }
   .lx-opcion-metodo {
     opacity: 0.7;
+  }
+  .lx-salvaje {
+    display: inline-flex;
+    vertical-align: middle;
+    margin-left: 4px;
+    color: #58a838;
+    opacity: 0.75;
+  }
+  .lx-salvaje:hover {
+    opacity: 1;
+    animation: lx-hierba 0.4s steps(4, end);
+  }
+  @keyframes lx-hierba {
+    25% { transform: rotate(-12deg); }
+    75% { transform: rotate(12deg); }
   }
   .dupe {
     @apply mr-2 text-tiny grayscale;

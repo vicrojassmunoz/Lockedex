@@ -184,7 +184,7 @@
   let DeathModal
   const openDeathModal = async (args) => {
     if (DeathModal) open(DeathModal, args)
-    import('$lib/components/DeathModal/index.svelte').then((m) => {
+    import('$lib/lockedex/EscenaMuerte.svelte').then((m) => {
       DeathModal = m.default
       open(DeathModal, args)
     })
@@ -193,7 +193,7 @@
   let EvoModal
   const openEvoModal = async (args) => {
     if (EvoModal) open(EvoModal, args)
-    import('$lib/components/EvolutionModal.svelte').then((m) => {
+    import('$lib/lockedex/EscenaEvolucion.svelte').then((m) => {
       EvoModal = m.default
       open(EvoModal, args)
     })
@@ -204,6 +204,7 @@
     openEvoModal({
       evolutions: evos,
       base: alias,
+      nickname: original?.nickname,
       select: handleEvoComplete(original)
     })
   const handleEvoComplete = (o) => async (id) =>

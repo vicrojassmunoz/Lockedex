@@ -7,7 +7,7 @@
   import Genlocke from '$lib/lockedex/Genlocke.svelte'
   import GeneradorHuevos from '$lib/lockedex/GeneradorHuevos.svelte'
   import IconoLx from '@iconify/svelte/dist/OfflineIcon.svelte'
-  import { Diario as IconoDiario, Ficha as IconoFicha } from '$icons'
+  import { Diario as IconoDiario, Ficha as IconoFicha, Loop as IconoRecargar } from '$icons'
   import { leerReglas } from '$lib/lockedex/reglas.js'
   import TarjetaEntrenador from '$lib/lockedex/TarjetaEntrenador.svelte'
   import Diario from '$lib/lockedex/Diario.svelte'
@@ -42,6 +42,9 @@
   let gameStore, gameKey, gameData
   const { open: abrirVentana } = getContext('simple-modal')
   const abrirFicha = () => abrirVentana(TarjetaEntrenador, { id: $activeGame })
+  // Recargar la partida del emulador vinculada (o ir a vincularla). Lo hace Sincronizacion.svelte
+  $: savVinculado = typeof window !== 'undefined' && $activeGame ? localStorage.getItem(`lockedex.savruta.${$activeGame}`) : null
+  const recargarSav = () => window.dispatchEvent(new Event('lx:recargar-sav'))
   const abrirDiario = () => abrirVentana(Diario, { id: $activeGame })
   const abrirHuevos = () => abrirVentana(GeneradorHuevos, { id: $activeGame })
   // con el Egglocke activo, el generador de huevos a mano (se mira al cambiar de run o de datos)
@@ -194,6 +197,9 @@
               {/if}
               <button class="lx-continuar lx-accion-run" on:click={abrirFicha} title={t('Imagen de tu run para compartir', 'An image of your run to share')} data-lx-original>
                 <IconoLx inline icon={IconoFicha} class="lx-accion-icono" />{t('Ficha', 'Card')}
+              </button>
+              <button class="lx-continuar lx-accion-run" on:click={recargarSav} title={savVinculado ? t(`Volver a leer ${savVinculado.split(/[\\/]/).pop()}`, `Read ${savVinculado.split(/[\\/]/).pop()} again`) : t('Elige la partida del emulador en Importar', 'Choose your emulator save in Import')} data-lx-original>
+                <IconoLx inline icon={IconoRecargar} class="lx-accion-icono" />{savVinculado ? t('Recargar .sav', 'Reload .sav') : t('Vincular .sav', 'Link .sav')}
               </button>
             </div>
 
