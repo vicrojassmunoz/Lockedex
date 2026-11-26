@@ -24,7 +24,14 @@ export const Shiny = objeto('shiny-charm') // Variocolor
 export const Missed = objeto('smoke-ball') // Fallido: la Bola Humo, para huir
 export const Descartado = objeto('papelera') // Descartado: papelera metálica
 export const Gift = objeto('cherish-ball') // Regalo: la Gloria Ball de los Pokémon de evento
-export const Traded = imagen('/lx/mapa/frlg/cable_club_receptionist.png') // Intercambiado: el Club de Cable
+// Intercambiado: la consola de la pantalla de intercambio de Esmeralda. Es apaisada (104×48): va a lo
+// ancho del icono cuadrado, un poco desbordada por los lados para que se vea más grande, y se reduce sin
+// «pixelated», que al encoger se come líneas sueltas
+export const Traded = {
+  body: `<image href="/lx/objetos/consola-intercambio.png" x="-3" y="7.5" width="38" height="17.5"/>`,
+  width: 32,
+  height: 32
+}
 export const Map = objeto('mapa-pared') // Mapa (el del mapa de RojoFuego)
 export const Box = objeto('pc') // Caja: el PC del Centro Pokémon
 export const Deceased = objeto('lapida') // Muerto: lápida de la Torre Pokémon

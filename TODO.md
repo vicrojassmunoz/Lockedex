@@ -48,7 +48,7 @@ Notas para retomar el trabajo en otra sesión. Lo primero es el mapa del proyect
 - [x] Algunos iconos son **sprites de objetos** de los juegos (`icons/sprites.js`): Poké Ball (capturado), Amuleto Iris (variocolor), Cuerda Huida (huyó) y Mapa del pueblo.
 - [x] 1.7.3: selector de inicial con Piedra Fuego, Agua y Hoja (sprites del juego).
 - [x] 1.7.4: menú de equipo de los jefes **a píxeles como en GBA** (marcos escalonados en `lib/lockedex/gba.js`, letra Fusion Pixel, barra de PS de la consola) y ficha rehecha como la pantalla «INFO. POKéMON»: estadísticas al nivel del jefe junto a las base, iconos de tipo de 3.ª gen, habilidad/objeto y ◀ ▶ para pasar de Pokémon.
-- [ ] (1.16.0: efectos de campo de los jefes con las rocas de clima y objetos de la 2.ª–5.ª gen en `Effect.svelte`, e iconos grandes encajados con `encajar.js`. Pendiente: que el usuario elija entre la recepcionista y la consola del intercambio para «Intercambio»; recorte de la consola en `/home/claude/pruebas/intercambio-consola.png`, sacado de `graphics/trade/gba.png` de pokeemerald) **Iconos con sprites de los juegos (≤ 5.ª gen, nada de 3D)** — el usuario deja libertad para elegir los mejores; ir poco a poco, unos cuantos por versión. Hoja de los actuales: `herramientas/generar_iconos.py --muestra`.
+- [ ] (1.16.0: efectos de campo de los jefes con las rocas de clima y objetos de la 2.ª–5.ª gen en `Effect.svelte`, e iconos grandes encajados con `encajar.js`. Intercambio: elegida la consola de la pantalla de intercambio de Esmeralda, `consola-intercambio.png` desde `graphics/trade/gba.png` de pokeemerald) **Iconos con sprites de los juegos (≤ 5.ª gen, nada de 3D)** — el usuario deja libertad para elegir los mejores; ir poco a poco, unos cuantos por versión. Hoja de los actuales: `herramientas/generar_iconos.py --muestra`.
   - Criterio: **objeto de la mochila** (PokéSprite, `/home/claude/pokesprite/items`) cuando el icono representa algo que se lleva (Poké Ball, piedras, Mapa, Cuerda Huida, MT…); **objeto del tileset/mapa** (pret: pokefirered/pokeemerald `data/tilesets/.../metatiles`, `graphics/`) cuando es mobiliario o escenario: el **PC** mejor como el PC del Centro Pokémon, la Caja, la Tienda, la Liga (estatua/puerta), el cementerio (lápida de la Torre Pokémon)…
   - **No** usar proteínas/vitaminas para las estadísticas (no le gustan). Los iconos de estadísticas actuales (Atk, Def, Spa, Spd…) son «feotes»: rehacerlos a mi manera (p. ej. símbolos pixel claros o las barras de colores de la pantalla de datos).
   - Se añaden a `web/static/lx/objetos/` (o `lx/tiles/`) y a `icons/sprites.js` + `IconSet.ts`; los créditos ya citan PokéSprite y pret.
@@ -74,7 +74,7 @@ Cómo hacerlo: ir componente a componente, con capturas antes y después. Se pue
 
 ---
 
-- [ ] **Actualizaciones más ligeras** (idea del usuario, 25/11). **1.13.0: comprobado que la descarga diferencial ya funciona**: el instalador NSIS se copia en la caché del actualizador al instalarse y se publican los `.blockmap`; comparando blockmaps reales, de la 1.12.0 a la 1.12.1 solo hay que bajar **1,3 MB de 143 MB** (de la 1.11.0, 1,9 MB). El registro de la app (`registro.txt`) apunta ahora la actividad del actualizador («Download block maps», «Full / To download»). El punto 3 (solo contenido) ya casi no hace falta. **Paso 1 hecho en la 1.9.0:** las guías ya no se prerenderizan (−171 MB sin comprimir; `electron/app` pasa de 252 a 82 MB). **Resultado real: el instalador solo baja de 148,5 a 143,3 MB**, porque esos HTML se comprimían muchísimo; casi todo el peso es Electron. Lo que de verdad aligeraría las actualizaciones es el punto 3 (solo contenido) o la descarga diferencial. Hoy cada versión baja el instalador entero (~148 MB). Medido en local: `electron/app` ocupa 252 MB sin comprimir, de los que **171 MB son `app/prerendered`** (páginas y JSON prerenderizados, en parte duplicados de `static/api`), 46 MB `client` y 35 MB `server/chunks`.
+- [x] (cerrado: con la descarga diferencial cada actualización baja ~1,3 MB) **Actualizaciones más ligeras** (idea del usuario, 25/11). **1.13.0: comprobado que la descarga diferencial ya funciona**: el instalador NSIS se copia en la caché del actualizador al instalarse y se publican los `.blockmap`; comparando blockmaps reales, de la 1.12.0 a la 1.12.1 solo hay que bajar **1,3 MB de 143 MB** (de la 1.11.0, 1,9 MB). El registro de la app (`registro.txt`) apunta ahora la actividad del actualizador («Download block maps», «Full / To download»). El punto 3 (solo contenido) ya casi no hace falta. **Paso 1 hecho en la 1.9.0:** las guías ya no se prerenderizan (−171 MB sin comprimir; `electron/app` pasa de 252 a 82 MB). **Resultado real: el instalador solo baja de 148,5 a 143,3 MB**, porque esos HTML se comprimían muchísimo; casi todo el peso es Electron. Lo que de verdad aligeraría las actualizaciones es el punto 3 (solo contenido) o la descarga diferencial. Hoy cada versión baja el instalador entero (~148 MB). Medido en local: `electron/app` ocupa 252 MB sin comprimir, de los que **171 MB son `app/prerendered`** (páginas y JSON prerenderizados, en parte duplicados de `static/api`), 46 MB `client` y 35 MB `server/chunks`.
   1. **Adelgazar lo que se empaqueta:** ver qué se prerenderiza (probablemente las rutas `/api/...` de cada juego/Pokémon) y servirlo desde `static/` o generarlo al vuelo; quitar duplicados. Puede bajar el instalador a la mitad o menos.
   2. **Comprobar que funciona la descarga diferencial** de electron-updater (ya se publican los `.blockmap`): mirar en el registro de la app si pone «Downloading … differential»; si no compensa por la compresión sólida del NSIS, probar `nsis.differentialPackage`.
   3. **Actualizaciones solo de contenido:** si Electron no cambia, bajar solo un zip de `app/` (unos MB) firmado con hash SHA-256 publicado en la release, descomprimirlo en `userData` y servir desde ahí; el instalador completo solo cuando cambia la versión de Electron o `main.mjs`.
@@ -152,23 +152,23 @@ Una pantalla `/analista`, enlazada desde la barra, para preparar cualquier comba
 
 **Pasos:**
 
-- [ ] **Paso 1 · Juego e inicial:** buscador como el de Nueva partida.
-- [ ] **Paso 2 · Jefe:** lista de los jefes del juego en orden, agrupados (gimnasios, rival, Alto Mando, equipo malvado), con su nivel máximo. Este modo muestra el equipo del jefe aunque esté activado el modo sin spoilers; hay que avisarlo.
-- [ ] **Paso 3 · Tu equipo (hasta 6):** por cada Pokémon:
-  - [ ] Especie, con buscador en español o inglés.
-  - [ ] Nivel, por defecto el nivel máximo del jefe.
-  - [ ] Naturaleza, habilidad y objeto.
-  - [ ] IVs y EVs, con preajustes: "salvaje medio" (IVs 15, EVs 0), "perfecto" (31) y a mano.
-  - [ ] 4 movimientos, sugiriendo los que aprende por nivel hasta ese nivel y por MT en ese juego.
-- [ ] **Atajos para rellenar el equipo:** "Copiar de mi run", "Copiar de mi .sav importado" y "Aleatorio con X características" (por ejemplo: monotipo, solo Pokémon capturables antes de ese jefe, sin legendarios, etc.).
-- [ ] **Resultado:**
-  - [ ] Medidor de riesgo grande y consejos.
-  - [ ] Tabla de enfrentamientos: cada Pokémon tuyo contra cada Pokémon del jefe, con el % de daño que haces y recibes (mín–máx), quién es más rápido y avisos de KO de un golpe.
-  - [ ] Mejor Pokémon para abrir el combate y "respuesta" recomendada para cada Pokémon del jefe.
-- [ ] **Qué pasaría si…:** deslizador de nivel y cambio rápido de movimientos o naturaleza, recalculando al momento.
+- [x] **Paso 1 · Juego e inicial:** buscador como el de Nueva partida.
+- [x] **Paso 2 · Jefe:** lista de los jefes del juego en orden, agrupados (gimnasios, rival, Alto Mando, equipo malvado), con su nivel máximo. Este modo muestra el equipo del jefe aunque esté activado el modo sin spoilers; hay que avisarlo.
+- [x] **Paso 3 · Tu equipo (hasta 6):** por cada Pokémon:
+  - [x] Especie, con buscador en español o inglés.
+  - [x] Nivel, por defecto el nivel máximo del jefe.
+  - [x] Naturaleza, habilidad y objeto.
+  - [x] IVs y EVs, con preajustes: "salvaje medio" (IVs 15, EVs 0), "perfecto" (31) y a mano.
+  - [x] 4 movimientos, sugiriendo los que aprende por nivel hasta ese nivel y por MT en ese juego.
+- [x] **Atajos para rellenar el equipo:** "Copiar de mi run", "Copiar de mi .sav importado" y "Aleatorio con X características" (por ejemplo: monotipo, solo Pokémon capturables antes de ese jefe, sin legendarios, etc.).
+- [x] **Resultado:**
+  - [x] Medidor de riesgo grande y consejos.
+  - [x] Tabla de enfrentamientos: cada Pokémon tuyo contra cada Pokémon del jefe, con el % de daño que haces y recibes (mín–máx), quién es más rápido y avisos de KO de un golpe.
+  - [x] Mejor Pokémon para abrir el combate y "respuesta" recomendada para cada Pokémon del jefe.
+- [ ] (hecho el deslizador de nivel; falta el cambio rápido de movimientos o naturaleza) **Qué pasaría si…:** deslizador de nivel y cambio rápido de movimientos o naturaleza, recalculando al momento.
 - [ ] **Comparar dos equipos** lado a lado contra el mismo jefe.
-- [ ] **Equipos guardados** en `localStorage` (`lockedex.analista.equipos`), que el archivo de partidas ya sincroniza. Opción de exportar e importar en formato Showdown (texto), que es el estándar de la comunidad.
-- [ ] Si el cálculo de muchos enfrentamientos tarda, llevarlo a un Web Worker.
+- [x] (hecho: guardar, exportar e importar) **Equipos guardados** en `localStorage` (`lockedex.analista.equipos`), que el archivo de partidas ya sincroniza. Opción de exportar e importar en formato Showdown (texto), que es el estándar de la comunidad.
+- [ ] (de momento no hace falta: el cálculo va rápido) Si el cálculo de muchos enfrentamientos tarda, llevarlo a un Web Worker.
 
 ---
 
@@ -182,13 +182,13 @@ En un juego pasado por un randomizer, los Pokémon de cada ruta y los equipos de
 - [x] Opciones del modo (1.15.0, en `reglas.js`: `nivelesJefes` y `datosAleatorios`, con `ajustarNivel`, `ajustarEquipoJefe` y `sinCalculos`):
   - [x] Qué está aleatorizado (entrenadores, y tipos/habilidades/movimientos, que quita el riesgo y el asistente): solo salvajes, salvajes y entrenadores, o también habilidades, movimientos y tipos.
   - [x] Si los niveles de los jefes se mantienen o están cambiados (por ejemplo, +X %).
-- [ ] **En la partida:**
-  - [ ] El buscador de encuentro ofrece **cualquier Pokémon** (`getAllPkmn`), no los de la tabla de la ruta. Esto equivale a forzar el ajuste "Encounter suggestions" desactivado.
-  - [ ] Sin estadísticas, tipos sugeridos ni análisis basados en datos del juego cuando no aplican.
-  - [ ] Jefes: solo nombre, lugar y **nivel máximo**. Si los entrenadores están aleatorizados, ocultar el equipo, el riesgo y el asistente; se puede reutilizar la lógica del modo sin spoilers (`gym-card.svelte`, ajuste `spoilers`).
-  - [ ] Opción de apuntar a mano el equipo real del jefe cuando lo veas en el juego, para que el riesgo y el asistente funcionen con esos datos.
+- [x] **En la partida:**
+  - [x] El buscador de encuentro ofrece **cualquier Pokémon** (`getAllPkmn`), no los de la tabla de la ruta. Esto equivale a forzar el ajuste "Encounter suggestions" desactivado.
+  - [ ] (en parte: con «tipos aleatorizados» no hay riesgo ni asistente; faltan las sugerencias de tipos y las estadísticas) Sin estadísticas, tipos sugeridos ni análisis basados en datos del juego cuando no aplican.
+  - [x] Jefes: solo nombre, lugar y **nivel máximo**. Si los entrenadores están aleatorizados, ocultar el equipo, el riesgo y el asistente; se puede reutilizar la lógica del modo sin spoilers (`gym-card.svelte`, ajuste `spoilers`).
+  - [x] Opción de apuntar a mano el equipo real del jefe cuando lo veas en el juego, para que el riesgo y el asistente funcionen con esos datos.
 - [x] 1.10.0: compacto en Randomlocke con riesgo solo si se apuntó el equipo real; barra de EXP con «MÁX n» y el próximo jefe en el título.
-- [ ] La importación del .sav sigue funcionando igual: el lector no depende de las tablas del juego.
+- [x] La importación del .sav sigue funcionando igual: el lector no depende de las tablas del juego.
 
 ---
 
@@ -209,10 +209,10 @@ Hecho: reglas por run en `lockedex.reglas.<id>` (`web/src/lib/lockedex/reglas.js
 - [x] **Game over** (1.12.0: derrotas, «He perdido», pantalla de FIN DE LA PARTIDA, nuevo intento con historial y modo con vidas; probado por el usuario). 1.16.0: la app lo propone sola al caer todo el equipo con la regla normal (`recordarEquipo`/`equipoCaido` en `derrotas.js`, panel «¡TU EQUIPO HA CAÍDO!»). Antes: Falta: proponerlo solo al caer todo el equipo con la regla normal.
 - [ ] Variantes populares activables:
   - [ ] Wedlocke: parejas, y solo combate un miembro de la pareja.
-  - [ ] Monotipo.
-  - [ ] Sin legendarios.
-  - [ ] Soul Link a dos jugadores, emparejando encuentros por zona.
-  - [ ] Wonderlocke.
+  - [x] Monotipo (regla con aviso).
+  - [x] Sin legendarios (regla con aviso).
+  - [ ] (ver «Duallocke / Soul Link» más abajo) Soul Link a dos jugadores, emparejando encuentros por zona.
+  - [ ] Wonderlocke (ver «Otras variantes» más abajo).
 - [x] (hecho: las plantillas salen en Nueva partida) **Plantillas de reglas:** "Nuzlocke clásico", "Hardcore", "Randomlocke", "A mi manera", y elegir la plantilla al crear la partida.
 - [x] 1.16.0: segundo encuentro en una zona sin su cláusula, filas marcadas con «!» (`avisosFila`) y luz roja (graves) o ámbar (avisos) en la barra. Falta integrarlo con el asistente. **Reglas inteligentes:** avisos cuando registras algo que rompe una regla. Por ejemplo:
   - segundo encuentro en una zona sin regalo ni shiny;
@@ -258,7 +258,7 @@ Ampliar los modos además de Nuzlocke clásico, Hardcore y Randomlocke. Cada mod
 - [ ] **Lector de .sav:** (1.12.1) **probado con una partida real de RojoFuego del usuario** (49 h, equipo de 6 y 17 en cajas: juego, entrenador, motes, niveles y naturalezas bien) y **arreglados los IVs y la habilidad**, que se leían de las cintas (bytes 8–11 de la subestructura M) en vez de los bytes 4–7: salían siempre 0. La partida está en `/home/claude/pruebas/sav-real/` (no subirla al repo: datos personales); probar con `node /home/claude/pruebas/sav/leer_real.mjs <archivo>`. Falta probar Rubí, Zafiro, Esmeralda, VerdeHoja y hacks CFRU. Antes: probado solo con partidas sintéticas. Hay que probarlo con partidas reales de Rubí, Zafiro, Esmeralda, RojoFuego y VerdeHoja (y con hacks CFRU como Radical Red y Unbound, que amplían especies y pueden no ser compatibles).
 - [ ] Añadir .sav de otras generaciones (1–2 en GB/GBC y 4–5 en NDS, siguiendo los formatos de PKHeX).
 - [x] **Modo compacto con acciones rápidas** (1.5.0): apuntar el encuentro de la siguiente zona (capturado o fallido) y marcar como caído a un miembro del equipo. Se envían por IPC a la ventana principal (`lib/lockedex/acciones.js`), que es la que guarda.
-- [x] 1.15.0: **naturalezas reales de los jefes de la 3.ª gen** (calculadas como `CreateNPCTrainerParty`: hash del nombre del entrenador y de la especie, `herramientas/naturalezas_jefes.py` → campo «nat»), **IVs de Platino** (`iv_scale` de pret/pokeplatinum) y EVs 0 explícitos. Falta: naturalezas de la 4.ª gen en adelante (PID con el RNG sembrado con índice y clase del entrenador) e IVs de DP, HGSS y la 5.ª gen. Antes, 1.10.0 (en parte): **IVs reales de los jefes de RojoFuego, VerdeHoja, Esmeralda y (1.10.1) Rubí/Zafiro** (525 Pokémon, de pret: `herramientas/ivs_jefes.py` → campo «iv» en `datos/jefes`); clima de Sequía/Llovizna/Chorro Arena/Nevada; movimientos con prioridad que rematan. Falta: IVs de otros juegos (4.ª+ gen), naturalezas de los entrenadores y EVs. Antes: **Afinar el riesgo:** IVs y EVs reales de los jefes por juego, cambios de forma o tipo, objetos, clima y prioridad.
+- [x] 1.15.0: **naturalezas reales de los jefes de la 3.ª gen** (calculadas como `CreateNPCTrainerParty`: hash del nombre del entrenador y de la especie, `herramientas/naturalezas_jefes.py` → campo «nat»), **IVs de Platino** (`iv_scale` de pret/pokeplatinum) y EVs 0 explícitos. Falta: naturalezas de la 4.ª gen en adelante (PID con el RNG sembrado con índice y clase del entrenador), IVs de DP, HGSS y la 5.ª gen, y corregir los equipos de Gardenia (Cherrim, no Cherubi) y Candice (niveles) en Platino, que por eso se quedan sin IVs. Antes, 1.10.0 (en parte): **IVs reales de los jefes de RojoFuego, VerdeHoja, Esmeralda y (1.10.1) Rubí/Zafiro** (525 Pokémon, de pret: `herramientas/ivs_jefes.py` → campo «iv» en `datos/jefes`); clima de Sequía/Llovizna/Chorro Arena/Nevada; movimientos con prioridad que rematan. Falta: IVs de otros juegos (4.ª+ gen), naturalezas de los entrenadores y EVs. Antes: **Afinar el riesgo:** IVs y EVs reales de los jefes por juego, cambios de forma o tipo, objetos, clima y prioridad.
 - [x] 1.15.0 (`lib/lockedex/sincronizar.js`): al guardar en el emulador se aplican solas las evoluciones (emparejando por línea evolutiva) y se pregunta por los del equipo con 0 PS; en Importar salen también como «caído». Arreglada de paso una carrera en `pokemon-selector.svelte` que volvía a guardar la especie vieja. Antes: Sincronizar la partida del emulador con la run de forma más fina (evoluciones, muertes cuando el Pokémon sale debilitado en el .sav).
 - [x] 1.10.1: 15 logros (antes 8) con sprites de objetos de los juegos en vez de símbolos, en gris hasta conseguirlos, y sección «Por juego» en el perfil.
 - [x] Privacidad y créditos reescritos en español (1.5.0), con lo que de verdad hace la versión de escritorio y los proyectos en los que se apoya.

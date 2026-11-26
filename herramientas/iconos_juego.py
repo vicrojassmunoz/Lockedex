@@ -47,6 +47,22 @@ def en16(im):
     lienzo.paste(im, ((16 - im.size[0]) // 2, (16 - im.size[1]) // 2), im)
     return lienzo
 
+def consola_intercambio():
+    """La consola de la pantalla de intercambio de Esmeralda (graphics/trade/gba.png con gba.pal): solo la
+    mitad de arriba (pantalla, cruceta y botones, sin la línea de texto), a su tamaño (104×48)."""
+    base = '/home/claude/sprites-pret/pokeemerald/graphics/trade/'
+    im = Image.open(base + 'gba.png')
+    filas = [l for l in open(base + 'gba.pal').read().split('\n')[3:] if l.strip()]
+    cols = [tuple(map(int, l.split())) for l in filas]
+    out = Image.new('RGBA', im.size, (0, 0, 0, 0))
+    p = im.load()
+    for y in range(im.size[1]):
+        for x in range(im.size[0]):
+            if p[x, y]: out.putpixel((x, y), cols[p[x, y]] + (255,))
+    out = out.crop((0, 0, 112, 48))
+    return out.crop(out.getbbox())
+
+guardar(consola_intercambio(), 'consola-intercambio')
 guardar(en16(objeto_mapa('secondary/pokemon_center', 741)), 'pc')
 guardar(en16(objeto_mapa('secondary/pokemon_tower', 657)), 'lapida')
 guardar(en16(misc_pret('town_map')), 'mapa-pared')

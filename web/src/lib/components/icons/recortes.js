@@ -61,6 +61,11 @@ export default {
   0,
   30
  ],
+ "consola-intercambio": [
+  0,
+  -8,
+  32
+ ],
  "cuchara-torcida": [
   5,
   6,
