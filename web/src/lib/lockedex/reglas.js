@@ -22,8 +22,24 @@ export const REGLAS = [
   { id: 'sinLegendarios', grupo: 'variantes', es: 'Sin legendarios', en: 'No legendaries', desc: ['Avisa si capturas un legendario o singular.', 'Warns if you catch a legendary or mythical.'] },
   { id: 'monotipo', grupo: 'variantes', tipo: 'tipo', es: 'Monotipo', en: 'Monotype', desc: ['Solo Pokémon del tipo elegido. Avisa si capturas uno que no lo es.', 'Only Pokémon of the chosen type. Warns otherwise.'] },
   { id: 'randomlocke', grupo: 'variantes', es: 'Randomlocke (juego aleatorizado)', en: 'Randomlocke (randomized game)', desc: ['Puedes registrar cualquier Pokémon en cada ruta y no se muestran sugerencias de encuentros.', 'Any Pokémon can be logged on each route and encounter suggestions are off.'] },
-  { id: 'entrenadoresAleatorios', grupo: 'variantes', depende: 'randomlocke', es: 'Entrenadores también aleatorizados', en: 'Trainers randomized too', desc: ['Oculta los equipos de los jefes; puedes apuntar el equipo real cuando lo veas.', 'Hides boss teams; you can log the real team when you see it.'] }
+  { id: 'entrenadoresAleatorios', grupo: 'variantes', depende: 'randomlocke', es: 'Entrenadores también aleatorizados', en: 'Trainers randomized too', desc: ['Oculta los equipos de los jefes; puedes apuntar el equipo real cuando lo veas.', 'Hides boss teams; you can log the real team when you see it.'] },
+  { id: 'nivelesJefes', grupo: 'variantes', depende: 'randomlocke', tipo: 'opciones', opciones: [['', 'Como el original', 'As original'], ['10', '+10 %', '+10%'], ['20', '+20 %', '+20%'], ['30', '+30 %', '+30%'], ['50', '+50 %', '+50%']], es: 'Niveles de los jefes', en: 'Boss levels', desc: ['Si el randomizer subió el nivel de los entrenadores: el nivel máximo, la barra de EXP, los equipos y el riesgo usan el nivel ajustado.', 'If the randomizer raised trainer levels: level caps, the EXP bar, teams and risk use the adjusted level.'] },
+  { id: 'datosAleatorios', grupo: 'variantes', depende: 'randomlocke', es: 'Tipos, habilidades o movimientos aleatorizados', en: 'Types, abilities or moves randomized', desc: ['El riesgo y el asistente de combate salen de los datos de cada especie; con esto activado no se calculan (no serían fiables).', 'Risk and the battle assistant come from species data; with this on they are not calculated (they would be wrong).'] }
 ]
+
+// Randomlocke con niveles de jefes cambiados: factor y ajuste de un nivel o de un equipo de jefe
+export const factorNiveles = (reglas) => (reglas?.randomlocke && +reglas.nivelesJefes ? 1 + +reglas.nivelesJefes / 100 : 1)
+export const ajustarNivel = (n, reglas) => {
+  const f = factorNiveles(reglas)
+  if (f === 1 || n == null || n === '' || isNaN(+n)) return n
+  return Math.min(100, Math.round(+n * f))
+}
+export const ajustarEquipoJefe = (pokemon, reglas) =>
+  factorNiveles(reglas) === 1
+    ? pokemon
+    : (pokemon || []).map((p) => (/^[+-]/.test('' + p?.level) || isNaN(parseInt(p?.level, 10)) ? p : { ...p, level: '' + ajustarNivel(parseInt(p.level, 10), reglas) }))
+// Con tipos, habilidades o movimientos aleatorizados, los cálculos con datos de las especies no valen
+export const sinCalculos = (reglas) => !!(reglas?.randomlocke && reglas?.datosAleatorios)
 
 export const GRUPOS_REGLAS = {
   clausulas: ['Cláusulas', 'Clauses'],
@@ -106,7 +122,7 @@ export const comprobarReglas = async ({ partida, resumen, liga, pokedex }) => {
   }
 
   if (reglas.nivelMax && resumen.siguienteJefe && liga) {
-    const cap = nivelMaximo(liga[resumen.siguienteJefe.value])
+    const cap = ajustarNivel(nivelMaximo(liga[resumen.siguienteJefe.value]), reglas)
     let sav = null
     try {
       sav = JSON.parse(localStorage.getItem(claveSav(partida.id)) || 'null')

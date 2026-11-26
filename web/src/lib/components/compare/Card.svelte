@@ -12,6 +12,7 @@
   import { color } from '$lib/data/colors.ts'
 
   import { createImgUrl } from '$utils/rewrites'
+  import { recorte } from '$lib/lockedex/recorte.js'
 
   $: atk = pokemon[0]
   $: def = pokemon[1]
@@ -68,7 +69,10 @@
         <img
           alt={atk.name}
           in:fade={{ duration: 500 }}
-          class="flip z-20 -mx-6 flex h-32 w-32"
+          width="96"
+          height="96"
+          use:recorte={'suelo'}
+          class="flip lx-cmp-sprite z-20 flex"
           style="transform: scaleX(-1); "
           src={sprite(atk, atk.status)}
         />
@@ -77,7 +81,10 @@
         <img
           alt={def.name}
           in:fade={{ duration: 500 }}
-          class="z-20 -mx-6 flex h-32 w-32"
+          width="96"
+          height="96"
+          use:recorte={'suelo'}
+          class="lx-cmp-sprite z-20 flex"
           src={sprite(def)}
         />
       {/key}
@@ -125,6 +132,14 @@
 </SettingWrapper>
 
 <style lang="postcss">
+  /* recortados a su dibujo y apoyados en la línea de abajo, en vez de 96 px escalados a 128 */
+  .lx-cmp-sprite {
+    width: 84px;
+    height: 84px;
+    align-self: flex-end;
+    margin-bottom: 4px;
+    transform-origin: 50% 100%;
+  }
   img.flip {
     animation: bob-left 4.5s ease 0.3s infinite;
   }

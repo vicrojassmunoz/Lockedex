@@ -12,6 +12,7 @@
   import * as A from '$lib/lockedex/analista.js'
   import Riesgo from '$lib/lockedex/Riesgo.svelte'
   import MenuEquipo from '$lib/lockedex/MenuEquipo.svelte'
+  import { recorte } from '$lib/lockedex/recorte.js'
   import { COLOR_TIPO, RIESGO } from '$lib/lockedex/colores.js'
 
   const es = idioma() === 'es'
@@ -492,7 +493,7 @@
         {@const sp = especieDe(m.especie)}
         <article class:lx-a-vacio-slot={!sp}>
           <div class="lx-a-m-cab">
-            <img src={sp ? sprite(sp.nombre) : '/assets/img/pokemon/base-201-question.png'} alt="" class:lx-a-gris={!sp} />
+            <img src={sp ? sprite(sp.nombre) : '/assets/img/pokemon/base-201-question.png'} alt="" class:lx-a-gris={!sp} width="96" height="96" use:recorte />
             <div class="lx-a-m-nombre">
               <input list="lx-esp-list" bind:value={m.especie} on:change={() => alCambiarEspecie(i)} placeholder={t(`Pokémon ${i + 1}`, `Pokémon ${i + 1}`)} />
               {#if sp}
@@ -503,25 +504,25 @@
           </div>
           {#if sp}
             <div class="lx-a-campos">
-              <label>{t('Nivel', 'Level')}<input type="number" min="1" max="100" bind:value={m.nivel} on:change={() => actualizarSugerencias(i)} /></label>
-              <label>{t('Naturaleza', 'Nature')}
+              <label><span class="lx-a-et">{t('Nivel', 'Level')}</span><input type="number" min="1" max="100" bind:value={m.nivel} on:change={() => actualizarSugerencias(i)} /></label>
+              <label><span class="lx-a-et">{t('Naturaleza', 'Nature')}</span>
                 <select bind:value={m.naturaleza}>
                   {#each nats as n}<option value={n.id}>{n.nombre}</option>{/each}
                 </select>
               </label>
-              <label>{t('Habilidad', 'Ability')}
+              <label><span class="lx-a-et">{t('Habilidad', 'Ability')}</span>
                 <select bind:value={m.habilidad}>
                   {#each sp.habilidades as h}<option value={h}>{traducirNombre(h)}</option>{/each}
                 </select>
               </label>
-              <label>{t('Objeto', 'Item')}<input list="lx-obj-list" bind:value={m.objeto} placeholder={t('Ninguno', 'None')} /></label>
-              <label>IVs
+              <label><span class="lx-a-et">{t('Objeto', 'Item')}</span><input list="lx-obj-list" bind:value={m.objeto} placeholder={t('Ninguno', 'None')} /></label>
+              <label><span class="lx-a-et">IVs</span>
                 <select bind:value={m.iv}>
                   {#each Object.entries(A.PRESETS_IV) as [k, v]}<option value={k}>{es ? v.es : v.en}</option>{/each}
                   {#if m.ivExacto}<option value="exacto">{t('De tu partida', 'From your save')}</option>{/if}
                 </select>
               </label>
-              <label>EVs
+              <label><span class="lx-a-et">EVs</span>
                 <select bind:value={m.ev}>
                   {#each Object.entries(A.PRESETS_EV) as [k, v]}<option value={k}>{es ? v.es : v.en}</option>{/each}
                   {#if m.evExacto}<option value="exacto">{t('De tu partida', 'From your save')}</option>{/if}
@@ -587,7 +588,7 @@
           {/if}
         </div>
 
-        <ul class="lx-a-consejos">
+        <ul class="lx-a-consejos lx-a-dialogo">
           {#each riesgo.todosLosConsejos || riesgo.consejos as c}
             <li class="lx-{c.tipo}">{c.texto}</li>
           {/each}
@@ -600,7 +601,7 @@
                 <tr>
                   <th>{t('Su Pokémon', 'Their Pokémon')}</th>
                   {#each riesgo.matriz[0]?.filas || [] as f}
-                    <th><img src={sprite(f.y.especie)} alt="" /><span>{f.y.nombre}</span></th>
+                    <th><img src={sprite(f.y.especie)} alt="" width="96" height="96" use:recorte /><span>{f.y.nombre}</span></th>
                   {/each}
                 </tr>
               </thead>
@@ -609,11 +610,12 @@
                   {@const mejor = mejorDeFila(fila)}
                   <tr>
                     <th>
-                      <img src={sprite(fila.jefe.name)} alt="" />
+                      <img src={sprite(fila.jefe.name)} alt="" width="96" height="96" use:recorte />
                       <span>{fila.jefe.name.replace(/-/g, ' ')}<small>{t('Nv.', 'Lv.')} {fila.jefe.level} · {t('Vel.', 'Spe')} {fila.velocidad || '?'}</small></span>
                     </th>
                     {#each fila.filas as f, k}
                       <td class={claseCelda(f)} class:lx-a-mejor={k === mejor}>
+                        {#if k === mejor}<b class="lx-a-sello">{t('MEJOR', 'BEST')}</b>{/if}
                         <span class="lx-a-hace" title={f.mejor ? movEs(f.mejor) : ''}>▲ {pct(f.hace)}–{pct(f.haceMax)}%</span>
                         <small>{f.mejor ? movEs(f.mejor) : t('sin ataques', 'no attacks')}</small>
                         <span class="lx-a-recibe" title={f.peligro ? movEs(f.peligro) : ''}>▼ {pct(f.recibeMin)}–{pct(f.recibe)}%</span>
@@ -627,7 +629,7 @@
             </table>
           </div>
           <p class="lx-a-nota">
-            {t('▲ daño que haces (mín–máx, con tu mejor ataque) · ▼ daño que recibes (con su ataque más peligroso) · ⚡ eres más rápido · «KO en / aguantas» cuenta golpes en un 1 contra 1 · verde: lo ganas con margen · amarillo: lo ganas justo · rojo: te debilita de un golpe · el borde marca la mejor respuesta. Los jefes se calculan con IVs 31, en el peor caso.', '▲ damage you deal (min–max, best move) · ▼ damage you take (their most dangerous move) · ⚡ you outspeed · “KO in / survive” counts hits in a 1v1 · green: comfortable win · yellow: narrow win · red: you get OHKOd · border marks the best answer. Bosses use 31 IVs, worst case.')}
+            {t('▲ daño que haces (mín–máx, con tu mejor ataque) · ▼ daño que recibes (con su ataque más peligroso) · ⚡ eres más rápido · «KO en / aguantas» cuenta golpes en un 1 contra 1 · verde: lo ganas con margen · amarillo: lo ganas justo · rojo: te debilita de un golpe · el recuadro naranja marca la mejor respuesta. Los jefes usan sus IVs reales cuando se conocen (3.ª generación y Platino; si no, 31, el peor caso), su naturaleza real en la 3.ª generación y 0 EVs, como en los juegos.', '▲ damage you deal (min–max, best move) · ▼ damage you take (their most dangerous move) · ⚡ you outspeed · “KO in / survive” counts hits in a 1v1 · green: comfortable win · yellow: narrow win · red: you get OHKOd · the orange frame marks the best answer. Bosses use their real IVs when known (Gen 3 and Platinum; otherwise 31, worst case), their real nature in Gen 3 and 0 EVs, like in the games.')}
           </p>
         {:else}
           <p class="lx-a-nota">{t('Rellena el nivel y los movimientos de todo tu equipo para ver la tabla de daño exacta (ahora es una estimación por tipos).', 'Fill in level and moves for your whole team to see the exact damage table (currently a type-based estimate).')}</p>
@@ -1360,5 +1362,240 @@
   }
   .lx-a-rival-menu {
     margin-top: 8px;
+  }
+
+  /* ---- Segunda pasada (1.15.0): campos de cada hueco como la pantalla de datos (etiquetas en
+     recuadro azul, casillas cuadradas con canto), consejos en un cuadro de diálogo y la tabla de daño
+     con celdas de menú y el recuadro naranja de selección ---- */
+  .lx-a-campos label {
+    gap: 2px;
+    opacity: 1;
+  }
+  .lx-a-et {
+    align-self: flex-start;
+    padding: 0 6px;
+    font-family: 'LX Pixel', 'VT323', monospace;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.5px;
+    color: #f8f8f8;
+    background: #5068a8;
+    box-shadow: inset 0 -2px 0 #384880;
+    clip-path: polygon(2px 0, calc(100% - 2px) 0, 100% 2px, 100% 100%, 0 100%, 0 2px);
+  }
+  :global(.dark) .lx-a-et {
+    background: #6a5cb0;
+    box-shadow: inset 0 -2px 0 #4a3d88;
+  }
+  .lx-a-equipo input,
+  .lx-a-equipo select {
+    border-radius: 0 !important;
+    border: 2px solid #506078 !important;
+    background: #f8f8f8;
+    box-shadow: inset 0 -3px 0 #d8dee6;
+    padding: 4px 6px;
+  }
+  :global(.dark) .lx-analista .lx-a-equipo input,
+  :global(.dark) .lx-analista .lx-a-equipo select {
+    background: #24213e;
+    border-color: #6a6890 !important;
+    box-shadow: inset 0 -3px 0 #1a1830;
+  }
+  .lx-a-equipo input:focus,
+  .lx-a-equipo select:focus {
+    border-color: #f8a848 !important;
+    box-shadow: inset 0 -3px 0 #d8dee6, 0 0 0 2px #f8a848;
+  }
+  .lx-a-equipo input::placeholder {
+    color: #a0a8b4;
+  }
+  /* movimientos: como las filas de la pantalla de movimientos, con el color del tipo a la izquierda */
+  .lx-a-movs-edit {
+    gap: 4px 6px;
+  }
+  .lx-a-movs-edit input {
+    border-left: 10px solid var(--c) !important;
+    font-weight: 600;
+  }
+  .lx-a-movs-edit input:placeholder-shown {
+    border-left-color: #c8d0d8 !important;
+    font-weight: normal;
+  }
+  .lx-a-m-cab img {
+    width: 56px;
+    height: 56px;
+    margin: -4px 0;
+  }
+  .lx-a-tipos i {
+    border-radius: 0;
+    font-family: 'LX Pixel', 'VT323', monospace;
+    font-size: 12px;
+    line-height: 14px;
+    padding: 0 5px;
+    clip-path: polygon(2px 0, calc(100% - 2px) 0, 100% 2px, 100% calc(100% - 2px), calc(100% - 2px) 100%, 2px 100%, 0 calc(100% - 2px), 0 2px);
+    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.25);
+  }
+  .lx-a-x {
+    font-family: 'LX Pixel', 'VT323', monospace;
+    font-size: 12px;
+    line-height: 14px;
+    padding: 2px 5px;
+    color: #f8f8f8;
+    background: #283850;
+    opacity: 0.8;
+    clip-path: polygon(2px 0, calc(100% - 2px) 0, 100% 2px, 100% calc(100% - 2px), calc(100% - 2px) 100%, 2px 100%, 0 calc(100% - 2px), 0 2px);
+  }
+  .lx-a-x:hover {
+    opacity: 1;
+    color: #f8f8f8;
+    background: var(--lx-rojo);
+  }
+  .lx-a-link {
+    padding: 2px 8px;
+    font-family: 'LX Pixel', 'VT323', monospace;
+    font-size: 12px;
+    line-height: 16px;
+    color: #f8f8f8;
+    background: #283850;
+    opacity: 1;
+    clip-path: polygon(2px 0, calc(100% - 2px) 0, 100% 2px, 100% calc(100% - 2px), calc(100% - 2px) 100%, 2px 100%, 0 calc(100% - 2px), 0 2px);
+    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.35);
+  }
+  .lx-a-link:hover {
+    text-decoration: none;
+    background: var(--lx-rojo);
+  }
+
+  /* Consejos: cuadro de diálogo de los juegos (marco doble, letra de la consola y flecha que parpadea) */
+  .lx-a-dialogo {
+    position: relative;
+    gap: 2px;
+    padding: 10px 16px 14px;
+    background: #f8f8f8;
+    border: 3px solid #506078;
+    box-shadow: inset 0 0 0 3px #f8f8f8, inset 0 0 0 5px #a8b8c8;
+    color: #303840;
+  }
+  :global(.dark) .lx-a-dialogo {
+    background: #24213e;
+    border-color: #6a6890;
+    box-shadow: inset 0 0 0 3px #24213e, inset 0 0 0 5px #3c3866;
+    color: #ece6d4;
+  }
+  .lx-a-dialogo::after {
+    content: '▼';
+    position: absolute;
+    right: 12px;
+    bottom: 4px;
+    font-size: 12px;
+    color: #e03838;
+    animation: lx-a-flecha 1s steps(1, end) infinite;
+  }
+  @keyframes lx-a-flecha {
+    50% {
+      opacity: 0;
+    }
+  }
+  .lx-a-dialogo li {
+    padding: 2px 0 2px 26px;
+    border-radius: 0;
+    background: none;
+    font-family: 'LX Pixel', 'VT323', monospace;
+    font-size: 24px;
+    line-height: 28px;
+  }
+  .lx-a-dialogo li::before {
+    left: 2px;
+    font-family: 'LX Pixel', 'VT323', monospace;
+    font-weight: normal;
+  }
+  .lx-a-dialogo .lx-aviso::before {
+    left: 6px !important;
+  }
+
+  /* Tabla de daño: celdas cuadradas con canto, colores de la consola y la mejor con el recuadro naranja */
+  .lx-a-tabla {
+    border-spacing: 6px;
+  }
+  .lx-a-tabla th img {
+    width: 48px;
+    height: 48px;
+  }
+  .lx-a-tabla thead th span,
+  .lx-a-tabla tbody th span {
+    font-family: 'LX Pixel', 'VT323', monospace;
+    font-size: 12px;
+    line-height: 14px;
+    text-transform: uppercase;
+  }
+  .lx-a-tabla td {
+    position: relative;
+    border-radius: 0;
+    border: 2px solid var(--borde, #b0b8c0);
+    box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.08);
+    clip-path: polygon(2px 0, calc(100% - 2px) 0, 100% 2px, 100% calc(100% - 2px), calc(100% - 2px) 100%, 2px 100%, 0 calc(100% - 2px), 0 2px);
+  }
+  .lx-a-tabla td span {
+    font-family: 'LX Pixel', 'VT323', monospace;
+    font-size: 24px;
+    line-height: 24px;
+  }
+  .lx-c-bien {
+    background: #d0f0c0;
+    --borde: #58a848;
+  }
+  .lx-c-regular {
+    background: #f8f0b8;
+    --borde: #c8a030;
+  }
+  .lx-c-flojo {
+    background: #e8eaec;
+    --borde: #a8b0b8;
+  }
+  .lx-c-mal {
+    background: #f8d0c8;
+    --borde: #d05040;
+  }
+  :global(.dark) .lx-c-bien {
+    background: #1f4a30;
+    --borde: #58a848;
+  }
+  :global(.dark) .lx-c-regular {
+    background: #54451a;
+    --borde: #c8a030;
+  }
+  :global(.dark) .lx-c-flojo {
+    background: #2f2c4c;
+    --borde: #5a5880;
+  }
+  :global(.dark) .lx-c-mal {
+    background: #5a2228;
+    --borde: #d05040;
+  }
+  .lx-a-equipo select {
+    padding-right: 2px;
+  }
+  .lx-a-mejor {
+    border-color: #f8a848 !important;
+    box-shadow: inset 0 0 0 2px #f8a848, inset 0 -5px 0 rgba(0, 0, 0, 0.08) !important;
+    clip-path: none;
+  }
+  .lx-a-sello {
+    position: absolute;
+    top: -9px;
+    right: 6px;
+    padding: 0 4px;
+    font-family: 'LX Pixel', 'VT323', monospace;
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: normal;
+    color: #fff;
+    background: #e07820;
+  }
+  .lx-a-hace {
+    color: #207830;
+  }
+  .lx-a-recibe {
+    color: #c02828;
   }
 </style>

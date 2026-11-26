@@ -36,6 +36,8 @@ export async function GET({ params }) {
   }
 
   let sprite = await keyToBase64(id, shiny);
+  // Sprite que no existe: 404 (antes reventaba con un 500 al pasarle null a Buffer.from)
+  if (!sprite) return new Response(null, { status: 404 });
 
   return new Response(Buffer.from(sprite, 'base64'), {
     headers: {

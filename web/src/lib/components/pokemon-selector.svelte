@@ -109,6 +109,7 @@
   getTeams((t) => (team = t.team))
 
   let resetd, hiddenLength
+  let especiePendiente = null
   store &&
     store.subscribe(
       read((data) => {
@@ -143,11 +144,16 @@
         hidden = pkmn.hidden
         nickname = pkmn.nickname
         death = pkmn.death
-        if (pkmn.pokemon)
+        if (pkmn.pokemon && pkmn.pokemon !== selected?.alias) {
+          // Mientras llega la especie nueva (p. ej. una evolución que trae el .sav) no se escribe la fila:
+          // si no, se guardaba otra vez la especie vieja con el mote y la naturaleza nuevos
+          especiePendiente = pkmn.pokemon
           getPkmn(pkmn.pokemon).then((p) => {
             selected = p
+            especiePendiente = null
             loading = false
           })
+        } else if (pkmn.pokemon) loading = false
       })
     )
 
@@ -163,7 +169,7 @@
     ...(status?.id === 5 && death ? { death } : {})
   });
 
-  if (selected && !oEqual(topatch, resetd)) {
+  if (selected && !especiePendiente && !oEqual(topatch, resetd)) {
     console.log('Patching', location);
     store.update(patch({ [location]: topatch }));
 
@@ -754,6 +760,25 @@
 </SettingsWrapper>
 
 <style lang="postcss">
+  /* Fila en una línea (ventana de 1024 px o más): columnas con su ancho en vez de ocho iguales, para
+     que el estado («Intercambiado») quepa entero, el lugar no se corte y los botones de la derecha no
+     se salgan de la ficha. Las de ancho fijo mantienen las filas alineadas entre sí. */
+  @media (min-width: 1024px) {
+    .lx-fila:global(.lg\:grid-cols-8) {
+      grid-template-columns: 112px minmax(0, 1fr) minmax(0, 1fr) minmax(0, 0.75fr) minmax(0, 0.75fr) 148px minmax(96px, 1fr) 150px;
+    }
+    .lx-fila:global(.lg\:grid-cols-6) {
+      grid-template-columns: 112px minmax(0, 1.2fr) minmax(0, 1.2fr) 148px minmax(96px, 1fr) 150px;
+    }
+    .lx-fila {
+      column-gap: 6px;
+    }
+    .location {
+      margin-right: 4px !important;
+      overflow-wrap: anywhere;
+    }
+  }
+
   /* Ficha al lado de la fila (solo con la ventana ancha, donde hay sitio a la izquierda) */
   .lx-ficha-lado {
     display: none;

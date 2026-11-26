@@ -4,7 +4,8 @@
   import { leerPartidaGen3 } from '$lib/lockedex/sav/gen3.js'
   import { cargar, movimientos, naturalezas, habilidades, norm } from '$lib/lockedex/datos.js'
   import { partidaActiva, cargarRutas, resumirPartida } from '$lib/lockedex/partida.js'
-  import { claveSav, claveRutaSav, emparejar, leerSavGuardado } from '$lib/lockedex/equipo.js'
+  import { claveSav, claveRutaSav, leerSavGuardado } from '$lib/lockedex/equipo.js'
+  import { calcularCambiosSav, parcheCambiosSav } from '$lib/lockedex/sincronizar.js'
   import { idioma, iniciarTraduccion, traducirNombre } from '$lib/lockedex/idioma.js'
   import { getGameStore, patch } from '$lib/store'
   import { fetchData } from '$utils/fetchers'
@@ -102,57 +103,15 @@
     }
   }
 
-  // Qué se puede actualizar en la run con los datos de la partida
+  // Qué se puede actualizar en la run con los datos de la partida (lib/lockedex/sincronizar.js)
+  const linea = (especie) => info(especie)?.evoline || null
   const calcularCambios = () => {
-    if (!partida || !sav || !resumen) return (cambios = [])
-    const usados = new Set()
-    const lista = []
-    const todos = [...sav.equipo.map((p) => ({ ...p, enEquipo: true })), ...(sav.cajas || [])]
-
-    for (const e of resumen.encuentros) {
-      const s = emparejar(e, todos, usados)
-      if (!s) continue
-      usados.add(s)
-      const parche = {}
-      if (!e.nickname && s.mote && norm(s.mote) !== norm(s.especie)) parche.nickname = s.mote
-      if (!e.nature && s.naturaleza) parche.nature = s.naturaleza
-      if (norm(e.pokemon) !== norm(s.especie) && info(s.especie)) parche.pokemon = info(s.especie).alias
-      if (Object.keys(parche).length) lista.push({ tipo: 'actualizar', lugar: e.lugar, antes: e, s, parche })
-    }
-
-    // Capturas que no están en la run, por lugar de captura
-    const libres = new Set()
-    for (const s of todos) {
-      if (usados.has(s) || !s.lugarCaptura) continue
-      const lugar = resumen.encuentros.find((e) => norm(e.lugar) === norm(s.lugarCaptura))
-      if (lugar) continue
-      const existe = (partida.datos || {})[s.lugarCaptura]
-      if (existe?.pokemon) continue
-      if (libres.has(s.lugarCaptura)) continue
-      libres.add(s.lugarCaptura)
-      if (info(s.especie))
-        lista.push({ tipo: 'nuevo', lugar: s.lugarCaptura, s, parche: { pokemon: info(s.especie).alias, status: 1, nickname: s.mote, nature: s.naturaleza } })
-    }
-    cambios = lista.map((c) => ({ ...c, marcado: true }))
+    cambios = calcularCambiosSav({ partida, resumen, sav, pkdx }).map((c) => ({ ...c, marcado: true }))
   }
 
   const aplicar = () => {
     const store = getGameStore(partida.id)
-    const datos = {}
-    for (const c of cambios.filter((c) => c.marcado)) {
-      const actual = (partida.datos || {})[c.lugar] || {}
-      datos[c.lugar] = { ...actual, ...c.parche }
-    }
-    // Equipo: los del emulador que estén en la run
-    const equipoLugares = sav.equipo
-      .map((s) => {
-        const c = cambios.find((x) => x.s === s && x.marcado)
-        if (c) return c.lugar
-        const e = resumen.encuentros.find((e) => emparejar(e, [s]))
-        return e?.lugar
-      })
-      .filter(Boolean)
-    if (equipoLugares.length) datos.__team = equipoLugares
+    const datos = parcheCambiosSav({ partida, resumen, sav, cambios: cambios.filter((c) => c.marcado), linea })
     store.update(patch(datos))
     aplicado = true
     cambios = []
@@ -266,6 +225,8 @@
                   <b>{traducirNombre(c.lugar)}</b>:
                   {#if c.tipo === 'nuevo'}
                     {es ? 'añadir' : 'add'} {info(c.s.especie)?.name || c.s.especie} «{c.s.mote}»
+                  {:else if c.tipo === 'caido'}
+                    <span class="lx-caido-txt">{c.s.mote || c.antes.nickname || c.antes.pokemon} {es ? 'está debilitado (0 PS) en tu partida: marcarlo como caído' : 'has fainted (0 HP) in your save: mark as dead'}</span>
                   {:else}
                     {#if c.parche.pokemon}{es ? 'evoluciona a' : 'evolves into'} {info(c.s.especie)?.name} ·{/if}
                     {#if c.parche.nickname}{es ? 'mote' : 'nickname'} «{c.parche.nickname}» ·{/if}
@@ -492,6 +453,12 @@
     bottom: 0;
     font-family: 'VT323', monospace;
     font-size: 14px;
+  }
+  .lx-caido-txt {
+    color: #c02828;
+  }
+  :global(.dark) .lx-caido-txt {
+    color: #f87171;
   }
   .lx-cambios {
     display: flex;

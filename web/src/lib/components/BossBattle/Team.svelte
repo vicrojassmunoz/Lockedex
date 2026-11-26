@@ -1,4 +1,7 @@
 <script>
+  // Equipos de la presentación del VS: cada Pokémon en un hueco cuadrado recortado a su dibujo y apoyado
+  // en la línea de abajo de la cabecera. El tamaño del hueco depende de cuántos haya (para que quepan
+  // sin escalar a 1,25 ni amontonarse) y el primero queda junto a la insignia VS.
   export let type = 'attack',
     team = []
 
@@ -6,6 +9,7 @@
   import { flip } from 'svelte/animate'
 
   import { createImgUrl } from '$utils/rewrites'
+  import { recorte } from '$lib/lockedex/recorte.js'
 
   const sprite = (p, status) => {
     return createImgUrl(
@@ -14,178 +18,74 @@
     )
   }
 
-  const islast = (type, i) => i === 5
+  const LADOS = [88, 88, 80, 72, 64, 56, 52]
+  $: lado = LADOS[Math.min(team.length, 6)]
 </script>
 
 <div
-  class:flip={type === 'attack'}
-  class:flex-row-reverse={type === 'attack'}
-  class="team-grid team-grid__{team.length} flex h-10 justify-evenly md:h-auto md:justify-center"
+  class="lx-vs-equipo"
+  class:lx-vs-izq={type === 'attack'}
+  style="--lado: {lado}px"
 >
   {#each team as p, i (p?.original?.customId || p?.original?.location || i)}
-    <span
-      class="z-20 -mx-2 flex h-14 w-14 md:h-24 md:w-24"
-      class:last={islast(type, i, team)}
-      animate:flip
-    >
+    <span class="lx-vs-hueco" style="z-index: {20 - i}" animate:flip={{ duration: 250 }}>
       <img
         in:fade={{ duration: 200 }}
+        width="96"
+        height="96"
+        use:recorte={'suelo'}
         style="--bob-delay: {(2 * i) / 10}s"
         alt={p.name}
-        src={sprite(p)}
+        src={sprite(p, p?.original?.status)}
       />
     </span>
   {/each}
 </div>
 
-<style lang="postcss">
-  :root {
-    --bob-delay: 0.2s;
+<style>
+  .lx-vs-equipo {
+    display: flex;
+    align-items: flex-end;
+    height: 80px;
+    padding: 0 6px 8px;
   }
-
+  .lx-vs-izq {
+    flex-direction: row-reverse;
+  }
+  .lx-vs-hueco {
+    position: relative;
+    flex: none;
+    width: var(--lado);
+    height: var(--lado);
+    margin-inline: calc(var(--lado) * -0.1);
+  }
   img {
+    width: 100%;
+    height: 100%;
     image-rendering: pixelated;
-    animation: bob 5.5s ease var(--bob-delay) infinite;
+    transform-origin: 50% 100%;
+    animation: lx-vs-bob 5.5s ease var(--bob-delay) infinite;
   }
-
-  .flip img {
-    image-rendering: pixelated;
-    animation: bob-left 5.5s ease var(--bob-delay) infinite;
+  /* los tuyos miran hacia el rival */
+  .lx-vs-izq img {
+    transform: scaleX(-1);
   }
-
-  @keyframes bob {
+  @keyframes lx-vs-bob {
     0%,
     100% {
-      transform: translate(var(--tw-translate-x), var(--tw-translate-y))
-        scaleX(1) scaleY(1);
+      scale: 1 1;
     }
     25%,
     75% {
-      transform: translate(var(--tw-translate-x), var(--tw-translate-y))
-        scaleX(1.03) scaleY(0.97);
+      scale: 1.03 0.97;
     }
     50% {
-      transform: translate(var(--tw-translate-x), var(--tw-translate-y))
-        scaleX(0.99) scaleY(1.03);
+      scale: 0.98 1.03;
     }
   }
-
-  @keyframes bob-left {
-    0%,
-    100% {
-      transform: translate(var(--tw-translate-x), var(--tw-translate-y))
-        scaleX(-1) scaleY(1);
-    }
-    25%,
-    75% {
-      transform: translate(var(--tw-translate-x), var(--tw-translate-y))
-        scaleX(-1.02) scaleY(0.97);
-    }
-    50% {
-      transform: translate(var(--tw-translate-x), var(--tw-translate-y))
-        scaleX(-0.96) scaleY(1.01);
-    }
-  }
-
-  .flip img {
-    /* animation: bob-left 4.5s ease var(--bob-delay) infinite; */
-    @apply -scale-x-100;
-  }
-
-  /* -------------- Team Grid styles --------------- */
-  /* .team-grid, .team-grid span, .team-grid img { @apply transition; } */
-  .team-grid {
-    @apply flex-1;
-  }
-  .team-grid > span {
-    @apply -mx-6 scale-125;
-  }
-
-  .team-grid > span:nth-child(even) {
-    @apply z-10 -translate-y-8;
-  }
-
-  .team-grid > span:nth-child(odd) {
-    @apply z-20 -translate-y-2;
-  }
-
-  .team-grid__1.flip img {
-    @apply -translate-y-4 scale-y-[1.75] -scale-x-[1.75];
-  }
-  .team-grid__2.flip img {
-    @apply -translate-y-0 scale-y-[1.25] -scale-x-[1.25];
-  }
-  .team-grid__3.flip img {
-    @apply -translate-y-1 scale-y-[1.2] -scale-x-[1.2];
-  }
-  .team-grid__4.flip img {
-    @apply -translate-y-0 scale-y-[1.1] -scale-x-[1.1];
-  }
-
-  .team-grid__1:not(.flip) img {
-    @apply -translate-y-4 scale-y-[1.75] scale-x-[1.75];
-  }
-  .team-grid__2:not(.flip) img {
-    @apply -translate-y-0 scale-y-[1.25] scale-x-[1.25];
-  }
-  .team-grid__3:not(.flip) img {
-    @apply -translate-y-1 scale-y-[1.2] scale-x-[1.2];
-  }
-  .team-grid__4:not(.flip) img {
-    @apply -translate-y-0 scale-y-[1.1] scale-x-[1.1];
-  }
-
-  @media (min-width: 350px) {
-    .team-grid {
-      @apply translate-y-1;
-    }
-
-    .team-grid > span {
-      @apply -mx-8 scale-125;
-    }
-
-    .team-grid > span:nth-child(even) {
-      @apply z-10 -translate-y-8;
-    }
-  }
-
-  @media (min-width: theme('screens.md')) {
-    .team-grid {
-      @apply -translate-y-2;
-    }
-
-    .team-grid > span {
-      @apply -mx-6;
-    }
-
-    .team-grid__6 > span {
-      @apply -mx-7;
-    }
-
-    .team-grid > span:nth-child(even) {
-      @apply z-10 -translate-y-8;
-    }
-
-    .team-grid > span:nth-child(odd) {
-      @apply z-20 translate-y-2;
-    }
-
-    .team-grid.team-grid__1 {
-      @apply -translate-y-5;
-    }
-
-    .team-grid__1:not(.flip) img,
-    .team-grid__2:not(.flip) img,
-    .team-grid__3:not(.flip) img,
-    .team-grid__4:not(.flip) img {
-      @apply translate-y-0 scale-100;
-    }
-
-    .team-grid__1.flip img,
-    .team-grid__2.flip img,
-    .team-grid__3.flip img,
-    .team-grid__4.flip img {
-      @apply translate-y-0 scale-100 -scale-x-100;
+  @media (prefers-reduced-motion: reduce) {
+    img {
+      animation: none;
     }
   }
 </style>

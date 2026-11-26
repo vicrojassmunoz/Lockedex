@@ -41,6 +41,7 @@
           "effect": ""
         },
         "iv": 12,
+        "nat": "docile",
         "sprite": "74",
         "types": [
           "rock",
@@ -92,6 +93,7 @@
           "effect": ""
         },
         "iv": 12,
+        "nat": "quiet",
         "sprite": "74",
         "types": [
           "rock",
@@ -142,6 +144,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "lonely",
         "sprite": "299",
         "types": [
           "rock"
@@ -197,6 +200,7 @@
           "effect": ""
         },
         "iv": 12,
+        "nat": "hardy",
         "sprite": "66",
         "types": [
           "fighting"
@@ -246,6 +250,7 @@
           "effect": ""
         },
         "iv": 12,
+        "nat": "calm",
         "sprite": "307",
         "types": [
           "fighting",
@@ -302,6 +307,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "lax",
         "sprite": "296",
         "types": [
           "fighting"
@@ -360,6 +366,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "docile",
         "sprite": "100",
         "types": [
           "electric"
@@ -410,6 +417,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "serious",
         "sprite": "309",
         "types": [
           "electric"
@@ -458,6 +466,7 @@
           "effect": ""
         },
         "iv": 26,
+        "nat": "impish",
         "sprite": "82",
         "types": [
           "electric",
@@ -514,6 +523,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "brave",
         "sprite": "310",
         "types": [
           "electric"
@@ -570,6 +580,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "jolly",
         "sprite": "322",
         "types": [
           "fire",
@@ -620,6 +631,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "calm",
         "sprite": "218",
         "types": [
           "fire"
@@ -669,6 +681,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "adamant",
         "sprite": "323",
         "types": [
           "fire",
@@ -724,6 +737,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "modest",
         "sprite": "324",
         "types": [
           "fire"
@@ -780,6 +794,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "docile",
         "sprite": "327",
         "types": [
           "normal"
@@ -830,6 +845,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "naive",
         "sprite": "288",
         "types": [
           "normal"
@@ -880,6 +896,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "lonely",
         "sprite": "264",
         "types": [
           "normal"
@@ -935,6 +952,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "sassy",
         "sprite": "289",
         "types": [
           "normal"
@@ -990,6 +1008,7 @@
           "effect": ""
         },
         "iv": 25,
+        "nat": "hasty",
         "sprite": "333",
         "types": [
           "normal",
@@ -1040,6 +1059,7 @@
           "effect": ""
         },
         "iv": 25,
+        "nat": "impish",
         "sprite": "357",
         "types": [
           "grass",
@@ -1091,6 +1111,7 @@
           "effect": ""
         },
         "iv": 25,
+        "nat": "calm",
         "sprite": "279",
         "types": [
           "water",
@@ -1142,6 +1163,7 @@
           "effect": ""
         },
         "iv": 26,
+        "nat": "calm",
         "sprite": "227",
         "types": [
           "steel",
@@ -1198,6 +1220,7 @@
           "effect": ""
         },
         "iv": 31,
+        "nat": "docile",
         "sprite": "334",
         "types": [
           "dragon",
@@ -1256,6 +1279,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "lax",
         "sprite": "344",
         "types": [
           "ground",
@@ -1305,6 +1329,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "docile",
         "sprite": "178",
         "types": [
           "psychic",
@@ -1359,6 +1384,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "impish",
         "sprite": "337",
         "types": [
           "rock",
@@ -1415,6 +1441,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "modest",
         "sprite": "338",
         "types": [
           "rock",
@@ -1472,6 +1499,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "adamant",
         "sprite": "370",
         "types": [
           "water"
@@ -1521,6 +1549,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "hasty",
         "sprite": "340",
         "types": [
           "water",
@@ -1572,6 +1601,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "naive",
         "sprite": "364",
         "types": [
           "ice",
@@ -1622,6 +1652,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "adamant",
         "sprite": "342",
         "types": [
           "water",
@@ -1677,6 +1708,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "naive",
         "sprite": "230",
         "types": [
           "water",
@@ -1728,6 +1760,7 @@
           "effect": ""
         },
         "iv": 6,
+        "nat": "lax",
         "sprite": "322",
         "types": [
           "fire",
@@ -1777,6 +1810,7 @@
           "effect": ""
         },
         "iv": 6,
+        "nat": "bashful",
         "sprite": "261",
         "types": [
           "dark"
@@ -1826,6 +1860,7 @@
           "effect": ""
         },
         "iv": 6,
+        "nat": "mild",
         "sprite": "322",
         "types": [
           "fire",
@@ -1877,6 +1912,7 @@
           "effect": ""
         },
         "iv": 6,
+        "nat": "rash",
         "sprite": "41",
         "types": [
           "poison",
@@ -1934,6 +1970,7 @@
           "effect": ""
         },
         "iv": 9,
+        "nat": "lax",
         "sprite": "322",
         "types": [
           "fire",
@@ -1984,6 +2021,7 @@
           "effect": ""
         },
         "iv": 9,
+        "nat": "bashful",
         "sprite": "262",
         "types": [
           "dark"
@@ -2033,6 +2071,7 @@
           "effect": ""
         },
         "iv": 9,
+        "nat": "lax",
         "sprite": "323",
         "types": [
           "fire",
@@ -2084,6 +2123,7 @@
           "effect": ""
         },
         "iv": 9,
+        "nat": "gentle",
         "sprite": "41",
         "types": [
           "poison",
@@ -2141,6 +2181,7 @@
           "effect": ""
         },
         "iv": 18,
+        "nat": "lax",
         "sprite": "262",
         "types": [
           "dark"
@@ -2191,6 +2232,7 @@
           "effect": ""
         },
         "iv": 18,
+        "nat": "lonely",
         "sprite": "169",
         "types": [
           "poison",
@@ -2242,6 +2284,7 @@
           "effect": ""
         },
         "iv": 18,
+        "nat": "adamant",
         "sprite": "323",
         "types": [
           "fire",
@@ -2299,6 +2342,7 @@
           "effect": ""
         },
         "iv": 18,
+        "nat": "lax",
         "sprite": "262",
         "types": [
           "dark"
@@ -2348,6 +2392,7 @@
           "effect": ""
         },
         "iv": 18,
+        "nat": "lonely",
         "sprite": "169",
         "types": [
           "poison",
@@ -2399,6 +2444,7 @@
           "effect": ""
         },
         "iv": 18,
+        "nat": "adamant",
         "sprite": "323",
         "types": [
           "fire",
@@ -2449,6 +2495,7 @@
           "effect": ""
         },
         "iv": 12,
+        "nat": "quirky",
         "sprite": "323",
         "types": [
           "fire",
@@ -2499,6 +2546,7 @@
           "effect": ""
         },
         "iv": 12,
+        "nat": "impish",
         "sprite": "262",
         "types": [
           "dark"
@@ -2549,6 +2597,7 @@
           "effect": ""
         },
         "iv": 12,
+        "nat": "quirky",
         "sprite": "42",
         "types": [
           "poison",
@@ -2605,6 +2654,7 @@
           "effect": ""
         },
         "iv": 6,
+        "nat": "jolly",
         "sprite": "318",
         "types": [
           "water",
@@ -2655,6 +2705,7 @@
           "effect": ""
         },
         "iv": 6,
+        "nat": "lonely",
         "sprite": "262",
         "types": [
           "dark"
@@ -2711,6 +2762,7 @@
           "effect": ""
         },
         "iv": 12,
+        "nat": "gentle",
         "sprite": "319",
         "types": [
           "water",
@@ -2761,6 +2813,7 @@
           "effect": ""
         },
         "iv": 12,
+        "nat": "lax",
         "sprite": "262",
         "types": [
           "dark"
@@ -2865,6 +2918,7 @@
           "effect": ""
         },
         "iv": 6,
+        "nat": "bold",
         "sprite": "262",
         "types": [
           "dark"
@@ -2915,6 +2969,7 @@
           "effect": ""
         },
         "iv": 6,
+        "nat": "docile",
         "sprite": "42",
         "types": [
           "poison",
@@ -3125,6 +3180,7 @@
           "effect": ""
         },
         "iv": 3,
+        "nat": "naughty",
         "sprite": "280",
         "types": [
           "psychic"
@@ -3181,6 +3237,7 @@
           "effect": ""
         },
         "iv": 14,
+        "nat": "jolly",
         "sprite": "334",
         "types": [
           "dragon",
@@ -3230,6 +3287,7 @@
           "effect": ""
         },
         "iv": 18,
+        "nat": "quirky",
         "sprite": "301",
         "types": [
           "normal"
@@ -3279,6 +3337,7 @@
           "effect": ""
         },
         "iv": 18,
+        "nat": "adamant",
         "sprite": "315",
         "types": [
           "grass",
@@ -3329,6 +3388,7 @@
           "effect": ""
         },
         "iv": 18,
+        "nat": "impish",
         "sprite": "82",
         "types": [
           "electric",
@@ -3379,6 +3439,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "naive",
         "sprite": "282",
         "types": [
           "psychic"
@@ -3479,6 +3540,7 @@
         },
         "starter": "grass",
         "iv": 3,
+        "nat": "jolly",
         "sprite": "270",
         "types": [
           "water",
@@ -3530,6 +3592,7 @@
         },
         "starter": "grass",
         "iv": 6,
+        "nat": "mild",
         "sprite": "255",
         "types": [
           "fire"
@@ -3587,6 +3650,7 @@
         },
         "starter": "grass",
         "iv": 0,
+        "nat": "modest",
         "sprite": "278",
         "types": [
           "water",
@@ -3638,6 +3702,7 @@
         },
         "starter": "grass",
         "iv": 6,
+        "nat": "quiet",
         "sprite": "271",
         "types": [
           "water",
@@ -3690,6 +3755,7 @@
         },
         "starter": "grass",
         "iv": 12,
+        "nat": "naive",
         "sprite": "256",
         "types": [
           "fire",
@@ -3748,6 +3814,7 @@
         },
         "starter": "grass",
         "iv": 2,
+        "nat": "hardy",
         "sprite": "279",
         "types": [
           "water",
@@ -3801,6 +3868,7 @@
         },
         "starter": "grass",
         "iv": 12,
+        "nat": "brave",
         "sprite": "271",
         "types": [
           "water",
@@ -3852,6 +3920,7 @@
         },
         "starter": "grass",
         "iv": 18,
+        "nat": "quirky",
         "sprite": "256",
         "types": [
           "fire",
@@ -3910,6 +3979,7 @@
           "effect": ""
         },
         "iv": 18,
+        "nat": "mild",
         "sprite": "357",
         "types": [
           "grass",
@@ -3961,6 +4031,7 @@
         },
         "starter": "grass",
         "iv": 3,
+        "nat": "bold",
         "sprite": "279",
         "types": [
           "water",
@@ -4012,6 +4083,7 @@
         },
         "starter": "grass",
         "iv": 18,
+        "nat": "calm",
         "sprite": "272",
         "types": [
           "water",
@@ -4064,6 +4136,7 @@
         },
         "starter": "grass",
         "iv": 24,
+        "nat": "quiet",
         "sprite": "256",
         "types": [
           "fire",
@@ -4122,6 +4195,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "rash",
         "sprite": "262",
         "types": [
           "dark"
@@ -4170,6 +4244,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "jolly",
         "sprite": "275",
         "types": [
           "grass",
@@ -4220,6 +4295,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "adamant",
         "sprite": "332",
         "types": [
           "grass",
@@ -4271,6 +4347,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "naughty",
         "sprite": "342",
         "types": [
           "water",
@@ -4327,6 +4404,7 @@
           "effect": ""
         },
         "iv": 31,
+        "nat": "bold",
         "sprite": "359",
         "types": [
           "dark"
@@ -4383,6 +4461,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "naughty",
         "sprite": "356",
         "types": [
           "ghost"
@@ -4432,6 +4511,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "calm",
         "sprite": "354",
         "types": [
           "ghost"
@@ -4481,6 +4561,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "careful",
         "sprite": "302",
         "types": [
           "dark",
@@ -4533,6 +4614,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "naive",
         "sprite": "354",
         "types": [
           "ghost"
@@ -4589,6 +4671,7 @@
           "effect": ""
         },
         "iv": 31,
+        "nat": "careful",
         "sprite": "356",
         "types": [
           "ghost"
@@ -4645,6 +4728,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "brave",
         "sprite": "364",
         "types": [
           "ice",
@@ -4696,6 +4780,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "bashful",
         "sprite": "362",
         "types": [
           "ice"
@@ -4741,6 +4826,7 @@
           }
         ],
         "iv": 30,
+        "nat": "hardy",
         "sprite": "364",
         "types": [
           "ice",
@@ -4792,6 +4878,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "mild",
         "sprite": "362",
         "types": [
           "ice"
@@ -4847,6 +4934,7 @@
           "effect": ""
         },
         "iv": 31,
+        "nat": "naive",
         "sprite": "365",
         "types": [
           "ice",
@@ -4906,6 +4994,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "quiet",
         "sprite": "372",
         "types": [
           "dragon"
@@ -4956,6 +5045,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "modest",
         "sprite": "334",
         "types": [
           "dragon",
@@ -5006,6 +5096,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "hardy",
         "sprite": "230",
         "types": [
           "water",
@@ -5058,6 +5149,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "lax",
         "sprite": "330",
         "types": [
           "ground",
@@ -5115,6 +5207,7 @@
           "effect": ""
         },
         "iv": 31,
+        "nat": "bold",
         "sprite": "373",
         "types": [
           "dragon",
@@ -5173,6 +5266,7 @@
           "effect": ""
         },
         "iv": 31,
+        "nat": "rash",
         "sprite": "321",
         "types": [
           "water"
@@ -5223,6 +5317,7 @@
           "effect": ""
         },
         "iv": 31,
+        "nat": "sassy",
         "sprite": "73",
         "types": [
           "water",
@@ -5273,6 +5368,7 @@
           "effect": ""
         },
         "iv": 31,
+        "nat": "hardy",
         "sprite": "272",
         "types": [
           "water",
@@ -5324,6 +5420,7 @@
           "effect": ""
         },
         "iv": 31,
+        "nat": "sassy",
         "sprite": "340",
         "types": [
           "water",
@@ -5375,6 +5472,7 @@
           "effect": ""
         },
         "iv": 31,
+        "nat": "rash",
         "sprite": "130",
         "types": [
           "water",
@@ -5430,6 +5528,7 @@
           "effect": ""
         },
         "iv": 31,
+        "nat": "gentle",
         "sprite": "350",
         "types": [
           "water"
@@ -5486,6 +5585,7 @@
           "effect": ""
         },
         "iv": 31,
+        "nat": "modest",
         "sprite": "227",
         "types": [
           "steel",
@@ -5536,6 +5636,7 @@
           "effect": ""
         },
         "iv": 31,
+        "nat": "modest",
         "sprite": "344",
         "types": [
           "ground",
@@ -5588,6 +5689,7 @@
           "effect": ""
         },
         "iv": 31,
+        "nat": "naive",
         "sprite": "306",
         "types": [
           "steel",
@@ -5638,6 +5740,7 @@
           "effect": ""
         },
         "iv": 31,
+        "nat": "naive",
         "sprite": "346",
         "types": [
           "rock",
@@ -5690,6 +5793,7 @@
           "effect": ""
         },
         "iv": 31,
+        "nat": "mild",
         "sprite": "348",
         "types": [
           "rock",
@@ -5747,6 +5851,7 @@
           "effect": ""
         },
         "iv": 31,
+        "nat": "bashful",
         "sprite": "376",
         "types": [
           "steel",

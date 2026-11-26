@@ -76,8 +76,8 @@ export const PRESETS_IV = {
   cero: { es: 'Mínimos (0)', en: 'Minimum (0)', v: 0 }
 }
 export const PRESETS_EV = {
-  cero: { es: 'Sin entrenar (0)', en: 'None (0)' },
-  ruta: { es: 'Run normal (~20 por stat)', en: 'Normal run (~20 each)' },
+  cero: { es: 'Ninguno (0)', en: 'None (0)' },
+  ruta: { es: 'Normal (~20 por stat)', en: 'Normal (~20 each)' },
   ataque: { es: 'Ofensivo (252 Atq/AtEsp + Vel)', en: 'Offensive (252 Atk/SpA + Spe)' },
   defensa: { es: 'Defensivo (252 PS + Def/DefEsp)', en: 'Defensive (252 HP + Def/SpD)' }
 }

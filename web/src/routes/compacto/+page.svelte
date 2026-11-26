@@ -5,7 +5,7 @@
   import { equipoCompleto } from '$lib/lockedex/equipo.js'
   import { calcularRiesgo } from '$lib/lockedex/riesgo.js'
   import Riesgo from '$lib/lockedex/Riesgo.svelte'
-  import { leerReglas } from '$lib/lockedex/reglas.js'
+  import { leerReglas, ajustarNivel, ajustarEquipoJefe, sinCalculos } from '$lib/lockedex/reglas.js'
   import { estadoRun, registrarDerrota, vidasRestantes, contarCaidos } from '$lib/lockedex/derrotas.js'
   import { leerEquiposJefes, comoJefe } from '$lib/lockedex/jefes.js'
   import { cargarCalc } from '$lib/lockedex/analista.js'
@@ -59,19 +59,22 @@
     const desde = lista.findIndex((j) => String(j.value) === String(jefe.value))
     const resto = lista.slice(Math.max(0, desde))
     const gimnasio = resto.find((j) => j.group === 'gym-leader') || resto.find((j) => j.group === 'elite-four') || jefe
-    const nivel = nivelMaximo(ligaActual?.[gimnasio.value]) ?? nivelMaximo(datos)
     // Randomlocke con entrenadores aleatorios: el equipo de la liga no vale. El riesgo sale solo si se ha
-    // apuntado el equipo real del jefe; si no, se enseña el jefe y su nivel máximo, sin equipo
+    // apuntado el equipo real del jefe; si no, se enseña el jefe y su nivel máximo, sin equipo. Con los
+    // niveles de los jefes subidos, nivel máximo y equipo van ajustados; con tipos aleatorios, sin riesgo
     const reglas = leerReglas(partida.id) || {}
+    const nivel = ajustarNivel(nivelMaximo(ligaActual?.[gimnasio.value]) ?? nivelMaximo(datos), reglas)
     aleatorio = !!(reglas.randomlocke && reglas.entrenadoresAleatorios)
-    let paraRiesgo = datos
+    const datosAj = datos && { ...datos, pokemon: ajustarEquipoJefe(datos.pokemon, reglas) }
+    let paraRiesgo = datosAj
+    if (sinCalculos(reglas)) paraRiesgo = null
     if (aleatorio) {
       const real = leerEquiposJefes(partida.id)[jefe.value]
-      paraRiesgo = real?.length ? await comoJefe(jefe.boss || jefe.name, real, await cargarCalc(partida.info.gen || 9)) : null
+      paraRiesgo = real?.length && !sinCalculos(reglas) ? await comoJefe(jefe.boss || jefe.name, real, await cargarCalc(partida.info.gen || 9)) : null
     }
     const r = paraRiesgo ? await calcularRiesgo({ jefe: paraRiesgo, equipo: equipoActual, gen: partida.info.gen, cap: nivel }) : null
     if (jefe?.value !== visto) return // se cambió de jefe mientras se calculaba
-    datosJefe = datos
+    datosJefe = datosAj
     cap = nivel
     capGimnasio = gimnasio
     riesgo = r

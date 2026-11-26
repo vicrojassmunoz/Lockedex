@@ -15,18 +15,23 @@ export const leerSavGuardado = (idPartida) => {
 }
 
 // Empareja un Pokémon de la run con uno de la partida del emulador
-export const emparejar = (encuentro, candidatos = [], usados = new Set()) => {
+export const emparejar = (encuentro, candidatos = [], usados = new Set(), linea = null) => {
   // Los muertos y fallidos no se emparejan con Pokémon vivos del emulador
   if ([4, 5, 7].includes(+encuentro.status)) return null
   const libres = candidatos.filter((c) => !usados.has(c))
   const mote = norm(encuentro.nickname)
   const especie = norm(encuentro.pokemon)
   const lugar = norm(encuentro.lugar)
+  // Misma línea evolutiva (si se pasa linea(especie)): para reconocerlo después de evolucionar
+  const familia = linea ? linea(encuentro.pokemon) : null
+  const mismaLinea = (c) => !!familia && linea(c.especie) === familia
   return (
     (mote && libres.find((c) => norm(c.mote) === mote && norm(c.especie) === especie)) ||
     libres.find((c) => norm(c.lugarCaptura) === lugar && norm(c.especie) === especie) ||
+    libres.find((c) => norm(c.lugarCaptura) === lugar && mismaLinea(c)) ||
     (mote && libres.find((c) => norm(c.mote) === mote)) ||
     libres.find((c) => norm(c.especie) === especie) ||
+    libres.find((c) => mismaLinea(c)) ||
     null
   )
 }

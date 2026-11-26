@@ -132,13 +132,17 @@ const riesgoConCalculadora = async (jefe, equipo, gen, cap) => {
 
   function evaluar(b) {
     const movsJefe = (b.moves || []).map((m) => m?.name).filter(Boolean)
-    // IVs: los reales del juego cuando se conocen (3.ª gen, de pret: «iv» de 0 a 31); si no, 31 (el peor caso)
+    // IVs: los reales del juego cuando se conocen (3.ª gen y Platino, de pret: «iv» de 0 a 31); si no, 31
+    // (el peor caso). Naturaleza: la real en la 3.ª gen («nat», calculada como en la GBA); si no, neutra.
+    // EVs: 0, que es lo que llevan los entrenadores de los juegos hasta la 5.ª gen.
     const iv = Number.isFinite(+b.iv) && b.iv !== null && b.iv !== '' ? +b.iv : 31
     const pb = crear(b.name, {
       level: nivelJefe(b, cap),
       ability: b.ability?.name,
       item: b.held?.name,
       ivs: { hp: iv, atk: iv, def: iv, spa: iv, spd: iv, spe: iv },
+      evs: { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 },
+      ...(b.nat ? { nature: nombreBonito(b.nat) } : {}),
       moves: movsJefe
     })
     const nb = nombreBonito(b.name)

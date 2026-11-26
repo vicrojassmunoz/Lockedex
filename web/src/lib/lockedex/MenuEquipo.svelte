@@ -32,11 +32,23 @@
     if (b === 1) return 1
     return Math.floor(((2 * b + ivDe(p)) * n) / 100) + n + 10
   }
+  // Naturaleza real del Pokémon del jefe cuando se conoce (3.ª gen: calculada como en el juego, campo «nat»)
+  const NATURALEZAS = {
+    lonely: ['atk', 'def'], brave: ['atk', 'spe'], adamant: ['atk', 'spa'], naughty: ['atk', 'spd'],
+    bold: ['def', 'atk'], relaxed: ['def', 'spe'], impish: ['def', 'spa'], lax: ['def', 'spd'],
+    timid: ['spe', 'atk'], hasty: ['spe', 'def'], jolly: ['spe', 'spa'], naive: ['spe', 'spd'],
+    modest: ['spa', 'atk'], mild: ['spa', 'def'], quiet: ['spa', 'spe'], rash: ['spa', 'spd'],
+    calm: ['spd', 'atk'], gentle: ['spd', 'def'], sassy: ['spd', 'spe'], careful: ['spd', 'spa']
+  }
+  const efectoNat = (p, k) => {
+    const [mas, menos] = NATURALEZAS[String(p?.nat || '').toLowerCase()] || []
+    return k === mas ? 1.1 : k === menos ? 0.9 : 1
+  }
   const stat = (p, k) => {
     if (k === 'hp') return ps(p)
     const b = +p.stats?.[k] || 0
     if (!b) return null
-    return Math.floor(((2 * b + ivDe(p)) * (+p.level || 1)) / 100) + 5
+    return Math.floor((Math.floor(((2 * b + ivDe(p)) * (+p.level || 1)) / 100) + 5) * efectoNat(p, k))
   }
   const textoPs = (p) =>
     ivReal(p)
@@ -94,12 +106,23 @@
 
   const elegir = (i) => (abierto = abierto === i ? null : i)
   const mover = (d) => (abierto = (abierto + d + pokemon.length) % pokemon.length)
+  let anchoMenu = 0
   $: primero = pokemon[0]
   $: resto = pokemon.slice(1)
   $: huecosVacios = Math.max(0, 5 - resto.length)
   $: elegido = abierto !== null ? pokemon[abierto] : null
 </script>
 
+<!-- El envoltorio mide el ancho del propio menú: así se recoloca igual en la tarjeta del jefe, en el
+     Analista o en una ventana estrecha, sin depender del ancho de la pantalla (el minificador de CSS de
+     esta versión no entiende @container, por eso va con clases) -->
+<div
+  class="lx-me-envoltorio"
+  bind:clientWidth={anchoMenu}
+  class:lx-me-estrecho={anchoMenu && anchoMenu <= 640}
+  class:lx-gf-medio={anchoMenu && anchoMenu <= 740}
+  class:lx-gf-mini={anchoMenu && anchoMenu <= 440}
+>
 <div class="lx-me" style={MARCOS.fondo}>
   <div class="lx-me-izq">
     {#if primero}
@@ -193,6 +216,10 @@
             <span class="lx-gf-etq">{t('HABILIDAD', 'ABILITY')}</span>
             <span class="lx-gf-valor"><span class="cursor-help" data-lx-hab={elegido.ability.name}>{elegido.ability.name}</span></span>
           {/if}
+          {#if elegido.nat}
+            <span class="lx-gf-etq">{t('NATURALEZA', 'NATURE')}</span>
+            <span class="lx-gf-valor" title={t('La del juego (se calcula igual que lo hace la GBA)', 'The in-game one (calculated like the GBA does)')}>{traducirNombre(mayus(elegido.nat))}</span>
+          {/if}
           <span class="lx-gf-etq">{t('OBJETO', 'ITEM')}</span>
           {#if elegido.held?.name}
             <span class="lx-gf-valor lx-gf-obj"><PIcon type="item" name={elegido.held.sprite} /><span class="cursor-help" data-lx-obj={elegido.held.name}>{elegido.held.name}</span></span>
@@ -214,7 +241,7 @@
         </span>
         <span class="lx-gf-col">{t('BASE', 'BASE')}</span>
         {#each ETIQUETAS as [k, es, en]}
-          <span class="lx-gf-st">{t(es, en)}</span>
+          <span class="lx-gf-st" class:lx-gf-sube={efectoNat(elegido, k) > 1} class:lx-gf-baja={efectoNat(elegido, k) < 1}>{t(es, en)}</span>
           <span class="lx-gf-v">{stat(elegido, k) ?? '—'}</span>
           <span class="lx-gf-b">{+(elegido.stats?.[k] || 0) || '—'}</span>
         {/each}
@@ -248,6 +275,7 @@
     {/if}
   </section>
 {/if}
+</div>
 
 <style>
   /* Todo lo de este menú va con la letra pixelada a tamaños enteros (12 px = escala 1, 24 px = escala 2) */
@@ -267,10 +295,8 @@
     background-color: #2b766d;
     background-image: repeating-linear-gradient(0deg, #317f75 0 2px, #2b766d 2px 6px);
   }
-  @media (max-width: 700px) {
-    .lx-me {
-      grid-template-columns: minmax(0, 1fr);
-    }
+  .lx-me-estrecho .lx-me {
+    grid-template-columns: minmax(0, 1fr);
   }
   .lx-me-izq {
     display: flex;
@@ -287,7 +313,7 @@
   .lx-me-slot {
     position: relative;
     display: grid;
-    grid-template-columns: 50px minmax(0, 1fr) auto;
+    grid-template-columns: 72px minmax(0, 1fr) auto;
     align-items: center;
     column-gap: 4px;
     min-height: 58px;
@@ -308,7 +334,7 @@
   }
   .lx-me-slot :global(.lx-me-icono) {
     justify-self: center;
-    transform: scale(1.25);
+    transform: scale(2);
     image-rendering: pixelated;
   }
   /* El Pokémon elegido «salta» a dos fotogramas, como el icono del menú de equipo de la GBA */
@@ -317,10 +343,10 @@
   }
   @keyframes lx-me-salto {
     0% {
-      transform: scale(1.25) translateY(0);
+      transform: scale(2) translateY(0);
     }
     50% {
-      transform: scale(1.25) translateY(-4px);
+      transform: scale(2) translateY(-2px);
     }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -367,8 +393,8 @@
   }
   .lx-me-objeto {
     position: absolute;
-    left: 30px;
-    bottom: -4px;
+    left: 46px;
+    bottom: -2px;
     transform: scale(0.65);
     transform-origin: left bottom;
     image-rendering: pixelated;
@@ -424,7 +450,7 @@
 
   /* Primer Pokémon, en grande */
   .lx-me-grande {
-    grid-template-columns: 50px minmax(0, 1fr);
+    grid-template-columns: 72px minmax(0, 1fr);
     grid-template-rows: auto auto auto;
     row-gap: 6px;
     padding: 8px 8px 4px 4px;
@@ -506,13 +532,14 @@
     align-items: start;
     padding: 0 4px;
   }
-  @media (max-width: 760px) {
-    .lx-gf-cuerpo {
-      grid-template-columns: 168px minmax(0, 1fr);
-    }
-    .lx-gf-movs {
-      grid-column: 1 / -1;
-    }
+  .lx-gf-medio .lx-gf-cuerpo {
+    grid-template-columns: 168px minmax(0, 1fr);
+  }
+  .lx-gf-medio .lx-gf-movs {
+    grid-column: 1 / -1;
+  }
+  .lx-gf-mini .lx-gf-cuerpo {
+    grid-template-columns: minmax(0, 1fr);
   }
   .lx-gf-izq {
     display: flex;
@@ -723,5 +750,11 @@
   }
   .lx-gf-boton:active {
     transform: translateY(2px);
+  }
+  .lx-gf-sube {
+    color: #e04030 !important;
+  }
+  .lx-gf-baja {
+    color: #3070d8 !important;
   }
 </style>

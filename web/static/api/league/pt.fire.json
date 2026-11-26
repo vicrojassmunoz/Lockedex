@@ -26,6 +26,7 @@
           "name": "Rock Head",
           "effect": ""
         },
+        "iv": 6,
         "sprite": "74",
         "types": [
           "rock",
@@ -68,6 +69,7 @@
           "name": "Rock Head",
           "effect": ""
         },
+        "iv": 6,
         "sprite": "95",
         "types": [
           "rock",
@@ -111,6 +113,7 @@
           "name": "Mold Breaker",
           "effect": ""
         },
+        "iv": 6,
         "sprite": "408",
         "types": [
           "rock"
@@ -323,6 +326,7 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 12,
         "sprite": "355",
         "types": [
           "ghost"
@@ -372,6 +376,7 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 12,
         "sprite": "93",
         "types": [
           "ghost",
@@ -427,6 +432,7 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 12,
         "sprite": "429",
         "types": [
           "ghost"
@@ -485,6 +491,7 @@
           "name": "Pure Power",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "307",
         "types": [
           "fighting",
@@ -535,6 +542,7 @@
           "name": "Guts",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "67",
         "types": [
           "fighting"
@@ -590,6 +598,7 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "448",
         "types": [
           "fighting",
@@ -648,6 +657,7 @@
           "name": "Intimidate",
           "effect": ""
         },
+        "iv": 18,
         "sprite": "130",
         "types": [
           "water",
@@ -698,6 +708,7 @@
           "name": "Damp",
           "effect": ""
         },
+        "iv": 18,
         "sprite": "195",
         "types": [
           "water",
@@ -755,6 +766,7 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 18,
         "sprite": "419",
         "types": [
           "water"
@@ -811,6 +823,7 @@
           "name": "Magnet Pull",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "82",
         "types": [
           "electric",
@@ -861,6 +874,7 @@
           "name": "Rock Head",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "208",
         "types": [
           "steel",
@@ -914,6 +928,7 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "411",
         "types": [
           "rock",
@@ -1189,6 +1204,7 @@
           "name": "Volt Absorb",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "135",
         "types": [
           "electric"
@@ -1240,6 +1256,7 @@
           "name": "Static",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "26",
         "types": [
           "electric"
@@ -1290,6 +1307,7 @@
           "name": "Rivalry",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "405",
         "types": [
           "electric"
@@ -1346,6 +1364,7 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 31,
         "sprite": "466",
         "types": [
           "electric"
@@ -1395,6 +1414,7 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 12,
         "sprite": "41",
         "types": [
           "poison",
@@ -1445,6 +1465,7 @@
           "name": "Oran Berry",
           "effect": ""
         },
+        "iv": 12,
         "sprite": "432",
         "types": [
           "normal"
@@ -1495,6 +1516,7 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 12,
         "sprite": "41",
         "types": [
           "poison",
@@ -1548,6 +1570,7 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 12,
         "sprite": "435",
         "types": [
           "poison",
@@ -1606,6 +1629,7 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "215",
         "types": [
           "dark",
@@ -1656,6 +1680,7 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "42",
         "types": [
           "poison",
@@ -1711,6 +1736,7 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "198",
         "types": [
           "dark",
@@ -1769,6 +1795,7 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "215",
         "types": [
           "dark",
@@ -1819,6 +1846,7 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "169",
         "types": [
           "poison",
@@ -1874,6 +1902,7 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "430",
         "types": [
           "dark",
@@ -1931,6 +1960,7 @@
           "name": "Flash Fire",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "229",
         "types": [
           "dark",
@@ -1982,6 +2012,7 @@
           "name": "Insomnia",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "430",
         "types": [
           "dark",
@@ -2031,6 +2062,7 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "169",
         "types": [
           "poison",
@@ -2082,6 +2114,7 @@
           "name": "Intimidate",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "130",
         "types": [
           "water",
@@ -2139,6 +2172,7 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "461",
         "types": [
           "dark",
@@ -2195,6 +2229,7 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "42",
         "types": [
           "poison",
@@ -2244,6 +2279,7 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "436",
         "types": [
           "steel",
@@ -2301,6 +2337,7 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "454",
         "types": [
           "poison",
@@ -2357,6 +2394,7 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "42",
         "types": [
           "poison",
@@ -2405,6 +2443,7 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "436",
         "types": [
           "steel",
@@ -2461,6 +2500,7 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "432",
         "types": [
           "normal"
@@ -2517,6 +2557,7 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "42",
         "types": [
           "poison",
@@ -2573,6 +2614,7 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "454",
         "types": [
           "poison",
@@ -2622,6 +2664,7 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "436",
         "types": [
           "steel",
@@ -2677,6 +2720,7 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "436",
         "types": [
           "steel",
@@ -2727,6 +2771,7 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "42",
         "types": [
           "poison",
@@ -2782,6 +2827,7 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "432",
         "types": [
           "normal"
@@ -2830,6 +2876,7 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "436",
         "types": [
           "steel",
@@ -2880,6 +2927,7 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "42",
         "types": [
           "poison",
@@ -2935,6 +2983,7 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "435",
         "types": [
           "poison",
@@ -3022,6 +3071,7 @@
           "name": "Keen Eye",
           "effect": ""
         },
+        "iv": 3,
         "sprite": "396",
         "types": [
           "normal",
@@ -3059,6 +3109,7 @@
           "effect": ""
         },
         "starter": "fire",
+        "iv": 3,
         "sprite": "393",
         "types": [
           "water"
@@ -3115,6 +3166,7 @@
           "name": "Intimidate",
           "effect": ""
         },
+        "iv": 6,
         "sprite": "397",
         "types": [
           "normal",
@@ -3165,6 +3217,7 @@
           "effect": ""
         },
         "starter": "fire",
+        "iv": 6,
         "sprite": "315",
         "types": [
           "grass",
@@ -3215,6 +3268,7 @@
           "effect": ""
         },
         "starter": "fire",
+        "iv": 6,
         "sprite": "77",
         "types": [
           "fire"
@@ -3265,6 +3319,7 @@
           "effect": ""
         },
         "starter": "fire",
+        "iv": 6,
         "sprite": "394",
         "types": [
           "water"
@@ -3321,6 +3376,7 @@
           "name": "Intimidate",
           "effect": ""
         },
+        "iv": 9,
         "sprite": "397",
         "types": [
           "normal",
@@ -3372,6 +3428,7 @@
           "effect": ""
         },
         "starter": "fire",
+        "iv": 9,
         "sprite": "315",
         "types": [
           "grass",
@@ -3422,6 +3479,7 @@
           "effect": ""
         },
         "starter": "fire",
+        "iv": 9,
         "sprite": "77",
         "types": [
           "fire"
@@ -3472,6 +3530,7 @@
           "effect": ""
         },
         "starter": "fire",
+        "iv": 9,
         "sprite": "394",
         "types": [
           "water"
@@ -3529,6 +3588,7 @@
           "name": "Keen Eye",
           "effect": ""
         },
+        "iv": 12,
         "sprite": "398",
         "types": [
           "normal",
@@ -3580,6 +3640,7 @@
           "name": "Swarm",
           "effect": ""
         },
+        "iv": 12,
         "sprite": "214",
         "types": [
           "bug",
@@ -3629,6 +3690,7 @@
           "effect": ""
         },
         "starter": "fire",
+        "iv": 12,
         "sprite": "407",
         "types": [
           "grass",
@@ -3680,6 +3742,7 @@
           "effect": ""
         },
         "starter": "fire",
+        "iv": 12,
         "sprite": "78",
         "types": [
           "fire"
@@ -3731,6 +3794,7 @@
           "effect": ""
         },
         "starter": "fire",
+        "iv": 12,
         "sprite": "395",
         "types": [
           "water",
@@ -3789,6 +3853,7 @@
           "name": "Keen Eye",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "398",
         "types": [
           "normal",
@@ -3840,6 +3905,7 @@
           "name": "Swarm",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "214",
         "types": [
           "bug",
@@ -3890,6 +3956,7 @@
           "name": "Immunity",
           "effect": ""
         },
+        "iv": 24,
         "sprite": "143",
         "types": [
           "normal"
@@ -3940,6 +4007,7 @@
           "effect": ""
         },
         "starter": "fire",
+        "iv": 24,
         "sprite": "407",
         "types": [
           "grass",
@@ -3990,6 +4058,7 @@
           "effect": ""
         },
         "starter": "fire",
+        "iv": 24,
         "sprite": "78",
         "types": [
           "fire"
@@ -4041,6 +4110,7 @@
           "effect": ""
         },
         "starter": "fire",
+        "iv": 24,
         "sprite": "395",
         "types": [
           "water",
@@ -4098,6 +4168,7 @@
           "name": "Speed Boost",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "469",
         "types": [
           "bug",
@@ -4150,6 +4221,7 @@
           "name": "Swarm",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "212",
         "types": [
           "bug",
@@ -4201,6 +4273,7 @@
           "name": "Swarm",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "214",
         "types": [
           "bug",
@@ -4250,6 +4323,7 @@
           "name": "Pressure",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "416",
         "types": [
           "bug",
@@ -4306,6 +4380,7 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "452",
         "types": [
           "poison",
@@ -4363,6 +4438,7 @@
           "name": "Oblivious",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "340",
         "types": [
           "water",
@@ -4414,6 +4490,7 @@
           "name": "Hyper Cutter",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "472",
         "types": [
           "ground",
@@ -4464,6 +4541,7 @@
           "name": "Rock Head",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "76",
         "types": [
           "rock",
@@ -4514,6 +4592,7 @@
           "name": "Sand Stream",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "450",
         "types": [
           "ground"
@@ -4570,6 +4649,7 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "464",
         "types": [
           "ground",
@@ -4627,6 +4707,7 @@
           "name": "Early Bird",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "229",
         "types": [
           "dark",
@@ -4678,6 +4759,7 @@
           "name": "Flash Fire",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "136",
         "types": [
           "fire"
@@ -4727,6 +4809,7 @@
           "name": "Run Away",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "78",
         "types": [
           "fire"
@@ -4778,6 +4861,7 @@
           "name": "Blaze",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "392",
         "types": [
           "fire",
@@ -4834,6 +4918,7 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "467",
         "types": [
           "fire"
@@ -4889,6 +4974,7 @@
           "name": "Soundproof",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "122",
         "types": [
           "psychic"
@@ -4940,6 +5026,7 @@
           "name": "Synchronize",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "196",
         "types": [
           "psychic"
@@ -4988,6 +5075,7 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "437",
         "types": [
           "steel",
@@ -5038,6 +5126,7 @@
           "name": "Synchronize",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "65",
         "types": [
           "psychic"
@@ -5093,6 +5182,7 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "475",
         "types": [
           "psychic",
@@ -5151,6 +5241,7 @@
           "name": "Pressure",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "442",
         "types": [
           "ghost",
@@ -5201,6 +5292,7 @@
           "name": "Natural Cure",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "407",
         "types": [
           "grass",
@@ -5253,6 +5345,7 @@
           "name": "Steadfast",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "448",
         "types": [
           "fighting",
@@ -5304,6 +5397,7 @@
           "name": "Hustle",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "468",
         "types": [
           "normal",
@@ -5355,6 +5449,7 @@
           "name": "Marvel Scale",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "350",
         "types": [
           "water"
@@ -5410,6 +5505,7 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 30,
         "sprite": "445",
         "types": [
           "dragon",

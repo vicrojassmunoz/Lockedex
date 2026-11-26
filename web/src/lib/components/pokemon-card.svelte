@@ -30,6 +30,7 @@
 
   import { UNOWN } from '$utils/rewrites'
   import { Stars as Pattern } from '$utils/pattern'
+  import { recorte } from '$lib/lockedex/recorte.js'
 
   const canonname = name.replace(/-(Alola|Galar)/, '')
 
@@ -95,17 +96,17 @@
         </span>
       </div>
 
-      <div
-        class="absolute -right-8 h-0 origin-bottom-right"
-        class:scale-75={minimal}
-      >
+      <!-- El Pokémon en un hueco fijo a la derecha, recortado a su dibujo y apoyado en el borde de abajo
+           de la cabecera (como en la pantalla de datos), en vez del sprite de 160 px desplazado -->
+      <div class="lx-ficha-sprite" class:lx-ficha-sprite-min={minimal}>
         <slot name="img" />
         {#if sprite}
           <img
             width="96"
             height="96"
+            use:recorte={'suelo'}
             style="--v-anim-dur: {animDur}s; --v-anim-delay: {animDelay}s"
-            class="{anim} img__pkm pointer-events-none h-40 w-auto -translate-y-16"
+            class="{anim} img__pkm pointer-events-none"
             src={sprite}
             onerror="this.onerror=null;this.src='{fallback}'"
             alt={name}
@@ -116,7 +117,7 @@
             height="96"
             src={UNOWN}
             style="--v-anim-dur: {animDur}s; --v-anim-delay: {animDelay}s"
-            class="{anim} pointer-events-none h-40 w-auto -translate-y-16 -translate-x-6 scale-75"
+            class="{anim} img__pkm pointer-events-none"
             alt="Unknown sprite for {name}"
           />
         {/if}
@@ -301,8 +302,23 @@
     );
   }
 
-  .img__pkm {
-    min-width: 160px;
+  .lx-ficha-sprite {
+    position: absolute;
+    right: 6px;
+    bottom: 3px;
+    width: 80px;
+    height: 80px;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .lx-ficha-sprite-min {
+    width: 64px;
+    height: 64px;
+  }
+  .lx-ficha-sprite .img__pkm {
+    width: 100%;
+    height: 100%;
+    transform-origin: 50% 100%;
   }
 
   img {

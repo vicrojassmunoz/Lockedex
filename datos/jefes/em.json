@@ -4,9 +4,9 @@
     "speciality": "rock",
     "img": "/leaders/rs-roxanne",
     "pokemon": [
-      { "name": "geodude", "level": "12", "moves": ["tackle", "defense-curl", "rock-throw", "rock-tomb"], "ability": "rock-head", "iv": 12 },
-      { "name": "geodude", "level": "12", "moves": ["tackle", "defense-curl", "rock-throw", "rock-tomb"], "ability": "rock-head", "iv": 12 },
-      { "name": "nosepass", "level": "15", "moves": ["block", "harden", "tackle", "rock-tomb"], "ability": "sturdy", "iv": 24 }
+      { "name": "geodude", "level": "12", "moves": ["tackle", "defense-curl", "rock-throw", "rock-tomb"], "ability": "rock-head", "iv": 12, "nat": "docile" },
+      { "name": "geodude", "level": "12", "moves": ["tackle", "defense-curl", "rock-throw", "rock-tomb"], "ability": "rock-head", "iv": 12, "nat": "quiet" },
+      { "name": "nosepass", "level": "15", "moves": ["block", "harden", "tackle", "rock-tomb"], "ability": "sturdy", "iv": 24, "nat": "lonely" }
     ]
   },
   "2": {
@@ -14,9 +14,17 @@
     "speciality": "fighting",
     "img": "/leaders/rs-brawly",
     "pokemon": [
-      { "name": "machop", "level": "16", "moves": ["karate-chop", "low-kick", "seismic-toss", "bulk-up"], "ability": "guts", "iv": 12 },
-      { "name": "meditite", "level": "16", "moves": ["focus-punch", "light-screen", "reflect", "bulk-up"], "ability": "pure-power", "iv": 12 },
-      { "name": "makuhita", "level": "19", "moves": ["arm-thrust", "vital-throw", "reversal", "bulk-up"], "ability": "guts", "held": "sitrus-berry", "iv": 24 }
+      { "name": "machop", "level": "16", "moves": ["karate-chop", "low-kick", "seismic-toss", "bulk-up"], "ability": "guts", "iv": 12, "nat": "hardy" },
+      { "name": "meditite", "level": "16", "moves": ["focus-punch", "light-screen", "reflect", "bulk-up"], "ability": "pure-power", "iv": 12, "nat": "calm" },
+      {
+        "name": "makuhita",
+        "level": "19",
+        "moves": ["arm-thrust", "vital-throw", "reversal", "bulk-up"],
+        "ability": "guts",
+        "held": "sitrus-berry",
+        "iv": 24,
+        "nat": "lax"
+      }
     ]
   },
   "3": {
@@ -24,16 +32,24 @@
     "speciality": "electric",
     "img": "/leaders/rs-wattson",
     "pokemon": [
-      { "name": "voltorb", "level": "20", "moves": ["rollout", "spark", "self-destruct", "shock-wave"], "ability": "soundproof", "iv": 24 },
-      { "name": "electrike", "level": "20", "moves": ["shock-wave", "leer", "quick-attack", "howl"], "ability": "static", "iv": 24 },
-      { "name": "magneton", "level": "22", "moves": ["supersonic", "thunder-wave", "shock-wave", "sonic-boom"], "ability": "magnet-pull", "iv": 26 },
+      { "name": "voltorb", "level": "20", "moves": ["rollout", "spark", "self-destruct", "shock-wave"], "ability": "soundproof", "iv": 24, "nat": "docile" },
+      { "name": "electrike", "level": "20", "moves": ["shock-wave", "leer", "quick-attack", "howl"], "ability": "static", "iv": 24, "nat": "serious" },
+      {
+        "name": "magneton",
+        "level": "22",
+        "moves": ["supersonic", "thunder-wave", "shock-wave", "sonic-boom"],
+        "ability": "magnet-pull",
+        "iv": 26,
+        "nat": "impish"
+      },
       {
         "name": "manectric",
         "level": "24",
         "moves": ["quick-attack", "shock-wave", "thunder-wave", "howl"],
         "ability": "static",
         "held": "sitrus-berry",
-        "iv": 30
+        "iv": 30,
+        "nat": "brave"
       }
     ]
   },
@@ -42,10 +58,18 @@
     "speciality": "fire",
     "img": "/leaders/rs-flannery",
     "pokemon": [
-      { "name": "numel", "level": "24", "moves": ["overheat", "take-down", "magnitude", "sunny-day"], "ability": "oblivious", "iv": 24 },
-      { "name": "slugma", "level": "24", "moves": ["overheat", "smog", "light-screen", "sunny-day"], "ability": "magma-armor", "iv": 24 },
-      { "name": "camerupt", "level": "26", "moves": ["overheat", "tackle", "sunny-day", "attract"], "ability": "magma-armor", "iv": 30 },
-      { "name": "torkoal", "level": "29", "moves": ["overheat", "sunny-day", "body-slam", "attract"], "ability": "white-smoke", "held": "white-herb", "iv": 30 }
+      { "name": "numel", "level": "24", "moves": ["overheat", "take-down", "magnitude", "sunny-day"], "ability": "oblivious", "iv": 24, "nat": "jolly" },
+      { "name": "slugma", "level": "24", "moves": ["overheat", "smog", "light-screen", "sunny-day"], "ability": "magma-armor", "iv": 24, "nat": "calm" },
+      { "name": "camerupt", "level": "26", "moves": ["overheat", "tackle", "sunny-day", "attract"], "ability": "magma-armor", "iv": 30, "nat": "adamant" },
+      {
+        "name": "torkoal",
+        "level": "29",
+        "moves": ["overheat", "sunny-day", "body-slam", "attract"],
+        "ability": "white-smoke",
+        "held": "white-herb",
+        "iv": 30,
+        "nat": "modest"
+      }
     ]
   },
   "5": {
@@ -53,10 +77,18 @@
     "speciality": "normal",
     "img": "/leaders/rs-norman",
     "pokemon": [
-      { "name": "spinda", "level": "27", "moves": ["teeter-dance", "psybeam", "facade", "encore"], "ability": "own-tempo", "iv": 24 },
-      { "name": "vigoroth", "level": "27", "moves": ["slash", "facade", "encore", "feint-attack"], "ability": "vital-spirit", "iv": 24 },
-      { "name": "linoone", "level": "29", "moves": ["slash", "belly-drum", "facade", "headbutt"], "ability": "pickup", "iv": 24 },
-      { "name": "slaking", "level": "31", "moves": ["counter", "yawn", "facade", "feint-attack"], "ability": "truant", "held": "sitrus-berry", "iv": 30 }
+      { "name": "spinda", "level": "27", "moves": ["teeter-dance", "psybeam", "facade", "encore"], "ability": "own-tempo", "iv": 24, "nat": "docile" },
+      { "name": "vigoroth", "level": "27", "moves": ["slash", "facade", "encore", "feint-attack"], "ability": "vital-spirit", "iv": 24, "nat": "naive" },
+      { "name": "linoone", "level": "29", "moves": ["slash", "belly-drum", "facade", "headbutt"], "ability": "pickup", "iv": 24, "nat": "lonely" },
+      {
+        "name": "slaking",
+        "level": "31",
+        "moves": ["counter", "yawn", "facade", "feint-attack"],
+        "ability": "truant",
+        "held": "sitrus-berry",
+        "iv": 30,
+        "nat": "sassy"
+      }
     ]
   },
   "6": {
@@ -64,17 +96,25 @@
     "speciality": "flying",
     "img": "/leaders/rs-winona",
     "pokemon": [
-      { "name": "swablu", "level": "29", "moves": ["perish-song", "mirror-move", "safeguard", "aerial-ace"], "ability": "natural-cure", "iv": 25 },
-      { "name": "tropius", "level": "29", "moves": ["sunny-day", "aerial-ace", "solar-beam", "synthesis"], "ability": "chlorophyll", "iv": 25 },
-      { "name": "pelipper", "level": "30", "moves": ["water-gun", "supersonic", "protect", "aerial-ace"], "ability": "keen-eye", "iv": 25 },
-      { "name": "skarmory", "level": "31", "moves": ["sand-attack", "fury-attack", "steel-wing", "aerial-ace"], "ability": "keen-eye", "iv": 26 },
+      {
+        "name": "swablu",
+        "level": "29",
+        "moves": ["perish-song", "mirror-move", "safeguard", "aerial-ace"],
+        "ability": "natural-cure",
+        "iv": 25,
+        "nat": "hasty"
+      },
+      { "name": "tropius", "level": "29", "moves": ["sunny-day", "aerial-ace", "solar-beam", "synthesis"], "ability": "chlorophyll", "iv": 25, "nat": "impish" },
+      { "name": "pelipper", "level": "30", "moves": ["water-gun", "supersonic", "protect", "aerial-ace"], "ability": "keen-eye", "iv": 25, "nat": "calm" },
+      { "name": "skarmory", "level": "31", "moves": ["sand-attack", "fury-attack", "steel-wing", "aerial-ace"], "ability": "keen-eye", "iv": 26, "nat": "calm" },
       {
         "name": "altaria",
         "level": "33",
         "moves": ["earthquake", "dragon-breath", "dragon-dance", "aerial-ace"],
         "ability": "natural-cure",
         "held": "oran-berry",
-        "iv": 31
+        "iv": 31,
+        "nat": "docile"
       }
     ]
   },
@@ -83,15 +123,16 @@
     "speciality": "psychic",
     "img": "/leaders/rs-tate-liza",
     "pokemon": [
-      { "name": "claydol", "level": "41", "moves": ["earthquake", "ancient-power", "psychic", "light-screen"], "ability": "levitate", "iv": 30 },
-      { "name": "xatu", "level": "41", "moves": ["psychic", "sunny-day", "confuse-ray", "calm-mind"], "ability": "synchronize", "iv": 30 },
+      { "name": "claydol", "level": "41", "moves": ["earthquake", "ancient-power", "psychic", "light-screen"], "ability": "levitate", "iv": 30, "nat": "lax" },
+      { "name": "xatu", "level": "41", "moves": ["psychic", "sunny-day", "confuse-ray", "calm-mind"], "ability": "synchronize", "iv": 30, "nat": "docile" },
       {
         "name": "lunatone",
         "level": "42",
         "moves": ["light-screen", "psychic", "hypnosis", "calm-mind"],
         "ability": "levitate",
         "held": "sitrus-berry",
-        "iv": 30
+        "iv": 30,
+        "nat": "impish"
       },
       {
         "name": "solrock",
@@ -99,7 +140,8 @@
         "moves": ["sunny-day", "solar-beam", "psychic", "flamethrower"],
         "ability": "levitate",
         "held": "sitrus-berry",
-        "iv": 30
+        "iv": 30,
+        "nat": "modest"
       }
     ],
     "doubleBattle": true
@@ -109,17 +151,18 @@
     "speciality": "water",
     "img": "/leaders/rs-juan",
     "pokemon": [
-      { "name": "luvdisc", "level": "41", "moves": ["water-pulse", "attract", "sweet-kiss", "flail"], "ability": "swift-swim", "iv": 24 },
-      { "name": "whiscash", "level": "41", "moves": ["rain-dance", "water-pulse", "amnesia", "earthquake"], "ability": "oblivious", "iv": 24 },
-      { "name": "sealeo", "level": "43", "moves": ["encore", "body-slam", "aurora-beam", "water-pulse"], "ability": "thick-fat", "iv": 24 },
-      { "name": "crawdaunt", "level": "43", "moves": ["water-pulse", "crabhammer", "taunt", "leer"], "ability": "hyper-cutter", "iv": 24 },
+      { "name": "luvdisc", "level": "41", "moves": ["water-pulse", "attract", "sweet-kiss", "flail"], "ability": "swift-swim", "iv": 24, "nat": "adamant" },
+      { "name": "whiscash", "level": "41", "moves": ["rain-dance", "water-pulse", "amnesia", "earthquake"], "ability": "oblivious", "iv": 24, "nat": "hasty" },
+      { "name": "sealeo", "level": "43", "moves": ["encore", "body-slam", "aurora-beam", "water-pulse"], "ability": "thick-fat", "iv": 24, "nat": "naive" },
+      { "name": "crawdaunt", "level": "43", "moves": ["water-pulse", "crabhammer", "taunt", "leer"], "ability": "hyper-cutter", "iv": 24, "nat": "adamant" },
       {
         "name": "kingdra",
         "level": "46",
         "moves": ["water-pulse", "double-team", "ice-beam", "rest"],
         "ability": "swift-swim",
         "held": "chesto-berry",
-        "iv": 30
+        "iv": 30,
+        "nat": "naive"
       }
     ]
   },
@@ -128,10 +171,10 @@
     "speciality": "",
     "img": "/leaders/rs-tabitha",
     "pokemon": [
-      { "name": "numel", "level": "18", "moves": ["growl", "tackle", "ember"], "ability": "oblivious", "iv": 6 },
-      { "name": "poochyena", "level": "20", "moves": ["howl", "sand-attack", "bite", "odor-sleuth"], "ability": "run-away", "iv": 6 },
-      { "name": "numel", "level": "22", "moves": ["growl", "tackle", "ember", "magnitude"], "ability": "oblivious", "iv": 6 },
-      { "name": "zubat", "level": "22", "moves": ["supersonic", "astonish", "bite", "wing-attack"], "ability": "inner-focus", "iv": 6 }
+      { "name": "numel", "level": "18", "moves": ["growl", "tackle", "ember"], "ability": "oblivious", "iv": 6, "nat": "lax" },
+      { "name": "poochyena", "level": "20", "moves": ["howl", "sand-attack", "bite", "odor-sleuth"], "ability": "run-away", "iv": 6, "nat": "bashful" },
+      { "name": "numel", "level": "22", "moves": ["growl", "tackle", "ember", "magnitude"], "ability": "oblivious", "iv": 6, "nat": "mild" },
+      { "name": "zubat", "level": "22", "moves": ["supersonic", "astonish", "bite", "wing-attack"], "ability": "inner-focus", "iv": 6, "nat": "rash" }
     ]
   },
   "mt2": {
@@ -139,10 +182,10 @@
     "speciality": "",
     "img": "/leaders/rs-tabitha",
     "pokemon": [
-      { "name": "numel", "level": "26", "moves": ["tackle", "ember", "magnitude", "focus-energy"], "ability": "oblivious", "iv": 9 },
-      { "name": "mightyena", "level": "28", "moves": ["bite", "odor-sleuth", "roar", "swagger"], "ability": "intimidate", "iv": 9 },
-      { "name": "camerupt", "level": "33", "moves": ["focus-energy", "take-down", "amnesia", "rock-slide"], "ability": "magma-armor", "iv": 9 },
-      { "name": "zubat", "level": "30", "moves": ["astonish", "confuse-ray", "bite", "wing-attack"], "ability": "inner-focus", "iv": 9 }
+      { "name": "numel", "level": "26", "moves": ["tackle", "ember", "magnitude", "focus-energy"], "ability": "oblivious", "iv": 9, "nat": "lax" },
+      { "name": "mightyena", "level": "28", "moves": ["bite", "odor-sleuth", "roar", "swagger"], "ability": "intimidate", "iv": 9, "nat": "bashful" },
+      { "name": "camerupt", "level": "33", "moves": ["focus-energy", "take-down", "amnesia", "rock-slide"], "ability": "magma-armor", "iv": 9, "nat": "lax" },
+      { "name": "zubat", "level": "30", "moves": ["astonish", "confuse-ray", "bite", "wing-attack"], "ability": "inner-focus", "iv": 9, "nat": "gentle" }
     ]
   },
   "mtmax": {
@@ -150,9 +193,9 @@
     "speciality": "",
     "img": "/leaders/rs-maxie",
     "pokemon": [
-      { "name": "mightyena", "level": "37", "moves": ["roar", "swagger", "scary-face", "take-down"], "ability": "intimidate", "iv": 18 },
-      { "name": "crobat", "level": "38", "moves": ["bite", "confuse-ray", "wing-attack", "air-cutter"], "ability": "inner-focus", "iv": 18 },
-      { "name": "camerupt", "level": "39", "moves": ["take-down", "amnesia", "rock-slide", "earthquake"], "ability": "magma-armor", "iv": 18 }
+      { "name": "mightyena", "level": "37", "moves": ["roar", "swagger", "scary-face", "take-down"], "ability": "intimidate", "iv": 18, "nat": "lax" },
+      { "name": "crobat", "level": "38", "moves": ["bite", "confuse-ray", "wing-attack", "air-cutter"], "ability": "inner-focus", "iv": 18, "nat": "lonely" },
+      { "name": "camerupt", "level": "39", "moves": ["take-down", "amnesia", "rock-slide", "earthquake"], "ability": "magma-armor", "iv": 18, "nat": "adamant" }
     ]
   },
   "mtmaxt": {
@@ -160,12 +203,19 @@
     "speciality": "",
     "img": "/leaders/rs-maxie-tabitha",
     "pokemon": [
-      { "name": "mightyena", "level": "42", "moves": ["roar", "take-down", "scary-face", "taunt"], "ability": "intimidate", "iv": 18 },
-      { "name": "crobat", "level": "43", "moves": ["mean-look", "confuse-ray", "wing-attack", "air-cutter"], "ability": "inner-focus", "iv": 18 },
-      { "name": "camerupt", "level": "44", "moves": ["take-down", "amnesia", "rock-slide", "earthquake"], "ability": "magma-armor", "iv": 18 },
-      { "name": "camerupt", "level": "36", "moves": ["focus-energy", "take-down", "amnesia", "rock-slide"], "ability": "oblivious", "iv": 12 },
-      { "name": "mightyena", "level": "38", "moves": ["roar", "take-down", "scary-face", "swagger"], "ability": "intimidate", "iv": 12 },
-      { "name": "golbat", "level": "40", "moves": ["bite", "confuse-ray", "wing-attack", "air-cutter"], "ability": "inner-focus", "iv": 12 }
+      { "name": "mightyena", "level": "42", "moves": ["roar", "take-down", "scary-face", "taunt"], "ability": "intimidate", "iv": 18, "nat": "lax" },
+      {
+        "name": "crobat",
+        "level": "43",
+        "moves": ["mean-look", "confuse-ray", "wing-attack", "air-cutter"],
+        "ability": "inner-focus",
+        "iv": 18,
+        "nat": "lonely"
+      },
+      { "name": "camerupt", "level": "44", "moves": ["take-down", "amnesia", "rock-slide", "earthquake"], "ability": "magma-armor", "iv": 18, "nat": "adamant" },
+      { "name": "camerupt", "level": "36", "moves": ["focus-energy", "take-down", "amnesia", "rock-slide"], "ability": "oblivious", "iv": 12, "nat": "quirky" },
+      { "name": "mightyena", "level": "38", "moves": ["roar", "take-down", "scary-face", "swagger"], "ability": "intimidate", "iv": 12, "nat": "impish" },
+      { "name": "golbat", "level": "40", "moves": ["bite", "confuse-ray", "wing-attack", "air-cutter"], "ability": "inner-focus", "iv": 12, "nat": "quirky" }
     ]
   },
   "as1": {
@@ -173,8 +223,8 @@
     "speciality": "",
     "img": "/leaders/rs-shelly",
     "pokemon": [
-      { "name": "carvanha", "level": "28", "moves": ["focus-energy", "scary-face", "crunch", "screech"], "ability": "rough-skin", "iv": 6 },
-      { "name": "mightyena", "level": "28", "moves": ["bite", "odor-sleuth", "roar", "swagger"], "ability": "intimidate", "iv": 6 }
+      { "name": "carvanha", "level": "28", "moves": ["focus-energy", "scary-face", "crunch", "screech"], "ability": "rough-skin", "iv": 6, "nat": "jolly" },
+      { "name": "mightyena", "level": "28", "moves": ["bite", "odor-sleuth", "roar", "swagger"], "ability": "intimidate", "iv": 6, "nat": "lonely" }
     ]
   },
   "as2": {
@@ -182,8 +232,8 @@
     "speciality": "",
     "img": "/leaders/rs-shelly",
     "pokemon": [
-      { "name": "sharpedo", "level": "37", "moves": ["scary-face", "crunch", "screech", "slash"], "ability": "rough-skin", "iv": 12 },
-      { "name": "mightyena", "level": "37", "moves": ["take-down", "scary-face", "roar", "swagger"], "ability": "intimidate", "iv": 12 }
+      { "name": "sharpedo", "level": "37", "moves": ["scary-face", "crunch", "screech", "slash"], "ability": "rough-skin", "iv": 12, "nat": "gentle" },
+      { "name": "mightyena", "level": "37", "moves": ["take-down", "scary-face", "roar", "swagger"], "ability": "intimidate", "iv": 12, "nat": "lax" }
     ]
   },
   "am1": {
@@ -192,8 +242,8 @@
     "img": "/leaders/rs-matt",
     "pokemon": [
       { "name": "sharpedo", "level": "37", "moves": ["scary-face", "crunch", "screech", "slash"], "ability": "rough-skin" },
-      { "name": "mightyena", "level": "34", "moves": ["odor-sleuth", "roar", "swagger", "scary-face"], "ability": "intimidate", "iv": 6 },
-      { "name": "golbat", "level": "34", "moves": ["astonish", "confuse-ray", "bite", "wing-attack"], "ability": "inner-focus", "iv": 6 }
+      { "name": "mightyena", "level": "34", "moves": ["odor-sleuth", "roar", "swagger", "scary-face"], "ability": "intimidate", "iv": 6, "nat": "bold" },
+      { "name": "golbat", "level": "34", "moves": ["astonish", "confuse-ray", "bite", "wing-attack"], "ability": "inner-focus", "iv": 6, "nat": "docile" }
     ]
   },
   "aqarc": {
@@ -211,7 +261,7 @@
     "speciality": "",
     "img": "/leaders/rs-wally",
     "pokemon": [
-      { "name": "ralts", "level": "16", "moves": ["growl", "confusion", "double-team", "teleport"], "ability": "synchronize", "iv": 3 }
+      { "name": "ralts", "level": "16", "moves": ["growl", "confusion", "double-team", "teleport"], "ability": "synchronize", "iv": 3, "nat": "naughty" }
     ]
   },
   "w2": {
@@ -219,11 +269,39 @@
     "speciality": "",
     "img": "/leaders/rs-wally",
     "pokemon": [
-      { "name": "altaria", "level": "44", "moves": ["aerial-ace", "safeguard", "dragon-breath", "dragon-dance"], "ability": "natural-cure", "iv": 14 },
-      { "name": "delcatty", "level": "43", "moves": ["sing", "assist", "charm", "feint-attack"], "ability": "cute-charm", "iv": 18 },
-      { "name": "roselia", "level": "44", "moves": ["magical-leaf", "leech-seed", "giga-drain", "toxic"], "ability": "poison-point", "iv": 18 },
-      { "name": "magneton", "level": "41", "moves": ["supersonic", "thunderbolt", "tri-attack", "screech"], "ability": "magnet-pull", "iv": 18 },
-      { "name": "gardevoir", "level": "45", "moves": ["double-team", "calm-mind", "psychic", "future-sight"], "ability": "synchronize", "iv": 30 }
+      {
+        "name": "altaria",
+        "level": "44",
+        "moves": ["aerial-ace", "safeguard", "dragon-breath", "dragon-dance"],
+        "ability": "natural-cure",
+        "iv": 14,
+        "nat": "jolly"
+      },
+      { "name": "delcatty", "level": "43", "moves": ["sing", "assist", "charm", "feint-attack"], "ability": "cute-charm", "iv": 18, "nat": "quirky" },
+      {
+        "name": "roselia",
+        "level": "44",
+        "moves": ["magical-leaf", "leech-seed", "giga-drain", "toxic"],
+        "ability": "poison-point",
+        "iv": 18,
+        "nat": "adamant"
+      },
+      {
+        "name": "magneton",
+        "level": "41",
+        "moves": ["supersonic", "thunderbolt", "tri-attack", "screech"],
+        "ability": "magnet-pull",
+        "iv": 18,
+        "nat": "impish"
+      },
+      {
+        "name": "gardevoir",
+        "level": "45",
+        "moves": ["double-team", "calm-mind", "psychic", "future-sight"],
+        "ability": "synchronize",
+        "iv": 30,
+        "nat": "naive"
+      }
     ]
   },
   "r1": {
@@ -241,12 +319,44 @@
     "speciality": "",
     "img": "/leaders/rs-may",
     "pokemon": [
-      { "name": "torkoal", "level": "13", "moves": ["curse", "smog", "ember"], "ability": "flame-body", "starter": "fire", "iv": 3 },
-      { "name": "lotad", "level": "13", "moves": ["astonish", "growl", "absorb", "nature-power"], "ability": "swift-swim", "starter": "grass", "iv": 3 },
-      { "name": "wingull", "level": "13", "moves": ["growl", "water-gun", "supersonic", "wing-attack"], "ability": "keen-eye", "starter": "water", "iv": 3 },
-      { "name": "mudkip", "level": "15", "moves": ["growl", "mud-slap", "water-gun", "bide"], "ability": "torrent", "starter": "fire", "iv": 6 },
-      { "name": "torchic", "level": "15", "moves": ["scratch", "growl", "focus-energy", "ember"], "ability": "blaze", "starter": "grass", "iv": 6 },
-      { "name": "treecko", "level": "15", "moves": ["pound", "leer", "absorb", "quick-attack"], "ability": "overgrow", "starter": "water", "iv": 6 }
+      { "name": "torkoal", "level": "13", "moves": ["curse", "smog", "ember"], "ability": "flame-body", "starter": "fire", "iv": 3, "nat": "mild" },
+      {
+        "name": "lotad",
+        "level": "13",
+        "moves": ["astonish", "growl", "absorb", "nature-power"],
+        "ability": "swift-swim",
+        "starter": "grass",
+        "iv": 3,
+        "nat": "jolly"
+      },
+      {
+        "name": "wingull",
+        "level": "13",
+        "moves": ["growl", "water-gun", "supersonic", "wing-attack"],
+        "ability": "keen-eye",
+        "starter": "water",
+        "iv": 3,
+        "nat": "gentle"
+      },
+      { "name": "mudkip", "level": "15", "moves": ["growl", "mud-slap", "water-gun", "bide"], "ability": "torrent", "starter": "fire", "iv": 6, "nat": "jolly" },
+      {
+        "name": "torchic",
+        "level": "15",
+        "moves": ["scratch", "growl", "focus-energy", "ember"],
+        "ability": "blaze",
+        "starter": "grass",
+        "iv": 6,
+        "nat": "mild"
+      },
+      {
+        "name": "treecko",
+        "level": "15",
+        "moves": ["pound", "leer", "absorb", "quick-attack"],
+        "ability": "overgrow",
+        "starter": "water",
+        "iv": 6,
+        "nat": "bold"
+      }
     ]
   },
   "r3": {
@@ -254,15 +364,71 @@
     "speciality": "",
     "img": "/leaders/rs-may",
     "pokemon": [
-      { "name": "lombre", "level": "18", "moves": ["astonish", "growl", "absorb", "nature-power"], "ability": "swift-swim", "starter": "fire", "iv": 6 },
-      { "name": "wingull", "level": "18", "moves": ["growl", "water-gun", "supersonic", "wing-attack"], "ability": "keen-eye", "starter": "grass", "iv": 0 },
-      { "name": "slugma", "level": "18", "moves": ["yawn", "smog", "ember", "rock-tomb"], "ability": "flame-body", "starter": "water", "iv": 0 },
-      { "name": "slugma", "level": "18", "moves": ["yawn", "smog", "ember", "rock-tomb"], "ability": "flame-body", "starter": "fire", "iv": 0 },
-      { "name": "lombre", "level": "18", "moves": ["astonish", "growl", "absorb", "nature-power"], "ability": "swift-swim", "starter": "grass", "iv": 6 },
-      { "name": "wingull", "level": "18", "moves": ["growl", "water-gun", "supersonic", "wing-attack"], "ability": "keen-eye", "starter": "water", "iv": 0 },
-      { "name": "marshtomp", "level": "20", "moves": ["water-gun", "bide", "mud-shot", "foresight"], "ability": "torrent", "starter": "fire", "iv": 12 },
-      { "name": "combusken", "level": "20", "moves": ["focus-energy", "ember", "double-kick", "peck"], "ability": "blaze", "starter": "grass", "iv": 12 },
-      { "name": "grovyle", "level": "20", "moves": ["absorb", "quick-attack", "fury-cutter", "pursuit"], "ability": "overgrow", "starter": "water", "iv": 12 }
+      {
+        "name": "lombre",
+        "level": "18",
+        "moves": ["astonish", "growl", "absorb", "nature-power"],
+        "ability": "swift-swim",
+        "starter": "fire",
+        "iv": 6,
+        "nat": "quiet"
+      },
+      {
+        "name": "wingull",
+        "level": "18",
+        "moves": ["growl", "water-gun", "supersonic", "wing-attack"],
+        "ability": "keen-eye",
+        "starter": "grass",
+        "iv": 0,
+        "nat": "modest"
+      },
+      { "name": "slugma", "level": "18", "moves": ["yawn", "smog", "ember", "rock-tomb"], "ability": "flame-body", "starter": "water", "iv": 0, "nat": "bold" },
+      { "name": "slugma", "level": "18", "moves": ["yawn", "smog", "ember", "rock-tomb"], "ability": "flame-body", "starter": "fire", "iv": 0, "nat": "bold" },
+      {
+        "name": "lombre",
+        "level": "18",
+        "moves": ["astonish", "growl", "absorb", "nature-power"],
+        "ability": "swift-swim",
+        "starter": "grass",
+        "iv": 6,
+        "nat": "quiet"
+      },
+      {
+        "name": "wingull",
+        "level": "18",
+        "moves": ["growl", "water-gun", "supersonic", "wing-attack"],
+        "ability": "keen-eye",
+        "starter": "water",
+        "iv": 0,
+        "nat": "modest"
+      },
+      {
+        "name": "marshtomp",
+        "level": "20",
+        "moves": ["water-gun", "bide", "mud-shot", "foresight"],
+        "ability": "torrent",
+        "starter": "fire",
+        "iv": 12,
+        "nat": "bashful"
+      },
+      {
+        "name": "combusken",
+        "level": "20",
+        "moves": ["focus-energy", "ember", "double-kick", "peck"],
+        "ability": "blaze",
+        "starter": "grass",
+        "iv": 12,
+        "nat": "naive"
+      },
+      {
+        "name": "grovyle",
+        "level": "20",
+        "moves": ["absorb", "quick-attack", "fury-cutter", "pursuit"],
+        "ability": "overgrow",
+        "starter": "water",
+        "iv": 12,
+        "nat": "hasty"
+      }
     ]
   },
   "r4": {
@@ -270,15 +436,87 @@
     "speciality": "",
     "img": "/leaders/rs-may",
     "pokemon": [
-      { "name": "lombre", "level": "29", "moves": ["absorb", "fake-out", "nature-power", "fury-swipes"], "ability": "swift-swim", "starter": "fire", "iv": 12 },
-      { "name": "pelipper", "level": "29", "moves": ["wing-attack", "supersonic", "mist", "protect"], "ability": "keen-eye", "starter": "grass", "iv": 2 },
-      { "name": "pelipper", "level": "29", "moves": ["wing-attack", "supersonic", "mist", "protect"], "ability": "keen-eye", "starter": "water", "iv": 2 },
-      { "name": "slugma", "level": "29", "moves": ["harden", "amnesia", "ember", "rock-throw"], "ability": "flame-body", "starter": "fire", "iv": 2 },
-      { "name": "lombre", "level": "29", "moves": ["absorb", "fake-out", "nature-power", "fury-swipes"], "ability": "swift-swim", "starter": "grass", "iv": 12 },
-      { "name": "slugma", "level": "29", "moves": ["harden", "amnesia", "ember", "rock-throw"], "ability": "flame-body", "starter": "water", "iv": 2 },
-      { "name": "marshtomp", "level": "31", "moves": ["mud-shot", "mud-sport", "foresight", "take-down"], "ability": "torrent", "starter": "fire", "iv": 18 },
-      { "name": "combusken", "level": "31", "moves": ["double-kick", "bulk-up", "peck", "sand-attack"], "ability": "blaze", "starter": "grass", "iv": 18 },
-      { "name": "grovyle", "level": "31", "moves": ["fury-cutter", "leaf-blade", "pursuit", "screech"], "ability": "overgrow", "starter": "water", "iv": 18 }
+      {
+        "name": "lombre",
+        "level": "29",
+        "moves": ["absorb", "fake-out", "nature-power", "fury-swipes"],
+        "ability": "swift-swim",
+        "starter": "fire",
+        "iv": 12,
+        "nat": "brave"
+      },
+      {
+        "name": "pelipper",
+        "level": "29",
+        "moves": ["wing-attack", "supersonic", "mist", "protect"],
+        "ability": "keen-eye",
+        "starter": "grass",
+        "iv": 2,
+        "nat": "hardy"
+      },
+      {
+        "name": "pelipper",
+        "level": "29",
+        "moves": ["wing-attack", "supersonic", "mist", "protect"],
+        "ability": "keen-eye",
+        "starter": "water",
+        "iv": 2,
+        "nat": "hardy"
+      },
+      {
+        "name": "slugma",
+        "level": "29",
+        "moves": ["harden", "amnesia", "ember", "rock-throw"],
+        "ability": "flame-body",
+        "starter": "fire",
+        "iv": 2,
+        "nat": "bold"
+      },
+      {
+        "name": "lombre",
+        "level": "29",
+        "moves": ["absorb", "fake-out", "nature-power", "fury-swipes"],
+        "ability": "swift-swim",
+        "starter": "grass",
+        "iv": 12,
+        "nat": "brave"
+      },
+      {
+        "name": "slugma",
+        "level": "29",
+        "moves": ["harden", "amnesia", "ember", "rock-throw"],
+        "ability": "flame-body",
+        "starter": "water",
+        "iv": 2,
+        "nat": "bold"
+      },
+      {
+        "name": "marshtomp",
+        "level": "31",
+        "moves": ["mud-shot", "mud-sport", "foresight", "take-down"],
+        "ability": "torrent",
+        "starter": "fire",
+        "iv": 18,
+        "nat": "bashful"
+      },
+      {
+        "name": "combusken",
+        "level": "31",
+        "moves": ["double-kick", "bulk-up", "peck", "sand-attack"],
+        "ability": "blaze",
+        "starter": "grass",
+        "iv": 18,
+        "nat": "quirky"
+      },
+      {
+        "name": "grovyle",
+        "level": "31",
+        "moves": ["fury-cutter", "leaf-blade", "pursuit", "screech"],
+        "ability": "overgrow",
+        "starter": "water",
+        "iv": 18,
+        "nat": "gentle"
+      }
     ]
   },
   "r5": {
@@ -286,16 +524,88 @@
     "speciality": "",
     "img": "/leaders/rs-may",
     "pokemon": [
-      { "name": "tropius", "level": "31", "moves": ["stomp", "sweet-scent", "whirlwind", "magical-leaf"], "ability": "chlorophyll", "iv": 18 },
-      { "name": "ludicolo", "level": "32", "moves": ["astonish", "absorb", "growl", "nature-power"], "ability": "swift-swim", "starter": "fire", "iv": 18 },
-      { "name": "pelipper", "level": "32", "moves": ["wing-attack", "supersonic", "mist", "protect"], "ability": "keen-eye", "starter": "grass", "iv": 3 },
-      { "name": "pelipper", "level": "32", "moves": ["wing-attack", "supersonic", "mist", "protect"], "ability": "keen-eye", "starter": "water", "iv": 3 },
-      { "name": "slugma", "level": "32", "moves": ["harden", "amnesia", "ember", "rock-throw"], "ability": "flame-body", "starter": "fire", "iv": 3 },
-      { "name": "ludicolo", "level": "32", "moves": ["astonish", "absorb", "growl", "nature-power"], "ability": "swift-swim", "starter": "grass", "iv": 18 },
-      { "name": "slugma", "level": "32", "moves": ["harden", "amnesia", "ember", "rock-throw"], "ability": "flame-body", "starter": "water", "iv": 3 },
-      { "name": "marshtomp", "level": "34", "moves": ["mud-shot", "mud-sport", "foresight", "take-down"], "ability": "torrent", "starter": "fire", "iv": 24 },
-      { "name": "combusken", "level": "34", "moves": ["sand-attack", "bulk-up", "peck", "quick-attack"], "ability": "blaze", "starter": "grass", "iv": 24 },
-      { "name": "grovyle", "level": "34", "moves": ["fury-cutter", "leaf-blade", "pursuit", "screech"], "ability": "overgrow", "starter": "water", "iv": 24 }
+      { "name": "tropius", "level": "31", "moves": ["stomp", "sweet-scent", "whirlwind", "magical-leaf"], "ability": "chlorophyll", "iv": 18, "nat": "mild" },
+      {
+        "name": "ludicolo",
+        "level": "32",
+        "moves": ["astonish", "absorb", "growl", "nature-power"],
+        "ability": "swift-swim",
+        "starter": "fire",
+        "iv": 18,
+        "nat": "calm"
+      },
+      {
+        "name": "pelipper",
+        "level": "32",
+        "moves": ["wing-attack", "supersonic", "mist", "protect"],
+        "ability": "keen-eye",
+        "starter": "grass",
+        "iv": 3,
+        "nat": "bold"
+      },
+      {
+        "name": "pelipper",
+        "level": "32",
+        "moves": ["wing-attack", "supersonic", "mist", "protect"],
+        "ability": "keen-eye",
+        "starter": "water",
+        "iv": 3,
+        "nat": "bold"
+      },
+      {
+        "name": "slugma",
+        "level": "32",
+        "moves": ["harden", "amnesia", "ember", "rock-throw"],
+        "ability": "flame-body",
+        "starter": "fire",
+        "iv": 3,
+        "nat": "timid"
+      },
+      {
+        "name": "ludicolo",
+        "level": "32",
+        "moves": ["astonish", "absorb", "growl", "nature-power"],
+        "ability": "swift-swim",
+        "starter": "grass",
+        "iv": 18,
+        "nat": "calm"
+      },
+      {
+        "name": "slugma",
+        "level": "32",
+        "moves": ["harden", "amnesia", "ember", "rock-throw"],
+        "ability": "flame-body",
+        "starter": "water",
+        "iv": 3,
+        "nat": "timid"
+      },
+      {
+        "name": "marshtomp",
+        "level": "34",
+        "moves": ["mud-shot", "mud-sport", "foresight", "take-down"],
+        "ability": "torrent",
+        "starter": "fire",
+        "iv": 24,
+        "nat": "hasty"
+      },
+      {
+        "name": "combusken",
+        "level": "34",
+        "moves": ["sand-attack", "bulk-up", "peck", "quick-attack"],
+        "ability": "blaze",
+        "starter": "grass",
+        "iv": 24,
+        "nat": "quiet"
+      },
+      {
+        "name": "grovyle",
+        "level": "34",
+        "moves": ["fury-cutter", "leaf-blade", "pursuit", "screech"],
+        "ability": "overgrow",
+        "starter": "water",
+        "iv": 24,
+        "nat": "lonely"
+      }
     ]
   },
   "e1": {
@@ -303,17 +613,25 @@
     "speciality": "dark",
     "img": "/leaders/rs-sidney",
     "pokemon": [
-      { "name": "mightyena", "level": "46", "moves": ["roar", "double-edge", "sand-attack", "crunch"], "ability": "intimidate", "iv": 30 },
-      { "name": "shiftry", "level": "48", "moves": ["torment", "double-team", "swagger", "extrasensory"], "ability": "chlorophyll", "iv": 30 },
-      { "name": "cacturne", "level": "46", "moves": ["leech-seed", "feint-attack", "needle-arm", "cotton-spore"], "ability": "sand-veil", "iv": 30 },
-      { "name": "crawdaunt", "level": "48", "moves": ["surf", "swords-dance", "strength", "facade"], "ability": "hyper-cutter", "iv": 30 },
+      { "name": "mightyena", "level": "46", "moves": ["roar", "double-edge", "sand-attack", "crunch"], "ability": "intimidate", "iv": 30, "nat": "rash" },
+      { "name": "shiftry", "level": "48", "moves": ["torment", "double-team", "swagger", "extrasensory"], "ability": "chlorophyll", "iv": 30, "nat": "jolly" },
+      {
+        "name": "cacturne",
+        "level": "46",
+        "moves": ["leech-seed", "feint-attack", "needle-arm", "cotton-spore"],
+        "ability": "sand-veil",
+        "iv": 30,
+        "nat": "adamant"
+      },
+      { "name": "crawdaunt", "level": "48", "moves": ["surf", "swords-dance", "strength", "facade"], "ability": "hyper-cutter", "iv": 30, "nat": "naughty" },
       {
         "name": "absol",
         "level": "49",
         "moves": ["aerial-ace", "rock-slide", "swords-dance", "slash"],
         "ability": "pressure",
         "held": "sitrus-berry",
-        "iv": 31
+        "iv": 31,
+        "nat": "bold"
       }
     ]
   },
@@ -322,17 +640,25 @@
     "speciality": "ghost",
     "img": "/leaders/rs-phoebe",
     "pokemon": [
-      { "name": "dusclops", "level": "48", "moves": ["shadow-punch", "confuse-ray", "curse", "protect"], "ability": "pressure", "iv": 30 },
-      { "name": "banette", "level": "49", "moves": ["shadow-ball", "grudge", "will-o-wisp", "feint-attack"], "ability": "insomnia", "iv": 30 },
-      { "name": "sableye", "level": "50", "moves": ["shadow-ball", "double-team", "night-shade", "feint-attack"], "ability": "keen-eye", "iv": 30 },
-      { "name": "banette", "level": "49", "moves": ["shadow-ball", "psychic", "thunderbolt", "facade"], "ability": "insomnia", "iv": 30 },
+      { "name": "dusclops", "level": "48", "moves": ["shadow-punch", "confuse-ray", "curse", "protect"], "ability": "pressure", "iv": 30, "nat": "naughty" },
+      { "name": "banette", "level": "49", "moves": ["shadow-ball", "grudge", "will-o-wisp", "feint-attack"], "ability": "insomnia", "iv": 30, "nat": "calm" },
+      {
+        "name": "sableye",
+        "level": "50",
+        "moves": ["shadow-ball", "double-team", "night-shade", "feint-attack"],
+        "ability": "keen-eye",
+        "iv": 30,
+        "nat": "careful"
+      },
+      { "name": "banette", "level": "49", "moves": ["shadow-ball", "psychic", "thunderbolt", "facade"], "ability": "insomnia", "iv": 30, "nat": "naive" },
       {
         "name": "dusclops",
         "level": "51",
         "moves": ["shadow-ball", "ice-beam", "rock-slide", "earthquake"],
         "ability": "pressure",
         "held": "sitrus-berry",
-        "iv": 31
+        "iv": 31,
+        "nat": "careful"
       }
     ]
   },
@@ -341,11 +667,19 @@
     "speciality": "ice",
     "img": "/leaders/rs-glacia",
     "pokemon": [
-      { "name": "sealeo", "level": "50", "moves": ["encore", "body-slam", "hail", "ice-ball"], "ability": "thick-fat", "iv": 30 },
-      { "name": "glalie", "level": "50", "moves": ["light-screen", "crunch", "icy-wind", "ice-beam"], "ability": "inner-focus", "iv": 30 },
-      { "name": "sealeo", "level": "52", "moves": ["attract", "double-edge", "hail", "blizzard"], "iv": 30 },
-      { "name": "glalie", "level": "52", "moves": ["shadow-ball", "explosion", "hail", "ice-beam"], "ability": "inner-focus", "iv": 30 },
-      { "name": "walrein", "level": "53", "moves": ["surf", "body-slam", "ice-beam", "sheer-cold"], "ability": "thick-fat", "held": "sitrus-berry", "iv": 31 }
+      { "name": "sealeo", "level": "50", "moves": ["encore", "body-slam", "hail", "ice-ball"], "ability": "thick-fat", "iv": 30, "nat": "brave" },
+      { "name": "glalie", "level": "50", "moves": ["light-screen", "crunch", "icy-wind", "ice-beam"], "ability": "inner-focus", "iv": 30, "nat": "bashful" },
+      { "name": "sealeo", "level": "52", "moves": ["attract", "double-edge", "hail", "blizzard"], "iv": 30, "nat": "hardy" },
+      { "name": "glalie", "level": "52", "moves": ["shadow-ball", "explosion", "hail", "ice-beam"], "ability": "inner-focus", "iv": 30, "nat": "mild" },
+      {
+        "name": "walrein",
+        "level": "53",
+        "moves": ["surf", "body-slam", "ice-beam", "sheer-cold"],
+        "ability": "thick-fat",
+        "held": "sitrus-berry",
+        "iv": 31,
+        "nat": "naive"
+      }
     ]
   },
   "e4": {
@@ -353,17 +687,25 @@
     "speciality": "dragon",
     "img": "/leaders/rs-drake",
     "pokemon": [
-      { "name": "shelgon", "level": "52", "moves": ["rock-tomb", "dragon-claw", "protect", "double-edge"], "ability": "rock-head", "iv": 30 },
-      { "name": "altaria", "level": "54", "moves": ["double-edge", "dragon-breath", "dragon-dance", "aerial-ace"], "ability": "natural-cure", "iv": 30 },
-      { "name": "kingdra", "level": "53", "moves": ["smokescreen", "dragon-dance", "surf", "body-slam"], "ability": "swift-swim", "iv": 30 },
-      { "name": "flygon", "level": "53", "moves": ["flamethrower", "crunch", "dragon-breath", "earthquake"], "ability": "levitate", "iv": 30 },
+      { "name": "shelgon", "level": "52", "moves": ["rock-tomb", "dragon-claw", "protect", "double-edge"], "ability": "rock-head", "iv": 30, "nat": "quiet" },
+      {
+        "name": "altaria",
+        "level": "54",
+        "moves": ["double-edge", "dragon-breath", "dragon-dance", "aerial-ace"],
+        "ability": "natural-cure",
+        "iv": 30,
+        "nat": "modest"
+      },
+      { "name": "kingdra", "level": "53", "moves": ["smokescreen", "dragon-dance", "surf", "body-slam"], "ability": "swift-swim", "iv": 30, "nat": "hardy" },
+      { "name": "flygon", "level": "53", "moves": ["flamethrower", "crunch", "dragon-breath", "earthquake"], "ability": "levitate", "iv": 30, "nat": "lax" },
       {
         "name": "salamence",
         "level": "55",
         "moves": ["flamethrower", "dragon-claw", "rock-slide", "crunch"],
         "ability": "intimidate",
         "held": "sitrus-berry",
-        "iv": 31
+        "iv": 31,
+        "nat": "bold"
       }
     ]
   },
@@ -372,12 +714,20 @@
     "speciality": "water",
     "img": "/leaders/rs-wallace",
     "pokemon": [
-      { "name": "wailord", "level": "57", "moves": ["rain-dance", "water-spout", "double-edge", "blizzard"], "ability": "water-veil", "iv": 31 },
-      { "name": "tentacruel", "level": "55", "moves": ["toxic", "hydro-pump", "sludge-bomb", "ice-beam"], "ability": "clear-body", "iv": 31 },
-      { "name": "ludicolo", "level": "56", "moves": ["giga-drain", "surf", "leech-seed", "double-team"], "ability": "swift-swim", "iv": 31 },
-      { "name": "whiscash", "level": "56", "moves": ["earthquake", "surf", "amnesia", "hyper-beam"], "ability": "oblivious", "iv": 31 },
-      { "name": "gyarados", "level": "56", "moves": ["dragon-dance", "earthquake", "hyper-beam", "surf"], "ability": "intimidate", "iv": 31 },
-      { "name": "milotic", "level": "58", "moves": ["recover", "surf", "ice-beam", "toxic"], "ability": "marvel-scale", "held": "sitrus-berry", "iv": 31 }
+      { "name": "wailord", "level": "57", "moves": ["rain-dance", "water-spout", "double-edge", "blizzard"], "ability": "water-veil", "iv": 31, "nat": "rash" },
+      { "name": "tentacruel", "level": "55", "moves": ["toxic", "hydro-pump", "sludge-bomb", "ice-beam"], "ability": "clear-body", "iv": 31, "nat": "sassy" },
+      { "name": "ludicolo", "level": "56", "moves": ["giga-drain", "surf", "leech-seed", "double-team"], "ability": "swift-swim", "iv": 31, "nat": "hardy" },
+      { "name": "whiscash", "level": "56", "moves": ["earthquake", "surf", "amnesia", "hyper-beam"], "ability": "oblivious", "iv": 31, "nat": "sassy" },
+      { "name": "gyarados", "level": "56", "moves": ["dragon-dance", "earthquake", "hyper-beam", "surf"], "ability": "intimidate", "iv": 31, "nat": "rash" },
+      {
+        "name": "milotic",
+        "level": "58",
+        "moves": ["recover", "surf", "ice-beam", "toxic"],
+        "ability": "marvel-scale",
+        "held": "sitrus-berry",
+        "iv": 31,
+        "nat": "gentle"
+      }
     ]
   },
   "c2": {
@@ -385,18 +735,33 @@
     "speciality": "rock",
     "img": "/leaders/rs-steven",
     "pokemon": [
-      { "name": "skarmory", "level": "77", "moves": ["toxic", "aerial-ace", "spikes", "steel-wing"], "ability": "keen-eye", "iv": 31 },
-      { "name": "claydol", "level": "75", "moves": ["reflect", "light-screen", "ancient-power", "earthquake"], "ability": "levitate", "iv": 31 },
-      { "name": "aggron", "level": "76", "moves": ["thunder", "earthquake", "solar-beam", "dragon-claw"], "ability": "sturdy", "iv": 31 },
-      { "name": "cradily", "level": "76", "moves": ["giga-drain", "ingrain", "ancient-power", "confuse-ray"], "ability": "suction-cups", "iv": 31 },
-      { "name": "armaldo", "level": "76", "moves": ["water-pulse", "ancient-power", "aerial-ace", "slash"], "ability": "battle-armor", "iv": 31 },
+      { "name": "skarmory", "level": "77", "moves": ["toxic", "aerial-ace", "spikes", "steel-wing"], "ability": "keen-eye", "iv": 31, "nat": "modest" },
+      {
+        "name": "claydol",
+        "level": "75",
+        "moves": ["reflect", "light-screen", "ancient-power", "earthquake"],
+        "ability": "levitate",
+        "iv": 31,
+        "nat": "modest"
+      },
+      { "name": "aggron", "level": "76", "moves": ["thunder", "earthquake", "solar-beam", "dragon-claw"], "ability": "sturdy", "iv": 31, "nat": "naive" },
+      {
+        "name": "cradily",
+        "level": "76",
+        "moves": ["giga-drain", "ingrain", "ancient-power", "confuse-ray"],
+        "ability": "suction-cups",
+        "iv": 31,
+        "nat": "naive"
+      },
+      { "name": "armaldo", "level": "76", "moves": ["water-pulse", "ancient-power", "aerial-ace", "slash"], "ability": "battle-armor", "iv": 31, "nat": "mild" },
       {
         "name": "metagross",
         "level": "78",
         "moves": ["earthquake", "psychic", "meteor-mash", "shadow-ball"],
         "ability": "clear-body",
         "held": "sitrus-berry",
-        "iv": 31
+        "iv": 31,
+        "nat": "bashful"
       }
     ]
   }

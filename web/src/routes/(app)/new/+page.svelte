@@ -192,8 +192,9 @@
     <Button rounded {disabled} on:click={handleNewGame}>Create game</Button>
     <div>
       <Tooltip
-        >Generate a game with pre-randomized encounters, designed for games like
-        Scarlet & Violet with overworld only encounters</Tooltip
+        >{es
+          ? 'Crea la partida con un encuentro al azar ya puesto en cada zona, pensado para juegos de mundo abierto como Escarlata y Púrpura. No es el Randomlocke: para un juego pasado por un randomizer, elige la regla «Randomlocke» de abajo.'
+          : 'Creates the run with a random encounter already set in each area, for open-world games like Scarlet & Violet. This is not Randomlocke: for a randomized ROM, pick the «Randomlocke» rules below.'}</Tooltip
       >
       <Button
         className="w-full md:w-auto"
@@ -201,7 +202,7 @@
         {disabled}
         on:click={handleGenGame}
       >
-        Randomize
+        {es ? 'Encuentros al azar' : 'Random encounters'}
         <Icon inline="true" icon={Dice} class="inline" />
       </Button>
     </div>

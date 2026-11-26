@@ -354,7 +354,7 @@
     background: rgba(255, 255, 255, 0.16) !important;
   }
   .lx-hueco :global(.lx-hueco-icono) {
-    transform: scale(1.35);
+    transform: scale(2);
     image-rendering: pixelated;
   }
   .lx-sel :global(.lx-hueco-icono) {
@@ -362,7 +362,7 @@
   }
   @keyframes lx-salto {
     50% {
-      transform: scale(1.35) translateY(-3px);
+      transform: scale(2) translateY(-2px);
     }
   }
   .lx-mano {

@@ -1,11 +1,13 @@
 <script>
+  // Equipo y Caja de la ventana del VS, como el PC de los juegos: seis huecos de equipo arriba y la caja
+  // abajo con el fondo de cuadros, iconos a ×2 y salto a dos fotogramas al pasar por encima.
   import { createEventDispatcher } from 'svelte'
   import { crossfade } from 'svelte/transition'
   import { flip } from 'svelte/animate'
 
-  import { PIcon, Icon } from '$c/core'
+  import { PIcon } from '$c/core'
+  import { t } from '$lib/lockedex/idioma.js'
 
-  import { Pip } from '$icons'
   import { chunk } from '$utils/arr'
   import { locid } from '$utils/pokemon'
 
@@ -14,6 +16,8 @@
 
   export let team = [],
     box = []
+
+  const POR_CAJA = 6 * 3
 
   $: teamList = team.map((t) => locid(t?.original))
   $: boxList = box
@@ -24,189 +28,244 @@
     pages,
     max
 
-  $: (pages = chunk(boxList, 8 * 3)), (max = Math.max(pages.length - 1, 0))
+  $: (pages = chunk(boxList, POR_CAJA)), (max = Math.max(pages.length - 1, 0))
   $: if (page > max) page = max
-
-  const set = (i) => (_) => (page = i)
 
   const select = (poke) => () => dispatch('select', poke)
   const clear = () => dispatch('clear')
   const reset = () => dispatch('reset')
 </script>
 
-<div class="mt-4 flex w-full flex-col gap-x-4 md:flex-row">
-  <div>
-    <h2 class="max-md:inline md:w-full">Team</h2>
+<div class="lx-bt">
+  <div class="lx-bt-bloque">
+    <div class="lx-bt-cabecera">
+      <h2>{t('Equipo', 'Team')}</h2>
+      <span class="lx-bt-acciones">
+        <button disabled={team.length == 0} on:click={clear} class="lx-bt-enlace">
+          {t('Vaciar', 'Clear')}
+        </button>
+        <button on:click={reset} class="lx-bt-enlace">{t('Restablecer', 'Reset')}</button>
+      </span>
+    </div>
 
-    <ul
-      class="my-1 grid grid-cols-6 gap-y-2 md:mt-3 md:mb-4 md:w-fit md:grid-cols-3"
-    >
+    <ul class="lx-bt-rejilla lx-bt-equipo">
       {#each team as poke (locid(poke.original))}
         {@const og = poke.original}
         <button
-          title="Remove {og.pokemon} from team"
-          class="selected relative mx-auto h-10 w-10"
+          title={t(`Sacar a ${og.pokemon} del equipo`, `Remove ${og.pokemon} from team`)}
+          class="lx-bt-hueco lx-bt-lleno"
           on:click={select(og)}
           animate:flip={{ duration: 200 }}
           in:receive={{ key: locid(og) }}
           out:send|local={{ key: locid(og) }}
         >
-          <PIcon class="picon" name={og.pokemon} />
+          <PIcon class="lx-bt-icono" name={og.pokemon} />
         </button>
       {/each}
-      {#each Array(6 - team.length) as _}
-        <div class="relative h-10 w-10">
+      {#each Array(Math.max(0, 6 - team.length)) as _}
+        <div class="lx-bt-hueco lx-bt-libre">
           <img class="lx-hueco-ball" src="/lx/objetos/poke-ball.png" alt="" aria-hidden="true" />
         </div>
       {/each}
     </ul>
-
-    <span
-      class="float-right mt-1 inline-flex justify-end gap-x-4 text-right md:float-none md:-mt-1 md:justify-start"
-      ><button
-        disabled={team.length == 0}
-        on:click={clear}
-        class="clear float-right text-xs italic underline underline-offset-2 opacity-50 hover:opacity-100"
-      >
-        Clear team
-      </button>
-      <button
-        on:click={reset}
-        class="clear float-right text-xs italic underline underline-offset-2 opacity-50 hover:opacity-100"
-      >
-        Reset
-      </button>
-    </span>
   </div>
 
-  <div class="relative">
-    <h2>Box</h2>
-    <div class="flex flex-col items-start md:flex-row md:items-center" />
+  <div class="lx-bt-bloque">
+    <div class="lx-bt-cabecera">
+      <h2>
+        {t('Caja', 'Box')}
+        {#if pages.length > 1}<small>{page + 1}/{pages.length}</small>{/if}
+      </h2>
+      {#if pages.length > 1}
+        <span class="lx-bt-flechas">
+          <button disabled={page === 0} on:click={() => (page -= 1)} title={t('Caja anterior', 'Previous box')}>◀</button>
+          <button disabled={page === max} on:click={() => (page += 1)} title={t('Caja siguiente', 'Next box')}>▶</button>
+        </span>
+      {/if}
+    </div>
 
-    <ul
-      class="mt-2 grid w-full grid-cols-6 rounded-lg bg-gray-200 px-4 py-2 dark:bg-gray-800 max-md:min-h-[56px] md:w-fit md:grid-cols-8"
-    >
+    <ul class="lx-bt-rejilla lx-bt-caja">
       {#key page}
         {#each pages[page] || [] as poke (locid(poke.original))}
           {@const og = poke.original}
           <button
             title={team.length === 6
-              ? 'Your team is full!'
-              : `Add ${og.pokemon} to your team`}
-            class="relative mx-auto h-10 w-10"
+              ? t('¡Tu equipo está lleno!', 'Your team is full!')
+              : t(`Meter a ${og.pokemon} en el equipo`, `Add ${og.pokemon} to your team`)}
+            class="lx-bt-hueco"
             disabled={team.length === 6}
             on:click={select(og)}
             animate:flip={{ duration: 200 }}
             in:receive={{ key: locid(og) }}
             out:send|local={{ key: locid(og) }}
           >
-            <PIcon class="picon -scale-x-100" name={og.pokemon} />
+            <PIcon class="lx-bt-icono" name={og.pokemon} />
           </button>
         {/each}
       {/key}
+      {#if !boxList.length}
+        <li class="lx-bt-vacia">{t('No queda nadie en la caja', 'Nobody left in the box')}</li>
+      {/if}
     </ul>
-
-    {#if pages.length > 1}
-      <div
-        class="max-md:w-full max-md:text-center md:absolute md:right-0 md:top-0"
-      >
-        {#each Array(pages.length) as p, i}
-          <button
-            disabled={page === i}
-            class="pip"
-            title="Box {i + 1}"
-            on:click={set(i)}
-          >
-            <Icon inline="true" height="0.5rem" icon={Pip} />
-          </button>
-        {/each}
-      </div>
-    {/if}
   </div>
 </div>
 
 <style>
+  .lx-bt {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+    width: 100%;
+  }
+  .lx-bt-cabecera {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+  h2 {
+    font-family: 'LX Pixel', 'VT323', monospace;
+    font-size: 24px;
+    line-height: 24px;
+    font-weight: normal;
+  }
+  h2 small {
+    font-size: 12px;
+    margin-left: 6px;
+    opacity: 0.7;
+  }
+  .lx-bt-acciones {
+    display: flex;
+    gap: 14px;
+  }
+  .lx-bt-enlace {
+    font-size: 12px;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    opacity: 0.6;
+  }
+  .lx-bt-enlace:hover:enabled {
+    opacity: 1;
+  }
+  .lx-bt-enlace:disabled {
+    opacity: 0.3;
+  }
+  .lx-bt-flechas {
+    display: flex;
+    gap: 4px;
+  }
+  .lx-bt-flechas button {
+    width: 26px;
+    height: 22px;
+    font-size: 12px;
+    color: #f8f8f8;
+    background: #283850;
+    clip-path: polygon(2px 0, calc(100% - 2px) 0, 100% 2px, 100% calc(100% - 2px), calc(100% - 2px) 100%, 2px 100%, 0 calc(100% - 2px), 0 2px);
+  }
+  .lx-bt-flechas button:disabled {
+    opacity: 0.3;
+  }
+
+  /* Rejillas de seis columnas: el equipo sobre el verde azulado del menú y la caja con el fondo de
+     cuadros del PC */
+  .lx-bt-rejilla {
+    display: grid;
+    grid-template-columns: repeat(6, 64px);
+    gap: 6px;
+    padding: 8px;
+    width: fit-content;
+    border: 2px solid var(--lx-tinta);
+    clip-path: polygon(4px 0, calc(100% - 4px) 0, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px), 0 4px);
+  }
+  .lx-bt-equipo {
+    background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.08) 0 2px, transparent 2px 4px), #2f6f63;
+  }
+  .lx-bt-caja {
+    min-height: 84px;
+    background-color: #cfe8d8;
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.35) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.35) 75%),
+      linear-gradient(45deg, rgba(255, 255, 255, 0.35) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.35) 75%);
+    background-size: 32px 32px;
+    background-position: 0 0, 16px 16px;
+  }
+  :global(html.dark) .lx-bt-caja {
+    background-color: #183a30;
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.04) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.04) 75%),
+      linear-gradient(45deg, rgba(255, 255, 255, 0.04) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.04) 75%);
+  }
+  .lx-bt-vacia {
+    grid-column: 1 / -1;
+    align-self: center;
+    text-align: center;
+    font-size: 12px;
+    color: #405048;
+  }
+  :global(html.dark) .lx-bt-vacia {
+    color: #b8d0c8;
+  }
+
+  .lx-bt-hueco {
+    position: relative;
+    width: 64px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lx-bt-lleno {
+    background: rgba(255, 255, 255, 0.16);
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.35);
+  }
+  .lx-bt-lleno:hover {
+    background: rgba(220, 10, 45, 0.35);
+  }
+  .lx-bt-libre {
+    background: rgba(0, 0, 0, 0.15);
+  }
+  .lx-bt-caja .lx-bt-hueco:hover:enabled {
+    background: rgba(255, 255, 255, 0.55);
+  }
+  .lx-bt-hueco:disabled {
+    filter: grayscale(1);
+    opacity: 0.6;
+  }
   /* Hueco libre del equipo: Poké Ball apagada, como un hueco vacío del menú de los juegos */
   .lx-hueco-ball {
-    position: absolute;
-    inset: 4px;
     width: 32px;
     height: 32px;
     image-rendering: pixelated;
-    filter: grayscale(1) opacity(0.35);
+    filter: grayscale(1) opacity(0.45);
   }
 
-  h2 {
-    @apply text-sm font-bold;
+  .lx-bt-hueco :global(.lx-bt-icono) {
+    pointer-events: none;
+    transform: scale(2);
+    image-rendering: pixelated;
   }
-
-  :global(.picon) {
-    @apply pointer-events-none absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2;
+  .lx-bt-caja :global(.lx-bt-icono) {
+    transform: scale(-2, 2);
   }
-
-  button:enabled:not(.selected):hover :global(.pkm) {
-    animation: shake 3.2s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
+  /* Salto a dos fotogramas, como el icono del menú de equipo de la GBA */
+  .lx-bt-lleno :global(.lx-bt-icono) {
+    animation: lx-bt-salto 1s steps(1, end) infinite;
   }
-
-  button:disabled {
-    @apply grayscale;
+  .lx-bt-caja .lx-bt-hueco:hover:enabled :global(.lx-bt-icono) {
+    animation: lx-bt-salto-caja 0.5s steps(1, end) infinite;
   }
-
-  button.clear::before,
-  button.pip::before {
-    content: none;
-  }
-
-  button:before {
-    content: '';
-    position: absolute;
-    border-radius: 100%;
-    @apply left-1/2 -bottom-0 h-4 w-8 -translate-x-1/2 opacity-0 transition-opacity;
-  }
-
-  button::before {
-    @apply bg-black;
-  }
-
-  :global(.dark) button::before {
-    @apply bg-white;
-  }
-
-  button.selected::before {
-    @apply opacity-10;
-  }
-
-  button:not(.selected):enabled:hover::before {
-    @apply opacity-20;
-  }
-
-  button.selected :global(.pkm) {
-    animation: bob 3s ease infinite;
-  }
-
-  @keyframes bob {
-    0%,
-    100% {
-      transform: scale(-1, var(--tw-scale-y))
-        translate(var(--tw-translate-x), -8px);
-    }
+  @keyframes lx-bt-salto {
     50% {
-      transform: scale(-1, var(--tw-scale-y))
-        translate(var(--tw-translate-x), -4px);
+      transform: scale(2) translateY(-2px);
     }
   }
-
-  button {
-    @apply transition;
+  @keyframes lx-bt-salto-caja {
+    50% {
+      transform: scale(-2, 2) translateY(-2px);
+    }
   }
-
-  .pip:disabled {
-    @apply pointer-events-none scale-150 opacity-100;
-  }
-  .pip {
-    @apply p-1 opacity-50;
-  }
-  .pip:enabled:hover {
-    @apply text-orange-500 opacity-100;
+  @media (prefers-reduced-motion: reduce) {
+    .lx-bt-hueco :global(.lx-bt-icono) {
+      animation: none !important;
+    }
   }
 </style>

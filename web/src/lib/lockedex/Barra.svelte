@@ -9,6 +9,7 @@
   import { idioma, cambiarIdioma, traducirNombre } from './idioma.js'
   import { partidaActiva, cargarRutas, resumirPartida, alCambiarDatos, cargarLiga, nivelMaximo } from './partida.js'
   import { theme } from '$lib/store'
+  import { leerReglas, ajustarNivel } from './reglas.js'
   import Icon from '@iconify/svelte/dist/OfflineIcon.svelte'
   import { DarkMode, LightMode } from '$icons'
 
@@ -66,7 +67,8 @@
     const lista = r.jefes || []
     const resto = lista.slice(Math.max(0, lista.findIndex((j) => String(j.value) === String(jefe.value))))
     const gim = resto.find((j) => j.group === 'gym-leader') || resto.find((j) => j.group === 'elite-four') || jefe
-    return { nombre: traducirNombre(jefe.boss || jefe.name), nivel: nivelMaximo(liga?.[gim.value]) ?? nivelMaximo(liga?.[jefe.value]) }
+    const nivel = nivelMaximo(liga?.[gim.value]) ?? nivelMaximo(liga?.[jefe.value])
+    return { nombre: traducirNombre(jefe.boss || jefe.name), nivel: ajustarNivel(nivel, leerReglas(p.id)) }
   }
 
   // Navegación interna con plan B: si en 2,5 s no ha cambiado de página,

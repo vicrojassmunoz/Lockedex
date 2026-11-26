@@ -68,7 +68,7 @@
   import { onMount as alMontar } from 'svelte'
 
   // Lockedex: Randomlocke (equipos de jefes aleatorizados, apuntados a mano)
-  import { leerReglas } from '$lib/lockedex/reglas.js'
+  import { leerReglas, ajustarEquipoJefe, sinCalculos } from '$lib/lockedex/reglas.js'
   import { leerEquiposJefes, comoJefe } from '$lib/lockedex/jefes.js'
   import { cargarCalc, urlSprite, cargarPokedex } from '$lib/lockedex/analista.js'
   import { infoJuego } from '$lib/lockedex/datos.js'
@@ -114,7 +114,7 @@
       const actual = await equipoActual()
       if (!actual) return
       leerRandom()
-      const jefeRiesgo = await jefeParaRiesgo()
+      const jefeRiesgo = sinCalculos(reglasRun) ? null : await jefeParaRiesgo()
       riesgo = jefeRiesgo ? await calcularRiesgo({ jefe: jefeRiesgo, equipo: actual.eq.miembros, gen: actual.partida.info.gen, cap: levelCap }) : null
     } catch (e) {
       console.error('[riesgo]', e)
@@ -178,7 +178,8 @@
 
       img = bossToImage(data);
 
-      pokemon = data.pokemon
+      // Randomlocke con los niveles de los jefes subidos: el equipo ya con el nivel ajustado
+      pokemon = ajustarEquipoJefe(data.pokemon, leerReglas($activeGame))
       name = data.name
       speciality = data.speciality
 
@@ -393,7 +394,9 @@
             </div>
             <button class="lx-random-boton" on:click|stopPropagation={apuntarEquipo}>Editar equipo apuntado</button>
           {:else}
-            <p>Randomlocke: el equipo de este jefe es aleatorio. Apúntalo cuando lo veas para calcular el riesgo.</p>
+            <p>{sinCalculos(reglasRun)
+              ? tr('Randomlocke: el equipo de este jefe es aleatorio. Puedes apuntarlo para tenerlo a mano (con tipos aleatorizados no se calcula el riesgo).', 'Randomlocke: this boss team is random. You can log it for reference (risk is not calculated with randomized types).')
+              : tr('Randomlocke: el equipo de este jefe es aleatorio. Apúntalo cuando lo veas para calcular el riesgo.', 'Randomlocke: this boss team is random. Log it when you see it to calculate risk.')}</p>
             <button class="lx-random-boton" on:click|stopPropagation={apuntarEquipo}>Apuntar equipo real</button>
           {/if}
         </div>
