@@ -4,7 +4,7 @@
   import { partidaActiva, cargarRutas, resumirPartida } from './partida.js'
   import { prepararCandidatos, buscarEquipo, duelosContraJefe, motivos, resumenEquipo } from './equilibrar.js'
   import { calcularRiesgo } from './riesgo.js'
-  import { tipos as tiposEs } from './datos.js'
+  import { tipos as tiposEs, habilidades as cargarHabs, norm } from './datos.js'
   import { COLOR_TIPO, RIESGO } from './colores.js'
   import { recorte } from './recorte.js'
   import { t, idioma, traducirNombre } from './idioma.js'
@@ -19,6 +19,11 @@
   let datos = null // { candidatos, cap, jefe, reglas, notas, gen, parejas, conSav }
   let partida = null
   let tt = {}
+  let habs = {}
+  const nombreHab = (k) => {
+    const h = habs?.[norm(k)]
+    return h ? (es ? h.es : h.en) : k
+  }
   let modo = 'general'
   let fijos = new Set()
   let propuesta = []
@@ -43,7 +48,7 @@
       if (!partida?.info) throw new Error('sin run')
       const rutas = await cargarRutas(partida.info.lid)
       const resumen = resumirPartida(partida, rutas)
-      ;[datos, tt] = await Promise.all([prepararCandidatos(partida, resumen), tiposEs()])
+      ;[datos, tt, habs] = await Promise.all([prepararCandidatos(partida, resumen), tiposEs(), cargarHabs()])
       if (!datos.candidatos.length) {
         estado = 'vacio'
         return
@@ -108,6 +113,10 @@
         return t(`Cubre ${c.tipos.map(nombreTipo).join(', ')}`, `Covers ${c.tipos.map(nombreTipo).join(', ')}`)
       case 'resiste':
         return t(`Resiste ${c.tipos.map(nombreTipo).join(', ')}`, `Resists ${c.tipos.map(nombreTipo).join(', ')}`)
+      case 'habilidad':
+        return c.inmune
+          ? t(`Inmune a ${c.tipos.map(nombreTipo).join(', ')} (${nombreHab(c.habilidad)})`, `Immune to ${c.tipos.map(nombreTipo).join(', ')} (${nombreHab(c.habilidad)})`)
+          : t(`Aguanta ${c.tipos.map(nombreTipo).join(', ')} (${nombreHab(c.habilidad)})`, `Takes less ${c.tipos.map(nombreTipo).join(', ')} (${nombreHab(c.habilidad)})`)
       case 'rapido':
         return t('El más rápido', 'Fastest')
       case 'fuerte':
@@ -421,6 +430,10 @@
   :global(.dark) .lx-eq-chips li {
     background: #2c3a52;
     color: #c8d8f0;
+  }
+  .lx-eq-chips .lx-c-habilidad {
+    background: #f0e8fb;
+    color: #5a2e8c;
   }
   .lx-eq-chips .lx-c-gana {
     background: #e0f4e4;

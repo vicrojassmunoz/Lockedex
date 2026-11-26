@@ -10,7 +10,8 @@
 // suma cada vez) y luego se prueban cambios de uno en uno hasta que ninguno mejora.
 import { moveResistance } from '$utils/advice/advisor-types'
 import { fetchData } from '$utils/fetchers'
-import { movimientos, aprendizaje, clavePokemon, norm } from './datos.js'
+import { movimientos, habilidades as cargarHabs, aprendizaje, clavePokemon, norm } from './datos.js'
+import { efectividad, habilidadQueCuenta, cargarHabilidadesEspecie, habilidadesPara } from './tiposHabilidad.js'
 import { leerSavGuardado, emparejar } from './equipo.js'
 import { leerReglas, capDelCombate, ajustarEquipoJefe } from './reglas.js'
 import { leerParejas, parejaDe } from './parejas.js'
@@ -45,6 +46,8 @@ const ef = (atq, def) => {
     return 1
   }
 }
+// Lo que recibe un miembro del equipo: con su habilidad (Levitación, Absorbe Agua, Sebo…)
+const recibe = (x, m, gen) => efectividad(x, m.types, m.habilidades, gen)
 
 /**
  * Candidatos de la run: los vivos (equipo y caja) con tipos, estadísticas base, nivel y movimientos.
@@ -54,7 +57,10 @@ export const prepararCandidatos = async (partida, resumen) => {
   const info = partida.info || {}
   const gen = info.gen || 3
   const reglas = leerReglas(partida.id)
-  const [pk, movs, tabla] = await Promise.all([fetchData(), movimientos(), aprendizaje(info.grupo)])
+  const [pk, movs, tabla, habs, tablaHabs] = await Promise.all([fetchData(), movimientos(), aprendizaje(info.grupo), cargarHabs(), cargarHabilidadesEspecie()])
+  // id de habilidad (la del .sav) → su clave
+  const habPorId = {}
+  for (const [k, h] of Object.entries(habs || {})) habPorId[h.id] = k
   const porNivel = tabla?.nivel || {}
   const movPorId = {}
   for (const [k, m] of Object.entries(movs || {})) movPorId[m.id] = { ...m, clave: k }
@@ -100,6 +106,8 @@ export const prepararCandidatos = async (partida, resumen) => {
       especie: s?.especie || e.pokemon,
       imgId: p.imgId,
       types: (p.types || []).map((t) => t.toLowerCase()),
+      // la habilidad del .sav si se sabe; si no, las que puede tener su especie en este juego
+      habilidades: habilidadesPara(tablaHabs, p.alias || e.pokemon, gen, s?.habilidad ? habPorId[s.habilidad] : null),
       base: p.baseStats || { hp: 50, atk: 50, def: 50, spa: 50, spd: 50, spe: 50 },
       total: p.total || 300,
       nivel,
@@ -150,7 +158,7 @@ export const analizarEquipo = (equipo, gen = 3) => {
     let debiles = 0
     let resisten = 0
     for (const m of equipo) {
-      const v = ef(x, m.types)
+      const v = recibe(x, m, gen)
       if (v >= 2) debiles++
       else if (v <= 0.5) resisten++
     }
@@ -302,7 +310,12 @@ export const motivos = (equipo, ctx) => {
     })
     if (cubre.length) chips.push({ clave: 'cubre', tipos: cubre.slice(0, 3) })
     // Resiste: tipos que pegan supereficaz a alguien del equipo y solo él resiste
-    const resiste = a.tipos.filter((x) => a.defensa[x].debiles >= 1 && ef(x, m.types) <= 0.5 && a.defensa[x].resisten === 1)
+    const soloEl = a.tipos.filter((x) => a.defensa[x].debiles >= 1 && recibe(x, m, ctx.gen) <= 0.5 && a.defensa[x].resisten === 1)
+    // Lo que debe a su habilidad va aparte: «Inmune a Tierra (Levitación)»
+    const porHabilidad = soloEl.filter((x) => habilidadQueCuenta(x, m.types, m.habilidades, ctx.gen))
+    const resiste = soloEl.filter((x) => !porHabilidad.includes(x))
+    if (porHabilidad.length)
+      chips.push({ clave: 'habilidad', tipos: porHabilidad.slice(0, 2), habilidad: habilidadQueCuenta(porHabilidad[0], m.types, m.habilidades, ctx.gen), inmune: recibe(porHabilidad[0], m, ctx.gen) === 0 })
     if (resiste.length) chips.push({ clave: 'resiste', tipos: resiste.slice(0, 3) })
     if (m === masRapido) chips.push({ clave: 'rapido' })
     if (m === masFuerte) chips.push({ clave: 'fuerte' })

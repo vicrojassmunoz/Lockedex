@@ -6,6 +6,7 @@
 import { moveResistance } from '$utils/advice/advisor-types'
 import { movimientos, habilidades, tipos as tiposEs, norm, aprendizaje, clavePokemon } from './datos.js'
 import { idioma } from './idioma.js'
+import { efectividad } from './tiposHabilidad.js'
 
 const es = () => idioma() === 'es'
 const pct = (x) => Math.round(x * 100)
@@ -19,8 +20,9 @@ const tiposAtaque = (b) => {
   return t.size ? [...t] : [...(b.types || [])]
 }
 
-const multAtaque = (tiposAtq, tiposDef) =>
-  tiposAtq.length ? Math.max(...tiposAtq.map((t) => moveResistance(t, tiposDef || []))) : 1
+// Con la habilidad del que recibe (Levitación, Absorbe Agua…) si se conoce
+const multAtaque = (tiposAtq, tiposDef, habilidades = [], gen = 9) =>
+  tiposAtq.length ? Math.max(...tiposAtq.map((t) => (habilidades.length ? efectividad(t, tiposDef || [], habilidades, gen) : moveResistance(t, tiposDef || [])))) : 1
 
 const nivelJefe = (b, cap) => {
   const n = parseInt(b.level, 10)
@@ -28,14 +30,14 @@ const nivelJefe = (b, cap) => {
 }
 
 // --- Estimación por tipos -----------------------------------------------------------
-const riesgoPorTipos = (jefe, equipo, tt) => {
+const riesgoPorTipos = (jefe, equipo, tt, gen = 9) => {
   const consejos = []
   const puntos = jefe.pokemon.map((b) => {
     const atq = tiposAtaque(b)
     const filas = equipo.map((y) => ({
       y,
-      def: multAtaque(atq, y.types),
-      off: multAtaque(y.types || [], b.types || [])
+      def: multAtaque(atq, y.types, y.habilidadNombre ? [y.habilidadNombre] : [], gen),
+      off: multAtaque(y.types || [], b.types || [], b.ability?.name ? [b.ability.name] : [], gen)
     }))
     const respuestas = filas.filter((f) => f.off >= 2 && f.def <= 1)
     const neutras = filas.filter((f) => f.off >= 1 && f.def < 2)
@@ -295,11 +297,11 @@ const calcularRiesgoSinCache = async ({ jefe, equipo = [], gen = 3, cap = null, 
       if (completo) {
         r = await riesgoConCalculadora(completo.jefe, completo.equipo, gen, cap)
         r.modo = 'estimado'
-      } else r = riesgoPorTipos(jefe, equipo, tt)
+      } else r = riesgoPorTipos(jefe, equipo, tt, gen)
     }
   } catch (e) {
     console.error('[riesgo]', e)
-    r = riesgoPorTipos(jefe, equipo, tt)
+    r = riesgoPorTipos(jefe, equipo, tt, gen)
   }
 
   const media = r.puntos.reduce((a, b) => a + b, 0) / r.puntos.length

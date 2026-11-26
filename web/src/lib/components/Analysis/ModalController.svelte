@@ -7,19 +7,26 @@
   import { Analysis } from '$icons'
 
   export let box
+  import { partidaActiva } from '$lib/lockedex/partida.js'
+  import { cargarHabilidadesEspecie, habilidadesPara } from '$lib/lockedex/tiposHabilidad.js'
   let Modal
   onMount(() => {
     import('$lib/components/Analysis/index.svelte').then(m => Modal = m.default)
   })
 
-  const fetchanalysis = (box) =>
-    fetch('/api/box/analysis.json', {
+  // Con las habilidades que puede tener cada uno en este juego (Levitación, Absorbe Agua…)
+  const fetchanalysis = async (box) => {
+    const gen = partidaActiva()?.info?.gen || 9
+    const tabla = await cargarHabilidadesEspecie()
+    const conHabs = box.map((p) => ({ types: p.types, habilidades: habilidadesPara(tabla, p.alias, gen) }))
+    return fetch('/api/box/analysis.json', {
       method: 'POST',
-      body: JSON.stringify({ box }),
+      body: JSON.stringify({ box: conHabs, gen }),
       headers: {
         'Content-Type': 'application/json',
       }
     }).then(res => res.json())
+  }
 
   const { open } = getContext('simple-modal')
   const onopen = async _ => {

@@ -25,6 +25,8 @@ Notas para retomar el trabajo en otra sesión. Lo primero es el mapa del proyect
 
 - [x] **1.19.0 — El diario y el «verdugo» del Perfil no sabían quién debilitó a cada Pokémon**: leían `death.tab`/`death.result` (formato antiguo) y la ventana de «¿quién fue?» guarda `death.type` y `death.trainer.name`. Ahora leen los dos.
 
+- [x] **1.19.1 — Las habilidades cuentan en la efectividad de tipos** (pedido el 26/11: «Gengar no es débil a Tierra, es inmune»). `lib/lockedex/tiposHabilidad.js` + `static/lx/habilidades-especie.json` (habilidades de cada especie por generación, de PokeAPI con `herramientas/habilidades_especies.py`): Levitación, Absorbe Agua/Electricidad, Absorbe Fuego, Sebo, Ignífugo, Piel Seca, Pararrayos y Colector (5.ª+), Herbívoro, Superguarda… Se usa en «Equilibrar equipo» (chip «Inmune a Tierra (Levitación)»), en el análisis de tipos de Caja/Equipo, en la estimación por tipos del riesgo y en el Analista (que ahora ofrece las habilidades reales de cada especie en ese juego, con la oculta marcada). Sin .sav, con varias posibles cuenta lo peor para ti. Falta: la ventana antigua de «Preparar el equipo contra…» (`utils/advice`).
+
 ## 1. Estética propia (desmarcarse de nuzlocke-redux)
 
 **Ya es Lockedex:** el chasis rojo con la lente y los LEDs, la barra con EXP, el logo de la portada, la tarjeta de información, el medidor de riesgo, el asistente, la importación, el perfil, el modo compacto y el Analista.

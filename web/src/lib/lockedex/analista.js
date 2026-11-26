@@ -1,5 +1,6 @@
 // Modo Analista: datos y utilidades para montar equipos sin partida
-import { movimientos, naturalezas, especies, aprendizaje, clavePokemon, norm, infoJuego } from './datos.js'
+import { movimientos, naturalezas, especies, aprendizaje, clavePokemon, norm, infoJuego, habilidades as cargarHabs } from './datos.js'
+import { cargarHabilidadesEspecie, habilidadesDe } from './tiposHabilidad.js'
 import { idioma } from './idioma.js'
 
 const es = () => idioma() === 'es'
@@ -10,10 +11,27 @@ export const cargarCalc = async (gen) => {
   const calc = await import('@smogon/calc')
   if (!calcs[gen]) {
     const g = calc.Generations.get(gen)
+    // Habilidades de cada especie en esta generación (PokeAPI): la calculadora solo trae la primera.
+    // Primero las normales y al final la oculta, que se marca aparte
+    const [tablaHabs, habs] = await Promise.all([cargarHabilidadesEspecie(), cargarHabs()])
+    const enIngles = (k) => habs?.[norm(k)]?.en || null
     const especiesGen = [...g.species]
       .filter((s) => !s.isNonstandard || s.isNonstandard === 'Past')
       .filter((s) => !/-(Gmax|Mega|Totem|Primal)/.test(s.name))
-      .map((s) => ({ nombre: s.name, id: s.id, tipos: s.types.map((t) => t.toLowerCase()), habilidades: Object.values(s.abilities || {}), base: s.baseStats }))
+      .map((s) => {
+        const calcHabs = Object.values(s.abilities || {})
+        const { normales, oculta } = habilidadesDe(tablaHabs, s.name, gen)
+        const lista = normales.map(enIngles).filter(Boolean)
+        const ocultaEn = oculta ? enIngles(oculta) : null
+        return {
+          nombre: s.name,
+          id: s.id,
+          tipos: s.types.map((t) => t.toLowerCase()),
+          habilidades: lista.length ? [...lista, ...(ocultaEn && !lista.includes(ocultaEn) ? [ocultaEn] : [])] : calcHabs,
+          habilidadOculta: lista.length ? ocultaEn : null,
+          base: s.baseStats
+        }
+      })
       .sort((a, b) => a.nombre.localeCompare(b.nombre))
     calcs[gen] = {
       calc,

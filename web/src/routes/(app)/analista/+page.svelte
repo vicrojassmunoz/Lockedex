@@ -528,7 +528,7 @@
               </label>
               <label><span class="lx-a-et">{t('Habilidad', 'Ability')}</span>
                 <select bind:value={m.habilidad}>
-                  {#each sp.habilidades as h}<option value={h}>{traducirNombre(h)}</option>{/each}
+                  {#each sp.habilidades as h}<option value={h}>{traducirNombre(h)}{h === sp.habilidadOculta ? t(' (oculta)', ' (hidden)') : ''}</option>{/each}
                 </select>
               </label>
               <label><span class="lx-a-et">{t('Objeto', 'Item')}</span><input list="lx-obj-list" bind:value={m.objeto} placeholder={t('Ninguno', 'None')} /></label>

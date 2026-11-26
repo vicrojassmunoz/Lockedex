@@ -1,3 +1,8 @@
+## Novedades de la 1.19.1
+
+- **Las habilidades cuentan:** Gengar con Levitación ya no sale como débil a Tierra, sino inmune, y lo mismo con Absorbe Agua, Absorbe Fuego, Sebo, Pararrayos y compañía. Vale para «Equilibrar equipo» (con un chip «Inmune a Tierra (Levitación)»), el análisis de tipos de la Caja y del equipo, y el riesgo. Cada especie tiene las habilidades de su juego: Gengar tiene Levitación hasta la 6.ª generación y Cuerpo Maldito desde la 7.ª.
+- **Analista:** el selector de habilidad ofrece todas las que puede tener cada Pokémon en ese juego (la oculta va marcada), no solo una.
+
 ## Novedades de la 1.19.0
 
 - **Equilibrar equipo:** en la Caja, un botón propone los 6 que mejor se complementan de tu Caja y tu equipo, con el motivo de cada uno («Cubre Planta, Bicho», «Resiste Fantasma», «Gana a Tangela») y una tabla de antes y después. Tiene un modo general y otro contra el próximo jefe, que enseña el riesgo con tu equipo y con la propuesta. Respeta el monotipo, el nivel máximo y las parejas del Wedlocke, puedes fijar a quien quieras y «Usar este equipo» lo cambia en la run.
