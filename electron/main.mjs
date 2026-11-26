@@ -566,6 +566,25 @@ ipcMain.handle('lx:leer-sav', (_e, ruta) => {
   }
 })
 
+// Escribir una partida modificada (huevos del Egglocke). Antes, una copia de seguridad al lado del
+// original. Si el archivo ha cambiado desde que se leyó (el emulador guardó mientras tanto), no se toca.
+ipcMain.handle('lx:escribir-sav', async (_e, { ruta, datos, fechaLeida }) => {
+  try {
+    if (!ruta || !fs.existsSync(ruta)) return { ok: false, motivo: 'no-existe' }
+    const actual = fs.statSync(ruta)
+    if (fechaLeida && Math.abs(actual.mtimeMs - fechaLeida) > 1) return { ok: false, motivo: 'cambiado' }
+    const sello = new Date().toISOString().replace(/[-:]/g, '').replace('T', '-').slice(0, 15)
+    const copia = path.join(path.dirname(ruta), `${path.basename(ruta)}.antes-de-lockedex-${sello}.bak`)
+    await fsp.copyFile(ruta, copia)
+    const temporal = ruta + '.lockedex-tmp'
+    await fsp.writeFile(temporal, Buffer.from(datos))
+    await fsp.rename(temporal, ruta)
+    return { ok: true, copia, nombreCopia: path.basename(copia), fecha: fs.statSync(ruta).mtimeMs }
+  } catch (e) {
+    return { ok: false, motivo: 'error', detalle: String(e?.message || e) }
+  }
+})
+
 ipcMain.handle('lx:vigilar-sav', (_e, ruta) => {
   if (savVigilado) fs.unwatchFile(savVigilado)
   savVigilado = null

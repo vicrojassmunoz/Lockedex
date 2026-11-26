@@ -92,3 +92,24 @@ export const habilidadesDe = (t, alias, gen = 9) => {
 
 /** Lista de habilidades a tener en cuenta para un Pokémon: la del .sav si se sabe; si no, las normales de su especie */
 export const habilidadesPara = (t, alias, gen, conocida = null) => (conocida ? [conocida] : habilidadesDe(t, alias, gen).normales)
+
+// --- Para la ventana antigua de «Preparar el equipo contra…» (utils/advice) ----------------------------
+const TIPOS_TODOS = ['normal', 'fire', 'water', 'grass', 'electric', 'ice', 'fighting', 'poison', 'ground', 'flying', 'psychic', 'bug', 'rock', 'ghost', 'dragon', 'dark', 'steel', 'fairy']
+
+/** Lo que recibe un Pokémon ({ types, habilidades?, gen? }) de un ataque de tipo «atq» */
+export const resistenciaDe = (atq, mon) =>
+  mon?.habilidades?.length ? efectividad(atq, mon.types || [], mon.habilidades, mon.gen || 9) : efectividad(atq, mon?.types || [])
+
+/** Mapa { tipo: multiplicador } solo con lo que no es neutro (como «weaknesses» de utils/advice/types) */
+export const debilidadesDe = (mon) => {
+  const r = {}
+  for (const t of TIPOS_TODOS) {
+    let m = resistenciaDe(t, mon)
+    // la ventana antigua solo sabe pintar ×0, ×¼, ×½, ×2 y ×4 (Piel Seca da ×1,25 al Fuego)
+    if (m > 1 && m < 2) m = 1
+    else if (m > 2) m = m >= 4 ? 4 : 2
+    else if (m > 0.5 && m < 1) m = 0.5
+    if (m !== 1) r[t] = m
+  }
+  return r
+}

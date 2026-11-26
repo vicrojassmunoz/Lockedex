@@ -1,4 +1,5 @@
 import { typeAdvMap } from './types'
+import { resistenciaDe } from '$lib/lockedex/tiposHabilidad.js'
 
 interface IPokemon {
   alias: string
@@ -26,9 +27,11 @@ export const coverageResistance = (atkTypes: string[], pkmnTypes: string[]) =>
 export default (defTeam: IPokemon[], atkTeam: IPokemon[]) => {
   // Loop through each defending pokemon and determine how well it
   // resists individual attacking mons and team
-  return defTeam.map(({ alias: defName, types: defTypes }) => {
+  return defTeam.map((defMon) => {
+    const { alias: defName } = defMon
     const coverageAll = atkTeam.map(({ alias: atkName, types: atkTypes }) => {
-      const maxDmgMod = coverageResistance(atkTypes, defTypes)
+      // con la habilidad del que recibe (Levitación, Absorbe Agua…) si se conoce
+      const maxDmgMod = atkTypes.length ? Math.max(...atkTypes.map((t) => resistenciaDe(t, defMon))) : 1
 
       return { atkName, maxDmgMod }
     })

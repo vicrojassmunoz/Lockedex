@@ -1,5 +1,5 @@
 import { NaturesMap } from '$lib/data/natures'
-import { moveResistance } from './advisor-types'
+import { resistenciaDe } from '$lib/lockedex/tiposHabilidad.js'
 
 interface IMove {
   type: string
@@ -77,7 +77,7 @@ const calcDamage = (
   }
 
   const STAB = atkMon.types.includes(atkMove.type) ? 1.5 : 1
-  const TYPE = moveResistance(atkMove.type, defMon.types)
+  const TYPE = resistenciaDe(atkMove.type, defMon)
 
   const dmg = Math.floor(
     ((((2 * atkMon.level) / 5 + 2) * atkMove.power * (A / D)) / 50 + 2) *

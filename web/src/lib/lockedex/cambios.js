@@ -4,6 +4,7 @@
 import { getGameStore, patch } from '$lib/store'
 import { leerReglas } from './reglas.js'
 import { leerPartida } from './partida.js'
+import { marcarHuevoUsado } from './egglocke.js'
 
 // Solo las capturas (normales y shinies); los regalos e intercambios del juego no se cambian
 const SE_CAMBIAN = [1, 6]
@@ -25,6 +26,8 @@ export const aplicarCambio = (idRun, lugar, especie) => {
   const e = leerPartida(idRun)?.datos?.[lugar]
   if (!tipo || !e || !especie) return false
   getGameStore(idRun).update(patch({ [lugar]: { ...e, pokemon: especie, cambio: { de: e.pokemon, tipo, fecha: Date.now() } } }))
+  // si era uno de los huevos del generador, ya está abierto
+  if (tipo === 'huevo') marcarHuevoUsado(idRun, especie)
   return true
 }
 

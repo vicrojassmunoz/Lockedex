@@ -1,4 +1,4 @@
-import { pivotWeaknesses } from './types'
+import { debilidadesDe } from '$lib/lockedex/tiposHabilidad.js'
 import { movesToCategory, movesToTypes } from './utils'
 
 import calcTeamDamage from './advisor-damage'
@@ -58,9 +58,10 @@ export default function ProcessAdvice(box: IPokemon[], team: IPokemon[]) {
     ]
   })
 
-  const weaknessAdvice = team.map(({ alias, types }) => [
-    alias,
-    pivotWeaknesses(...types)
+  // { multiplicador: [tipos] } de cada Pokémon del jefe, con su habilidad si se conoce
+  const weaknessAdvice = team.map((mon) => [
+    mon.alias,
+    Object.entries(debilidadesDe(mon)).reduce((acc, [t, mod]) => ({ ...acc, [mod]: (acc[mod] || []).concat(t) }), {})
   ])
 
   return {

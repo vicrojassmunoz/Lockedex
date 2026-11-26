@@ -54,6 +54,9 @@ export const DarkMode = objeto('piedra-lunar') // Tema oscuro: la Piedra Lunar
 export const LightMode = objeto('piedra-solar') // Tema claro: la Piedra Solar
 export const Cookie = objeto('galleta-lava') // Aviso de cookies: la Galleta Lava de Pueblo Lavacalda
 export const Battle = objeto('buscapelea') // Modo batalla: el Buscapelea de RojoFuego
+export const Diario = objeto('comprobador-fama') // Diario de la run: el Comprobador de Fama de RojoFuego
+export const Ficha = objeto('tarjeta-socio') // Ficha de entrenador: la Tarjeta Socio
+export const Track = objeto('bicicleta') // «Empezar partida»: la Bicicleta, para salir de viaje
 
 // Estadísticas: los objetos Recio de la 4.ª gen, uno por estadística
 export const HP = objeto('power-weight')

@@ -24,6 +24,8 @@
   } from '$lib/store'
 
   import calcAdvice from '$utils/advice'
+  import { partidaActiva } from '$lib/lockedex/partida.js'
+  import { cargarHabilidadesEspecie, habilidadesPara } from '$lib/lockedex/tiposHabilidad.js'
   import { toList, regionise, capitalise } from '$utils/string'
   import { locid } from '$utils/pokemon'
   import { nonnull } from '$utils/obj'
@@ -146,6 +148,12 @@
     setup(async (_, boxData) => {
       const boxMons = await fetchPkmnSet(boxData)
       const gymMons = await fetchPkmnSet(boss.pokemon, 'name')
+      // Habilidades: las del jefe si sus datos las traen; las tuyas, las que puede tener su especie en
+      // este juego (Gengar con Levitación no es débil a Tierra)
+      const gen = partidaActiva()?.info?.gen || 9
+      const tablaHabs = await cargarHabilidadesEspecie()
+      for (const m of boxMons) Object.assign(m, { gen, habilidades: habilidadesPara(tablaHabs, m.alias, gen) })
+      for (const m of gymMons) Object.assign(m, { gen, habilidades: m.original?.ability?.name ? [m.original.ability.name] : habilidadesPara(tablaHabs, m.alias, gen) })
 
       const advice = calcAdvice(boxMons, gymMons)
       analysisResult = {

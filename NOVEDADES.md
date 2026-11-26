@@ -1,3 +1,9 @@
+## Novedades de la 1.20.0
+
+- **Generador de Egglocke:** con la regla Egglocke activa, el botón «Huevos» de la partida reparte huevos al azar con especies del juego, con opciones (formas básicas, sin legendarios, sin repetir línea, por tipo). En RojoFuego, VerdeHoja, Rubí, Zafiro y Esmeralda los mete directamente en el PC de tu partida, como si te los hubiera dado el juego, con una copia de seguridad antes. Cierra el juego en el emulador antes de hacerlo.
+- **Habilidades también en «Preparar el equipo contra…»:** la ventana antigua del VS ya cuenta Levitación, Absorbe Agua y compañía, como el resto de la app.
+- **Iconos:** Comprobador de Fama para el Diario, Tarjeta Socio para la Ficha, el Huevo para el generador y la Bicicleta para «Empezar partida».
+
 ## Novedades de la 1.19.1
 
 - **Las habilidades cuentan:** Gengar con Levitación ya no sale como débil a Tierra, sino inmune, y lo mismo con Absorbe Agua, Absorbe Fuego, Sebo, Pararrayos y compañía. Vale para «Equilibrar equipo» (con un chip «Inmune a Tierra (Levitación)»), el análisis de tipos de la Caja y del equipo, y el riesgo. Cada especie tiene las habilidades de su juego: Gengar tiene Levitación hasta la 6.ª generación y Cuerpo Maldito desde la 7.ª.

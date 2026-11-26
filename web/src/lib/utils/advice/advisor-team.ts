@@ -1,5 +1,4 @@
-import { moveResistance } from './advisor-types'
-import { weaknesses } from './types'
+import { resistenciaDe, debilidadesDe } from '$lib/lockedex/tiposHabilidad.js'
 
 const debug = []
 
@@ -13,7 +12,7 @@ export default (box, boss) => {
   const bossMoveClass = bossMoves.map((move) => move.damage_class)
 
   const bossTeamDmgMods = boss
-    .map((poke) => weaknesses(...poke.types))
+    .map((poke) => debilidadesDe(poke))
     .map((weakMap) => Object.entries(weakMap))
     .flat()
 
@@ -26,9 +25,9 @@ export default (box, boss) => {
       }
     }, {})
 
-  const calcModPct = (compf, mods, types, debug) =>
+  const calcModPct = (compf, mods, mon, debug) =>
     mods.reduce((acc, type) => {
-      const damageMod = moveResistance(type, types)
+      const damageMod = resistenciaDe(type, mon)
       if (debug) console.log(type, damageMod)
       return acc + (compf(damageMod) ? 1 : 0)
     }, 0) / mods.length
@@ -66,7 +65,7 @@ export default (box, boss) => {
 
       if (debug.includes(defName)) console.log(defName)
       const defAdvantageScore = bossMoveTypes.reduce((acc, type) => {
-        const damageMod = moveResistance(type, defTypes)
+        const damageMod = resistenciaDe(type, mon)
         if (debug.includes(defName)) console.log(type, defTypes, damageMod, acc)
 
         switch (damageMod) {
@@ -120,19 +119,19 @@ export default (box, boss) => {
         weakPct: calcModPct(
           (m) => m > 1,
           bossMoveTypes,
-          defTypes,
+          mon,
           debug.includes(defName)
         ),
         resistPct: calcModPct(
           (m) => m < 1,
           bossMoveTypes,
-          defTypes,
+          mon,
           debug.includes(defName)
         ),
         immunePct: calcModPct(
           (m) => m === 0,
           bossMoveTypes,
-          defTypes,
+          mon,
           debug.includes(defName)
         )
       }

@@ -11,6 +11,11 @@ export default {
   6,
   20
  ],
+ "bicicleta": [
+  6,
+  5,
+  22
+ ],
  "brazal-firme": [
   4,
   6,
@@ -65,6 +70,11 @@ export default {
   0,
   0,
   30
+ ],
+ "comprobador-fama": [
+  5,
+  6,
+  22
  ],
  "consola-intercambio": [
   0,
@@ -298,6 +308,11 @@ export default {
  ],
  "tabla-llama": [
   5,
+  5,
+  22
+ ],
+ "tarjeta-socio": [
+  6,
   5,
   22
  ],

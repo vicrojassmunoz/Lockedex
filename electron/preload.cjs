@@ -11,6 +11,7 @@ contextBridge.exposeInMainWorld('lockedex', {
   // Partida del emulador (.sav)
   elegirSav: () => ipcRenderer.invoke('lx:elegir-sav'),
   leerSav: (ruta) => ipcRenderer.invoke('lx:leer-sav', ruta),
+  escribirSav: (datos) => ipcRenderer.invoke('lx:escribir-sav', datos),
   vigilarSav: (ruta) => ipcRenderer.invoke('lx:vigilar-sav', ruta),
   alCambiarSav: (cb) => {
     const f = (_e, ruta) => cb(ruta)

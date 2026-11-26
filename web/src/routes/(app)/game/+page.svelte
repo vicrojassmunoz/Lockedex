@@ -5,6 +5,10 @@
   import SalonFama from '$lib/lockedex/SalonFama.svelte'
   import Sacrificio from '$lib/lockedex/Sacrificio.svelte'
   import Genlocke from '$lib/lockedex/Genlocke.svelte'
+  import GeneradorHuevos from '$lib/lockedex/GeneradorHuevos.svelte'
+  import IconoLx from '@iconify/svelte/dist/OfflineIcon.svelte'
+  import { Diario as IconoDiario, Ficha as IconoFicha } from '$icons'
+  import { leerReglas } from '$lib/lockedex/reglas.js'
   import TarjetaEntrenador from '$lib/lockedex/TarjetaEntrenador.svelte'
   import Diario from '$lib/lockedex/Diario.svelte'
   let runTerminada = false
@@ -39,6 +43,9 @@
   const { open: abrirVentana } = getContext('simple-modal')
   const abrirFicha = () => abrirVentana(TarjetaEntrenador, { id: $activeGame })
   const abrirDiario = () => abrirVentana(Diario, { id: $activeGame })
+  const abrirHuevos = () => abrirVentana(GeneradorHuevos, { id: $activeGame })
+  // con el Egglocke activo, el generador de huevos a mano (se mira al cambiar de run o de datos)
+  $: egglocke = !!($activeGame && gameData && leerReglas($activeGame).egglocke)
   let routeEl
 
   let search = ''
@@ -180,10 +187,15 @@
                 </button>
               {/if}
               <button class="lx-continuar lx-accion-run" on:click={abrirDiario} title={t('Todo lo que ha pasado en la run', 'Everything that happened in the run')} data-lx-original>
-                {t('Diario', 'Diary')}
+                <IconoLx inline icon={IconoDiario} class="lx-accion-icono" />{t('Diario', 'Diary')}
               </button>
+              {#if egglocke}
+                <button class="lx-continuar lx-accion-run lx-accion-huevos" on:click={abrirHuevos} title={t('Reparte huevos al azar y mételos en tu partida', 'Hand out random eggs and put them in your save')} data-lx-original>
+                  <img src="/lx/iconos/huevo.png" alt="" width="24" height="24" />{t('Huevos', 'Eggs')}
+                </button>
+              {/if}
               <button class="lx-continuar lx-accion-run" on:click={abrirFicha} title={t('Imagen de tu run para compartir', 'An image of your run to share')} data-lx-original>
-                {t('Ficha', 'Card')}
+                <IconoLx inline icon={IconoFicha} class="lx-accion-icono" />{t('Ficha', 'Card')}
               </button>
             </div>
 
@@ -262,6 +274,20 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 6px;
+  }
+  .lx-accion-run :global(.lx-accion-icono) {
+    width: 22px;
+    height: 22px;
+    margin: -4px 4px -4px -4px;
+    vertical-align: middle;
+  }
+  .lx-accion-huevos img {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin: -6px 2px -6px -6px;
+    vertical-align: middle;
+    image-rendering: pixelated;
   }
   .lx-accion-run {
     font-family: 'VT323', monospace;

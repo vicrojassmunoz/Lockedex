@@ -1,14 +1,14 @@
 // Lector de partidas de 3.ª generación (Rubí, Zafiro, Esmeralda, RojoFuego, VerdeHoja)
 // Formato documentado por la comunidad (Bulbapedia, pret/pokeemerald).
 
-const TAM_SECCION = 0x1000
+export const TAM_SECCION = 0x1000
 const FIRMA = 0x08012025
 const TAM_RANURA = TAM_SECCION * 14
 // Tamaño útil de cada sección del PC (secciones 5 a 13)
-const TAM_PC = [3968, 3968, 3968, 3968, 3968, 3968, 3968, 3968, 2000]
+export const TAM_PC = [3968, 3968, 3968, 3968, 3968, 3968, 3968, 3968, 2000]
 
 // Orden de las subestructuras según personalidad % 24 (G=0, A=1, E=2, M=3)
-const ORDENES = [
+export const ORDENES = [
   'GAEM', 'GAME', 'GEAM', 'GEMA', 'GMAE', 'GMEA', 'AGEM', 'AGME', 'AEGM', 'AEMG', 'AMGE', 'AMEG',
   'EGAM', 'EGMA', 'EAGM', 'EAMG', 'EMGA', 'EMAG', 'MGAE', 'MGEA', 'MAGE', 'MAEG', 'MEGA', 'MEAG'
 ]
@@ -36,7 +36,7 @@ const nivelPorExperiencia = (exp, tablaCrecimiento) => {
 }
 
 // Busca la ranura de guardado más reciente y devuelve sus secciones por ID
-const leerSecciones = (buffer) => {
+export const leerSecciones = (buffer) => {
   const v = new DataView(buffer)
   const ranuras = []
   for (let r = 0; r < 2; r++) {

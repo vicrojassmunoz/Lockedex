@@ -90,7 +90,10 @@ for origen, nombre in [
     ('items/evo-item/moon-stone', 'piedra-lunar'),
     # 1.19.0: tema claro/oscuro, aviso de cookies y modo batalla
     ('items/evo-item/sun-stone', 'piedra-solar'), ('items/medicine/lava-cookie', 'galleta-lava'),
-    ('items/key-item/vs-seeker', 'buscapelea')]:
+    ('items/key-item/vs-seeker', 'buscapelea'),
+    # 1.20.0: diario de la run, ficha de entrenador y «Empezar partida»
+    ('items/key-item/fame-checker', 'comprobador-fama'), ('items/key-item/member-card', 'tarjeta-socio'),
+    ('items/key-item/bicycle', 'bicicleta')]:
     # Los de PokéSprite ya son de 32×32 con su margen, como los demás iconos de objetos
     im = Image.open(PS + origen + '.png').convert('RGBA')
     if im.size != (32, 32):  # las cintas son de 40×40: se centran en 32×32 sin escalar
