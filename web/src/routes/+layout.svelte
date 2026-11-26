@@ -7,6 +7,8 @@
   import Sincronizacion from '$lib/lockedex/Sincronizacion.svelte'
   import { iniciarTraduccion } from '$lib/lockedex/idioma.js'
   import { escucharAcciones } from '$lib/lockedex/acciones.js'
+  import { registrarCambios } from '$lib/lockedex/diario.js'
+  import { alCambiarDatos } from '$lib/lockedex/partida.js'
 
   let escritorio = false
   onMount(() => {
@@ -15,7 +17,22 @@
     iniciarTraduccion()
     // Solo la ventana principal aplica las acciones rápidas del modo compacto
     vigilarScroll()
-    if (!window.lockedex?.compacto) return escucharAcciones()
+    if (window.lockedex?.compacto) return
+    // El diario de la run lo lleva solo la ventana principal (también apunta lo que se hace en el compacto)
+    const apuntar = () => {
+      try {
+        registrarCambios()
+      } catch (e) {
+        console.error('[diario]', e)
+      }
+    }
+    apuntar()
+    const quitarDiario = alCambiarDatos(apuntar)
+    const quitarAcciones = escucharAcciones()
+    return () => {
+      quitarDiario()
+      quitarAcciones?.()
+    }
   })
 
   import { page } from '$app/stores'

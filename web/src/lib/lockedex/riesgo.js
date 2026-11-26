@@ -1,18 +1,22 @@
 // Nivel de riesgo de un combate contra un jefe y consejos para afrontarlo.
-// Con niveles y movimientos (partida .sav) usa la calculadora de daño de Smogon;
-// sin ellos, hace una estimación por tipos.
+// Con niveles y movimientos (partida .sav) usa la calculadora de daño de Smogon. Sin ellos, completa lo
+// que falta con lo que aprende cada Pokémon por nivel (tus Pokémon al nivel máximo, el jefe a su nivel) y
+// usa la misma calculadora: cuenta los movimientos reales, el STAB, la categoría, la velocidad, el aguante,
+// las habilidades y los objetos. Solo si no hay datos de aprendizaje (algunos hacks) estima por tipos.
 import { moveResistance } from '$utils/advice/advisor-types'
-import { movimientos, habilidades, tipos as tiposEs, norm } from './datos.js'
+import { movimientos, habilidades, tipos as tiposEs, norm, aprendizaje, clavePokemon } from './datos.js'
 import { idioma } from './idioma.js'
 
 const es = () => idioma() === 'es'
 const pct = (x) => Math.round(x * 100)
 const nombreBonito = (n = '') => n.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
 
+// Tipos con los que pega el jefe: los de sus movimientos ofensivos si se conocen (la Starmie de Misty no
+// tiene ataques psíquicos, así que no cuenta como psíquica); si no se conocen, sus tipos
 const tiposAtaque = (b) => {
-  const t = new Set(b.types || [])
+  const t = new Set()
   for (const m of b.moves || []) if (m?.type && m.damage_class !== 'status' && m.power !== 0) t.add(m.type)
-  return [...t]
+  return t.size ? [...t] : [...(b.types || [])]
 }
 
 const multAtaque = (tiposAtq, tiposDef) =>
@@ -222,11 +226,46 @@ const riesgoConCalculadora = async (jefe, equipo, gen, cap) => {
   }
 }
 
+// --- Movimientos probables por nivel --------------------------------------------------------------
+// Los 4 últimos que aprende por nivel hasta ese nivel (lo que lleva un Pokémon que no ha cambiado nada)
+const probablesANivel = (lista = [], nivel = 100) => {
+  const ultimo = new Map()
+  for (const [nv, k] of lista) if (nv <= nivel) ultimo.set(k, nv)
+  return [...ultimo.entries()].sort((a, b) => a[1] - b[1]).map(([k]) => k).slice(-4)
+}
+
+// Completa niveles y movimientos que falten: tus Pokémon al nivel máximo del combate (o al del jefe) con
+// lo que aprenden por nivel; el jefe, con lo que aprende a su nivel si sus datos no traen movimientos
+const completarConAprendizaje = async (jefe, equipo, grupo, cap) => {
+  if (!grupo) return null
+  const [movs, tabla] = await Promise.all([movimientos(), aprendizaje(grupo)])
+  const porNivel = tabla?.nivel || {}
+  if (!Object.keys(porNivel).length) return null
+  const nivelesJefe = jefe.pokemon.map((b) => nivelJefe(b, cap)).filter((n) => n && !isNaN(n))
+  const nivelTuyo = cap || Math.max(5, ...nivelesJefe)
+  const equipoC = equipo.map((y) => {
+    const nivel = y.nivel || nivelTuyo
+    if (y.movimientos?.length) return { ...y, nivel }
+    const claves = probablesANivel(porNivel[clavePokemon(y.especie || y.alias, porNivel)], nivel)
+    return { ...y, nivel, movimientos: claves.map((k) => movs[k]?.id).filter(Boolean), estimado: true }
+  })
+  const jefeC = {
+    ...jefe,
+    pokemon: jefe.pokemon.map((b) => {
+      if ((b.moves || []).filter(Boolean).length) return b
+      const claves = probablesANivel(porNivel[clavePokemon(b.name, porNivel)], nivelJefe(b, cap) || nivelTuyo)
+      return { ...b, moves: claves.map((k) => (movs[k] ? { name: movs[k].en } : null)).filter(Boolean) }
+    })
+  }
+  const completo = equipoC.every((y) => y.nivel && y.movimientos?.length) && jefeC.pokemon.every((p) => (p.moves || []).length)
+  return completo ? { jefe: jefeC, equipo: equipoC } : null
+}
+
 // --- Punto de entrada -------------------------------------------------------------------------
 // equipo: [{ nombre, alias, especie, types, nivel?, movimientos?, naturaleza?, ivs?, evs?, habilidad? }]
 const cacheRiesgo = new Map()
 export const calcularRiesgo = (args) => {
-  const { jefe, equipo = [], gen, cap } = args
+  const { jefe, equipo = [], gen, cap, grupo } = args
   if (!jefe?.pokemon?.length || !equipo.length) return Promise.resolve(null)
   const firma = JSON.stringify([
     jefe.name,
@@ -234,13 +273,14 @@ export const calcularRiesgo = (args) => {
     equipo.map((y) => [y.alias, y.especie, y.nivel, y.movimientos, y.naturaleza, y.habilidad, y.habilidadNombre, y.objeto, y.ivs, y.evs]),
     gen,
     cap,
+    grupo,
     idioma()
   ])
   if (!cacheRiesgo.has(firma)) cacheRiesgo.set(firma, calcularRiesgoSinCache(args))
   return cacheRiesgo.get(firma)
 }
 
-const calcularRiesgoSinCache = async ({ jefe, equipo = [], gen = 3, cap = null }) => {
+const calcularRiesgoSinCache = async ({ jefe, equipo = [], gen = 3, cap = null, grupo = null }) => {
   const tt = await tiposEs()
   const conDatos =
     equipo.every((y) => y.nivel && y.movimientos?.length) &&
@@ -248,7 +288,15 @@ const calcularRiesgoSinCache = async ({ jefe, equipo = [], gen = 3, cap = null }
 
   let r
   try {
-    r = conDatos ? await riesgoConCalculadora(jefe, equipo, gen, cap) : riesgoPorTipos(jefe, equipo, tt)
+    if (conDatos) r = await riesgoConCalculadora(jefe, equipo, gen, cap)
+    else {
+      // Sin .sav: movimientos probables por nivel y la misma calculadora; si no hay datos, por tipos
+      const completo = await completarConAprendizaje(jefe, equipo, grupo, cap)
+      if (completo) {
+        r = await riesgoConCalculadora(completo.jefe, completo.equipo, gen, cap)
+        r.modo = 'estimado'
+      } else r = riesgoPorTipos(jefe, equipo, tt)
+    }
   } catch (e) {
     console.error('[riesgo]', e)
     r = riesgoPorTipos(jefe, equipo, tt)

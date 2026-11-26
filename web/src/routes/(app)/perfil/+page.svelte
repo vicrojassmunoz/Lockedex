@@ -1,6 +1,10 @@
 <script>
   // Perfil de entrenador: foto, estadísticas de todas tus runs y logros
-  import { onMount } from 'svelte'
+  import { onMount, getContext } from 'svelte'
+  import { leerSalon } from '$lib/lockedex/salon.js'
+  import { recorte } from '$lib/lockedex/recorte.js'
+  import { createImgUrl } from '$utils/rewrites'
+  import TarjetaEntrenador from '$lib/lockedex/TarjetaEntrenador.svelte'
   import avatares from '$lib/lockedex/avatares.js'
   import { actualizarEquipo } from '$lib/components/icons/sprites.js'
   import Games from '$lib/data/games.json'
@@ -18,6 +22,10 @@
   let runs = []
   let est = null
   let cargando = true
+  // Salón de la Fama: las runs que vencieron al Campeón (lo más nuevo primero)
+  let salon = []
+  const { open } = getContext('simple-modal')
+  const verFicha = (e) => open(TarjetaEntrenador, { id: e.id, entrada: e })
 
   const guardar = () => localStorage.setItem(CLAVE, JSON.stringify(perfil))
   const img = (id) => `/assets/img/leaders/${id}.png`
@@ -27,6 +35,7 @@
       perfil = { ...perfil, ...(JSON.parse(localStorage.getItem(CLAVE) || '{}') || {}) }
     } catch {}
 
+    salon = leerSalon().slice().sort((a, b) => b.fecha - a.fecha)
     try {
       await calcular()
     } catch (e) {
@@ -222,6 +231,26 @@
       </div>
     </section>
 
+    {#if salon.length}
+      <section class="lx-panel">
+        <h2>{es ? 'Salón de la Fama' : 'Hall of Fame'}</h2>
+        <div class="lx-salon-lista">
+          {#each salon as e}
+            <div class="lx-salon-fila">
+              <div class="lx-run-info">
+                <b>{e.nombre || nombreJuego(e.juego, Games[e.juego])}</b>
+                <span>{nombreJuego(e.juego, Games[e.juego])} · {es ? 'intento' : 'attempt'} {e.intento} · {new Date(e.fecha).toLocaleDateString(es ? 'es-ES' : 'en-GB')} · ☠ {e.caidos}</span>
+              </div>
+              <span class="lx-salon-equipo">
+                {#each e.equipo as m}<img src={createImgUrl({ imgId: m.imgId }, { ext: 'png' })} alt={m.mote || m.nombre} title={m.mote || m.nombre} use:recorte width="36" height="36" />{/each}
+              </span>
+              <button class="lx-salon-ficha" on:click={() => verFicha(e)}>{es ? 'Ficha' : 'Card'}</button>
+            </div>
+          {/each}
+        </div>
+      </section>
+    {/if}
+
     {#if estJuegos.length}
       <section class="lx-panel">
         <h2>{es ? 'Por juego' : 'By game'}</h2>
@@ -270,6 +299,32 @@
 </main>
 
 <style>
+  .lx-salon-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .lx-salon-fila {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .lx-salon-fila .lx-run-info {
+    flex: 1;
+    min-width: 180px;
+  }
+  .lx-salon-equipo {
+    display: inline-flex;
+  }
+  .lx-salon-equipo img {
+    image-rendering: pixelated;
+  }
+  .lx-salon-ficha {
+    padding: 2px 12px;
+    border: 2px solid currentColor;
+    border-radius: 6px;
+  }
   .lx-perfil {
     max-width: 1000px;
     margin: 0 auto;

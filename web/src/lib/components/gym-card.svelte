@@ -115,7 +115,7 @@
       if (!actual) return
       leerRandom()
       const jefeRiesgo = sinCalculos(reglasRun) ? null : await jefeParaRiesgo()
-      riesgo = jefeRiesgo ? await calcularRiesgo({ jefe: jefeRiesgo, equipo: actual.eq.miembros, gen: actual.partida.info.gen, cap: levelCap }) : null
+      riesgo = jefeRiesgo ? await calcularRiesgo({ jefe: jefeRiesgo, equipo: actual.eq.miembros, gen: actual.partida.info.gen, cap: levelCap, grupo: actual.partida.info.grupo }) : null
     } catch (e) {
       console.error('[riesgo]', e)
     }

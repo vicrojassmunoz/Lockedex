@@ -170,6 +170,10 @@ export const leerPartidaGen3 = (buffer, tablas) => {
     minutos: v.getUint8(s0 + 0x10)
   }
 
+  // Dónde estás: SaveBlock1 empieza con la posición (4 bytes) y el mapa actual (grupo y número);
+  // la sección 1 es el principio de SaveBlock1 en los cinco juegos
+  const ubicacion = { grupo: v.getUint8(s1 + 4), mapa: v.getUint8(s1 + 5) }
+
   const tamEquipo = Math.min(6, u32(v, s1 + desplazEquipo))
   const equipo = []
   for (let i = 0; i < tamEquipo; i++) {
@@ -194,5 +198,5 @@ export const leerPartidaGen3 = (buffer, tablas) => {
     }
   }
 
-  return { juego, entrenador, equipo, cajas }
+  return { juego, entrenador, ubicacion, equipo, cajas }
 }

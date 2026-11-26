@@ -1,3 +1,13 @@
+## Novedades de la 1.18.0
+
+- **Salón de la Fama:** al vencer al Campeón, la vista de partida enseña tu equipo campeón con sus números (medallas, capturas, caídos, tiempo de juego). Queda guardado y en el Perfil aparece la lista de tus runs campeonas.
+- **Ficha de entrenador:** una imagen de tu run a píxeles, como la tarjeta de entrenador de los juegos, con tu equipo, las medallas, los caídos y las reglas. Azul si sigue en curso, dorada si eres Campeón y cobre si acabó en game over. Se copia o se guarda como PNG para pasarla por Discord.
+- **Diario de la run:** todo lo que pasa, con fecha y hora: capturas, muertes y quién fue, evoluciones, jefes vencidos, derrotas, intentos… También lo que apuntas desde el modo compacto. Puedes añadir notas y copiarlo como texto. Empieza a contar desde esta versión.
+- **El compacto sabe dónde estás:** en RojoFuego, VerdeHoja y Esmeralda, con el .sav vinculado, «Apuntar encuentro» elige sola la zona donde guardaste la partida.
+- **Riesgo sin .sav por movimientos:** ya no se estima por tipos. Tu equipo cuenta con los movimientos que aprende por nivel y el jefe con los suyos: la Starmie de Misty ya no cuenta como psíquica, y un Wartortle con Mordisco sale como buena respuesta.
+- **Riesgo más fino en Diamante, Perla, HeartGold y SoulSilver:** IVs y naturalezas reales de los jefes, calculados como en el juego. De paso, cuatro niveles de jefes corregidos con los datos del juego.
+- **Arreglo:** «Osada» no salía en la lista de naturalezas (se veía «Intenso»).
+
 ## Novedades de la 1.17.1
 
 - **Un solo nivel máximo:** el asistente de combate y la ventana de VS usan ya el del próximo líder de gimnasio, como la ventana compacta y los avisos. Antes, contra un rival, usaban el nivel del propio rival y dejaban fuera del plan a casi todo el equipo.

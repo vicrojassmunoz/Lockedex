@@ -26,6 +26,8 @@
           "name": "Keen Eye",
           "effect": ""
         },
+        "iv": 6,
+        "nat": "lonely",
         "sprite": "16",
         "types": [
           "normal",
@@ -69,6 +71,8 @@
           "name": "Keen Eye",
           "effect": ""
         },
+        "iv": 6,
+        "nat": "hardy",
         "sprite": "17",
         "types": [
           "normal",
@@ -131,6 +135,8 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 9,
+        "nat": "gentle",
         "sprite": "123",
         "types": [
           "bug",
@@ -161,6 +167,8 @@
           "name": "Shed Skin",
           "effect": ""
         },
+        "iv": 9,
+        "nat": "quirky",
         "sprite": "14",
         "types": [
           "bug",
@@ -191,6 +199,8 @@
           "name": "Shed Skin",
           "effect": ""
         },
+        "iv": 9,
+        "nat": "serious",
         "sprite": "11",
         "types": [
           "bug"
@@ -245,6 +255,8 @@
           "name": "Cute Charm",
           "effect": ""
         },
+        "iv": 12,
+        "nat": "modest",
         "sprite": "35",
         "types": [
           "normal"
@@ -298,6 +310,8 @@
           "name": "Lum Berry",
           "effect": ""
         },
+        "iv": 12,
+        "nat": "calm",
         "sprite": "241",
         "types": [
           "normal"
@@ -352,6 +366,8 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 12,
+        "nat": "rash",
         "sprite": "92",
         "types": [
           "ghost",
@@ -400,6 +416,8 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 12,
+        "nat": "careful",
         "sprite": "93",
         "types": [
           "ghost",
@@ -455,6 +473,8 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 12,
+        "nat": "bold",
         "sprite": "94",
         "types": [
           "ghost",
@@ -504,6 +524,8 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 12,
+        "nat": "serious",
         "sprite": "93",
         "types": [
           "ghost",
@@ -561,6 +583,8 @@
           "name": "Vital Spirit",
           "effect": ""
         },
+        "iv": 18,
+        "nat": "lax",
         "sprite": "57",
         "types": [
           "fighting"
@@ -616,6 +640,8 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 18,
+        "nat": "careful",
         "sprite": "62",
         "types": [
           "water",
@@ -671,6 +697,8 @@
           "name": "Magnet Pull",
           "effect": ""
         },
+        "iv": 18,
+        "nat": "sassy",
         "sprite": "81",
         "types": [
           "electric",
@@ -719,6 +747,8 @@
           "name": "Sturdy",
           "effect": ""
         },
+        "iv": 18,
+        "nat": "careful",
         "sprite": "81",
         "types": [
           "electric",
@@ -773,6 +803,8 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 18,
+        "nat": "bold",
         "sprite": "208",
         "types": [
           "steel",
@@ -829,6 +861,8 @@
           "name": "Thick Fat",
           "effect": ""
         },
+        "iv": 18,
+        "nat": "sassy",
         "sprite": "86",
         "types": [
           "water"
@@ -878,6 +912,8 @@
           "name": "Thick Fat",
           "effect": ""
         },
+        "iv": 18,
+        "nat": "rash",
         "sprite": "87",
         "types": [
           "water",
@@ -933,6 +969,8 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 18,
+        "nat": "calm",
         "sprite": "221",
         "types": [
           "ice",
@@ -990,6 +1028,8 @@
           "name": "Intimidate",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "hasty",
         "sprite": "130",
         "types": [
           "water",
@@ -1040,6 +1080,8 @@
           "name": "Shed Skin",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "gentle",
         "sprite": "148",
         "types": [
           "dragon"
@@ -1089,6 +1131,8 @@
           "name": "Shed Skin",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "gentle",
         "sprite": "148",
         "types": [
           "dragon"
@@ -1143,6 +1187,8 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "timid",
         "sprite": "230",
         "types": [
           "water",
@@ -1201,6 +1247,8 @@
           "name": "Early Bird",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "lax",
         "sprite": "228",
         "types": [
           "dark",
@@ -1250,6 +1298,8 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "quirky",
         "sprite": "109",
         "types": [
           "poison"
@@ -1300,6 +1350,8 @@
           "name": "Early Bird",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "naughty",
         "sprite": "229",
         "types": [
           "dark",
@@ -1343,6 +1395,8 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 12,
+        "nat": "impish",
         "sprite": "41",
         "types": [
           "poison",
@@ -1392,6 +1446,8 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 12,
+        "nat": "modest",
         "sprite": "109",
         "types": [
           "poison"
@@ -1448,6 +1504,8 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 12,
+        "nat": "docile",
         "sprite": "42",
         "types": [
           "poison",
@@ -1498,6 +1556,8 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 12,
+        "nat": "naughty",
         "sprite": "110",
         "types": [
           "poison"
@@ -1554,6 +1614,8 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 12,
+        "nat": "relaxed",
         "sprite": "41",
         "types": [
           "poison",
@@ -1604,6 +1666,8 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 12,
+        "nat": "rash",
         "sprite": "109",
         "types": [
           "poison"
@@ -1654,6 +1718,8 @@
           "name": "Guts",
           "effect": ""
         },
+        "iv": 12,
+        "nat": "calm",
         "sprite": "20",
         "types": [
           "normal"
@@ -2011,6 +2077,8 @@
           "name": "Intimidate",
           "effect": ""
         },
+        "iv": 12,
+        "nat": "hardy",
         "sprite": "24",
         "types": [
           "poison"
@@ -2059,6 +2127,8 @@
           "name": "Chlorophyll",
           "effect": ""
         },
+        "iv": 12,
+        "nat": "modest",
         "sprite": "44",
         "types": [
           "grass",
@@ -2109,6 +2179,8 @@
           "name": "Super Luck",
           "effect": ""
         },
+        "iv": 12,
+        "nat": "lonely",
         "sprite": "198",
         "types": [
           "dark",
@@ -2158,6 +2230,8 @@
           "name": "Insomnia",
           "effect": ""
         },
+        "iv": 3,
+        "nat": "naive",
         "sprite": "96",
         "types": [
           "psychic"
@@ -2206,6 +2280,8 @@
           "name": "Stench",
           "effect": ""
         },
+        "iv": 3,
+        "nat": "hasty",
         "sprite": "88",
         "types": [
           "poison"
@@ -2262,6 +2338,8 @@
           "name": "Intimidate",
           "effect": ""
         },
+        "iv": 12,
+        "nat": "impish",
         "sprite": "24",
         "types": [
           "poison"
@@ -2310,6 +2388,8 @@
           "name": "Chlorophyll",
           "effect": ""
         },
+        "iv": 12,
+        "nat": "adamant",
         "sprite": "45",
         "types": [
           "grass",
@@ -2360,6 +2440,8 @@
           "name": "Super Luck",
           "effect": ""
         },
+        "iv": 12,
+        "nat": "bold",
         "sprite": "198",
         "types": [
           "dark",
@@ -2416,6 +2498,8 @@
           "name": "Insomnia",
           "effect": ""
         },
+        "iv": 18,
+        "nat": "quiet",
         "sprite": "96",
         "types": [
           "psychic"
@@ -2463,6 +2547,8 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 18,
+        "nat": "impish",
         "sprite": "93",
         "types": [
           "ghost",
@@ -2512,6 +2598,8 @@
           "name": "Static",
           "effect": ""
         },
+        "iv": 18,
+        "nat": "impish",
         "sprite": "101",
         "types": [
           "electric"
@@ -2554,6 +2642,8 @@
           "name": "Chlorophyll",
           "effect": ""
         },
+        "iv": 0,
+        "nat": "bold",
         "sprite": "69",
         "types": [
           "grass",
@@ -2590,6 +2680,8 @@
           "name": "Chlorophyll",
           "effect": ""
         },
+        "iv": 0,
+        "nat": "bold",
         "sprite": "69",
         "types": [
           "grass",
@@ -2632,6 +2724,8 @@
           "name": "Insomnia",
           "effect": ""
         },
+        "iv": 0,
+        "nat": "quiet",
         "sprite": "163",
         "types": [
           "normal",
@@ -2984,6 +3078,8 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 3,
+        "nat": "modest",
         "sprite": "92",
         "types": [
           "ghost",
@@ -3034,6 +3130,8 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 3,
+        "nat": "brave",
         "sprite": "41",
         "types": [
           "poison",
@@ -3083,6 +3181,8 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 3,
+        "nat": "serious",
         "sprite": "153",
         "types": [
           "grass"
@@ -3137,6 +3237,8 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 9,
+        "nat": "careful",
         "sprite": "92",
         "types": [
           "ghost",
@@ -3187,6 +3289,8 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 9,
+        "nat": "hardy",
         "sprite": "41",
         "types": [
           "poison",
@@ -3235,6 +3339,8 @@
           "name": "Magnet Pull",
           "effect": ""
         },
+        "iv": 9,
+        "nat": "timid",
         "sprite": "81",
         "types": [
           "electric",
@@ -3284,6 +3390,8 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 9,
+        "nat": "calm",
         "sprite": "153",
         "types": [
           "grass"
@@ -3340,6 +3448,8 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 14,
+        "nat": "lonely",
         "sprite": "42",
         "types": [
           "poison",
@@ -3388,6 +3498,8 @@
           "name": "Magnet Pull",
           "effect": ""
         },
+        "iv": 14,
+        "nat": "docile",
         "sprite": "81",
         "types": [
           "electric",
@@ -3436,6 +3548,8 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 14,
+        "nat": "quirky",
         "sprite": "93",
         "types": [
           "ghost",
@@ -3488,6 +3602,8 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 14,
+        "nat": "hasty",
         "sprite": "215",
         "types": [
           "dark",
@@ -3537,6 +3653,8 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 14,
+        "nat": "gentle",
         "sprite": "154",
         "types": [
           "grass"
@@ -3595,6 +3713,8 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 19,
+        "nat": "impish",
         "sprite": "215",
         "types": [
           "dark",
@@ -3645,6 +3765,8 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 19,
+        "nat": "hasty",
         "sprite": "42",
         "types": [
           "poison",
@@ -3694,6 +3816,8 @@
           "name": "Magnet Pull",
           "effect": ""
         },
+        "iv": 19,
+        "nat": "relaxed",
         "sprite": "82",
         "types": [
           "electric",
@@ -3742,6 +3866,8 @@
           "name": "Synchronize",
           "effect": ""
         },
+        "iv": 19,
+        "nat": "timid",
         "sprite": "64",
         "types": [
           "psychic"
@@ -3789,6 +3915,8 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 19,
+        "nat": "careful",
         "sprite": "93",
         "types": [
           "ghost",
@@ -3838,6 +3966,8 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 19,
+        "nat": "docile",
         "sprite": "154",
         "types": [
           "grass"
@@ -3896,6 +4026,8 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "hardy",
         "sprite": "215",
         "types": [
           "dark",
@@ -3946,6 +4078,8 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "quiet",
         "sprite": "42",
         "types": [
           "poison",
@@ -3995,6 +4129,8 @@
           "name": "Magnet Pull",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "sassy",
         "sprite": "82",
         "types": [
           "electric",
@@ -4043,6 +4179,8 @@
           "name": "Synchronize",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "bashful",
         "sprite": "65",
         "types": [
           "psychic"
@@ -4090,6 +4228,8 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "serious",
         "sprite": "94",
         "types": [
           "ghost",
@@ -4139,6 +4279,8 @@
           "effect": ""
         },
         "starter": "water",
+        "iv": 24,
+        "nat": "relaxed",
         "sprite": "154",
         "types": [
           "grass"
@@ -4194,6 +4336,8 @@
           "name": "Synchronize",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "relaxed",
         "sprite": "178",
         "types": [
           "psychic",
@@ -4244,6 +4388,8 @@
           "name": "Oblivious",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "impish",
         "sprite": "124",
         "types": [
           "ice",
@@ -4260,7 +4406,7 @@
       },
       {
         "name": "exeggutor",
-        "level": "31",
+        "level": "41",
         "moves": [
           {
             "type": "psychic",
@@ -4293,6 +4439,8 @@
           "name": "Chlorophyll",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "naive",
         "sprite": "103",
         "types": [
           "grass",
@@ -4342,6 +4490,8 @@
           "name": "Own Tempo",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "brave",
         "sprite": "80",
         "types": [
           "water",
@@ -4397,6 +4547,8 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "quirky",
         "sprite": "178",
         "types": [
           "psychic",
@@ -4453,6 +4605,8 @@
           "name": "Insomnia",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "bashful",
         "sprite": "168",
         "types": [
           "bug",
@@ -4502,6 +4656,8 @@
           "name": "Shield Dust",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "docile",
         "sprite": "49",
         "types": [
           "bug",
@@ -4552,6 +4708,8 @@
           "name": "Sturdy",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "gentle",
         "sprite": "205",
         "types": [
           "bug",
@@ -4605,6 +4763,8 @@
           "name": "Black Sludge",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "naughty",
         "sprite": "89",
         "types": [
           "poison"
@@ -4660,6 +4820,8 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "lax",
         "sprite": "169",
         "types": [
           "poison",
@@ -4719,6 +4881,8 @@
           "name": "Technician",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "quirky",
         "sprite": "237",
         "types": [
           "fighting"
@@ -4767,6 +4931,8 @@
           "name": "Reckless",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "hasty",
         "sprite": "106",
         "types": [
           "fighting"
@@ -4818,6 +4984,8 @@
           "name": "Iron Fist",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "calm",
         "sprite": "107",
         "types": [
           "fighting"
@@ -4867,6 +5035,8 @@
           "name": "Sturdy",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "lax",
         "sprite": "95",
         "types": [
           "rock",
@@ -4923,6 +5093,8 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "mild",
         "sprite": "68",
         "types": [
           "fighting"
@@ -4978,6 +5150,8 @@
           "name": "Synchronize",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "modest",
         "sprite": "197",
         "types": [
           "dark"
@@ -5026,6 +5200,8 @@
           "name": "Chlorophyll",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "docile",
         "sprite": "45",
         "types": [
           "grass",
@@ -5075,6 +5251,8 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "impish",
         "sprite": "94",
         "types": [
           "ghost",
@@ -5127,6 +5305,8 @@
           "name": "Super Luck",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "quirky",
         "sprite": "198",
         "types": [
           "dark",
@@ -5182,6 +5362,8 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "docile",
         "sprite": "229",
         "types": [
           "dark",
@@ -5239,6 +5421,8 @@
           "name": "Intimidate",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "bold",
         "sprite": "130",
         "types": [
           "water",
@@ -5289,6 +5473,8 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "naive",
         "sprite": "149",
         "types": [
           "dragon",
@@ -5339,6 +5525,8 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "naive",
         "sprite": "149",
         "types": [
           "dragon",
@@ -5390,6 +5578,8 @@
           "name": "Pressure",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "lonely",
         "sprite": "142",
         "types": [
           "rock",
@@ -5441,6 +5631,8 @@
           "name": "Blaze",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "sassy",
         "sprite": "6",
         "types": [
           "fire",
@@ -5496,6 +5688,8 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "sassy",
         "sprite": "149",
         "types": [
           "dragon",
@@ -5553,6 +5747,8 @@
           "name": "Static",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "calm",
         "sprite": "26",
         "types": [
           "electric"
@@ -5600,6 +5796,8 @@
           "name": "Static",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "hasty",
         "sprite": "101",
         "types": [
           "electric"
@@ -5648,6 +5846,8 @@
           "name": "Static",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "hasty",
         "sprite": "101",
         "types": [
           "electric"
@@ -5696,6 +5896,8 @@
           "name": "Sturdy",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "adamant",
         "sprite": "82",
         "types": [
           "electric",
@@ -5751,6 +5953,8 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "lonely",
         "sprite": "125",
         "types": [
           "electric"
@@ -5806,6 +6010,8 @@
           "name": "Synchronize",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "quirky",
         "sprite": "196",
         "types": [
           "psychic"
@@ -5853,6 +6059,8 @@
           "name": "Filter",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "naive",
         "sprite": "122",
         "types": [
           "psychic"
@@ -5906,6 +6114,8 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "impish",
         "sprite": "65",
         "types": [
           "psychic"
@@ -5961,6 +6171,8 @@
           "name": "Chlorophyll",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "impish",
         "sprite": "189",
         "types": [
           "grass",
@@ -6010,6 +6222,8 @@
           "name": "Chlorophyll",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "rash",
         "sprite": "114",
         "types": [
           "grass"
@@ -6058,6 +6272,8 @@
           "name": "Chlorophyll",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "rash",
         "sprite": "71",
         "types": [
           "grass",
@@ -6112,6 +6328,8 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "quirky",
         "sprite": "182",
         "types": [
           "grass"
@@ -6166,6 +6384,8 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "timid",
         "sprite": "169",
         "types": [
           "poison",
@@ -6216,6 +6436,8 @@
           "name": "Levitate",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "careful",
         "sprite": "110",
         "types": [
           "poison"
@@ -6264,6 +6486,8 @@
           "name": "Insomnia",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "modest",
         "sprite": "168",
         "types": [
           "bug",
@@ -6314,6 +6538,8 @@
           "name": "Insomnia",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "modest",
         "sprite": "168",
         "types": [
           "bug",
@@ -6369,6 +6595,8 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "mild",
         "sprite": "49",
         "types": [
           "bug",
@@ -6425,6 +6653,8 @@
           "name": "Damp",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "calm",
         "sprite": "55",
         "types": [
           "water"
@@ -6473,6 +6703,8 @@
           "name": "Water Absorb",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "naive",
         "sprite": "195",
         "types": [
           "water",
@@ -6523,6 +6755,8 @@
           "name": "Shell Armor",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "naughty",
         "sprite": "131",
         "types": [
           "water",
@@ -6577,6 +6811,8 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "impish",
         "sprite": "121",
         "types": [
           "water",
@@ -6634,6 +6870,8 @@
           "name": "Sturdy",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "lonely",
         "sprite": "75",
         "types": [
           "rock",
@@ -6682,6 +6920,8 @@
           "name": "Lightning Rod",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "gentle",
         "sprite": "111",
         "types": [
           "ground",
@@ -6733,6 +6973,8 @@
           "name": "Shell Armor",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "lax",
         "sprite": "139",
         "types": [
           "rock",
@@ -6787,6 +7029,8 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "gentle",
         "sprite": "95",
         "types": [
           "rock",
@@ -6803,7 +7047,7 @@
       },
       {
         "name": "kabutops",
-        "level": "54",
+        "level": "52",
         "moves": [
           {
             "power": 75,
@@ -6839,6 +7083,8 @@
           "name": "Battle Armor",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "jolly",
         "sprite": "141",
         "types": [
           "rock",
@@ -6901,6 +7147,8 @@
           "name": "White Herb",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "docile",
         "sprite": "219",
         "types": [
           "fire",
@@ -6955,6 +7203,8 @@
           "name": "White Herb",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "rash",
         "sprite": "126",
         "types": [
           "fire"
@@ -7011,6 +7261,8 @@
           "name": "White Herb",
           "effect": ""
         },
+        "iv": 24,
+        "nat": "modest",
         "sprite": "78",
         "types": [
           "fire"
@@ -7067,6 +7319,8 @@
           "name": "Chlorophyll",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "quiet",
         "sprite": "103",
         "types": [
           "grass",
@@ -7119,6 +7373,8 @@
           "name": "Intimidate",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "brave",
         "sprite": "59",
         "types": [
           "fire"
@@ -7169,6 +7425,8 @@
           "name": "Rock Head",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "calm",
         "sprite": "112",
         "types": [
           "ground",
@@ -7218,6 +7476,8 @@
           "name": "Intimidate",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "sassy",
         "sprite": "130",
         "types": [
           "water",
@@ -7269,6 +7529,8 @@
           "name": "No Guard",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "gentle",
         "sprite": "68",
         "types": [
           "fighting"
@@ -7322,6 +7584,8 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "sassy",
         "sprite": "18",
         "types": [
           "normal",
@@ -7386,6 +7650,8 @@
           "name": "Light Ball",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "bashful",
         "sprite": "25",
         "types": [
           "electric"
@@ -7436,6 +7702,8 @@
           "name": "Shell Armor",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "brave",
         "sprite": "131",
         "types": [
           "water",
@@ -7487,6 +7755,8 @@
           "name": "Thick Fat",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "hardy",
         "sprite": "143",
         "types": [
           "normal"
@@ -7536,6 +7806,8 @@
           "name": "Overgrow",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "sassy",
         "sprite": "3",
         "types": [
           "grass",
@@ -7587,6 +7859,8 @@
           "name": "Blaze",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "relaxed",
         "sprite": "6",
         "types": [
           "fire",
@@ -7638,6 +7912,8 @@
           "name": "Torrent",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "naive",
         "sprite": "9",
         "types": [
           "water"

@@ -63,6 +63,8 @@
           <small>
             {modo === 'calculadora'
               ? es ? 'Calculado con tu partida del emulador' : 'Calculated from your emulator save'
+              : modo === 'estimado'
+              ? es ? 'Con los movimientos que aprenden por nivel · importa tu .sav para afinarlo' : 'With level-up moves · import your .sav to refine'
               : es ? 'Estimación por tipos · importa tu .sav para afinarla' : 'Type-based estimate · import your .sav to refine'}
           </small>
         {/if}

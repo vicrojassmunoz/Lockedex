@@ -272,11 +272,11 @@
       if (!jefe || !datosCalc) return (riesgo = null)
       calculando = true
       const miembros = await A.paraCalculo(equipo, datosCalc, delta)
-      riesgo = miembros.length ? await calcularRiesgo({ jefe, equipo: miembros, gen: info.gen, cap }) : null
+      riesgo = miembros.length ? await calcularRiesgo({ jefe, equipo: miembros, gen: info.gen, cap, grupo: info.grupo }) : null
       const otro = guardados.find((g) => g.id === comparar)
       if (otro) {
         const mOtro = await A.paraCalculo(otro.equipo, datosCalc, delta)
-        riesgoComparado = mOtro.length ? await calcularRiesgo({ jefe, equipo: mOtro, gen: info.gen, cap }) : null
+        riesgoComparado = mOtro.length ? await calcularRiesgo({ jefe, equipo: mOtro, gen: info.gen, cap, grupo: info.grupo }) : null
       } else riesgoComparado = null
       calculando = false
       A.guardarActual({ clave, inicial, jefeValor, equipo, delta })

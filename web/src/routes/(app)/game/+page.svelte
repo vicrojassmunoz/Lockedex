@@ -2,8 +2,11 @@
   import { t, traducirNombre } from '$lib/lockedex/idioma'
   import AvisosReglas from '$lib/lockedex/AvisosReglas.svelte'
   import FinPartida from '$lib/lockedex/FinPartida.svelte'
+  import SalonFama from '$lib/lockedex/SalonFama.svelte'
+  import TarjetaEntrenador from '$lib/lockedex/TarjetaEntrenador.svelte'
+  import Diario from '$lib/lockedex/Diario.svelte'
   let runTerminada = false
-  import { onMount, afterUpdate } from 'svelte'
+  import { onMount, afterUpdate, getContext } from 'svelte'
   import { browser } from '$app/environment'
   import { fade, slide } from 'svelte/transition'
 
@@ -31,6 +34,9 @@
   } from '$lib/store'
 
   let gameStore, gameKey, gameData
+  const { open: abrirVentana } = getContext('simple-modal')
+  const abrirFicha = () => abrirVentana(TarjetaEntrenador, { id: $activeGame })
+  const abrirDiario = () => abrirVentana(Diario, { id: $activeGame })
   let routeEl
 
   let search = ''
@@ -156,17 +162,26 @@
           <div class="flex w-full flex-col gap-y-2">
             <AvisosReglas />
             <FinPartida id={$activeGame} datos={gameData} bind:terminada={runTerminada} />
-            {#if filter === 'nuzlocke'}
-              <button
-                transition:slide|local={{ duration: 250 }}
-                class="lx-continuar"
-                on:click={routeEl.setroute(latestnav(route, gameData))}
-                data-lx-original
-              >
-                <span class="lx-continuar-cursor">▶</span>
-                {t('Seguir en', 'Continue at')} <b>{traducirNombre(latestnav(route, gameData).name)}</b>
+            <SalonFama id={$activeGame} datos={gameData} />
+            <div class="lx-acciones-run">
+              {#if filter === 'nuzlocke'}
+                <button
+                  transition:slide|local={{ duration: 250 }}
+                  class="lx-continuar"
+                  on:click={routeEl.setroute(latestnav(route, gameData))}
+                  data-lx-original
+                >
+                  <span class="lx-continuar-cursor">▶</span>
+                  {t('Seguir en', 'Continue at')} <b>{traducirNombre(latestnav(route, gameData).name)}</b>
+                </button>
+              {/if}
+              <button class="lx-continuar lx-accion-run" on:click={abrirDiario} title={t('Todo lo que ha pasado en la run', 'Everything that happened in the run')} data-lx-original>
+                {t('Diario', 'Diary')}
               </button>
-            {/if}
+              <button class="lx-continuar lx-accion-run" on:click={abrirFicha} title={t('Imagen de tu run para compartir', 'An image of your run to share')} data-lx-original>
+                {t('Ficha', 'Card')}
+              </button>
+            </div>
 
             <Tabs name="filter" tabs={filters} bind:selected={filter} />
 
@@ -237,6 +252,18 @@
     filter: grayscale(0.6);
     pointer-events: none;
     user-select: none;
+  }
+  .lx-acciones-run {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+  .lx-accion-run {
+    font-family: 'VT323', monospace;
+    font-size: 19px;
+    line-height: 20px;
+    color: #fff;
   }
   .lx-continuar {
     align-self: flex-start;

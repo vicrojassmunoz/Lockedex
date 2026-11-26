@@ -5,7 +5,9 @@
 #   codificación del juego) del nombre del entrenador y del nombre de la especie. Naturaleza = personalidad % 25.
 # Se añaden como «nat» (en inglés, minúsculas) a datos/jefes/<juego>.json; luego `node herramientas/datos.mjs compilar`.
 #
-# También los IVs de los jefes de Platino (pret/pokeplatinum, res/trainers/data/*.json): IV = iv_scale·31/255.
+# También los IVs y naturalezas de los jefes de la 4.ª gen: Platino (pret/pokeplatinum), Diamante/Perla
+# (pret/pokediamond) y HeartGold/SoulSilver (pret/pokeheartgold). IV = dificultad·31/255.
+# La 5.ª gen no tiene decomp: sus jefes siguen sin IVs ni naturalezas.
 import re, json, os, glob
 from collections import Counter
 
@@ -194,4 +196,70 @@ if os.path.exists(f'{PP}/generated/trainers.txt'):
     puestos2, _ = poner('pt', plat_nats, 'nat', lambda n: n)
     print(f'pt: naturaleza puesta a {puestos2} Pokémon')
     total += puestos + puestos2
+
+# Diamante/Perla y HeartGold/SoulSilver: el mismo cálculo que Platino (seed = dificultad + nivel + especie +
+# índice del entrenador; el LCRNG avanza «clase» veces; personalidad = (rnd << 8) + 0x78/0x88). HGSS añade
+# TrMon_OverridePidGender: «habilidad 2» pone el bit 0 (personalidad | 1) y «habilidad 1» lo quita, y el
+# cambio se queda para los siguientes Pokémon del equipo (el juego lo guarda en la misma variable). El cambio
+# de género (2 Pokémon en todo HGSS) depende del ratio de la especie: esos y los que les siguen se saltan.
+def nat_gen4(seed, clase, base):
+    estado = seed & 0xFFFFFFFF
+    rnd = estado
+    for _ in range(clase):
+        estado = (estado * 1103515245 + 24691) & 0xFFFFFFFF
+        rnd = estado >> 16
+    return NATURALEZAS[(((rnd << 8) + base) & 0xFFFFFFFF) % 25]
+
+def gen4(nombre, repo, entrenadores_, clases, mujeres, juegos):
+    if not os.path.exists(f'{PRET}/{repo}') or not os.path.exists(f'{PP}/generated/species.txt'):
+        print(f'{nombre}: falta {repo}'); return 0
+    especies = lista_constantes('species')  # el número de especie es el de la Pokédex nacional (igual en DP/Pt/HGSS)
+    t_ivs, t_nats, sin_especie = [], [], set()
+    for idx, clase, party in entrenadores_:
+        if clase not in clases: continue
+        base = 0x78 if clase in mujeres else 0x88
+        ivs, nats = [], []
+        for p in party:
+            sp = p.get('species')
+            if sp not in especies:
+                sin_especie.add(sp); continue
+            n = sp.replace('SPECIES_', '').lower().replace('_', '-')
+            nivel, dif = int(p.get('level') or 0), int(p.get('difficulty') or 0)
+            genero = p.get('genderOverride', 'TRPOKE_GENDER_OVERRIDE_OFF')
+            habilidad = p.get('abilityOverride', 'TRPOKE_ABILITY_OVERRIDE_OFF')
+            if genero != 'TRPOKE_GENDER_OVERRIDE_OFF': base = None
+            if base is not None and habilidad.endswith('_SECOND'): base |= 1
+            if base is not None and habilidad.endswith('_FIRST'): base &= ~1
+            ivs.append((n, nivel, dif))
+            if base is not None:
+                nats.append((n, nivel, nat_gen4(dif + nivel + especies[sp] + idx, clases[clase], base)))
+        if ivs: t_ivs.append(ivs)
+        if nats: t_nats.append(nats)
+    hechos = 0
+    for juego in juegos:
+        a, sin = poner(juego, t_ivs, 'iv', lambda v: min(31, v * 31 // 255))
+        b, _ = poner(juego, t_nats, 'nat', lambda n: n)
+        print(f'{juego}: IVs a {a} y naturaleza a {b} Pokémon ({len(t_ivs)} equipos de {repo}); jefes sin pareja: {len(sin)} {sin[:8]}')
+        hechos += a + b
+    if sin_especie: print(f'{nombre}: especies sin número: {sorted(sin_especie)[:10]}')
+    return hechos
+
+def clases_de(fichero, prefijo):
+    return {m.group(1): int(m.group(2)) for m in re.finditer(rf'#define ({prefijo}\w+)\s+(\d+)', open(fichero).read())}
+
+PD = f'{PRET}/pokediamond'
+if os.path.exists(f'{PD}/files/poketool/trainer/trdata.json'):
+    clases = clases_de(f'{PD}/include/constants/trainer_classes.h', 'TRAINER_CLASS_')
+    tabla = re.findall(r'/\*(TRAINER_CLASS_\w+)\*/\s*(\d)', open(f'{PD}/arm9/src/trainer_data.c').read())
+    mujeres = {c for c, g in tabla if g == '1'}
+    datos = json.load(open(f'{PD}/files/poketool/trainer/trdata.json'))['trdata']
+    total += gen4('dp', 'pokediamond', [(t['index'], t['class'], t.get('party', [])) for t in datos], clases, mujeres, ['d', 'p'])
+
+PH = f'{PRET}/pokeheartgold'
+if os.path.exists(f'{PH}/files/poketool/trainer/trainers.json'):
+    clases = clases_de(f'{PH}/include/constants/trainer_class.h', 'TRAINERCLASS_')
+    tabla = re.findall(r'(TRAINER_MALE|TRAINER_FEMALE|TRAINER_DOUBLE),\s*//\s*(TRAINERCLASS_\w+)', open(f'{PH}/src/trainer_data.c').read())
+    mujeres = {c for g, c in tabla if g == 'TRAINER_FEMALE'}
+    datos = json.load(open(f'{PH}/files/poketool/trainer/trainers.json'))['trainers']
+    total += gen4('hgss', 'pokeheartgold', [(i, t['class'], t.get('party', [])) for i, t in enumerate(datos)], clases, mujeres, ['hg', 'ss'])
 print('total', total)

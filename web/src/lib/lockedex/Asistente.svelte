@@ -107,7 +107,7 @@
         es ? 'Nadie de tu equipo cumple tus reglas para este combate: el plan de abajo cuenta con todos igualmente.' : 'Nobody in your team meets your rules for this battle: the plan below uses everyone anyway.'
       )
     }
-    riesgo = await calcularRiesgo({ jefe, equipo: validos, gen: info.gen, cap })
+    riesgo = await calcularRiesgo({ jefe, equipo: validos, gen: info.gen, cap, grupo: info.grupo })
     // Wedlocke: si el plan cuenta con los dos de una pareja, avisa (solo puede combatir uno)
     if (reglas.wedlocke && riesgo?.consejos?.length) {
       const parejas = leerParejas(partida.id)
@@ -180,6 +180,8 @@
         <p class="lx-modo">
           {riesgo.modo === 'calculadora'
             ? es ? 'Calculado con los niveles, movimientos, naturalezas e IVs de tu partida del emulador.' : 'Calculated with the levels, moves, natures and IVs from your emulator save.'
+            : riesgo.modo === 'estimado'
+            ? es ? 'Calculado con los movimientos que aprende cada uno por nivel (tus Pokémon, al nivel máximo). Importa tu partida .sav para usar los de verdad.' : 'Calculated with the moves each one learns by level (your Pokémon at the level cap). Import your .sav to use the real ones.'
             : es ? 'Estimación por tipos. Importa tu partida .sav para un cálculo de daño exacto.' : 'Type-based estimate. Import your .sav for exact damage calcs.'}
         </p>
       </div>

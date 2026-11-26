@@ -1,6 +1,6 @@
 <script>
   // Modo compacto: ventanita siempre encima para tener a mano tu run mientras juegas
-  import { onMount } from 'svelte'
+  import { onMount, tick } from 'svelte'
   import { partidaActiva, cargarRutas, cargarLiga, resumirPartida, nivelMaximo, alCambiarDatos } from '$lib/lockedex/partida.js'
   import { equipoCompleto } from '$lib/lockedex/equipo.js'
   import { calcularRiesgo } from '$lib/lockedex/riesgo.js'
@@ -13,6 +13,7 @@
   import { idioma, iniciarTraduccion, traducirNombre } from '$lib/lockedex/idioma.js'
   import { COLOR_TIPO } from '$lib/lockedex/colores.js'
   import { nombreJuego } from '$lib/lockedex/juegos.js'
+  import { zonaDelSav } from '$lib/lockedex/zonas.js'
 
   const es = idioma() === 'es'
   let partida = null
@@ -42,7 +43,20 @@
     miembros = eq.miembros.slice(0, 6)
     equipoActual = eq.miembros
     ligaActual = await cargarLiga(partida.juego, partida.datos.__starter || 'fire')
+    mirarSav()
     await mostrarJefe()
+  }
+
+  // Zona del .sav: cuando cambia (guardas en otro mapa), se elige sola en «Apuntar encuentro»
+  let zonaSav = null
+  let ultimaUbicacion = null
+  const mirarSav = async () => {
+    await tick() // que «pendientes» ya esté al día con la run recién leída
+    const z = await zonaDelSav(partida)
+    zonaSav = z?.zona || null
+    if (!z || z.clave === ultimaUbicacion) return
+    ultimaUbicacion = z.clave
+    if (zonaSav && pendientes.some((p) => p.name === zonaSav)) zonaSel = zonaSav
   }
 
   // Jefe que se enseña: el próximo, o el elegido con ◀ ▶
@@ -73,7 +87,7 @@
       const real = leerEquiposJefes(partida.id)[jefe.value]
       paraRiesgo = real?.length && !sinCalculos(reglas) ? await comoJefe(jefe.boss || jefe.name, real, await cargarCalc(partida.info.gen || 9)) : null
     }
-    const r = paraRiesgo ? await calcularRiesgo({ jefe: paraRiesgo, equipo: equipoActual, gen: partida.info.gen, cap: nivel }) : null
+    const r = paraRiesgo ? await calcularRiesgo({ jefe: paraRiesgo, equipo: equipoActual, gen: partida.info.gen, cap: nivel, grupo: partida.info.grupo }) : null
     if (jefe?.value !== visto) return // se cambió de jefe mientras se calculaba
     datosJefe = datosAj
     cap = nivel
@@ -270,8 +284,13 @@
     {#if pendientes.length}
       <section class="lx-mini-apuntar">
         <small>{es ? 'APUNTAR ENCUENTRO' : 'LOG ENCOUNTER'}</small>
+        {#if zonaSav}
+          <span class="lx-mini-zona-sav" title={es ? 'Según tu .sav' : 'From your .sav'}>
+            ◉ {es ? 'Estás en' : "You're at"} {traducirNombre(zonaSav)}{#if !pendientes.some((p) => p.name === zonaSav)} · {es ? 'ya apuntada' : 'already logged'}{/if}
+          </span>
+        {/if}
         <select bind:value={zonaSel} aria-label={es ? 'Zona' : 'Area'}>
-          {#each pendientes.slice(0, 15) as z}
+          {#each pendientes.slice(0, 15).concat(pendientes.slice(15).filter((p) => p.name === zonaSel)) as z}
             <option value={z.name}>{traducirNombre(z.name)}</option>
           {/each}
         </select>
@@ -724,6 +743,15 @@
   }
   section .lx-mini-vacio {
     color: inherit;
+  }
+  .lx-mini-zona-sav {
+    display: block;
+    font-size: 11px;
+    line-height: 14px;
+    color: #2f62b8;
+  }
+  :global(.dark) .lx-mini-zona-sav {
+    color: #8cb4f0;
   }
   .lx-mini-apuntar {
     display: grid;
