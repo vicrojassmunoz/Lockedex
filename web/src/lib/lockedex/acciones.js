@@ -9,17 +9,22 @@ export const aplicarAccion = (accion = {}) => {
   const almacen = getGameStore(id)
 
   if (accion.tipo === 'encuentro' && accion.ubicacion && accion.pokemon) {
-    almacen.update(
-      patch({
-        [accion.ubicacion]: {
-          id: accion.idRuta ?? 0,
-          pokemon: accion.pokemon,
-          status: accion.estado || 1,
-          location: accion.ubicacion,
-          ...(accion.mote ? { nickname: accion.mote } : {})
-        }
-      })
-    )
+    almacen.update((texto) => {
+      const datos = JSON.parse(texto || '{}')
+      const estado = accion.estado || 1
+      datos[accion.ubicacion] = {
+        id: accion.idRuta ?? 0,
+        pokemon: accion.pokemon,
+        status: estado,
+        location: accion.ubicacion,
+        ...(accion.mote ? { nickname: accion.mote } : {})
+      }
+      // Captura (o regalo, intercambio, shiny) con hueco en el equipo: entra sola
+      const equipo = (datos.__team || []).filter(Boolean)
+      if ([1, 2, 3, 6].includes(+estado) && equipo.length < 6 && !equipo.includes(accion.ubicacion))
+        datos.__team = [...equipo, accion.ubicacion]
+      return JSON.stringify(datos)
+    })
     return true
   }
 

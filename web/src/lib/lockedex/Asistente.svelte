@@ -9,7 +9,10 @@
   import { idioma } from './idioma.js'
   import { COLOR_TIPO } from './colores.js'
   import { leerReglas, recordatorios } from './reglas.js'
+  import { leerParejas, parejaDe } from './parejas.js'
   let reglasActivas = []
+  // Lo que el plan haría y tus reglas no dejan: quién queda fuera del cálculo y por qué
+  let avisosRegla = []
 
   export let jefe
   export let cap = null
@@ -58,7 +61,63 @@
       const probables = m.nivel ? [] : lista.filter(([nv]) => nv <= hasta).slice(-4).map(([nv, k]) => ({ nv, m: movs[k] })).filter((x) => x.m)
       return { ...m, actuales, proximos, probables }
     })
-    riesgo = await calcularRiesgo({ jefe, equipo: eq.miembros, gen: info.gen, cap })
+    // Reglas: con el nivel máximo obligatorio o el monotipo, los que no pueden combatir no cuentan en el plan
+    const reglas = leerReglas(partida.id)
+    const nom = (m) => m.nombre
+    const fuera = []
+    if (reglas.nivelMax && cap) {
+      const pasados = eq.miembros.filter((m) => m.nivel && m.nivel > cap)
+      if (pasados.length) {
+        fuera.push(...pasados)
+        avisosRegla.push(
+          es
+            ? `Nivel máximo ${cap}: ${pasados.map((m) => `${nom(m)} (Nv. ${m.nivel})`).join(', ')} no ${pasados.length > 1 ? 'pueden' : 'puede'} combatir, así que el plan cuenta sin ${pasados.length > 1 ? 'ellos' : 'él'}.`
+            : `Level cap ${cap}: ${pasados.map((m) => `${nom(m)} (Lv. ${m.nivel})`).join(', ')} can't fight, so the plan leaves them out.`
+        )
+      }
+    }
+    if (reglas.monotipo) {
+      const otros = eq.miembros.filter((m) => (m.types || []).length && !m.types.includes(reglas.monotipo) && !fuera.includes(m))
+      if (otros.length) {
+        fuera.push(...otros)
+        avisosRegla.push(
+          es
+            ? `Monotipo (${reglas.monotipo}): ${otros.map(nom).join(', ')} no ${otros.length > 1 ? 'son' : 'es'} del tipo, así que el plan cuenta sin ${otros.length > 1 ? 'ellos' : 'él'}.`
+            : `Monotype (${reglas.monotipo}): ${otros.map(nom).join(', ')} not of the type, left out of the plan.`
+        )
+      }
+    }
+    let validos = eq.miembros.filter((m) => !fuera.includes(m))
+    if (fuera.length && !validos.length) {
+      // nadie cumple: se calcula con todos, pero dicho claro
+      validos = eq.miembros
+      avisosRegla = avisosRegla.map((a) =>
+        a.replace(/, así que el plan cuenta sin (ellos|él)\./, '.').replace(/, so the plan leaves them out\./, '.').replace(/, left out of the plan\./, '.')
+      )
+      avisosRegla.push(
+        es ? 'Nadie de tu equipo cumple tus reglas para este combate: el plan de abajo cuenta con todos igualmente.' : 'Nobody in your team meets your rules for this battle: the plan below uses everyone anyway.'
+      )
+    }
+    riesgo = await calcularRiesgo({ jefe, equipo: validos, gen: info.gen, cap })
+    // Wedlocke: si el plan cuenta con los dos de una pareja, avisa (solo puede combatir uno)
+    if (reglas.wedlocke && riesgo?.consejos?.length) {
+      const parejas = leerParejas(partida.id)
+      const texto = riesgo.consejos.map((c) => c.texto).join(' ')
+      const vistas = new Set()
+      for (const m of validos) {
+        const otra = parejaDe(parejas, m.lugar)
+        const pm = otra && validos.find((x) => x.lugar === otra)
+        if (!pm || vistas.has(m.lugar)) continue
+        vistas.add(otra)
+        if (texto.includes(nom(m)) && texto.includes(nom(pm)))
+          avisosRegla.push(
+            es
+              ? `Wedlocke: el plan usa a ${nom(m)} y a ${nom(pm)}, que son pareja. En este combate solo puede salir uno de los dos.`
+              : `Wedlocke: the plan uses ${nom(m)} and ${nom(pm)}, who are partners. Only one of them may fight here.`
+          )
+      }
+    }
+    avisosRegla = avisosRegla
     cargando = false
   })
 </script>
@@ -89,6 +148,14 @@
         : 'Add Pokémon to your team (or import your .sav) to see the analysis.'}
     </p>
   {:else}
+    {#if avisosRegla.length}
+      <div class="lx-bloque lx-reglas-plan">
+        <h3>{es ? 'Tus reglas' : 'Your rules'}</h3>
+        <ul class="lx-consejos">
+          {#each avisosRegla as a}<li class="lx-regla">{a}</li>{/each}
+        </ul>
+      </div>
+    {/if}
     {#if riesgo}
       <div class="lx-bloque">
         <h3>{es ? 'Consejos' : 'Tips'}</h3>
@@ -357,5 +424,16 @@
     font-size: 14px;
     margin-right: 4px;
     opacity: 0.9;
+  }
+  .lx-consejos .lx-regla {
+    border-left: 4px solid #e07820;
+    background: #fff4e0;
+  }
+  .lx-consejos .lx-regla::before {
+    content: '!';
+    color: #e07820;
+  }
+  :global(.dark) .lx-consejos .lx-regla {
+    background: #3a2a10;
   }
 </style>

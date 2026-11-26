@@ -27,6 +27,7 @@
           "effect": ""
         },
         "iv": 6,
+        "nat": "lax",
         "sprite": "74",
         "types": [
           "rock",
@@ -70,6 +71,7 @@
           "effect": ""
         },
         "iv": 6,
+        "nat": "bold",
         "sprite": "95",
         "types": [
           "rock",
@@ -114,6 +116,7 @@
           "effect": ""
         },
         "iv": 6,
+        "nat": "jolly",
         "sprite": "408",
         "types": [
           "rock"
@@ -168,6 +171,8 @@
           "name": "Overgrow",
           "effect": ""
         },
+        "iv": 6,
+        "nat": "quirky",
         "sprite": "387",
         "types": [
           "grass"
@@ -182,7 +187,7 @@
         }
       },
       {
-        "name": "cherubi",
+        "name": "cherrim",
         "level": "20",
         "moves": [
           {
@@ -215,17 +220,19 @@
           "name": "Flower Gift",
           "effect": ""
         },
-        "sprite": "420",
+        "iv": 6,
+        "nat": "lax",
+        "sprite": "421",
         "types": [
           "grass"
         ],
         "stats": {
-          "hp": 45,
-          "atk": 35,
-          "def": 45,
-          "spa": 62,
-          "spd": 53,
-          "spe": 35
+          "hp": 70,
+          "atk": 60,
+          "def": 70,
+          "spa": 87,
+          "spd": 78,
+          "spe": 85
         }
       },
       {
@@ -268,6 +275,8 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 6,
+        "nat": "naive",
         "sprite": "407",
         "types": [
           "grass",
@@ -327,6 +336,7 @@
           "effect": ""
         },
         "iv": 12,
+        "nat": "mild",
         "sprite": "355",
         "types": [
           "ghost"
@@ -377,6 +387,7 @@
           "effect": ""
         },
         "iv": 12,
+        "nat": "bashful",
         "sprite": "93",
         "types": [
           "ghost",
@@ -433,6 +444,7 @@
           "effect": ""
         },
         "iv": 12,
+        "nat": "impish",
         "sprite": "429",
         "types": [
           "ghost"
@@ -492,6 +504,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "brave",
         "sprite": "307",
         "types": [
           "fighting",
@@ -543,6 +556,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "naughty",
         "sprite": "67",
         "types": [
           "fighting"
@@ -599,6 +613,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "hasty",
         "sprite": "448",
         "types": [
           "fighting",
@@ -658,6 +673,7 @@
           "effect": ""
         },
         "iv": 18,
+        "nat": "lax",
         "sprite": "130",
         "types": [
           "water",
@@ -709,6 +725,7 @@
           "effect": ""
         },
         "iv": 18,
+        "nat": "naughty",
         "sprite": "195",
         "types": [
           "water",
@@ -767,6 +784,7 @@
           "effect": ""
         },
         "iv": 18,
+        "nat": "naughty",
         "sprite": "419",
         "types": [
           "water"
@@ -824,6 +842,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "relaxed",
         "sprite": "82",
         "types": [
           "electric",
@@ -875,6 +894,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "serious",
         "sprite": "208",
         "types": [
           "steel",
@@ -929,6 +949,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "lax",
         "sprite": "411",
         "types": [
           "rock",
@@ -950,57 +971,6 @@
     "speciality": "ice",
     "img": "/leaders/dp-candice",
     "pokemon": [
-      {
-        "name": "piloswine",
-        "level": "38",
-        "moves": [
-          {
-            "power": 100,
-            "type": "ground",
-            "damage_class": "physical",
-            "name": "Earthquake",
-            "effect": ""
-          },
-          {
-            "power": 100,
-            "type": "rock",
-            "damage_class": "physical",
-            "name": "Stone Edge",
-            "effect": ""
-          },
-          {
-            "power": 60,
-            "type": "ice",
-            "damage_class": "physical",
-            "name": "Avalanche",
-            "effect": "",
-            "priority": -4
-          },
-          {
-            "type": "ice",
-            "damage_class": "status",
-            "name": "Hail",
-            "effect": ""
-          }
-        ],
-        "ability": {
-          "name": "Oblivious",
-          "effect": ""
-        },
-        "sprite": "221",
-        "types": [
-          "ice",
-          "ground"
-        ],
-        "stats": {
-          "hp": 100,
-          "atk": 100,
-          "def": 80,
-          "spa": 60,
-          "spd": 60,
-          "spe": 50
-        }
-      },
       {
         "name": "sneasel",
         "level": "40",
@@ -1039,6 +1009,8 @@
           "name": "Inner Focus",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "docile",
         "sprite": "215",
         "types": [
           "dark",
@@ -1051,6 +1023,59 @@
           "spa": 35,
           "spd": 75,
           "spe": 115
+        }
+      },
+      {
+        "name": "piloswine",
+        "level": "40",
+        "moves": [
+          {
+            "power": 100,
+            "type": "ground",
+            "damage_class": "physical",
+            "name": "Earthquake",
+            "effect": ""
+          },
+          {
+            "power": 100,
+            "type": "rock",
+            "damage_class": "physical",
+            "name": "Stone Edge",
+            "effect": ""
+          },
+          {
+            "power": 60,
+            "type": "ice",
+            "damage_class": "physical",
+            "name": "Avalanche",
+            "effect": "",
+            "priority": -4
+          },
+          {
+            "type": "ice",
+            "damage_class": "status",
+            "name": "Hail",
+            "effect": ""
+          }
+        ],
+        "ability": {
+          "name": "Oblivious",
+          "effect": ""
+        },
+        "iv": 30,
+        "nat": "mild",
+        "sprite": "221",
+        "types": [
+          "ice",
+          "ground"
+        ],
+        "stats": {
+          "hp": 100,
+          "atk": 100,
+          "def": 80,
+          "spa": 60,
+          "spd": 60,
+          "spe": 50
         }
       },
       {
@@ -1091,6 +1116,8 @@
           "name": "Snow Warning",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "relaxed",
         "sprite": "460",
         "types": [
           "grass",
@@ -1146,6 +1173,8 @@
           "name": "Sitrus Berry",
           "effect": ""
         },
+        "iv": 30,
+        "nat": "lonely",
         "sprite": "478",
         "types": [
           "ice",
@@ -1205,6 +1234,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "relaxed",
         "sprite": "135",
         "types": [
           "electric"
@@ -1257,6 +1287,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "gentle",
         "sprite": "26",
         "types": [
           "electric"
@@ -1308,6 +1339,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "lax",
         "sprite": "405",
         "types": [
           "electric"
@@ -1365,6 +1397,7 @@
           "effect": ""
         },
         "iv": 31,
+        "nat": "impish",
         "sprite": "466",
         "types": [
           "electric"
@@ -1415,6 +1448,7 @@
           "effect": ""
         },
         "iv": 12,
+        "nat": "bold",
         "sprite": "41",
         "types": [
           "poison",
@@ -1466,6 +1500,7 @@
           "effect": ""
         },
         "iv": 12,
+        "nat": "bashful",
         "sprite": "432",
         "types": [
           "normal"
@@ -1517,6 +1552,7 @@
           "effect": ""
         },
         "iv": 12,
+        "nat": "brave",
         "sprite": "41",
         "types": [
           "poison",
@@ -1571,6 +1607,7 @@
           "effect": ""
         },
         "iv": 12,
+        "nat": "modest",
         "sprite": "435",
         "types": [
           "poison",
@@ -1630,6 +1667,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "relaxed",
         "sprite": "215",
         "types": [
           "dark",
@@ -1681,6 +1719,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "quiet",
         "sprite": "42",
         "types": [
           "poison",
@@ -1737,6 +1776,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "impish",
         "sprite": "198",
         "types": [
           "dark",
@@ -1796,6 +1836,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "serious",
         "sprite": "215",
         "types": [
           "dark",
@@ -1847,6 +1888,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "hasty",
         "sprite": "169",
         "types": [
           "poison",
@@ -1903,6 +1945,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "relaxed",
         "sprite": "430",
         "types": [
           "dark",
@@ -1961,6 +2004,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "bashful",
         "sprite": "229",
         "types": [
           "dark",
@@ -2013,6 +2057,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "adamant",
         "sprite": "430",
         "types": [
           "dark",
@@ -2063,6 +2108,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "naive",
         "sprite": "169",
         "types": [
           "poison",
@@ -2115,6 +2161,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "careful",
         "sprite": "130",
         "types": [
           "water",
@@ -2173,6 +2220,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "modest",
         "sprite": "461",
         "types": [
           "dark",
@@ -2230,6 +2278,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "naughty",
         "sprite": "42",
         "types": [
           "poison",
@@ -2280,6 +2329,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "quirky",
         "sprite": "436",
         "types": [
           "steel",
@@ -2338,6 +2388,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "adamant",
         "sprite": "454",
         "types": [
           "poison",
@@ -2395,6 +2446,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "modest",
         "sprite": "42",
         "types": [
           "poison",
@@ -2444,6 +2496,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "relaxed",
         "sprite": "436",
         "types": [
           "steel",
@@ -2501,6 +2554,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "bashful",
         "sprite": "432",
         "types": [
           "normal"
@@ -2558,6 +2612,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "bold",
         "sprite": "42",
         "types": [
           "poison",
@@ -2615,6 +2670,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "naughty",
         "sprite": "454",
         "types": [
           "poison",
@@ -2665,6 +2721,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "hardy",
         "sprite": "436",
         "types": [
           "steel",
@@ -2721,6 +2778,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "quirky",
         "sprite": "436",
         "types": [
           "steel",
@@ -2772,6 +2830,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "brave",
         "sprite": "42",
         "types": [
           "poison",
@@ -2828,6 +2887,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "jolly",
         "sprite": "432",
         "types": [
           "normal"
@@ -2877,6 +2937,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "quirky",
         "sprite": "436",
         "types": [
           "steel",
@@ -2928,6 +2989,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "brave",
         "sprite": "42",
         "types": [
           "poison",
@@ -2984,6 +3046,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "relaxed",
         "sprite": "435",
         "types": [
           "poison",
@@ -3072,6 +3135,7 @@
           "effect": ""
         },
         "iv": 3,
+        "nat": "naive",
         "sprite": "396",
         "types": [
           "normal",
@@ -3110,6 +3174,7 @@
         },
         "starter": "fire",
         "iv": 3,
+        "nat": "naughty",
         "sprite": "393",
         "types": [
           "water"
@@ -3167,6 +3232,7 @@
           "effect": ""
         },
         "iv": 6,
+        "nat": "timid",
         "sprite": "397",
         "types": [
           "normal",
@@ -3218,6 +3284,7 @@
         },
         "starter": "fire",
         "iv": 6,
+        "nat": "jolly",
         "sprite": "315",
         "types": [
           "grass",
@@ -3269,6 +3336,7 @@
         },
         "starter": "fire",
         "iv": 6,
+        "nat": "careful",
         "sprite": "77",
         "types": [
           "fire"
@@ -3320,6 +3388,7 @@
         },
         "starter": "fire",
         "iv": 6,
+        "nat": "timid",
         "sprite": "394",
         "types": [
           "water"
@@ -3377,6 +3446,7 @@
           "effect": ""
         },
         "iv": 9,
+        "nat": "bashful",
         "sprite": "397",
         "types": [
           "normal",
@@ -3429,6 +3499,7 @@
         },
         "starter": "fire",
         "iv": 9,
+        "nat": "gentle",
         "sprite": "315",
         "types": [
           "grass",
@@ -3480,6 +3551,7 @@
         },
         "starter": "fire",
         "iv": 9,
+        "nat": "docile",
         "sprite": "77",
         "types": [
           "fire"
@@ -3531,6 +3603,7 @@
         },
         "starter": "fire",
         "iv": 9,
+        "nat": "quirky",
         "sprite": "394",
         "types": [
           "water"
@@ -3589,6 +3662,7 @@
           "effect": ""
         },
         "iv": 12,
+        "nat": "serious",
         "sprite": "398",
         "types": [
           "normal",
@@ -3641,6 +3715,7 @@
           "effect": ""
         },
         "iv": 12,
+        "nat": "bold",
         "sprite": "214",
         "types": [
           "bug",
@@ -3691,6 +3766,7 @@
         },
         "starter": "fire",
         "iv": 12,
+        "nat": "naive",
         "sprite": "407",
         "types": [
           "grass",
@@ -3743,6 +3819,7 @@
         },
         "starter": "fire",
         "iv": 12,
+        "nat": "timid",
         "sprite": "78",
         "types": [
           "fire"
@@ -3795,6 +3872,7 @@
         },
         "starter": "fire",
         "iv": 12,
+        "nat": "bashful",
         "sprite": "395",
         "types": [
           "water",
@@ -3854,6 +3932,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "quiet",
         "sprite": "398",
         "types": [
           "normal",
@@ -3906,6 +3985,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "timid",
         "sprite": "214",
         "types": [
           "bug",
@@ -3957,6 +4037,7 @@
           "effect": ""
         },
         "iv": 24,
+        "nat": "careful",
         "sprite": "143",
         "types": [
           "normal"
@@ -4008,6 +4089,7 @@
         },
         "starter": "fire",
         "iv": 24,
+        "nat": "rash",
         "sprite": "407",
         "types": [
           "grass",
@@ -4059,6 +4141,7 @@
         },
         "starter": "fire",
         "iv": 24,
+        "nat": "modest",
         "sprite": "78",
         "types": [
           "fire"
@@ -4111,6 +4194,7 @@
         },
         "starter": "fire",
         "iv": 24,
+        "nat": "quiet",
         "sprite": "395",
         "types": [
           "water",
@@ -4169,6 +4253,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "rash",
         "sprite": "469",
         "types": [
           "bug",
@@ -4222,6 +4307,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "gentle",
         "sprite": "212",
         "types": [
           "bug",
@@ -4274,6 +4360,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "naughty",
         "sprite": "214",
         "types": [
           "bug",
@@ -4324,6 +4411,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "careful",
         "sprite": "416",
         "types": [
           "bug",
@@ -4381,6 +4469,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "jolly",
         "sprite": "452",
         "types": [
           "poison",
@@ -4439,6 +4528,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "mild",
         "sprite": "340",
         "types": [
           "water",
@@ -4491,6 +4581,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "serious",
         "sprite": "472",
         "types": [
           "ground",
@@ -4542,6 +4633,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "docile",
         "sprite": "76",
         "types": [
           "rock",
@@ -4593,6 +4685,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "quirky",
         "sprite": "450",
         "types": [
           "ground"
@@ -4650,6 +4743,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "naughty",
         "sprite": "464",
         "types": [
           "ground",
@@ -4708,6 +4802,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "relaxed",
         "sprite": "229",
         "types": [
           "dark",
@@ -4760,6 +4855,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "quirky",
         "sprite": "136",
         "types": [
           "fire"
@@ -4810,6 +4906,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "docile",
         "sprite": "78",
         "types": [
           "fire"
@@ -4862,6 +4959,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "bold",
         "sprite": "392",
         "types": [
           "fire",
@@ -4919,6 +5017,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "gentle",
         "sprite": "467",
         "types": [
           "fire"
@@ -4975,6 +5074,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "hasty",
         "sprite": "122",
         "types": [
           "psychic"
@@ -5027,6 +5127,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "hardy",
         "sprite": "196",
         "types": [
           "psychic"
@@ -5076,6 +5177,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "naive",
         "sprite": "437",
         "types": [
           "steel",
@@ -5127,6 +5229,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "hardy",
         "sprite": "65",
         "types": [
           "psychic"
@@ -5183,6 +5286,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "careful",
         "sprite": "475",
         "types": [
           "psychic",
@@ -5242,6 +5346,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "timid",
         "sprite": "442",
         "types": [
           "ghost",
@@ -5293,6 +5398,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "mild",
         "sprite": "407",
         "types": [
           "grass",
@@ -5346,6 +5452,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "careful",
         "sprite": "448",
         "types": [
           "fighting",
@@ -5398,6 +5505,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "hardy",
         "sprite": "468",
         "types": [
           "normal",
@@ -5450,6 +5558,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "docile",
         "sprite": "350",
         "types": [
           "water"
@@ -5506,6 +5615,7 @@
           "effect": ""
         },
         "iv": 30,
+        "nat": "quirky",
         "sprite": "445",
         "types": [
           "dragon",

@@ -14,6 +14,8 @@
   import TypeLogo from '$lib/components/type-logo.svelte'
   import { Modal as AnalysisModal } from '$lib/components/Analysis'
   import CajaPC from '$lib/lockedex/CajaPC.svelte'
+  import { leerReglas, sinCalculos } from '$lib/lockedex/reglas.js'
+  import { activeGame as runActiva } from '$lib/store'
   import { t } from '$lib/lockedex/idioma'
 
   import { capitalise } from '$utils/string'
@@ -255,12 +257,15 @@
         <div
           class="relative -my-2 flex snap-start flex-row items-center gap-x-2 md:mt-0"
         >
-          <AnalysisModal box={Object.values(Pokemon)}>
-            <small>Box</small>
-          </AnalysisModal>
-          <AnalysisModal box={mons.map((p) => Pokemon[p.pokemon])}>
-            <small>Team</small>
-          </AnalysisModal>
+          <!-- Randomlocke con tipos aleatorizados: el análisis de tipos saldría con los tipos del juego original -->
+          {#if !sinCalculos(leerReglas($runActiva))}
+            <AnalysisModal box={Object.values(Pokemon)}>
+              <small>Box</small>
+            </AnalysisModal>
+            <AnalysisModal box={mons.map((p) => Pokemon[p.pokemon])}>
+              <small>Team</small>
+            </AnalysisModal>
+          {/if}
 
           <Settings class="absolute right-0" />
 

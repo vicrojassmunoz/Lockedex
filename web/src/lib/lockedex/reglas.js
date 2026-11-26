@@ -4,6 +4,7 @@ import { especies, clavePokemon, norm } from './datos.js'
 import { idioma, traducirNombre } from './idioma.js'
 import { claveSav } from './equipo.js'
 import { nivelMaximo } from './partida.js'
+import { leerParejas, parejaDe } from './parejas.js'
 
 const es = () => idioma() === 'es'
 const clave = (id) => `lockedex.reglas.${id}`
@@ -25,6 +26,7 @@ export const REGLAS = [
   { id: 'set', grupo: 'dificultad', es: 'Modo Set', en: 'Set mode', desc: ['Sin cambio gratis cuando debilitas a un Pokémon del rival (en los juegos, «Estilo: Fijo»). Recordatorio en el asistente, el VS y la ventana compacta.', 'No free switch after knocking out a foe (the games’ «Battle style: Set»). Reminder in the assistant, the VS window and the compact window.'] },
   { id: 'gameover', grupo: 'dificultad', es: 'Game over si cae todo el equipo', en: 'Game over on wipe', desc: ['Si cae todo tu equipo, la app te propone dar la run por perdida (puedes seguir si no fue así) y avisa si no te queda ningún Pokémon vivo.', 'If your whole team faints, the app offers to end the run (you can keep playing if it did not) and warns if no Pokémon are left alive.'] },
   { id: 'sinLegendarios', grupo: 'variantes', es: 'Sin legendarios', en: 'No legendaries', desc: ['Avisa si capturas un legendario o singular.', 'Warns if you catch a legendary or mythical.'] },
+  { id: 'wedlocke', grupo: 'variantes', es: 'Wedlocke (parejas)', en: 'Wedlocke (pairs)', desc: ['Cada Pokémon va en pareja con otro (se elige en la Caja) y en cada combate solo puede salir uno de los dos. Si uno cae, el otro puede buscar pareja nueva. El asistente y el VS lo recuerdan.', 'Each Pokémon is paired with another (set in the Box) and only one of each pair may fight in a battle. If one faints, the other can find a new partner. The assistant and VS window remind you.'] },
   { id: 'monotipo', grupo: 'variantes', tipo: 'tipo', es: 'Monotipo', en: 'Monotype', desc: ['Solo Pokémon del tipo elegido. Avisa si capturas uno que no lo es.', 'Only Pokémon of the chosen type. Warns otherwise.'] },
   { id: 'randomlocke', grupo: 'variantes', es: 'Randomlocke (juego aleatorizado)', en: 'Randomlocke (randomized game)', desc: ['Puedes registrar cualquier Pokémon en cada ruta y no se muestran sugerencias de encuentros.', 'Any Pokémon can be logged on each route and encounter suggestions are off.'] },
   { id: 'entrenadoresAleatorios', grupo: 'variantes', depende: 'randomlocke', es: 'Entrenadores también aleatorizados', en: 'Trainers randomized too', desc: ['Oculta los equipos de los jefes; puedes apuntar el equipo real cuando lo veas.', 'Hides boss teams; you can log the real team when you see it.'] },
@@ -113,6 +115,7 @@ export const recordatorios = (reglas) =>
     limiteObjetos(reglas) === 0 && (es() ? 'Sin objetos en combate' : 'No items in battle'),
     limiteObjetos(reglas) > 0 && (es() ? `Máx. ${limiteObjetos(reglas)} objeto${limiteObjetos(reglas) > 1 ? 's' : ''} por combate` : `Max ${limiteObjetos(reglas)} item${limiteObjetos(reglas) > 1 ? 's' : ''} per battle`),
     reglas.set && (es() ? 'Modo Set' : 'Set mode'),
+    reglas.wedlocke && (es() ? 'Wedlocke: de cada pareja solo combate uno' : 'Wedlocke: only one of each pair fights'),
     reglas.nivelMax && (es() ? 'Nivel máximo obligatorio' : 'Hard level caps')
   ].filter(Boolean)
 
@@ -224,6 +227,35 @@ export const comprobarReglas = async ({ partida, resumen, liga, pokedex }) => {
         lugares: [e.lugar],
         texto: es() ? `Segundo encuentro en ${base} (${nombre}) ${motivo}.` : `Second encounter in ${base} (${nombre}) ${motivo}.`
       })
+  }
+
+  // Wedlocke: los del equipo sin pareja y los que se han quedado sin ella porque su pareja cayó
+  if (reglas.wedlocke) {
+    const parejas = leerParejas(partida.id)
+    const VIVOS = [1, 2, 3, 6]
+    const porLugar = Object.fromEntries(resumen.encuentros.map((e) => [e.lugar, e]))
+    const nombre = (e) => e.nickname || e.pokemon
+    const equipo = (partida.datos?.__team || []).map((l) => porLugar[l]).filter((e) => e && VIVOS.includes(+e.status))
+    const solos = equipo.filter((e) => !parejaDe(parejas, e.lugar))
+    if (solos.length)
+      avisos.push({
+        nivel: 'info',
+        texto: es()
+          ? `Wedlocke: ${solos.map(nombre).join(', ')} ${solos.length > 1 ? 'no tienen' : 'no tiene'} pareja (se elige en la Caja, en el detalle de cada Pokémon).`
+          : `Wedlocke: ${solos.map(nombre).join(', ')} ${solos.length > 1 ? 'have' : 'has'} no partner (set it in the Box, in each Pokémon's details).`
+      })
+    for (const [a, b] of parejas) {
+      const ea = porLugar[a], eb = porLugar[b]
+      if (!ea || !eb) continue
+      const [vivo, caido] = +ea.status === 5 && VIVOS.includes(+eb.status) ? [eb, ea] : +eb.status === 5 && VIVOS.includes(+ea.status) ? [ea, eb] : []
+      if (vivo)
+        avisos.push({
+          nivel: 'info',
+          texto: es()
+            ? `Wedlocke: ${nombre(vivo)} se ha quedado sin pareja (${nombre(caido)} cayó). Puede emparejarse de nuevo en la Caja.`
+            : `Wedlocke: ${nombre(vivo)} lost their partner (${nombre(caido)} fainted). They can pair up again in the Box.`
+        })
+    }
   }
 
   // Cláusula de regalos: recordar que el regalo no gasta el encuentro de la zona

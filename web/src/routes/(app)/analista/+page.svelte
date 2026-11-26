@@ -24,6 +24,7 @@
   let jefeValor = ''
   let equipo = Array.from({ length: 6 }, () => A.miembroVacio())
   let delta = 0
+  let rapido = 0 // hueco elegido en el «¿Y si…?» rápido del resultado
   let comparar = ''
 
   let busquedaJuego = ''
@@ -328,6 +329,21 @@
     return mejor
   }
   const golpes = (n) => (n >= 99 ? '∞' : n)
+
+  // Comparar dos equipos cara a cara: para cada Pokémon del jefe, la mejor respuesta de cada equipo
+  const puntosCelda = (f) => (f ? (f.ganas ? 100 : 0) + f.margen * 3 + Math.min(f.hace, 1) : -999)
+  $: caraACara =
+    riesgo?.matriz?.length && riesgoComparado?.matriz?.length
+      ? riesgo.matriz.map((fila, i) => {
+          const otra = riesgoComparado.matriz[i]
+          const a = fila.filas[mejorDeFila(fila)]
+          const b = otra ? otra.filas[mejorDeFila(otra)] : null
+          const pa = puntosCelda(a)
+          const pb = puntosCelda(b)
+          return { jefe: fila.jefe, a, b, gana: pa > pb + 0.5 ? 'a' : pb > pa + 0.5 ? 'b' : '' }
+        })
+      : []
+  $: marcador = caraACara.reduce((m, x) => ({ a: m.a + (x.gana === 'a'), b: m.b + (x.gana === 'b') }), { a: 0, b: 0 })
 </script>
 
 <svelte:head>
@@ -565,6 +581,29 @@
         </label>
       </div>
 
+      <!-- ¿Y si…? rápido: naturaleza y movimientos de un Pokémon sin subir a su hueco; se recalcula al momento -->
+      {#if equipo.some((m) => m.especie)}
+        {@const m = equipo[rapido]?.especie ? equipo[rapido] : equipo.find((x) => x.especie)}
+        {@const i = equipo.indexOf(m)}
+        <div class="lx-a-rapido">
+          <span class="lx-a-et">{t('¿Y SI…?', 'WHAT IF…?')}</span>
+          <select bind:value={rapido} title={t('Pokémon que cambias', 'Pokémon to change')}>
+            {#each equipo as x, k}{#if x.especie}<option value={k}>{x.mote || traducirNombre(x.especie)}</option>{/if}{/each}
+          </select>
+          <select bind:value={equipo[i].naturaleza} title={t('Naturaleza', 'Nature')}>
+            {#each nats as n}<option value={n.id}>{n.nombre}</option>{/each}
+          </select>
+          {#each [0, 1, 2, 3] as j}
+            <input
+              list="lx-movs-{i}"
+              bind:value={equipo[i].movimientos[j]}
+              placeholder={t(`Movimiento ${j + 1}`, `Move ${j + 1}`)}
+              style="--c:{equipo[i].movimientos[j] ? colorMov(equipo[i].movimientos[j]) : 'transparent'}"
+            />
+          {/each}
+        </div>
+      {/if}
+
       {#if !riesgo}
         <p class="lx-a-nota">{t('Añade al menos un Pokémon a tu equipo para ver el análisis.', 'Add at least one Pokémon to see the analysis.')}</p>
       {:else}
@@ -587,6 +626,43 @@
             </p>
           {/if}
         </div>
+
+        {#if caraACara.length}
+          <!-- Cara a cara con el equipo guardado: la mejor respuesta de cada uno a cada Pokémon del jefe -->
+          <div class="lx-a-tabla-envoltorio">
+            <table class="lx-a-tabla lx-a-cara">
+              <thead>
+                <tr>
+                  <th>{t('Su Pokémon', 'Their Pokémon')}</th>
+                  <th><span>{t('Este equipo', 'This team')}</span><b class="lx-a-marcador">{marcador.a}</b></th>
+                  <th><span>{guardados.find((g) => g.id === comparar)?.nombre}</span><b class="lx-a-marcador">{marcador.b}</b></th>
+                </tr>
+              </thead>
+              <tbody>
+                {#each caraACara as x}
+                  <tr>
+                    <th>
+                      <img src={sprite(x.jefe.name)} alt="" width="96" height="96" use:recorte />
+                      <span>{x.jefe.name.replace(/-/g, ' ')}<small>{t('Nv.', 'Lv.')} {x.jefe.level}</small></span>
+                    </th>
+                    {#each [['a', x.a], ['b', x.b]] as [lado, f]}
+                      <td class={f ? claseCelda(f) : 'lx-c-flojo'} class:lx-a-mejor={x.gana === lado}>
+                        {#if x.gana === lado}<b class="lx-a-sello">{t('GANA', 'WINS')}</b>{/if}
+                        {#if f}
+                          <span class="lx-a-cara-quien"><img src={sprite(f.y.especie)} alt="" width="96" height="96" use:recorte />{f.y.nombre}</span>
+                          <small>{f.mejor ? movEs(f.mejor) : t('sin ataques', 'no attacks')} · ▲ {pct(f.hace)}–{pct(f.haceMax)}%</small>
+                          <em class="lx-a-duelo">{t(`KO en ${golpes(f.tu)} · aguantas ${golpes(f.el)}`, `KO in ${golpes(f.tu)} · survive ${golpes(f.el)}`)}</em>
+                        {:else}
+                          <small>—</small>
+                        {/if}
+                      </td>
+                    {/each}
+                  </tr>
+                {/each}
+              </tbody>
+            </table>
+          </div>
+        {/if}
 
         <ul class="lx-a-consejos lx-a-dialogo">
           {#each riesgo.todosLosConsejos || riesgo.consejos as c}
@@ -629,7 +705,7 @@
             </table>
           </div>
           <p class="lx-a-nota">
-            {t('▲ daño que haces (mín–máx, con tu mejor ataque) · ▼ daño que recibes (con su ataque más peligroso) · ⚡ eres más rápido · «KO en / aguantas» cuenta golpes en un 1 contra 1 · verde: lo ganas con margen · amarillo: lo ganas justo · rojo: te debilita de un golpe · el recuadro naranja marca la mejor respuesta. Los jefes usan sus IVs reales cuando se conocen (3.ª generación y Platino; si no, 31, el peor caso), su naturaleza real en la 3.ª generación y 0 EVs, como en los juegos.', '▲ damage you deal (min–max, best move) · ▼ damage you take (their most dangerous move) · ⚡ you outspeed · “KO in / survive” counts hits in a 1v1 · green: comfortable win · yellow: narrow win · red: you get OHKOd · the orange frame marks the best answer. Bosses use their real IVs when known (Gen 3 and Platinum; otherwise 31, worst case), their real nature in Gen 3 and 0 EVs, like in the games.')}
+            {t('▲ daño que haces (mín–máx, con tu mejor ataque) · ▼ daño que recibes (con su ataque más peligroso) · ⚡ eres más rápido · «KO en / aguantas» cuenta golpes en un 1 contra 1 · verde: lo ganas con margen · amarillo: lo ganas justo · rojo: te debilita de un golpe · el recuadro naranja marca la mejor respuesta. Los jefes usan sus IVs reales cuando se conocen (3.ª generación y Platino; si no, 31, el peor caso), su naturaleza real en la 3.ª generación y en Platino, y 0 EVs, como en los juegos.', '▲ damage you deal (min–max, best move) · ▼ damage you take (their most dangerous move) · ⚡ you outspeed · “KO in / survive” counts hits in a 1v1 · green: comfortable win · yellow: narrow win · red: you get OHKOd · the orange frame marks the best answer. Bosses use their real IVs when known (Gen 3 and Platinum; otherwise 31, worst case), their real nature in Gen 3 and Platinum, and 0 EVs, like in the games.')}
           </p>
         {:else}
           <p class="lx-a-nota">{t('Rellena el nivel y los movimientos de todo tu equipo para ver la tabla de daño exacta (ahora es una estimación por tipos).', 'Fill in level and moves for your whole team to see the exact damage table (currently a type-based estimate).')}</p>
@@ -1599,5 +1675,66 @@
   }
   .lx-a-recibe {
     color: #c02828;
+  }
+  /* Cara a cara de dos equipos */
+  .lx-a-cara th:not(:first-child) {
+    text-align: left;
+  }
+  .lx-a-cara thead th span {
+    font-family: 'LX Pixel', 'VT323', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+  .lx-a-marcador {
+    margin-left: 8px;
+    padding: 0 6px;
+    font-family: 'LX Pixel', 'VT323', monospace;
+    font-size: 24px;
+    line-height: 24px;
+    font-weight: normal;
+    color: #f8f8f8;
+    background: #283850;
+  }
+  .lx-a-cara td {
+    min-width: 220px;
+  }
+  .lx-a-cara-quien {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'LX Pixel', 'VT323', monospace;
+    font-size: 24px !important;
+    line-height: 26px;
+  }
+  .lx-a-cara-quien img {
+    width: 32px;
+    height: 32px;
+    image-rendering: pixelated;
+  }
+  /* ¿Y si…? rápido */
+  .lx-a-rapido {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin: 4px 0 10px;
+  }
+  .lx-a-rapido select,
+  .lx-a-rapido input {
+    padding: 3px 6px;
+    font-size: 13px;
+    border: 2px solid #506078;
+    border-radius: 0;
+    background: #f8f8f8;
+  }
+  .lx-a-rapido input {
+    width: 130px;
+    border-left: 8px solid var(--c, #c8d0d8);
+  }
+  :global(.dark) .lx-a-rapido select,
+  :global(.dark) .lx-a-rapido input {
+    background: #24213e;
+    border-color: #6a6890;
+    color: #ece6d4;
   }
 </style>

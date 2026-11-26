@@ -1,3 +1,13 @@
+## Novedades de la 1.17.0
+
+- **Wedlocke:** nueva variante en las reglas. Empareja a tus Pokémon en la Caja (detalle del PC) y en cada combate solo puede salir uno de cada pareja. La app avisa de quién no tiene pareja, de quién se ha quedado sin ella, y te recuerda las parejas en el VS, la ventana compacta y el asistente.
+- **Capturas al equipo solas:** al capturar, recibir un regalo, un intercambio o un shiny, si tienes hueco en el equipo entra solo, también desde la ventana compacta.
+- **Analista:** compara dos equipos cara a cara (la mejor respuesta de cada uno a cada Pokémon del jefe, con marcador) y cambia la naturaleza o los movimientos desde la fila «¿Y SI…?» del resultado, que se recalcula al momento.
+- **Tus reglas en el asistente de combate:** quien pasa del nivel máximo o no es de tu monotipo queda fuera del plan, y avisa si el plan usa a los dos de una pareja del Wedlocke.
+- **Riesgo más fino en Platino:** la naturaleza real de los Pokémon de los jefes, calculada como lo hace el juego, y los equipos de Gardenia y Candice corregidos.
+- **Randomlocke con tipos aleatorizados:** ya no salen el análisis de tipos del VS y de la Caja ni los tipos del detalle del PC, que serían los del juego original.
+- **Arreglo:** lo que aparece al pasar el ratón (el detalle del riesgo, los tooltips) va siempre al frente; antes el detalle del riesgo se quedaba tapado en la versión completa.
+
 ## Novedades de la 1.16.0
 
 - **Game over al caer todo el equipo:** con la regla normal, si no te queda nadie en pie en el equipo la app te propone dar la run por perdida, igual que con las vidas. Si no fue así, «Sigo jugando» y no vuelve a preguntar por ese equipo.

@@ -17,6 +17,10 @@ Notas para retomar el trabajo en otra sesión. Lo primero es el mapa del proyect
 
 ---
 
+## 0. Hotfixes
+
+- [x] **1.17.0 — Lo que aparece al pasar el ratón, siempre al frente** (avisado el 26/11): en la versión completa el detalle del riesgo quedaba tapado. Ahora va fuera de la tarjeta, al final del `<body>` y con posición fija (`lib/lockedex/alFrente.js`), y los tooltips de Tippy van al `<body>` con el z-index máximo. Regla para lo que venga: todo lo flotante al pasar el ratón usa `alFrente` o un tooltip.
+
 ## 1. Estética propia (desmarcarse de nuzlocke-redux)
 
 **Ya es Lockedex:** el chasis rojo con la lente y los LEDs, la barra con EXP, el logo de la portada, la tarjeta de información, el medidor de riesgo, el asistente, la importación, el perfil, el modo compacto y el Analista.
@@ -165,8 +169,8 @@ Una pantalla `/analista`, enlazada desde la barra, para preparar cualquier comba
   - [x] Medidor de riesgo grande y consejos.
   - [x] Tabla de enfrentamientos: cada Pokémon tuyo contra cada Pokémon del jefe, con el % de daño que haces y recibes (mín–máx), quién es más rápido y avisos de KO de un golpe.
   - [x] Mejor Pokémon para abrir el combate y "respuesta" recomendada para cada Pokémon del jefe.
-- [ ] (hecho el deslizador de nivel; falta el cambio rápido de movimientos o naturaleza) **Qué pasaría si…:** deslizador de nivel y cambio rápido de movimientos o naturaleza, recalculando al momento.
-- [ ] **Comparar dos equipos** lado a lado contra el mismo jefe.
+- [x] (1.17.0: fila «¿Y SI…?» en el resultado para cambiar naturaleza y movimientos de un Pokémon; el deslizador de nivel ya estaba) **Qué pasaría si…:** deslizador de nivel y cambio rápido de movimientos o naturaleza, recalculando al momento.
+- [x] (1.17.0: tabla cara a cara con la mejor respuesta de cada equipo y marcador) **Comparar dos equipos** lado a lado contra el mismo jefe.
 - [x] (hecho: guardar, exportar e importar) **Equipos guardados** en `localStorage` (`lockedex.analista.equipos`), que el archivo de partidas ya sincroniza. Opción de exportar e importar en formato Showdown (texto), que es el estándar de la comunidad.
 - [ ] (de momento no hace falta: el cálculo va rápido) Si el cálculo de muchos enfrentamientos tarda, llevarlo a un Web Worker.
 
@@ -184,7 +188,7 @@ En un juego pasado por un randomizer, los Pokémon de cada ruta y los equipos de
   - [x] Si los niveles de los jefes se mantienen o están cambiados (por ejemplo, +X %).
 - [x] **En la partida:**
   - [x] El buscador de encuentro ofrece **cualquier Pokémon** (`getAllPkmn`), no los de la tabla de la ruta. Esto equivale a forzar el ajuste "Encounter suggestions" desactivado.
-  - [ ] (en parte: con «tipos aleatorizados» no hay riesgo ni asistente; faltan las sugerencias de tipos y las estadísticas) Sin estadísticas, tipos sugeridos ni análisis basados en datos del juego cuando no aplican.
+  - [x] (1.17.0: con «tipos aleatorizados» no hay riesgo, asistente, análisis de tipos del VS ni de la Caja, ni tipos en el detalle del PC; las estadísticas base se quedan) Sin estadísticas, tipos sugeridos ni análisis basados en datos del juego cuando no aplican.
   - [x] Jefes: solo nombre, lugar y **nivel máximo**. Si los entrenadores están aleatorizados, ocultar el equipo, el riesgo y el asistente; se puede reutilizar la lógica del modo sin spoilers (`gym-card.svelte`, ajuste `spoilers`).
   - [x] Opción de apuntar a mano el equipo real del jefe cuando lo veas en el juego, para que el riesgo y el asistente funcionen con esos datos.
 - [x] 1.10.0: compacto en Randomlocke con riesgo solo si se apuntó el equipo real; barra de EXP con «MÁX n» y el próximo jefe en el título.
@@ -207,14 +211,14 @@ Hecho: reglas por run en `lockedex.reglas.<id>` (`web/src/lib/lockedex/reglas.js
 - [x] 1.16.0: «Objetos en combate» con límite (prohibidos o 1–3 por combate; `limiteObjetos`), contador en el compacto y recordatorios en el VS. **Modo Set** (sin cambio gratis tras debilitar) y **objetos en combate**: prohibidos, o limitados a X por combate.
 - [x] 1.16.0: plantilla Hardcore con objetos prohibidos, Set, nivel máximo y sin regalos ni estáticos; aviso de nivel máximo en el VS (`ReglasCombate.svelte`) y en el compacto. **Hardcore:** nivel máximo obligatorio (aviso si tu equipo lo supera antes del combate), sin objetos en combate y modo Set.
 - [x] **Game over** (1.12.0: derrotas, «He perdido», pantalla de FIN DE LA PARTIDA, nuevo intento con historial y modo con vidas; probado por el usuario). 1.16.0: la app lo propone sola al caer todo el equipo con la regla normal (`recordarEquipo`/`equipoCaido` en `derrotas.js`, panel «¡TU EQUIPO HA CAÍDO!»). Antes: Falta: proponerlo solo al caer todo el equipo con la regla normal.
-- [ ] Variantes populares activables:
-  - [ ] Wedlocke: parejas, y solo combate un miembro de la pareja.
+- [x] Variantes populares activables:
+  - [x] (1.17.0: regla «Wedlocke», parejas en el detalle del PC con `parejas.js`, avisos y recordatorios en VS, compacto y asistente) Wedlocke: parejas, y solo combate un miembro de la pareja.
   - [x] Monotipo (regla con aviso).
   - [x] Sin legendarios (regla con aviso).
   - [ ] (ver «Duallocke / Soul Link» más abajo) Soul Link a dos jugadores, emparejando encuentros por zona.
   - [ ] Wonderlocke (ver «Otras variantes» más abajo).
 - [x] (hecho: las plantillas salen en Nueva partida) **Plantillas de reglas:** "Nuzlocke clásico", "Hardcore", "Randomlocke", "A mi manera", y elegir la plantilla al crear la partida.
-- [x] 1.16.0: segundo encuentro en una zona sin su cláusula, filas marcadas con «!» (`avisosFila`) y luz roja (graves) o ámbar (avisos) en la barra. Falta integrarlo con el asistente. **Reglas inteligentes:** avisos cuando registras algo que rompe una regla. Por ejemplo:
+- [x] 1.16.0: segundo encuentro en una zona sin su cláusula, filas marcadas con «!» (`avisosFila`) y luz roja (graves) o ámbar (avisos) en la barra. 1.17.0: integrado en el asistente (bloque «Tus reglas»: fuera del plan quien pasa del nivel máximo o no es del monotipo, aviso si usa a los dos de una pareja). **Reglas inteligentes:** avisos cuando registras algo que rompe una regla. Por ejemplo:
   - segundo encuentro en una zona sin regalo ni shiny;
   - un Pokémon por encima del nivel máximo antes del jefe;
   - un repetido según la cláusula de especie.
@@ -240,7 +244,16 @@ Ampliar los modos además de Nuzlocke clásico, Hardcore y Randomlocke. Cada mod
 - [ ] **Duallocke / Soul Link:** dos jugadores con runs enlazadas (los encuentros de cada zona van en pareja; si cae uno, cae su pareja). **Con un sistema de amigos sería la repanocha:** enlazar dos runs entre dos Lockedex (cuenta o código de amigo, sincronización por la nube o por archivo/QR), ver la run del otro y que las muertes se propaguen.
 - [ ] Otras variantes populares a valorar: **Wonderlocke** (intercambio prodigioso), **Monotype** (solo un tipo), **Genlocke** (varias generaciones seguidas con el equipo del anterior), **Wedlocke** (parejas), **Sacrificio**, **Nuzlocke por niveles (level cap estricto)**…
 
+## 5c. Ideas nuevas (26/11, le gustaron al usuario)
+
+- [ ] **Salón de la Fama:** la pareja del game over. Al vencer al Campeón, una pantalla con tu equipo, las medallas, los caídos y el tiempo, con estética de consola (como la del Salón de la Fama de los juegos), que queda guardada en el perfil.
+- [ ] **Diario de la run:** línea de tiempo estilo GBA con todo lo que pasa («Capturaste a Pidgey en la Ruta 1», «Saur cayó contra Brock», «Medalla Roca»). Sale de lo que ya se apunta (encuentros, `__teams`, derrotas); haría falta guardar la fecha de cada cambio.
+- [ ] **Zona actual desde el .sav:** el guardado de la 3.ª gen dice en qué mapa estás (grupo y número de mapa); la ventana compacta tendría ya elegida esa zona al apuntar un encuentro. Hace falta una tabla mapa → zona por juego.
+- [ ] **Ficha de entrenador para compartir:** una imagen como la Ficha de Entrenador de los juegos, con equipo, medallas, caídos y reglas, para pasarla por Discord (generada en un canvas y guardada como PNG).
+
 ## 6. Otras mejoras y limitaciones conocidas
+
+- [x] **1.17.0 — Capturas al equipo solas** (pedido el 26/11): al pasar una fila a capturado, regalo, intercambio o shiny, si hay hueco en el equipo entra sola (`pokemon-selector.svelte` y `acciones.js` para el compacto).
 
 - [x] **Consejos del riesgo cortados en el modo compacto** (avisado el 25/11): la ventana flotante de 320 px se salía de la ventana. Desde la 1.6.0, en el compacto los consejos salen en un desplegable a todo el ancho, debajo del medidor (`Riesgo.svelte` tiene `sinPopover`).
 - [ ] **Modo batalla en el compacto** (pedido el 25/11): durante un combate contra un jefe, ver su Pokémon actual y el tuyo, con la **calculadora de daño** (`@smogon/calc`, ya en la app): daño de cada ataque en %, si hace KO y en cuántos golpes, quién es más rápido y el siguiente Pokémon del rival. Ideas: elegir tu Pokémon y el suyo con un toque, cambiar de nivel o estado (quemado, paralizado), clima y potenciadores (+1/+2), y apuntar al terminar si se ganó o quién cayó.
@@ -258,7 +271,7 @@ Ampliar los modos además de Nuzlocke clásico, Hardcore y Randomlocke. Cada mod
 - [ ] **Lector de .sav:** (1.12.1) **probado con una partida real de RojoFuego del usuario** (49 h, equipo de 6 y 17 en cajas: juego, entrenador, motes, niveles y naturalezas bien) y **arreglados los IVs y la habilidad**, que se leían de las cintas (bytes 8–11 de la subestructura M) en vez de los bytes 4–7: salían siempre 0. La partida está en `/home/claude/pruebas/sav-real/` (no subirla al repo: datos personales); probar con `node /home/claude/pruebas/sav/leer_real.mjs <archivo>`. Falta probar Rubí, Zafiro, Esmeralda, VerdeHoja y hacks CFRU. Antes: probado solo con partidas sintéticas. Hay que probarlo con partidas reales de Rubí, Zafiro, Esmeralda, RojoFuego y VerdeHoja (y con hacks CFRU como Radical Red y Unbound, que amplían especies y pueden no ser compatibles).
 - [ ] Añadir .sav de otras generaciones (1–2 en GB/GBC y 4–5 en NDS, siguiendo los formatos de PKHeX).
 - [x] **Modo compacto con acciones rápidas** (1.5.0): apuntar el encuentro de la siguiente zona (capturado o fallido) y marcar como caído a un miembro del equipo. Se envían por IPC a la ventana principal (`lib/lockedex/acciones.js`), que es la que guarda.
-- [x] 1.15.0: **naturalezas reales de los jefes de la 3.ª gen** (calculadas como `CreateNPCTrainerParty`: hash del nombre del entrenador y de la especie, `herramientas/naturalezas_jefes.py` → campo «nat»), **IVs de Platino** (`iv_scale` de pret/pokeplatinum) y EVs 0 explícitos. Falta: naturalezas de la 4.ª gen en adelante (PID con el RNG sembrado con índice y clase del entrenador), IVs de DP, HGSS y la 5.ª gen, y corregir los equipos de Gardenia (Cherrim, no Cherubi) y Candice (niveles) en Platino, que por eso se quedan sin IVs. Antes, 1.10.0 (en parte): **IVs reales de los jefes de RojoFuego, VerdeHoja, Esmeralda y (1.10.1) Rubí/Zafiro** (525 Pokémon, de pret: `herramientas/ivs_jefes.py` → campo «iv» en `datos/jefes`); clima de Sequía/Llovizna/Chorro Arena/Nevada; movimientos con prioridad que rematan. Falta: IVs de otros juegos (4.ª+ gen), naturalezas de los entrenadores y EVs. Antes: **Afinar el riesgo:** IVs y EVs reales de los jefes por juego, cambios de forma o tipo, objetos, clima y prioridad.
+- [x] 1.15.0: **naturalezas reales de los jefes de la 3.ª gen** (calculadas como `CreateNPCTrainerParty`: hash del nombre del entrenador y de la especie, `herramientas/naturalezas_jefes.py` → campo «nat»), **IVs de Platino** (`iv_scale` de pret/pokeplatinum) y EVs 0 explícitos. 1.17.0: naturalezas de Platino (TrainerData_BuildParty: semilla = iv_scale + nivel + especie + índice del entrenador, LCRNG avanzado tantas veces como la clase) y Gardenia (Cherrim) y Candice (Piloswine Nv. 40, orden del juego) corregidas. Falta: IVs y naturalezas de DP, HGSS y la 5.ª gen. Antes, 1.10.0 (en parte): **IVs reales de los jefes de RojoFuego, VerdeHoja, Esmeralda y (1.10.1) Rubí/Zafiro** (525 Pokémon, de pret: `herramientas/ivs_jefes.py` → campo «iv» en `datos/jefes`); clima de Sequía/Llovizna/Chorro Arena/Nevada; movimientos con prioridad que rematan. Falta: IVs de otros juegos (4.ª+ gen), naturalezas de los entrenadores y EVs. Antes: **Afinar el riesgo:** IVs y EVs reales de los jefes por juego, cambios de forma o tipo, objetos, clima y prioridad.
 - [x] 1.15.0 (`lib/lockedex/sincronizar.js`): al guardar en el emulador se aplican solas las evoluciones (emparejando por línea evolutiva) y se pregunta por los del equipo con 0 PS; en Importar salen también como «caído». Arreglada de paso una carrera en `pokemon-selector.svelte` que volvía a guardar la especie vieja. Antes: Sincronizar la partida del emulador con la run de forma más fina (evoluciones, muertes cuando el Pokémon sale debilitado en el .sav).
 - [x] 1.10.1: 15 logros (antes 8) con sprites de objetos de los juegos en vez de símbolos, en gris hasta conseguirlos, y sección «Por juego» en el perfil.
 - [x] Privacidad y créditos reescritos en español (1.5.0), con lo que de verdad hace la versión de escritorio y los proyectos en los que se apoya.

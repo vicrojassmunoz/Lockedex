@@ -11,8 +11,22 @@
   // Sin ventana flotante al pasar el ratón (el modo compacto enseña los consejos debajo)
   export let sinPopover = false
 
+  import { alFrente } from './alFrente.js'
+
   const es = idioma() === 'es'
   let abierto = false
+  let medidor
+  // El detalle va al frente de todo (fuera de la tarjeta); se cierra un poco después de salir, para poder
+  // pasar el ratón del medidor al detalle sin que se cierre
+  let cierre
+  const abrir = () => {
+    clearTimeout(cierre)
+    abierto = !grande && !sinPopover
+  }
+  const cerrar = () => {
+    clearTimeout(cierre)
+    cierre = setTimeout(() => (abierto = false), 150)
+  }
 
   $: r = nivel === null ? null : RIESGO[nivel]
 </script>
@@ -23,8 +37,9 @@
     class:lx-grande={grande}
     class:lx-mortal={nivel === 4}
     style="--c:{r.color}"
-    on:mouseenter={() => (abierto = !grande && !sinPopover)}
-    on:mouseleave={() => (abierto = false)}
+    bind:this={medidor}
+    on:mouseenter={abrir}
+    on:mouseleave={cerrar}
     data-lx-original
   >
     <span class="lx-riesgo-etq">{es ? 'RIESGO' : 'RISK'}</span>
@@ -38,7 +53,7 @@
     </span>
 
     {#if abierto && consejos.length}
-      <span class="lx-riesgo-pop">
+      <span class="lx-riesgo-pop" use:alFrente={{ ancla: medidor, lado: 'derecha' }} on:mouseenter={abrir} on:mouseleave={cerrar}>
         {#if ocultarConsejos}
           <em>{es ? 'Revela el equipo para ver los consejos.' : 'Reveal the team to see tips.'}</em>
         {:else}
@@ -140,10 +155,7 @@
     }
   }
   .lx-riesgo-pop {
-    position: absolute;
-    z-index: 60;
-    right: 0;
-    top: calc(100% + 8px);
+    position: fixed;
     width: 320px;
     display: flex;
     flex-direction: column;

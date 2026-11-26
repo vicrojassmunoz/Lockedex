@@ -13,6 +13,9 @@
   import { toDb } from '$utils/link'
   import { summarise } from '$utils/badges'
   import { t, traducirNombre } from './idioma'
+  import { activeGame } from '$lib/store'
+  import { leerReglas, sinCalculos } from './reglas.js'
+  import { tiendaParejas, parejaDe, emparejar } from './parejas.js'
 
   export let lista = []
   export let Pokemon = {}
@@ -40,6 +43,17 @@
   $: enEquipo = elegido && (equipo || []).includes(locid(elegido))
   $: puedeEquipo = elegido && (enEquipo || !equipo || equipo.length < 6)
   $: medallas = elegido ? summarise(elegido, victorias) : null
+
+  // Wedlocke: pareja del elegido (se elige en el detalle) y ♥ en los huecos emparejados
+  $: wedlocke = !!leerReglas($activeGame).wedlocke
+  $: tParejas = tiendaParejas($activeGame)
+  $: parejas = $tParejas || []
+  $: pareja = elegido ? parejaDe(parejas, elegido.location) : null
+  $: candidatos = elegido ? lista.filter((p) => p.location !== elegido.location && [1, 2, 3, 6].includes(+p.status)) : []
+  const nombreDe = (lugarP) => {
+    const p = lista.find((x) => x.location === lugarP)
+    return p ? p.nickname || traducirNombre(Pokemon[p.pokemon]?.name || p.pokemon) : traducirNombre(lugarP)
+  }
 
   const ETIQUETAS = [
     ['hp', 'PS', 'HP'],
@@ -115,6 +129,9 @@
             <PIcon class="data-drag-img invisible absolute -left-20 -top-20 -z-20" name={p.pokemon} />
             {#if sel}<span class="lx-mano" aria-hidden="true">▼</span>{/if}
             <span class="lx-hueco-encaje" use:encajarIcono={{ nombre: p.pokemon, max: 64, escala: 2 }}><PIcon class="lx-hueco-icono lx-encajar" name={p.pokemon} /></span>
+            {#if wedlocke && parejaDe(parejas, p.location)}
+              <span class="lx-hueco-pareja" title={t('Pareja de ', 'Partner of ') + nombreDe(parejaDe(parejas, p.location))}>♥</span>
+            {/if}
             {#if (equipo || []).includes(locid(p))}
               <span class="lx-hueco-equipo-marca" title={t('En el equipo', 'In your team')}><Icon inline icon={Ball} /></span>
             {/if}
@@ -161,11 +178,14 @@
           {:else}
             <h3>{traducirNombre(datos.name)}</h3>
           {/if}
-          <div class="lx-det-tipos">
-            {#each datos.types || [] as tipo}
-              <TypeLogo type={tipo.toLowerCase()} />
-            {/each}
-          </div>
+          <!-- con tipos aleatorizados, los del juego original no valen -->
+          {#if !sinCalculos(leerReglas($activeGame))}
+            <div class="lx-det-tipos">
+              {#each datos.types || [] as tipo}
+                <TypeLogo type={tipo.toLowerCase()} />
+              {/each}
+            </div>
+          {/if}
         </div>
       </div>
 
@@ -174,6 +194,21 @@
           <div><dt>{t('Naturaleza', 'Nature')}</dt><dd>{traducirNombre(elegido.nature)}</dd></div>
         {/if}
         <div><dt>{t('Origen', 'Origin')}</dt><dd>{lugar(elegido)}</dd></div>
+        {#if wedlocke}
+          <div>
+            <dt>{t('Pareja', 'Partner')}</dt>
+            <dd class="lx-det-pareja">
+              <span class="lx-det-corazon" class:lx-sin-pareja={!pareja}>♥</span>
+              <select value={pareja || ''} on:change={(e) => emparejar($activeGame, elegido.location, e.currentTarget.value || null)}>
+                <option value="">{t('Sin pareja', 'No partner')}</option>
+                {#each candidatos as c}
+                  {@const suya = parejaDe(parejas, c.location)}
+                  <option value={c.location}>{c.nickname || traducirNombre(Pokemon[c.pokemon]?.name || c.pokemon)}{suya && suya !== elegido.location ? t(` (con ${nombreDe(suya)})`, ` (with ${nombreDe(suya)})`) : ''}</option>
+                {/each}
+              </select>
+            </dd>
+          </div>
+        {/if}
         {#if medallas}
           <div>
             <dt>{t('Combates', 'Battles')}</dt>
@@ -385,6 +420,37 @@
     50% {
       transform: translate(-50%, -3px);
     }
+  }
+  .lx-hueco-pareja {
+    position: absolute;
+    left: 3px;
+    bottom: 0;
+    font-size: 13px;
+    line-height: 14px;
+    color: #f05080;
+    text-shadow: 0 1px 0 #fff;
+  }
+  .lx-det-pareja {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .lx-det-pareja select {
+    flex: 1;
+    min-width: 0;
+    padding: 2px 6px;
+    font-size: 13px;
+    border: 2px solid var(--lx-bisel);
+    border-radius: var(--lx-radio-sm);
+    background: var(--lx-fondo-tarjeta, #fff);
+    color: inherit;
+  }
+  .lx-det-corazon {
+    color: #f05080;
+  }
+  .lx-sin-pareja {
+    color: var(--lx-texto-suave);
+    opacity: 0.5;
   }
   .lx-hueco-equipo-marca {
     position: absolute;

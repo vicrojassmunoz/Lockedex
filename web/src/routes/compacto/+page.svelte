@@ -6,6 +6,7 @@
   import { calcularRiesgo } from '$lib/lockedex/riesgo.js'
   import Riesgo from '$lib/lockedex/Riesgo.svelte'
   import { leerReglas, ajustarNivel, ajustarEquipoJefe, sinCalculos, limiteObjetos } from '$lib/lockedex/reglas.js'
+  import { leerParejas, parejaDe } from '$lib/lockedex/parejas.js'
   import { estadoRun, registrarDerrota, vidasRestantes, contarCaidos } from '$lib/lockedex/derrotas.js'
   import { leerEquiposJefes, comoJefe } from '$lib/lockedex/jefes.js'
   import { cargarCalc } from '$lib/lockedex/analista.js'
@@ -168,6 +169,23 @@
   // Reglas de combate a la vista: nivel máximo obligatorio (quién se pasa), modo Set y objetos en combate.
   // Con límite de objetos se lleva la cuenta de los gastados contra el jefe que se está viendo.
   $: limite = limiteObjetos(reglasRun)
+  // Wedlocke: parejas que van juntas en el equipo (de cada una solo combate uno)
+  $: parejasJuntas = reglasRun.wedlocke
+    ? (() => {
+        const ps = leerParejas(partida?.id)
+        const out = []
+        const vistas = new Set()
+        for (const m of miembros) {
+          const otra = parejaDe(ps, m.lugar)
+          const pm = otra && miembros.find((x) => x.lugar === otra)
+          if (pm && !vistas.has(otra)) {
+            vistas.add(m.lugar)
+            out.push([m.nombre, pm.nombre])
+          }
+        }
+        return out
+      })()
+    : []
   $: pasados = reglasRun.nivelMax && cap ? miembros.filter((m) => +m.nivel > +cap) : []
   const claveObjetos = () => `lockedex.objetosCombate.${partida?.id}`
   const leerUsados = (v) => {
@@ -308,7 +326,7 @@
             ><small>{es ? 'NV. MÁX' : 'LV. CAP'}</small>{cap}</span>
           {/if}
         </div>
-        {#if pasados.length || reglasRun.set || limite !== null}
+        {#if pasados.length || reglasRun.set || reglasRun.wedlocke || limite !== null}
           <div class="lx-mini-reglas">
             {#if pasados.length}
               <p class="lx-mini-pasados">
@@ -317,6 +335,10 @@
               </p>
             {/if}
             {#if reglasRun.set}<span class="lx-mini-regla">{es ? 'Modo Set' : 'Set mode'}</span>{/if}
+            {#if reglasRun.wedlocke}
+              <span class="lx-mini-regla">{es ? 'Wedlocke' : 'Wedlocke'}</span>
+              {#each parejasJuntas as [a, b]}<span class="lx-mini-regla lx-mini-pareja" title={es ? 'Solo combate uno de los dos' : 'Only one of them fights'}>{a} ♥ {b}</span>{/each}
+            {/if}
             {#if limite === 0}<span class="lx-mini-regla">{es ? 'Sin objetos' : 'No items'}</span>{/if}
             {#if limite > 0}
               <span class="lx-mini-regla lx-mini-objetos" title={es ? 'Objetos gastados en este combate (pulsa para contar)' : 'Items used in this battle (click to count)'}>
@@ -668,6 +690,10 @@
     background: #2a2a31;
     border: 1px solid #3f3f46;
     border-radius: 4px;
+  }
+  .lx-mini-pareja {
+    color: #ffd0e0;
+    border-color: #a03060;
   }
   .lx-mini-objetos button {
     width: 10px;

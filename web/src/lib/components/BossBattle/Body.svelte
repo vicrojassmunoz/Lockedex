@@ -2,6 +2,7 @@
   import { Recommendation, BoxTeam, Advice } from './'
   import ReglasCombate from '$lib/lockedex/ReglasCombate.svelte'
   import { activeGame } from '$lib/store'
+  import { leerReglas, sinCalculos } from '$lib/lockedex/reglas.js'
 
   import TypeLogo from '$c/type-logo.svelte'
   import { Icon, Tooltip, Accordion } from '$c/core'
@@ -26,10 +27,15 @@
   >
     <slot name="tabs" />
 
-    <ReglasCombate id={$activeGame} {pokemon} />
+    <ReglasCombate id={$activeGame} {pokemon} equipo={team} />
 
     <BoxTeam on:clear on:reset on:select {team} {box} boss={{ name }} />
 
+    <!-- Randomlocke con tipos aleatorizados: el análisis y las recomendaciones salen de los tipos del juego
+         original, así que no se enseñan -->
+    {#if sinCalculos(leerReglas($activeGame))}
+      <p class="lx-sin-tipos">Con tipos aleatorizados no se analizan los tipos de los equipos.</p>
+    {:else}
     <Accordion className="md:-ml-4 -mb-2 py-2">
       <h2 slot="heading">Team analysis</h2>
       <div
@@ -122,6 +128,7 @@
         </div>
       </div>
     </Accordion>
+    {/if}
 
     <slot />
   </div>

@@ -20,6 +20,9 @@
         {
           delay: [delay, 0],
           allowHTML: true,
+          // siempre al frente de todo, fuera de tarjetas y ventanas
+          appendTo: () => document.body,
+          zIndex: 2147483000,
           content: node.innerHTML,
           onCreate() {
             if (

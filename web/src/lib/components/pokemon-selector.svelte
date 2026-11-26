@@ -172,11 +172,19 @@
 
   if (selected && !especiePendiente && !oEqual(topatch, resetd)) {
     console.log('Patching', location);
+    // estado de antes del cambio (al guardar, la suscripción ya pone resetd al nuevo)
+    const estadoAntes = +resetd?.status
     store.update(patch({ [location]: topatch }));
 
     // Remove from team if marked as dead
     if (status?.id === 5 && (team || []).includes(location)) {
       store.update(patch({ __team: team.filter((loc) => loc !== location) }));
+    }
+
+    // Captura nueva (o regalo, intercambio, shiny) con hueco en el equipo: entra sola
+    const OBTENIDO = [1, 2, 3, 6]
+    if (OBTENIDO.includes(status?.id) && !OBTENIDO.includes(estadoAntes) && !(team || []).includes(location) && (team || []).filter(Boolean).length < 6) {
+      store.update(patch({ __team: [...(team || []).filter(Boolean), location] }));
     }
   }
 

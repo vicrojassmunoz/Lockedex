@@ -148,19 +148,50 @@ for juego, (repo, fichero) in JUEGOS.items():
     total += puestos
     print(f'{juego}: naturaleza puesta a {puestos} Pokémon ({len(equipos)} equipos de pret); sin pareja: {len(sin)}')
 
-# Platino: IVs por «iv_scale» de cada Pokémon
-plat = []
-for f in sorted(glob.glob(f'{PRET}/pokeplatinum/res/trainers/data/*.json')):
-    try:
-        d = json.load(open(f))
-    except Exception:
-        continue
-    mons = [(p['species'].replace('SPECIES_', '').lower().replace('_', '-'), int(p.get('level') or 0), int(p.get('iv_scale') or 0))
-            for p in d.get('party', []) if p.get('species')]
-    if mons: plat.append(mons)
-if plat:
-    # el iv_scale va de 0 a 255; el Electivire de Volkner lleva 2500 en el desensamblado: se queda en 31
-    puestos, sin = poner('pt', plat, 'iv', lambda v: min(31, v * 31 // 255))
-    print(f'pt: IVs puestos a {puestos} Pokémon ({len(plat)} equipos de pret); sin pareja: {len(sin)}')
-    total += puestos
+# Platino: IVs por «iv_scale» y naturaleza como TrainerData_BuildParty (src/trainer_data.c de pokeplatinum):
+#   semilla = iv_scale + nivel + nº de especie + índice del entrenador; el LCRNG (×1103515245 + 24691) avanza
+#   tantas veces como el número de la clase del entrenador (rnd = estado >> 16); personalidad =
+#   (rnd << 8) + 120 si la clase es de mujer o 136 si no; naturaleza = personalidad % 25
+PP = f'{PRET}/pokeplatinum'
+def lista_constantes(nombre):
+    return {l.strip(): i for i, l in enumerate(open(f'{PP}/generated/{nombre}.txt')) if l.strip()}
+if os.path.exists(f'{PP}/generated/trainers.txt'):
+    ENTRENADORES = lista_constantes('trainers')
+    CLASES = lista_constantes('trainer_classes')
+    ESPECIES = lista_constantes('species')
+    MUJERES = set(re.findall(r'\[(TRAINER_CLASS_\w+)\]\s*=\s*GENDER_FEMALE', open(f'{PP}/include/data/trainer_class_genders.h').read()))
+    def nat_platino(id_entrenador, clase, mujer, especie, nivel, escala):
+        estado = (escala + nivel + especie + id_entrenador) & 0xFFFFFFFF
+        rnd = estado
+        for _ in range(clase):
+            estado = (estado * 1103515245 + 24691) & 0xFFFFFFFF
+            rnd = estado >> 16
+        pv = ((rnd << 8) + (120 if mujer else 136)) & 0xFFFFFFFF
+        return NATURALEZAS[pv % 25]
+    plat_ivs, plat_nats = [], []
+    for f in sorted(glob.glob(f'{PP}/res/trainers/data/*.json')):
+        try:
+            d = json.load(open(f))
+        except Exception:
+            continue
+        constante = 'TRAINER_' + os.path.basename(f)[:-5].upper()
+        clase = d.get('class', '')
+        if constante not in ENTRENADORES or clase not in CLASES:
+            continue
+        ivs, nats = [], []
+        for p in d.get('party', []):
+            sp = p.get('species')
+            if not sp or sp not in ESPECIES: continue
+            nombre = sp.replace('SPECIES_', '').lower().replace('_', '-')
+            nivel, escala = int(p.get('level') or 0), int(p.get('iv_scale') or 0)
+            ivs.append((nombre, nivel, escala))
+            nats.append((nombre, nivel, nat_platino(ENTRENADORES[constante], CLASES[clase], clase in MUJERES, ESPECIES[sp], nivel, escala)))
+        if ivs:
+            plat_ivs.append(ivs); plat_nats.append(nats)
+    # el iv_scale va de 0 a 255; el Electivire de Volkner lleva 2500 (en el juego eso da IVs al azar): se queda en 31
+    puestos, sin = poner('pt', plat_ivs, 'iv', lambda v: min(31, v * 31 // 255))
+    print(f'pt: IVs puestos a {puestos} Pokémon ({len(plat_ivs)} equipos de pret); sin pareja: {len(sin)} {sin}')
+    puestos2, _ = poner('pt', plat_nats, 'nat', lambda n: n)
+    print(f'pt: naturaleza puesta a {puestos2} Pokémon')
+    total += puestos + puestos2
 print('total', total)

@@ -3,10 +3,33 @@
   // máximo obligatorio» y el .sav importado o vinculado), modo Set y objetos en combate
   import { leerReglas, limiteObjetos, ajustarNivel } from './reglas.js'
   import { claveSav } from './equipo.js'
-  import { t } from './idioma.js'
+  import { t, traducirNombre } from './idioma.js'
+  import { tiendaParejas, parejaDe } from './parejas.js'
 
   export let id = ''
   export let pokemon = [] // equipo del jefe (para su nivel máximo)
+  export let equipo = [] // tu equipo elegido en el VS (objetos con .original = el encuentro de la run)
+
+  // Wedlocke: parejas que tienes juntas en el equipo (de cada una solo combate uno)
+  $: tParejas = tiendaParejas(id)
+  $: parejas = $tParejas || []
+  $: nombre = (o) => o?.nickname || traducirNombre(String(o?.pokemon || '').replace(/^./, (c) => c.toUpperCase()))
+  $: juntas = reglas.wedlocke
+    ? (() => {
+        const lugares = (equipo || []).map((p) => p?.original?.location).filter(Boolean)
+        const vistas = new Set()
+        const out = []
+        for (const p of equipo || []) {
+          const l = p?.original?.location
+          const otra = parejaDe(parejas, l)
+          if (l && otra && lugares.includes(otra) && !vistas.has(otra)) {
+            vistas.add(l)
+            out.push([p.original, (equipo.find((q) => q?.original?.location === otra) || {}).original])
+          }
+        }
+        return out
+      })()
+    : []
 
   $: reglas = leerReglas(id)
   $: limite = limiteObjetos(reglas)
@@ -22,7 +45,7 @@
   })()
 </script>
 
-{#if pasados.length || reglas.set || limite !== null}
+{#if pasados.length || reglas.set || reglas.wedlocke || limite !== null}
   <div class="lx-rc">
     {#if pasados.length}
       <p class="lx-rc-pasados">
@@ -32,6 +55,12 @@
       </p>
     {/if}
     {#if reglas.set}<span class="lx-rc-chip">{t('Modo Set', 'Set mode')}</span>{/if}
+    {#if reglas.wedlocke}
+      <span class="lx-rc-chip">{t('Wedlocke: de cada pareja solo combate uno', 'Wedlocke: one of each pair fights')}</span>
+      {#each juntas as [a, b]}
+        <span class="lx-rc-chip lx-rc-pareja">{nombre(a)} ♥ {nombre(b)}</span>
+      {/each}
+    {/if}
     {#if limite === 0}<span class="lx-rc-chip">{t('Sin objetos en combate', 'No items in battle')}</span>{/if}
     {#if limite > 0}<span class="lx-rc-chip">{t(`Máx. ${limite} objeto${limite > 1 ? 's' : ''} por combate`, `Max ${limite} item${limite > 1 ? 's' : ''} per battle`)}</span>{/if}
   </div>
@@ -53,6 +82,9 @@
     color: #fff;
     background: #c02838;
     box-shadow: inset 0 -2px 0 #801020;
+  }
+  .lx-rc-pareja {
+    background: #c03868 !important;
   }
   .lx-rc-chip {
     padding: 0 6px;
