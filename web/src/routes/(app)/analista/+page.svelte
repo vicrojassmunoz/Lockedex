@@ -1575,14 +1575,16 @@
   .lx-a-equipo select {
     padding-right: 2px;
   }
-  .lx-a-mejor {
+  /* sin el recorte de esquinas, que si no se comía medio sello «MEJOR» (la regla de td pesaba más) */
+  .lx-a-tabla td.lx-a-mejor {
     border-color: #f8a848 !important;
     box-shadow: inset 0 0 0 2px #f8a848, inset 0 -5px 0 rgba(0, 0, 0, 0.08) !important;
     clip-path: none;
   }
   .lx-a-sello {
     position: absolute;
-    top: -9px;
+    z-index: 1;
+    top: -7px;
     right: 6px;
     padding: 0 4px;
     font-family: 'LX Pixel', 'VT323', monospace;

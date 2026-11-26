@@ -1,3 +1,7 @@
+## Novedades de la 1.15.1
+
+- **Analista:** el sello «MEJOR» de la tabla de daño ya se ve entero (se cortaba por la mitad).
+
 ## Novedades de la 1.15.0
 
 - **Sincronización con el emulador más fina:** al guardar en el emulador, la run se pone al día sola con las evoluciones (y el mote o la naturaleza si estaban vacíos). Si un Pokémon de tu equipo está debilitado (0 PS) en la partida, te pregunta si ha caído. En Importar también salen las evoluciones aunque el Pokémon no tenga mote.
