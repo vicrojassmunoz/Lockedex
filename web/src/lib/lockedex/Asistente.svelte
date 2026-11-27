@@ -10,7 +10,8 @@
   import { COLOR_TIPO } from './colores.js'
   import { leerReglas, recordatorios, capDelCombate } from './reglas.js'
   import { leerParejas, parejaDe } from './parejas.js'
-  let reglasActivas = []
+  // Se exportan para que la pantalla de combate los enseñe en su propia barra (con el asistente incrustado)
+  export let reglasActivas = []
   // Lo que el plan haría y tus reglas no dejan: quién queda fuera del cálculo y por qué
   let avisosRegla = []
   // Nivel máximo del Nuzlocke: el del próximo líder de gimnasio (o del Alto Mando al final), como en la
@@ -23,7 +24,8 @@
   export let valor = ''
   export let juego = ''
   export let inicial = 'fire'
-  // Dentro de la pantalla de combate: sin título ni botón de cerrar (ya los pone la escena)
+  // Dentro de la pantalla de combate: sin cabecera (el nivel máximo, el riesgo, las reglas y el Analista ya
+  // están en la escena y en la barra de pestañas)
   export let incrustado = false
   import { goto } from '$app/navigation'
   const abrirAnalista = () => {
@@ -35,7 +37,7 @@
   const es = idioma() === 'es'
 
   let cargando = true
-  let riesgo = null
+  export let riesgo = null
   let miembros = []
   let info = null
   let movs = {}
@@ -134,12 +136,11 @@
 </script>
 
 <section class="lx-asistente" class:lx-incrustado={incrustado} data-lx-original>
+  {#if !incrustado}
   <header>
     <div>
-      {#if !incrustado}
-        <small>{es ? 'ASISTENTE DE COMBATE' : 'BATTLE ASSISTANT'}</small>
-        <h2>{ocultarEquipo ? '???' : jefe?.name}</h2>
-      {/if}
+      <small>{es ? 'ASISTENTE DE COMBATE' : 'BATTLE ASSISTANT'}</small>
+      <h2>{ocultarEquipo ? '???' : jefe?.name}</h2>
       {#if capRegla || cap}<span class="lx-cap">{es ? 'Nivel máximo' : 'Level cap'} {capRegla || cap}</span>{/if}
       {#each reglasActivas as r}<span class="lx-regla-chip">{r}</span>{/each}
     </div>
@@ -149,8 +150,9 @@
         {es ? 'Probar en el Analista →' : 'Try in Analyst →'}
       </button>
     {/if}
-    {#if !incrustado}<button class="lx-cerrar" on:click={close} aria-label={es ? 'Cerrar' : 'Close'}>✕</button>{/if}
+    <button class="lx-cerrar" on:click={close} aria-label={es ? 'Cerrar' : 'Close'}>✕</button>
   </header>
+  {/if}
 
   {#if cargando}
     <p class="lx-cargando">{es ? 'Analizando el combate…' : 'Analysing the battle…'}</p>

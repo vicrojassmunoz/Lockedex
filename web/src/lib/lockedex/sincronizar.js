@@ -6,7 +6,7 @@
 //   eclosion:   Pokémon nacidos de un huevo (nivel al conocerlo 0) que no están en la run: no son capturas
 //               de la zona donde nacieron; en Egglocke son lo que salió de algún huevo (se apuntan en la Caja)
 import { norm } from './datos.js'
-import { emparejar } from './equipo.js'
+import { emparejar, emparejarRun } from './equipo.js'
 import { leerReglas } from './reglas.js'
 
 const VIVOS = [1, 2, 3, 6]
@@ -89,13 +89,30 @@ export const parcheCambiosSav = ({ partida, resumen, sav, cambios, linea }) => {
     datos[c.lugar] = { ...actual, ...c.parche }
   }
   const caidos = new Set(cambios.filter((c) => c.tipo === 'caido').map((c) => c.lugar))
+  // Quién es cada uno del equipo del emulador en la run: el del cambio si lo hay; si no, el mismo
+  // emparejado que usa el resto de Lockedex (cada Pokémon del .sav con una sola entrada de la run)
+  const asignados = emparejarRun(sav, { ...(partida.datos || {}), ...datos }, linea)
+  const lugarDe = (s) => {
+    for (const [l, x] of asignados) if (mismo(x, s)) return l
+    return null
+  }
   const equipoLugares = (sav.equipo || [])
     .map((s) => {
       const c = cambios.find((x) => mismo(x.s, s))
-      if (c) return c.lugar
-      return resumen.encuentros.find((e) => emparejar(e, [s], new Set(), linea))?.lugar
+      if (c?.lugar) return c.lugar
+      return lugarDe(s) || resumen.encuentros.find((e) => emparejar(e, [s], new Set(), linea))?.lugar
     })
     .filter((l) => l && !caidos.has(l))
-  if (equipoLugares.length || caidos.size) datos.__team = [...new Set(equipoLugares)]
+  if (equipoLugares.length || caidos.size) datos.__team = [...new Set(equipoLugares)].slice(0, 6)
   return datos
+}
+
+// Lo que la sincronización automática guarda cada vez que llega el .sav: los cambios seguros y el equipo
+// del emulador. El equipo va siempre (antes solo si había otro cambio, y al guardar sin evoluciones ni
+// motes nuevos la barra del equipo no se enteraba), pero solo si es distinto del de la run
+export const parcheAutomatico = ({ partida, resumen, sav, cambios, linea }) => {
+  const parche = parcheCambiosSav({ partida, resumen, sav, cambios, linea })
+  const antes = ((partida.datos || {}).__team || []).filter(Boolean)
+  if (parche.__team && parche.__team.length === antes.length && parche.__team.every((l, i) => l === antes[i])) delete parche.__team
+  return parche
 }

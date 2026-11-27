@@ -1,3 +1,11 @@
+## Novedades de la 1.27.0
+
+- **El equipo se actualiza con el .sav:** al guardar en el emulador, la barra del equipo pasa a ser el equipo de tu partida (sin los caídos), aunque no haya evoluciones ni motes nuevos. Antes solo se actualizaba si había algún otro cambio.
+- **Pantalla de combate más limpia:** una sola barra con las pestañas, tus reglas y el riesgo (el asistente ya no repite su cabecera). Fuera la pestaña TIPOS. **DUELO** enseña ahora las estadísticas reales y los tipos de tu Pokémon y del suyo, lado a lado, con la mayor en negrita y la naturaleza marcada. «Comparar con mi equipo» abre el duelo con ese Pokémon del jefe.
+- **Naturaleza en la Caja:** en las estadísticas del detalle del PC, la que sube la naturaleza sale en rojo con ▲ y la que baja, en azul con ▼. Junto a la naturaleza se ve qué toca (por ejemplo, «Ingenua ▲ Vel. ▼ Def. Esp.»), también en la ficha del menú de equipo.
+- **Huevos variocolor y con habilidad oculta:** el generador de Egglocke deja elegir cuántos salen variocolor (como en el juego, 1 de cada 100, 1 de cada 10 o todos). En RojoFuego, VerdeHoja, Rubí, Zafiro y Esmeralda el huevo eclosiona variocolor de verdad. Desde la 5.ª gen, también cuántos llevan habilidad oculta (se apunta en la lista para que la pongas tú). Se ven con «Ver qué hay dentro».
+- **Modo oscuro:** en la pantalla de título ya se leen «OTRAS PARTIDAS» y «Gestionar partidas».
+
 ## Novedades de la 1.26.2
 
 - **Pantalla de combate:** ya sale el sprite del jefe en la escena (salía roto) y los sprites pequeños se ven al doble, a píxeles.

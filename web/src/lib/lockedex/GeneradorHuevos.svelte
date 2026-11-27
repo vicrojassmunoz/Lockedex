@@ -16,7 +16,7 @@
 
   let partida = null
   let tt = {}
-  let opciones = { cantidad: 30, basicas: true, sinLegendarios: true, sinRepetir: true, tipo: '', rapida: false, movimientosHuevo: true }
+  let opciones = { cantidad: 30, basicas: true, sinLegendarios: true, sinRepetir: true, tipo: '', rapida: false, movimientosHuevo: true, variocolor: 0, oculta: 0 }
   let guardado = null // { fecha, lista, sav }
   let lista = []
   let disponibles = 0
@@ -121,7 +121,7 @@
   }
 
   const copiarLista = async () => {
-    const texto = lista.map((h, i) => `${i + 1}. ${traducirNombre(h.nombre)}`).join('\n')
+    const texto = lista.map((h, i) => `${i + 1}. ${traducirNombre(h.nombre)}${h.variocolor ? ' ✦' : ''}${h.oculta ? t(' (habilidad oculta)', ' (hidden ability)') : ''}`).join('\n')
     try {
       await navigator.clipboard.writeText(texto)
       aviso = t('Lista copiada', 'List copied')
@@ -150,12 +150,30 @@
           {#each TIPOS.filter((x) => !(gen < 6 && x === 'fairy') && !(gen < 2 && ['dark', 'steel'].includes(x))) as x}<option value={x}>{nombreTipo(x)}</option>{/each}
         </select>
       </label>
+      <label title={t('En los .sav de la 3.ª gen el huevo sale variocolor de verdad al eclosionar', 'In 3rd-gen saves the egg really hatches shiny')}>{t('Variocolor', 'Shiny')}
+        <select bind:value={opciones.variocolor}>
+          <option value={0}>{t('Como en el juego', 'As in the game')}</option>
+          <option value={100}>{t('1 de cada 100', '1 in 100')}</option>
+          <option value={10}>{t('1 de cada 10', '1 in 10')}</option>
+          <option value={1}>{t('Todos', 'All')}</option>
+        </select>
+      </label>
+      {#if gen >= 5}
+        <label title={t('Desde la 5.ª gen. Lockedex lo apunta en la lista; ponla tú en el juego (por ejemplo, con PKHeX)', 'Since gen 5. Lockedex notes it in the list; set it in the game yourself (e.g. with PKHeX)')}>{t('Habilidad oculta', 'Hidden ability')}
+          <select bind:value={opciones.oculta}>
+            <option value={0}>{t('Ninguno', 'None')}</option>
+            <option value={10}>{t('1 de cada 10', '1 in 10')}</option>
+            <option value={3}>{t('1 de cada 3', '1 in 3')}</option>
+            <option value={1}>{t('Todos', 'All')}</option>
+          </select>
+        </label>
+      {/if}
       <button class="lx-gh-generar" disabled={ocupado} on:click={generar}>{lista.length ? t('Generar otros', 'Generate again') : t('Generar huevos', 'Generate eggs')}</button>
     </div>
 
     {#if lista.length}
       <div class="lx-gh-cab">
-        <span>{lista.length} {t('huevos', 'eggs')}{usados ? ` · ${usados} ${t('ya abiertos', 'hatched')}` : ''}{guardado?.fecha ? ` · ${new Date(guardado.fecha).toLocaleDateString(es ? 'es-ES' : 'en-GB')}` : ''}</span>
+        <span>{lista.length} {t('huevos', 'eggs')}{ver && lista.some((h) => h.variocolor) ? ` · ✦ ${lista.filter((h) => h.variocolor).length}` : ''}{ver && lista.some((h) => h.oculta) ? ` · HO ${lista.filter((h) => h.oculta).length}` : ''}{usados ? ` · ${usados} ${t('ya abiertos', 'hatched')}` : ''}{guardado?.fecha ? ` · ${new Date(guardado.fecha).toLocaleDateString(es ? 'es-ES' : 'en-GB')}` : ''}</span>
         <label class="lx-gh-ver"><input type="checkbox" bind:checked={ver} /> {t('Ver qué hay dentro (spoiler)', 'Show what is inside (spoiler)')}</label>
       </div>
       <ol class="lx-gh-huevos">
@@ -164,6 +182,12 @@
             {#if ver}
               <img src={`/assets/img/pokemon/base-${h.imgId}.png`} alt="" width="48" height="48" />
               <small>{traducirNombre(h.nombre)}</small>
+              {#if h.variocolor || h.oculta}
+                <span class="lx-gh-marcas">
+                  {#if h.variocolor}<b class="lx-gh-vario" title={t('Variocolor', 'Shiny')}>✦</b>{/if}
+                  {#if h.oculta}<b class="lx-gh-oculta" title={t('Con habilidad oculta', 'With hidden ability')}>HO</b>{/if}
+                </span>
+              {/if}
             {:else}
               <img class="lx-gh-huevo" src="/lx/iconos/huevo.png" alt="" width="32" height="32" />
               <small>{i + 1}</small>
@@ -387,5 +411,28 @@
     justify-content: flex-end;
     gap: 8px;
     padding: 0 14px 12px;
+  }
+  .lx-gh-huevos li {
+    position: relative;
+  }
+  .lx-gh-marcas {
+    position: absolute;
+    top: 0;
+    right: 2px;
+    display: flex;
+    gap: 2px;
+    font-size: 11px;
+    line-height: 14px;
+  }
+  .lx-gh-vario {
+    color: #e0a000;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.35);
+  }
+  .lx-gh-oculta {
+    padding: 0 3px;
+    border-radius: 3px;
+    background: #6048c0;
+    color: #fff;
+    font-size: 9px;
   }
 </style>

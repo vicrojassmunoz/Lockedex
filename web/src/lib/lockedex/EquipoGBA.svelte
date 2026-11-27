@@ -18,6 +18,7 @@
   import { cargarHabilidadesEspecie, habilidadesDe } from './tiposHabilidad.js'
   import { leerReglas, sinCalculos } from './reglas.js'
   import { origenDe } from './origen.js'
+  import { resumenNaturaleza } from './naturalezas.js'
   import FichaSav from './FichaSav.svelte'
   import { marco, bola, TIPO_GBA } from './gba.js'
   import { t, traducirNombre, idioma } from './idioma.js'
@@ -269,7 +270,7 @@
           <dl class="lx-eg-panel" style={MARCOS.panel}>
             {#if elegido.nature}
               <dt>{t('NATURALEZA', 'NATURE')}</dt>
-              <dd>{traducirNombre(mayus(elegido.nature))}</dd>
+              <dd>{traducirNombre(mayus(elegido.nature))}{#if resumenNaturaleza(elegido.nature, es)}<small class="lx-eg-nat">{resumenNaturaleza(elegido.nature, es)}</small>{/if}</dd>
             {/if}
             <dt>{t('ORIGEN', 'ORIGIN')}</dt>
             <dd>{origenDe(elegido)}</dd>
@@ -765,6 +766,10 @@
     line-height: 22px;
   }
   .lx-eg-panel dt {
+    color: #687890;
+  }
+  .lx-eg-nat {
+    margin-left: 8px;
     color: #687890;
   }
   .lx-eg-aviso {

@@ -177,7 +177,7 @@
   const { getLeague } = getContext('game')
   const { open } = getContext('simple-modal')
 
-  const openCompare = (i) => () => abrirCombate('tipos', i)
+  const openCompare = (i) => () => abrirCombate('duelo', i)
   const openBuilder = () => abrirCombate('plan')
 
   export let loading = true

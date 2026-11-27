@@ -1,17 +1,17 @@
 <script>
   // Pantalla de combate contra un jefe, como el principio de un combate de GBA: el jefe arriba a la
   // derecha con sus Poké Balls, tu equipo abajo a la izquierda con sus PS y, abajo a la derecha, el cuadro
-  // de órdenes (VENCIDO, DERROTA, ANALISTA, HUIR). Debajo, tres pestañas:
-  //   PLAN  → el asistente (riesgo, consejos y movimientos hasta el nivel máximo)
-  //   DUELO → el modo batalla: eliges tu Pokémon y el suyo y ves el daño de cada ataque
-  //   TIPOS → lo que queda del análisis heredado (equipo y comparación por tipos)
+  // de órdenes (VENCIDO, DERROTA, ANALISTA, HUIR). Debajo, dos pestañas, con las reglas y el riesgo en la
+  // misma barra:
+  //   PLAN  → el asistente (consejos y movimientos hasta el nivel máximo)
+  //   DUELO → el modo batalla: eliges tu Pokémon y el suyo y ves sus estadísticas, sus tipos y el daño
   // El VS de la tarjeta, el medidor de riesgo y «Comparar con mi equipo» abren esta misma pantalla.
   import { onMount, getContext } from 'svelte'
   import { goto } from '$app/navigation'
   import { PIcon } from '$c/core'
   import Asistente from './Asistente.svelte'
   import ModoBatalla from './ModoBatalla.svelte'
-  import ProgressModal from '$lib/components/ProgressModal.svelte'
+  import Riesgo from './Riesgo.svelte'
   import { equipoActual } from './equipo.js'
   import { alCambiarDatos } from './partida.js'
   import { capDelCombate } from './reglas.js'
@@ -60,11 +60,13 @@
   // Pestañas: cada una se monta la primera vez que se abre y luego se queda (el plan tarda en calcularse)
   const PESTANAS = [
     ['plan', 'PLAN', 'PLAN'],
-    ['duelo', 'DUELO', 'DUEL'],
-    ['tipos', 'TIPOS', 'TYPES']
+    ['duelo', 'DUELO', 'DUEL']
   ]
-  if (!jefe && pestana !== 'tipos') pestana = 'tipos'
-  let vistas = new Set([pestana])
+  if (!PESTANAS.some(([k]) => k === pestana)) pestana = comparar !== null ? 'duelo' : 'plan'
+  // el plan se monta siempre: de él salen el riesgo y las reglas de la barra
+  let vistas = new Set(['plan', pestana])
+  let riesgo = null
+  let reglasActivas = []
   const ir = (p) => {
     pestana = p
     vistas = new Set([...vistas, p])
@@ -213,13 +215,17 @@
         {pestana === clave ? '▶ ' : ''}{t(es, en)}
       </button>
     {/each}
+    <span class="lx-pc-barra-extra">
+      {#each reglasActivas as r}<span class="lx-pc-regla">{r}</span>{/each}
+      {#if riesgo && !vencido}<span class="lx-pc-riesgo"><Riesgo nivel={riesgo.nivel} consejos={riesgo.consejos} modo={riesgo.modo} ocultarConsejos={ocultarEquipo} sinPopover /></span>{/if}
+    </span>
   </nav>
 
   <div class="lx-pc-cuerpo">
     {#if vistas.has('plan')}
       <div class:hidden={pestana !== 'plan'}>
         {#if jefe}
-          <Asistente incrustado {jefe} {cap} ocultarEquipo={ocultarEquipo} {valor} {juego} {inicial} />
+          <Asistente incrustado bind:riesgo bind:reglasActivas {jefe} {cap} ocultarEquipo={ocultarEquipo} {valor} {juego} {inicial} />
         {:else}
           <p class="lx-pc-aviso">{t('Con tipos aleatorizados no se puede calcular el plan.', 'The plan cannot be calculated with randomized types.')}</p>
         {/if}
@@ -236,16 +242,7 @@
         {:else if !miembros.length}
           <p class="lx-pc-aviso">{t('Añade Pokémon a tu equipo para usar el duelo.', 'Add Pokémon to your team to use the duel.')}</p>
         {:else}
-          <ModoBatalla {jefe} equipo={miembros} gen={actual.partida.info.gen} {cap} grupo={actual.partida.info.grupo} on:caido={caido} />
-        {/if}
-      </div>
-    {/if}
-    {#if vistas.has('tipos')}
-      <div class:hidden={pestana !== 'tipos'} class="lx-pc-tipos">
-        {#if ocultarPokemon}
-          <p class="lx-pc-aviso">{t('Revela el equipo del jefe para ver el análisis de tipos.', "Reveal the boss's team to see the type analysis.")}</p>
-        {:else}
-          <ProgressModal incrustado {boss} mode={comparar !== null ? 'compare' : 'build'} id={comparar ?? 0} />
+          <ModoBatalla conStats suInicial={comparar ?? 0} {jefe} equipo={miembros} gen={actual.partida.info.gen} {cap} grupo={actual.partida.info.grupo} on:caido={caido} />
         {/if}
       </div>
     {/if}
@@ -533,6 +530,7 @@
   /* Pestañas */
   .lx-pc-pestanas {
     display: flex;
+    align-items: flex-end;
     gap: 4px;
     padding: 6px 10px 0;
     background: #283850;
@@ -552,7 +550,7 @@
   }
   .lx-pc-pestanas .lx-pc-activa {
     background: var(--lx-panel);
-    color: var(--lx-tinta);
+    color: var(--lx-texto);
   }
   .lx-pc-cuerpo {
     max-height: calc(100vh - 420px);
@@ -573,7 +571,27 @@
     box-shadow: none;
     border: 0;
   }
-  .lx-pc-tipos :global(.fixed) {
-    position: absolute;
+  .lx-pc-barra-extra {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    margin-left: auto;
+    padding-bottom: 4px;
+    font-family: system-ui, sans-serif;
+    -webkit-font-smoothing: auto;
+  }
+  .lx-pc-regla {
+    padding: 1px 8px;
+    border-radius: 999px;
+    background: #3c5070;
+    color: #e8eef8;
+    font-size: 11px;
+    line-height: 18px;
+    white-space: nowrap;
+  }
+  .lx-pc-riesgo {
+    display: inline-flex;
   }
 </style>

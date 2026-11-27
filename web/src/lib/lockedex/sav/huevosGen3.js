@@ -71,13 +71,27 @@ export const huecosLibres = (buffer) => {
 }
 
 /**
+ * Personalidad de un Pokémon variocolor para ese entrenador: en la 3.ª gen lo es si
+ * ID ^ ID secreto ^ mitad alta ^ mitad baja de la personalidad < 8 (y el huevo lleva el ID del jugador)
+ */
+export const personalidadVariocolor = (id32) => {
+  const id = id32 & 0xffff
+  const secreto = (id32 >>> 16) & 0xffff
+  const bajo = aleatorio32() & 0xffff
+  const alto = (id ^ secreto ^ bajo ^ (aleatorio32() & 7)) & 0xffff
+  return ((alto << 16) | bajo) >>> 0
+}
+export const esVariocolor = (personalidad, id32) =>
+  ((id32 & 0xffff) ^ ((id32 >>> 16) & 0xffff) ^ (personalidad >>> 16) ^ (personalidad & 0xffff)) < 8
+
+/**
  * Crea los 80 bytes de un huevo.
- * huevo: { interna, experiencia, movimientos: [{ id, pp }], ciclos, dosHabilidades }
+ * huevo: { interna, experiencia, movimientos: [{ id, pp }], ciclos, dosHabilidades, variocolor }
  * entrenador: { id32, nombre (7 bytes), chica }
  */
 export const crearHuevo = (huevo, entrenador, version) => {
-  const personalidad = aleatorio32()
   const idEntrenador = entrenador.id32 >>> 0
+  const personalidad = huevo.variocolor ? personalidadVariocolor(idEntrenador) : aleatorio32()
   const out = new Uint8Array(TAM_BOX_MON)
   const v = new DataView(out.buffer)
   v.setUint32(0, personalidad, true)

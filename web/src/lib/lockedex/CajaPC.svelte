@@ -20,6 +20,7 @@
   import { leerPartida, alCambiarDatos, partidaActiva } from './partida.js'
   import FichaSav from './FichaSav.svelte'
   import { origenDe } from './origen.js'
+  import { efectoNaturaleza, resumenNaturaleza } from './naturalezas.js'
   import { leerSavGuardado, emparejarRun } from './equipo.js'
   import { cargarHabilidadesEspecie, habilidadesDe } from './tiposHabilidad.js'
   import { habilidades as cargarHabs } from './datos.js'
@@ -139,6 +140,8 @@
   const calcularEmparejados = (sv, _lista) => emparejarRun(sv, leerPartida($activeGame)?.datos || {}, lineaDe)
   $: emparejados = calcularEmparejados(sav, lista)
   $: savElegido = elegido ? emparejados.get(elegido.location) || null : null
+  // Naturaleza para marcar en las estadísticas la que sube y la que baja: la del .sav manda
+  $: natElegido = savElegido?.naturaleza || elegido?.nature || ''
   // Sin .sav: las habilidades que puede tener su especie en ese juego
   $: habsPosibles = elegido && !savElegido && tablaHab ? habilidadesDe(tablaHab, elegido.pokemon, gen) : null
   const habDe = (k) => habs[k] || habs[String(k).replace(/[^a-z0-9]/gi, '').toLowerCase()]
@@ -242,7 +245,7 @@
 
       <dl class="lx-det-datos">
         {#if elegido.nature}
-          <div><dt>{t('Naturaleza', 'Nature')}</dt><dd>{traducirNombre(elegido.nature.charAt(0).toUpperCase() + elegido.nature.slice(1))}</dd></div>
+          <div><dt>{t('Naturaleza', 'Nature')}</dt><dd>{traducirNombre(elegido.nature.charAt(0).toUpperCase() + elegido.nature.slice(1))}{#if resumenNaturaleza(elegido.nature, t('es', 'en') === 'es')}<small class="lx-nat-efecto">{resumenNaturaleza(elegido.nature, t('es', 'en') === 'es')}</small>{/if}</dd></div>
         {/if}
         <div><dt>{t('Origen', 'Origin')}</dt><dd>{lugar(elegido)}</dd></div>
         {#if habsPosibles && (habsPosibles.normales?.length || habsPosibles.oculta)}
@@ -339,8 +342,14 @@
       <div class="lx-det-stats">
         {#each ETIQUETAS as [k, es, en]}
           {@const v = +(datos.baseStats?.[k] || 0)}
-          <span class="lx-stat-nombre">{t(es, en)}</span>
-          <span class="lx-stat-valor">{v}</span>
+          {@const nat = efectoNaturaleza(natElegido, k)}
+          <span
+            class="lx-stat-nombre"
+            class:lx-stat-sube={nat > 0}
+            class:lx-stat-baja={nat < 0}
+            title={nat > 0 ? t('Su naturaleza la sube', 'Raised by its nature') : nat < 0 ? t('Su naturaleza la baja', 'Lowered by its nature') : ''}
+          >{t(es, en)}{nat > 0 ? ' ▲' : nat < 0 ? ' ▼' : ''}</span>
+          <span class="lx-stat-valor" class:lx-stat-sube={nat > 0} class:lx-stat-baja={nat < 0}>{v}</span>
           <span class="lx-stat-barra"><i style="width:{Math.min(100, (v / 180) * 100)}%;background:{colorStat(v)}" /></span>
         {/each}
         <span class="lx-stat-nombre lx-stat-total">{t('Total', 'Total')}</span>
@@ -781,6 +790,26 @@
   }
   .lx-stat-nombre {
     color: var(--lx-texto-suave);
+  }
+  /* La estadística que sube la naturaleza en rojo y la que baja en azul, como en la pantalla de datos */
+  .lx-stat-sube {
+    color: #d03828;
+    font-weight: 600;
+  }
+  .lx-stat-baja {
+    color: #3060c8;
+    font-weight: 600;
+  }
+  :global(html.dark) .lx-stat-sube {
+    color: #f08070;
+  }
+  :global(html.dark) .lx-stat-baja {
+    color: #80a8f8;
+  }
+  .lx-nat-efecto {
+    margin-left: 6px;
+    font-size: 0.85em;
+    opacity: 0.8;
   }
   .lx-stat-valor {
     text-align: right;

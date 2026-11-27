@@ -11,7 +11,7 @@
   import { claveSav, claveRutaSav } from './equipo.js'
   import { idioma, traducirNombre } from './idioma.js'
   import { partidaActiva, cargarRutas, resumirPartida } from './partida.js'
-  import { calcularCambiosSav, parcheCambiosSav } from './sincronizar.js'
+  import { calcularCambiosSav, parcheCambiosSav, parcheAutomatico } from './sincronizar.js'
   import { encolarEscenas } from './escenasPendientes.js'
   import { getGameStore, patch } from '$lib/store'
   import { fetchData } from '$utils/fetchers'
@@ -41,7 +41,8 @@
     const nuevos = cambios.filter((c) => c.tipo === 'nuevo')
     const eclosiones = cambios.filter((c) => c.tipo === 'eclosion')
     contexto = { partida, resumen, sav, linea, rutas }
-    if (seguros.length) getGameStore(partida.id).update(patch(parcheCambiosSav({ ...contexto, cambios: seguros })))
+    const parche = parcheAutomatico({ ...contexto, cambios: seguros })
+    if (Object.keys(parche).length) getGameStore(partida.id).update(patch(parche))
     // Egglocke: los que se marcaron como salidos de un huevo, abiertos también en la lista del generador
     seguros.filter((c) => c.parche.cambio).forEach((c) => marcarHuevoUsado(partida.id, c.parche.pokemon || c.antes.pokemon))
     const nombre = (e) => (pkdx?.aliasMap?.[norm(e)] || pkdx?.nameMap?.[norm(e)])?.name || e

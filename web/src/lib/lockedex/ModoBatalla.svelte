@@ -7,6 +7,7 @@
   import { movimientos, habilidades, norm } from './datos.js'
   import { completarConAprendizaje } from './riesgo.js'
   import { COLOR_TIPO } from './colores.js'
+  import { efectoNaturaleza } from './naturalezas.js'
   import { idioma, traducirNombre } from './idioma.js'
 
   export let jefe = null // { name, pokemon: [{ name, level, moves, ability, held, iv, nat }] }
@@ -14,6 +15,10 @@
   export let gen = 3
   export let cap = null
   export let grupo = null
+  // En la pantalla de combate: las estadísticas y los tipos de los dos, lado a lado
+  export let conStats = false
+  // Pokémon del jefe elegido al abrir («Comparar con mi equipo» desde uno de su equipo)
+  export let suInicial = 0
 
   const es = idioma() === 'es'
   const dispatch = createEventDispatcher()
@@ -42,7 +47,7 @@
   let datos = null // { jefe, equipo } completados con lo que aprenden por nivel
 
   let tuIdx = 0
-  let suIdx = 0
+  let suIdx = +suInicial || 0
   // Ajustes del combate
   let estadoTuyo = ''
   let estadoSuyo = ''
@@ -189,11 +194,25 @@
     const yo = mejorMio?.golpesMax ?? 99
     const el = peorSuyo?.golpesMin ?? 99
     const ganas = rapido ? yo <= el : yo < el
-    return { mios, suyos, velT, velS, empate: velT === velS, rapido, yo, el, ganas, mejorMio, peorSuyo }
+    const stats = (p) => ({ ...(p.stats || {}) })
+    return {
+      mios, suyos, velT, velS, empate: velT === velS, rapido, yo, el, ganas, mejorMio, peorSuyo,
+      tuyo: { stats: stats(pt), tipos: pt.types || [], nat: y.naturaleza || y.nature || '', nivel: pt.level },
+      suyo: { stats: stats(ps), tipos: ps.types || [], nat: b.nat || '', nivel: ps.level }
+    }
   }
   const mult = (n) => (n >= 0 ? (2 + n) / 2 : 2 / (2 - n))
 
   const pct = (x) => Math.round(x * 100)
+  const STATS = [
+    ['hp', 'PS', 'HP'],
+    ['atk', 'Ataque', 'Attack'],
+    ['def', 'Defensa', 'Defense'],
+    ['spa', 'At. Esp.', 'Sp. Atk'],
+    ['spd', 'Def. Esp.', 'Sp. Def'],
+    ['spe', 'Velocidad', 'Speed']
+  ]
+  const flecha = (nat, k) => ['▼', '', '▲'][efectoNaturaleza(nat, k) + 1]
   const textoKO = (d) => {
     if (d.estado) return es ? 'estado' : 'status'
     if (d.max <= 0) return es ? 'no le afecta' : 'no effect'
@@ -276,6 +295,33 @@
         {:else if duelo.rapido}{es ? `Pegas tú primero (Vel. ${duelo.velT} contra ${duelo.velS})` : `You move first (Spe ${duelo.velT} vs ${duelo.velS})`}
         {:else}{es ? `Pega él primero (Vel. ${duelo.velS} contra ${duelo.velT})` : `They move first (Spe ${duelo.velS} vs ${duelo.velT})`}{/if}
       </p>
+
+      {#if conStats && duelo.tuyo && duelo.suyo}
+        <div class="lx-bt-stats">
+          <span />
+          <b class="lx-bt-quien">{tu.nombre} <small>{es ? 'Nv.' : 'Lv.'} {duelo.tuyo.nivel}</small></b>
+          <b class="lx-bt-quien">{traducirNombre(nombreBonito(su.name))} <small>{es ? 'Nv.' : 'Lv.'} {duelo.suyo.nivel}</small></b>
+          <span class="lx-bt-etq">{es ? 'Tipo' : 'Type'}</span>
+          {#each [duelo.tuyo, duelo.suyo] as lado}
+            <span class="lx-bt-tipos">
+              {#each lado.tipos as tp}<em style="background:{COLOR_TIPO[String(tp).toLowerCase()] || '#888'}">{traducirNombre(tp)}</em>{/each}
+            </span>
+          {/each}
+          {#each STATS as [k, e, n]}
+            <span class="lx-bt-etq">{es ? e : n}</span>
+            {#each [[duelo.tuyo, duelo.suyo], [duelo.suyo, duelo.tuyo]] as [lado, otro]}
+              <span
+                class="lx-bt-valor"
+                class:lx-bt-mas={lado.stats[k] > otro.stats[k]}
+                class:lx-bt-sube={efectoNaturaleza(lado.nat, k) > 0}
+                class:lx-bt-baja={efectoNaturaleza(lado.nat, k) < 0}
+                title={efectoNaturaleza(lado.nat, k) ? (efectoNaturaleza(lado.nat, k) > 0 ? (es ? 'La naturaleza la sube' : 'Raised by nature') : es ? 'La naturaleza la baja' : 'Lowered by nature') : ''}
+              >{lado.stats[k] ?? '—'}{flecha(lado.nat, k)}</span>
+            {/each}
+          {/each}
+        </div>
+        <p class="lx-bt-nota">{es ? 'Estadísticas reales a su nivel: las tuyas con lo del .sav (o sin IVs ni EVs conocidos); las suyas con sus IVs y sin EVs.' : 'Actual stats at their level: yours from the .sav when linked; theirs with their IVs and no EVs.'}</p>
+      {/if}
 
       <small class="lx-bt-tit">{es ? 'TUS ATAQUES' : 'YOUR MOVES'}</small>
       <ul class="lx-bt-movs">
@@ -539,5 +585,63 @@
     width: 18px;
     text-align: center;
     font-weight: 600;
+  }
+  .lx-bt-stats {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 220px) minmax(0, 220px);
+    gap: 2px 18px;
+    margin: 8px 0 2px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: var(--lx-panel-2, rgba(0, 0, 0, 0.04));
+    font-size: 0.92em;
+  }
+  .lx-bt-quien {
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .lx-bt-quien small {
+    font-weight: normal;
+    opacity: 0.7;
+  }
+  .lx-bt-etq {
+    opacity: 0.7;
+  }
+  .lx-bt-tipos {
+    display: flex;
+    gap: 4px;
+  }
+  .lx-bt-tipos em {
+    padding: 0 6px;
+    border-radius: 4px;
+    color: #fff;
+    font-style: normal;
+    font-size: 0.82em;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+  }
+  .lx-bt-valor {
+    font-variant-numeric: tabular-nums;
+  }
+  .lx-bt-mas {
+    font-weight: 700;
+  }
+  .lx-bt-sube {
+    color: #d03828;
+  }
+  .lx-bt-baja {
+    color: #3060c8;
+  }
+  :global(html.dark) .lx-bt-sube {
+    color: #f08070;
+  }
+  :global(html.dark) .lx-bt-baja {
+    color: #80a8f8;
+  }
+  .lx-bt-nota {
+    font-size: 0.75em;
+    opacity: 0.65;
+    margin-bottom: 6px;
   }
 </style>

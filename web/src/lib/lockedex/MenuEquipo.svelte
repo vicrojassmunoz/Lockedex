@@ -9,6 +9,7 @@
   import { claseVista } from './genVista.js'
   import { createImgUrl, UNOWN } from '$utils/rewrites'
   import { marco, bola, TIPO_GBA } from './gba.js'
+  import { efectoNaturaleza } from './naturalezas.js'
   import { recorte } from '$lib/lockedex/recorte.js'
   import { t, traducirNombre } from './idioma.js'
 
@@ -35,17 +36,7 @@
     return Math.floor(((2 * b + ivDe(p)) * n) / 100) + n + 10
   }
   // Naturaleza real del Pokémon del jefe cuando se conoce (3.ª gen: calculada como en el juego, campo «nat»)
-  const NATURALEZAS = {
-    lonely: ['atk', 'def'], brave: ['atk', 'spe'], adamant: ['atk', 'spa'], naughty: ['atk', 'spd'],
-    bold: ['def', 'atk'], relaxed: ['def', 'spe'], impish: ['def', 'spa'], lax: ['def', 'spd'],
-    timid: ['spe', 'atk'], hasty: ['spe', 'def'], jolly: ['spe', 'spa'], naive: ['spe', 'spd'],
-    modest: ['spa', 'atk'], mild: ['spa', 'def'], quiet: ['spa', 'spe'], rash: ['spa', 'spd'],
-    calm: ['spd', 'atk'], gentle: ['spd', 'def'], sassy: ['spd', 'spe'], careful: ['spd', 'spa']
-  }
-  const efectoNat = (p, k) => {
-    const [mas, menos] = NATURALEZAS[String(p?.nat || '').toLowerCase()] || []
-    return k === mas ? 1.1 : k === menos ? 0.9 : 1
-  }
+  const efectoNat = (p, k) => [0.9, 1, 1.1][efectoNaturaleza(p?.nat, k) + 1]
   const stat = (p, k) => {
     if (k === 'hp') return ps(p)
     const b = +p.stats?.[k] || 0

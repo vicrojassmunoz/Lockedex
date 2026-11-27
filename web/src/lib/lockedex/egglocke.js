@@ -38,9 +38,11 @@ const azar = (n) => {
 
 /**
  * Huevos al azar entre las especies del juego (hasta su generación).
- * opciones: { cantidad, basicas, sinLegendarios, sinRepetir, tipo }
+ * opciones: { cantidad, basicas, sinLegendarios, sinRepetir, tipo, variocolor, oculta }
+ * variocolor y oculta: 1 de cada cuántos huevos sale variocolor o con habilidad oculta (0 = como en el juego;
+ * la habilidad oculta solo existe desde la 5.ª gen)
  */
-export const generarHuevos = async (gen, { cantidad = 30, basicas = true, sinLegendarios = true, sinRepetir = true, tipo = '' } = {}) => {
+export const generarHuevos = async (gen, { cantidad = 30, basicas = true, sinLegendarios = true, sinRepetir = true, tipo = '', variocolor = 0, oculta = 0 } = {}) => {
   const [pk, esp] = await Promise.all([fetchData(), especies()])
   const tope = TOPE[gen] || 1025
   const vistos = new Set()
@@ -61,7 +63,15 @@ export const generarHuevos = async (gen, { cantidad = 30, basicas = true, sinLeg
     const linea = norm(p.evoline || p.alias)
     if (sinRepetir && lineas.has(linea)) continue
     lineas.add(linea)
-    lista.push({ alias: p.alias, nombre: p.name, imgId: p.imgId, types: (p.types || []).map((t) => t.toLowerCase()), usado: false })
+    lista.push({
+      alias: p.alias,
+      nombre: p.name,
+      imgId: p.imgId,
+      types: (p.types || []).map((t) => t.toLowerCase()),
+      usado: false,
+      ...(+variocolor > 0 && azar(+variocolor) === 0 ? { variocolor: true } : {}),
+      ...(gen >= 5 && +oculta > 0 && azar(+oculta) === 0 ? { oculta: true } : {})
+    })
   }
   return { lista, disponibles: pool.length }
 }
@@ -108,7 +118,8 @@ export const paraSavGen3 = async (lista, grupo, { rapida = false, movimientosHue
       experiencia: tablas.experiencia[e.c]?.[5] ?? 0,
       movimientos: movimientosH.slice(0, 4),
       ciclos: rapida ? 0 : ciclosJson.ciclos[i] ?? 20,
-      dosHabilidades: !!(e.h?.[1] && e.h[1] !== e.h[0])
+      dosHabilidades: !!(e.h?.[1] && e.h[1] !== e.h[0]),
+      variocolor: !!h.variocolor
     }
   })
 }

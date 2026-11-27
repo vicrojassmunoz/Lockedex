@@ -577,7 +577,7 @@
   .lx-tit-cartuchos h2 {
     font-size: 24px;
     line-height: 28px;
-    color: var(--lx-tinta);
+    color: var(--lx-texto);
     opacity: 0.75;
   }
   .lx-tit-rejilla {
@@ -660,14 +660,14 @@
     display: inline-block;
     margin-top: 12px;
     font-size: 18px;
-    color: var(--lx-tinta);
+    color: var(--lx-texto);
     text-decoration: underline;
     opacity: 0.8;
   }
   .lx-tit-vacio {
     font-family: 'LX Pixel', 'VT323', monospace;
     font-size: 18px;
-    color: var(--lx-tinta);
+    color: var(--lx-texto);
     opacity: 0.8;
     text-align: center;
   }
