@@ -336,3 +336,8 @@ Ampliar los modos además de Nuzlocke clásico, Hardcore y Randomlocke. Cada mod
 - ~~Firmar el instalador para que Windows no muestre el aviso de SmartScreen~~ — descartado (26/11): el certificado es de pago y no se va a comprar.
 
 - [x] **1.26.1 — Flecos de las escenas:** la escena de evolución del .sav no salía si la ventana compacta aplicaba el .sav antes (cola compartida en `lockedex.escenas`, `escenasPendientes.js`; también desde Importar). Lápida (`EscenaMuerte`) para los caídos que se confirman en el aviso del .sav.
+
+- [ ] **Revisión de las tandas 3–6 (27/11, pedido por el usuario):**
+  - [ ] **Modo oscuro en la pantalla de título:** no se leen «OTRAS PARTIDAS» ni el enlace «Gestionar partidas…» (`PantallaTitulo.svelte`, `.lx-tit-cartuchos h2` y `.lx-tit-todas` usan `var(--lx-tinta)` sobre el fondo oscuro). Repasar también el texto de «sin runs».
+  - [ ] **Pantalla de combate, pestaña PLAN:** parecen dos barras de navegación seguidas (las pestañas PLAN/DUELO/TIPOS y la cabecera roja del asistente con el nivel máximo, el riesgo y «Probar en el Analista»). Unificarlas: por ejemplo, llevar el nivel máximo, el riesgo y el botón del Analista a la escena o a la propia barra de pestañas y dejar el asistente sin cabecera cuando va incrustado.
+  - [ ] **Quitar la pestaña TIPOS** de la pantalla de combate (y con ella el `ProgressModal` incrustado). En su lugar, en **DUELO**, enseñar las estadísticas y el tipo del Pokémon rival elegido (y los del tuyo al lado para comparar).
