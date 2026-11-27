@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
-"""Ciclos de huevo de la 3.ª gen por especie interna → web/static/lx/huevos-gen3.json
+"""Ciclos de huevo y movimientos huevo de la 3.ª gen por especie interna → web/static/lx/huevos-gen3.json
 
 El contador de eclosión de un huevo (MON_DATA_FRIENDSHIP en CreateEgg de pokeemerald) es el campo
 eggCycles de gSpeciesInfo. Se saca de pret/pokeemerald (src/data/pokemon/species_info.h y
 include/constants/species.h); RojoFuego/VerdeHoja y Rubí/Zafiro usan los mismos valores.
+
+Los movimientos huevo salen de src/data/pokemon/egg_moves.h (con los números de include/constants/moves.h):
+{ "huevo": { "<especie interna>": [id de movimiento, …] } }, para rellenar los huecos libres de los huevos.
 
 Uso: python3 herramientas/huevos_gen3.py [carpeta de pokeemerald]
 """
@@ -30,6 +33,17 @@ for t in trozos[1:]:
         continue
     c = re.search(r'\.eggCycles\s*=\s*(\d+)', t)
     ciclos[n] = int(c.group(1)) if c else 120
+# Movimientos huevo: egg_moves(ESPECIE, MOVE_A, MOVE_B, …)
+movs = {}
+for m in re.finditer(r'#define MOVE_([A-Z0-9_]+) (\d+)\s*$', (EM / 'include/constants/moves.h').read_text(), re.M):
+    movs[m.group(1)] = int(m.group(2))
+huevo = {}
+for m in re.finditer(r'egg_moves\(([A-Z0-9_]+),([^)]*)\)', (EM / 'src/data/pokemon/egg_moves.h').read_text()):
+    n = numeros.get(m.group(1))
+    lista = [movs[x] for x in re.findall(r'MOVE_([A-Z0-9_]+)', m.group(2)) if x in movs]
+    if n is not None and lista:
+        huevo[str(n)] = lista
 destino = RAIZ / 'web/static/lx/huevos-gen3.json'
-destino.write_text(json.dumps({'ciclos': ciclos}, separators=(',', ':')))
+destino.write_text(json.dumps({'ciclos': ciclos, 'huevo': huevo}, separators=(',', ':')))
+print('movimientos huevo de', len(huevo), 'especies | togepi', huevo.get(str(numeros['TOGEPI'])))
 print('ciclos de', sum(1 for c in ciclos if c), 'especies →', destino.relative_to(RAIZ), '| bulbasaur', ciclos[1], 'magikarp', ciclos[129], 'togepi', ciclos[175])

@@ -1,3 +1,12 @@
+## Novedades de la 1.22.1
+
+- **El inicial ya no cuenta como huevo sin abrir:** en Egglocke, el aviso de «huevo sin abrir» y la marca de la Caja eran por el inicial, que contaba como captura. Si también lo cambias por un huevo, en su detalle se puede apuntar igual.
+- **El inicial del .sav va a su zona:** en Esmeralda el inicial se recibe en la Ruta 101 y Lockedex lo tomaba por una captura de esa ruta. Ahora lo reconoce (de la línea de uno de los iniciales y conocido a nivel 5) y lo propone para la zona del inicial, sin mote si no tiene. Vale para todos los juegos.
+- **Egglocke con el .sav:** los Pokémon nacidos de un huevo ya no salen como capturas de la zona donde nacieron. En el huevo sin abrir de cada captura, en la Caja, salen los nacidos en tu partida para elegir con un clic qué salió, con su mote y su naturaleza.
+- **Huevos con movimientos huevo:** el generador de Egglocke rellena los huecos libres de movimientos (hasta 4) con movimientos huevo al azar de su especie. Se puede desmarcar.
+- **Escena de muerte:** al editar una tumba desde el cementerio ya no sale la animación. La X de cerrar pasa a ser un botón «No ha caído».
+- **Motes en mayúsculas,** como en los juegos, al apuntar un encuentro con la escena.
+
 ## Novedades de la 1.22.0
 
 - **«¡Un Pokémon salvaje!»:** junto al nombre de cada zona vacía hay una mata de hierba alta. Al pulsarla eliges qué ha salido (los Pokémon de la zona con su método, nivel y probabilidad, o escribe otro), aparece en la hierba como en un combate y eliges en el menú CAPTURADO, VARIOCOLOR, HUYÓ o LO DEBILITÉ. Si lo capturas, la Poké Ball se mueve y te pregunta el mote. Se maneja con las flechas e Intro, y se puede seguir escribiendo en el buscador como antes.

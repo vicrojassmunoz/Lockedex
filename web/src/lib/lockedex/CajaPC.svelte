@@ -16,7 +16,8 @@
   import { activeGame } from '$lib/store'
   import { leerReglas, sinCalculos } from './reglas.js'
   import { tiendaParejas, parejaDe, emparejar } from './parejas.js'
-  import { tipoCambio, pendienteDeCambio, aplicarCambio, deshacerCambio } from './cambios.js'
+  import { tipoCambio, pendienteDeCambio, sePuedeCambiar, esInicial, aplicarCambio, deshacerCambio, eclosionadosDelSav } from './cambios.js'
+  import { leerPartida } from './partida.js'
   import { fetchData } from '$utils/fetchers'
 
   export let lista = []
@@ -65,6 +66,16 @@
     if (!elegidaNueva || !elegido) return
     aplicarCambio($activeGame, elegido.location, elegidaNueva.alias)
     nuevaEspecie = ''
+  }
+  // Los nacidos de un huevo en la partida del emulador que aún no están en la run, para elegirlos de un clic
+  const lineaDe = (x) => (Pokemon[x] || Object.values(Pokemon).find((p) => p?.name?.toLowerCase() === String(x).toLowerCase()))?.evoline || null
+  $: eclosionados = cambio === 'huevo' && elegido ? eclosionadosDelSav($activeGame, leerPartida($activeGame)?.datos || {}, lineaDe) : []
+  const aliasDe = (especie) => especiesTodas.find((x) => x.alias === String(especie).toLowerCase() || x.nombre.toLowerCase() === traducirNombre(especie).toLowerCase())?.alias
+  const nombreEspecie = (e) => traducirNombre(Pokemon[aliasDe(e) || String(e).toLowerCase()]?.name || String(e).charAt(0).toUpperCase() + String(e).slice(1))
+  const apuntarEclosionado = (s) => {
+    const alias = aliasDe(s.especie)
+    if (!alias || !elegido) return
+    aplicarCambio($activeGame, elegido.location, alias, { nickname: s.mote && s.mote.toLowerCase() !== String(s.especie).toLowerCase() ? s.mote : '', nature: s.naturaleza })
   }
   const nombreDe = (lugarP) => {
     const p = lista.find((x) => x.location === lugarP)
@@ -225,10 +236,25 @@
               <button class="lx-det-deshacer" title={t('Deshacer: vuelve el Pokémon capturado', 'Undo: back to the caught Pokémon')} on:click={() => deshacerCambio($activeGame, elegido.location)}>↶</button>
             </dd>
           </div>
-        {:else if pendienteDeCambio(elegido, { egglocke: cambio === 'huevo', wonderlocke: cambio === 'prodigioso' })}
+        {:else if sePuedeCambiar(elegido, { egglocke: cambio === 'huevo', wonderlocke: cambio === 'prodigioso' })}
           <div class="lx-det-cambio-pend">
-            <dt>{cambio === 'huevo' ? t('Huevo sin abrir', 'Unhatched egg') : t('Sin intercambiar', 'Not traded yet')}</dt>
+            <dt>
+              {#if esInicial(elegido, elegido.location)}
+                {cambio === 'huevo' ? t('Inicial (si también lo cambias por un huevo)', 'Starter (if it is swapped too)') : t('Inicial (si también lo intercambias)', 'Starter (if traded too)')}
+              {:else}
+                {cambio === 'huevo' ? t('Huevo sin abrir', 'Unhatched egg') : t('Sin intercambiar', 'Not traded yet')}
+              {/if}
+            </dt>
             <dd>
+              {#if eclosionados.length}
+                <div class="lx-det-eclosion">
+                  <span>{t('Nacidos en tu partida:', 'Hatched in your save:')}</span>
+                  {#each eclosionados as s}
+                    {@const especieN = nombreEspecie(s.especie)}
+                    <button on:click={() => apuntarEclosionado(s)} title={t(`Ha salido ${especieN}`, `${especieN} hatched`)}>{s.mote && s.mote.toLowerCase() !== especieN.toLowerCase() && s.mote.toLowerCase() !== String(s.especie).toLowerCase() ? `${s.mote} (${especieN})` : especieN}</button>
+                  {/each}
+                </div>
+              {/if}
               <form on:submit|preventDefault={apuntarCambio}>
                 <input
                   list="lx-especies-cambio"
@@ -506,6 +532,22 @@
     padding: 0 6px;
     border: 2px solid var(--lx-bisel);
     border-radius: var(--lx-radio-sm);
+  }
+  .lx-det-eclosion {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 4px;
+    font-size: 0.85em;
+  }
+  .lx-det-eclosion button {
+    padding: 0 6px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+  }
+  .lx-det-eclosion button:hover {
+    background: rgba(224, 80, 96, 0.15);
   }
   .lx-det-cambio-pend form {
     display: flex;

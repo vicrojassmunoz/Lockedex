@@ -70,7 +70,19 @@ export const generarHuevos = async (gen, { cantidad = 30, basicas = true, sinLeg
  * Datos para crear cada huevo en un .sav de 3.ª gen: especie interna, experiencia de nivel 5, movimientos
  * de nivel 5, ciclos de eclosión (0 = eclosión rápida, en los siguientes 255 pasos) y si tiene dos habilidades.
  */
-export const paraSavGen3 = async (lista, grupo, { rapida = false } = {}) => {
+// Movimientos huevo al azar para rellenar los huecos libres (sin repetir los que ya sabe)
+const conMovimientosHuevo = (movimientos, deHuevo = [], ppDe = {}) => {
+  const ya = new Set(movimientos.map((m) => m.id))
+  const libres = deHuevo.filter((id) => !ya.has(id))
+  const out = [...movimientos]
+  while (out.length < 4 && libres.length) {
+    const id = libres.splice(azar(libres.length), 1)[0]
+    out.push({ id, pp: ppDe[id] || 10 })
+  }
+  return out
+}
+
+export const paraSavGen3 = async (lista, grupo, { rapida = false, movimientosHuevo = false } = {}) => {
   const [tablas, ciclosJson, movs, apr] = await Promise.all([
     fetch('/lx/gen3.json').then((r) => r.json()),
     fetch('/lx/huevos-gen3.json').then((r) => r.json()),
@@ -78,6 +90,8 @@ export const paraSavGen3 = async (lista, grupo, { rapida = false } = {}) => {
     aprendizaje(grupo)
   ])
   const porNivel = apr?.nivel || {}
+  const ppPorId = {}
+  Object.values(movs || {}).forEach((m) => m?.id && (ppPorId[m.id] = m.pp))
   const interna = {}
   tablas.especies.forEach((e, i) => e && !(e.p in interna) && (interna[e.p] = i))
   return lista.map((h) => {
@@ -85,11 +99,14 @@ export const paraSavGen3 = async (lista, grupo, { rapida = false } = {}) => {
     if (!i) throw new Error(`${h.nombre} no existe en los juegos de GBA.`)
     const e = tablas.especies[i]
     const claves = probablesANivel(porNivel[clavePokemon(h.alias, porNivel)], 5)
-    const movimientosH = claves.map((k) => movs[k]).filter((m) => m && m.id <= 354).map((m) => ({ id: m.id, pp: m.pp || 10 }))
+    let movimientosH = claves.map((k) => movs[k]).filter((m) => m && m.id <= 354).map((m) => ({ id: m.id, pp: m.pp || 10 }))
+    if (!movimientosH.length) movimientosH = [{ id: 33, pp: 35 }]
+    // Los movimientos huevo son de la forma básica (la del huevo): solo rellenan huecos, nunca quitan
+    if (movimientosHuevo) movimientosH = conMovimientosHuevo(movimientosH, ciclosJson.huevo?.[i] || [], ppPorId)
     return {
       interna: i,
       experiencia: tablas.experiencia[e.c]?.[5] ?? 0,
-      movimientos: movimientosH.length ? movimientosH : [{ id: 33, pp: 35 }],
+      movimientos: movimientosH.slice(0, 4),
       ciclos: rapida ? 0 : ciclosJson.ciclos[i] ?? 20,
       dosHabilidades: !!(e.h?.[1] && e.h[1] !== e.h[0])
     }

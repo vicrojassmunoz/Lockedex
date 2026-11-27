@@ -133,7 +133,13 @@ export const leerHuevo = (bytes) => {
   const orden = ORDENES[personalidad % 24]
   const g = orden.indexOf('G') * 12
   const m = orden.indexOf('M') * 12
-  return { interna: datos.getUint16(g, true), sumaOk: suma === v.getUint16(0x1c, true), huevo: !!((datos.getUint32(m + 4, true) >>> 30) & 1) }
+  const a = orden.indexOf('A') * 12
+  return {
+    interna: datos.getUint16(g, true),
+    sumaOk: suma === v.getUint16(0x1c, true),
+    huevo: !!((datos.getUint32(m + 4, true) >>> 30) & 1),
+    movimientos: [0, 1, 2, 3].map((i) => datos.getUint16(a + i * 2, true)).filter(Boolean)
+  }
 }
 
 /**

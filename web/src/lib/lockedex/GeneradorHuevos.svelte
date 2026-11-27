@@ -16,7 +16,7 @@
 
   let partida = null
   let tt = {}
-  let opciones = { cantidad: 30, basicas: true, sinLegendarios: true, sinRepetir: true, tipo: '', rapida: false }
+  let opciones = { cantidad: 30, basicas: true, sinLegendarios: true, sinRepetir: true, tipo: '', rapida: false, movimientosHuevo: true }
   let guardado = null // { fecha, lista, sav }
   let lista = []
   let disponibles = 0
@@ -96,7 +96,7 @@
       // Se vuelve a leer justo antes, por si el juego ha guardado desde que se abrió la ventana
       const fresco = prepararSav(await window.lockedex.leerSav(sav.ruta))
       if (!fresco?.libres) throw new Error(t('No se pudo volver a leer la partida.', 'Could not re-read the save.'))
-      const datos = await paraSavGen3(lista, partida.info.grupo, { rapida: opciones.rapida })
+      const datos = await paraSavGen3(lista, partida.info.grupo, { rapida: opciones.rapida, movimientosHuevo: opciones.movimientosHuevo })
       const r = meterHuevos(fresco.buffer, datos, { version: VERSION_JUEGO[partida.juego] || 4, desdeCaja })
       const w = await window.lockedex.escribirSav({ ruta: fresco.ruta, datos: new Uint8Array(r.buffer), fechaLeida: fresco.fecha })
       if (!w?.ok)
@@ -196,6 +196,7 @@
                 ({libresDesde} {t('libres', 'free')})
               </p>
               <label><input type="checkbox" bind:checked={opciones.rapida} /> {t('Eclosión rápida (en los próximos 255 pasos)', 'Quick hatch (within the next 255 steps)')}</label>
+              <label title={t('Si con los de nivel 5 le quedan huecos, se rellenan con movimientos huevo de su especie al azar. No quita ninguno.', 'If it has free move slots at level 5, they are filled with random egg moves of its species. Nothing is removed.')}><input type="checkbox" bind:checked={opciones.movimientosHuevo} /> {t('Con movimientos huevo (al azar, para rellenar hasta 4)', 'With egg moves (random, to fill up to 4)')}</label>
               <p class="lx-gh-aviso-sav">
                 ⚠ {t('Cierra el juego en el emulador antes de meterlos: si está abierto y guardas, los huevos se pierden. Antes de escribir se hace una copia de seguridad de tu partida al lado del archivo.', 'Close the game in your emulator first: if it is open and you save, the eggs are lost. A backup of your save is made next to the file before writing.')}
               </p>

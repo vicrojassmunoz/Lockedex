@@ -4,6 +4,7 @@
   // Pokémon del equipo que estén debilitados en la partida (en un Nuzlocke, caídos)
   import { onMount } from 'svelte'
   import { goto } from '$app/navigation'
+  import { leerReglas } from './reglas.js'
   import { leerPartidaGen3 } from './sav/gen3.js'
   import { cargar, norm } from './datos.js'
   import { claveSav, claveRutaSav } from './equipo.js'
@@ -36,6 +37,7 @@
     const seguros = cambios.filter((c) => c.tipo === 'actualizar')
     const caidos = cambios.filter((c) => c.tipo === 'caido')
     const nuevos = cambios.filter((c) => c.tipo === 'nuevo')
+    const eclosiones = cambios.filter((c) => c.tipo === 'eclosion')
     contexto = { partida, resumen, sav, linea, rutas }
     if (seguros.length) getGameStore(partida.id).update(patch(parcheCambiosSav({ ...contexto, cambios: seguros })))
     const nombre = (e) => (pkdx?.aliasMap?.[norm(e)] || pkdx?.nameMap?.[norm(e)])?.name || e
@@ -43,7 +45,7 @@
     // La escena de evolución de cada una (la abre EscenasSav.svelte, dentro de la app, al volver a la ventana)
     const escenas = seguros.filter((c) => c.parche.pokemon && c.parche.pokemon !== c.antes.pokemon).map((c) => ({ base: c.antes.pokemon, evo: c.parche.pokemon, mote: c.antes.nickname || '' }))
     if (escenas.length) window.dispatchEvent(new CustomEvent('lx:evoluciones-sav', { detail: escenas }))
-    return { caidos, nuevos, evoluciones }
+    return { caidos, nuevos, eclosiones, evoluciones }
   }
 
   const marcarCaidos = () => {
@@ -124,6 +126,8 @@
         }
         const partes = [(es ? 'Partida del emulador actualizada — ' : 'Emulator save updated — ') + equipo]
         if (hecho.evoluciones?.length) partes.push((es ? 'Evolución: ' : 'Evolved: ') + hecho.evoluciones.join(', '))
+        if (hecho.eclosiones?.length && leerReglas(idActual)?.egglocke)
+          partes.push(es ? `${hecho.eclosiones.length} sin apuntar de qué huevo ${hecho.eclosiones.length > 1 ? 'salieron' : 'salió'}: elígelo en la Caja` : `${hecho.eclosiones.length} hatched but not logged: pick it in the Box`)
         mostrar(partes.join('. '), false, { caidos: hecho.caidos || [], nuevos: hecho.nuevos?.length || 0 })
       } catch (e) {
         mostrar((es ? 'No se pudo leer la partida: ' : 'Could not read the save: ') + e.message, true)

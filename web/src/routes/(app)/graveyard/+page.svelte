@@ -63,7 +63,7 @@
           )
     }
 
-    openDeathModal({ ...o.detail, submit, pokemon, mode })
+    openDeathModal({ ...o.detail, submit, pokemon, mode, animar: false })
   }
 
   const chunkSize = 6

@@ -93,7 +93,8 @@
   }
   const terminar = () => {
     parar()
-    elegir({ pokemon, estado: estado.id === 'ko' ? 4 : estado.id, mote: mote.trim() })
+    // el mote en mayúsculas, como en los juegos
+    elegir({ pokemon, estado: estado.id === 'ko' ? 4 : estado.id, mote: mote.trim().toLocaleUpperCase(es ? 'es' : 'en') })
     close()
   }
 
@@ -470,6 +471,7 @@
     border-radius: 4px;
     font-family: inherit;
     font-size: 16px;
+    text-transform: uppercase;
   }
   .lx-enc-mote button {
     padding: 0 8px;

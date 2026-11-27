@@ -21,11 +21,16 @@
       siguiente()
     }
     window.addEventListener('lx:evoluciones-sav', llegan)
+    // al volver a la ventana (o al tocarla: en algunos sistemas el foco llega sin evento)
     window.addEventListener('focus', siguiente)
+    window.addEventListener('pointerdown', siguiente)
+    window.addEventListener('keydown', siguiente)
     document.addEventListener('visibilitychange', siguiente)
     return () => {
       window.removeEventListener('lx:evoluciones-sav', llegan)
       window.removeEventListener('focus', siguiente)
+      window.removeEventListener('pointerdown', siguiente)
+      window.removeEventListener('keydown', siguiente)
       document.removeEventListener('visibilitychange', siguiente)
     }
   })

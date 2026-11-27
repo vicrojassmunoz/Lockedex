@@ -2,7 +2,9 @@
 // (lista con casillas) y la sincronización automática al guardar en el emulador (Sincronizacion.svelte).
 //   actualizar: evoluciones (la especie del .sav es otra de la misma línea), mote y naturaleza
 //   caido:      un Pokémon del equipo con 0 PS en el .sav (en un Nuzlocke, debilitado = caído)
-//   nuevo:      capturas del .sav que no están en la run, por su lugar de captura
+//   nuevo:      capturas del .sav que no están en la run, por su lugar de captura (el inicial, a su zona)
+//   eclosion:   Pokémon nacidos de un huevo (nivel al conocerlo 0) que no están en la run: no son capturas
+//               de la zona donde nacieron; en Egglocke son lo que salió de algún huevo (se apuntan en la Caja)
 import { norm } from './datos.js'
 import { emparejar } from './equipo.js'
 
@@ -15,6 +17,7 @@ export const calcularCambiosSav = ({ partida, resumen, sav, pkdx }) => {
   if (!partida || !sav || !resumen) return []
   const info = (especie) => pkdx?.aliasMap?.[norm(especie)] || pkdx?.nameMap?.[norm(especie)]
   const linea = (especie) => info(especie)?.evoline || null
+  const sinMote = (s) => !s.mote || norm(s.mote) === norm(s.especie) || norm(s.mote) === norm(info(s.especie)?.name)
   const usados = new Set()
   const lista = []
   const todos = [...(sav.equipo || []).map((p) => ({ ...p, enEquipo: true })), ...(sav.cajas || [])]
@@ -32,16 +35,40 @@ export const calcularCambiosSav = ({ partida, resumen, sav, pkdx }) => {
       lista.push({ tipo: 'caido', lugar: e.lugar, antes: e, s, parche: { status: 5 } })
   }
 
+  // El inicial: en muchos juegos su lugar de captura es una ruta o un pueblo (en Esmeralda, la Ruta 101;
+  // en RojoFuego, Pueblo Paleta), no la zona «Starter» de la lista. Se reconoce por ser de la línea de
+  // uno de los iniciales del juego y haberlo conocido a nivel 5
+  const zonaInicial = (resumen.lugares || []).find((l) => l.name === 'Starter')
+  const lineasIniciales = new Set((zonaInicial?.encounters || []).map((x) => linea(x)).filter(Boolean))
+  const esInicial = (s) => !!zonaInicial && lineasIniciales.has(linea(s.especie)) && +s.nivelCaptura === 5
+  let inicialVisto = !!(partida.datos || {}).Starter?.pokemon
+
   // Capturas que no están en la run, por lugar de captura
   const libres = new Set()
   for (const s of todos) {
     if (usados.has(s) || !s.lugarCaptura) continue
-    if (resumen.encuentros.find((e) => norm(e.lugar) === norm(s.lugarCaptura))) continue
-    if ((partida.datos || {})[s.lugarCaptura]?.pokemon) continue
-    if (libres.has(s.lugarCaptura)) continue
-    libres.add(s.lugarCaptura)
+    if (+s.nivelCaptura === 0 && s.lugarCaptura) {
+      if (info(s.especie)) lista.push({ tipo: 'eclosion', lugar: null, s })
+      continue
+    }
+    let lugar = s.lugarCaptura
+    if (esInicial(s)) {
+      if (inicialVisto) continue
+      inicialVisto = true
+      lugar = 'Starter'
+    }
+    if (resumen.encuentros.find((e) => norm(e.lugar) === norm(lugar))) continue
+    if ((partida.datos || {})[lugar]?.pokemon) continue
+    if (libres.has(lugar)) continue
+    libres.add(lugar)
     if (info(s.especie))
-      lista.push({ tipo: 'nuevo', lugar: s.lugarCaptura, s, parche: { pokemon: info(s.especie).alias, status: 1, nickname: s.mote, nature: s.naturaleza } })
+      lista.push({
+        tipo: 'nuevo',
+        lugar,
+        s,
+        // sin mote si es el nombre de la especie (así salen en el juego los que no tienen mote)
+        parche: { pokemon: info(s.especie).alias, status: 1, nickname: sinMote(s) ? '' : s.mote, nature: s.naturaleza, location: lugar }
+      })
   }
   return lista
 }

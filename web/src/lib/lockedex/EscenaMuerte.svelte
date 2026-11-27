@@ -19,6 +19,8 @@
   export let nickname = ''
   export let death = {}
   export let mode = 'new'
+  // Desde el cementerio (editar una tumba) no hay animación y «Cancelar» no toca nada
+  export let animar = true
 
   const { close } = getContext('simple-modal')
   const es = idioma() === 'es'
@@ -30,7 +32,7 @@
   const quien = nickname || nombre
 
   // Escena: 'cae' (animación) → 'lapida' (formulario). Al editar desde el cementerio, directo a la lápida
-  let fase = mode === 'new' ? 'cae' : 'lapida'
+  let fase = animar && mode === 'new' ? 'cae' : 'lapida'
   let temporizador
   const aLapida = () => {
     clearTimeout(temporizador)
@@ -132,7 +134,7 @@
     close()
   }
   const saltar = () => {
-    submit(mode === 'new' ? { time: Date.now() } : { ...death })
+    submit({ time: Date.now() })
     close()
   }
 
@@ -144,8 +146,6 @@
 <svelte:window on:keydown={tecla} />
 
 <section class="lx-muerte" data-lx-original>
-  <button class="lx-m-x" on:click={close} aria-label={t('Cerrar (no ha caído)', 'Close (not dead)')} title={t('Cerrar (no ha caído)', 'Close (not dead)')}>✕</button>
-
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div class="lx-m-pantalla" class:lx-m-noche={fase === 'lapida'} on:click={() => fase === 'cae' && aLapida()}>
     {#if fase === 'cae'}
@@ -225,8 +225,13 @@
       <textarea rows="3" value={epitafio} on:input={(e) => ((propio = true), (epitafio = e.currentTarget.value))} />
 
       <div class="lx-m-botones">
-        <button on:click={saltar} style={BOTON}>{mode === 'new' ? t('Sin detalles', 'Skip details') : t('Cancelar', 'Cancel')}</button>
-        <button class="lx-m-ok" on:click={guardar} style={ACCION}>{t('Al cementerio', 'To the graveyard')}</button>
+        {#if animar}
+          <button on:click={close} style={BOTON} title={t('Me he equivocado: sigue vivo', 'My mistake: still alive')}>{t('No ha caído', 'Not dead')}</button>
+          <button on:click={saltar} style={BOTON} title={t('Cae sin causa ni epitafio', 'Dies without cause or epitaph')}>{t('Sin detalles', 'Skip details')}</button>
+        {:else}
+          <button on:click={close} style={BOTON}>{t('Cancelar', 'Cancel')}</button>
+        {/if}
+        <button class="lx-m-ok" on:click={guardar} style={ACCION}>{animar ? t('Al cementerio', 'To the graveyard') : t('Guardar', 'Save')}</button>
       </div>
     </div>
   {/if}
@@ -247,14 +252,6 @@
   :global(html.dark) .lx-muerte {
     background: #2c2948;
     color: #f4f0e4;
-  }
-  .lx-m-x {
-    position: absolute;
-    top: 6px;
-    right: 8px;
-    z-index: 2;
-    font-size: 14px;
-    opacity: 0.7;
   }
   .lx-m-pantalla {
     position: relative;

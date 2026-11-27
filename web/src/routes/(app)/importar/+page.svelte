@@ -26,6 +26,7 @@
   let movs = {}, nats = {}, habs = {}
   let pkdx = null
   let cambios = []
+  let eclosiones = []
   let aplicado = false
   let vigilando = false
   let entrada
@@ -132,7 +133,10 @@
   // Qué se puede actualizar en la run con los datos de la partida (lib/lockedex/sincronizar.js)
   const linea = (especie) => info(especie)?.evoline || null
   const calcularCambios = () => {
-    cambios = calcularCambiosSav({ partida, resumen, sav, pkdx }).map((c) => ({ ...c, marcado: true }))
+    const todos = calcularCambiosSav({ partida, resumen, sav, pkdx })
+    // Los nacidos de un huevo no son capturas de la zona donde nacieron: se apuntan en la Caja
+    eclosiones = todos.filter((c) => c.tipo === 'eclosion')
+    cambios = todos.filter((c) => c.tipo !== 'eclosion').map((c) => ({ ...c, marcado: true }))
   }
 
   const aplicar = () => {
@@ -255,7 +259,7 @@
                   <input type="checkbox" bind:checked={c.marcado} />
                   <b>{traducirNombre(c.lugar)}</b>:
                   {#if c.tipo === 'nuevo'}
-                    {es ? 'añadir' : 'add'} {info(c.s.especie)?.name || c.s.especie} «{c.s.mote}»
+                    {es ? 'añadir' : 'add'} {info(c.s.especie)?.name || c.s.especie}{c.parche.nickname ? ` «${c.parche.nickname}»` : ''}
                   {:else if c.tipo === 'caido'}
                     <span class="lx-caido-txt">{c.s.mote || c.antes.nickname || c.antes.pokemon} {es ? 'está debilitado (0 PS) en tu partida: marcarlo como caído' : 'has fainted (0 HP) in your save: mark as dead'}</span>
                   {:else}
@@ -268,6 +272,13 @@
             {/each}
           </ul>
           <button class="lx-btn" on:click={aplicar}>{es ? 'Aplicar a mi run' : 'Apply to my run'}</button>
+        {/if}
+        {#if eclosiones.length}
+          <p class="lx-nota">
+            {es
+              ? `${eclosiones.map((c) => c.s.mote || info(c.s.especie)?.name || c.s.especie).join(', ')} ${eclosiones.length > 1 ? 'han nacido' : 'ha nacido'} de un huevo. No ${eclosiones.length > 1 ? 'son capturas' : 'es una captura'} de la zona donde ${eclosiones.length > 1 ? 'nacieron' : 'nació'}: en Egglocke, apunta qué salió de cada huevo en la Caja (sale para elegir con un clic).`
+              : `${eclosiones.map((c) => c.s.mote || c.s.especie).join(', ')} hatched from an egg: not a catch from where it hatched. In Egglocke, log what hatched in the Box (one click).`}
+          </p>
         {/if}
       </section>
     {/if}
@@ -490,6 +501,11 @@
   }
   :global(.dark) .lx-caido-txt {
     color: #f87171;
+  }
+  .lx-nota {
+    margin-top: 10px;
+    font-size: 0.9em;
+    opacity: 0.85;
   }
   .lx-cambios {
     display: flex;
