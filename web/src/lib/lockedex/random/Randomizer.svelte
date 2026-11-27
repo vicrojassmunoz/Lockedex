@@ -379,7 +379,7 @@
   .lx-rnd-previo {
     border-style: dashed;
   }
-  .lx-rnd-hecho b {
+  .lx-rnd-hecho > b:first-child {
     font-size: 24px;
     color: #2a8a40;
   }

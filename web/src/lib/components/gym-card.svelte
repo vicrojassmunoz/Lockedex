@@ -32,7 +32,7 @@
 
   import { createImgUrl } from '$utils/rewrites'
   import { toList } from '$utils/string'
-  import { t as tr } from '$lib/lockedex/idioma.js'
+  import { t as tr, traducirNombre } from '$lib/lockedex/idioma.js'
 
   import { Picture, Icon, PIcon, IconButton, Accordion, Tooltip } from '$c/core'
   import { Wrapper as SettingWrapper } from '$lib/components/Settings'
@@ -398,7 +398,7 @@
               {#each equipoReal as p}
                 <span class="lx-random-p">
                   <img src={urlSprite(pokedexRun, p.especie) || '/assets/img/pokemon/base-201-question.png'} alt="" />
-                  <b>{p.especie}</b>
+                  <b>{traducirNombre(String(p.especie).replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()))}</b>
                   <small>Nv. {p.nivel}</small>
                   {#each p.movimientos || [] as mv}<em data-lx-mov={mv}>{mv}</em>{/each}
                 </span>

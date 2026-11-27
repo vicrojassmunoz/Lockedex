@@ -1,3 +1,7 @@
+## Novedades de la 1.28.1
+
+- **Equipos de los jefes aleatorizados:** en la tarjeta del jefe, los nombres salen bien escritos y traducidos (salían en minúsculas, como «totodile»).
+
 ## Novedades de la 1.28.0
 
 - **Randomizer de Lockedex (3.ª gen):** crea una ROM aleatoria de RojoFuego, VerdeHoja, Rubí, Zafiro o Esmeralda, en cualquier idioma. Elige tu ROM y Lockedex te dice qué ha encontrado en ella. Luego eliges qué cambiar:
