@@ -13,6 +13,8 @@
   import Diario from '$lib/lockedex/Diario.svelte'
   let runTerminada = false
   import { onMount, afterUpdate, getContext } from 'svelte'
+  import { leerPartida, alCambiarDatos } from '$lib/lockedex/partida.js'
+  import { zonaDelSav } from '$lib/lockedex/zonas.js'
   import { browser } from '$app/environment'
   import { fade, slide } from 'svelte/transition'
 
@@ -129,6 +131,19 @@
   const _onsearch = (e) => (search = e.detail.search)
   const onsearch = debounce(_onsearch, 350)
 
+  // Con el .sav vinculado (RojoFuego, VerdeHoja y Esmeralda), la zona donde está tu personaje: el botón
+  // pasa a ser «Estás en …». Se relee cada vez que llega una partida nueva del emulador
+  let zonaSav = null
+  const leerZonaSav = async () => {
+    const p = $activeGame ? leerPartida($activeGame) : null
+    zonaSav = p ? (await zonaDelSav(p).catch(() => null))?.zona || null : null
+  }
+  onMount(() => {
+    leerZonaSav()
+    return alCambiarDatos(leerZonaSav)
+  })
+  $: posSav = zonaSav && route?.length ? route.findIndex((r) => r.type === 'route' && r.name === zonaSav) : -1
+
   // «Seguir en…»: la zona siguiente a la última de la lista con algo apuntado. Lo que no es de la lista
   // (herencia del Genlocke, capturas añadidas desde el .sav sin zona, zonas personalizadas) no cuenta;
   // antes se esperaba a «gastar» todas las entradas y con una de esas acababa en la última zona
@@ -177,15 +192,29 @@
             <Genlocke id={$activeGame} datos={gameData} />
             <div class="lx-acciones-run">
               {#if filter === 'nuzlocke'}
-                <button
-                  transition:slide|local={{ duration: 250 }}
-                  class="lx-continuar"
-                  on:click={routeEl.setroute(latestnav(route, gameData))}
-                  data-lx-original
-                >
-                  <span class="lx-continuar-cursor">▶</span>
-                  {t('Seguir en', 'Continue at')} <b>{traducirNombre(latestnav(route, gameData).name)}</b>
-                </button>
+                {#if posSav >= 0}
+                  <!-- Con el .sav vinculado: la zona donde está tu personaje ahora mismo -->
+                  <button
+                    transition:slide|local={{ duration: 250 }}
+                    class="lx-continuar lx-continuar-sav"
+                    on:click={routeEl.setroute({ ...route[posSav], id: posSav })}
+                    title={t('Según tu partida del emulador (la última vez que guardaste)', 'From your emulator save (last time you saved)')}
+                    data-lx-original
+                  >
+                    <span class="lx-continuar-cursor">◉</span>
+                    {t('Estás en', 'You are at')} <b>{traducirNombre(route[posSav].name)}</b>
+                  </button>
+                {:else}
+                  <button
+                    transition:slide|local={{ duration: 250 }}
+                    class="lx-continuar"
+                    on:click={routeEl.setroute(latestnav(route, gameData))}
+                    data-lx-original
+                  >
+                    <span class="lx-continuar-cursor">▶</span>
+                    {t('Seguir en', 'Continue at')} <b>{traducirNombre(latestnav(route, gameData).name)}</b>
+                  </button>
+                {/if}
               {/if}
               <button class="lx-continuar lx-accion-run" on:click={abrirDiario} title={t('Todo lo que ha pasado en la run', 'Everything that happened in the run')} data-lx-original>
                 <IconoLx inline icon={IconoDiario} class="lx-accion-icono" />{t('Diario', 'Diary')}

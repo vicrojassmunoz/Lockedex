@@ -1,3 +1,7 @@
+## Novedades de la 1.22.2
+
+- **«Estás en…»:** con la partida del emulador vinculada (RojoFuego, VerdeHoja y Esmeralda), el botón de la partida te lleva a la zona donde está tu personaje según tu último guardado («◉ Estás en Ruta 101»). Se actualiza solo cada vez que guardas en el emulador. Sin .sav, o en una zona que no está en la lista, sigue siendo «Seguir en…».
+
 ## Novedades de la 1.22.1
 
 - **El inicial ya no cuenta como huevo sin abrir:** en Egglocke, el aviso de «huevo sin abrir» y la marca de la Caja eran por el inicial, que contaba como captura. Si también lo cambias por un huevo, en su detalle se puede apuntar igual.
