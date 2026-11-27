@@ -1,3 +1,9 @@
+## Novedades de la 1.26.0
+
+- **Una sola pantalla de combate:** el VS de cada jefe, el medidor de riesgo y «Comparar con mi equipo» abren la misma pantalla. Arriba está la escena como en el juego: el jefe arriba a la derecha con sus Poké Balls y tu nivel máximo, y tu equipo abajo a la izquierda con sus niveles y sus PS (del .sav si está vinculado). Abajo a la derecha está el cuadro de órdenes: VENCIDO, DERROTA (las dos piden un segundo clic para confirmar), ANALISTA y HUIR.
+- **Tres pestañas:** PLAN (el asistente: riesgo, consejos y movimientos hasta el nivel máximo), DUELO (el modo batalla de la ventana compacta: tu Pokémon contra el suyo, con el daño de cada ataque) y TIPOS (el análisis por tipos de antes, ya en español).
+- Fuera la ventana heredada «Preparar el equipo contra…».
+
 ## Novedades de la 1.25.0
 
 - **La partida, por tramos:** la lista se parte en tramos entre gimnasios («Hasta Brock», «Hasta Misty»…, «Hasta la Liga» y «Después de la Liga»). El tramo en el que estás va abierto y marcado con AHORA. Los demás van plegados, con su medalla (encendida si ya la tienes), las zonas apuntadas, las capturas, los caídos y los fallidos. Pulsa uno para abrirlo o plegarlo; Lockedex se acuerda hasta que pasas al tramo siguiente. «Seguir en…» y «Estás en…» abren el tramo de la zona. Con el buscador se ve todo.

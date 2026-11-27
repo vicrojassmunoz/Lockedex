@@ -3,6 +3,9 @@
   export let id = 0,
     mode = MODES.build
   export let boss
+  // Dentro de la pantalla de combate (pestaña Tipos): sin la X ni los botones de vencer/derrota, que ya
+  // están en la escena
+  export let incrustado = false
 
   import { onMount, getContext } from 'svelte'
 
@@ -192,6 +195,7 @@
 {:else}
   {@const team = makeTeam(teamLocs, analysisResult.mons)}
 
+  {#if !incrustado}
   <IconButton
     borderless
     rounded
@@ -199,6 +203,7 @@
     on:click={close}
     containerClassName="fixed top-4 right-4 z-[100]"
   />
+  {/if}
 
   <CompareCard
     on:select={toggleMon}
@@ -210,17 +215,20 @@
     advice={analysisResult}
   >
     <Tabs className="lx-vs-pestanas flex-1" slot="tabs" bind:active={tab} {tabs} />
-    <Actions
-      slot="actions"
-      on:toggle={settab(0)}
-      on:complete={handlesubmit(team)}
-      on:derrota={handlederrota(team)}
-      class="justify-center rounded-b-lg bg-white px-6 pt-1 pb-2 dark:bg-gray-900 md:-mt-4"
-      {...boss}
-      {team}
-    >
-      <span slot="switch-text">{t('Montar equipo', 'Build team')}</span>
-    </Actions>
+    <svelte:fragment slot="actions">
+      {#if !incrustado}
+        <Actions
+          on:toggle={settab(0)}
+          on:complete={handlesubmit(team)}
+          on:derrota={handlederrota(team)}
+          class="justify-center rounded-b-lg bg-white px-6 pt-1 pb-2 dark:bg-gray-900 md:-mt-4"
+          {...boss}
+          {team}
+        >
+          <span slot="switch-text">{t('Montar equipo', 'Build team')}</span>
+        </Actions>
+      {/if}
+    </svelte:fragment>
   </CompareCard>
 
   <TeamBuildCard
@@ -235,15 +243,18 @@
     summary={analysisResult.summary}
   >
     <Tabs className="lx-vs-pestanas" slot="tabs" bind:active={tab} {tabs} />
-    <Actions
-      slot="actions"
-      on:toggle={settab(1)}
-      on:complete={handlesubmit(team)}
-      on:derrota={handlederrota(team)}
-      {...boss}
-      {team}
-    >
-      <span slot="switch-text">{t('Comparar equipo', 'Compare team')}</span>
-    </Actions>
+    <svelte:fragment slot="actions">
+      {#if !incrustado}
+        <Actions
+          on:toggle={settab(1)}
+          on:complete={handlesubmit(team)}
+          on:derrota={handlederrota(team)}
+          {...boss}
+          {team}
+        >
+          <span slot="switch-text">{t('Comparar equipo', 'Compare team')}</span>
+        </Actions>
+      {/if}
+    </svelte:fragment>
   </TeamBuildCard>
 {/if}

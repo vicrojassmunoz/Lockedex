@@ -41,6 +41,7 @@
   import { Vs } from '$lib/components/BossBattle'
   import { bossToImage } from '$utils/rewrites'
   import MenuEquipo from '$lib/lockedex/MenuEquipo.svelte'
+  import PantallaCombate from '$lib/lockedex/PantallaCombate.svelte'
 
   import Effect from '$lib/components/Effect.svelte'
 
@@ -61,7 +62,6 @@
 
   // Lockedex: nivel de riesgo y asistente de combate
   import Riesgo from '$lib/lockedex/Riesgo.svelte'
-  import Asistente from '$lib/lockedex/Asistente.svelte'
   import { calcularRiesgo } from '$lib/lockedex/riesgo.js'
   import { equipoActual } from '$lib/lockedex/equipo.js'
   import { alCambiarDatos } from '$lib/lockedex/partida.js'
@@ -155,11 +155,20 @@
     }
   })
   $: if (vista && !loading && pokemon.length) evaluarRiesgo()
-  const abrirAsistente = async () => {
-    const jefeRiesgo = await jefeParaRiesgo()
-    if (!jefeRiesgo) return apuntarEquipo()
-    open(Asistente, { jefe: jefeRiesgo, cap: capJefe, ocultarEquipo: !showBoss, valor: id, juego: game, inicial: starter })
+  // Pantalla de combate (Plan, Duelo y Tipos): la abren el VS, el medidor de riesgo y «Comparar con mi equipo»
+  const abrirCombate = async (pestana = 'plan', comparar = null) => {
+    leerRandom()
+    const sinCalc = sinCalculos(reglasRun)
+    const jefeRiesgo = sinCalc ? null : await jefeParaRiesgo()
+    // Randomlocke sin el equipo real apuntado: primero hay que apuntarlo
+    if (aleatorio && !jefeRiesgo && !sinCalc) return apuntarEquipo()
+    open(
+      PantallaCombate,
+      { boss, jefe: jefeRiesgo, cap: capJefe, ocultarEquipo: !showBoss, ocultarPokemon: !showTeam, valor: id, juego: game, inicial: starter, pestana, comparar, defeated },
+      { closeOnEsc: true }
+    )
   }
+  const abrirAsistente = () => abrirCombate('plan')
 
   $: showTeam = !aleatorio && (reader || spoilers < 1 || revealed || defeated)
   $: showBoss = reader || spoilers < 2 || revealed || defeated
@@ -168,19 +177,8 @@
   const { getLeague } = getContext('game')
   const { open } = getContext('simple-modal')
 
-  let CompareModal
-  const loadmodal = async () => {
-    if (CompareModal) return CompareModal
-    return import('$lib/components/ProgressModal.svelte').then((m) => {
-      CompareModal = m.default
-      return CompareModal
-    })
-  }
-
-  const openCompare = (id) => () =>
-    loadmodal().then((modal) => open(modal, { boss, mode: 'compare', id }))
-  const openBuilder = () =>
-    loadmodal().then((modal) => open(modal, { boss, mode: 'build' }))
+  const openCompare = (i) => () => abrirCombate('tipos', i)
+  const openBuilder = () => abrirCombate('plan')
 
   export let loading = true
 
@@ -358,7 +356,7 @@
             <button
               class="lx-boton-riesgo -mt-1"
               on:click|stopPropagation={abrirAsistente}
-              title="Asistente de combate"
+              title={tr('Preparar el combate', 'Prepare the battle')}
             >
               <Riesgo
                 nivel={riesgo.nivel}
@@ -381,7 +379,7 @@
             <button
               class="lx-vs"
               on:click={openBuilder}
-              title={showBoss ? `Preparar el equipo contra ${boss.name}` : 'Preparar el equipo para este combate'}
+              title={showBoss ? tr(`Preparar el combate contra ${boss.name}`, `Prepare the battle against ${boss.name}`) : tr('Preparar este combate', 'Prepare this battle')}
               data-lx-original
             >VS</button>
           {/if}

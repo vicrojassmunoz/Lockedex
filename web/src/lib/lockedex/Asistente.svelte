@@ -23,6 +23,8 @@
   export let valor = ''
   export let juego = ''
   export let inicial = 'fire'
+  // Dentro de la pantalla de combate: sin título ni botón de cerrar (ya los pone la escena)
+  export let incrustado = false
   import { goto } from '$app/navigation'
   const abrirAnalista = () => {
     close()
@@ -131,11 +133,13 @@
   })
 </script>
 
-<section class="lx-asistente" data-lx-original>
+<section class="lx-asistente" class:lx-incrustado={incrustado} data-lx-original>
   <header>
     <div>
-      <small>{es ? 'ASISTENTE DE COMBATE' : 'BATTLE ASSISTANT'}</small>
-      <h2>{ocultarEquipo ? '???' : jefe?.name}</h2>
+      {#if !incrustado}
+        <small>{es ? 'ASISTENTE DE COMBATE' : 'BATTLE ASSISTANT'}</small>
+        <h2>{ocultarEquipo ? '???' : jefe?.name}</h2>
+      {/if}
       {#if capRegla || cap}<span class="lx-cap">{es ? 'Nivel máximo' : 'Level cap'} {capRegla || cap}</span>{/if}
       {#each reglasActivas as r}<span class="lx-regla-chip">{r}</span>{/each}
     </div>
@@ -145,7 +149,7 @@
         {es ? 'Probar en el Analista →' : 'Try in Analyst →'}
       </button>
     {/if}
-    <button class="lx-cerrar" on:click={close} aria-label={es ? 'Cerrar' : 'Close'}>✕</button>
+    {#if !incrustado}<button class="lx-cerrar" on:click={close} aria-label={es ? 'Cerrar' : 'Close'}>✕</button>{/if}
   </header>
 
   {#if cargando}
