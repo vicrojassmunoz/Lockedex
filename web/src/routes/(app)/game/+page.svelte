@@ -18,14 +18,12 @@
   import { browser } from '$app/environment'
   import { fade, slide } from 'svelte/transition'
 
-  import { Loader, Tabs } from '$lib/components/core'
+  import { Loader } from '$lib/components/core'
 
   import { SupportBanner } from '$lib/components/navs'
   import { GameRoute, Search } from '$lib/components/Game'
   import { Settings } from '$lib/components/Settings'
 
-  import Icon from '@iconify/svelte/dist/OfflineIcon.svelte'
-  import { Arrow, Hide } from '$icons'
 
   import deferStyles from '$lib/utils/defer-styles'
   import debounce from '$lib/utils/debounce'
@@ -55,30 +53,11 @@
 
   let search = ''
 
-  let filter = 'nuzlocke'
-  const filters = [
-    { label: 'Nuzlocke', val: 'nuzlocke' },
-    { label: 'Routes', val: 'route' },
-    { label: 'Bosses', val: 'bosses' },
-    { label: 'Upcoming', val: 'upcoming' }
-  ]
-
-  let routeFilter = 'all'
-  let routeFilters = [
-    { label: 'All', val: 'all' },
-    { label: 'Upcoming', val: 'upcoming' },
-    { label: 'Planned', val: 'planned' },
-    { label: 'Missed', val: 'missed' }
-  ]
-
-  let bossFilter = 'all'
-  const bossFilters = [
-    { label: 'All', val: 'all' },
-    { label: 'Gym leaders', val: 'gym-leader' },
-    { label: 'Elite Four', val: 'elite-four' },
-    { label: 'Rival fights', val: 'rival' },
-    { label: 'Evil team', val: 'evil-team' }
-  ]
+  // Las pestañas heredadas (Nuzlocke, Rutas, Jefes, Próximos) dejan paso a los tramos entre gimnasios
+  // (Route.svelte): la lista se ve siempre entera, plegada por tramos
+  const filter = 'nuzlocke'
+  const bossFilter = 'all'
+  const routeFilter = 'all'
 
   let route
   const fetchRoute = async (gen) => {
@@ -232,41 +211,6 @@
               </button>
             </div>
 
-            <Tabs name="filter" tabs={filters} bind:selected={filter} />
-
-            {#if filter === 'bosses'}
-              <span transition:slide|local={{ duration: 250 }}>
-                <Tabs
-                  name="bosses"
-                  tabs={bossFilters}
-                  bind:selected={bossFilter}
-                />
-              </span>
-            {/if}
-
-            {#if filter === 'route'}
-              <span transition:slide|local={{ duration: 250 }}>
-                <Tabs
-                  name="route"
-                  tabs={routeFilters}
-                  bind:selected={routeFilter}
-                />
-              </span>
-            {/if}
-
-            {#if filter === 'upcoming'}
-              <span
-                transition:slide|local={{ duration: 250 }}
-                class="-mb-4 inline-block text-sm leading-5 tracking-tight dark:text-gray-400"
-              >
-                <Icon
-                  inline={true}
-                  height="1.2em"
-                  icon={Hide}
-                  class="-mt-1 mr-1 inline-block fill-current"
-                /><b>{latestnav(route, gameData).id}</b> {t('ocultos', 'items hidden')}
-              </span>
-            {/if}
           </div>
 
           <div class="inline-flex">

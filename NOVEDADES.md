@@ -1,3 +1,9 @@
+## Novedades de la 1.25.0
+
+- **La partida, por tramos:** la lista se parte en tramos entre gimnasios («Hasta Brock», «Hasta Misty»…, «Hasta la Liga» y «Después de la Liga»). El tramo en el que estás va abierto y marcado con AHORA. Los demás van plegados, con su medalla (encendida si ya la tienes), las zonas apuntadas, las capturas, los caídos y los fallidos. Pulsa uno para abrirlo o plegarlo; Lockedex se acuerda hasta que pasas al tramo siguiente. «Seguir en…» y «Estás en…» abren el tramo de la zona. Con el buscador se ve todo.
+- **Fuera las pestañas heredadas** (Nuzlocke, Rutas, Jefes, Próximos): los tramos las sustituyen.
+- **Medallas a color** en los tramos, en la pantalla de título y en la ficha de entrenador (antes en grises).
+
 ## Novedades de la 1.24.0
 
 - **Pantalla de título:** al abrir Lockedex sale un menú como el de Esmeralda. CONTINUAR lleva la tarjeta de tu run activa: entrenador, juego, tiempo de juego (del .sav, o los días desde que la creaste), capturas, caídos, medallas y tu equipo. Debajo están NUEVA PARTIDA y OPCIONES (idioma, tema, reglas y ajustes de la run y copia de seguridad). Se maneja con las flechas e Intro.

@@ -34,7 +34,7 @@
     fin: { fondo: '#e09868', franja: '#a85830', claro: '#f0c0a0', tinta: '#502010' }
   }
   // Hojas de medallas sacadas de las tarjetas de entrenador de los juegos (8 de 16×16)
-  const HOJAS = { kanto: '/lx/medallas/kanto.png', johto: '/lx/medallas/johto.png', hoenn: '/lx/medallas/hoenn.png' }
+  const HOJAS = { kanto: '/lx/medallas/kanto-color.png', johto: '/lx/medallas/johto-color.png', hoenn: '/lx/medallas/hoenn-color.png' }
 
   const cargarImg = (src) =>
     new Promise((ok) => {

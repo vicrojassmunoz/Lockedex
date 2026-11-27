@@ -19,7 +19,7 @@
   const lx = typeof window !== 'undefined' ? window.lockedex : null
 
   // Hojas de medallas de las tarjetas de entrenador de los juegos (8 de 16×16 en fila)
-  const HOJAS = { kanto: '/lx/medallas/kanto.png', johto: '/lx/medallas/johto.png', hoenn: '/lx/medallas/hoenn.png' }
+  const HOJAS = { kanto: '/lx/medallas/kanto-color.png', johto: '/lx/medallas/johto-color.png', hoenn: '/lx/medallas/hoenn-color.png' }
   // Color de la etiqueta de cada cartucho (el de la caja del juego); si no está, el de su región
   const ETIQUETA = {
     red: '#d83830', blue: '#3060c8', yel: '#f0c020', gold: '#d0a030', silv: '#a8b0c0', crys: '#58b8e0',
