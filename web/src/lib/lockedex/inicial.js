@@ -1,6 +1,7 @@
 // Tipo del inicial (planta, fuego o agua) a partir del Pokémon apuntado en «Inicial».
 // De él depende el equipo del rival: si coges a Bulbasaur, el rival lleva a Charmander.
 import { fetchData } from '$utils/fetchers'
+import { tipoInicialRandom } from './random/registro.js'
 
 const LINEAS = {
   grass: 'bulbasaur ivysaur venusaur chikorita bayleef meganium treecko grovyle sceptile turtwig grotle torterra snivy servine serperior chespin quilladin chesnaught rowlet dartrix decidueye grookey thwackey rillaboom sprigatito floragato meowscarada',
@@ -22,6 +23,9 @@ const norm = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '')
 
 export const tipoInicial = async (especie, juego = '') => {
   if (!especie) return null
+  // ROM aleatoria de Lockedex: cuenta la casilla del inicial (la de Planta, la de Fuego o la de Agua)
+  const delRandom = tipoInicialRandom(especie)
+  if (delRandom) return delRandom
   const base = String(especie).toLowerCase()
   const hack = Object.keys(HACKS).find((h) => String(juego).startsWith(h))
   if (hack) {

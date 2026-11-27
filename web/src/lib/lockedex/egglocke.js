@@ -92,7 +92,8 @@ const conMovimientosHuevo = (movimientos, deHuevo = [], ppDe = {}) => {
   return out
 }
 
-export const paraSavGen3 = async (lista, grupo, { rapida = false, movimientosHuevo = false } = {}) => {
+// aprendizajeRandom: movimientos por nivel de una ROM aleatoria de Lockedex ({ alias: [[nivel, id]] })
+export const paraSavGen3 = async (lista, grupo, { rapida = false, movimientosHuevo = false, aprendizajeRandom = null } = {}) => {
   const [tablas, ciclosJson, movs, apr] = await Promise.all([
     fetch('/lx/gen3.json').then((r) => r.json()),
     fetch('/lx/huevos-gen3.json').then((r) => r.json()),
@@ -110,6 +111,11 @@ export const paraSavGen3 = async (lista, grupo, { rapida = false, movimientosHue
     const e = tablas.especies[i]
     const claves = probablesANivel(porNivel[clavePokemon(h.alias, porNivel)], 5)
     let movimientosH = claves.map((k) => movs[k]).filter((m) => m && m.id <= 354).map((m) => ({ id: m.id, pp: m.pp || 10 }))
+    const delRandom = aprendizajeRandom?.[h.alias]
+    if (delRandom?.length) {
+      const ids = delRandom.filter(([n]) => n <= 5).map(([, id]) => id)
+      movimientosH = [...new Set(ids)].slice(-4).map((id) => ({ id, pp: ppPorId[id] || 10 }))
+    }
     if (!movimientosH.length) movimientosH = [{ id: 33, pp: 35 }]
     // Los movimientos huevo son de la forma básica (la del huevo): solo rellenan huecos, nunca quitan
     if (movimientosHuevo) movimientosH = conMovimientosHuevo(movimientosH, ciclosJson.huevo?.[i] || [], ppPorId)

@@ -13,6 +13,11 @@ contextBridge.exposeInMainWorld('lockedex', {
   leerSav: (ruta) => ipcRenderer.invoke('lx:leer-sav', ruta),
   escribirSav: (datos) => ipcRenderer.invoke('lx:escribir-sav', datos),
   vigilarSav: (ruta) => ipcRenderer.invoke('lx:vigilar-sav', ruta),
+
+  // Randomizer: ROM de la 3.ª gen (la aleatorizada se guarda al lado, la original no se toca)
+  elegirRom: () => ipcRenderer.invoke('lx:elegir-rom'),
+  guardarRomAleatoria: (datos) => ipcRenderer.invoke('lx:guardar-rom-aleatoria', datos),
+  mostrarArchivo: (ruta) => ipcRenderer.invoke('lx:mostrar-archivo', ruta),
   alCambiarSav: (cb) => {
     const f = (_e, ruta) => cb(ruta)
     ipcRenderer.on('lx:sav-cambiado', f)

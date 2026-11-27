@@ -585,6 +585,60 @@ ipcMain.handle('lx:escribir-sav', async (_e, { ruta, datos, fechaLeida }) => {
   }
 })
 
+// ---------------------------------------------------------------------------
+// Randomizer: la ROM del usuario (.gba) se lee y la aleatorizada se guarda AL LADO, con otro nombre.
+// La original no se toca nunca.
+// ---------------------------------------------------------------------------
+ipcMain.handle('lx:elegir-rom', async (e) => {
+  // Solo para las pruebas automáticas (con NUZ_DEBUG): una ROM fija en vez del diálogo
+  if (process.env.NUZ_DEBUG && process.env.LOCKEDEX_ROM_PRUEBA && fs.existsSync(process.env.LOCKEDEX_ROM_PRUEBA)) {
+    const r = process.env.LOCKEDEX_ROM_PRUEBA
+    return { ruta: r, nombre: path.basename(r), tamano: fs.statSync(r).size, datos: new Uint8Array(fs.readFileSync(r)) }
+  }
+  const v = BrowserWindow.fromWebContents(e.sender)
+  const { canceled, filePaths } = await dialog.showOpenDialog(v, {
+    title: 'Elige tu ROM de la 3.ª generación',
+    defaultPath: leerConfig().carpetaRom || leerConfig().carpetaSav || app.getPath('documents'),
+    filters: [
+      { name: 'ROM de Game Boy Advance', extensions: ['gba'] },
+      { name: 'Todos los archivos', extensions: ['*'] }
+    ],
+    properties: ['openFile']
+  })
+  if (canceled || !filePaths[0]) return null
+  const ruta = filePaths[0]
+  const st = fs.statSync(ruta)
+  if (st.size > 32 * 1024 * 1024) return { ruta, nombre: path.basename(ruta), error: 'grande' }
+  guardarConfig({ carpetaRom: path.dirname(ruta) })
+  return { ruta, nombre: path.basename(ruta), tamano: st.size, datos: new Uint8Array(fs.readFileSync(ruta)) }
+})
+
+ipcMain.handle('lx:guardar-rom-aleatoria', async (_e, { rutaOriginal, datos, sufijo, registroTexto }) => {
+  try {
+    if (!rutaOriginal || !fs.existsSync(rutaOriginal)) return { ok: false, motivo: 'no-existe' }
+    const dir = path.dirname(rutaOriginal)
+    const base = path.basename(rutaOriginal, path.extname(rutaOriginal))
+    const limpio = String(sufijo || 'aleatoria').replace(/[\\/:*?"<>|]/g, '').slice(0, 40)
+    let destino = path.join(dir, `${base} (Lockedex ${limpio}).gba`)
+    for (let n = 2; fs.existsSync(destino) && n < 100; n++) destino = path.join(dir, `${base} (Lockedex ${limpio} ${n}).gba`)
+    if (path.resolve(destino) === path.resolve(rutaOriginal)) return { ok: false, motivo: 'misma' }
+    await fsp.writeFile(destino, Buffer.from(datos))
+    let registro = null
+    if (registroTexto) {
+      registro = destino.replace(/\.gba$/i, '.log.txt')
+      await fsp.writeFile(registro, registroTexto, 'utf8')
+    }
+    return { ok: true, ruta: destino, nombre: path.basename(destino), registro: registro && path.basename(registro) }
+  } catch (e) {
+    return { ok: false, motivo: 'error', detalle: String(e?.message || e) }
+  }
+})
+
+ipcMain.handle('lx:mostrar-archivo', (_e, ruta) => {
+  if (ruta && fs.existsSync(ruta)) shell.showItemInFolder(ruta)
+  return true
+})
+
 ipcMain.handle('lx:vigilar-sav', (_e, ruta) => {
   if (savVigilado) fs.unwatchFile(savVigilado)
   savVigilado = null

@@ -7,7 +7,9 @@
   import Genlocke from '$lib/lockedex/Genlocke.svelte'
   import GeneradorHuevos from '$lib/lockedex/GeneradorHuevos.svelte'
   import IconoLx from '@iconify/svelte/dist/OfflineIcon.svelte'
-  import { Diario as IconoDiario, Ficha as IconoFicha, Loop as IconoRecargar } from '$icons'
+  import { Diario as IconoDiario, Ficha as IconoFicha, Loop as IconoRecargar, Dice as IconoDado } from '$icons'
+  import Randomizer from '$lib/lockedex/random/Randomizer.svelte'
+  import { leerRandom } from '$lib/lockedex/random/registro.js'
   import { leerReglas } from '$lib/lockedex/reglas.js'
   import TarjetaEntrenador from '$lib/lockedex/TarjetaEntrenador.svelte'
   import Diario from '$lib/lockedex/Diario.svelte'
@@ -47,6 +49,18 @@
   const recargarSav = () => window.dispatchEvent(new Event('lx:recargar-sav'))
   const abrirDiario = () => abrirVentana(Diario, { id: $activeGame })
   const abrirHuevos = () => abrirVentana(GeneradorHuevos, { id: $activeGame })
+  // Randomizer (3.ª gen): ROM aleatoria con su registro en la run. Al crear una run con «Aleatorizar mi ROM»
+  // se abre solo la primera vez
+  const JUEGOS_RANDOM = ['ruby', 'saph', 'em', 'fr', 'lg']
+  $: conRandomizer = !!(gameKey && JUEGOS_RANDOM.includes(gameKey))
+  $: randomRun = ($activeGame, gameData, $activeGame ? leerRandom($activeGame) : null)
+  const abrirRandomizer = () => abrirVentana(Randomizer, { id: $activeGame })
+  onMount(() => {
+    if (localStorage.getItem('lockedex.abrirRandomizer') === localStorage.getItem('nuzlocke')) {
+      localStorage.removeItem('lockedex.abrirRandomizer')
+      setTimeout(abrirRandomizer, 600)
+    }
+  })
   // con el Egglocke activo, el generador de huevos a mano (se mira al cambiar de run o de datos)
   $: egglocke = !!($activeGame && gameData && leerReglas($activeGame).egglocke)
   let routeEl
@@ -201,6 +215,11 @@
               {#if egglocke}
                 <button class="lx-continuar lx-accion-run lx-accion-huevos" on:click={abrirHuevos} title={t('Reparte huevos al azar y mételos en tu partida', 'Hand out random eggs and put them in your save')} data-lx-original>
                   <img src="/lx/iconos/huevo.png" alt="" width="24" height="24" />{t('Huevos', 'Eggs')}
+                </button>
+              {/if}
+              {#if conRandomizer}
+                <button class="lx-continuar lx-accion-run" on:click={abrirRandomizer} title={randomRun ? t(`ROM aleatoria · semilla ${randomRun.semilla}`, `Random ROM · seed ${randomRun.semilla}`) : t('Crea una ROM aleatoria de tu juego', 'Create a random ROM of your game')} data-lx-original>
+                  <IconoLx inline icon={IconoDado} class="lx-accion-icono" />{randomRun ? t('ROM aleatoria', 'Random ROM') : t('Randomizer', 'Randomizer')}
                 </button>
               {/if}
               <button class="lx-continuar lx-accion-run" on:click={abrirFicha} title={t('Imagen de tu run para compartir', 'An image of your run to share')} data-lx-original>

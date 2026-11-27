@@ -19,6 +19,13 @@
 
   let reglasNuevas = { ...PLANTILLAS.clasico.reglas, plantilla: 'clasico' }
   let personalizar = false
+  // «Aleatorizar mi ROM»: la partida se abre con el randomizer de Lockedex (solo 3.ª gen de GBA)
+  const JUEGOS_RANDOM = ['ruby', 'saph', 'em', 'fr', 'lg']
+  let conRandomizer = false
+  const marcarRandomizer = () => {
+    const id = get(activeGame)
+    if (conRandomizer && id && JUEGOS_RANDOM.includes(selected)) localStorage.setItem('lockedex.abrirRandomizer', id)
+  }
   let ajustesExtra = {}
 
   // Guarda las reglas elegidas en la run recién creada y aplica sus ajustes
@@ -82,6 +89,7 @@
 
     savedGames.update(createGame(gameName, createid))
     aplicarReglas()
+    marcarRandomizer()
     window.location = '/game'
   }
 
@@ -98,6 +106,7 @@
 
         savedGames.update(createGame(gameName, createid, res))
         aplicarReglas()
+        marcarRandomizer()
         window.location = '/game'
       })
   }
@@ -242,6 +251,12 @@
     {/each}
     <button class="lx-personalizar" on:click={() => (personalizar = !personalizar)}>{personalizar ? '▴' : '▾'} {es ? 'Personalizar' : 'Customise'}</button>
   </div>
+  {#if selected && JUEGOS_RANDOM.includes(selected)}
+    <label class="lx-nuevo-random" data-lx-original>
+      <input type="checkbox" bind:checked={conRandomizer} />
+      🎲 {es ? 'Aleatorizar mi ROM con Lockedex al empezar (salvajes, iniciales, entrenadores, tipos…)' : 'Randomize my ROM with Lockedex when starting (wild, starters, trainers, types…)'}
+    </label>
+  {/if}
   {#if personalizar}
     {#key reglasNuevas.plantilla}
       <div class="lx-reglas-editor">
@@ -326,6 +341,13 @@
 <div class="h-28 w-8" />
 
 <style>
+  .lx-nuevo-random {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 6px 0 10px;
+    font-size: 14px;
+  }
   .lx-nuevo-genlocke {
     margin-bottom: 12px;
     padding: 8px 12px;

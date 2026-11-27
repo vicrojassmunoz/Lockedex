@@ -21,6 +21,7 @@
   const reglasRun = typeof window !== 'undefined' ? leerReglas(localStorage.getItem('nuzlocke')) : {}
   // Lockedex: método, niveles y probabilidad de cada Pokémon en esta zona (juegos oficiales, de PokeAPI)
   import { cargarEncuentros, resumenEspecie } from '$lib/lockedex/encuentros.js'
+  import { randomActivo, encuentrosRandom } from '$lib/lockedex/random/registro.js'
   import { norm as normLx } from '$lib/lockedex/datos.js'
   let encuentrosZona = null
   const esLx = idioma() === 'es'
@@ -76,15 +77,24 @@
   export let encounters = []
   let encounterItems = []
 
+  // Con una ROM aleatoria de Lockedex, lo que sale en la zona es lo de su registro
+  const conRandom = typeof localStorage !== 'undefined' && !!randomActivo()
+  let especiesRandom = null
+  $: listaEncuentros = especiesRandom || encounters || []
   const encounterF = (_) =>
-    getPkmns(encounters).then((e) =>
-      (encounters || []).map((id) => e[id]).filter((i) => i)
+    getPkmns(listaEncuentros).then((e) =>
+      (listaEncuentros || []).map((id) => e[id]).filter((i) => i)
     )
 
   let Particles, EvoModal, DeathModal
   onMount(() => {
     const [data, claveJuego] = readdata()
-    cargarEncuentros(claveJuego).then((m) => (encuentrosZona = m?.[location] || null))
+    if (conRandom)
+      encuentrosRandom().then((r) => {
+        encuentrosZona = r.zonas?.[location] || null
+        especiesRandom = r.especies?.[location] || null
+      })
+    else cargarEncuentros(claveJuego).then((m) => (encuentrosZona = m?.[location] || null))
     const loc = data[location]
     if (typeof loc?.pokemon !== 'undefined') {
       const o = {
@@ -319,7 +329,7 @@
   let EscenaEncuentro
   const abrirEncuentro = async (conMote) => {
     EscenaEncuentro ||= (await import('$lib/lockedex/EscenaEncuentro.svelte')).default
-    const candidatos = reglasRun.randomlocke ? [] : await encounterF().catch(() => [])
+    const candidatos = reglasRun.randomlocke && !especiesRandom ? [] : await encounterF().catch(() => [])
     open(EscenaEncuentro, {
       zona: location,
       candidatos,
@@ -437,7 +447,7 @@
             <AutoCompleteV2
               inset={selected ? true : '2.4em'}
               itemF={(_) => (fetchSearch ? getEncounterablePkmn() : encounterF())}
-              max={fetchSearch ? 16 : (encounters || []).length}
+              max={fetchSearch ? 16 : (listaEncuentros || []).length}
               on:change={(_) => (search = null)}
               bind:search
               bind:selected

@@ -24,6 +24,7 @@
   import { activeGame } from '$lib/store'
   import { tipoInicial } from '$lib/lockedex/inicial'
   import { leerReglas } from '$lib/lockedex/reglas'
+  import { leerRandom } from '$lib/lockedex/random/registro.js'
   import GymCard from '$lib/components/gym-card.svelte'
   import PokemonSelector from '$lib/components/pokemon-selector.svelte'
 
@@ -57,7 +58,7 @@
   // En Randomlocke no, porque el Pokémon no dice qué Poké Ball elegiste.
   let inicialVisto = data.Starter?.pokemon
   const deducirInicial = async (especie, alAbrir) => {
-    if (!especie || leerReglas(get(activeGame))?.randomlocke) return
+    if (!especie || (leerReglas(get(activeGame))?.randomlocke && !leerRandom(get(activeGame)))) return
     if (alAbrir && data.__starter) return
     const tipo = await tipoInicial(especie, key)
     if (tipo && tipo !== starter) {

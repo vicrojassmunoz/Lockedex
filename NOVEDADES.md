@@ -1,3 +1,16 @@
+## Novedades de la 1.28.0
+
+- **Randomizer de Lockedex (3.ª gen):** crea una ROM aleatoria de RojoFuego, VerdeHoja, Rubí, Zafiro o Esmeralda, en cualquier idioma. Elige tu ROM y Lockedex te dice qué ha encontrado en ella. Luego eliges qué cambiar:
+  - **Pokémon salvajes:** 1 a 1 por especie, al azar por zona o por fuerza parecida. Puedes respetar la etapa (básicos por básicos, finales por finales), quitar los legendarios y subir los niveles.
+  - **Iniciales:** al azar o al azar con 3 etapas. Pueden ser de Planta, Fuego y Agua o formar un triángulo de tipos (cada uno gana al siguiente).
+  - **Entrenadores y jefes:** al azar o por fuerza parecida, con la misma etapa, los líderes y el Alto Mando con su tipo, el rival con la línea de su inicial y subida de niveles. Los que llevan movimientos propios reciben los que sabría su especie nueva a ese nivel.
+  - **Tipos, habilidades y movimientos por nivel:** al azar, igual en toda la línea evolutiva o del todo al azar, sin Superguarda y siempre con un ataque desde el principio.
+  - **Semilla:** con la misma semilla y los mismos ajustes sale la misma ROM.
+- La ROM nueva se guarda **al lado de la tuya**, con un registro en texto de todo lo que ha cambiado. La original no se toca.
+- **La run lo sabe todo:** se guardan los ajustes y el registro. Al apuntar un encuentro salen los Pokémon que hay de verdad en cada zona, con su método, niveles y probabilidad. Lockedex reconoce los iniciales nuevos, y los jefes llevan su equipo aleatorizado, ya puesto según tu inicial. La run pasa a Randomlocke sola. Si cambian tipos, habilidades o movimientos, el riesgo no se calcula.
+- **Huevos con la ROM aleatoria:** el generador de Egglocke usa los mismos ajustes y, si cambian los movimientos, los de esa ROM.
+- Se abre con el botón **Randomizer** de la partida, o marcando «Aleatorizar mi ROM con Lockedex» al crear una run de la 3.ª gen.
+
 ## Novedades de la 1.27.1
 
 - **Rubí y Zafiro con el .sav:** «Estás en…» ya funciona (faltaba la tabla de mapas de Rubí y Zafiro) y el generador de huevos ya puede meterlos en partidas de Rubí y Zafiro (las reconocía con otra clave de juego).

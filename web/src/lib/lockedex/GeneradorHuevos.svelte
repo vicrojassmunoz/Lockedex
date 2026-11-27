@@ -6,6 +6,7 @@
   import { generarHuevos, paraSavGen3, leerHuevosRun, guardarHuevosRun, JUEGOS_GEN3 } from './egglocke.js'
   import { meterHuevos, huecosLibres, juegoDelSav, VERSION_JUEGO } from './sav/huevosGen3.js'
   import { tipos as tiposEs } from './datos.js'
+  import { leerRandom } from './random/registro.js'
   import { t, idioma, traducirNombre } from './idioma.js'
 
   export let id = ''
@@ -18,6 +19,7 @@
   let tt = {}
   let opciones = { cantidad: 30, basicas: true, sinLegendarios: true, sinRepetir: true, tipo: '', rapida: false, movimientosHuevo: true, variocolor: 0, oculta: 0 }
   let guardado = null // { fecha, lista, sav }
+  let random = null
   let lista = []
   let disponibles = 0
   let ver = false
@@ -37,6 +39,9 @@
     partida = leerPartida(id)
     tt = await tiposEs()
     guardado = leerHuevosRun(id)
+    // ROM aleatoria de Lockedex: los huevos, con sus mismos ajustes (y sus movimientos por nivel)
+    random = leerRandom(id)
+    if (random?.ajustes?.salvajes) opciones.sinLegendarios = !!random.ajustes.salvajes.sinLegendarios
     if (guardado?.lista?.length) lista = guardado.lista
     // (escribible es reactivo y aquí aún no está al día)
     if (JUEGOS_GEN3.includes(partida?.juego)) cargarVinculado()
@@ -96,7 +101,12 @@
       // Se vuelve a leer justo antes, por si el juego ha guardado desde que se abrió la ventana
       const fresco = prepararSav(await window.lockedex.leerSav(sav.ruta))
       if (!fresco?.libres) throw new Error(t('No se pudo volver a leer la partida.', 'Could not re-read the save.'))
-      const datos = await paraSavGen3(lista, partida.info.grupo, { rapida: opciones.rapida, movimientosHuevo: opciones.movimientosHuevo })
+      const datos = await paraSavGen3(lista, partida.info.grupo, {
+        rapida: opciones.rapida,
+        // con movimientos aleatorizados, los movimientos huevo de siempre no pegan: solo los de su nivel en esa ROM
+        movimientosHuevo: opciones.movimientosHuevo && !random?.aprendizaje,
+        aprendizajeRandom: random?.aprendizaje || null
+      })
       const r = meterHuevos(fresco.buffer, datos, { version: VERSION_JUEGO[partida.juego] || 4, desdeCaja })
       const w = await window.lockedex.escribirSav({ ruta: fresco.ruta, datos: new Uint8Array(r.buffer), fechaLeida: fresco.fecha })
       if (!w?.ok)
@@ -139,6 +149,9 @@
   </header>
 
   <div class="lx-gh-cuerpo">
+    {#if random}
+      <p class="lx-gh-nota">🎲 {t(`Run con ROM aleatoria de Lockedex (semilla ${random.semilla}): los huevos usan sus mismos ajustes${random.aprendizaje ? ' y sus movimientos por nivel' : ''}.`, `Run with a Lockedex random ROM (seed ${random.semilla}): eggs use its settings${random.aprendizaje ? ' and its level-up moves' : ''}.`)}</p>
+    {/if}
     <div class="lx-gh-opciones">
       <label>{t('Huevos', 'Eggs')} <input type="number" min="1" max="120" bind:value={opciones.cantidad} /></label>
       <label><input type="checkbox" bind:checked={opciones.basicas} /> {t('Solo formas básicas', 'Base forms only')}</label>
