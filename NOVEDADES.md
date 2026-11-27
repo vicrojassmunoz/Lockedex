@@ -1,3 +1,8 @@
+## Novedades de la 1.24.0
+
+- **Pantalla de título:** al abrir Lockedex sale un menú como el de Esmeralda. CONTINUAR lleva la tarjeta de tu run activa: entrenador, juego, tiempo de juego (del .sav, o los días desde que la creaste), capturas, caídos, medallas y tu equipo. Debajo están NUEVA PARTIDA y OPCIONES (idioma, tema, reglas y ajustes de la run y copia de seguridad). Se maneja con las flechas e Intro.
+- **Tus otras runs, como cartuchos:** debajo del menú salen las demás runs con el logotipo de su juego, sus capturas, sus caídos y la última vez que jugaste. Pulsa una para seguir con ella. «Partidas» sigue sirviendo para compartir, borrar o importar.
+
 ## Novedades de la 1.23.0
 
 - **Menú de equipo como en la GBA:** al pulsar la barra del equipo se abre el menú del juego, con el primero en grande y el resto en barras. Si tienes el .sav vinculado, cada uno lleva su nivel y sus PS. Al elegir uno salen FICHA, CAMBIAR y SACAR. Un hueco libre abre la caja para meter a uno. CAMBIAR también deja sustituirlo por uno de la caja. Se maneja con las flechas, Intro y Esc. Sustituye a la ventana «Montar equipo»; arrastrar desde la Caja sigue funcionando.
