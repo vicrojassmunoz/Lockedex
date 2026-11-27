@@ -1,11 +1,10 @@
 <script>
   import { PIcon, Icon } from '$c/core'
   import { encajarIcono } from '$lib/lockedex/encajar.js'
-  import { X, Plus } from '$icons'
+  import { Plus } from '$icons'
+  import { t } from '$lib/lockedex/idioma.js'
   import { fade, scale } from 'svelte/transition'
   import { drag } from '$utils/drag'
-
-  import { ModalController } from './'
 
   import { createEventDispatcher } from 'svelte'
   const dispatch = createEventDispatcher()
@@ -62,20 +61,6 @@
     dragLeave()
   }
 
-  function onSubmit(evt) {
-    evt.detail.forEach((data, targetId) => {
-      dispatch('add', { data, targetId })
-    })
-  }
-
-  const onRemove = (p) => (evt) => {
-    dispatch('remove', {
-      data: p,
-      targetId: getAttr(evt.target, 'data-drag-id')
-    })
-  }
-
-
 </script>
 
 <div
@@ -85,9 +70,9 @@
   {#each mons as p, i}
     <button
       use:drag={{ data: p, id: i, effect: 'move' }}
-      on:click={onRemove(p)}
-      title="Remove {p.pokemon} from your team"
-      aria-label="Remove {p.pokemon} from your team"
+      on:click={() => dispatch('abrir', i)}
+      title={t('Abrir el menú de equipo', 'Open the party menu')}
+      aria-label={t('Abrir el menú de equipo', 'Open the party menu')}
       on:dragenter={dragReplace}
       on:dragleave={dragLeave}
       on:drop={onDrop}
@@ -109,16 +94,15 @@
         />
       </span>
 
-      <Icon
-        class="pointer-events-none absolute left-1/2 -bottom-4 -translate-x-1/2 opacity-0 transition group-hover:opacity-100"
-        inline
-        icon={X}
-      />
     </button>
   {/each}
 
   {#each Array(6 - mons.length).fill() as _, i}
-    <ModalController on:submit={onSubmit} {mons}>
+    <button
+      on:click={() => dispatch('abrir', 'meter')}
+      title={t('Meter un Pokémon de la caja', 'Add a Pokémon from your box')}
+      aria-label={t('Meter un Pokémon de la caja', 'Add a Pokémon from your box')}
+    >
       <p
         on:dragenter={dragAdd}
         on:dragleave={dragLeave}
@@ -140,6 +124,6 @@
           icon={Plus}
         />
       </p>
-    </ModalController>
+    </button>
   {/each}
 </div>

@@ -6,6 +6,12 @@
   import { toObj } from '$utils/obj'
   import { locid as pokeLocId } from '$utils/pokemon'
   import { fade } from 'svelte/transition'
+  import { getContext } from 'svelte'
+  import EquipoGBA from '$lib/lockedex/EquipoGBA.svelte'
+  import { t } from '$lib/lockedex/idioma.js'
+  const { open } = getContext('simple-modal')
+  // La barra abre el menú de equipo de la GBA; Esc lo maneja el propio menú (para volver atrás paso a paso)
+  const abrirMenu = (evt) => open(EquipoGBA, { inicial: evt.detail }, { closeOnEsc: false })
   import {
     getGameStore,
     readdata,
@@ -98,6 +104,7 @@
       on:swap={onteamswap}
       on:remove={onteamremove}
       on:replace={onteamreplace}
+      on:abrir={abrirMenu}
       {mons}
     />
 
@@ -108,7 +115,7 @@
         class:hidden={seenTeam}
         class="absolute left-1/2 mb-1 w-full -translate-x-1/2 translate-y-full italic text-gray-500 md:bottom-2 md:block"
       >
-        Drag Pokémon from your box or click add to team
+        {t('Arrastra Pokémon desde la caja o pulsa un hueco para meterlo', 'Drag Pokémon from your box or click a slot to add one')}
         <span class="relative">
           <Icon
             class="absolute top-0.5 -right-4 scale-110 transform"
@@ -126,7 +133,7 @@
 
     <IconButton
       on:click={onteamclear}
-      title="Clear your team"
+      title={t('Vaciar el equipo', 'Clear your team')}
       disabled={!mons?.length}
       borderless
       containerClassName=" rounded-full !border-gray-900 z-50 -translate-x-3/4 md:translate-x-1/2 md:mt-1"

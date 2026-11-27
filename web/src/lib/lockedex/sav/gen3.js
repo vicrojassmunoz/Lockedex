@@ -210,12 +210,18 @@ export const leerPartidaGen3 = (buffer, tablas) => {
   }
   const vpc = new DataView(pc.buffer)
   const cajas = []
+  const huevos = [] // huevos sin abrir (el lector no los cuenta como Pokémon): dónde están
   for (let c = 0; c < 14; c++) {
     for (let i = 0; i < 30; i++) {
-      const p = leerPokemon(vpc, 4 + (c * 30 + i) * 80, false, tablas, juego)
-      if (p) cajas.push({ ...p, caja: c + 1 })
+      const o = 4 + (c * 30 + i) * 80
+      const p = leerPokemon(vpc, o, false, tablas, juego)
+      if (p) cajas.push({ ...p, caja: c + 1, hueco: i + 1 })
+      // byte 0x13 de BoxPokemon (sin cifrar): bit 1 «tiene especie», bit 2 «es huevo»
+      else if ((vpc.getUint8(o + 0x13) & 0x06) === 0x06) huevos.push({ caja: c + 1, hueco: i + 1 })
     }
   }
+  // Nombres de las cajas: 14 de 9 bytes justo después de los Pokémon (4 + 14·30·80)
+  const nombresCajas = Array.from({ length: 14 }, (_, c) => texto(new Uint8Array(pc.buffer, 4 + 14 * 30 * 80 + c * 9, 9), tablas.caracteres) || `CAJA ${c + 1}`)
 
-  return { juego, entrenador, ubicacion, medallas, campeon, equipo, cajas }
+  return { juego, entrenador, ubicacion, medallas, campeon, equipo, cajas, huevos, nombresCajas }
 }

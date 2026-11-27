@@ -14,6 +14,7 @@
   import TypeLogo from '$lib/components/type-logo.svelte'
   import { Modal as AnalysisModal } from '$lib/components/Analysis'
   import CajaPC from '$lib/lockedex/CajaPC.svelte'
+  import CajaJuego from '$lib/lockedex/CajaJuego.svelte'
   import EquipoEquilibrado from '$lib/lockedex/EquipoEquilibrado.svelte'
   import { filtroCombates } from '$lib/lockedex/combatesPosibles.js'
   import { partidaActiva, cargarRutas } from '$lib/lockedex/partida.js'
@@ -50,10 +51,12 @@
 
   let minimal = false
 
-  // Vista de la caja: «pc» (rejilla tipo PC, por defecto) o «fichas» (las tarjetas de siempre)
+  // Vista de la caja: «pc» (la run como PC, con la ficha al elegir) o «juego» (el PC de la partida del
+  // emulador). Las fichas heredadas ya no se ofrecen: la ficha sale al elegir un Pokémon en el PC
   let vista = 'pc'
   try {
     vista = localStorage.getItem('lockedex.caja.vista') || 'pc'
+    if (!['pc', 'juego'].includes(vista)) vista = 'pc'
   } catch {}
   const cambiarVista = (v) => {
     vista = v
@@ -291,8 +294,8 @@
             <button role="tab" aria-selected={vista === 'pc'} class:lx-vista-activa={vista === 'pc'} on:click={() => cambiarVista('pc')}>
               {t('Caja PC', 'PC box')}
             </button>
-            <button role="tab" aria-selected={vista === 'fichas'} class:lx-vista-activa={vista === 'fichas'} on:click={() => cambiarVista('fichas')}>
-              {t('Fichas', 'Cards')}
+            <button role="tab" aria-selected={vista === 'juego'} class:lx-vista-activa={vista === 'juego'} on:click={() => cambiarVista('juego')} title={t('Las cajas de tu partida del emulador, tal cual', 'The boxes of your emulator save, as they are')}>
+              {t('PC del juego', 'Game PC')}
             </button>
           </div>
 
@@ -308,6 +311,7 @@
 
         <div
           class="z-50 mt-2 inline-flex flex-wrap gap-y-2 gap-x-4 sm:flex-row sm:items-start md:flex-nowrap"
+          class:hidden={vista === 'juego'}
         >
           <div
             class="col-span-2 grid w-full grid-cols-5 grid-rows-2 gap-2 sm:w-auto sm:gap-2"
@@ -319,7 +323,7 @@
               on:click={clear}
             >
               <Icon class="pl-1" height="1.2em" inline icon={X} />
-              <span class="pl-0.5 pr-2 text-sm">Clear</span>
+              <span class="pl-0.5 pr-2 text-sm">{t('Quitar', 'Clear')}</span>
             </IconButton>
 
             {#each stats as s}
@@ -420,7 +424,9 @@
           {/if}
         </div>
 
-        {#if vista === 'pc'}
+        {#if vista === 'juego'}
+          <CajaJuego {Pokemon} />
+        {:else if vista === 'pc'}
           <CajaPC
             lista={(stat === 'team' ? mons : box).filter(filter)}
             {Pokemon}

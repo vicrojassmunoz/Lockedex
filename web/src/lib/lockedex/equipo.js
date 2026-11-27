@@ -36,6 +36,27 @@ export const emparejar = (encuentro, candidatos = [], usados = new Set(), linea 
   )
 }
 
+// Qué Pokémon del .sav es cada entrada de la run (lugar → Pokémon del .sav). Los que llevan mote van primero
+// para que no se los quede otro de la misma especie
+export const emparejarRun = (sav, datos = {}, linea = null) => {
+  const m = new Map()
+  if (!sav) return m
+  const todos = [...(sav.equipo || []).map((x) => ({ ...x, enEquipo: true })), ...(sav.cajas || [])]
+  const usados = new Set()
+  const entradas = Object.entries(datos || {})
+    .filter(([k, e]) => !k.startsWith('__') && e?.pokemon)
+    .map(([k, e]) => ({ ...e, lugar: k }))
+    .sort((a, b) => (b.nickname ? 1 : 0) - (a.nickname ? 1 : 0))
+  for (const e of entradas) {
+    const x = emparejar(e, todos, usados, linea)
+    if (x) {
+      usados.add(x)
+      m.set(e.lugar, x)
+    }
+  }
+  return m
+}
+
 const ficha = (pkdx, encuentro, sav) => ({
   nombre: encuentro?.nickname || sav?.mote || pkdx?.name || encuentro?.pokemon,
   alias: pkdx?.alias || encuentro?.pokemon,

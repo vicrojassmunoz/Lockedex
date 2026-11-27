@@ -17,7 +17,12 @@
   import { leerReglas, sinCalculos } from './reglas.js'
   import { tiendaParejas, parejaDe, emparejar } from './parejas.js'
   import { tipoCambio, pendienteDeCambio, sePuedeCambiar, esInicial, aplicarCambio, deshacerCambio, eclosionadosDelSav, marcarCambiado } from './cambios.js'
-  import { leerPartida } from './partida.js'
+  import { leerPartida, alCambiarDatos, partidaActiva } from './partida.js'
+  import FichaSav from './FichaSav.svelte'
+  import { origenDe } from './origen.js'
+  import { leerSavGuardado, emparejarRun } from './equipo.js'
+  import { cargarHabilidadesEspecie, habilidadesDe } from './tiposHabilidad.js'
+  import { habilidades as cargarHabs } from './datos.js'
   import { fetchData } from '$utils/fetchers'
 
   export let lista = []
@@ -93,16 +98,7 @@
   const colorStat = (v) => (v >= 110 ? '#38bdf8' : v >= 85 ? '#4ade80' : v >= 60 ? '#facc15' : '#f87171')
   const total = (s) => Object.values(s || {}).reduce((a, b) => a + (+b || 0), 0)
 
-  const lugar = (p) => {
-    const sitio = p.customName || p.location
-    if (p.location === 'Starter') return t('Tu Pokémon inicial', 'Your starter Pokémon')
-    if (p.cambio?.tipo === 'huevo') return t('Salió de un huevo', 'Hatched from an egg') + (sitio ? t(' (captura de ', ' (catch from ') + traducirNombre(sitio) + ')' : '')
-    if (p.cambio?.tipo === 'prodigioso') return t('Llegó por Intercambio Prodigioso', 'Came via Wonder Trade') + (sitio ? t(' (captura de ', ' (catch from ') + traducirNombre(sitio) + ')' : '')
-    if (!sitio || (p.customId && !p.customName)) return t('Lugar desconocido', 'Unknown place')
-    if (p.status === 2) return t('Regalo en ', 'Gift at ') + traducirNombre(sitio)
-    if (p.status === 3) return t('Intercambio en ', 'Traded at ') + traducirNombre(sitio)
-    return t('Capturado en ', 'Met at ') + traducirNombre(sitio)
-  }
+  const lugar = origenDe
 
   const elegir = (p) => p && (elegido = p)
   const cambiarCaja = (d) => {
@@ -128,6 +124,25 @@
   onMount(() => {
     if (!elegido) elegido = enCaja[0] || null
   })
+
+  // Lo que dice la partida del emulador de cada Pokémon (nivel, habilidad, movimientos, IVs)
+  let sav = null
+  let tablaHab = null
+  let habs = {}
+  onMount(() => {
+    sav = leerSavGuardado($activeGame)
+    cargarHabilidadesEspecie().then((x) => (tablaHab = x)).catch(() => {})
+    cargarHabs().then((x) => (habs = x || {})).catch(() => {})
+    return alCambiarDatos(() => (sav = leerSavGuardado($activeGame)))
+  })
+  $: gen = ($activeGame, partidaActiva()?.info?.gen) || 3
+  const calcularEmparejados = (sv, _lista) => emparejarRun(sv, leerPartida($activeGame)?.datos || {}, lineaDe)
+  $: emparejados = calcularEmparejados(sav, lista)
+  $: savElegido = elegido ? emparejados.get(elegido.location) || null : null
+  // Sin .sav: las habilidades que puede tener su especie en ese juego
+  $: habsPosibles = elegido && !savElegido && tablaHab ? habilidadesDe(tablaHab, elegido.pokemon, gen) : null
+  const habDe = (k) => habs[k] || habs[String(k).replace(/[^a-z0-9]/gi, '').toLowerCase()]
+  const nombreHab = (k) => (habDe(k) ? (t('es', 'en') === 'es' ? habDe(k).es : habDe(k).en) : traducirNombre(k))
 </script>
 
 <div class="lx-caja">
@@ -227,9 +242,18 @@
 
       <dl class="lx-det-datos">
         {#if elegido.nature}
-          <div><dt>{t('Naturaleza', 'Nature')}</dt><dd>{traducirNombre(elegido.nature)}</dd></div>
+          <div><dt>{t('Naturaleza', 'Nature')}</dt><dd>{traducirNombre(elegido.nature.charAt(0).toUpperCase() + elegido.nature.slice(1))}</dd></div>
         {/if}
         <div><dt>{t('Origen', 'Origin')}</dt><dd>{lugar(elegido)}</dd></div>
+        {#if habsPosibles && (habsPosibles.normales?.length || habsPosibles.oculta)}
+          <div>
+            <dt>{t('Habilidad', 'Ability')}</dt>
+            <dd>
+              {#each habsPosibles.normales || [] as h, i}{#if i}{' / '}{/if}<span class="cursor-help" data-lx-hab={habDe(h)?.en || h}>{nombreHab(h)}</span>{/each}
+              {#if habsPosibles.oculta}<small> · {t('oculta', 'hidden')}: <span class="cursor-help" data-lx-hab={habDe(habsPosibles.oculta)?.en || habsPosibles.oculta}>{nombreHab(habsPosibles.oculta)}</span></small>{/if}
+            </dd>
+          </div>
+        {/if}
         {#if cambio && elegido.cambio}
           <div>
             <dt>{elegido.cambio.tipo === 'huevo' ? t('Huevo', 'Egg') : t('Intercambio', 'Trade')}</dt>
@@ -307,6 +331,10 @@
           </div>
         {/if}
       </dl>
+
+      {#if savElegido}
+        <FichaSav s={savElegido} {gen} />
+      {/if}
 
       <div class="lx-det-stats">
         {#each ETIQUETAS as [k, es, en]}

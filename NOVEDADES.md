@@ -1,3 +1,9 @@
+## Novedades de la 1.23.0
+
+- **Menú de equipo como en la GBA:** al pulsar la barra del equipo se abre el menú del juego, con el primero en grande y el resto en barras. Si tienes el .sav vinculado, cada uno lleva su nivel y sus PS. Al elegir uno salen FICHA, CAMBIAR y SACAR. Un hueco libre abre la caja para meter a uno. CAMBIAR también deja sustituirlo por uno de la caja. Se maneja con las flechas, Intro y Esc. Sustituye a la ventana «Montar equipo»; arrastrar desde la Caja sigue funcionando.
+- **Ficha en la Caja:** al elegir un Pokémon en el PC sale su ficha con la habilidad. Con el .sav salen también su nivel, sus movimientos (con la clase de su generación y los PP) y sus IVs. Sin .sav, salen las habilidades posibles de su especie.
+- **PC del juego:** la pestaña «Fichas» de la Caja pasa a ser «PC del juego». Enseña las cajas de tu partida tal cual, con sus nombres, cada Pokémon en su hueco y los huevos sin abrir. Al elegir uno sale su ficha y qué es en la run. Los que en la run están muertos no salen (por si los guardas en la última caja), salvo que marques «Ver los caídos».
+
 ## Novedades de la 1.22.4
 
 - **Físico o especial según la generación:** hasta la 3.ª gen la clase de un ataque la decide su tipo (Puño Hielo es especial en Esmeralda y RojoFuego, y físico desde Diamante y Perla). La ficha que sale al pasar el ratón por un ataque, el menú de equipo de los jefes, las fichas de los jefes y la ventana antigua de comparar y recomendar enseñaban la clase moderna. Ahora usan la del juego: el de la run, o el elegido en el Analista. Los cálculos de daño ya lo hacían bien.

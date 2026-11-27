@@ -82,14 +82,14 @@
     const ruta = id && localStorage.getItem(claveRutaSav(id))
     if (ruta) lx.vigilarSav(ruta)
 
-    // La copia guardada por versiones anteriores a la 1.20.2 no trae las medallas: se relee una vez
-    // en silencio, sin tocar la run
+    // La copia guardada por versiones anteriores no trae lo nuevo del lector (medallas, huecos y huevos):
+    // se relee una vez en silencio, sin tocar la run
     if (ruta && lx.leerSav) {
       let guardado = null
       try {
         guardado = JSON.parse(localStorage.getItem(claveSav(id)) || 'null')
       } catch {}
-      if (guardado && !Array.isArray(guardado.medallas)) {
+      if (guardado && (!Array.isArray(guardado.medallas) || !Array.isArray(guardado.huevos))) {
         ;(async () => {
           try {
             const archivo = await lx.leerSav(ruta)
@@ -97,7 +97,8 @@
             const b = archivo.datos
             const res = leerPartidaGen3(b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength), await cargar('gen3.json'))
             if (localStorage.getItem('nuzlocke') !== id) return
-            localStorage.setItem(claveSav(id), JSON.stringify({ ...guardado, medallas: res.medallas, campeon: res.campeon }))
+            // lo nuevo del lector (medallas desde la 1.20.2; huecos, huevos y nombres de caja desde la 1.23.0)
+            localStorage.setItem(claveSav(id), JSON.stringify({ ...guardado, ...res }))
           } catch {}
         })()
       }
