@@ -69,18 +69,20 @@
 
   // Lockedex: Randomlocke (equipos de jefes aleatorizados, apuntados a mano)
   import { leerReglas, ajustarEquipoJefe, sinCalculos, capDelCombate } from '$lib/lockedex/reglas.js'
-  import { leerEquiposJefes, comoJefe } from '$lib/lockedex/jefes.js'
+  import { leerEquiposJefes, leerTiposJefes, comoJefe } from '$lib/lockedex/jefes.js'
   import { cargarCalc, urlSprite, cargarPokedex } from '$lib/lockedex/analista.js'
   import { infoJuego } from '$lib/lockedex/datos.js'
   import EquipoJefe from '$lib/lockedex/EquipoJefe.svelte'
 
   let reglasRun = {}
   let equipoReal = null
+  let tipoReal = null
   let pokedexRun = {}
   const leerRandom = () => {
     if (!browser) return
     reglasRun = leerReglas($activeGame)
     equipoReal = leerEquiposJefes($activeGame)[id] || null
+    tipoReal = leerTiposJefes($activeGame)[id] || null
   }
   $: aleatorio = !!(reglasRun.randomlocke && reglasRun.entrenadoresAleatorios)
   $: if (browser && aleatorio && !Object.keys(pokedexRun).length) cargarPokedex(game).then((p) => (pokedexRun = p))
@@ -294,7 +296,7 @@
 
           {#if speciality && showBoss}
             <div class:grayscale={defeated}>
-              <TypeBadge type={speciality} />
+              {#key aleatorio && tipoReal}<TypeBadge type={aleatorio && tipoReal ? tipoReal : speciality} />{/key}
             </div>
           {/if}
 
@@ -399,7 +401,7 @@
                 <span class="lx-random-p">
                   <img src={urlSprite(pokedexRun, p.especie) || '/assets/img/pokemon/base-201-question.png'} alt="" />
                   <b>{traducirNombre(String(p.especie).replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()))}</b>
-                  <small>Nv. {p.nivel}</small>
+                  <small>Nv. {p.nivel}{p.objeto ? ' · ' + String(p.objeto).toLowerCase().replace(/(^|[\s.])\S/g, (c) => c.toUpperCase()) : ''}</small>
                   {#each p.movimientos || [] as mv}<em data-lx-mov={mv}>{mv}</em>{/each}
                 </span>
               {/each}

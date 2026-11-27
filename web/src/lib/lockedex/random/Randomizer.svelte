@@ -4,7 +4,7 @@
   // y el registro se quedan en la run: las rutas, los iniciales y los jefes los usan.
   import { onMount, getContext } from 'svelte'
   import { analizarRom, leerEntrenadores } from './rom.js'
-  import { aleatorizar, registroEnTexto, AJUSTES_POR_DEFECTO } from './aleatorizar.js'
+  import { aleatorizar, registroEnTexto, completarAjustes } from './aleatorizar.js'
   import { semillaNueva } from './azar.js'
   import { leerRandom, guardarRandom, borrarRandom, emparejarJefes } from './registro.js'
   import { leerPartida, cargarLiga } from '../partida.js'
@@ -28,12 +28,12 @@
   let nombres = {}
 
   const copia = (o) => JSON.parse(JSON.stringify(o))
-  let ajustes = { semilla: semillaNueva(), ...copia(AJUSTES_POR_DEFECTO) }
+  let ajustes = { ...completarAjustes(), semilla: semillaNueva() }
 
   onMount(async () => {
     partida = leerPartida(id)
     previo = leerRandom(id)
-    if (previo?.ajustes) ajustes = { ...copia(AJUSTES_POR_DEFECTO), ...copia(previo.ajustes), semilla: semillaNueva() }
+    if (previo?.ajustes) ajustes = { ...completarAjustes(copia(previo.ajustes)), semilla: semillaNueva() }
     try {
       const esp = await cargar('especies.json')
       nombres = Object.fromEntries(Object.entries(esp || {}).map(([k, v]) => [k, es ? v.es : v.en]))
@@ -70,8 +70,16 @@
     ['entrenadores', 'Entrenadores', 'Trainers', (a) => (a.entrenadores ? `${a.entrenadores.n}` : null)],
     ['base', 'Tipos y habilidades', 'Types and abilities', (a) => (a.base !== null ? '✓' : null)],
     ['aprendizaje', 'Movimientos por nivel', 'Level-up moves', (a) => (a.aprendizaje !== null ? '✓' : null)],
-    ['evoluciones', 'Evoluciones', 'Evolutions', (a) => (a.evoluciones !== null ? '✓' : null)]
+    ['evoluciones', 'Evoluciones', 'Evolutions', (a) => (a.evoluciones !== null ? '✓' : null)],
+    ['mt', 'MT y MO', 'TMs and HMs', (a) => (a.mt ? '✓' : null)],
+    ['compatMT', 'Quién aprende cada MT', 'TM compatibility', (a) => (a.compatMT !== null ? '✓' : null)],
+    ['tutores', 'Tutores', 'Move tutors', (a) => (a.tutores ? `${a.tutores.n}` : a.juego?.familia === 'rs' ? 'na' : null)],
+    ['objetosSuelo', 'Objetos del suelo', 'Field items', (a) => (a.objetosSuelo ? `${a.objetosSuelo.length}` : null)],
+    ['tiendas', 'Tiendas', 'Shops', (a) => (a.tiendas ? `${a.tiendas.length}` : null)],
+    ['libre', 'Espacio libre', 'Free space', (a) => (a.libre ? `${Math.round((a.libre.fin - a.libre.inicio) / 1024)} KB` : null)]
   ]
+  const marca = (v) => (v === 'na' ? '–' : v ? '✓' : '✗')
+  const detalle = (v) => (v === 'na' ? t('no tiene', 'none') : v && v !== '✓' ? v : '')
 
   const datosMotor = async () => {
     const [g3, esp, movs] = await Promise.all([fetch('/lx/gen3.json').then((r) => r.json()), cargar('especies.json'), cargar('movimientos.json')])
@@ -108,7 +116,8 @@
       const zonas = await fetch('/lx/zonas-sav.json').then((r) => r.json()).catch(() => ({}))
       const mapas = zonas[{ ruby: 'rz', saph: 'rz', em: 'esmeralda', fr: 'rfvh', lg: 'rfvh' }[analisis.juego.clave]] || {}
       const nombreMapa = (m) => (mapas[m] ? `${traducirNombre(mapas[m])} (${m})` : m)
-      const w = await lx.guardarRomAleatoria({ rutaOriginal: rom.ruta, datos: nueva, sufijo: ajustes.semilla, registroTexto: registroEnTexto(registro, nombre, nombreMapa) })
+      const nombreMov = (id) => (es ? datos.movimientos[id]?.es : datos.movimientos[id]?.en) || `#${id}`
+      const w = await lx.guardarRomAleatoria({ rutaOriginal: rom.ruta, datos: nueva, sufijo: ajustes.semilla, registroTexto: registroEnTexto(registro, nombre, nombreMapa, nombreMov) })
       if (!w?.ok) throw new Error(t('No se pudo guardar la ROM nueva: ', 'Could not save the new ROM: ') + (w?.detalle || w?.motivo || ''))
       registro.rom = { original: rom.nombre, nombre: w.nombre, ruta: w.ruta, registro: w.registro }
       if (coincide) {
@@ -193,7 +202,7 @@
             <p><b>{analisis.juego.nombre}</b> ({analisis.juego.codigo}, {analisis.juego.idioma}{analisis.juego.revision ? `, rev. ${analisis.juego.revision}` : ''})</p>
             <ul class="lx-rnd-encontrado">
               {#each ENCONTRADO as [k, e, n, f]}
-                <li class:lx-rnd-falta={!f(analisis)}>{f(analisis) ? '✓' : '✗'} {t(e, n)}{f(analisis) && f(analisis) !== '✓' ? ` (${f(analisis)})` : ''}</li>
+                <li class:lx-rnd-falta={!f(analisis)}>{marca(f(analisis))} {t(e, n)}{detalle(f(analisis)) ? ` (${detalle(f(analisis))})` : ''}</li>
               {/each}
             </ul>
             {#if analisis.problemas?.length}
@@ -221,8 +230,8 @@
                 <option value="fuerza">{t('Por fuerza parecida', 'Similar strength')}</option>
               </select>
               <small>{ajustes.salvajes.modo === 'unoAuno' ? t('Cada especie pasa a ser siempre la misma (todos los Zigzagoon, por ejemplo, pasan a ser Ralts).', 'Each species always becomes the same one.') : ajustes.salvajes.modo === 'zona' ? t('Cada zona, sus especies al azar (mismas proporciones).', 'Each area gets its own random species.') : ajustes.salvajes.modo === 'fuerza' ? t('Como el 1 a 1, pero por una de total de estadísticas parecido.', 'Like 1-to-1, but with a similar stat total.') : ''}</small>
-              <label><input type="checkbox" bind:checked={ajustes.salvajes.mismaEtapa} /> {t('Respetar la etapa (básicos por básicos, finales por finales)', 'Keep the stage (basic for basic, final for final)')}</label>
-              <label><input type="checkbox" bind:checked={ajustes.salvajes.sinLegendarios} /> {t('Sin legendarios', 'No legendaries')}</label>
+              <label class="lx-rnd-casilla"><input type="checkbox" bind:checked={ajustes.salvajes.mismaEtapa} /> {t('Respetar la etapa (básicos por básicos, finales por finales)', 'Keep the stage (basic for basic, final for final)')}</label>
+              <label class="lx-rnd-casilla"><input type="checkbox" bind:checked={ajustes.salvajes.sinLegendarios} /> {t('Sin legendarios', 'No legendaries')}</label>
               <label>{t('Subir niveles', 'Raise levels')} <select bind:value={ajustes.salvajes.subirNivel}>{#each PCT as p}<option value={p}>{p ? `+${p} %` : t('No', 'No')}</option>{/each}</select></label>
             </fieldset>
 
@@ -240,21 +249,66 @@
                   <option value="cualquiera">{t('Triángulo de tipos (cada uno gana al siguiente)', 'Type triangle (each beats the next)')}</option>
                 </select>
               </label>
-              <label><input type="checkbox" bind:checked={ajustes.iniciales.sinLegendarios} /> {t('Sin legendarios', 'No legendaries')}</label>
+              <label class="lx-rnd-casilla"><input type="checkbox" bind:checked={ajustes.iniciales.sinLegendarios} /> {t('Sin legendarios', 'No legendaries')}</label>
             </fieldset>
 
             <fieldset disabled={!analisis.entrenadores}>
               <legend>{t('Entrenadores y jefes', 'Trainers and bosses')}</legend>
               <select bind:value={ajustes.entrenadores.modo}>
-                <option value="mantener">{t('No cambiar', 'Unchanged')}</option>
+                <option value="mantener">{t('No cambiar sus Pokémon', 'Keep their Pokémon')}</option>
                 <option value="azar">{t('Al azar', 'Random')}</option>
                 <option value="fuerza">{t('Por fuerza parecida', 'Similar strength')}</option>
               </select>
-              <label><input type="checkbox" bind:checked={ajustes.entrenadores.mismaEtapa} /> {t('Respetar la etapa (básicos por básicos, finales por finales)', 'Keep the stage (basic for basic, final for final)')}</label>
-              <label><input type="checkbox" bind:checked={ajustes.entrenadores.lideresTipo} /> {t('Líderes y Alto Mando con su tipo', 'Leaders and Elite Four keep their type')}</label>
-              <label><input type="checkbox" bind:checked={ajustes.entrenadores.rivalInicial} /> {t('El rival lleva su inicial', 'Rival carries their starter')}</label>
-              <label><input type="checkbox" bind:checked={ajustes.entrenadores.sinLegendarios} /> {t('Sin legendarios', 'No legendaries')}</label>
+              <label>{t('Líderes y Alto Mando', 'Leaders and Elite Four')}
+                <select bind:value={ajustes.entrenadores.jefes}>
+                  <option value="original">{t('Con su tipo de siempre', 'Their usual type')}</option>
+                  <option value="azar">{t('Con otro tipo al azar', 'Another random type')}</option>
+                  <option value="no">{t('Sin tipo', 'No type')}</option>
+                </select>
+              </label>
+              <label>{t('Los demás', 'Everyone else')}
+                <select bind:value={ajustes.entrenadores.tema}>
+                  <option value="no">{t('Sin tipo', 'No type')}</option>
+                  <option value="clase">{t('Por su clase (Nadador: Agua…)', 'By class (Swimmer: Water…)')}</option>
+                  <option value="azar">{t('Un tipo al azar cada uno', 'A random type each')}</option>
+                </select>
+              </label>
+              <label class="lx-rnd-casilla"><input type="checkbox" bind:checked={ajustes.entrenadores.mismaEtapa} /> {t('Respetar la etapa (básicos por básicos, finales por finales)', 'Keep the stage (basic for basic, final for final)')}</label>
+              <label class="lx-rnd-casilla"><input type="checkbox" bind:checked={ajustes.entrenadores.rivalInicial} /> {t('El rival lleva su inicial', 'Rival carries their starter')}</label>
+              <label class="lx-rnd-casilla"><input type="checkbox" bind:checked={ajustes.entrenadores.sinLegendarios} /> {t('Sin legendarios', 'No legendaries')}</label>
+              <label class="lx-rnd-casilla"><input type="checkbox" bind:checked={ajustes.entrenadores.nombres} /> {t('Mezclar los nombres de los entrenadores normales', 'Shuffle regular trainer names')}</label>
+            </fieldset>
+
+            <fieldset disabled={!analisis.entrenadores}>
+              <legend>{t('Dificultad de los combates', 'Battle difficulty')}</legend>
               <label>{t('Subir niveles', 'Raise levels')} <select bind:value={ajustes.entrenadores.subirNivel}>{#each PCT as p}<option value={p}>{p ? `+${p} %` : t('No', 'No')}</option>{/each}</select></label>
+              <label>{t('Totalmente evolucionados desde', 'Fully evolved from')}
+                <select bind:value={ajustes.entrenadores.evolucionados}>
+                  <option value={0}>{t('No', 'No')}</option>
+                  {#each [25, 30, 35, 40, 45, 50] as n}<option value={n}>{t('Nv.', 'Lv.')} {n}</option>{/each}
+                </select>
+              </label>
+              <label>{t('Objetos equipados', 'Held items')}
+                <select bind:value={ajustes.entrenadores.objetos}>
+                  <option value="mantener">{t('Los de siempre', 'Unchanged')}</option>
+                  <option value="jefes">{t('Solo los jefes', 'Bosses only')}</option>
+                  <option value="importantes">{t('Jefes, rivales y villanos', 'Bosses, rivals and villains')}</option>
+                  <option value="todos">{t('Todos', 'Everyone')}</option>
+                </select>
+              </label>
+              <label>{t('Qué objetos', 'Which items')}
+                <select bind:value={ajustes.entrenadores.objetosClase} disabled={ajustes.entrenadores.objetos === 'mantener'}>
+                  <option value="sensatos">{t('Con sentido (Restos, el de su tipo…)', 'Sensible (Leftovers, type boosters…)')}</option>
+                  <option value="bayas">{t('Solo bayas', 'Berries only')}</option>
+                </select>
+              </label>
+              <label>{t('Pokémon de más · jefes y rivales', 'Extra Pokémon · bosses and rivals')}
+                <select bind:value={ajustes.entrenadores.extraJefes} disabled={!analisis.libre}>{#each [0, 1, 2, 3] as n}<option value={n}>{n ? `+${n}` : t('No', 'No')}</option>{/each}</select>
+              </label>
+              <label>{t('Pokémon de más · el resto', 'Extra Pokémon · everyone else')}
+                <select bind:value={ajustes.entrenadores.extraResto} disabled={!analisis.libre}>{#each [0, 1, 2] as n}<option value={n}>{n ? `+${n}` : t('No', 'No')}</option>{/each}</select>
+              </label>
+              <small>{analisis.libre ? t('Hasta 6 por equipo, al nivel del más fuerte.', 'Up to 6 per team, at the level of the strongest.') : t('No hay espacio libre en esta ROM para Pokémon de más.', 'No free space in this ROM for extra Pokémon.')}</small>
             </fieldset>
 
             <fieldset>
@@ -273,7 +327,7 @@
                   <option value="azar">{t('Totalmente al azar', 'Fully random')}</option>
                 </select>
               </label>
-              <label><input type="checkbox" bind:checked={ajustes.habilidades.sinSuperguarda} disabled={ajustes.habilidades.modo === 'mantener'} /> {t('Sin Superguarda', 'No Wonder Guard')}</label>
+              <label class="lx-rnd-casilla"><input type="checkbox" bind:checked={ajustes.habilidades.sinSuperguarda} disabled={ajustes.habilidades.modo === 'mantener'} /> {t('Sin Superguarda', 'No Wonder Guard')}</label>
               <label>{t('Movimientos por nivel', 'Level-up moves')}
                 <select bind:value={ajustes.movimientos.modo}>
                   <option value="mantener">{t('No cambiar', 'Unchanged')}</option>
@@ -286,6 +340,63 @@
                 </select>
               </label>
               {#if cambiaDatos}<small>{t('Con esto, el riesgo y el asistente de combate dejan de calcularse (los datos de cada especie ya no son los del juego).', 'With this, risk and the battle assistant stop being calculated.')}</small>{/if}
+            </fieldset>
+
+            <fieldset disabled={!analisis.mt && !analisis.compatMT}>
+              <legend>{t('MT, MO y tutores', 'TMs, HMs and tutors')}</legend>
+              <label>{t('Movimientos de las MT', 'TM moves')}
+                <select bind:value={ajustes.mt.modo} disabled={!analisis.mt}>
+                  <option value="mantener">{t('No cambiar', 'Unchanged')}</option>
+                  <option value="azar">{t('Al azar (las MO no cambian)', 'Random (HMs stay)')}</option>
+                </select>
+              </label>
+              <label>{t('Movimientos de los tutores', 'Tutor moves')}
+                <select bind:value={ajustes.tutores.modo} disabled={!analisis.tutores}>
+                  <option value="mantener">{t('No cambiar', 'Unchanged')}</option>
+                  <option value="azar">{t('Al azar', 'Random')}</option>
+                </select>
+              </label>
+              <label>{t('Ataques que hacen daño', 'Damaging moves')}
+                <select bind:value={ajustes.mt.danino} disabled={ajustes.mt.modo === 'mantener' && ajustes.tutores.modo === 'mantener'}>
+                  {#each [30, 45, 60, 75, 90] as p}<option value={p}>{p} %</option>{/each}
+                </select>
+              </label>
+              <label class="lx-rnd-casilla"><input type="checkbox" bind:checked={ajustes.mt.campo} disabled={ajustes.mt.modo === 'mantener'} /> {t('Dejar Excavar y Daño Secreto (se usan fuera de combate)', 'Keep Dig and Secret Power (field use)')}</label>
+              <label>{t('Quién aprende cada MT y tutor', 'Who learns each TM and tutor')}
+                <select bind:value={ajustes.compat.modo} disabled={!analisis.compatMT}>
+                  <option value="mantener">{t('No cambiar', 'Unchanged')}</option>
+                  <option value="tipo">{t('Al azar, mejor si es de su tipo', 'Random, favouring its type')}</option>
+                  <option value="azar">{t('Totalmente al azar', 'Fully random')}</option>
+                  <option value="total">{t('Todos pueden aprenderlo todo', 'Everyone learns everything')}</option>
+                </select>
+              </label>
+              <label>{t('Las MO', 'HMs')}
+                <select bind:value={ajustes.compat.mo} disabled={!analisis.compatMT}>
+                  <option value="original">{t('Las aprende quien siempre', 'Usual Pokémon learn them')}</option>
+                  <option value="igual">{t('Como las MT', 'Same as TMs')}</option>
+                  <option value="todos">{t('Todos pueden aprenderlas', 'Everyone can learn them')}</option>
+                </select>
+              </label>
+              <small>{t('Una evolución siempre puede aprender lo que aprendía su preevolución.', 'An evolution can always learn what its pre-evolution could.')}{!analisis.tutores && analisis.juego?.familia === 'rs' ? t(' Rubí y Zafiro no tienen tutores.', ' Ruby and Sapphire have no tutors.') : ''}</small>
+            </fieldset>
+
+            <fieldset disabled={!analisis.objetosSuelo && !analisis.tiendas}>
+              <legend>{t('Objetos y tiendas', 'Items and shops')}</legend>
+              <label>{t('Objetos del suelo', 'Field items')}
+                <select bind:value={ajustes.objetosSuelo.modo} disabled={!analisis.objetosSuelo}>
+                  <option value="mantener">{t('No cambiar', 'Unchanged')}</option>
+                  <option value="mezclar">{t('Mezclar los que hay', 'Shuffle them')}</option>
+                  <option value="azar">{t('Al azar (una MT sigue siendo una MT)', 'Random (a TM stays a TM)')}</option>
+                </select>
+              </label>
+              <label>{t('Tiendas', 'Shops')}
+                <select bind:value={ajustes.tiendas.modo} disabled={!analisis.tiendas}>
+                  <option value="mantener">{t('No cambiar', 'Unchanged')}</option>
+                  <option value="azar">{t('Al azar', 'Random')}</option>
+                </select>
+              </label>
+              <label class="lx-rnd-casilla"><input type="checkbox" bind:checked={ajustes.tiendas.basicos} disabled={ajustes.tiendas.modo === 'mantener'} /> {t('Que sigan vendiendo Poké Balls y Pociones', 'Keep selling Poké Balls and Potions')}</label>
+              <small>{t('Los objetos clave y las MO no se tocan nunca. Son las Poké Balls que se ven en el suelo; los objetos ocultos no cambian.', 'Key items and HMs are never touched. These are the visible item balls; hidden items stay.')}</small>
             </fieldset>
           </div>
         </div>
@@ -309,7 +420,7 @@
 
 <style>
   .lx-rnd {
-    width: min(760px, calc(100vw - 32px));
+    width: min(900px, calc(100vw - 32px));
     max-height: calc(100vh - 64px);
     overflow-y: auto;
     background: #f8f8f0;
@@ -433,14 +544,20 @@
   }
   label {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 6px;
+    gap: 2px 6px;
   }
   label input[type='checkbox'] {
     flex: none;
+    margin-top: 4px;
+  }
+  .lx-rnd-casilla {
+    flex-wrap: nowrap;
+    align-items: flex-start;
   }
   label select {
-    flex: 1 1 140px;
+    flex: 1 1 180px;
   }
   select,
   input:not([type='checkbox']) {

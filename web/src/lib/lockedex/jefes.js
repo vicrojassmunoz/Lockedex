@@ -1,11 +1,18 @@
 // Equipos de jefes apuntados a mano (Randomlocke)
 import { movimientos } from './datos.js'
-import { leerRandom, equiposDelRandom } from './random/registro.js'
+import { leerRandom, equiposDelRandom, tiposDelRandom } from './random/registro.js'
 
 const clave = (id) => `lockedex.jefes.${id}`
 
 // Los apuntados a mano mandan; si la run tiene una ROM aleatoria de Lockedex, el resto sale de su registro
 // (según el inicial de la run, porque el rival cambia con él)
+const inicialDe = (partidaId) => {
+  try {
+    return JSON.parse(localStorage.getItem(`nuzlocke.${partidaId}`) || '{}')?.__starter || 'fire'
+  } catch {
+    return 'fire'
+  }
+}
 export const leerEquiposJefes = (partidaId) => {
   if (typeof window === 'undefined' || !partidaId) return {}
   let aMano = {}
@@ -14,11 +21,13 @@ export const leerEquiposJefes = (partidaId) => {
   } catch {}
   const r = leerRandom(partidaId)
   if (!r?.jefes) return aMano
-  let inicial = 'fire'
-  try {
-    inicial = JSON.parse(localStorage.getItem(`nuzlocke.${partidaId}`) || '{}')?.__starter || 'fire'
-  } catch {}
-  return { ...equiposDelRandom(r, inicial, nombreMovimiento), ...aMano }
+  return { ...equiposDelRandom(r, inicialDe(partidaId), nombreMovimiento), ...aMano }
+}
+// El tipo que el randomizer de Lockedex dio a cada jefe (líderes con otro tipo al azar)
+export const leerTiposJefes = (partidaId) => {
+  if (typeof window === 'undefined' || !partidaId) return {}
+  const r = leerRandom(partidaId)
+  return r?.jefes ? tiposDelRandom(r, inicialDe(partidaId)) : {}
 }
 // Movimientos del registro (números de la 3.ª gen) por su nombre en inglés, como los apuntados a mano
 let porId = null

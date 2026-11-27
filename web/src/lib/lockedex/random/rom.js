@@ -12,6 +12,16 @@ import {
   TAM_EVOLUCIONES,
   HUECOS,
   INICIALES,
+  MAX_MOVIMIENTO,
+  MT_ORIGINALES,
+  NUM_MT,
+  NUM_MO,
+  TUTORES_ORIGINALES,
+  NUM_TUTORES,
+  NUM_OBJETOS,
+  OBJ,
+  esObjetoClave,
+  esMO,
   especieValida
 } from './constantes.js'
 
@@ -21,6 +31,10 @@ export const u32 = (b, o) => (b[o] | (b[o + 1] << 8) | (b[o + 2] << 16) | (b[o +
 export const pon16 = (b, o, v) => {
   b[o] = v & 0xff
   b[o + 1] = (v >> 8) & 0xff
+}
+export const pon32 = (b, o, v) => {
+  pon16(b, o, v & 0xffff)
+  pon16(b, o + 2, (v >>> 16) & 0xffff)
 }
 const esPuntero = (b, p) => p >= BASE_ROM && p < BASE_ROM + b.length
 const aOffset = (p) => p - BASE_ROM
@@ -238,6 +252,157 @@ const buscarIniciales = (b, familia) => {
   return offs.length && offs.length <= 3 ? { tipo: 'tabla', offsets: offs } : null
 }
 
+const patron16 = (lista) => lista.flatMap((v) => [v & 0xff, v >> 8])
+const patron32 = (lista) => lista.flatMap(bytes32)
+
+// MT y MO: la lista de los 58 movimientos (RojoFuego y VerdeHoja la tienen dos veces: se cambian todas)
+const buscarMT = (b) => {
+  const offsets = buscarTodas(b, patron16(MT_ORIGINALES), 2, 8)
+  return offsets.length ? { offsets } : null
+}
+
+// Compatibilidad con MT/MO: 8 bytes (64 bits) por especie; la 0 vacía y Bulbasaur e Ivysaur iguales
+const COMPAT_BULBASAUR = [0x84350720, 0x00e41e08]
+const buscarCompatMT = (b) => {
+  for (const o of buscarTodas(b, patron32([0, 0, ...COMPAT_BULBASAUR, ...COMPAT_BULBASAUR]), 4)) {
+    if (o + NUM_ESPECIES * 8 > b.length) continue
+    let ok = true
+    for (let i = 0; ok && i < NUM_ESPECIES; i++) if (u32(b, o + i * 8 + 4) >>> (NUM_MT + NUM_MO - 32)) ok = false
+    if (ok) return o
+  }
+  return null
+}
+
+// Tutores: la lista de movimientos (una o más copias) y su compatibilidad (u32 en Esmeralda, u16 en RF/VH)
+const TUTOR_COMPAT = {
+  e: { tam: 4, inicio: [0, 0x25b4409a, 0x25b4409a, 0x25b4409a, 0x37b4e0ff] },
+  frlg: { tam: 2, inicio: [0, 0x409a, 0x409a, 0x409a, 0x60ff] }
+}
+const buscarTutores = (b, familia) => {
+  const n = NUM_TUTORES[familia]
+  const c = TUTOR_COMPAT[familia]
+  if (!n || !c) return null
+  const movimientos = buscarTodas(b, patron16(TUTORES_ORIGINALES.slice(0, n)), 2, 8)
+  if (!movimientos.length) return null
+  let compat = null
+  for (const o of buscarTodas(b, c.tam === 4 ? patron32(c.inicio) : patron16(c.inicio), c.tam)) {
+    if (o + NUM_ESPECIES * c.tam > b.length) continue
+    let ok = true
+    for (let i = 0; ok && i < NUM_ESPECIES; i++) {
+      const v = c.tam === 4 ? u32(b, o + i * 4) : u16(b, o + i * 2)
+      if (v >>> n) ok = false
+    }
+    if (ok) {
+      compat = o
+      break
+    }
+  }
+  return compat === null ? null : { n, movimientos, compat, tam: c.tam }
+}
+
+// Tabla de objetos: registros de 44 bytes { nombre[14], número, precio, …, descripción* (0x14) }; la
+// Ultra Ball (2) cuesta 1200 en todas las ediciones
+export const TAM_OBJETO = 44
+const buscarObjetos = (b) => {
+  for (const p of buscarTodas(b, [2, 0, 0xb0, 0x04], 2)) {
+    const t = p - 14 - 2 * TAM_OBJETO
+    if (t < 0 || t % 4) continue
+    let n = 0
+    while (n < NUM_OBJETOS && t + (n + 1) * TAM_OBJETO <= b.length && u16(b, t + n * TAM_OBJETO + 14) === n) n++
+    if (n >= 340 && esPuntero(b, u32(b, t + OBJ.MT01 * TAM_OBJETO + 0x14))) return { tabla: t, n }
+  }
+  return null
+}
+
+// Descripciones de los movimientos (las del resumen del Pokémon): 354 punteros a textos que van uno
+// detrás de otro. Sirven para que la descripción de cada MT diga lo que hace su movimiento nuevo
+const largoTexto = (b, o, max = 260) => {
+  for (let k = 0; k < max && o + k < b.length; k++) if (b[o + k] === 0xff) return k
+  return -1
+}
+const buscarDescripcionesMov = (b) => {
+  const n = MAX_MOVIMIENTO
+  const seguido = (o, k) => {
+    const a = aOffset(u32(b, o + k * 4))
+    const c = aOffset(u32(b, o + (k + 1) * 4))
+    const l = largoTexto(b, a)
+    return l >= 4 && c - (a + l + 1) >= 0 && c - (a + l + 1) <= 3
+  }
+  for (let o = 0; o + n * 4 <= b.length; o += 4) {
+    if (b[o + 3] !== 0x08 || b[o + 7] !== 0x08 || b[o + 11] !== 0x08) continue
+    if (!esPuntero(b, u32(b, o)) || !esPuntero(b, u32(b, o + 4)) || !esPuntero(b, u32(b, o + 8))) continue
+    if (!seguido(o, 0) || !seguido(o, 1)) continue
+    let ok = true
+    for (let k = 0; ok && k < n - 1; k++) if (!esPuntero(b, u32(b, o + (k + 1) * 4)) || !seguido(o, k)) ok = false
+    if (ok && largoTexto(b, aOffset(u32(b, o + (n - 1) * 4))) >= 4) return o
+  }
+  return null
+}
+
+// Objetos del suelo (las Poké Balls con objeto): su guion es «finditem»:
+// setorcopyvar 0x8000, objeto · setorcopyvar 0x8001, cantidad · callstd 1
+const buscarObjetosSuelo = (b) => {
+  const out = []
+  let i = b.indexOf(0x1a)
+  while (i !== -1 && i + 12 <= b.length) {
+    if (b[i + 1] === 0x00 && b[i + 2] === 0x80 && b[i + 5] === 0x1a && b[i + 6] === 0x01 && b[i + 7] === 0x80 && b[i + 9] === 0 && b[i + 10] === 0x09 && b[i + 11] === 0x01) {
+      const objeto = u16(b, i + 3)
+      if (objeto >= 1 && objeto < NUM_OBJETOS && b[i + 8] >= 1) out.push({ o: i + 3, objeto })
+    }
+    i = b.indexOf(0x1a, i + 1)
+  }
+  return out.length >= 20 ? out : null
+}
+
+// Tiendas: «pokemart lista» (0x86 + puntero) y la lista de objetos que termina en 0. En las cinco
+// ediciones, detrás va siempre «msgbox» (loadword 0, texto · callstd): así no se confunde con otros datos
+const buscarTiendas = (b) => {
+  const vistas = new Map()
+  let i = b.indexOf(0x86)
+  while (i !== -1 && i + 12 <= b.length) {
+    const p = u32(b, i + 1)
+    const msgbox = b[i + 5] === 0x0f && b[i + 6] === 0x00 && esPuntero(b, u32(b, i + 7)) && b[i + 11] === 0x09
+    if (msgbox && esPuntero(b, p) && p % 2 === 0) {
+      const o = aOffset(p)
+      if (!vistas.has(o)) {
+        const objetos = []
+        let ok = false
+        for (let k = 0; k < 40 && o + k * 2 + 2 <= b.length; k++) {
+          const v = u16(b, o + k * 2)
+          if (v === 0) {
+            ok = objetos.length >= 2
+            break
+          }
+          if (v >= NUM_OBJETOS || esObjetoClave(v) || esMO(v) || objetos.includes(v)) break
+          objetos.push(v)
+        }
+        if (ok) vistas.set(o, { o, objetos })
+      }
+    }
+    i = b.indexOf(0x86, i + 1)
+  }
+  const out = [...vistas.values()]
+  return out.length >= 5 ? out : null
+}
+
+// Espacio libre: el tramo más largo de 0xFF (lo que sobra al final de la ROM). Hace falta para dar
+// Pokémon extra a los entrenadores, porque sus equipos no caben en su sitio
+const buscarEspacioLibre = (b) => {
+  let mejor = null
+  let inicio = -1
+  for (let o = 0; o <= b.length; o += 4) {
+    const libre = o < b.length && b[o] === 0xff && b[o + 1] === 0xff && b[o + 2] === 0xff && b[o + 3] === 0xff
+    if (libre && inicio < 0) inicio = o
+    if (!libre && inicio >= 0) {
+      if (!mejor || o - inicio > mejor.fin - mejor.inicio) mejor = { inicio, fin: o }
+      inicio = -1
+    }
+  }
+  if (!mejor || mejor.fin - mejor.inicio < 0x4000) return null
+  // un margen por si lo anterior termina con bytes 0xFF que sí se usan
+  return { inicio: (mejor.inicio + 0x100 + 15) & ~15, fin: mejor.fin }
+}
+
 export const analizarRom = (b) => {
   const juego = detectarJuego(b)
   if (!juego) return { juego: null, problemas: ['No parece una ROM de Game Boy Advance.'] }
@@ -250,6 +415,14 @@ export const analizarRom = (b) => {
     salvajes: buscarSalvajes(b),
     entrenadores: buscarEntrenadores(b),
     iniciales: buscarIniciales(b, juego.familia),
+    mt: buscarMT(b),
+    compatMT: buscarCompatMT(b),
+    tutores: buscarTutores(b, juego.familia),
+    objetos: buscarObjetos(b),
+    descripcionesMov: buscarDescripcionesMov(b),
+    objetosSuelo: buscarObjetosSuelo(b),
+    tiendas: buscarTiendas(b),
+    libre: buscarEspacioLibre(b),
     problemas: []
   }
   if (r.base === null) r.problemas.push('No encuentro las estadísticas de las especies.')

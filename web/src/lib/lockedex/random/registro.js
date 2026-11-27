@@ -11,7 +11,19 @@ export const leerRandom = (id) => {
     return null
   }
 }
-export const guardarRandom = (id, r) => localStorage.setItem(clave(id), JSON.stringify(r))
+// Si no cabe, se quita lo que la app no usa (está entero en el registro de texto junto a la ROM)
+const PRESCINDIBLE = ['compat', 'tiendas', 'objetosSuelo', 'mtTodas']
+export const guardarRandom = (id, r) => {
+  const copia = { ...r }
+  for (let k = 0; ; k++) {
+    try {
+      return localStorage.setItem(clave(id), JSON.stringify(copia))
+    } catch (e) {
+      if (k >= PRESCINDIBLE.length) throw e
+      delete copia[PRESCINDIBLE[k]]
+    }
+  }
+}
 export const borrarRandom = (id) => localStorage.removeItem(clave(id))
 export const idActivo = () => (typeof localStorage === 'undefined' ? null : localStorage.getItem('nuzlocke'))
 export const randomActivo = () => leerRandom(idActivo())
@@ -102,9 +114,19 @@ export const equiposDelRandom = (r, inicial = 'fire', nombreMov = (id) => id) =>
     out[valor] = e.equipo.map((m) => ({
       especie: m.especie,
       nivel: m.nivel,
-      ...(m.movimientos?.length ? { movimientos: m.movimientos.map(nombreMov).filter(Boolean) } : {})
+      ...(m.movimientos?.length ? { movimientos: m.movimientos.map(nombreMov).filter(Boolean) } : {}),
+      ...(m.objeto && r.nombresObjetos?.[m.objeto] ? { objeto: r.nombresObjetos[m.objeto] } : {})
     }))
   }
+  return out
+}
+
+// Tipo de cada jefe en la ROM aleatoria (si el randomizer le dio uno)
+export const tiposDelRandom = (r, inicial = 'fire') => {
+  const jefes = r?.jefes?.[inicial] || r?.jefes?.fire || null
+  if (!jefes) return {}
+  const out = {}
+  for (const [valor, i] of Object.entries(jefes)) if (r.entrenadores?.[i]?.tipo) out[valor] = r.entrenadores[i].tipo
   return out
 }
 

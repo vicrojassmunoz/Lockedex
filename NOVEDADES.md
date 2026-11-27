@@ -1,3 +1,15 @@
+## Novedades de la 1.29.0
+
+- **Randomizer, muchas más opciones** (ideas sacadas del Universal Pokémon Randomizer ZX, hechas en el motor de Lockedex):
+  - **Entrenadores con tipo:** los líderes y el Alto Mando pueden llevar su tipo de siempre, otro tipo al azar (uno distinto cada líder, también en sus revanchas) o ninguno. Los demás pueden ir sin tipo, con el de su clase (Nadador de Agua, Pájaro de Volador…) o con un tipo al azar cada uno. Si al evolucionar uno perdería el tipo del entrenador, se cambia por otro que lo conserve. La tarjeta del jefe enseña su tipo nuevo.
+  - **Dificultad de los combates:** Pokémon totalmente evolucionados desde el nivel que elijas, **objetos equipados** (solo jefes; jefes, rivales y villanos; o todos), con sentido (Restos, Garra Rápida, el potenciador de su tipo…) o solo bayas, y **Pokémon de más** (hasta 6 por equipo, al nivel del más fuerte). Los objetos salen en la tarjeta del jefe.
+  - **Nombres mezclados** entre los entrenadores normales del mismo género. Los jefes y los de la historia se quedan con el suyo.
+  - **MT y tutores:** movimientos de las MT al azar (las MO no cambian; puedes dejar Excavar y Daño Secreto) y de los tutores de Esmeralda, RojoFuego y VerdeHoja, con el porcentaje de ataques que elijas. La descripción de cada MT en la mochila pasa a ser la de su movimiento nuevo.
+  - **Quién aprende cada MT y tutor:** al azar prefiriendo su tipo, del todo al azar o todos todo. Las MO pueden quedarse como siempre, seguir a las MT o valer para todos. Una evolución siempre puede aprender lo que aprendía su preevolución.
+  - **Objetos del suelo y tiendas:** las Poké Balls del suelo se pueden mezclar o poner al azar (una MT sigue siendo una MT). Las tiendas pueden ir al azar y seguir vendiendo Poké Balls y Pociones. Los objetos clave y las MO no se tocan nunca.
+- El registro en texto trae todo eso: tipo y objetos de cada entrenador, MT, tutores, qué puede aprender cada especie, objetos del suelo y tiendas, con los nombres de objetos de tu ROM.
+- **Rival:** si el inicial al azar no es básico, el rival lleva la etapa que toca a partir de él. Solo los rivales siguen la línea de su inicial; los demás entrenadores que llevaban un Bulbasaur, por ejemplo, se aleatorizan como el resto.
+
 ## Novedades de la 1.28.1
 
 - **Equipos de los jefes aleatorizados:** en la tarjeta del jefe, los nombres salen bien escritos y traducidos (salían en minúsculas, como «totodile»).
