@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Tabla «mapa del .sav → zona de Lockedex» para RojoFuego/VerdeHoja y Esmeralda.
+"""Tabla «mapa del .sav → zona de Lockedex» para RojoFuego/VerdeHoja, Rubí/Zafiro y Esmeralda.
 
 El .sav guarda dónde estás como grupo y número de mapa (SaveBlock1, bytes 4 y 5). Los nombres de los
-mapas salen de data/maps/map_groups.json de los decomps de pret (pokefirered, pokeemerald) y se
+mapas salen de data/maps/map_groups.json de los decomps de pret (pokefirered, pokeruby, pokeemerald) y se
 emparejan con las zonas de la app: «Route3» → «Route 3», «MtMoon_B1F» → «Mt. Moon»,
 «CeladonCity_GameCorner_PrizeRoom» → «Celadon City»… Los interiores cuentan como su pueblo o su ruta
 (los regalos suelen darse dentro de una casa). Lo que no tiene zona en la app se queda fuera.
@@ -54,10 +54,21 @@ ALIAS = {
         'DesertUnderpass': 'Desert Underpass',
     },
 }
+ALIAS['rz'] = {
+    'LittlerootTown_ProfessorBirchsLab': 'Starter',
+    'MtPyre': 'Mt. Pyre',
+    'MagmaHideout': 'Team Magma Hideout',
+    'AquaHideout': 'Team Aqua Hideout',
+    'SSTidal': 'S.S. Tidal',
+    'SSTidalCorridor': 'S.S. Tidal',
+    'SSTidalLowerDeck': 'S.S. Tidal',
+    'SSTidalRooms': 'S.S. Tidal',
+    'MirageIsland': 'Mirage Island',
+}
 # La Ruta 101 tiene encuentros propios: el inicial solo se preselecciona en el laboratorio
 ALIAS['esmeralda'].pop('Route101')
 
-FUENTES = {'rfvh': ('pokefirered', 'fr'), 'esmeralda': ('pokeemerald', 'em')}
+FUENTES = {'rfvh': ('pokefirered', 'fr'), 'rz': ('pokeruby', 'ruby'), 'esmeralda': ('pokeemerald', 'em')}
 
 
 def separar(nombre):

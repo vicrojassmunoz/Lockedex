@@ -16,7 +16,7 @@ const MOTE_HUEVO = [0x60, 0x6f, 0x8b] // タマゴ
 const IDIOMA_JAPONES = 1
 const POKE_BALL = 4
 // Versión del juego en «origins» (pokeemerald, include/constants/global.h)
-export const VERSION_JUEGO = { s: 1, r: 2, em: 3, fr: 4, lg: 5 }
+export const VERSION_JUEGO = { saph: 1, ruby: 2, em: 3, fr: 4, lg: 5 }
 
 const aleatorio32 = () => {
   const a = new Uint32Array(1)

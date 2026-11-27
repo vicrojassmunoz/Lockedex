@@ -1,9 +1,9 @@
 // Zona actual según el .sav importado: el mapa donde guardaste (grupo y número) pasado a la zona de la
 // app con web/static/lx/zonas-sav.json (lo genera herramientas/zonas_sav.py desde los decomps de pret).
-// Solo RojoFuego/VerdeHoja y Esmeralda: en Rubí/Zafiro y en los hacks los mapas no coinciden.
+// RojoFuego/VerdeHoja, Rubí/Zafiro y Esmeralda (en los hacks los mapas no coinciden).
 import { leerSavGuardado } from './equipo.js'
 
-const JUEGOS = { rfvh: ['fr', 'lg'], esmeralda: ['em'] }
+const JUEGOS = { rfvh: ['fr', 'lg'], rz: ['ruby', 'saph'], esmeralda: ['em'] }
 let tabla = null
 const cargar = () =>
   (tabla ||= fetch('/lx/zonas-sav.json')

@@ -8,7 +8,7 @@ import { probablesANivel } from './riesgo.js'
 // Pokédex nacional de cada generación
 const TOPE = { 1: 151, 2: 251, 3: 386, 4: 493, 5: 649, 6: 721, 7: 809, 8: 905, 9: 1025 }
 // Juegos de la 3.ª gen (sin hacks) en los que se puede escribir el .sav
-export const JUEGOS_GEN3 = ['r', 's', 'em', 'fr', 'lg']
+export const JUEGOS_GEN3 = ['ruby', 'saph', 'em', 'fr', 'lg']
 
 const clave = (id) => `lockedex.huevos.${id}`
 export const leerHuevosRun = (id) => {

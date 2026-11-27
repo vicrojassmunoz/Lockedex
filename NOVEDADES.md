@@ -1,3 +1,7 @@
+## Novedades de la 1.27.1
+
+- **Rubí y Zafiro con el .sav:** «Estás en…» ya funciona (faltaba la tabla de mapas de Rubí y Zafiro) y el generador de huevos ya puede meterlos en partidas de Rubí y Zafiro (las reconocía con otra clave de juego).
+
 ## Novedades de la 1.27.0
 
 - **El equipo se actualiza con el .sav:** al guardar en el emulador, la barra del equipo pasa a ser el equipo de tu partida (sin los caídos), aunque no haya evoluciones ni motes nuevos. Antes solo se actualizaba si había algún otro cambio.

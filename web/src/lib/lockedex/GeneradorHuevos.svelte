@@ -71,7 +71,7 @@
       return { ...r, buffer, libres: null, juegoSav: null }
     }
   }
-  const SAV_DE = { fr: 'rfvh', lg: 'rfvh', r: 'rz', s: 'rz', em: 'esmeralda' }
+  const SAV_DE = { fr: 'rfvh', lg: 'rfvh', ruby: 'rz', saph: 'rz', em: 'esmeralda' }
 
   const cargarVinculado = async () => {
     const ruta = localStorage.getItem(claveRutaSav(id))
