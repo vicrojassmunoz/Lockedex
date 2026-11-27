@@ -6,6 +6,7 @@
   import { partidaActiva, cargarRutas, resumirPartida } from '$lib/lockedex/partida.js'
   import { claveSav, claveRutaSav, leerSavGuardado } from '$lib/lockedex/equipo.js'
   import { calcularCambiosSav, parcheCambiosSav } from '$lib/lockedex/sincronizar.js'
+  import { encolarEscenas } from '$lib/lockedex/escenasPendientes.js'
   import { marcarHuevoUsado } from '$lib/lockedex/egglocke.js'
   import { idioma, iniciarTraduccion, traducirNombre } from '$lib/lockedex/idioma.js'
   import { getGameStore, patch } from '$lib/store'
@@ -144,6 +145,12 @@
     const store = getGameStore(partida.id)
     const datos = parcheCambiosSav({ partida, resumen, sav, cambios: cambios.filter((c) => c.marcado), linea })
     store.update(patch(datos))
+    // La escena de cada evolución, como cuando llega sola del emulador
+    encolarEscenas(
+      cambios
+        .filter((c) => c.marcado && c.tipo === 'actualizar' && c.parche.pokemon && c.parche.pokemon !== c.antes.pokemon)
+        .map((c) => ({ tipo: 'evolucion', base: c.antes.pokemon, evo: c.parche.pokemon, mote: c.antes.nickname || '' }))
+    )
     // Egglocke: los marcados como salidos de un huevo, abiertos también en la lista del generador
     cambios.filter((c) => c.marcado && c.parche.cambio).forEach((c) => marcarHuevoUsado(partida.id, c.parche.pokemon || c.antes.pokemon))
     aplicado = true

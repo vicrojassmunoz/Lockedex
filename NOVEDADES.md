@@ -1,3 +1,8 @@
+## Novedades de la 1.26.1
+
+- **La escena de evolución del .sav ya sale:** si jugabas con la ventana compacta abierta, era ella la que aplicaba la evolución y la escena se perdía (la compacta no enseña escenas). Ahora las escenas esperan en una cola compartida y la ventana principal las enseña al volver a ella. También salen al aplicar las evoluciones desde Importar.
+- **Lápida para los caídos del .sav:** al confirmar en el aviso que un Pokémon debilitado en tu partida ha caído, sale su lápida para apuntar quién fue y el epitafio, como al marcarlo a mano.
+
 ## Novedades de la 1.26.0
 
 - **Una sola pantalla de combate:** el VS de cada jefe, el medidor de riesgo y «Comparar con mi equipo» abren la misma pantalla. Arriba está la escena como en el juego: el jefe arriba a la derecha con sus Poké Balls y tu nivel máximo, y tu equipo abajo a la izquierda con sus niveles y sus PS (del .sav si está vinculado). Abajo a la derecha está el cuadro de órdenes: VENCIDO, DERROTA (las dos piden un segundo clic para confirmar), ANALISTA y HUIR.

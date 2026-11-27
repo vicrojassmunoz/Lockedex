@@ -12,6 +12,7 @@
   import { idioma, traducirNombre } from './idioma.js'
   import { partidaActiva, cargarRutas, resumirPartida } from './partida.js'
   import { calcularCambiosSav, parcheCambiosSav } from './sincronizar.js'
+  import { encolarEscenas } from './escenasPendientes.js'
   import { getGameStore, patch } from '$lib/store'
   import { fetchData } from '$utils/fetchers'
 
@@ -48,7 +49,7 @@
     const evoluciones = seguros.filter((c) => c.parche.pokemon).map((c) => `${c.antes.nickname || nombre(c.antes.pokemon)} → ${nombre(c.s.especie)}`)
     // La escena de evolución de cada una (la abre EscenasSav.svelte, dentro de la app, al volver a la ventana)
     const escenas = seguros.filter((c) => c.parche.pokemon && c.parche.pokemon !== c.antes.pokemon).map((c) => ({ base: c.antes.pokemon, evo: c.parche.pokemon, mote: c.antes.nickname || '' }))
-    if (escenas.length) window.dispatchEvent(new CustomEvent('lx:evoluciones-sav', { detail: escenas }))
+    if (escenas.length) encolarEscenas(escenas.map((x) => ({ tipo: 'evolucion', ...x })))
     return { caidos, nuevos, eclosiones, evoluciones }
   }
 
@@ -71,6 +72,8 @@
     if (contexto && partida && caidos.length) {
       const resumen = resumirPartida(partida, contexto.rutas)
       getGameStore(partida.id).update(patch(parcheCambiosSav({ ...contexto, partida, resumen, cambios: caidos })))
+      // La lápida de cada uno, para apuntar cómo fue (la enseña la ventana principal)
+      encolarEscenas(caidos.map((c) => ({ tipo: 'muerte', lugar: c.lugar, pokemon: c.antes.pokemon, mote: c.antes.nickname || '' })))
     }
     mostrar(es ? `Marcado${caidos.length > 1 ? 's' : ''} como caído${caidos.length > 1 ? 's' : ''}. Descansa${caidos.length > 1 ? 'n' : ''} en el cementerio.` : 'Marked as dead. Resting in the graveyard.')
   }

@@ -334,3 +334,5 @@ Ampliar los modos además de Nuzlocke clásico, Hardcore y Randomlocke. Cada mod
 - [x] Privacidad y créditos reescritos en español (1.5.0), con lo que de verdad hace la versión de escritorio y los proyectos en los que se apoya.
 - [x] 1.9.0: traducidas las guías por juego (índice, encuentros, jefes, inicial) y las plantillas de epitafio del modal de muerte (con concordancias: «el Rattata salvaje», «de tipo Fuego»). Quedan en inglés los textos largos de `src/docs/*.md` (9 juegos) y los nombres de lugares unidos en listas de solo lector de pantalla.
 - ~~Firmar el instalador para que Windows no muestre el aviso de SmartScreen~~ — descartado (26/11): el certificado es de pago y no se va a comprar.
+
+- [x] **1.26.1 — Flecos de las escenas:** la escena de evolución del .sav no salía si la ventana compacta aplicaba el .sav antes (cola compartida en `lockedex.escenas`, `escenasPendientes.js`; también desde Importar). Lápida (`EscenaMuerte`) para los caídos que se confirman en el aviso del .sav.
