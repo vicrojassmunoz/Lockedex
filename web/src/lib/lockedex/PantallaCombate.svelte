@@ -18,6 +18,7 @@
   import { aplicarAccion } from './acciones.js'
   import { registrarDerrota, contarCaidos } from './derrotas.js'
   import { encajarIcono } from './encajar.js'
+  import { ajustarGif } from './animado.js'
   import { marco, bola } from './gba.js'
   import { t, traducirNombre } from './idioma.js'
 
@@ -74,7 +75,8 @@
   const BOLA_VACIA = bola({ tinta: '#505868', rojo: '#a0a8b8', blanco: '#d0d8e0' })
   $: numJefe = (jefe?.pokemon || boss?.pokemon || []).length
   $: nombreJefe = ocultarEquipo ? '???' : traducirNombre(boss?.name || jefe?.name || '')
-  $: imgJefe = !ocultarEquipo && boss?.img?.src ? boss.img.src : null
+  // Las imágenes de los jefes vienen sin extensión (la tarjeta les pone .webp o .png)
+  $: imgJefe = !ocultarEquipo && boss?.img?.src ? (/\.(png|gif|webp|jpe?g)$/i.test(boss.img.src) ? boss.img.src : boss.img.src + '.png') : null
   let imgFallo = false
   const MARCOS = {
     caja: marco({ tinta: '#384050', fondo: '#f8f8e8', luz: '#ffffff', sombra: '#d0d0b8', r: 3 }),
@@ -165,7 +167,7 @@
     <div class="lx-pc-jefe">
       <span class="lx-pc-peana lx-pc-peana-jefe" />
       {#if imgJefe && !imgFallo}
-        <img class="lx-pc-entrenador" src={imgJefe} alt={nombreJefe} on:error={() => (imgFallo = true)} />
+        <img class="lx-pc-entrenador" src={imgJefe} alt={nombreJefe} on:load={ajustarGif(160)} on:error={() => (imgFallo = true)} />
       {:else}
         <span class="lx-pc-entrenador lx-pc-silueta">?</span>
       {/if}
@@ -358,8 +360,6 @@
   }
   .lx-pc-entrenador {
     position: relative;
-    max-height: 128px;
-    max-width: 128px;
     image-rendering: pixelated;
   }
   .lx-pc-silueta {

@@ -1,3 +1,7 @@
+## Novedades de la 1.26.2
+
+- **Pantalla de combate:** ya sale el sprite del jefe en la escena (salía roto) y los sprites pequeños se ven al doble, a píxeles.
+
 ## Novedades de la 1.26.1
 
 - **La escena de evolución del .sav ya sale:** si jugabas con la ventana compacta abierta, era ella la que aplicaba la evolución y la escena se perdía (la compacta no enseña escenas). Ahora las escenas esperan en una cola compartida y la ventana principal las enseña al volver a ella. También salen al aplicar las evoluciones desde Importar.
