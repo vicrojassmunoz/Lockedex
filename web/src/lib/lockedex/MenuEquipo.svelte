@@ -6,6 +6,7 @@
   import { createEventDispatcher } from 'svelte'
   import { PIcon, Icon } from '$c/core'
   import { Physical, Special, Status } from '$icons'
+  import { claseVista } from './genVista.js'
   import { createImgUrl, UNOWN } from '$utils/rewrites'
   import { marco, bola, TIPO_GBA } from './gba.js'
   import { recorte } from '$lib/lockedex/recorte.js'
@@ -257,7 +258,7 @@
             <span class="lx-gf-mov-nombre cursor-help" data-lx-mov={m.name} data-lx-pot={m.power || ''}>{m.name}</span>
             <span class="lx-gf-mov-datos">
               <span class="lx-gf-tipo" style="--c:{colorTipo(m.type)}">{traducirNombre(mayus(m.type))}</span>
-              {#if ICONO_CLASE[m.damage_class]}<Icon inline icon={ICONO_CLASE[m.damage_class]} class="lx-gf-clase" />{/if}
+              {#if ICONO_CLASE[claseVista(m.damage_class, m.type)]}<Icon inline icon={ICONO_CLASE[claseVista(m.damage_class, m.type)]} class="lx-gf-clase" />{/if}
               <span class="lx-gf-pot"><small>{t('POT', 'PWR')}</small>{m.power || '—'}</span>
             </span>
           </div>

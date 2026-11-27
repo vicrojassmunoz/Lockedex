@@ -26,6 +26,7 @@
 
   import TypeBadge from '$lib/components/type-badge.svelte'
   import MoveCard from '$lib/components/move-card.svelte'
+  import { claseVista } from '$lib/lockedex/genVista.js'
   import StatBlock from '$lib/components/stat-block.svelte'
 
   import { UNOWN } from '$utils/rewrites'
@@ -152,7 +153,7 @@
             class="my-3 ml-4 grid flex-2 grid-cols-2 gap-x-4 gap-y-0 lg:gap-y-3"
           >
             {#each moves.filter((m) => !isEmpty(m)) as m}
-              <MoveCard {...m} stab={types.includes(m.type)} />
+              <MoveCard {...m} damage_class={claseVista(m.damage_class, m.type)} stab={types.includes(m.type)} />
             {/each}
           </div>
         {/if}

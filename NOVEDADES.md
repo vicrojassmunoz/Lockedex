@@ -1,3 +1,7 @@
+## Novedades de la 1.22.4
+
+- **Físico o especial según la generación:** hasta la 3.ª gen la clase de un ataque la decide su tipo (Puño Hielo es especial en Esmeralda y RojoFuego, y físico desde Diamante y Perla). La ficha que sale al pasar el ratón por un ataque, el menú de equipo de los jefes, las fichas de los jefes y la ventana antigua de comparar y recomendar enseñaban la clase moderna. Ahora usan la del juego: el de la run, o el elegido en el Analista. Los cálculos de daño ya lo hacían bien.
+
 ## Novedades de la 1.22.3
 
 - **«¿Qué ha salido?» ya se queda guardado:** al volver a la partida, la fila de la zona volvía a guardar el encuentro sin la marca del huevo y se perdía. Ahora la fila solo toca sus campos.

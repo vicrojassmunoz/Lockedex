@@ -1,4 +1,7 @@
 <script>
+  import { ponerGenAnalista } from '$lib/lockedex/genVista.js'
+  import { onDestroy as alSalirGen } from 'svelte'
+  alSalirGen(() => ponerGenAnalista(null))
   // Modo Analista: prepara cualquier combate sin necesidad de tener una partida
   import { onMount } from 'svelte'
   import { page } from '$app/stores'
@@ -90,6 +93,7 @@
   const cargarJuego = async () => {
     if (!info) return
     ;[datosCalc, pokedex, rutas] = await Promise.all([A.cargarCalc(info.gen), A.cargarPokedex(clave), cargarRutas(info.lid)])
+    ponerGenAnalista(info.gen)
     liga = await cargarLiga(clave, inicial)
     if (jefeValor && !liga[jefeValor]) jefeValor = ''
   }

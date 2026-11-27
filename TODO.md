@@ -43,6 +43,8 @@ Notas para retomar el trabajo en otra sesión. Lo primero es el mapa del proyect
 
 - [x] **1.21.0 — 21 juegos sin lista de rutas en Lockedex:** `infoJuego().lid` devolvía el `lid` de games.json (hgss, bw, rs, oras, sm, usum, swsh, sv, blazevolt, sssg) y `routes.json` no tiene listas con esas claves; además `/api/route/<clave>.json` respondía «[object Object]» con un 200 en vez de un 404, así que `cargarRutas` se quedaba con una lista vacía sin avisar. Medallas, próximo jefe, nivel máximo, riesgo del compacto, Salón, ficha, perfil… salían vacíos en esos juegos. Ahora `lid` es el `pid`, la misma lista que usa la página de la partida (en el resto también, porque la lista conjunta —frlg, gsc, plat…— no siempre coincide con la de la versión: erratas como «Five Isalnd» y otro orden en Platino y Oro).
 
+- [x] **1.22.4 — Clase de los movimientos en la 1.ª–3.ª gen** (avisado el 27/11: «puño hielo es físico cuando es especial»): `genVista.js` (`claseVista`, gen del Analista o de la run) en `InfoFlotante`, `MenuEquipo`, `pokemon-card` y el VS heredado (`compare/Moves`, `advice/utils.ts`). Ya lo hacían `claseSegunGen` (equipos de jefe a mano) y `equilibrar.js`; el daño lo calcula @smogon/calc con la gen.
+
 ## 1. Estética propia (desmarcarse de nuzlocke-redux)
 
 **Ya es Lockedex:** el chasis rojo con la lente y los LEDs, la barra con EXP, el logo de la portada, la tarjeta de información, el medidor de riesgo, el asistente, la importación, el perfil, el modo compacto y el Analista.

@@ -1,4 +1,5 @@
 <script>
+  import { claseVista } from './genVista.js'
   // Tarjeta que aparece al pasar el ratón por un movimiento, habilidad u objeto.
   // Cualquier elemento con data-lx-mov / data-lx-hab / data-lx-obj la activa.
   import { onMount } from 'svelte'
@@ -58,7 +59,7 @@
         sub: es && d.es !== d.en ? d.en : '',
         tipoPkmn: d.tipo,
         tipoNombre: es ? t[d.tipo] || d.tipo : d.tipo,
-        clase: d.clase,
+        clase: claseVista(d.clase, d.tipo),
         potencia,
         precision: d.precision,
         pp: d.pp,

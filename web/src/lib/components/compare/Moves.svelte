@@ -1,4 +1,5 @@
 <script>
+  import { claseVista } from '$lib/lockedex/genVista.js'
   export let calc,
     pokemon = []
   const [team, opp] = pokemon
@@ -60,7 +61,7 @@
       </div>
 
       <p class="my-1 inline-flex origin-left scale-90 transform">
-        <TypeBadge type={move.damage_class} />
+        <TypeBadge type={claseVista(move.damage_class, move.type)} />
         <TypeBadge type={move.type} className="ml-1" />
       </p>
 
