@@ -167,6 +167,10 @@
       })
     )
 
+  // Campos del encuentro que maneja la fila (el resto los ponen otras partes de Lockedex)
+  const DE_LA_FILA = ['id', 'pokemon', 'status', 'nature', 'location', 'nickname', 'hidden', 'death']
+  const soloDeLaFila = (e) => (e ? Object.fromEntries(Object.entries(e).filter(([k]) => DE_LA_FILA.includes(k))) : e)
+
   $: {
     const topatch = nonnull({
     id,
@@ -179,11 +183,17 @@
     ...(status?.id === 5 && death ? { death } : {})
   });
 
-  if (selected && !especiePendiente && !oEqual(topatch, resetd)) {
+  if (selected && !especiePendiente && !oEqual(topatch, soloDeLaFila(resetd))) {
     console.log('Patching', location);
     // estado de antes del cambio (al guardar, la suscripción ya pone resetd al nuevo)
     const estadoAntes = +resetd?.status
-    store.update(patch({ [location]: topatch }));
+    // Lockedex: la fila solo escribe sus campos y respeta el resto del encuentro (la marca del huevo del
+    // Egglocke, la herencia del Genlocke…). Antes lo reescribía entero y los borraba
+    store.update((data) => {
+      const d = JSON.parse(data)
+      const resto = Object.fromEntries(Object.entries(d[location] || {}).filter(([k]) => !DE_LA_FILA.includes(k)))
+      return JSON.stringify({ ...d, [location]: { ...resto, ...topatch } })
+    });
 
     // Remove from team if marked as dead
     if (status?.id === 5 && (team || []).includes(location)) {

@@ -1,3 +1,12 @@
+## Novedades de la 1.22.3
+
+- **«¿Qué ha salido?» ya se queda guardado:** al volver a la partida, la fila de la zona volvía a guardar el encuentro sin la marca del huevo y se perdía. Ahora la fila solo toca sus campos.
+- **«Ya salió de un huevo»:** si apuntaste directamente lo que salió (como tu Gligar), en el detalle de la Caja hay un botón para marcarlo sin cambiar la especie. En la Caja, los que salieron de un huevo llevan el icono del huevo, y los que faltan, el huevo con «?».
+- **Con el .sav, el Egglocke va solo:** si un Pokémon de la run nació de un huevo en tu partida, se marca solo como salido del huevo al recargar.
+- **Naturalezas:** la del .sav manda siempre. Antes se quedaba la del Pokémon que capturaste en la zona en vez de la del que salió del huevo.
+- **Capturas nuevas sin ir a Importar:** al recargar el .sav, si hay capturas nuevas, el aviso las enseña con casillas y un botón «Añadir».
+- **El aviso de «huevos sin abrir»** ya no cuenta el inicial.
+
 ## Novedades de la 1.22.2
 
 - **«Estás en…»:** con la partida del emulador vinculada (RojoFuego, VerdeHoja y Esmeralda), el botón de la partida te lleva a la zona donde está tu personaje según tu último guardado («◉ Estás en Ruta 101»). Se actualiza solo cada vez que guardas en el emulador. Sin .sav, o en una zona que no está en la lista, sigue siendo «Seguir en…».

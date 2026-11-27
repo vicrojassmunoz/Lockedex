@@ -16,7 +16,7 @@
   import { activeGame } from '$lib/store'
   import { leerReglas, sinCalculos } from './reglas.js'
   import { tiendaParejas, parejaDe, emparejar } from './parejas.js'
-  import { tipoCambio, pendienteDeCambio, sePuedeCambiar, esInicial, aplicarCambio, deshacerCambio, eclosionadosDelSav } from './cambios.js'
+  import { tipoCambio, pendienteDeCambio, sePuedeCambiar, esInicial, aplicarCambio, deshacerCambio, eclosionadosDelSav, marcarCambiado } from './cambios.js'
   import { leerPartida } from './partida.js'
   import { fetchData } from '$utils/fetchers'
 
@@ -96,6 +96,8 @@
   const lugar = (p) => {
     const sitio = p.customName || p.location
     if (p.location === 'Starter') return t('Tu Pokémon inicial', 'Your starter Pokémon')
+    if (p.cambio?.tipo === 'huevo') return t('Salió de un huevo', 'Hatched from an egg') + (sitio ? t(' (captura de ', ' (catch from ') + traducirNombre(sitio) + ')' : '')
+    if (p.cambio?.tipo === 'prodigioso') return t('Llegó por Intercambio Prodigioso', 'Came via Wonder Trade') + (sitio ? t(' (captura de ', ' (catch from ') + traducirNombre(sitio) + ')' : '')
     if (!sitio || (p.customId && !p.customName)) return t('Lugar desconocido', 'Unknown place')
     if (p.status === 2) return t('Regalo en ', 'Gift at ') + traducirNombre(sitio)
     if (p.status === 3) return t('Intercambio en ', 'Traded at ') + traducirNombre(sitio)
@@ -164,9 +166,11 @@
             {/if}
             {#if p.status === 6}<span class="lx-hueco-shiny" title={t('Variocolor', 'Shiny')}>✦</span>{/if}
             {#if cambio && pendienteDeCambio(p, { egglocke: cambio === 'huevo', wonderlocke: cambio === 'prodigioso' })}
-              <span class="lx-hueco-huevo" title={cambio === 'huevo' ? t('Huevo sin abrir', 'Unhatched egg') : t('Sin intercambiar', 'Not traded yet')}
-                >{#if cambio === 'huevo'}<img src="/lx/iconos/huevo.png" alt="" width="32" height="32" />{:else}⇄{/if}</span
+              <span class="lx-hueco-huevo lx-pendiente" title={cambio === 'huevo' ? t('Huevo sin abrir: apunta qué salió', 'Unhatched egg: log what hatched') : t('Sin intercambiar', 'Not traded yet')}
+                >{#if cambio === 'huevo'}<img src="/lx/iconos/huevo.png" alt="" width="32" height="32" /><b>?</b>{:else}⇄{/if}</span
               >
+            {:else if p.cambio?.tipo === 'huevo'}
+              <span class="lx-hueco-huevo" title={t('Salió de un huevo', 'Hatched from an egg')}><img src="/lx/iconos/huevo.png" alt="" width="32" height="32" /></span>
             {/if}
           </button>
         {:else}
@@ -230,9 +234,13 @@
           <div>
             <dt>{elegido.cambio.tipo === 'huevo' ? t('Huevo', 'Egg') : t('Intercambio', 'Trade')}</dt>
             <dd class="lx-det-cambio">
-              {elegido.cambio.tipo === 'huevo'
-                ? t(`Salió del huevo · capturaste ${traducirNombre(Pokemon[elegido.cambio.de]?.name || elegido.cambio.de.charAt(0).toUpperCase() + elegido.cambio.de.slice(1))}`, `Hatched · you caught ${elegido.cambio.de}`)
-                : t(`Llegó por Intercambio Prodigioso · mandaste ${traducirNombre(Pokemon[elegido.cambio.de]?.name || elegido.cambio.de.charAt(0).toUpperCase() + elegido.cambio.de.slice(1))}`, `Came via Wonder Trade · you sent ${elegido.cambio.de}`)}
+              {#if !elegido.cambio.de}
+                {elegido.cambio.tipo === 'huevo' ? t('Salió de un huevo', 'Hatched from an egg') : t('Llegó por Intercambio Prodigioso', 'Came via Wonder Trade')}
+              {:else}
+                {elegido.cambio.tipo === 'huevo'
+                  ? t(`Salió del huevo · capturaste ${traducirNombre(Pokemon[elegido.cambio.de]?.name || elegido.cambio.de.charAt(0).toUpperCase() + elegido.cambio.de.slice(1))}`, `Hatched · you caught ${elegido.cambio.de}`)
+                  : t(`Llegó por Intercambio Prodigioso · mandaste ${traducirNombre(Pokemon[elegido.cambio.de]?.name || elegido.cambio.de.charAt(0).toUpperCase() + elegido.cambio.de.slice(1))}`, `Came via Wonder Trade · you sent ${elegido.cambio.de}`)}
+              {/if}
               <button class="lx-det-deshacer" title={t('Deshacer: vuelve el Pokémon capturado', 'Undo: back to the caught Pokémon')} on:click={() => deshacerCambio($activeGame, elegido.location)}>↶</button>
             </dd>
           </div>
@@ -263,6 +271,14 @@
                 />
                 <button type="submit" disabled={!elegidaNueva}>{t('Apuntar', 'Log')}</button>
               </form>
+              <button
+                class="lx-det-yaes"
+                on:click={() => marcarCambiado($activeGame, elegido.location)}
+                title={cambio === 'huevo' ? t('Lo apuntaste directamente con lo que salió: márcalo como salido de un huevo, sin cambiar la especie', 'You logged what hatched directly: mark it as hatched, keeping the species') : t('Ya es el que te llegó: márcalo, sin cambiar la especie', 'It is already the one you got: mark it, keeping the species')}
+              >
+                {#if cambio === 'huevo'}<img src="/lx/iconos/huevo.png" alt="" width="16" height="16" />{/if}
+                {cambio === 'huevo' ? t(`${nombreDe(elegido.location)} ya salió de un huevo`, `${nombreDe(elegido.location)} already hatched`) : t('Ya es el que me llegó', 'Already the one I got')}
+              </button>
               <datalist id="lx-especies-cambio">{#each especiesTodas as x}<option value={x.nombre} />{/each}</datalist>
             </dd>
           </div>
@@ -532,6 +548,29 @@
     padding: 0 6px;
     border: 2px solid var(--lx-bisel);
     border-radius: var(--lx-radio-sm);
+  }
+  .lx-hueco-huevo.lx-pendiente b {
+    position: absolute;
+    right: -2px;
+    bottom: -4px;
+    font-size: 11px;
+    line-height: 1;
+    color: #fff;
+    background: #c83848;
+    border-radius: 999px;
+    padding: 0 3px;
+  }
+  .lx-det-yaes {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px;
+    font-size: 0.85em;
+    opacity: 0.85;
+    text-decoration: underline dotted;
+  }
+  .lx-det-yaes img {
+    image-rendering: pixelated;
   }
   .lx-det-eclosion {
     display: flex;

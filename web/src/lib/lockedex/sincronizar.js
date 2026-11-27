@@ -7,6 +7,7 @@
 //               de la zona donde nacieron; en Egglocke son lo que salió de algún huevo (se apuntan en la Caja)
 import { norm } from './datos.js'
 import { emparejar } from './equipo.js'
+import { leerReglas } from './reglas.js'
 
 const VIVOS = [1, 2, 3, 6]
 // El mismo Pokémon del .sav (las listas guardan copias, así que no vale comparar referencias)
@@ -17,6 +18,7 @@ export const calcularCambiosSav = ({ partida, resumen, sav, pkdx }) => {
   if (!partida || !sav || !resumen) return []
   const info = (especie) => pkdx?.aliasMap?.[norm(especie)] || pkdx?.nameMap?.[norm(especie)]
   const linea = (especie) => info(especie)?.evoline || null
+  const egglocke = !!leerReglas(partida.id)?.egglocke
   const sinMote = (s) => !s.mote || norm(s.mote) === norm(s.especie) || norm(s.mote) === norm(info(s.especie)?.name)
   const usados = new Set()
   const lista = []
@@ -28,8 +30,13 @@ export const calcularCambiosSav = ({ partida, resumen, sav, pkdx }) => {
     usados.add(s)
     const parche = {}
     if (!e.nickname && s.mote && norm(s.mote) !== norm(s.especie)) parche.nickname = s.mote
-    if (!e.nature && s.naturaleza) parche.nature = s.naturaleza
+    // la naturaleza no cambia en el juego: manda la del .sav (en Egglocke, la del que salió del huevo,
+    // no la del que capturaste)
+    if (s.naturaleza && e.nature !== s.naturaleza) parche.nature = s.naturaleza
     if (norm(e.pokemon) !== norm(s.especie) && info(s.especie)) parche.pokemon = info(s.especie).alias
+    // Egglocke: si en la partida nació de un huevo (nivel al conocerlo 0), en la run también salió de uno
+    if (egglocke && +s.nivelCaptura === 0 && !e.cambio && [1, 6].includes(+e.status) && e.lugar !== 'Starter')
+      parche.cambio = { de: null, tipo: 'huevo', fecha: Date.now() }
     if (Object.keys(parche).length) lista.push({ tipo: 'actualizar', lugar: e.lugar, antes: e, s, parche })
     if (s.enEquipo && s.debilitado && VIVOS.includes(+e.status))
       lista.push({ tipo: 'caido', lugar: e.lugar, antes: e, s, parche: { status: 5 } })

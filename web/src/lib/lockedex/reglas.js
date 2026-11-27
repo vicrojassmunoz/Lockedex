@@ -204,9 +204,10 @@ export const comprobarReglas = async ({ partida, resumen, liga, pokedex }) => {
 
   // Egglocke / Wonderlocke: capturas que aún no se han cambiado
   if (reglas.egglocke || reglas.wonderlocke) {
-    const ya = new Set()
+    // la misma cuenta que la Caja (pendienteDeCambio de cambios.js): sin el inicial y sin los ya marcados
+    // como salidos del huevo (sin importar cambios.js, que importa este archivo)
     const pend = Object.entries(partida.datos || {}).filter(
-      ([k, e]) => !k.startsWith('__') && e && typeof e === 'object' && e.pokemon && [1, 6].includes(+e.status) && !e.cambio && !ya.has(k) && ya.add(k)
+      ([k, e]) => !k.startsWith('__') && e && typeof e === 'object' && e.pokemon && [1, 6].includes(+e.status) && !e.cambio && k !== 'Starter' && e.location !== 'Starter'
     )
     if (pend.length)
       avisos.push({

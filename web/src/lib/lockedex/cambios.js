@@ -53,21 +53,32 @@ export const aplicarCambio = (idRun, lugar, especie, extra = {}) => {
   const tipo = tipoCambio(reglas)
   const e = leerPartida(idRun)?.datos?.[lugar]
   if (!tipo || !e || !especie) return false
-  // del .sav pueden venir el mote y la naturaleza del que nació (sin pisar los que ya hubiera)
+  // del .sav vienen el mote y la naturaleza del que nació: son los suyos, no los del que capturaste
   const mas = {}
-  if (extra.nickname && !e.nickname) mas.nickname = extra.nickname
-  if (extra.nature && !e.nature) mas.nature = extra.nature
+  if (extra.nickname) mas.nickname = extra.nickname
+  if (extra.nature) mas.nature = extra.nature
   getGameStore(idRun).update(patch({ [lugar]: { ...e, ...mas, pokemon: especie, cambio: { de: e.pokemon, tipo, fecha: Date.now() } } }))
   // si era uno de los huevos del generador, ya está abierto
   if (tipo === 'huevo') marcarHuevoUsado(idRun, especie)
   return true
 }
 
-/** Deshace el cambio: vuelve el Pokémon capturado */
+/** El Pokémon apuntado ya es el que salió del huevo (o llegó por el intercambio): solo se marca, sin cambiar
+ *  la especie. Para cuando se apuntó directamente lo que salió. cambio.de queda en null (no se sabe qué se capturó) */
+export const marcarCambiado = (idRun, lugar) => {
+  const tipo = tipoCambio(leerReglas(idRun))
+  const e = leerPartida(idRun)?.datos?.[lugar]
+  if (!tipo || !e?.pokemon || e.cambio) return false
+  getGameStore(idRun).update(patch({ [lugar]: { ...e, cambio: { de: null, tipo, fecha: Date.now() } } }))
+  if (tipo === 'huevo') marcarHuevoUsado(idRun, e.pokemon)
+  return true
+}
+
+/** Deshace el cambio: vuelve el Pokémon capturado (si solo estaba marcado, se queda el mismo) */
 export const deshacerCambio = (idRun, lugar) => {
   const e = leerPartida(idRun)?.datos?.[lugar]
   if (!e?.cambio) return false
   const { cambio, ...resto } = e
-  getGameStore(idRun).update(patch({ [lugar]: { ...resto, pokemon: cambio.de } }))
+  getGameStore(idRun).update(patch({ [lugar]: { ...resto, pokemon: cambio.de || resto.pokemon } }))
   return true
 }
